@@ -37,6 +37,10 @@
 		8BA065FF16744D2F00991C6B /* EaglePlanJob.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D31674278E00991C6B /* EaglePlanJob.c */; };
 		8BA0660416748DA500991C6B /* EaglePageReceiver.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0660216748DA500991C6B /* EaglePageReceiver.c */; };
 		8BA0660516748DA500991C6B /* EaglePageReceiver.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0660216748DA500991C6B /* EaglePageReceiver.c */; };
+		8BA066141674C49800991C6B /* eagledb.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BA066131674C49800991C6B /* eagledb.1 */; };
+		8BA0661C1674C4C100991C6B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0661A1674C4C100991C6B /* main.c */; };
+		8BA066261674CBCC00991C6B /* sql.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA066251674CBCC00991C6B /* sql.tab.c */; };
+		8BA066291674CC9200991C6B /* lex.yy.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA066281674CC9200991C6B /* lex.yy.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +60,16 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		8BA0660C1674C49800991C6B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8BA066141674C49800991C6B /* eagledb.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -97,6 +111,14 @@
 		8BA0660216748DA500991C6B /* EaglePageReceiver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePageReceiver.c; sourceTree = "<group>"; };
 		8BA0660316748DA500991C6B /* EaglePageReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaglePageReceiver.h; sourceTree = "<group>"; };
 		8BA066061674ADB200991C6B /* EagleUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleUtils.h; sourceTree = "<group>"; };
+		8BA0660E1674C49800991C6B /* eagledb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagledb; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BA066131674C49800991C6B /* eagledb.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = eagledb.1; sourceTree = "<group>"; };
+		8BA0661A1674C4C100991C6B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		8BA0661D1674C58A00991C6B /* sql.l */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.lex; path = sql.l; sourceTree = "<group>"; };
+		8BA0661E1674C58A00991C6B /* sql.y */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.yacc; path = sql.y; sourceTree = "<group>"; };
+		8BA066251674CBCC00991C6B /* sql.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sql.tab.c; sourceTree = "<group>"; };
+		8BA066271674CC0100991C6B /* sql.tab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sql.tab.h; sourceTree = "<group>"; };
+		8BA066281674CC9200991C6B /* lex.yy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lex.yy.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +137,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BA0660B1674C49800991C6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -123,6 +152,7 @@
 			children = (
 				8BA065D51674377F00991C6B /* test */,
 				8B9AEABD166602CC0095B4F5 /* eagle */,
+				8BA066101674C49800991C6B /* eagledb */,
 				8B9AEABB166602CC0095B4F5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -132,6 +162,7 @@
 			children = (
 				8B9AEABA166602CC0095B4F5 /* eagle */,
 				8BA065DC1674399B00991C6B /* eagle_test */,
+				8BA0660E1674C49800991C6B /* eagledb */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +214,20 @@
 			name = test;
 			sourceTree = "<group>";
 		};
+		8BA066101674C49800991C6B /* eagledb */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0661A1674C4C100991C6B /* main.c */,
+				8BA066131674C49800991C6B /* eagledb.1 */,
+				8BA0661D1674C58A00991C6B /* sql.l */,
+				8BA0661E1674C58A00991C6B /* sql.y */,
+				8BA066251674CBCC00991C6B /* sql.tab.c */,
+				8BA066271674CC0100991C6B /* sql.tab.h */,
+				8BA066281674CC9200991C6B /* lex.yy.c */,
+			);
+			path = eagledb;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -221,6 +266,24 @@
 			productReference = 8BA065DC1674399B00991C6B /* eagle_test */;
 			productType = "com.apple.product-type.tool";
 		};
+		8BA0660D1674C49800991C6B /* eagledb */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BA066151674C49800991C6B /* Build configuration list for PBXNativeTarget "eagledb" */;
+			buildPhases = (
+				8BA0662A1674D27900991C6B /* ShellScript */,
+				8BA0660A1674C49800991C6B /* Sources */,
+				8BA0660B1674C49800991C6B /* Frameworks */,
+				8BA0660C1674C49800991C6B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eagledb;
+			productName = eagledb;
+			productReference = 8BA0660E1674C49800991C6B /* eagledb */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -244,6 +307,7 @@
 			targets = (
 				8B9AEAB9166602CC0095B4F5 /* eagle */,
 				8BA065DB1674399B00991C6B /* eagle_test */,
+				8BA0660D1674C49800991C6B /* eagledb */,
 			);
 		};
 /* End PBXProject section */
@@ -261,6 +325,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "geninfo --no-checksum --base-directory ${OBJROOT} --output-filename coverage.info ${OBJROOT}\n/usr/bin/php cov.php\ngenhtml -o coverage coverage.info";
+		};
+		8BA0662A1674D27900991C6B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cd eagledb\nbison -d sql.y\nflex sql.l\ncd ..";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -304,6 +381,16 @@
 				8BA065F1167442C600991C6B /* TestSuite.c in Sources */,
 				8BA065F31674431300991C6B /* MainSuite.c in Sources */,
 				8BA0660516748DA500991C6B /* EaglePageReceiver.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BA0660A1674C49800991C6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BA0661C1674C4C100991C6B /* main.c in Sources */,
+				8BA066261674CBCC00991C6B /* sql.tab.c in Sources */,
+				8BA066291674CC9200991C6B /* lex.yy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +488,22 @@
 			};
 			name = Release;
 		};
+		8BA066161674C49800991C6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ll";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BA066171674C49800991C6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ll";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -427,6 +530,14 @@
 			buildConfigurations = (
 				8BA065E41674399B00991C6B /* Debug */,
 				8BA065E51674399B00991C6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8BA066151674C49800991C6B /* Build configuration list for PBXNativeTarget "eagledb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BA066161674C49800991C6B /* Debug */,
+				8BA066171674C49800991C6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
