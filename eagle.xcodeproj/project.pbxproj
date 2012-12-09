@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		8B9AEABF166602CC0095B4F5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9AEABE166602CC0095B4F5 /* main.c */; };
 		8B9AEAC1166602CD0095B4F5 /* eagle.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9AEAC0166602CD0095B4F5 /* eagle.1 */; };
+		8BA065AE166F454000991C6B /* EaglePageProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065AD166F454000991C6B /* EaglePageProvider.c */; };
+		8BA065B3166F461300991C6B /* EagleWorker.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B2166F461300991C6B /* EagleWorker.c */; };
+		8BA065B7166F473000991C6B /* EagleWorkers.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B6166F473000991C6B /* EagleWorkers.c */; };
+		8BA065BA166F4CBC00991C6B /* EagleInstance.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B9166F4CBC00991C6B /* EagleInstance.c */; };
+		8BA065BC166F4E3900991C6B /* EaglePage.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065BB166F4E3900991C6B /* EaglePage.c */; };
+		8BA065BF1670884C00991C6B /* EaglePageOperations.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065BE1670884C00991C6B /* EaglePageOperations.c */; };
+		8BA065C216708A4900991C6B /* EaglePageReceiver.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C116708A4900991C6B /* EaglePageReceiver.c */; };
+		8BA065C51672D17000991C6B /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C41672D17000991C6B /* EagleData.c */; };
+		8BA065C81672D20600991C6B /* EaglePlan.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C71672D20600991C6B /* EaglePlan.c */; };
+		8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */; };
+		8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +39,28 @@
 		8B9AEABA166602CC0095B4F5 /* eagle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9AEABE166602CC0095B4F5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		8B9AEAC0166602CD0095B4F5 /* eagle.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = eagle.1; sourceTree = "<group>"; };
+		8BA065AD166F454000991C6B /* EaglePageProvider.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePageProvider.c; sourceTree = "<group>"; };
+		8BA065B0166F458E00991C6B /* EaglePageProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePageProvider.h; sourceTree = "<group>"; };
+		8BA065B1166F45DE00991C6B /* EagleWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleWorker.h; sourceTree = "<group>"; };
+		8BA065B2166F461300991C6B /* EagleWorker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleWorker.c; sourceTree = "<group>"; };
+		8BA065B4166F466B00991C6B /* EaglePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePage.h; sourceTree = "<group>"; };
+		8BA065B5166F46E000991C6B /* EagleWorkers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleWorkers.h; sourceTree = "<group>"; };
+		8BA065B6166F473000991C6B /* EagleWorkers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleWorkers.c; sourceTree = "<group>"; };
+		8BA065B8166F4C3000991C6B /* EagleInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleInstance.h; sourceTree = "<group>"; };
+		8BA065B9166F4CBC00991C6B /* EagleInstance.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleInstance.c; sourceTree = "<group>"; };
+		8BA065BB166F4E3900991C6B /* EaglePage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePage.c; sourceTree = "<group>"; };
+		8BA065BD1670874D00991C6B /* EaglePageOperations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePageOperations.h; sourceTree = "<group>"; };
+		8BA065BE1670884C00991C6B /* EaglePageOperations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePageOperations.c; sourceTree = "<group>"; };
+		8BA065C0167089C700991C6B /* EaglePageReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePageReceiver.h; sourceTree = "<group>"; };
+		8BA065C116708A4900991C6B /* EaglePageReceiver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePageReceiver.c; sourceTree = "<group>"; };
+		8BA065C31672D10F00991C6B /* EagleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleData.h; sourceTree = "<group>"; };
+		8BA065C41672D17000991C6B /* EagleData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleData.c; sourceTree = "<group>"; };
+		8BA065C61672D1CA00991C6B /* EaglePlan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlan.h; sourceTree = "<group>"; };
+		8BA065C71672D20600991C6B /* EaglePlan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlan.c; sourceTree = "<group>"; };
+		8BA065C91672F1A700991C6B /* EaglePlanOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanOperation.h; sourceTree = "<group>"; };
+		8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanOperation.c; sourceTree = "<group>"; };
+		8BA065CF16740CEB00991C6B /* EaglePlanBufferProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanBufferProvider.h; sourceTree = "<group>"; };
+		8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanBufferProvider.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +95,28 @@
 			children = (
 				8B9AEABE166602CC0095B4F5 /* main.c */,
 				8B9AEAC0166602CD0095B4F5 /* eagle.1 */,
+				8BA065B0166F458E00991C6B /* EaglePageProvider.h */,
+				8BA065AD166F454000991C6B /* EaglePageProvider.c */,
+				8BA065B1166F45DE00991C6B /* EagleWorker.h */,
+				8BA065B2166F461300991C6B /* EagleWorker.c */,
+				8BA065B4166F466B00991C6B /* EaglePage.h */,
+				8BA065BB166F4E3900991C6B /* EaglePage.c */,
+				8BA065B5166F46E000991C6B /* EagleWorkers.h */,
+				8BA065B6166F473000991C6B /* EagleWorkers.c */,
+				8BA065B8166F4C3000991C6B /* EagleInstance.h */,
+				8BA065B9166F4CBC00991C6B /* EagleInstance.c */,
+				8BA065BD1670874D00991C6B /* EaglePageOperations.h */,
+				8BA065BE1670884C00991C6B /* EaglePageOperations.c */,
+				8BA065C0167089C700991C6B /* EaglePageReceiver.h */,
+				8BA065C116708A4900991C6B /* EaglePageReceiver.c */,
+				8BA065C31672D10F00991C6B /* EagleData.h */,
+				8BA065C41672D17000991C6B /* EagleData.c */,
+				8BA065C61672D1CA00991C6B /* EaglePlan.h */,
+				8BA065C71672D20600991C6B /* EaglePlan.c */,
+				8BA065C91672F1A700991C6B /* EaglePlanOperation.h */,
+				8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */,
+				8BA065CF16740CEB00991C6B /* EaglePlanBufferProvider.h */,
+				8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */,
 			);
 			path = eagle;
 			sourceTree = "<group>";
@@ -118,6 +173,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9AEABF166602CC0095B4F5 /* main.c in Sources */,
+				8BA065AE166F454000991C6B /* EaglePageProvider.c in Sources */,
+				8BA065B3166F461300991C6B /* EagleWorker.c in Sources */,
+				8BA065B7166F473000991C6B /* EagleWorkers.c in Sources */,
+				8BA065BA166F4CBC00991C6B /* EagleInstance.c in Sources */,
+				8BA065BC166F4E3900991C6B /* EaglePage.c in Sources */,
+				8BA065BF1670884C00991C6B /* EaglePageOperations.c in Sources */,
+				8BA065C216708A4900991C6B /* EaglePageReceiver.c in Sources */,
+				8BA065C51672D17000991C6B /* EagleData.c in Sources */,
+				8BA065C81672D20600991C6B /* EaglePlan.c in Sources */,
+				8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */,
+				8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +274,7 @@
 				8B9AEAC6166602CD0095B4F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
