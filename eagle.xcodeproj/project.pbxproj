@@ -21,6 +21,22 @@
 		8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */; };
 		8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */; };
 		8BA065D41674278E00991C6B /* EaglePlanJob.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D31674278E00991C6B /* EaglePlanJob.c */; };
+		8BA065E616743A7700991C6B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D6167437A900991C6B /* main.c */; };
+		8BA065EA16743D1B00991C6B /* libcunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA065E916743D1A00991C6B /* libcunit.a */; };
+		8BA065F1167442C600991C6B /* TestSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065F0167442C600991C6B /* TestSuite.c */; };
+		8BA065F31674431300991C6B /* MainSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065F21674431300991C6B /* MainSuite.c */; };
+		8BA065F416744D2F00991C6B /* EaglePageProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065AD166F454000991C6B /* EaglePageProvider.c */; };
+		8BA065F516744D2F00991C6B /* EagleWorker.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B2166F461300991C6B /* EagleWorker.c */; };
+		8BA065F616744D2F00991C6B /* EaglePage.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065BB166F4E3900991C6B /* EaglePage.c */; };
+		8BA065F716744D2F00991C6B /* EagleWorkers.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B6166F473000991C6B /* EagleWorkers.c */; };
+		8BA065F816744D2F00991C6B /* EagleInstance.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065B9166F4CBC00991C6B /* EagleInstance.c */; };
+		8BA065F916744D2F00991C6B /* EaglePageOperations.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065BE1670884C00991C6B /* EaglePageOperations.c */; };
+		8BA065FA16744D2F00991C6B /* EaglePageReceiver.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C116708A4900991C6B /* EaglePageReceiver.c */; };
+		8BA065FB16744D2F00991C6B /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C41672D17000991C6B /* EagleData.c */; };
+		8BA065FC16744D2F00991C6B /* EaglePlan.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C71672D20600991C6B /* EaglePlan.c */; };
+		8BA065FD16744D2F00991C6B /* EaglePlanOperation.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */; };
+		8BA065FE16744D2F00991C6B /* EaglePlanBufferProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */; };
+		8BA065FF16744D2F00991C6B /* EaglePlanJob.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D31674278E00991C6B /* EaglePlanJob.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +47,15 @@
 			dstSubfolderSpec = 0;
 			files = (
 				8B9AEAC1166602CD0095B4F5 /* eagle.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		8BA065DA1674399B00991C6B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -64,6 +89,13 @@
 		8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanBufferProvider.c; sourceTree = "<group>"; };
 		8BA065D2167426E900991C6B /* EaglePlanJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanJob.h; sourceTree = "<group>"; };
 		8BA065D31674278E00991C6B /* EaglePlanJob.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanJob.c; sourceTree = "<group>"; };
+		8BA065D6167437A900991C6B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = test/main.c; sourceTree = "<group>"; };
+		8BA065DC1674399B00991C6B /* eagle_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BA065E916743D1A00991C6B /* libcunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcunit.a; path = /usr/local/lib/libcunit.a; sourceTree = "<absolute>"; };
+		8BA065EC167440DC00991C6B /* MainSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainSuite.h; path = test/MainSuite.h; sourceTree = "<group>"; };
+		8BA065EF1674428500991C6B /* TestSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TestSuite.h; path = test/TestSuite.h; sourceTree = "<group>"; };
+		8BA065F0167442C600991C6B /* TestSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TestSuite.c; path = test/TestSuite.c; sourceTree = "<group>"; };
+		8BA065F21674431300991C6B /* MainSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MainSuite.c; path = test/MainSuite.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +106,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8BA065D91674399B00991C6B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BA065EA16743D1B00991C6B /* libcunit.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		8B9AEAAF166602CC0095B4F5 = {
 			isa = PBXGroup;
 			children = (
+				8BA065D51674377F00991C6B /* test */,
 				8B9AEABD166602CC0095B4F5 /* eagle */,
 				8B9AEABB166602CC0095B4F5 /* Products */,
 			);
@@ -89,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				8B9AEABA166602CC0095B4F5 /* eagle */,
+				8BA065DC1674399B00991C6B /* eagle_test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +168,19 @@
 			path = eagle;
 			sourceTree = "<group>";
 		};
+		8BA065D51674377F00991C6B /* test */ = {
+			isa = PBXGroup;
+			children = (
+				8BA065E916743D1A00991C6B /* libcunit.a */,
+				8BA065D6167437A900991C6B /* main.c */,
+				8BA065EF1674428500991C6B /* TestSuite.h */,
+				8BA065F0167442C600991C6B /* TestSuite.c */,
+				8BA065EC167440DC00991C6B /* MainSuite.h */,
+				8BA065F21674431300991C6B /* MainSuite.c */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +199,23 @@
 			name = eagle;
 			productName = eagle;
 			productReference = 8B9AEABA166602CC0095B4F5 /* eagle */;
+			productType = "com.apple.product-type.tool";
+		};
+		8BA065DB1674399B00991C6B /* eagle_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BA065E31674399B00991C6B /* Build configuration list for PBXNativeTarget "eagle_test" */;
+			buildPhases = (
+				8BA065D81674399B00991C6B /* Sources */,
+				8BA065D91674399B00991C6B /* Frameworks */,
+				8BA065DA1674399B00991C6B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = eagle_test;
+			productName = eagle_test;
+			productReference = 8BA065DC1674399B00991C6B /* eagle_test */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -168,6 +240,7 @@
 			projectRoot = "";
 			targets = (
 				8B9AEAB9166602CC0095B4F5 /* eagle */,
+				8BA065DB1674399B00991C6B /* eagle_test */,
 			);
 		};
 /* End PBXProject section */
@@ -190,6 +263,28 @@
 				8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */,
 				8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */,
 				8BA065D41674278E00991C6B /* EaglePlanJob.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BA065D81674399B00991C6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BA065F416744D2F00991C6B /* EaglePageProvider.c in Sources */,
+				8BA065F516744D2F00991C6B /* EagleWorker.c in Sources */,
+				8BA065F616744D2F00991C6B /* EaglePage.c in Sources */,
+				8BA065F716744D2F00991C6B /* EagleWorkers.c in Sources */,
+				8BA065F816744D2F00991C6B /* EagleInstance.c in Sources */,
+				8BA065F916744D2F00991C6B /* EaglePageOperations.c in Sources */,
+				8BA065FA16744D2F00991C6B /* EaglePageReceiver.c in Sources */,
+				8BA065FB16744D2F00991C6B /* EagleData.c in Sources */,
+				8BA065FC16744D2F00991C6B /* EaglePlan.c in Sources */,
+				8BA065FD16744D2F00991C6B /* EaglePlanOperation.c in Sources */,
+				8BA065FE16744D2F00991C6B /* EaglePlanBufferProvider.c in Sources */,
+				8BA065FF16744D2F00991C6B /* EaglePlanJob.c in Sources */,
+				8BA065E616743A7700991C6B /* main.c in Sources */,
+				8BA065F1167442C600991C6B /* TestSuite.c in Sources */,
+				8BA065F31674431300991C6B /* MainSuite.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +356,24 @@
 			};
 			name = Release;
 		};
+		8BA065E41674399B00991C6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8BA065E51674399B00991C6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -281,6 +394,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8BA065E31674399B00991C6B /* Build configuration list for PBXNativeTarget "eagle_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BA065E41674399B00991C6B /* Debug */,
+				8BA065E51674399B00991C6B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

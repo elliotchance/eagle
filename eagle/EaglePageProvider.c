@@ -2,11 +2,11 @@
 #include "EaglePageProvider.h"
 #include "EaglePageOperations.h"
 
-EaglePageProvider* EaglePageProvider_New()
+EaglePageProvider* EaglePageProvider_New(int recordsPerPage)
 {
     EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
     
-    pageProvider->recordsPerPage = 1000;
+    pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->offsetRecords = 0;
     pageProvider->totalRecords = 0;
     pageProvider->records = NULL;
@@ -17,9 +17,9 @@ EaglePageProvider* EaglePageProvider_New()
     return pageProvider;
 }
 
-EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int totalRecords)
+EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int totalRecords, int recordsPerPage)
 {
-    EaglePageProvider *pageProvider = EaglePageProvider_New();
+    EaglePageProvider *pageProvider = EaglePageProvider_New(recordsPerPage);
     
     pageProvider->records = records;
     pageProvider->totalRecords = totalRecords;
@@ -27,9 +27,9 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int total
     return pageProvider;
 }
 
-EaglePageProvider* EaglePageProvider_CreateFromPageReceiver(EaglePageReceiver *receiver)
+EaglePageProvider* EaglePageProvider_CreateFromPageReceiver(EaglePageReceiver *receiver, int recordsPerPage)
 {
-    EaglePageProvider *pageProvider = EaglePageProvider_New();
+    EaglePageProvider *pageProvider = EaglePageProvider_New(recordsPerPage);
     
     pageProvider->nextPage = EaglePageProvider_nextPageFromReceiver_;
     pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromReceiver_;

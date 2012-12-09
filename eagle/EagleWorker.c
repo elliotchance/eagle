@@ -42,7 +42,7 @@ void* EagleWorker_begin(void *obj)
             // extract records
             for(int i = 0; i < job->plan->pageSize; ++i) {
                 if(job->buffers[0]->data[i]) {
-                    printf("%d\n", job->buffers[job->plan->providers[0]->destinationBuffer]->data[i]);
+                    //printf("%d\n", job->buffers[job->plan->providers[0]->destinationBuffer]->data[i]);
                 }
             }
         }
@@ -50,8 +50,6 @@ void* EagleWorker_begin(void *obj)
             printf("No job!\n");
             return NULL;
         }
-        
-        sleep(1);
     }
     
     return NULL;
