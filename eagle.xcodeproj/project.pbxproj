@@ -20,6 +20,7 @@
 		8BA065C81672D20600991C6B /* EaglePlan.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065C71672D20600991C6B /* EaglePlan.c */; };
 		8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */; };
 		8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */; };
+		8BA065D41674278E00991C6B /* EaglePlanJob.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D31674278E00991C6B /* EaglePlanJob.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +62,8 @@
 		8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanOperation.c; sourceTree = "<group>"; };
 		8BA065CF16740CEB00991C6B /* EaglePlanBufferProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanBufferProvider.h; sourceTree = "<group>"; };
 		8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanBufferProvider.c; sourceTree = "<group>"; };
+		8BA065D2167426E900991C6B /* EaglePlanJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanJob.h; sourceTree = "<group>"; };
+		8BA065D31674278E00991C6B /* EaglePlanJob.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePlanJob.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				8BA065CA1672F21A00991C6B /* EaglePlanOperation.c */,
 				8BA065CF16740CEB00991C6B /* EaglePlanBufferProvider.h */,
 				8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */,
+				8BA065D2167426E900991C6B /* EaglePlanJob.h */,
+				8BA065D31674278E00991C6B /* EaglePlanJob.c */,
 			);
 			path = eagle;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				8BA065C81672D20600991C6B /* EaglePlan.c in Sources */,
 				8BA065CB1672F21A00991C6B /* EaglePlanOperation.c in Sources */,
 				8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */,
+				8BA065D41674278E00991C6B /* EaglePlanJob.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

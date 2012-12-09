@@ -12,8 +12,6 @@ typedef struct {
     int allocatedProviders;
     int usedProviders;
     EaglePlanBufferProvider **providers;
-    int allocatedBuffers;
-    EaglePage **buffers;
     int pageSize;
 } EaglePlan;
 

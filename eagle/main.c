@@ -32,7 +32,7 @@ int main(int argc, const char * argv[])
     
     EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(10000000), "<2> > 5000000 -> <1>"));
     EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, EagleData_Int(20000000), "<3> < 10000000 -> <1>"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(0, EaglePageOperations_AndPage,        2, EaglePlan_getBuffer(plan, 3), "<2> && <3> -> DEST"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,                       "<2> && <3> -> DEST"));
     
     printf("%s", EaglePlan_toString(plan));
     

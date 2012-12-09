@@ -16,13 +16,6 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->usedProviders = 0;
     plan->providers = (EaglePlanBufferProvider**) calloc(plan->allocatedProviders, sizeof(EaglePlanBufferProvider*));
     
-    // initialize all buffers now
-    plan->allocatedBuffers = 4;
-    plan->buffers = (EaglePage**) calloc(plan->allocatedBuffers, sizeof(EaglePage));
-    for(int i = 0; i < plan->allocatedBuffers; ++i) {
-        plan->buffers[i] = EaglePage_Alloc(plan->pageSize);
-    }
-    
     return plan;
 }
 
@@ -34,11 +27,6 @@ void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo)
 void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
 {
     plan->providers[plan->usedProviders++] = bp;
-}
-
-EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer)
-{
-    return plan->buffers[buffer];
 }
 
 const char* EaglePlan_toString(EaglePlan *plan)
