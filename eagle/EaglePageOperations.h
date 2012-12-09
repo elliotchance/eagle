@@ -3,7 +3,6 @@
 
 #define EaglePageOperationFunction(ptr) void (*ptr)(EaglePage *page, EaglePage *out, void *obj)
 
-#include "EaglePageReceiver.h"
 #include "EaglePage.h"
 
 // single operations

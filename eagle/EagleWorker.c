@@ -42,12 +42,11 @@ void* EagleWorker_begin(void *obj)
             // extract records
             for(int i = 0; i < job->plan->pageSize; ++i) {
                 if(job->buffers[0]->data[i]) {
-                    //printf("%d\n", job->buffers[job->plan->providers[0]->destinationBuffer]->data[i]);
+                    EaglePageReceiver_pushRecordId(job->plan->receiver, job->buffers[0]->recordOffset + i);
                 }
             }
         }
         else {
-            printf("No job!\n");
             return NULL;
         }
     }
@@ -57,7 +56,6 @@ void* EagleWorker_begin(void *obj)
 
 void EagleWorker_start(EagleWorker *worker)
 {
-    printf("Starting worker thread %d\n", worker->workerId);
     worker->thread = (pthread_t*) malloc(sizeof(pthread_t));
     pthread_create(worker->thread, NULL, EagleWorker_begin, worker);
 }

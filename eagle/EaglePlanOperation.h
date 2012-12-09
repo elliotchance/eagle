@@ -11,7 +11,6 @@ typedef struct {
     int destination;
     int source;
     EaglePageOperationFunction(function);
-    EaglePageReceiver *pageReceiver;
     void *obj;
     const char *description;
     int type;

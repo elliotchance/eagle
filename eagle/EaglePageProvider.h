@@ -16,7 +16,6 @@ typedef struct EaglePageProvider_ EaglePageProvider;
 
 EaglePageProvider* EaglePageProvider_New(int recordsPerPage);
 EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int totalRecords, int recordsPerPage);
-EaglePageProvider* EaglePageProvider_CreateFromPageReceiver(EaglePageReceiver *receiver, int recordsPerPage);
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);

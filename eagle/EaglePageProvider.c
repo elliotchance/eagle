@@ -1,6 +1,8 @@
 #include <stdlib.h>
+#include <math.h>
 #include "EaglePageProvider.h"
 #include "EaglePageOperations.h"
+#include "EagleUtils.h"
 
 EaglePageProvider* EaglePageProvider_New(int recordsPerPage)
 {
@@ -27,19 +29,6 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int total
     return pageProvider;
 }
 
-EaglePageProvider* EaglePageProvider_CreateFromPageReceiver(EaglePageReceiver *receiver, int recordsPerPage)
-{
-    EaglePageProvider *pageProvider = EaglePageProvider_New(recordsPerPage);
-    
-    pageProvider->nextPage = EaglePageProvider_nextPageFromReceiver_;
-    pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromReceiver_;
-    
-    //EaglePageReceiverCursor *cursor = EaglePageReceiverCursor_New(receiver);
-    pageProvider->obj = receiver;
-    
-    return pageProvider;
-}
-
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)
 {
     return epp->pagesRemaining(epp);
@@ -59,12 +48,6 @@ int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)
     return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
 }
 
-int EaglePageProvider_pagesRemainingFromReceiver_(EaglePageProvider *epp)
-{
-    EaglePageReceiver *receiver = (EaglePageReceiver*) epp->obj;
-    return EaglePageProvider_TotalPages(receiver->used - epp->offsetRecords, epp->recordsPerPage);
-}
-
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 {
     return epp->nextPage(epp);
@@ -73,20 +56,9 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)
 {
     int *begin = (int*) epp->records;
-    int pageSize = epp->recordsPerPage;
+    int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
     
-    EaglePage *page = EaglePage_New(begin + epp->offsetRecords, pageSize);
-    epp->offsetRecords += pageSize;
-    
-    return page;
-}
-
-EaglePage* EaglePageProvider_nextPageFromReceiver_(EaglePageProvider *epp)
-{
-    EaglePageReceiver *receiver = (EaglePageReceiver*) epp->obj;
-    int pageSize = epp->recordsPerPage;
-    
-    EaglePage *page = EaglePage_New(receiver->buffer + epp->offsetRecords, pageSize);
+    EaglePage *page = EaglePage_New(begin + epp->offsetRecords, pageSize, epp->offsetRecords);
     epp->offsetRecords += pageSize;
     
     return page;

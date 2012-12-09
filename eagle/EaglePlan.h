@@ -3,6 +3,7 @@
 
 #include "EaglePageOperations.h"
 #include "EaglePlanOperation.h"
+#include "EaglePageReceiver.h"
 #include "EaglePlanBufferProvider.h"
 
 typedef struct {
@@ -13,9 +14,10 @@ typedef struct {
     int usedProviders;
     EaglePlanBufferProvider **providers;
     int pageSize;
+    EaglePageReceiver *receiver;
 } EaglePlan;
 
-EaglePlan* EaglePlan_New(int pageSize);
+EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver);
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo);
 void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);

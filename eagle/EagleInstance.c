@@ -36,7 +36,6 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     
     for(int i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
-        //printf("Pages Remaining (provider = %d): %d\n", i, EaglePageProvider_pagesRemaining(provider->provider));
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
             pthread_mutex_unlock(eagle->nextJobLock);
             return NULL;

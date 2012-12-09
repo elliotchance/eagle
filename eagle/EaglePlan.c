@@ -2,11 +2,12 @@
 #include <string.h>
 #include "EaglePlan.h"
 
-EaglePlan* EaglePlan_New(int pageSize)
+EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver)
 {
     EaglePlan *plan = (EaglePlan*) malloc(sizeof(EaglePlan));
     
     plan->pageSize = pageSize;
+    plan->receiver = receiver;
     
     plan->allocatedOperations = 10;
     plan->usedOperations = 0;
