@@ -37,7 +37,7 @@ void cunit_verify(int test, const char *format, ...)
         vsprintf(message, format, argptr);
         va_end(argptr);
         
-        CU_ASSERT_FALSE(message);
+        CU_FAIL(message);
     }
 }
 
@@ -51,7 +51,7 @@ void cunit_verify_equal_int(int left, int right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "%d == %d", left, right);
-        CU_ASSERT_FALSE(message);
+        CU_FAIL(message);
     }
 }
 
@@ -65,7 +65,7 @@ void cunit_verify_equal_string(char *left, char *right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "\"%s\" == \"%s\"", left, right);
-        CU_ASSERT_FALSE(message);
+        CU_FAIL(message);
     }
 }
 
@@ -83,7 +83,7 @@ void cunit_assert(int test, const char *format, ...)
         vsprintf(message, format, argptr);
         va_end(argptr);
         
-        CU_ASSERT_FALSE_FATAL(message);
+        CU_FAIL_FATAL(message);
     }
 }
 
@@ -97,7 +97,7 @@ void cunit_assert_equal_int(int left, int right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "%d == %d", left, right);
-        CU_ASSERT_FALSE_FATAL(message);
+        CU_FAIL_FATAL(message);
     }
 }
 
@@ -111,6 +111,6 @@ void cunit_assert_equal_string(char *left, char *right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "\"%s\" == \"%s\"", left, right);
-        CU_ASSERT_FALSE_FATAL(message);
+        CU_FAIL_FATAL(message);
     }
 }

@@ -208,6 +208,21 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     cunit_assert_equal_string((char*) EaglePlan_toString(plan), "EaglePlan:\n  Step 1\n  Step 2\n  Step 3\n");
 }
 
+CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
+{
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    
+    // fill
+    for(int i = 0; i < receiver->allocated; ++i) {
+        EaglePageReceiver_pushRecordId(receiver, 0);
+    }
+    cunit_assert_equal_int(receiver->allocated, receiver->used);
+    
+    // try to push in more data than is allocated
+    EaglePageReceiver_pushRecordId(receiver, 0);
+    cunit_assert_equal_int(receiver->allocated, receiver->used);
+}
+
 /**
  * The suite init function.
  */
@@ -235,6 +250,8 @@ CUnitTests* MainSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_TotalPages));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntStream));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageReceiver_pushRecordId));
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_toString));
     

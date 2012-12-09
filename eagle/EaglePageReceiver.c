@@ -14,7 +14,6 @@ EaglePageReceiver* EaglePageReceiver_New()
 void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId)
 {
     if(pr->used >= pr->allocated) {
-        printf("receiver is out of memory!");
         return;
     }
     pr->buffer[pr->used++] = recordId;
