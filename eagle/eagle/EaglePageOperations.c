@@ -5,22 +5,20 @@
 
 void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)
 {
-    int value = *((int*) obj);
+    int value = *((int*) obj), i;
     out->recordOffset = page->recordOffset;
     
-    // scan page
-    for(int i = 0; i < page->count; ++i) {
+    for(i = 0; i < page->count; ++i) {
         out->data[i] = (page->data[i] < value);
     }
 }
 
 void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *obj)
 {
-    int value = *((int*) obj);
+    int value = *((int*) obj), i;
     out->recordOffset = page->recordOffset;
     
-    // scan page
-    for(int i = 0; i < page->count; ++i) {
+    for(i = 0; i < page->count; ++i) {
         out->data[i] = (page->data[i] > value);
     }
 }
@@ -28,10 +26,11 @@ void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *o
 void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj)
 {
     EaglePage *page2 = (EaglePage*) obj;
+    int i;
+    
     out->recordOffset = page->recordOffset;
     
-    // compare pages
-    for(int i = 0; i < page->count; ++i) {
+    for(i = 0; i < page->count; ++i) {
         out->data[i] = page->data[i] && page2->data[i];
     }
 }

@@ -12,11 +12,11 @@ EagleInstance* EagleInstance_New(int totalWorkers)
 
 void EagleInstance_run(EagleInstance *eagle)
 {
-    // start workers
+    /* start workers */
     pthread_mutex_init(eagle->nextJobLock, NULL);
     EagleWorkers_start(eagle->workers);
     
-    // close workers
+    /* close workers */
     EagleWorkers_joinAll(eagle->workers);
     pthread_mutex_destroy(eagle->nextJobLock);
 }
@@ -28,13 +28,17 @@ void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)
 
 EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
 {
-    // synchronize this function
+    EaglePlan *plan;
+    EaglePlanJob *job;
+    int i;
+    
+    /* synchronize this function */
     pthread_mutex_lock(eagle->nextJobLock);
     
-    EaglePlan *plan = eagle->plan;
-    EaglePlanJob *job = EaglePlanJob_New(plan, 4);
+    plan = eagle->plan;
+    job = EaglePlanJob_New(plan, 4);
     
-    for(int i = 0; i < plan->usedProviders; ++i) {
+    for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
             pthread_mutex_unlock(eagle->nextJobLock);

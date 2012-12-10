@@ -21,7 +21,6 @@ int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 
-// private functions
 int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
 int EaglePageProvider_pagesRemainingFromReceiver_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);

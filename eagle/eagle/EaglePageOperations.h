@@ -5,11 +5,9 @@
 
 #include "EaglePage.h"
 
-// single operations
 void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj);
 void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *obj);
 
-// page operations
 void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj);
 
 #endif

@@ -10,7 +10,8 @@
 		8B1BF7D81675D79A007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
 		8B1BF7D91675D79A007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
 		8B1BF7DC1675D7E0007C11E6 /* libsqlparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */; };
-		8B1BF7E11675D7FB007C11E6 /* libsqlparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */; };
+		8B1BF7E41675DC6A007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
+		8B1BF7E51675DC6A007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
 		8B61FC651675787B00EB6CF9 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */; };
 		8BD9E41F16757166005C3BDE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3FC16756FF4005C3BDE /* main.c */; };
 		8BD9E42016757166005C3BDE /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3DB16756FF4005C3BDE /* EagleData.c */; };
@@ -50,20 +51,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
 			remoteInfo = sqlparser;
-		};
-		8B1BF7DF1675D7F2007C11E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
-			remoteInfo = sqlparser;
-		};
-		8B1BF7E21675D8EC007C11E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B9AEAB9166602CC0095B4F5;
-			remoteInfo = eagle;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -151,7 +138,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B1BF7E11675D7FB007C11E6 /* libsqlparser.a in Frameworks */,
 				8B61FC651675787B00EB6CF9 /* libcunit.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,8 +307,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8B1BF7E31675D8EC007C11E6 /* PBXTargetDependency */,
-				8B1BF7E01675D7F2007C11E6 /* PBXTargetDependency */,
 			);
 			name = eagle_test;
 			productName = eagle_test;
@@ -407,6 +391,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1BF7E41675DC6A007C11E6 /* sql.l in Sources */,
+				8B1BF7E51675DC6A007C11E6 /* sql.y in Sources */,
 				8BD9E43E1675729A005C3BDE /* EagleData.c in Sources */,
 				8BD9E43F1675729A005C3BDE /* EagleInstance.c in Sources */,
 				8BD9E4401675729A005C3BDE /* EaglePage.c in Sources */,
@@ -433,16 +419,6 @@
 			isa = PBXTargetDependency;
 			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
 			targetProxy = 8B1BF7DA1675D7D7007C11E6 /* PBXContainerItemProxy */;
-		};
-		8B1BF7E01675D7F2007C11E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
-			targetProxy = 8B1BF7DF1675D7F2007C11E6 /* PBXContainerItemProxy */;
-		};
-		8B1BF7E31675D8EC007C11E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B9AEAB9166602CC0095B4F5 /* eagle */;
-			targetProxy = 8B1BF7E21675D8EC007C11E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -522,6 +498,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				GCC_C_LANGUAGE_STANDARD = ansi;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
@@ -549,6 +526,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				GCC_C_LANGUAGE_STANDARD = ansi;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
