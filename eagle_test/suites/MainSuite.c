@@ -89,6 +89,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EagleInstance *eagle = EagleInstance_New(cores);
     
     // prepare data
+    srand(0);
     int *data = (int*) calloc(sizeof(int), totalRecords);
     for(int i = 0; i < totalRecords; ++i) {
         data[i] = rand();

@@ -1,6 +1,7 @@
 #ifndef eagle_EaglePageProvider_h
 #define eagle_EaglePageProvider_h
 
+#include <pthread.h>
 #include "EaglePage.h"
 
 struct EaglePageProvider_ {
@@ -11,6 +12,9 @@ struct EaglePageProvider_ {
     EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
     int (*pagesRemaining)(struct EaglePageProvider_ *epp);
     void *obj;
+    
+    /** synchronize EaglePageProvider_nextPage and EaglePageProvider_pagesRemaining */
+    pthread_mutex_t *nextPageLock;
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 

@@ -1,28 +1,28 @@
 %{
 
-#define YYSTYPE int
 #include "y.tab.h"
 #include <stdlib.h>
 
+char *yytext_last = NULL;
+
 %}
 
-white [ \t]+
-digit [0-9]
-integer {digit}+
+white [ \t\n\r]+
+identifier [a-zA-Z_][a-zA-Z0-9_]*
 
 %%
 
-{white} { }
-{integer} {
-    yylval = atoi(yytext);
-    return NUMBER;
+"SELECT" return K_SELECT;
+"FROM" return K_FROM;
+
+"*" return T_ASTERISK;
+";" return T_END;
+
+{white} {
+    /* skip white space */
 }
 
-"+" return PLUS;
-"-" return MINUS;
-"*" return TIMES;
-"/" return DIVIDE;
-"^" return POWER;
-"(" return LEFT;
-")" return RIGHT;
-"\n" return END;
+{identifier} {
+    yytext_last = yytext;
+    return IDENTIFIER;
+}

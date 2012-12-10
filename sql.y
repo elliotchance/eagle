@@ -3,39 +3,55 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define YYSTYPE int
 
 int yyerror(char *s);
 int yylex();
 
+char *yyerror_last = NULL;
+void *yyparse_ast = NULL;
+extern char *yytext_last;
+
+#include "EagleDbSqlSelect.h"
+
 %}
 
+/* be more versbose about error messages */
 %error-verbose
 
-%token NUMBER
-%token PLUS MINUS TIMES DIVIDE POWER
-%token LEFT RIGHT
-%token END
+/* keywords */
+%token K_FROM
+%token K_SELECT
 
-%left PLUS MINUS
-%left TIMES DIVIDE
-%left NEG
-%right POWER
+/* variable tokens */
+%token IDENTIFIER
+
+/* fixed tokens */
+%token T_ASTERISK
+%token T_END
 
 %%
 
 input:
-    | input expression
+    | input statement
 ;
 
-expression:
-    NUMBER PLUS NUMBER { $$ = $1 + $3; printf("%d\n", $$); }
+statement:
+    select_statement
+;
+
+select_statement:
+    K_SELECT {
+        yyparse_ast = (void*) EagleDbSqlSelect_New();
+    }
+    T_ASTERISK K_FROM IDENTIFIER {
+        ((EagleDbSqlSelect*) yyparse_ast)->tableName = yytext_last;
+    }
 ;
 
 %%
 
 int yyerror(char *s)
 {
-    printf("Error: %s\n", s);
+    yyerror_last = s;
     return 0;
 }

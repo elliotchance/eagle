@@ -37,7 +37,7 @@ void cunit_verify(int test, const char *format, ...)
         vsprintf(message, format, argptr);
         va_end(argptr);
         
-        CU_FAIL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_FALSE);
     }
 }
 
@@ -51,7 +51,7 @@ void cunit_verify_equal_int(int left, int right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "%d == %d", left, right);
-        CU_FAIL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_FALSE);
     }
 }
 
@@ -65,7 +65,7 @@ void cunit_verify_equal_string(char *left, char *right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "\"%s\" == \"%s\"", left, right);
-        CU_FAIL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_FALSE);
     }
 }
 
@@ -83,7 +83,7 @@ void cunit_assert(int test, const char *format, ...)
         vsprintf(message, format, argptr);
         va_end(argptr);
         
-        CU_FAIL_FATAL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_TRUE);
     }
 }
 
@@ -97,7 +97,7 @@ void cunit_assert_equal_int(int left, int right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "%d == %d", left, right);
-        CU_FAIL_FATAL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_TRUE);
     }
 }
 
@@ -111,6 +111,11 @@ void cunit_assert_equal_string(char *left, char *right)
         // failed, generate the message
         char message[1024];
         sprintf(message, "\"%s\" == \"%s\"", left, right);
-        CU_FAIL_FATAL(message);
+        CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_TRUE);
     }
+}
+
+void cunit_fail(char *message)
+{
+    CU_assertImplementation(CU_FALSE, __LINE__, message, __FILE__, "", CU_TRUE);
 }

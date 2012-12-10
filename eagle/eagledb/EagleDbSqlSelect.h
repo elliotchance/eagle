@@ -5,4 +5,6 @@ typedef struct {
     char *tableName;
 } EagleDbSqlSelect;
 
+EagleDbSqlSelect* EagleDbSqlSelect_New(void);
+
 #endif

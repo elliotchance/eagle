@@ -15,6 +15,7 @@ EaglePageProvider* EaglePageProvider_New(int recordsPerPage)
     pageProvider->nextPage = EaglePageProvider_nextPageFromStream_;
     pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromStream_;
     pageProvider->obj = NULL;
+    pageProvider->nextPageLock = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
     
     return pageProvider;
 }
@@ -31,7 +32,15 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int total
 
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)
 {
-    return epp->pagesRemaining(epp);
+    int pagesRemaining;
+    
+    /* synchronize this function */
+    pthread_mutex_lock(epp->nextPageLock);
+    
+    pagesRemaining = epp->pagesRemaining(epp);
+    
+    pthread_mutex_unlock(epp->nextPageLock);
+    return pagesRemaining;
 }
 
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage)
@@ -50,7 +59,15 @@ int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)
 
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 {
-    return epp->nextPage(epp);
+    EaglePage *nextPage;
+    
+    /* synchronize this function */
+    pthread_mutex_lock(epp->nextPageLock);
+    
+    nextPage = epp->nextPage(epp);
+    
+    pthread_mutex_unlock(epp->nextPageLock);
+    return nextPage;
 }
 
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)

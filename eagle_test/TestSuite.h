@@ -34,4 +34,6 @@ void cunit_assert(int test, const char *format, ...);
 void cunit_assert_equal_int(int left, int right);
 void cunit_assert_equal_string(char *left, char *right);
 
+void cunit_fail(char *message);
+
 #endif
