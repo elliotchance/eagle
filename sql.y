@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #define YYSTYPE int
 
+int yyerror(char *s);
+int yylex();
+
 %}
 
 %error-verbose
@@ -34,4 +37,5 @@ expression:
 int yyerror(char *s)
 {
     printf("Error: %s\n", s);
+    return 0;
 }

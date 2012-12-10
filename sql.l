@@ -1,6 +1,6 @@
 %{
 #define YYSTYPE int
-#include "sql.tab.h"
+#include "y.tab.h"
 #include <stdlib.h>
 %}
 
@@ -13,7 +13,6 @@ integer {digit}+
 {white} { }
 {integer} {
     yylval = atoi(yytext);
-    printf("real = '%s' %d\n", yytext, yylval);
     return NUMBER;
 }
 

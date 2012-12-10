@@ -9,6 +9,9 @@
 #include "EaglePlanOperation.h"
 #include "EaglePlanBufferProvider.h"
 
+extern int yyparse();
+extern int yy_scan_string(const char *);
+
 int main(int argc, const char * argv[])
 {
     // initialise workers
@@ -26,7 +29,8 @@ int main(int argc, const char * argv[])
     
     // plan: ? BETWEEN ? AND ?
     int recordsPerPage = 10000;
-    EaglePlan *plan = EaglePlan_New(recordsPerPage);
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, dataSize, recordsPerPage);
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
     
