@@ -14,6 +14,6 @@ EaglePage* EaglePage_New(int *data, int count, int recordOffset)
 
 EaglePage* EaglePage_Alloc(int count)
 {
-    int *data = (int*) calloc(count, sizeof(int));
+    int *data = (int*) calloc((size_t) count, sizeof(int));
     return EaglePage_New(data, count, 0);
 }

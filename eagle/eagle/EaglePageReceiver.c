@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "EaglePageReceiver.h"
 
-EaglePageReceiver* EaglePageReceiver_New()
+EaglePageReceiver* EaglePageReceiver_New(void)
 {
     EaglePageReceiver *pr = (EaglePageReceiver*) malloc(sizeof(EaglePageReceiver));
     pr->allocated = 10000;
-    pr->buffer = (int*) calloc(sizeof(int), pr->allocated);
+    pr->buffer = (int*) calloc((size_t) pr->allocated, sizeof(int));
     pr->used = 0;
     return pr;
 }

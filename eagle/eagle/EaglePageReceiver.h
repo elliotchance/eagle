@@ -7,8 +7,7 @@ typedef struct {
     int *buffer;
 } EaglePageReceiver;
 
-EaglePageReceiver* EaglePageReceiver_New();
-
+EaglePageReceiver* EaglePageReceiver_New(void);
 void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId);
 
 #endif

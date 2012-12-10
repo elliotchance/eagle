@@ -11,11 +11,11 @@ EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver)
     
     plan->allocatedOperations = 10;
     plan->usedOperations = 0;
-    plan->operations = (EaglePlanOperation**) calloc(plan->allocatedOperations, sizeof(EaglePlanOperation*));
+    plan->operations = (EaglePlanOperation**) calloc((size_t) plan->allocatedOperations, sizeof(EaglePlanOperation*));
     
     plan->allocatedProviders = 10;
     plan->usedProviders = 0;
-    plan->providers = (EaglePlanBufferProvider**) calloc(plan->allocatedProviders, sizeof(EaglePlanBufferProvider*));
+    plan->providers = (EaglePlanBufferProvider**) calloc((size_t) plan->allocatedProviders, sizeof(EaglePlanBufferProvider*));
     
     return plan;
 }

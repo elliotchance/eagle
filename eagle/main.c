@@ -20,7 +20,7 @@ int main(int argc, const char * argv[])
     // prepare data
     printf("Preparing data...\n");
     int dataSize = 100000000;
-    int *data = (int*) calloc(sizeof(int), dataSize);
+    int *data = (int*) calloc((size_t) dataSize, sizeof(int));
     
     srand(0);
     for(int i = 0; i < dataSize; ++i) {

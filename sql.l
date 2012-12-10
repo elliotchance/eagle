@@ -1,7 +1,9 @@
 %{
+
 #define YYSTYPE int
 #include "y.tab.h"
 #include <stdlib.h>
+
 %}
 
 white [ \t]+

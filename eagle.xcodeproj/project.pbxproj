@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B1BF7C81675852E007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
-		8B1BF7C91675852E007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
-		8B1BF7CC1675852E007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
-		8B1BF7CD1675852E007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
+		8B1BF7D81675D79A007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
+		8B1BF7D91675D79A007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
+		8B1BF7DC1675D7E0007C11E6 /* libsqlparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */; };
+		8B1BF7E11675D7FB007C11E6 /* libsqlparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */; };
 		8B61FC651675787B00EB6CF9 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */; };
 		8BD9E41F16757166005C3BDE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3FC16756FF4005C3BDE /* main.c */; };
 		8BD9E42016757166005C3BDE /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3DB16756FF4005C3BDE /* EagleData.c */; };
@@ -43,6 +43,30 @@
 		8BD9E44F1675729A005C3BDE /* TestSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E41D1675710B005C3BDE /* TestSuite.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8B1BF7DA1675D7D7007C11E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
+			remoteInfo = sqlparser;
+		};
+		8B1BF7DF1675D7F2007C11E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
+			remoteInfo = sqlparser;
+		};
+		8B1BF7E21675D8EC007C11E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9AEAB9166602CC0095B4F5;
+			remoteInfo = eagle;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		8B9AEAB8166602CC0095B4F5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -67,6 +91,8 @@
 /* Begin PBXFileReference section */
 		8B1BF7C21675852E007C11E6 /* sql.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = sql.l; sourceTree = SOURCE_ROOT; };
 		8B1BF7C51675852E007C11E6 /* sql.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = sql.y; sourceTree = SOURCE_ROOT; };
+		8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlSelect.h; sourceTree = "<group>"; };
+		8B1BF7D31675D752007C11E6 /* libsqlparser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsqlparser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = /usr/local/lib/libcunit.1.dylib; sourceTree = "<absolute>"; };
 		8B9AEABA166602CC0095B4F5 /* eagle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA065DC1674399B00991C6B /* eagle_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle_test; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,10 +132,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8B1BF7D01675D752007C11E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B9AEAB7166602CC0095B4F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1BF7DC1675D7E0007C11E6 /* libsqlparser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1BF7E11675D7FB007C11E6 /* libsqlparser.a in Frameworks */,
 				8B61FC651675787B00EB6CF9 /* libcunit.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,18 +159,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B1BF7C01675851F007C11E6 /* grammar */ = {
+		8B1BF7D71675D777007C11E6 /* sqlparser */ = {
 			isa = PBXGroup;
 			children = (
 				8B1BF7C21675852E007C11E6 /* sql.l */,
 				8B1BF7C51675852E007C11E6 /* sql.y */,
 			);
-			name = grammar;
+			name = sqlparser;
 			sourceTree = "<group>";
 		};
 		8B9AEAAF166602CC0095B4F5 = {
 			isa = PBXGroup;
 			children = (
+				8B1BF7D71675D777007C11E6 /* sqlparser */,
 				8BD9E3D916756FF4005C3BDE /* eagle */,
 				8BD9E4161675710B005C3BDE /* eagle_test */,
 				8B9AEABB166602CC0095B4F5 /* Products */,
@@ -147,6 +183,7 @@
 			children = (
 				8B9AEABA166602CC0095B4F5 /* eagle */,
 				8BA065DC1674399B00991C6B /* eagle_test */,
+				8B1BF7D31675D752007C11E6 /* libsqlparser.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,7 +233,7 @@
 		8BD9E3F416756FF4005C3BDE /* eagledb */ = {
 			isa = PBXGroup;
 			children = (
-				8B1BF7C01675851F007C11E6 /* grammar */,
+				8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */,
 			);
 			path = eagledb;
 			sourceTree = "<group>";
@@ -226,7 +263,34 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		8B1BF7D11675D752007C11E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		8B1BF7D21675D752007C11E6 /* sqlparser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B1BF7D41675D752007C11E6 /* Build configuration list for PBXNativeTarget "sqlparser" */;
+			buildPhases = (
+				8B1BF7CF1675D752007C11E6 /* Sources */,
+				8B1BF7D01675D752007C11E6 /* Frameworks */,
+				8B1BF7D11675D752007C11E6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sqlparser;
+			productName = sqlparser;
+			productReference = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		8B9AEAB9166602CC0095B4F5 /* eagle */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B9AEAC4166602CD0095B4F5 /* Build configuration list for PBXNativeTarget "eagle" */;
@@ -238,6 +302,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8B1BF7DB1675D7D7007C11E6 /* PBXTargetDependency */,
 			);
 			name = eagle;
 			productName = eagle;
@@ -256,6 +321,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				8B1BF7E31675D8EC007C11E6 /* PBXTargetDependency */,
+				8B1BF7E01675D7F2007C11E6 /* PBXTargetDependency */,
 			);
 			name = eagle_test;
 			productName = eagle_test;
@@ -285,6 +352,7 @@
 			targets = (
 				8B9AEAB9166602CC0095B4F5 /* eagle */,
 				8BA065DB1674399B00991C6B /* eagle_test */,
+				8B1BF7D21675D752007C11E6 /* sqlparser */,
 			);
 		};
 /* End PBXProject section */
@@ -306,6 +374,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8B1BF7CF1675D752007C11E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B1BF7D81675D79A007C11E6 /* sql.l in Sources */,
+				8B1BF7D91675D79A007C11E6 /* sql.y in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B9AEAB6166602CC0095B4F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,8 +400,6 @@
 				8BD9E43216757166005C3BDE /* EaglePlanOperation.c in Sources */,
 				8BD9E43516757166005C3BDE /* EagleWorker.c in Sources */,
 				8BD9E43716757166005C3BDE /* EagleWorkers.c in Sources */,
-				8B1BF7C81675852E007C11E6 /* sql.l in Sources */,
-				8B1BF7CC1675852E007C11E6 /* sql.y in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,14 +423,46 @@
 				8BD9E44D1675729A005C3BDE /* DBSuite.c in Sources */,
 				8BD9E44E1675729A005C3BDE /* MainSuite.c in Sources */,
 				8BD9E44F1675729A005C3BDE /* TestSuite.c in Sources */,
-				8B1BF7C91675852E007C11E6 /* sql.l in Sources */,
-				8B1BF7CD1675852E007C11E6 /* sql.y in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8B1BF7DB1675D7D7007C11E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
+			targetProxy = 8B1BF7DA1675D7D7007C11E6 /* PBXContainerItemProxy */;
+		};
+		8B1BF7E01675D7F2007C11E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
+			targetProxy = 8B1BF7DF1675D7F2007C11E6 /* PBXContainerItemProxy */;
+		};
+		8B1BF7E31675D8EC007C11E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B9AEAB9166602CC0095B4F5 /* eagle */;
+			targetProxy = 8B1BF7E21675D8EC007C11E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8B1BF7D51675D752007C11E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B1BF7D61675D752007C11E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8B9AEAC2166602CD0095B4F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -410,6 +517,25 @@
 		8B9AEAC5166602CD0095B4F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				OTHER_LDFLAGS = "-ll";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -418,6 +544,25 @@
 		8B9AEAC6166602CD0095B4F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				OTHER_LDFLAGS = "-ll";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -452,6 +597,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8B1BF7D41675D752007C11E6 /* Build configuration list for PBXNativeTarget "sqlparser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B1BF7D51675D752007C11E6 /* Debug */,
+				8B1BF7D61675D752007C11E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		8B9AEAB4166602CC0095B4F5 /* Build configuration list for PBXProject "eagle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

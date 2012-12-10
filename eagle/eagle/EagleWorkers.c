@@ -4,7 +4,7 @@
 EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance)
 {
     EagleWorkers *workers = (EagleWorkers*) malloc(sizeof(EagleWorkers));
-    workers->workers = (EagleWorker**) calloc(sizeof(EagleWorker*), totalWorkers);
+    workers->workers = (EagleWorker**) calloc((size_t) totalWorkers, sizeof(EagleWorker*));
     for(int i = 0; i < totalWorkers; ++i) {
         workers->workers[i] = EagleWorker_New(i, instance);
     }
