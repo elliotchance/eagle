@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int yyerror(char *s);
 int yylex();
@@ -21,9 +22,11 @@ extern char *yytext_last;
 /* keywords */
 %token K_FROM
 %token K_SELECT
+%token K_WHERE
 
 /* variable tokens */
 %token IDENTIFIER
+%token INTEGER
 
 /* fixed tokens */
 %token T_ASTERISK
@@ -44,9 +47,19 @@ select_statement:
         yyparse_ast = (void*) EagleDbSqlSelect_New();
     }
     T_ASTERISK K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) yyparse_ast)->tableName = yytext_last;
+        ((EagleDbSqlSelect*) yyparse_ast)->tableName = strdup(yytext_last);
+    }
+    where_expression
+;
+
+where_expression:
+    | K_WHERE expression {
+        ((EagleDbSqlSelect*) yyparse_ast)->whereExpression = EagleDbSqlValue_NewWithInteger(atoi(yytext_last));
     }
 ;
+
+expression:
+    INTEGER
 
 %%
 

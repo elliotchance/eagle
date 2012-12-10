@@ -71,6 +71,21 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
     yylex_destroy();
 }
 
+CUNIT_TEST(DBSuite, _, SELECT_WHERE_Integer)
+{
+    if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
+        cunit_fail(yyerror_last);
+    }
+    
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    cunit_assert_equal_string("mytable", select->tableName);
+    cunit_assert(NULL != select->whereExpression, "NULL != select->whereExpression");
+    cunit_assert_equal_int(EagleDbSqlValueTypeInteger, select->whereExpression->type);
+    cunit_assert_equal_int(123, select->whereExpression->value.intValue);
+    
+    yylex_destroy();
+}
+
 /**
  * The suite init function.
  */
@@ -101,6 +116,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingTableName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFROM));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFields));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE_Integer));
     
     return tests;
 }
