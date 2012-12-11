@@ -18,8 +18,10 @@ void* EagleWorker_begin(void *obj)
     EagleWorker *worker = (EagleWorker*) obj;
     
     while(1) {
+        EaglePlanJob *job;
+        
         /* ask the instance for the next job */
-        EaglePlanJob *job = EagleInstance_nextJob(worker->instance);
+        job = EagleInstance_nextJob(worker->instance);
         
         /* run the job is one is returned */
         if(NULL != job) {

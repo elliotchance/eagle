@@ -3,6 +3,8 @@
 #include "EaglePageOperations.h"
 #include "EaglePageProvider.h"
 
+#include <unistd.h>
+
 /**
  Calculate values in a page that are less than an integer.
  
@@ -19,10 +21,12 @@ void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)
 {
     int value = *((int*) obj), i;
     out->recordOffset = page->recordOffset;
+    out->count = page->count;
     
     for(i = 0; i < page->count; ++i) {
         out->data[i] = (page->data[i] < value);
     }
+    usleep(10000);
 }
 
 /**
@@ -41,6 +45,7 @@ void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *o
 {
     int value = *((int*) obj), i;
     out->recordOffset = page->recordOffset;
+    out->count = page->count;
     
     for(i = 0; i < page->count; ++i) {
         out->data[i] = (page->data[i] > value);
@@ -62,6 +67,7 @@ void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj)
     int i;
     
     out->recordOffset = page->recordOffset;
+    out->count = page->count;
     
     for(i = 0; i < page->count; ++i) {
         out->data[i] = page->data[i] && page2->data[i];

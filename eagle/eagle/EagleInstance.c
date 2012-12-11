@@ -6,19 +6,17 @@ EagleInstance* EagleInstance_New(int totalWorkers)
 {
     EagleInstance *instance = (EagleInstance*) malloc(sizeof(EagleInstance));
     instance->workers = EagleWorkers_New(totalWorkers, instance);
-    instance->nextJobLock = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    instance->nextJobLock = EagleSynchronizer_CreateLock();
     return instance;
 }
 
 void EagleInstance_run(EagleInstance *eagle)
 {
     /* start workers */
-    pthread_mutex_init(eagle->nextJobLock, NULL);
     EagleWorkers_start(eagle->workers);
     
     /* close workers */
     EagleWorkers_joinAll(eagle->workers);
-    pthread_mutex_destroy(eagle->nextJobLock);
 }
 
 /**
@@ -36,7 +34,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     int i;
     
     /* synchronize this function */
-    pthread_mutex_lock(eagle->nextJobLock);
+    EagleSynchronizer_Lock(eagle->nextJobLock);
     
     plan = eagle->plan;
     job = EaglePlanJob_New(plan, 4);
@@ -44,12 +42,12 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
-            pthread_mutex_unlock(eagle->nextJobLock);
+            EagleSynchronizer_Unlock(eagle->nextJobLock);
             return NULL;
         }
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
     }
     
-    pthread_mutex_unlock(eagle->nextJobLock);
+    EagleSynchronizer_Unlock(eagle->nextJobLock);
     return job;
 }

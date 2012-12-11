@@ -5,11 +5,12 @@
 #include "EagleWorkers.h"
 #include "EaglePageProvider.h"
 #include "EaglePlanJob.h"
+#include "EagleSynchronizer.h"
 
 struct EagleInstance_ {
     EagleWorkers *workers;
     EaglePlan *plan;
-    pthread_mutex_t *nextJobLock;
+    EagleLock *nextJobLock;
 };
 typedef struct EagleInstance_ EagleInstance;
 

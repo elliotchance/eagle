@@ -89,7 +89,6 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EagleInstance *eagle = EagleInstance_New(cores);
     
     // prepare data
-    srand(0);
     int *data = (int*) calloc(sizeof(int), totalRecords);
     for(int i = 0; i < totalRecords; ++i) {
         data[i] = rand();
@@ -99,12 +98,15 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     int min = 10000000, max = 20000000;
     EaglePageReceiver *receiver = EaglePageReceiver_New();
     EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
+    
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, totalRecords, recordsPerPage);
+    CU_ASSERT_EQUAL_FATAL(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
+    
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
     
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(min), ""));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, EagleData_Int(max), ""));
-    EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,                  ""));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(min), "1"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, EagleData_Int(max), "2"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,                  "3"));
     
     EagleInstance_addPlan(eagle, plan);
     
@@ -119,7 +121,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
             ++matches;
         }
     }
-    cunit_verify(matches == receiver->used, "%d == %d", matches, receiver->used);
+    CU_ASSERT_EQUAL(matches, receiver->used);
     
     int misses = 0;
     matches = 0;
@@ -131,8 +133,8 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
             ++misses;
         }
     }
-    cunit_verify(matches == receiver->used, "%d == %d", matches, receiver->used);
-    cunit_verify(misses == (totalRecords - receiver->used), "%d == %d", misses, totalRecords - receiver->used);
+    CU_ASSERT_EQUAL(matches, receiver->used);
+    CU_ASSERT_EQUAL(misses, (totalRecords - receiver->used));
 }
 
 CUNIT_TEST(MainSuite, _, InstanceSingle)
@@ -141,7 +143,7 @@ CUNIT_TEST(MainSuite, _, InstanceSingle)
     _instanceTest(1, 10, 1000);
     _instanceTest(1, 100, 1000);
     _instanceTest(1, 1000, 1000);
-    _instanceTest(1, 1001, 1000);
+    _instanceTest(1, 1000, 1001);
     _instanceTest(1, 1000, 10000);
 }
 
@@ -151,7 +153,7 @@ CUNIT_TEST(MainSuite, _, InstanceMulti)
     _instanceTest(8, 10, 1000);
     _instanceTest(8, 100, 1000);
     _instanceTest(8, 1000, 1000);
-    _instanceTest(8, 1001, 1000);
+    _instanceTest(8, 1000, 1001);
     _instanceTest(8, 1000, 10000);
 }
 

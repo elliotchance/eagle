@@ -3,6 +3,7 @@
 
 #include <pthread.h>
 #include "EaglePage.h"
+#include "EagleSynchronizer.h"
 
 struct EaglePageProvider_ {
     int offsetRecords;
@@ -14,7 +15,7 @@ struct EaglePageProvider_ {
     void *obj;
     
     /** synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining() */
-    pthread_mutex_t *nextPageLock;
+    EagleLock *nextPageLock;
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 

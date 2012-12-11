@@ -2,12 +2,13 @@
 #define eagle_EaglePageReceiver_h
 
 #include <pthread.h>
+#include "EagleSynchronizer.h"
 
 typedef struct {
     int allocated;
     int used;
     int *buffer;
-    pthread_mutex_t *pushRecordIdLock;
+    EagleLock *pushRecordIdLock;
 } EaglePageReceiver;
 
 EaglePageReceiver* EaglePageReceiver_New(void);

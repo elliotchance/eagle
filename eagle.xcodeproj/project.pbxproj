@@ -18,6 +18,8 @@
 		8B1BF7ED1675F7AA007C11E6 /* EagleDbSqlValue.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7EB1675F7AA007C11E6 /* EagleDbSqlValue.c */; };
 		8B1BF7F416770297007C11E6 /* EagleDbSqlBinaryExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7F316770297007C11E6 /* EagleDbSqlBinaryExpression.c */; };
 		8B1BF7F516770297007C11E6 /* EagleDbSqlBinaryExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7F316770297007C11E6 /* EagleDbSqlBinaryExpression.c */; };
+		8B1BF7F8167734FD007C11E6 /* EagleSynchronizer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */; };
+		8B1BF7F9167734FD007C11E6 /* EagleSynchronizer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */; };
 		8B61FC651675787B00EB6CF9 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */; };
 		8BD9E41F16757166005C3BDE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3FC16756FF4005C3BDE /* main.c */; };
 		8BD9E42016757166005C3BDE /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3DB16756FF4005C3BDE /* EagleData.c */; };
@@ -93,6 +95,8 @@
 		8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlExpression.h; sourceTree = "<group>"; };
 		8B1BF7F216770173007C11E6 /* EagleDbSqlExpressionOperator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlExpressionOperator.h; sourceTree = "<group>"; };
 		8B1BF7F316770297007C11E6 /* EagleDbSqlBinaryExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbSqlBinaryExpression.c; sourceTree = "<group>"; };
+		8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleSynchronizer.h; sourceTree = "<group>"; };
+		8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleSynchronizer.c; sourceTree = "<group>"; };
 		8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = /usr/local/lib/libcunit.1.dylib; sourceTree = "<absolute>"; };
 		8B9AEABA166602CC0095B4F5 /* eagle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA065DC1674399B00991C6B /* eagle_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle_test; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +229,8 @@
 				8BD9E3F116756FF4005C3BDE /* EagleWorker.h */,
 				8BD9E3F216756FF4005C3BDE /* EagleWorkers.c */,
 				8BD9E3F316756FF4005C3BDE /* EagleWorkers.h */,
+				8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */,
+				8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */,
 			);
 			path = eagle;
 			sourceTree = "<group>";
@@ -407,6 +413,7 @@
 				8B1BF7E71675DD09007C11E6 /* EagleDbSqlSelect.c in Sources */,
 				8B1BF7EC1675F7AA007C11E6 /* EagleDbSqlValue.c in Sources */,
 				8B1BF7F416770297007C11E6 /* EagleDbSqlBinaryExpression.c in Sources */,
+				8B1BF7F8167734FD007C11E6 /* EagleSynchronizer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +442,7 @@
 				8B1BF7E81675DD09007C11E6 /* EagleDbSqlSelect.c in Sources */,
 				8B1BF7ED1675F7AA007C11E6 /* EagleDbSqlValue.c in Sources */,
 				8B1BF7F516770297007C11E6 /* EagleDbSqlBinaryExpression.c in Sources */,
+				8B1BF7F9167734FD007C11E6 /* EagleSynchronizer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
