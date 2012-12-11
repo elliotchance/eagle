@@ -59,6 +59,9 @@ where_expression:
 ;
 
 expression:
+    value
+    
+value:
     INTEGER
 
 %%

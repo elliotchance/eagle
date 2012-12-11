@@ -21,6 +21,9 @@ void EagleInstance_run(EagleInstance *eagle)
     pthread_mutex_destroy(eagle->nextJobLock);
 }
 
+/**
+ Add an EaglePlan to an EagleInstance.
+ */
 void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)
 {
     eagle->plan = plan;

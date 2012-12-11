@@ -13,7 +13,7 @@ struct EaglePageProvider_ {
     int (*pagesRemaining)(struct EaglePageProvider_ *epp);
     void *obj;
     
-    /** synchronize EaglePageProvider_nextPage and EaglePageProvider_pagesRemaining */
+    /** synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining() */
     pthread_mutex_t *nextPageLock;
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
