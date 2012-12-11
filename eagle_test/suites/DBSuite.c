@@ -18,7 +18,7 @@ int _testSqlSelect(const char *sql)
 CUNIT_TEST(DBSuite, _, BLANK)
 {
     if(_testSqlSelect("")) {
-        cunit_fail(yyerror_last);
+        CUNIT_FAIL(yyerror_last);
     }
     yylex_destroy();
 }
@@ -28,20 +28,20 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
     // table name 1
     {
         if(_testSqlSelect("SELECT * FROM mytable1")) {
-            cunit_fail(yyerror_last);
+            CUNIT_FAIL(yyerror_last);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-        cunit_assert_equal_string("mytable1", select->tableName);
+        CUNIT_ASSERT_EQUAL_STRING("mytable1", select->tableName);
         yylex_destroy();
     }
     
     // table name 2
     {
         if(_testSqlSelect("SELECT * FROM mytable2")) {
-            cunit_fail(yyerror_last);
+            CUNIT_FAIL(yyerror_last);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-        cunit_assert_equal_string("mytable2", select->tableName);
+        CUNIT_ASSERT_EQUAL_STRING("mytable2", select->tableName);
         yylex_destroy();
     }
 }
@@ -49,41 +49,41 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
 CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
 {
     if(!_testSqlSelect("SELECT * FROM")) {
-        cunit_fail("should have failed!");
+        CUNIT_FAIL("should have failed!");
     }
-    cunit_assert_equal_string("syntax error, unexpected $end, expecting IDENTIFIER", yyerror_last);
+    CUNIT_ASSERT_EQUAL_STRING(yyerror_last, "syntax error, unexpected $end, expecting IDENTIFIER");
     yylex_destroy();
 }
 
 CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
 {
     if(!_testSqlSelect("SELECT *")) {
-        cunit_fail("should have failed!");
+        CUNIT_FAIL("should have failed!");
     }
-    cunit_assert_equal_string("syntax error, unexpected $end, expecting K_FROM", yyerror_last);
+    CUNIT_ASSERT_EQUAL_STRING(yyerror_last, "syntax error, unexpected $end, expecting K_FROM");
     yylex_destroy();
 }
 
 CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
 {
     if(!_testSqlSelect("SELECT")) {
-        cunit_fail("should have failed!");
+        CUNIT_FAIL("should have failed!");
     }
-    cunit_assert_equal_string("syntax error, unexpected $end, expecting T_ASTERISK", yyerror_last);
+    CUNIT_ASSERT_EQUAL_STRING("syntax error, unexpected $end, expecting T_ASTERISK", yyerror_last);
     yylex_destroy();
 }
 
 CUNIT_TEST(DBSuite, _, SELECT_WHERE_Integer)
 {
     if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        cunit_fail(yyerror_last);
+        CUNIT_FAIL(yyerror_last);
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    cunit_assert_equal_string("mytable", select->tableName);
-    cunit_assert(NULL != select->whereExpression, "NULL != select->whereExpression");
-    cunit_assert_equal_int(EagleDbSqlValueTypeInteger, select->whereExpression->type);
-    cunit_assert_equal_int(123, select->whereExpression->value.intValue);
+    CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
+    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, select->whereExpression->type);
+    CUNIT_ASSERT_EQUAL_INT(123, select->whereExpression->value.intValue);
     
     yylex_destroy();
 }
@@ -91,11 +91,11 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE_Integer)
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
-    CU_ASSERT_NOT_EQUAL_FATAL(select, NULL);
-    CU_ASSERT_EQUAL_FATAL(select->expressionType, EagleDbSqlExpressionTypeSelect);
+    CUNIT_ASSERT_NOT_NULL(select);
+    CUNIT_ASSERT_EQUAL_INT(select->expressionType, EagleDbSqlExpressionTypeSelect);
     
-    CU_ASSERT_EQUAL(select->tableName, NULL);
-    CU_ASSERT_EQUAL(select->whereExpression, NULL);
+    CUNIT_ASSERT_NULL(select->tableName);
+    CUNIT_ASSERT_NULL(select->whereExpression);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
@@ -104,22 +104,22 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
     EagleDbSqlExpression *right = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
     
     EagleDbSqlBinaryExpression *binary = EagleDbSqlBinaryExpression_New(left, EagleDbSqlExpressionOperatorPlus, right);
-    CU_ASSERT_NOT_EQUAL_FATAL(binary, NULL);
-    CU_ASSERT_EQUAL_FATAL(binary->expressionType, EagleDbSqlExpressionTypeBinaryExpression);
+    CUNIT_ASSERT_NOT_NULL(binary);
+    CUNIT_ASSERT_EQUAL_INT(binary->expressionType, EagleDbSqlExpressionTypeBinaryExpression);
     
-    CU_ASSERT_PTR_EQUAL(binary->left, left);
-    CU_ASSERT_EQUAL(binary->op, EagleDbSqlExpressionOperatorPlus);
-    CU_ASSERT_PTR_EQUAL(binary->right, right);
+    CUNIT_VERIFY_EQUAL_PTR(binary->left, left);
+    CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlExpressionOperatorPlus);
+    CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 {
     EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(123);
-    CU_ASSERT_NOT_EQUAL_FATAL(value, NULL);
-    CU_ASSERT_EQUAL_FATAL(value->expressionType, EagleDbSqlExpressionTypeValue);
+    CUNIT_ASSERT_NOT_NULL(value);
+    CUNIT_ASSERT_EQUAL_INT(value->expressionType, EagleDbSqlExpressionTypeValue);
     
-    CU_ASSERT_EQUAL_FATAL(value->type, EagleDbSqlValueTypeInteger);
-    CU_ASSERT_EQUAL_FATAL(value->value.intValue, 123);
+    CUNIT_ASSERT_EQUAL_INT(value->type, EagleDbSqlValueTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
 }
 
 /**

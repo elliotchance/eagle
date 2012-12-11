@@ -60,6 +60,20 @@
 			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
 			remoteInfo = sqlparser;
 		};
+		8B1BF7FA167738F5007C11E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9AEAB9166602CC0095B4F5;
+			remoteInfo = eagle;
+		};
+		8B1BF7FC167738FB007C11E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B9AEAB1166602CC0095B4F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B1BF7D21675D752007C11E6;
+			remoteInfo = sqlparser;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -229,8 +243,8 @@
 				8BD9E3F116756FF4005C3BDE /* EagleWorker.h */,
 				8BD9E3F216756FF4005C3BDE /* EagleWorkers.c */,
 				8BD9E3F316756FF4005C3BDE /* EagleWorkers.h */,
-				8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */,
 				8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */,
+				8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */,
 			);
 			path = eagle;
 			sourceTree = "<group>";
@@ -333,6 +347,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				8B1BF7FD167738FB007C11E6 /* PBXTargetDependency */,
+				8B1BF7FB167738F5007C11E6 /* PBXTargetDependency */,
 			);
 			name = eagle_test;
 			productName = eagle_test;
@@ -453,6 +469,16 @@
 			isa = PBXTargetDependency;
 			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
 			targetProxy = 8B1BF7DA1675D7D7007C11E6 /* PBXContainerItemProxy */;
+		};
+		8B1BF7FB167738F5007C11E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B9AEAB9166602CC0095B4F5 /* eagle */;
+			targetProxy = 8B1BF7FA167738F5007C11E6 /* PBXContainerItemProxy */;
+		};
+		8B1BF7FD167738FB007C11E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B1BF7D21675D752007C11E6 /* sqlparser */;
+			targetProxy = 8B1BF7FC167738FB007C11E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

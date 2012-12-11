@@ -35,7 +35,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
             break;
         }
     }
-    cunit_assert(valid, "Not valid");
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
 }
 
 CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
@@ -55,7 +55,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
             break;
         }
     }
-    cunit_assert(valid, "Not valid");
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
 }
 
 CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
@@ -80,7 +80,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
             break;
         }
     }
-    cunit_assert(valid, "Not valid");
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
 }
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
@@ -100,7 +100,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
     
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, totalRecords, recordsPerPage);
-    CU_ASSERT_EQUAL_FATAL(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
     
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
     
@@ -121,7 +121,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
             ++matches;
         }
     }
-    CU_ASSERT_EQUAL(matches, receiver->used);
+    CUNIT_VERIFY_EQUAL_INT(matches, receiver->used);
     
     int misses = 0;
     matches = 0;
@@ -133,8 +133,8 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
             ++misses;
         }
     }
-    CU_ASSERT_EQUAL(matches, receiver->used);
-    CU_ASSERT_EQUAL(misses, (totalRecords - receiver->used));
+    CUNIT_VERIFY_EQUAL_INT(matches, receiver->used);
+    CUNIT_VERIFY_EQUAL_INT(misses, (totalRecords - receiver->used));
 }
 
 CUNIT_TEST(MainSuite, _, InstanceSingle)
@@ -159,9 +159,9 @@ CUNIT_TEST(MainSuite, _, InstanceMulti)
 
 CUNIT_TEST(MainSuite, EaglePageProvider_TotalPages)
 {
-    cunit_verify(EaglePageProvider_TotalPages(1000, 1000) == 1, "Incorrect page count.");
-    cunit_verify(EaglePageProvider_TotalPages(1001, 1000) == 2, "Incorrect page count.");
-    cunit_verify(EaglePageProvider_TotalPages(1000, 10)   == 100, "Incorrect page count.");
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_TotalPages(1000, 1000), 1);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_TotalPages(1001, 1000), 2);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_TotalPages(1000, 10), 100);
 }
 
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
@@ -173,42 +173,42 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     testData[2] = 789;
     
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(testData, testDataSize, recordsPerPage);
-    cunit_verify_equal_int(provider->totalRecords, testDataSize);
-    cunit_verify_equal_int(provider->recordsPerPage, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, testDataSize);
+    CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
-    cunit_verify(EaglePageProvider_pagesRemaining(provider) == 2, "%d == %d", EaglePageProvider_pagesRemaining(provider), 2);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
     EaglePage *page1 = EaglePageProvider_nextPage(provider);
-    cunit_verify_equal_int(page1->count, recordsPerPage);
-    cunit_verify_equal_int(page1->data[0], testData[0]);
-    cunit_verify_equal_int(page1->data[1], testData[1]);
-    cunit_verify_equal_int(page1->recordOffset, 0);
+    CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
     
-    cunit_verify_equal_int(EaglePageProvider_pagesRemaining(provider), 1);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
     EaglePage *page2 = EaglePageProvider_nextPage(provider);
-    cunit_verify_equal_int(page2->count, 1);
-    cunit_verify_equal_int(page2->data[0], testData[2]);
-    cunit_verify_equal_int(page2->recordOffset, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page2->count, 1);
+    CUNIT_VERIFY_EQUAL_INT(page2->data[0], testData[2]);
+    CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, recordsPerPage);
     
-    cunit_verify_equal_int(EaglePageProvider_pagesRemaining(provider), 0);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 0);
 }
 
 CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
 {
     EaglePlanOperation *op = EaglePlanOperation_New(0, NULL, 0, NULL, "some description");
-    cunit_assert_equal_string((char*) EaglePlanOperation_toString(op), "some description");
+    CUNIT_ASSERT_EQUAL_STRING((char*) EaglePlanOperation_toString(op), "some description");
 }
 
 CUNIT_TEST(MainSuite, EaglePlan_toString)
 {
     EaglePlan *plan = EaglePlan_New(0, NULL);
-    cunit_assert_equal_string((char*) EaglePlan_toString(plan), "EaglePlan:\n");
+    CUNIT_ASSERT_EQUAL_STRING((char*) EaglePlan_toString(plan), "EaglePlan:\n");
     
     // add some steps
     EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, NULL, "Step 1"));
     EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, NULL, "Step 2"));
     EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,    "Step 3"));
     
-    cunit_assert_equal_string((char*) EaglePlan_toString(plan), "EaglePlan:\n  Step 1\n  Step 2\n  Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING((char*) EaglePlan_toString(plan), "EaglePlan:\n  Step 1\n  Step 2\n  Step 3\n");
 }
 
 CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
@@ -219,11 +219,11 @@ CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
     for(int i = 0; i < receiver->allocated; ++i) {
         EaglePageReceiver_pushRecordId(receiver, 0);
     }
-    cunit_assert_equal_int(receiver->allocated, receiver->used);
+    CUNIT_ASSERT_EQUAL_INT(receiver->allocated, receiver->used);
     
     // try to push in more data than is allocated
     EaglePageReceiver_pushRecordId(receiver, 0);
-    cunit_assert_equal_int(receiver->allocated, receiver->used);
+    CUNIT_ASSERT_EQUAL_INT(receiver->allocated, receiver->used);
 }
 
 /**

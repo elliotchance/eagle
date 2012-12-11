@@ -18,6 +18,7 @@ void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId)
     EagleSynchronizer_Lock(pr->pushRecordIdLock);
     
     if(pr->used >= pr->allocated) {
+        EagleSynchronizer_Unlock(pr->pushRecordIdLock);
         return;
     }
     pr->buffer[pr->used++] = recordId;
