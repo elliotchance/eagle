@@ -21,7 +21,7 @@ typedef struct {
     /**
      An optional WHERE clause. This may be NULL indicating there was no WHERE specified.
      */
-    EagleDbSqlValue *whereExpression;
+    EagleDbSqlExpression *whereExpression;
     
 } EagleDbSqlSelect;
 

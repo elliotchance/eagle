@@ -82,8 +82,10 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE_Integer)
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
     CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
     CUNIT_ASSERT_NOT_NULL(select->whereExpression);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, select->whereExpression->type);
-    CUNIT_ASSERT_EQUAL_INT(123, select->whereExpression->value.intValue);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, select->whereExpression->expressionType);
+    
+    EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
+    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
     
     yylex_destroy();
 }
@@ -122,6 +124,39 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
     CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
 }
 
+EagleDbSqlExpression* _getExpression(const char *sql)
+{
+    if(_testSqlSelect(sql)) {
+        CUNIT_FAIL(yyerror_last);
+    }
+    
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
+    
+    return select->whereExpression;
+}
+
+CUNIT_TEST(DBSuite, _, Expression_Addition)
+{
+    EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123 + 456");
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
+    
+    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
+    
+    EagleDbSqlValue *left = (EagleDbSqlValue*) expr->left;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, left->type);
+    
+    EagleDbSqlValue *right = (EagleDbSqlValue*) expr->right;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, right->type);
+    
+    CUNIT_ASSERT_EQUAL_INT(123, ((EagleDbSqlValue*) left)->value.intValue);
+    CUNIT_ASSERT_EQUAL_INT(456, ((EagleDbSqlValue*) right)->value.intValue);
+    
+    yylex_destroy();
+}
+
 /**
  * The suite init function.
  */
@@ -155,6 +190,8 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFROM));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFields));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE_Integer));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Addition));
     
     return tests;
 }

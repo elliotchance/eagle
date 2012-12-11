@@ -18,6 +18,7 @@ integer [0-9]+
 "WHERE" return K_WHERE;
 
 "*" return T_ASTERISK;
+"+" return T_PLUS;
 ";" return T_END;
 
 {white} {
