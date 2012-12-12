@@ -1,6 +1,8 @@
 #ifndef eagle_EagleDbSqlExpression_h
 #define eagle_EagleDbSqlExpression_h
 
+#include "EaglePlan.h"
+
 #define EagleDbSqlExpressionHeader EagleDbSqlExpressionType expressionType
 
 /**
@@ -48,5 +50,7 @@ typedef struct {
     EagleDbSqlExpressionHeader;
     
 } EagleDbSqlExpression;
+
+int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan, int depth);
 
 #endif

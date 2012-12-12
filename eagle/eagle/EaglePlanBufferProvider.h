@@ -9,5 +9,6 @@ typedef struct {
 } EaglePlanBufferProvider;
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider);
+char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp);
 
 #endif

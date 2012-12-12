@@ -30,6 +30,22 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int total
     return pageProvider;
 }
 
+/**
+ This creates a page provider that provides a single page filled with a fixed int.
+ 
+ @param value The value to fill the pages with.
+ @param recordsPerPage The number of records to return with each page.
+ */
+EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage)
+{
+    int *data = (int*) calloc((size_t) recordsPerPage, sizeof(int)), i;
+    EaglePageProvider *pageProvider = EaglePageProvider_CreateFromIntStream(data, recordsPerPage, recordsPerPage);
+    for(i = 0; i < recordsPerPage; ++i) {
+        data[i] = value;
+    }
+    return pageProvider;
+}
+
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)
 {
     int pagesRemaining;
@@ -57,6 +73,14 @@ int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)
     return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
 }
 
+int EaglePageProvider_pagesRemainingFromFixed_(EaglePageProvider *epp)
+{
+    if(epp->offsetRecords > 0) {
+        return 0;
+    }
+    return 1;
+}
+
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 {
     EaglePage *nextPage;
@@ -78,5 +102,13 @@ EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)
     EaglePage *page = EaglePage_New(begin + epp->offsetRecords, pageSize, epp->offsetRecords);
     epp->offsetRecords += pageSize;
     
+    return page;
+}
+
+EaglePage* EaglePageProvider_nextPageFromFixed_(EaglePageProvider *epp)
+{
+    int *begin = (int*) epp->records;
+    EaglePage *page = EaglePage_New(begin, epp->recordsPerPage, epp->offsetRecords);
+    epp->offsetRecords += epp->offsetRecords;
     return page;
 }

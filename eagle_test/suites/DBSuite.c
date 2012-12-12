@@ -4,6 +4,8 @@
 #include "EagleDbSqlSelect.h"
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleDbSqlValue.h"
+#include "EagleInstance.h"
+#include "EagleData.h"
 
 extern void *yyparse_ast;
 extern char *yyerror_last;
@@ -73,7 +75,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
     yylex_destroy();
 }
 
-CUNIT_TEST(DBSuite, _, SELECT_WHERE_Integer)
+CUNIT_TEST(DBSuite, _, SELECT_WHERE)
 {
     if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
         CUNIT_FAIL(yyerror_last);
@@ -136,11 +138,59 @@ EagleDbSqlExpression* _getExpression(const char *sql)
     return select->whereExpression;
 }
 
+void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOperations)
+{
+    // compile plan
+    int pageSize = 10;
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    EaglePlan *plan = EaglePlan_New(pageSize, receiver);
+    EagleDbSqlExpression_CompilePlan(where, 1, plan, 0);
+    //printf("%s\n", EaglePlan_toString(plan));
+    
+    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, usedProviders);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, userOperations);
+    
+    // execute
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    // validate result
+    CUNIT_ASSERT_EQUAL_INT(receiver->used, pageSize);
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(receiver->buffer[i] != i) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    yylex_destroy();
+}
+
+CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
+{
+    // SQL
+    EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123");
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, where->expressionType);
+    
+    // AST
+    EagleDbSqlValue *value = (EagleDbSqlValue*) where;
+    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
+    
+    _testExpression(where, 1, 1);
+    
+    yylex_destroy();
+}
+
 CUNIT_TEST(DBSuite, _, Expression_Addition)
 {
+    // SQL
     EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123 + 456");
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
     
+    // AST
     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
@@ -153,6 +203,8 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     
     CUNIT_ASSERT_EQUAL_INT(123, ((EagleDbSqlValue*) left)->value.intValue);
     CUNIT_ASSERT_EQUAL_INT(456, ((EagleDbSqlValue*) right)->value.intValue);
+    
+    _testExpression(where, 2, 2);
     
     yylex_destroy();
 }
@@ -189,8 +241,9 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingTableName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFROM));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFields));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE_Integer));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
     
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_ValueInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Addition));
     
     return tests;

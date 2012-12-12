@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "EaglePlanBufferProvider.h"
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider)
@@ -7,4 +8,11 @@ EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, Eagl
     bp->destinationBuffer = destinationBuffer;
     bp->provider = provider;
     return bp;
+}
+
+char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
+{
+    char *msg = (char*) malloc(1024);
+    sprintf(msg, "destination = %d", bp->destinationBuffer);
+    return msg;
 }

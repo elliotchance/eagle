@@ -26,7 +26,6 @@ void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)
     for(i = 0; i < page->count; ++i) {
         out->data[i] = (page->data[i] < value);
     }
-    usleep(10000);
 }
 
 /**
@@ -71,5 +70,30 @@ void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj)
     
     for(i = 0; i < page->count; ++i) {
         out->data[i] = page->data[i] && page2->data[i];
+    }
+}
+
+void EaglePageOperations_AdditionPage(EaglePage *page, EaglePage *out, void *obj)
+{
+    EaglePage *page2 = (EaglePage*) obj;
+    int i;
+    
+    out->recordOffset = page->recordOffset;
+    out->count = page->count;
+    
+    for(i = 0; i < page->count; ++i) {
+        out->data[i] = page->data[i] + page2->data[i];
+    }
+}
+
+void EaglePageOperations_CastIntPageToBoolean(EaglePage *page, EaglePage *out, void *obj)
+{
+    int i;
+    
+    out->recordOffset = page->recordOffset;
+    out->count = page->count;
+    
+    for(i = 0; i < page->count; ++i) {
+        out->data[i] = (page->data[i] != 0);
     }
 }

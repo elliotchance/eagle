@@ -7,7 +7,10 @@
 
 void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj);
 void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *obj);
+void EaglePageOperations_CastIntToBool(EaglePage *page, EaglePage *out, void *obj);
 
 void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj);
+void EaglePageOperations_AdditionPage(EaglePage *page, EaglePage *out, void *obj);
+void EaglePageOperations_CastIntPageToBoolean(EaglePage *page, EaglePage *out, void *obj);
 
 #endif
