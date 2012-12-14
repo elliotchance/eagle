@@ -41,5 +41,6 @@ typedef struct {
 } EagleDbSqlValue;
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
+void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
 
 #endif

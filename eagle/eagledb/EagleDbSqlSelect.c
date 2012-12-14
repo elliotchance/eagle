@@ -14,3 +14,10 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
     
     return select;
 }
+
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
+{
+    free(select->tableName);
+    EagleDbSqlExpression_Delete(select->whereExpression);
+    free(select);
+}

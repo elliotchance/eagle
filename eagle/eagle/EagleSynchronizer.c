@@ -44,3 +44,8 @@ void EagleSynchronizer_Unlock(EagleLock *lock)
 {
     pthread_mutex_unlock(&lock->mutex);
 }
+
+void EagleLock_Delete(EagleLock *lock)
+{
+    free(lock);
+}

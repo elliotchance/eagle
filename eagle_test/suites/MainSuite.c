@@ -36,6 +36,10 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
         }
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    // clean up
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
 }
 
 CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
@@ -56,6 +60,10 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
         }
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    // clean up
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
 }
 
 CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
@@ -81,6 +89,11 @@ CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
         }
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    // clean up
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    EaglePage_Delete(out);
 }
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
@@ -135,6 +148,9 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     }
     CUNIT_VERIFY_EQUAL_INT(matches, receiver->used);
     CUNIT_VERIFY_EQUAL_INT(misses, (totalRecords - receiver->used));
+    
+    // clean up
+    EagleInstance_Delete(eagle);
 }
 
 CUNIT_TEST(MainSuite, _, InstanceSingle)
@@ -190,12 +206,18 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, recordsPerPage);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 0);
+    
+    // clean up
+    EaglePageProvider_Delete(provider);
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
 }
 
 CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
 {
     EaglePlanOperation *op = EaglePlanOperation_New(0, NULL, 0, NULL, "some description");
     CUNIT_ASSERT_EQUAL_STRING((char*) EaglePlanOperation_toString(op), "some description");
+    EaglePlanOperation_Delete(op);
 }
 
 CUNIT_TEST(MainSuite, EaglePlan_toString)
@@ -209,6 +231,8 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,    "Step 3"));
     
     CUNIT_ASSERT_EQUAL_STRING((char*) EaglePlan_toString(plan), "EaglePlan:\n  Step 1\n  Step 2\n  Step 3\n");
+    
+    EaglePlan_Delete(plan);
 }
 
 CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
@@ -224,6 +248,8 @@ CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
     // try to push in more data than is allocated
     EaglePageReceiver_pushRecordId(receiver, 0);
     CUNIT_ASSERT_EQUAL_INT(receiver->allocated, receiver->used);
+    
+    EaglePageReceiver_Delete(receiver);
 }
 
 /**

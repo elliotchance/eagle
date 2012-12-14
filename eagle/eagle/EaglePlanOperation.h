@@ -19,6 +19,7 @@ typedef struct {
 EaglePlanOperation* EaglePlanOperation_New(int destination, EaglePageOperationFunction(function), int source, void *obj, const char *description);
 EaglePlanOperation* EaglePlanOperation_NewPage(int destination, EaglePageOperationFunction(function), int source1, int source2, const char *description);
 EaglePlanOperation* EaglePlanOperation_NewType(int type, int destination, EaglePageOperationFunction(function), int source, void *obj, const char *description);
+void EaglePlanOperation_Delete(EaglePlanOperation *epo);
 const char* EaglePlanOperation_toString(EaglePlanOperation *epo);
 
 #endif

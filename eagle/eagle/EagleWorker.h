@@ -12,6 +12,8 @@ typedef struct {
 } EagleWorker;
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance);
+void EagleWorker_Delete(EagleWorker *worker);
+
 void EagleWorker_start(EagleWorker *worker);
 void* EagleWorker_begin(void *obj);
 void EagleWorker_join(EagleWorker *worker);

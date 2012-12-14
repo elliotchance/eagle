@@ -6,6 +6,7 @@
 #include "EagleData.h"
 #include "EagleDbSqlBinaryExpression.h"
 #include "EaglePageOperations.h"
+#include "EagleDbSqlSelect.h"
 
 int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan, int depth)
 {
@@ -65,4 +66,23 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
     }
     
     return finalDestination;
+}
+
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
+{    
+    switch(expr->expressionType) {
+        case EagleDbSqlExpressionTypeBinaryExpression:
+            EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeSelect:
+            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeValue:
+            EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
+            break;
+    }
+    
+    free((void*) expr);
 }

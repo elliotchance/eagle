@@ -241,13 +241,13 @@
 				8BD9E3EC16756FF4005C3BDE /* EaglePlanJob.h */,
 				8BD9E3ED16756FF4005C3BDE /* EaglePlanOperation.c */,
 				8BD9E3EE16756FF4005C3BDE /* EaglePlanOperation.h */,
+				8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */,
+				8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */,
 				8BD9E3EF16756FF4005C3BDE /* EagleUtils.h */,
 				8BD9E3F016756FF4005C3BDE /* EagleWorker.c */,
 				8BD9E3F116756FF4005C3BDE /* EagleWorker.h */,
 				8BD9E3F216756FF4005C3BDE /* EagleWorkers.c */,
 				8BD9E3F316756FF4005C3BDE /* EagleWorkers.h */,
-				8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */,
-				8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */,
 			);
 			path = eagle;
 			sourceTree = "<group>";
@@ -255,15 +255,15 @@
 		8BD9E3F416756FF4005C3BDE /* eagledb */ = {
 			isa = PBXGroup;
 			children = (
-				8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */,
-				8B1BF7E61675DD09007C11E6 /* EagleDbSqlSelect.c */,
-				8B1BF7E91675F633007C11E6 /* EagleDbSqlBinaryExpression.h */,
 				8B1BF7F316770297007C11E6 /* EagleDbSqlBinaryExpression.c */,
-				8B1BF7EA1675F727007C11E6 /* EagleDbSqlValue.h */,
-				8B1BF7EB1675F7AA007C11E6 /* EagleDbSqlValue.c */,
-				8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */,
+				8B1BF7E91675F633007C11E6 /* EagleDbSqlBinaryExpression.h */,
 				8B1BF7FE16777633007C11E6 /* EagleDbSqlExpression.c */,
+				8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */,
 				8B1BF7F216770173007C11E6 /* EagleDbSqlExpressionOperator.h */,
+				8B1BF7E61675DD09007C11E6 /* EagleDbSqlSelect.c */,
+				8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */,
+				8B1BF7EB1675F7AA007C11E6 /* EagleDbSqlValue.c */,
+				8B1BF7EA1675F727007C11E6 /* EagleDbSqlValue.h */,
 			);
 			path = eagledb;
 			sourceTree = "<group>";

@@ -31,5 +31,6 @@ typedef struct {
 } EagleDbSqlBinaryExpression;
 
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right);
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr);
 
 #endif

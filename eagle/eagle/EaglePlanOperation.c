@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "EaglePlanOperation.h"
 #include "EagleData.h"
 
@@ -10,7 +11,7 @@ EaglePlanOperation* EaglePlanOperation_NewType(int type, int destination, EagleP
     epo->source = source;
     epo->function = function;
     epo->obj = obj;
-    epo->description = description;
+    epo->description = strdup(description);
     return epo;
 }
 
@@ -27,4 +28,11 @@ EaglePlanOperation* EaglePlanOperation_NewPage(int destination, EaglePageOperati
 const char* EaglePlanOperation_toString(EaglePlanOperation *epo)
 {
     return epo->description;
+}
+
+void EaglePlanOperation_Delete(EaglePlanOperation *epo)
+{
+    free(epo->obj);
+    free((void*) epo->description);
+    free(epo);
 }

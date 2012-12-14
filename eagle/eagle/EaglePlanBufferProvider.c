@@ -16,3 +16,9 @@ char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
     sprintf(msg, "destination = %d", bp->destinationBuffer);
     return msg;
 }
+
+void EaglePlanBufferProvider_Delete(EaglePlanBufferProvider *bp)
+{
+    EaglePageProvider_Delete(bp->provider);
+    free(bp);
+}

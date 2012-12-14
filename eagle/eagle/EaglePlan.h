@@ -18,6 +18,7 @@ typedef struct {
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver);
+void EaglePlan_Delete(EaglePlan *plan);
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo);
 void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);

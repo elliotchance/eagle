@@ -23,6 +23,7 @@ EaglePageProvider* EaglePageProvider_New(int recordsPerPage);
 EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int totalRecords, int recordsPerPage);
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage);
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
+void EaglePageProvider_Delete(EaglePageProvider *epp);
 
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);

@@ -10,5 +10,6 @@ typedef struct EaglePage_ EaglePage;
 
 EaglePage* EaglePage_New(int *data, int count, int recordOffset);
 EaglePage* EaglePage_Alloc(int count);
+void EaglePage_Delete(EaglePage *page);
 
 #endif

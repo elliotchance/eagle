@@ -25,3 +25,13 @@ void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId)
     
     EagleSynchronizer_Unlock(pr->pushRecordIdLock);
 }
+
+void EaglePageReceiver_Delete(EaglePageReceiver *receiver)
+{
+    if(NULL == receiver) {
+        return;
+    }
+    EagleLock_Delete(receiver->pushRecordIdLock);
+    free((void*) receiver->buffer);
+    free((void*) receiver);
+}

@@ -35,3 +35,9 @@ EaglePage* EaglePage_Alloc(int count)
     int *data = (int*) calloc((size_t) count, sizeof(int));
     return EaglePage_New(data, count, 0);
 }
+
+void EaglePage_Delete(EaglePage *page)
+{
+    free((void*) page->data);
+    free((void*) page);
+}

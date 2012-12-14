@@ -49,6 +49,9 @@ void* EagleWorker_begin(void *obj)
                     EaglePageReceiver_pushRecordId(job->plan->receiver, job->buffers[0]->recordOffset + i);
                 }
             }
+            
+            /* free */
+            EaglePlanJob_Delete(job);
         }
         else {
             return NULL;
@@ -67,4 +70,13 @@ void EagleWorker_start(EagleWorker *worker)
 void EagleWorker_join(EagleWorker *worker)
 {
     pthread_join(*worker->thread, NULL);
+}
+
+/**
+ This does not release the \c instance as that's only a reference to the parent object.
+ */
+void EagleWorker_Delete(EagleWorker *worker)
+{
+    free(worker->thread);
+    free(worker);
 }

@@ -17,3 +17,15 @@ EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)
     
     return job;
 }
+
+void EaglePlanJob_Delete(EaglePlanJob *job)
+{
+    int i;
+    
+    for(i = 0; i < job->allocatedBuffers; ++i) {
+        EaglePage_Delete(job->buffers[i]); 
+    }
+    free((void*) job->buffers);
+    
+    free((void*) job);
+}
