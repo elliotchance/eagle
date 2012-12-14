@@ -2,7 +2,7 @@ OBJROOT = `xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSett
 
 all: clean build
 
-release: clean build
+release: clean build coverage doxygen
 
 clean: clean_eagle clean_eagle_test
 	
@@ -22,3 +22,10 @@ build_eagle_test:
 
 test: build_eagle_test
 	build/Release/eagle_test
+	
+coverage: test
+	geninfo --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
+	genhtml -o coverage coverage.info
+
+doxygen:
+	doxygen
