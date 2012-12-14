@@ -121,8 +121,10 @@ typedef struct {
 } CUnitTests;
 
 CUnitTest* CUnitTest_New(const char* strName, CU_TestFunc pTestFunc);
+void CUnitTest_Delete(CUnitTest *obj);
 
 CUnitTests* CUnitTests_New(int allocatedTests);
+void CUnitTests_Delete(CUnitTests *obj);
 void CUnitTests_addTest(CUnitTests *tests, CUnitTest *test);
 
 #endif

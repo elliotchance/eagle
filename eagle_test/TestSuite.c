@@ -22,3 +22,17 @@ void CUnitTests_addTest(CUnitTests *tests, CUnitTest *test)
 {
     tests->tests[tests->usedTests++] = test;
 }
+
+void CUnitTest_Delete(CUnitTest *obj)
+{
+    free((void*) obj);
+}
+
+void CUnitTests_Delete(CUnitTests *obj)
+{
+    for(int i = 0; i < obj->usedTests; ++i) {
+        CUnitTest_Delete(obj->tests[i]);
+    }
+    free((void*) obj->tests);
+    free((void*) obj);
+}
