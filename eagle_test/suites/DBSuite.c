@@ -34,6 +34,8 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable1", select->tableName);
+        
+        EagleDbSqlSelect_Delete(select);
         yylex_destroy();
     }
     
@@ -44,6 +46,8 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable2", select->tableName);
+        
+        EagleDbSqlSelect_Delete(select);
         yylex_destroy();
     }
 }
@@ -89,17 +93,21 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE)
     EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
     CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
     
+    EagleDbSqlSelect_Delete(select);
     yylex_destroy();
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    
     CUNIT_ASSERT_NOT_NULL(select);
     CUNIT_ASSERT_EQUAL_INT(select->expressionType, EagleDbSqlExpressionTypeSelect);
     
     CUNIT_ASSERT_NULL(select->tableName);
     CUNIT_ASSERT_NULL(select->whereExpression);
+    
+    EagleDbSqlSelect_Delete(select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
@@ -114,16 +122,21 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
     CUNIT_VERIFY_EQUAL_PTR(binary->left, left);
     CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlExpressionOperatorPlus);
     CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
+    
+    EagleDbSqlBinaryExpression_Delete(binary);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 {
     EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(123);
+    
     CUNIT_ASSERT_NOT_NULL(value);
     CUNIT_ASSERT_EQUAL_INT(value->expressionType, EagleDbSqlExpressionTypeValue);
     
     CUNIT_ASSERT_EQUAL_INT(value->type, EagleDbSqlValueTypeInteger);
     CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
+    
+    EagleDbSqlValue_Delete(value);
 }
 
 EagleDbSqlExpression* _getExpression(const char *sql)
@@ -166,6 +179,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOpe
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
+    EagleInstance_Delete(eagle);
     yylex_destroy();
 }
 
@@ -173,14 +187,15 @@ CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
 {
     // SQL
     EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123");
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, where->expressionType);
+    CUNIT_ASSERT_EQUAL_INT(where->expressionType, EagleDbSqlExpressionTypeValue);
     
     // AST
     EagleDbSqlValue *value = (EagleDbSqlValue*) where;
-    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
+    CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
     
     _testExpression(where, 1, 1);
     
+    EagleDbSqlExpression_Delete(where);
     yylex_destroy();
 }
 
@@ -206,6 +221,7 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     
     _testExpression(where, 2, 2);
     
+    EagleDbSqlExpression_Delete(where);
     yylex_destroy();
 }
 

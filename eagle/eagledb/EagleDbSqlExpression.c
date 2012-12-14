@@ -69,7 +69,11 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
 }
 
 void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
-{    
+{
+    if(NULL == expr) {
+        return;
+    }
+    
     switch(expr->expressionType) {
         case EagleDbSqlExpressionTypeBinaryExpression:
             EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr);
@@ -83,6 +87,4 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
             EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
             break;
     }
-    
-    free((void*) expr);
 }

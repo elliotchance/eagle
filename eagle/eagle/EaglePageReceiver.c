@@ -32,6 +32,7 @@ void EaglePageReceiver_Delete(EaglePageReceiver *receiver)
         return;
     }
     EagleLock_Delete(receiver->pushRecordIdLock);
+    receiver->pushRecordIdLock = NULL;
     free((void*) receiver->buffer);
     free((void*) receiver);
 }

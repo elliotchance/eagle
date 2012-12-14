@@ -28,4 +28,5 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
     free((void*) job->buffers);
     
     free((void*) job);
+    job = NULL;
 }

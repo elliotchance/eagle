@@ -42,6 +42,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
+            EaglePlanJob_Delete(job);
             job = NULL;
             break;
         }
