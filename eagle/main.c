@@ -26,7 +26,7 @@ int main(int argc, const char * argv[])
     
     // plan: ? BETWEEN ? AND ?
     int recordsPerPage = 10000;
-    EaglePlan *plan = EaglePlan_New(recordsPerPage);
+    EaglePlan *plan = EaglePlan_New(recordsPerPage, NULL);
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, dataSize, recordsPerPage);
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
     

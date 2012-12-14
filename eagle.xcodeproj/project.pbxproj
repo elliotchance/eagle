@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B1BF816167AB6C0007C11E6 /* libcunit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF815167AB6C0007C11E6 /* libcunit.1.dylib */; };
 		8B9AEABF166602CC0095B4F5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9AEABE166602CC0095B4F5 /* main.c */; };
 		8B9AEAC1166602CD0095B4F5 /* eagle.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9AEAC0166602CD0095B4F5 /* eagle.1 */; };
 		8BA065AE166F454000991C6B /* EaglePageProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065AD166F454000991C6B /* EaglePageProvider.c */; };
@@ -21,7 +22,6 @@
 		8BA065D116740D3900991C6B /* EaglePlanBufferProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D016740D3900991C6B /* EaglePlanBufferProvider.c */; };
 		8BA065D41674278E00991C6B /* EaglePlanJob.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D31674278E00991C6B /* EaglePlanJob.c */; };
 		8BA065E616743A7700991C6B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065D6167437A900991C6B /* main.c */; };
-		8BA065EA16743D1B00991C6B /* libcunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA065E916743D1A00991C6B /* libcunit.a */; };
 		8BA065F1167442C600991C6B /* TestSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065F0167442C600991C6B /* TestSuite.c */; };
 		8BA065F31674431300991C6B /* MainSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065F21674431300991C6B /* MainSuite.c */; };
 		8BA065F416744D2F00991C6B /* EaglePageProvider.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BA065AD166F454000991C6B /* EaglePageProvider.c */; };
@@ -62,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B1BF815167AB6C0007C11E6 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = ../../../../usr/local/lib/libcunit.1.dylib; sourceTree = "<group>"; };
 		8B9AEABA166602CC0095B4F5 /* eagle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9AEABE166602CC0095B4F5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		8B9AEAC0166602CD0095B4F5 /* eagle.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = eagle.1; sourceTree = "<group>"; };
@@ -111,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BA065EA16743D1B00991C6B /* libcunit.a in Frameworks */,
+				8B1BF816167AB6C0007C11E6 /* libcunit.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +122,7 @@
 		8B9AEAAF166602CC0095B4F5 = {
 			isa = PBXGroup;
 			children = (
+				8B1BF815167AB6C0007C11E6 /* libcunit.1.dylib */,
 				8BA065D51674377F00991C6B /* test */,
 				8B9AEABD166602CC0095B4F5 /* eagle */,
 				8B9AEABB166602CC0095B4F5 /* Products */,
@@ -210,7 +212,6 @@
 				8BA065D81674399B00991C6B /* Sources */,
 				8BA065D91674399B00991C6B /* Frameworks */,
 				8BA065DA1674399B00991C6B /* CopyFiles */,
-				8BA06600167457E900991C6B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -247,22 +248,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8BA06600167457E900991C6B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "geninfo --no-checksum --base-directory ${OBJROOT} --output-filename coverage.info ${OBJROOT}\n/usr/bin/php cov.php\ngenhtml -o coverage coverage.info";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B9AEAB6166602CC0095B4F5 /* Sources */ = {
@@ -429,6 +414,7 @@
 				8BA065E51674399B00991C6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
