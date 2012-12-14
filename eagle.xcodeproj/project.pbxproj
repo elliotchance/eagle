@@ -358,7 +358,6 @@
 				8BA065D81674399B00991C6B /* Sources */,
 				8BA065D91674399B00991C6B /* Frameworks */,
 				8BA065DA1674399B00991C6B /* CopyFiles */,
-				8BA06600167457E900991C6B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -398,22 +397,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8BA06600167457E900991C6B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# generate report\nif [ $(find ${OBJROOT} -name *.gcda | wc -l) -eq 0 ]; then exit 0; fi\ngeninfo --no-checksum --output-filename coverage.info ${OBJROOT}\ngenhtml -o coverage coverage.info";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B1BF7CF1675D752007C11E6 /* Sources */ = {

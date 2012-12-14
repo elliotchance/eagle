@@ -1,5 +1,6 @@
+/build
 /coverage
-/eagle.xcodeproj/project.xcworkspace
-/eagle.xcodeproj/xcuserdata
 /coverage.info
 /doc
+/eagle.xcodeproj/project.xcworkspace
+/eagle.xcodeproj/xcuserdata
