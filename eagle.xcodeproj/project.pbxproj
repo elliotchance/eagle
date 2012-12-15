@@ -114,6 +114,7 @@
 		8B1BF7F61677343F007C11E6 /* EagleSynchronizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleSynchronizer.h; sourceTree = "<group>"; };
 		8B1BF7F7167734FC007C11E6 /* EagleSynchronizer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleSynchronizer.c; sourceTree = "<group>"; };
 		8B1BF7FE16777633007C11E6 /* EagleDbSqlExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbSqlExpression.c; sourceTree = "<group>"; };
+		8B3BB344167C3D4400E282AF /* EagleBoolean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleBoolean.h; sourceTree = "<group>"; };
 		8B61FC641675787B00EB6CF9 /* libcunit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcunit.1.dylib; path = /usr/local/lib/libcunit.1.dylib; sourceTree = "<absolute>"; };
 		8B9AEABA166602CC0095B4F5 /* eagle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA065DC1674399B00991C6B /* eagle_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle_test; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +222,7 @@
 		8BD9E3DA16756FF4005C3BDE /* eagle */ = {
 			isa = PBXGroup;
 			children = (
+				8B3BB344167C3D4400E282AF /* EagleBoolean.h */,
 				8BD9E3DB16756FF4005C3BDE /* EagleData.c */,
 				8BD9E3DC16756FF4005C3BDE /* EagleData.h */,
 				8BD9E3DD16756FF4005C3BDE /* EagleInstance.c */,
