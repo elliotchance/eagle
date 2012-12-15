@@ -61,8 +61,17 @@ gh-pages: master-only coverage doxygen
 	mv doc /tmp/eagle_doc
 	mv coverage /tmp/eagle_coverage
 	
+	# checkout gh-pages
 	git checkout gh-pages
 	git reset HEAD *
+	
+	# replace the old files
+	- rm -rf doc coverage
+	mv /tmp/eagle_doc doc
+	mv /tmp/eagle_coverage coverage
+	git add doc coverage
+	
+	# commit and push
 	git commit --amend -m "Auto generated"
 	git push --force origin gh-pages
 	git checkout master
