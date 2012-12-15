@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_expression_operator_8h" kind="file">
+    <compoundname>EagleDbSqlExpressionOperator.h</compoundname>
+    <includedby refid="_eagle_db_sql_binary_expression_8h" local="yes">eagle/eagledb/EagleDbSqlBinaryExpression.h</includedby>
+    <includedby refid="_eagle_db_sql_expression_8c" local="yes">eagle/eagledb/EagleDbSqlExpression.c</includedby>
+    <includedby refid="_eagle_db_sql_expression_operator_8c" local="yes">eagle/eagledb/EagleDbSqlExpressionOperator.c</includedby>
+    <invincdepgraph>
+      <node id="1503">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+      </node>
+      <node id="1504">
+        <label>eagle/eagledb/EagleDbSqlExpressionOperator.c</label>
+        <link refid="_eagle_db_sql_expression_operator_8c"/>
+      </node>
+      <node id="1501">
+        <label>eagle/eagledb/EagleDbSqlExpressionOperator.h</label>
+        <link refid="EagleDbSqlExpressionOperator.h"/>
+        <childnode refid="1502" relation="include">
+        </childnode>
+        <childnode refid="1503" relation="include">
+        </childnode>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+      <node id="1502">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.h</label>
+        <link refid="_eagle_db_sql_binary_expression_8h"/>
+        <childnode refid="1503" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23" prot="public" static="no">
+        <name>EagleDbSqlExpressionOperator</name>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a8de758baa9a47ccc47f06490f68bf99e" prot="public">
+          <name>EagleDbSqlExpressionOperatorPlus</name>
+          <initializer> 1</initializer>
+          <briefdescription>
+<para>Addition operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a2eaf4e53ddbbd69793836d44280597b1" prot="public">
+          <name>EagleDbSqlExpressionOperatorEquals</name>
+          <initializer> 2</initializer>
+          <briefdescription>
+<para>Equals operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a5f69441f24e36fed9600d1e24b2a29ae" prot="public">
+          <name>EagleDbSqlExpressionOperatorModulus</name>
+          <initializer> 3</initializer>
+          <briefdescription>
+<para>Modulus (remainder) operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a0496ca689fb0a154973a0395eeb82f68" prot="public">
+          <name>EagleDbSqlExpressionOperatorMultiply</name>
+          <initializer> 4</initializer>
+          <briefdescription>
+<para>Multiplication operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23af4e6bffeef8d451ed45179e5f6192a17" prot="public">
+          <name>EagleDbSqlExpressionOperatorNotEquals</name>
+          <initializer> 5</initializer>
+          <briefdescription>
+<para>Not equals operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a4cd09b9a616514a8321c00b431651462" prot="public">
+          <name>EagleDbSqlExpressionOperatorGreaterThan</name>
+          <initializer> 6</initializer>
+          <briefdescription>
+<para>Greater than operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23abef9429c14039f573479ee18ecc9ad78" prot="public">
+          <name>EagleDbSqlExpressionOperatorLessThan</name>
+          <initializer> 7</initializer>
+          <briefdescription>
+<para>Less than operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a024afce8a7965a1839070258c2462564" prot="public">
+          <name>EagleDbSqlExpressionOperatorGreaterThanEqual</name>
+          <initializer> 8</initializer>
+          <briefdescription>
+<para>Greater than or equal to operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a86b399d8d0979fcbdf54d49f82d4491a" prot="public">
+          <name>EagleDbSqlExpressionOperatorLessThanEqual</name>
+          <initializer> 9</initializer>
+          <briefdescription>
+<para>Greater than or equal to operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a6d000560e494a9e0bcae9ef0d8858ef9" prot="public">
+          <name>EagleDbSqlExpressionOperatorMinus</name>
+          <initializer> 10</initializer>
+          <briefdescription>
+<para>Subtraction (or negate) operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23ac4dcaf744f54e72e72535b26b21c0508" prot="public">
+          <name>EagleDbSqlExpressionOperatorDivide</name>
+          <initializer> 11</initializer>
+          <briefdescription>
+<para>Division operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Expression operators. </para>        </briefdescription>
+        <detaileddescription>
+<para>This includes pre and post unary operators as well as binary operators. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionOperator.h" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionOperator.h" bodystart="9" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_expression_operator_8h_1a607d80b70c1388c003df4f702c7148d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlExpressionOperator_toString</definition>
+        <argsstring>(EagleDbSqlExpressionOperator op)</argsstring>
+        <name>EagleDbSqlExpressionOperator_toString</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23" kindref="member">EagleDbSqlExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+<para>Get the string representation of the operator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string. You must free this yourself. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionOperator.h" line="73" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionOperator.c" bodystart="6" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlExpressionOperator_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlExpressionOperator_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="9" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="14" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a8de758baa9a47ccc47f06490f68bf99e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a8de758baa9a47ccc47f06490f68bf99e" kindref="member" tooltip="Addition operator.">EagleDbSqlExpressionOperatorPlus</ref><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a2eaf4e53ddbbd69793836d44280597b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a2eaf4e53ddbbd69793836d44280597b1" kindref="member" tooltip="Equals operator.">EagleDbSqlExpressionOperatorEquals</ref><sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a5f69441f24e36fed9600d1e24b2a29ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a5f69441f24e36fed9600d1e24b2a29ae" kindref="member" tooltip="Modulus (remainder) operator.">EagleDbSqlExpressionOperatorModulus</ref><sp/>=<sp/>3,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a0496ca689fb0a154973a0395eeb82f68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a0496ca689fb0a154973a0395eeb82f68" kindref="member" tooltip="Multiplication operator.">EagleDbSqlExpressionOperatorMultiply</ref><sp/>=<sp/>4,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23af4e6bffeef8d451ed45179e5f6192a17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23af4e6bffeef8d451ed45179e5f6192a17" kindref="member" tooltip="Not equals operator.">EagleDbSqlExpressionOperatorNotEquals</ref><sp/>=<sp/>5,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a4cd09b9a616514a8321c00b431651462" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a4cd09b9a616514a8321c00b431651462" kindref="member" tooltip="Greater than operator.">EagleDbSqlExpressionOperatorGreaterThan</ref><sp/>=<sp/>6,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="44" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23abef9429c14039f573479ee18ecc9ad78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23abef9429c14039f573479ee18ecc9ad78" kindref="member" tooltip="Less than operator.">EagleDbSqlExpressionOperatorLessThan</ref><sp/>=<sp/>7,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a024afce8a7965a1839070258c2462564" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a024afce8a7965a1839070258c2462564" kindref="member" tooltip="Greater than or equal to operator.">EagleDbSqlExpressionOperatorGreaterThanEqual</ref><sp/>=<sp/>8,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a86b399d8d0979fcbdf54d49f82d4491a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a86b399d8d0979fcbdf54d49f82d4491a" kindref="member" tooltip="Greater than or equal to operator.">EagleDbSqlExpressionOperatorLessThanEqual</ref><sp/>=<sp/>9,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a6d000560e494a9e0bcae9ef0d8858ef9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23a6d000560e494a9e0bcae9ef0d8858ef9" kindref="member" tooltip="Subtraction (or negate) operator.">EagleDbSqlExpressionOperatorMinus</ref><sp/>=<sp/>10,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64" refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23ac4dcaf744f54e72e72535b26b21c0508" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23ac4dcaf744f54e72e72535b26b21c0508" kindref="member" tooltip="Division operator.">EagleDbSqlExpressionOperatorDivide</ref><sp/>=<sp/>11</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}<sp/><ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23" kindref="member" tooltip="Expression operators.">EagleDbSqlExpressionOperator</ref>;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_expression_operator_8c_1a607d80b70c1388c003df4f702c7148d5" kindref="member" tooltip="Get the string representation of the operator.">EagleDbSqlExpressionOperator_toString</ref>(<ref refid="_eagle_db_sql_expression_operator_8h_1adf3855dd193afc9fcf60da83b54e3d23" kindref="member" tooltip="Expression operators.">EagleDbSqlExpressionOperator</ref><sp/>op);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionOperator.h"/>
+  </compounddef>
+</doxygen>

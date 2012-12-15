@@ -1,0 +1,711 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/eagledb/EagleDbParser.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle/eagledb</a> - EagleDbParser.c<span style="font-size: 80%;"> (source / <a href="EagleDbParser.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;Eagle.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleDbParser.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleDbSqlStatementType.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleData.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleDbSqlExpression.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleUtils.h&quot;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : /**
+<span class="lineNum">      13 </span>            :  Trivial internal type.
+<span class="lineNum">      14 </span>            :  */
+<span class="lineNum">      15 </span>            : typedef void* yyscan_t;
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            : /* internal prototypes supplied by flex and bison */
+<span class="lineNum">      18 </span>            : extern int yylex_destroy(yyscan_t);
+<span class="lineNum">      19 </span>            : extern int yy_scan_string(const char *str, yyscan_t scanner);
+<span class="lineNum">      20 </span>            : extern int yyparse(EagleDbParser*, yyscan_t);
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            : int yylex_init(yyscan_t *ptr_yy_globals);
+<span class="lineNum">      23 </span>            : int yylex_init_extra(EagleDbParser *user_defined, yyscan_t *ptr_yy_globals);
+<span class="lineNum">      24 </span>            : int yylex(yyscan_t yyscanner);
+<a name="25"><span class="lineNum">      25 </span>            : int yylex_destroy(yyscan_t yyscanner);</a>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span>            : EagleDbParser* EagleDbParser_New(void)
+<span class="lineNum">      28 </span>            : {
+<span class="lineNum">      29 </span><span class="lineCov">       1472 :     EagleDbParser *parser = (EagleDbParser*) EagleMemory_Allocate(&quot;EagleDbParser_New.1&quot;, sizeof(EagleDbParser));</span>
+<span class="lineNum">      30 </span><span class="lineCov">       1472 :     if(NULL == parser) {</span>
+<span class="lineNum">      31 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      32 </span>            :     }
+<span class="lineNum">      33 </span>            :     
+<span class="lineNum">      34 </span><span class="lineCov">       1464 :     parser-&gt;errors = EagleLinkedList_New();</span>
+<span class="lineNum">      35 </span><span class="lineCov">       1464 :     parser-&gt;yyparse_ast = NULL;</span>
+<span class="lineNum">      36 </span><span class="lineCov">       1464 :     parser-&gt;yystatementtype = EagleDbSqlStatementTypeNone;</span>
+<span class="lineNum">      37 </span>            :     
+<span class="lineNum">      38 </span><span class="lineCov">       1464 :     return parser;</span>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">       1472 : }</span></a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">       1448 : EagleDbParser* EagleDbParser_ParseWithString(const char *sql)</span>
+<span class="lineNum">      42 </span>            : {
+<span class="lineNum">      43 </span><span class="lineCov">       1448 :     EagleDbParser *parser = EagleDbParser_New();</span>
+<span class="lineNum">      44 </span>            :     
+<span class="lineNum">      45 </span><span class="lineCov">       1448 :     yylex_init_extra(parser, &amp;parser-&gt;yyparse);</span>
+<span class="lineNum">      46 </span><span class="lineCov">       1448 :     if(NULL != parser) {</span>
+<span class="lineNum">      47 </span><span class="lineCov">       1448 :         yy_scan_string(sql, parser-&gt;yyparse);</span>
+<span class="lineNum">      48 </span><span class="lineCov">       1448 :         yyparse(parser, parser-&gt;yyparse);</span>
+<span class="lineNum">      49 </span><span class="lineCov">       1448 :     }</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">       1448 :     return parser;</span>
+<a name="52"><span class="lineNum">      52 </span>            : }</a>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span><span class="lineCov">       5304 : char* EagleDbParser_lastToken(EagleDbParser *p)</span>
+<span class="lineNum">      55 </span>            : {
+<span class="lineNum">      56 </span><span class="lineCov">       5304 :     return p-&gt;yytext_last;</span>
+<a name="57"><span class="lineNum">      57 </span>            : }</a>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineCov">       1456 : EagleBoolean EagleDbParser_hasError(EagleDbParser *p)</span>
+<span class="lineNum">      60 </span>            : {
+<span class="lineNum">      61 </span><span class="lineCov">       1456 :     return !EagleLinkedList_isEmpty(p-&gt;errors);</span>
+<a name="62"><span class="lineNum">      62 </span>            : }</a>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span><span class="lineCov">         64 : void EagleDbParser_addError(EagleDbParser *p, char *message)</span>
+<span class="lineNum">      65 </span>            : {
+<span class="lineNum">      66 </span><span class="lineCov">         64 :     EagleLinkedList_add(p-&gt;errors, EagleLinkedListItem_New(strdup(message), EagleTrue, NULL));</span>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">         64 : }</span></a>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">         64 : char* EagleDbParser_lastError(EagleDbParser *p)</span>
+<span class="lineNum">      70 </span>            : {
+<span class="lineNum">      71 </span><span class="lineCov">         64 :     if(NULL == p) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      73 </span>            :     }
+<span class="lineNum">      74 </span><span class="lineCov">         56 :     if(EagleLinkedList_isEmpty(p-&gt;errors)) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      76 </span>            :     }
+<span class="lineNum">      77 </span><span class="lineCov">         48 :     return (char*) EagleLinkedList_end(p-&gt;errors)-&gt;obj;</span>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         64 : }</span></a>
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span><span class="lineCov">         64 : int yyerror(EagleDbParser *parser, void *scanner, char *s)</span>
+<span class="lineNum">      81 </span>            : {
+<span class="lineNum">      82 </span><span class="lineCov">         64 :     EagleDbParser_addError(parser, s);</span>
+<span class="lineNum">      83 </span><span class="lineCov">         64 :     return 0;</span>
+<a name="84"><span class="lineNum">      84 </span>            : }</a>
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span><span class="lineCov">       1472 : void EagleDbParser_Delete(EagleDbParser *p)</span>
+<span class="lineNum">      87 </span>            : {
+<span class="lineNum">      88 </span><span class="lineCov">       1472 :     if(NULL == p) {</span>
+<span class="lineNum">      89 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">      90 </span>            :     }
+<span class="lineNum">      91 </span>            :     
+<span class="lineNum">      92 </span><span class="lineCov">       1464 :     EagleLinkedList_DeleteWithItems(p-&gt;errors);</span>
+<span class="lineNum">      93 </span><span class="lineCov">       1464 :     if(NULL != p-&gt;yyparse) {</span>
+<span class="lineNum">      94 </span><span class="lineCov">       1448 :         yylex_destroy(p-&gt;yyparse);</span>
+<span class="lineNum">      95 </span><span class="lineCov">       1448 :     }</span>
+<span class="lineNum">      96 </span><span class="lineCov">       1464 :     EagleMemory_Free(p);</span>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">       2936 : }</span></a>
+<span class="lineNum">      98 </span>            : 
+<span class="lineNum">      99 </span><span class="lineCov">         24 : EagleBoolean EagleDbParser_IsNonreservedKeyword(const char *word)</span>
+<span class="lineNum">     100 </span>            : {
+<span class="lineNum">     101 </span><span class="lineCov">         24 :     unsigned long i;</span>
+<span class="lineNum">     102 </span>            :     static const char *words[] = {
+<span class="lineNum">     103 </span>            :         &quot;A&quot;,
+<span class="lineNum">     104 </span>            :         &quot;ABS&quot;,
+<span class="lineNum">     105 </span>            :         &quot;ABSOLUTE&quot;,
+<span class="lineNum">     106 </span>            :         &quot;ACTION&quot;,
+<span class="lineNum">     107 </span>            :         &quot;ADA&quot;,
+<span class="lineNum">     108 </span>            :         &quot;ADMIN&quot;,
+<span class="lineNum">     109 </span>            :         &quot;AFTER&quot;,
+<span class="lineNum">     110 </span>            :         &quot;ALWAYS&quot;,
+<span class="lineNum">     111 </span>            :         &quot;ASC&quot;,
+<span class="lineNum">     112 </span>            :         &quot;ASSERTION&quot;,
+<span class="lineNum">     113 </span>            :         &quot;ASSIGNMENT&quot;,
+<span class="lineNum">     114 </span>            :         &quot;ATTRIBUTE&quot;,
+<span class="lineNum">     115 </span>            :         &quot;ATTRIBUTES&quot;,
+<span class="lineNum">     116 </span>            :         &quot;AVG&quot;,
+<span class="lineNum">     117 </span>            :         &quot;BEFORE&quot;,
+<span class="lineNum">     118 </span>            :         &quot;BERNOULLI&quot;,
+<span class="lineNum">     119 </span>            :         &quot;BREADTH&quot;,
+<span class="lineNum">     120 </span>            :         &quot;C&quot;,
+<span class="lineNum">     121 </span>            :         &quot;CARDINALITY&quot;,
+<span class="lineNum">     122 </span>            :         &quot;CASCADE&quot;,
+<span class="lineNum">     123 </span>            :         &quot;CATALOG&quot;,
+<span class="lineNum">     124 </span>            :         &quot;CATALOG_NAME&quot;,
+<span class="lineNum">     125 </span>            :         &quot;CEIL&quot;,
+<span class="lineNum">     126 </span>            :         &quot;CEILING&quot;,
+<span class="lineNum">     127 </span>            :         &quot;CHAIN&quot;,
+<span class="lineNum">     128 </span>            :         &quot;CHARACTERISTICS&quot;,
+<span class="lineNum">     129 </span>            :         &quot;CHARACTERS&quot;,
+<span class="lineNum">     130 </span>            :         &quot;CHARACTER_LENGTH&quot;,
+<span class="lineNum">     131 </span>            :         &quot;CHARACTER_SET_CATALOG&quot;,
+<span class="lineNum">     132 </span>            :         &quot;CHARACTER_SET_NAME&quot;,
+<span class="lineNum">     133 </span>            :         &quot;CHARACTER_SET_SCHEMA&quot;,
+<span class="lineNum">     134 </span>            :         &quot;CHAR_LENGTH&quot;,
+<span class="lineNum">     135 </span>            :         &quot;CHECKED&quot;,
+<span class="lineNum">     136 </span>            :         &quot;CLASS_ORIGIN&quot;,
+<span class="lineNum">     137 </span>            :         &quot;COALESCE&quot;,
+<span class="lineNum">     138 </span>            :         &quot;COBOL&quot;,
+<span class="lineNum">     139 </span>            :         &quot;CODE_UNITS&quot;,
+<span class="lineNum">     140 </span>            :         &quot;COLLATION&quot;,
+<span class="lineNum">     141 </span>            :         &quot;COLLATION_CATALOG&quot;,
+<span class="lineNum">     142 </span>            :         &quot;COLLATION_NAME&quot;,
+<span class="lineNum">     143 </span>            :         &quot;COLLATION_SCHEMA&quot;,
+<span class="lineNum">     144 </span>            :         &quot;COLLECT&quot;,
+<span class="lineNum">     145 </span>            :         &quot;COLUMN_NAME&quot;,
+<span class="lineNum">     146 </span>            :         &quot;COMMAND_FUNCTION&quot;,
+<span class="lineNum">     147 </span>            :         &quot;COMMAND_FUNCTION_CODE&quot;,
+<span class="lineNum">     148 </span>            :         &quot;COMMITTED&quot;,
+<span class="lineNum">     149 </span>            :         &quot;CONDITION&quot;,
+<span class="lineNum">     150 </span>            :         &quot;CONDITION_NUMBER&quot;,
+<span class="lineNum">     151 </span>            :         &quot;CONNECTION_NAME&quot;,
+<span class="lineNum">     152 </span>            :         &quot;CONSTRAINTS&quot;,
+<span class="lineNum">     153 </span>            :         &quot;CONSTRAINT_CATALOG&quot;,
+<span class="lineNum">     154 </span>            :         &quot;CONSTRAINT_NAME&quot;,
+<span class="lineNum">     155 </span>            :         &quot;CONSTRAINT_SCHEMA&quot;,
+<span class="lineNum">     156 </span>            :         &quot;CONSTRUCTORS&quot;,
+<span class="lineNum">     157 </span>            :         &quot;CONTAINS&quot;,
+<span class="lineNum">     158 </span>            :         &quot;CONVERT&quot;,
+<span class="lineNum">     159 </span>            :         &quot;CORR&quot;,
+<span class="lineNum">     160 </span>            :         &quot;COUNT&quot;,
+<span class="lineNum">     161 </span>            :         &quot;COVAR_POP&quot;,
+<span class="lineNum">     162 </span>            :         &quot;COVAR_SAMP&quot;,
+<span class="lineNum">     163 </span>            :         &quot;CUME_DIST&quot;,
+<span class="lineNum">     164 </span>            :         &quot;CURRENT_COLLATION&quot;,
+<span class="lineNum">     165 </span>            :         &quot;CURSOR_NAME&quot;,
+<span class="lineNum">     166 </span>            :         &quot;DATA&quot;,
+<span class="lineNum">     167 </span>            :         &quot;DATETIME_INTERVAL_CODE&quot;,
+<span class="lineNum">     168 </span>            :         &quot;DATETIME_INTERVAL_PRECISION&quot;,
+<span class="lineNum">     169 </span>            :         &quot;DEFAULTS&quot;,
+<span class="lineNum">     170 </span>            :         &quot;DEFERRABLE&quot;,
+<span class="lineNum">     171 </span>            :         &quot;DEFERRED&quot;,
+<span class="lineNum">     172 </span>            :         &quot;DEFINED&quot;,
+<span class="lineNum">     173 </span>            :         &quot;DEFINER&quot;,
+<span class="lineNum">     174 </span>            :         &quot;DEGREE&quot;,
+<span class="lineNum">     175 </span>            :         &quot;DENSE_RANK&quot;,
+<span class="lineNum">     176 </span>            :         &quot;DEPTH&quot;,
+<span class="lineNum">     177 </span>            :         &quot;DERIVED&quot;,
+<span class="lineNum">     178 </span>            :         &quot;DESC&quot;,
+<span class="lineNum">     179 </span>            :         &quot;DESCRIPTOR&quot;,
+<span class="lineNum">     180 </span>            :         &quot;DIAGNOSTICS&quot;,
+<span class="lineNum">     181 </span>            :         &quot;DISPATCH&quot;,
+<span class="lineNum">     182 </span>            :         &quot;DOMAIN&quot;,
+<span class="lineNum">     183 </span>            :         &quot;DYNAMIC_FUNCTION&quot;,
+<span class="lineNum">     184 </span>            :         &quot;DYNAMIC_FUNCTION_CODE&quot;,
+<span class="lineNum">     185 </span>            :         &quot;EQUALS&quot;,
+<span class="lineNum">     186 </span>            :         &quot;EVERY&quot;,
+<span class="lineNum">     187 </span>            :         &quot;EXCEPTION&quot;,
+<span class="lineNum">     188 </span>            :         &quot;EXCLUDE&quot;,
+<span class="lineNum">     189 </span>            :         &quot;EXCLUDING&quot;,
+<span class="lineNum">     190 </span>            :         &quot;EXP&quot;,
+<span class="lineNum">     191 </span>            :         &quot;EXTRACT&quot;,
+<span class="lineNum">     192 </span>            :         &quot;FINAL&quot;,
+<span class="lineNum">     193 </span>            :         &quot;FIRST&quot;,
+<span class="lineNum">     194 </span>            :         &quot;FLOOR&quot;,
+<span class="lineNum">     195 </span>            :         &quot;FOLLOWING&quot;,
+<span class="lineNum">     196 </span>            :         &quot;FORTRAN&quot;,
+<span class="lineNum">     197 </span>            :         &quot;FOUND&quot;,
+<span class="lineNum">     198 </span>            :         &quot;FUSION&quot;,
+<span class="lineNum">     199 </span>            :         &quot;G&quot;,
+<span class="lineNum">     200 </span>            :         &quot;GENERAL&quot;,
+<span class="lineNum">     201 </span>            :         &quot;GO&quot;,
+<span class="lineNum">     202 </span>            :         &quot;GOTO&quot;,
+<span class="lineNum">     203 </span>            :         &quot;GRANTED&quot;,
+<span class="lineNum">     204 </span>            :         &quot;HIERARCHY&quot;,
+<span class="lineNum">     205 </span>            :         &quot;IMPLEMENTATION&quot;,
+<span class="lineNum">     206 </span>            :         &quot;INCLUDING&quot;,
+<span class="lineNum">     207 </span>            :         &quot;INCREMENT&quot;,
+<span class="lineNum">     208 </span>            :         &quot;INITIALLY&quot;,
+<span class="lineNum">     209 </span>            :         &quot;INSTANCE&quot;,
+<span class="lineNum">     210 </span>            :         &quot;INSTANTIABLE&quot;,
+<span class="lineNum">     211 </span>            :         &quot;INTERSECTION&quot;,
+<span class="lineNum">     212 </span>            :         &quot;INVOKER&quot;,
+<span class="lineNum">     213 </span>            :         &quot;K&quot;,
+<span class="lineNum">     214 </span>            :         &quot;KEY&quot;,
+<span class="lineNum">     215 </span>            :         &quot;KEY_MEMBER&quot;,
+<span class="lineNum">     216 </span>            :         &quot;KEY_TYPE&quot;,
+<span class="lineNum">     217 </span>            :         &quot;LAST&quot;,
+<span class="lineNum">     218 </span>            :         &quot;LENGTH&quot;,
+<span class="lineNum">     219 </span>            :         &quot;LEVEL&quot;,
+<span class="lineNum">     220 </span>            :         &quot;LN&quot;,
+<span class="lineNum">     221 </span>            :         &quot;LOCATOR&quot;,
+<span class="lineNum">     222 </span>            :         &quot;LOWER&quot;,
+<span class="lineNum">     223 </span>            :         &quot;M&quot;,
+<span class="lineNum">     224 </span>            :         &quot;MAP&quot;,
+<span class="lineNum">     225 </span>            :         &quot;MATCHED&quot;,
+<span class="lineNum">     226 </span>            :         &quot;MAX&quot;,
+<span class="lineNum">     227 </span>            :         &quot;MAXVALUE&quot;,
+<span class="lineNum">     228 </span>            :         &quot;MESSAGE_LENGTH&quot;,
+<span class="lineNum">     229 </span>            :         &quot;MESSAGE_OCTET_LENGTH&quot;,
+<span class="lineNum">     230 </span>            :         &quot;MESSAGE_TEXT&quot;,
+<span class="lineNum">     231 </span>            :         &quot;MIN&quot;,
+<span class="lineNum">     232 </span>            :         &quot;MINVALUE&quot;,
+<span class="lineNum">     233 </span>            :         &quot;MOD&quot;,
+<span class="lineNum">     234 </span>            :         &quot;MORE&quot;,
+<span class="lineNum">     235 </span>            :         &quot;MUMPS&quot;,
+<span class="lineNum">     236 </span>            :         &quot;NAME&quot;,
+<span class="lineNum">     237 </span>            :         &quot;NAMES&quot;,
+<span class="lineNum">     238 </span>            :         &quot;NESTING&quot;,
+<span class="lineNum">     239 </span>            :         &quot;NEXT&quot;,
+<span class="lineNum">     240 </span>            :         &quot;NORMALIZE&quot;,
+<span class="lineNum">     241 </span>            :         &quot;NORMALIZED&quot;,
+<span class="lineNum">     242 </span>            :         &quot;NULLABLE&quot;,
+<span class="lineNum">     243 </span>            :         &quot;NULLIF&quot;,
+<span class="lineNum">     244 </span>            :         &quot;NULLS&quot;,
+<span class="lineNum">     245 </span>            :         &quot;NUMBER&quot;,
+<span class="lineNum">     246 </span>            :         &quot;OBJECT&quot;,
+<span class="lineNum">     247 </span>            :         &quot;OCTETS&quot;,
+<span class="lineNum">     248 </span>            :         &quot;OCTET_LENGTH&quot;,
+<span class="lineNum">     249 </span>            :         &quot;OPTION&quot;,
+<span class="lineNum">     250 </span>            :         &quot;OPTIONS&quot;,
+<span class="lineNum">     251 </span>            :         &quot;ORDERING&quot;,
+<span class="lineNum">     252 </span>            :         &quot;ORDINALITY&quot;,
+<span class="lineNum">     253 </span>            :         &quot;OTHERS&quot;,
+<span class="lineNum">     254 </span>            :         &quot;OVERLAY&quot;,
+<span class="lineNum">     255 </span>            :         &quot;OVERRIDING&quot;,
+<span class="lineNum">     256 </span>            :         &quot;PAD&quot;,
+<span class="lineNum">     257 </span>            :         &quot;PARAMETER_MODE&quot;,
+<span class="lineNum">     258 </span>            :         &quot;PARAMETER_NAME&quot;,
+<span class="lineNum">     259 </span>            :         &quot;PARAMETER_ORDINAL_POSITION&quot;,
+<span class="lineNum">     260 </span>            :         &quot;PARAMETER_SPECIFIC_CATALOG&quot;,
+<span class="lineNum">     261 </span>            :         &quot;PARAMETER_SPECIFIC_NAME&quot;,
+<span class="lineNum">     262 </span>            :         &quot;PARAMETER_SPECIFIC_SCHEMA&quot;,
+<span class="lineNum">     263 </span>            :         &quot;PARTIAL&quot;,
+<span class="lineNum">     264 </span>            :         &quot;PASCAL&quot;,
+<span class="lineNum">     265 </span>            :         &quot;PATH&quot;,
+<span class="lineNum">     266 </span>            :         &quot;PERCENTILE_CONT&quot;,
+<span class="lineNum">     267 </span>            :         &quot;PERCENTILE_DISC&quot;,
+<span class="lineNum">     268 </span>            :         &quot;PERCENT_RANK&quot;,
+<span class="lineNum">     269 </span>            :         &quot;PLACING&quot;,
+<span class="lineNum">     270 </span>            :         &quot;PLI&quot;,
+<span class="lineNum">     271 </span>            :         &quot;POSITION&quot;,
+<span class="lineNum">     272 </span>            :         &quot;POWER&quot;,
+<span class="lineNum">     273 </span>            :         &quot;PRECEDING&quot;,
+<span class="lineNum">     274 </span>            :         &quot;PRESERVE&quot;,
+<span class="lineNum">     275 </span>            :         &quot;PRIOR&quot;,
+<span class="lineNum">     276 </span>            :         &quot;PRIVILEGES&quot;,
+<span class="lineNum">     277 </span>            :         &quot;PUBLIC&quot;,
+<span class="lineNum">     278 </span>            :         &quot;RANK&quot;,
+<span class="lineNum">     279 </span>            :         &quot;READ&quot;,
+<span class="lineNum">     280 </span>            :         &quot;RELATIVE&quot;,
+<span class="lineNum">     281 </span>            :         &quot;REPEATABLE&quot;,
+<span class="lineNum">     282 </span>            :         &quot;RESTART&quot;,
+<span class="lineNum">     283 </span>            :         &quot;RETURNED_CARDINALITY&quot;,
+<span class="lineNum">     284 </span>            :         &quot;RETURNED_LENGTH&quot;,
+<span class="lineNum">     285 </span>            :         &quot;RETURNED_OCTET_LENGTH&quot;,
+<span class="lineNum">     286 </span>            :         &quot;RETURNED_SQLSTATE&quot;,
+<span class="lineNum">     287 </span>            :         &quot;ROLE&quot;,
+<span class="lineNum">     288 </span>            :         &quot;ROUTINE&quot;,
+<span class="lineNum">     289 </span>            :         &quot;ROUTINE_CATALOG&quot;,
+<span class="lineNum">     290 </span>            :         &quot;ROUTINE_NAME&quot;,
+<span class="lineNum">     291 </span>            :         &quot;ROUTINE_SCHEMA&quot;,
+<span class="lineNum">     292 </span>            :         &quot;ROW_COUNT&quot;,
+<span class="lineNum">     293 </span>            :         &quot;ROW_NUMBER&quot;,
+<span class="lineNum">     294 </span>            :         &quot;SCALE&quot;,
+<span class="lineNum">     295 </span>            :         &quot;SCHEMA&quot;,
+<span class="lineNum">     296 </span>            :         &quot;SCHEMA_NAME&quot;,
+<span class="lineNum">     297 </span>            :         &quot;SCOPE_CATALOG&quot;,
+<span class="lineNum">     298 </span>            :         &quot;SCOPE_NAME&quot;,
+<span class="lineNum">     299 </span>            :         &quot;SCOPE_SCHEMA&quot;,
+<span class="lineNum">     300 </span>            :         &quot;SECTION&quot;,
+<span class="lineNum">     301 </span>            :         &quot;SECURITY&quot;,
+<span class="lineNum">     302 </span>            :         &quot;SELF&quot;,
+<span class="lineNum">     303 </span>            :         &quot;SEQUENCE&quot;,
+<span class="lineNum">     304 </span>            :         &quot;SERIALIZABLE&quot;,
+<span class="lineNum">     305 </span>            :         &quot;SERVER_NAME&quot;,
+<span class="lineNum">     306 </span>            :         &quot;SESSION&quot;,
+<span class="lineNum">     307 </span>            :         &quot;SETS&quot;,
+<span class="lineNum">     308 </span>            :         &quot;SIMPLE&quot;,
+<span class="lineNum">     309 </span>            :         &quot;SIZE&quot;,
+<span class="lineNum">     310 </span>            :         &quot;SOURCE&quot;,
+<span class="lineNum">     311 </span>            :         &quot;SPACE&quot;,
+<span class="lineNum">     312 </span>            :         &quot;SPECIFIC_NAME&quot;,
+<span class="lineNum">     313 </span>            :         &quot;SQRT&quot;,
+<span class="lineNum">     314 </span>            :         &quot;STATE&quot;,
+<span class="lineNum">     315 </span>            :         &quot;STATEMENT&quot;,
+<span class="lineNum">     316 </span>            :         &quot;STDDEV_POP&quot;,
+<span class="lineNum">     317 </span>            :         &quot;STDDEV_SAMP&quot;,
+<span class="lineNum">     318 </span>            :         &quot;STRUCTURE&quot;,
+<span class="lineNum">     319 </span>            :         &quot;STYLE&quot;,
+<span class="lineNum">     320 </span>            :         &quot;SUBCLASS_ORIGIN&quot;,
+<span class="lineNum">     321 </span>            :         &quot;SUBSTRING&quot;,
+<span class="lineNum">     322 </span>            :         &quot;SUM&quot;,
+<span class="lineNum">     323 </span>            :         &quot;TABLESAMPLE&quot;,
+<span class="lineNum">     324 </span>            :         &quot;TABLE_NAME&quot;,
+<span class="lineNum">     325 </span>            :         &quot;TEMPORARY&quot;,
+<span class="lineNum">     326 </span>            :         &quot;TIES&quot;,
+<span class="lineNum">     327 </span>            :         &quot;TOP_LEVEL_COUNT&quot;,
+<span class="lineNum">     328 </span>            :         &quot;TRANSACTION&quot;,
+<span class="lineNum">     329 </span>            :         &quot;TRANSACTIONS_COMMITTED&quot;,
+<span class="lineNum">     330 </span>            :         &quot;TRANSACTIONS_ROLLED_BACK&quot;,
+<span class="lineNum">     331 </span>            :         &quot;TRANSACTION_ACTIVE&quot;,
+<span class="lineNum">     332 </span>            :         &quot;TRANSFORM&quot;,
+<span class="lineNum">     333 </span>            :         &quot;TRANSFORMS&quot;,
+<span class="lineNum">     334 </span>            :         &quot;TRANSLATE&quot;,
+<span class="lineNum">     335 </span>            :         &quot;TRIGGER_CATALOG&quot;,
+<span class="lineNum">     336 </span>            :         &quot;TRIGGER_NAME&quot;,
+<span class="lineNum">     337 </span>            :         &quot;TRIGGER_SCHEMA&quot;,
+<span class="lineNum">     338 </span>            :         &quot;TRIM&quot;,
+<span class="lineNum">     339 </span>            :         &quot;TYPE&quot;,
+<span class="lineNum">     340 </span>            :         &quot;UNBOUNDED&quot;,
+<span class="lineNum">     341 </span>            :         &quot;UNCOMMITTED&quot;,
+<span class="lineNum">     342 </span>            :         &quot;UNDER&quot;,
+<span class="lineNum">     343 </span>            :         &quot;UNNAMED&quot;,
+<span class="lineNum">     344 </span>            :         &quot;USAGE&quot;,
+<span class="lineNum">     345 </span>            :         &quot;USER_DEFINED_TYPE_CATALOG&quot;,
+<span class="lineNum">     346 </span>            :         &quot;USER_DEFINED_TYPE_CODE&quot;,
+<span class="lineNum">     347 </span>            :         &quot;USER_DEFINED_TYPE_NAME&quot;,
+<span class="lineNum">     348 </span>            :         &quot;USER_DEFINED_TYPE_SCHEMA&quot;,
+<span class="lineNum">     349 </span>            :         &quot;VIEW&quot;,
+<span class="lineNum">     350 </span>            :         &quot;WORK&quot;,
+<span class="lineNum">     351 </span>            :         &quot;WRITE&quot;,
+<span class="lineNum">     352 </span>            :         &quot;ZONE&quot;
+<span class="lineNum">     353 </span>            :     };
+<span class="lineNum">     354 </span>            :     
+<span class="lineNum">     355 </span><span class="lineCov">       8048 :     for(i = 0; i &lt; sizeof(words) / sizeof(const char*); ++i) {</span>
+<span class="lineNum">     356 </span><span class="lineCov">       4008 :         if(EagleTrue == EagleUtils_CompareWithoutCase(word, words[i])) {</span>
+<span class="lineNum">     357 </span><span class="lineCov">          8 :             return EagleTrue;</span>
+<span class="lineNum">     358 </span>            :         }
+<span class="lineNum">     359 </span><span class="lineCov">       4000 :     }</span>
+<span class="lineNum">     360 </span>            :     
+<span class="lineNum">     361 </span><span class="lineCov">         16 :     return EagleFalse;</span>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         24 : }</span></a>
+<span class="lineNum">     363 </span>            : 
+<span class="lineNum">     364 </span><span class="lineCov">         24 : EagleBoolean EagleDbParser_IsReservedKeyword(const char *word)</span>
+<span class="lineNum">     365 </span>            : {
+<span class="lineNum">     366 </span><span class="lineCov">         24 :     unsigned long i;</span>
+<span class="lineNum">     367 </span>            :     static const char *words[] = {
+<span class="lineNum">     368 </span>            :         &quot;ADD&quot;,
+<span class="lineNum">     369 </span>            :         &quot;ALL&quot;,
+<span class="lineNum">     370 </span>            :         &quot;ALLOCATE&quot;,
+<span class="lineNum">     371 </span>            :         &quot;ALTER&quot;,
+<span class="lineNum">     372 </span>            :         &quot;AND&quot;,
+<span class="lineNum">     373 </span>            :         &quot;ANY&quot;,
+<span class="lineNum">     374 </span>            :         &quot;ARE&quot;,
+<span class="lineNum">     375 </span>            :         &quot;ARRAY&quot;,
+<span class="lineNum">     376 </span>            :         &quot;AS&quot;,
+<span class="lineNum">     377 </span>            :         &quot;ASENSITIVE&quot;,
+<span class="lineNum">     378 </span>            :         &quot;ASYMMETRIC&quot;,
+<span class="lineNum">     379 </span>            :         &quot;AT&quot;,
+<span class="lineNum">     380 </span>            :         &quot;ATOMIC&quot;,
+<span class="lineNum">     381 </span>            :         &quot;AUTHORIZATION&quot;,
+<span class="lineNum">     382 </span>            :         &quot;BEGIN&quot;,
+<span class="lineNum">     383 </span>            :         &quot;BETWEEN&quot;,
+<span class="lineNum">     384 </span>            :         &quot;BIGINT&quot;,
+<span class="lineNum">     385 </span>            :         &quot;BINARY&quot;,
+<span class="lineNum">     386 </span>            :         &quot;BIT&quot;,
+<span class="lineNum">     387 </span>            :         &quot;BLOB&quot;,
+<span class="lineNum">     388 </span>            :         &quot;BOOLEAN&quot;,
+<span class="lineNum">     389 </span>            :         &quot;BOTH&quot;,
+<span class="lineNum">     390 </span>            :         &quot;BY&quot;,
+<span class="lineNum">     391 </span>            :         &quot;CALL&quot;,
+<span class="lineNum">     392 </span>            :         &quot;CALLED&quot;,
+<span class="lineNum">     393 </span>            :         &quot;CASCADED&quot;,
+<span class="lineNum">     394 </span>            :         &quot;CASE&quot;,
+<span class="lineNum">     395 </span>            :         &quot;CAST&quot;,
+<span class="lineNum">     396 </span>            :         &quot;CHAR&quot;,
+<span class="lineNum">     397 </span>            :         &quot;CHARACTER&quot;,
+<span class="lineNum">     398 </span>            :         &quot;CHECK&quot;,
+<span class="lineNum">     399 </span>            :         &quot;CLOB&quot;,
+<span class="lineNum">     400 </span>            :         &quot;CLOSE&quot;,
+<span class="lineNum">     401 </span>            :         &quot;COLLATE&quot;,
+<span class="lineNum">     402 </span>            :         &quot;COLUMN&quot;,
+<span class="lineNum">     403 </span>            :         &quot;COMMIT&quot;,
+<span class="lineNum">     404 </span>            :         &quot;CONNECT&quot;,
+<span class="lineNum">     405 </span>            :         &quot;CONSTRAINT&quot;,
+<span class="lineNum">     406 </span>            :         &quot;CONTINUE&quot;,
+<span class="lineNum">     407 </span>            :         &quot;CORRESPONDING&quot;,
+<span class="lineNum">     408 </span>            :         &quot;CREATE&quot;,
+<span class="lineNum">     409 </span>            :         &quot;CROSS&quot;,
+<span class="lineNum">     410 </span>            :         &quot;CUBE&quot;,
+<span class="lineNum">     411 </span>            :         &quot;CURRENT&quot;,
+<span class="lineNum">     412 </span>            :         &quot;CURRENT_DATE&quot;,
+<span class="lineNum">     413 </span>            :         &quot;CURRENT_DEFAULT_TRANSFORM_GROUP&quot;,
+<span class="lineNum">     414 </span>            :         &quot;CURRENT_PATH&quot;,
+<span class="lineNum">     415 </span>            :         &quot;CURRENT_ROLE&quot;,
+<span class="lineNum">     416 </span>            :         &quot;CURRENT_TIME&quot;,
+<span class="lineNum">     417 </span>            :         &quot;CURRENT_TIMESTAMP&quot;,
+<span class="lineNum">     418 </span>            :         &quot;CURRENT_TRANSFORM_GROUP_FOR_TYPE&quot;,
+<span class="lineNum">     419 </span>            :         &quot;CURRENT_USER&quot;,
+<span class="lineNum">     420 </span>            :         &quot;CURSOR&quot;,
+<span class="lineNum">     421 </span>            :         &quot;CYCLE&quot;,
+<span class="lineNum">     422 </span>            :         &quot;DATE&quot;,
+<span class="lineNum">     423 </span>            :         &quot;DAY&quot;,
+<span class="lineNum">     424 </span>            :         &quot;DEALLOCATE&quot;,
+<span class="lineNum">     425 </span>            :         &quot;DEC&quot;,
+<span class="lineNum">     426 </span>            :         &quot;DECIMAL&quot;,
+<span class="lineNum">     427 </span>            :         &quot;DECLARE&quot;,
+<span class="lineNum">     428 </span>            :         &quot;DEFAULT&quot;,
+<span class="lineNum">     429 </span>            :         &quot;DELETE&quot;,
+<span class="lineNum">     430 </span>            :         &quot;DEREF&quot;,
+<span class="lineNum">     431 </span>            :         &quot;DESCRIBE&quot;,
+<span class="lineNum">     432 </span>            :         &quot;DETERMINISTIC&quot;,
+<span class="lineNum">     433 </span>            :         &quot;DISCONNECT&quot;,
+<span class="lineNum">     434 </span>            :         &quot;DISTINCT&quot;,
+<span class="lineNum">     435 </span>            :         &quot;DOUBLE&quot;,
+<span class="lineNum">     436 </span>            :         &quot;DROP&quot;,
+<span class="lineNum">     437 </span>            :         &quot;DYNAMIC&quot;,
+<span class="lineNum">     438 </span>            :         &quot;EACH&quot;,
+<span class="lineNum">     439 </span>            :         &quot;ELEMENT&quot;,
+<span class="lineNum">     440 </span>            :         &quot;ELSE&quot;,
+<span class="lineNum">     441 </span>            :         &quot;END&quot;,
+<span class="lineNum">     442 </span>            :         &quot;END-EXEC&quot;,
+<span class="lineNum">     443 </span>            :         &quot;ESCAPE&quot;,
+<span class="lineNum">     444 </span>            :         &quot;EXCEPT&quot;,
+<span class="lineNum">     445 </span>            :         &quot;EXEC&quot;,
+<span class="lineNum">     446 </span>            :         &quot;EXECUTE&quot;,
+<span class="lineNum">     447 </span>            :         &quot;EXISTS&quot;,
+<span class="lineNum">     448 </span>            :         &quot;EXTERNAL&quot;,
+<span class="lineNum">     449 </span>            :         &quot;FALSE&quot;,
+<span class="lineNum">     450 </span>            :         &quot;FETCH&quot;,
+<span class="lineNum">     451 </span>            :         &quot;FILTER&quot;,
+<span class="lineNum">     452 </span>            :         &quot;FLOAT&quot;,
+<span class="lineNum">     453 </span>            :         &quot;FOR&quot;,
+<span class="lineNum">     454 </span>            :         &quot;FOREIGN&quot;,
+<span class="lineNum">     455 </span>            :         &quot;FREE&quot;,
+<span class="lineNum">     456 </span>            :         &quot;FROM&quot;,
+<span class="lineNum">     457 </span>            :         &quot;FULL&quot;,
+<span class="lineNum">     458 </span>            :         &quot;FUNCTION&quot;,
+<span class="lineNum">     459 </span>            :         &quot;GET&quot;,
+<span class="lineNum">     460 </span>            :         &quot;GLOBAL&quot;,
+<span class="lineNum">     461 </span>            :         &quot;GRANT&quot;,
+<span class="lineNum">     462 </span>            :         &quot;GROUP&quot;,
+<span class="lineNum">     463 </span>            :         &quot;GROUPING&quot;,
+<span class="lineNum">     464 </span>            :         &quot;HAVING&quot;,
+<span class="lineNum">     465 </span>            :         &quot;HOLD&quot;,
+<span class="lineNum">     466 </span>            :         &quot;HOUR&quot;,
+<span class="lineNum">     467 </span>            :         &quot;IDENTITY&quot;,
+<span class="lineNum">     468 </span>            :         &quot;IMMEDIATE&quot;,
+<span class="lineNum">     469 </span>            :         &quot;IN&quot;,
+<span class="lineNum">     470 </span>            :         &quot;INDICATOR&quot;,
+<span class="lineNum">     471 </span>            :         &quot;INNER&quot;,
+<span class="lineNum">     472 </span>            :         &quot;INOUT&quot;,
+<span class="lineNum">     473 </span>            :         &quot;INPUT&quot;,
+<span class="lineNum">     474 </span>            :         &quot;INSENSITIVE&quot;,
+<span class="lineNum">     475 </span>            :         &quot;INSERT&quot;,
+<span class="lineNum">     476 </span>            :         &quot;INT&quot;,
+<span class="lineNum">     477 </span>            :         &quot;INTEGER&quot;,
+<span class="lineNum">     478 </span>            :         &quot;INTERSECT&quot;,
+<span class="lineNum">     479 </span>            :         &quot;INTERVAL&quot;,
+<span class="lineNum">     480 </span>            :         &quot;INTO&quot;,
+<span class="lineNum">     481 </span>            :         &quot;IS&quot;,
+<span class="lineNum">     482 </span>            :         &quot;ISOLATION&quot;,
+<span class="lineNum">     483 </span>            :         &quot;JOIN&quot;,
+<span class="lineNum">     484 </span>            :         &quot;LANGUAGE&quot;,
+<span class="lineNum">     485 </span>            :         &quot;LARGE&quot;,
+<span class="lineNum">     486 </span>            :         &quot;LATERAL&quot;,
+<span class="lineNum">     487 </span>            :         &quot;LEADING&quot;,
+<span class="lineNum">     488 </span>            :         &quot;LEFT&quot;,
+<span class="lineNum">     489 </span>            :         &quot;LIKE&quot;,
+<span class="lineNum">     490 </span>            :         &quot;LOCAL&quot;,
+<span class="lineNum">     491 </span>            :         &quot;LOCALTIME&quot;,
+<span class="lineNum">     492 </span>            :         &quot;LOCALTIMESTAMP&quot;,
+<span class="lineNum">     493 </span>            :         &quot;MATCH&quot;,
+<span class="lineNum">     494 </span>            :         &quot;MEMBER&quot;,
+<span class="lineNum">     495 </span>            :         &quot;MERGE&quot;,
+<span class="lineNum">     496 </span>            :         &quot;METHOD&quot;,
+<span class="lineNum">     497 </span>            :         &quot;MINUTE&quot;,
+<span class="lineNum">     498 </span>            :         &quot;MODIFIES&quot;,
+<span class="lineNum">     499 </span>            :         &quot;MODULE&quot;,
+<span class="lineNum">     500 </span>            :         &quot;MONTH&quot;,
+<span class="lineNum">     501 </span>            :         &quot;MULTISET&quot;,
+<span class="lineNum">     502 </span>            :         &quot;NATIONAL&quot;,
+<span class="lineNum">     503 </span>            :         &quot;NATURAL&quot;,
+<span class="lineNum">     504 </span>            :         &quot;NCHAR&quot;,
+<span class="lineNum">     505 </span>            :         &quot;NCLOB&quot;,
+<span class="lineNum">     506 </span>            :         &quot;NEW&quot;,
+<span class="lineNum">     507 </span>            :         &quot;NO&quot;,
+<span class="lineNum">     508 </span>            :         &quot;NONE&quot;,
+<span class="lineNum">     509 </span>            :         &quot;NOT&quot;,
+<span class="lineNum">     510 </span>            :         &quot;NULL&quot;,
+<span class="lineNum">     511 </span>            :         &quot;NUMERIC&quot;,
+<span class="lineNum">     512 </span>            :         &quot;OF&quot;,
+<span class="lineNum">     513 </span>            :         &quot;OLD&quot;,
+<span class="lineNum">     514 </span>            :         &quot;ON&quot;,
+<span class="lineNum">     515 </span>            :         &quot;ONLY&quot;,
+<span class="lineNum">     516 </span>            :         &quot;OPEN&quot;,
+<span class="lineNum">     517 </span>            :         &quot;OR&quot;,
+<span class="lineNum">     518 </span>            :         &quot;ORDER&quot;,
+<span class="lineNum">     519 </span>            :         &quot;OUT&quot;,
+<span class="lineNum">     520 </span>            :         &quot;OUTER&quot;,
+<span class="lineNum">     521 </span>            :         &quot;OUTPUT&quot;,
+<span class="lineNum">     522 </span>            :         &quot;OVER&quot;,
+<span class="lineNum">     523 </span>            :         &quot;OVERLAPS&quot;,
+<span class="lineNum">     524 </span>            :         &quot;PARAMETER&quot;,
+<span class="lineNum">     525 </span>            :         &quot;PARTITION&quot;,
+<span class="lineNum">     526 </span>            :         &quot;PRECISION&quot;,
+<span class="lineNum">     527 </span>            :         &quot;PREPARE&quot;,
+<span class="lineNum">     528 </span>            :         &quot;PRIMARY&quot;,
+<span class="lineNum">     529 </span>            :         &quot;PROCEDURE&quot;,
+<span class="lineNum">     530 </span>            :         &quot;RANGE&quot;,
+<span class="lineNum">     531 </span>            :         &quot;READS&quot;,
+<span class="lineNum">     532 </span>            :         &quot;REAL&quot;,
+<span class="lineNum">     533 </span>            :         &quot;RECURSIVE&quot;,
+<span class="lineNum">     534 </span>            :         &quot;REF&quot;,
+<span class="lineNum">     535 </span>            :         &quot;REFERENCES&quot;,
+<span class="lineNum">     536 </span>            :         &quot;REFERENCING&quot;,
+<span class="lineNum">     537 </span>            :         &quot;REGR_AVGX&quot;,
+<span class="lineNum">     538 </span>            :         &quot;REGR_AVGY&quot;,
+<span class="lineNum">     539 </span>            :         &quot;REGR_COUNT&quot;,
+<span class="lineNum">     540 </span>            :         &quot;REGR_INTERCEPT&quot;,
+<span class="lineNum">     541 </span>            :         &quot;REGR_R2&quot;,
+<span class="lineNum">     542 </span>            :         &quot;REGR_SLOPE&quot;,
+<span class="lineNum">     543 </span>            :         &quot;REGR_SXX&quot;,
+<span class="lineNum">     544 </span>            :         &quot;REGR_SXY&quot;,
+<span class="lineNum">     545 </span>            :         &quot;REGR_SYY&quot;,
+<span class="lineNum">     546 </span>            :         &quot;RELEASE&quot;,
+<span class="lineNum">     547 </span>            :         &quot;RESULT&quot;,
+<span class="lineNum">     548 </span>            :         &quot;RETURN&quot;,
+<span class="lineNum">     549 </span>            :         &quot;RETURNS&quot;,
+<span class="lineNum">     550 </span>            :         &quot;REVOKE&quot;,
+<span class="lineNum">     551 </span>            :         &quot;RIGHT&quot;,
+<span class="lineNum">     552 </span>            :         &quot;ROLLBACK&quot;,
+<span class="lineNum">     553 </span>            :         &quot;ROLLUP&quot;,
+<span class="lineNum">     554 </span>            :         &quot;ROW&quot;,
+<span class="lineNum">     555 </span>            :         &quot;ROWS&quot;,
+<span class="lineNum">     556 </span>            :         &quot;SAVEPOINT&quot;,
+<span class="lineNum">     557 </span>            :         &quot;SCROLL&quot;,
+<span class="lineNum">     558 </span>            :         &quot;SEARCH&quot;,
+<span class="lineNum">     559 </span>            :         &quot;SECOND&quot;,
+<span class="lineNum">     560 </span>            :         &quot;SELECT&quot;,
+<span class="lineNum">     561 </span>            :         &quot;SENSITIVE&quot;,
+<span class="lineNum">     562 </span>            :         &quot;SESSION_USER&quot;,
+<span class="lineNum">     563 </span>            :         &quot;SET&quot;,
+<span class="lineNum">     564 </span>            :         &quot;SIMILAR&quot;,
+<span class="lineNum">     565 </span>            :         &quot;SMALLINT&quot;,
+<span class="lineNum">     566 </span>            :         &quot;SOME&quot;,
+<span class="lineNum">     567 </span>            :         &quot;SPECIFIC&quot;,
+<span class="lineNum">     568 </span>            :         &quot;SPECIFICTYPE&quot;,
+<span class="lineNum">     569 </span>            :         &quot;SQL&quot;,
+<span class="lineNum">     570 </span>            :         &quot;SQLEXCEPTION&quot;,
+<span class="lineNum">     571 </span>            :         &quot;SQLSTATE&quot;,
+<span class="lineNum">     572 </span>            :         &quot;SQLWARNING&quot;,
+<span class="lineNum">     573 </span>            :         &quot;START&quot;,
+<span class="lineNum">     574 </span>            :         &quot;STATIC&quot;,
+<span class="lineNum">     575 </span>            :         &quot;SUBMULTISET&quot;,
+<span class="lineNum">     576 </span>            :         &quot;SYMMETRIC&quot;,
+<span class="lineNum">     577 </span>            :         &quot;SYSTEM&quot;,
+<span class="lineNum">     578 </span>            :         &quot;SYSTEM_USER&quot;,
+<span class="lineNum">     579 </span>            :         &quot;TABLE&quot;,
+<span class="lineNum">     580 </span>            :         &quot;THEN&quot;,
+<span class="lineNum">     581 </span>            :         &quot;TIME&quot;,
+<span class="lineNum">     582 </span>            :         &quot;TIMESTAMP&quot;,
+<span class="lineNum">     583 </span>            :         &quot;TIMEZONE_HOUR&quot;,
+<span class="lineNum">     584 </span>            :         &quot;TIMEZONE_MINUTE&quot;,
+<span class="lineNum">     585 </span>            :         &quot;TO&quot;,
+<span class="lineNum">     586 </span>            :         &quot;TRAILING&quot;,
+<span class="lineNum">     587 </span>            :         &quot;TRANSLATION&quot;,
+<span class="lineNum">     588 </span>            :         &quot;TREAT&quot;,
+<span class="lineNum">     589 </span>            :         &quot;TRIGGER&quot;,
+<span class="lineNum">     590 </span>            :         &quot;TRUE&quot;,
+<span class="lineNum">     591 </span>            :         &quot;UESCAPE&quot;,
+<span class="lineNum">     592 </span>            :         &quot;UNION&quot;,
+<span class="lineNum">     593 </span>            :         &quot;UNIQUE&quot;,
+<span class="lineNum">     594 </span>            :         &quot;UNKNOWN&quot;,
+<span class="lineNum">     595 </span>            :         &quot;UNNEST&quot;,
+<span class="lineNum">     596 </span>            :         &quot;UPDATE&quot;,
+<span class="lineNum">     597 </span>            :         &quot;UPPER&quot;,
+<span class="lineNum">     598 </span>            :         &quot;USER&quot;,
+<span class="lineNum">     599 </span>            :         &quot;USING&quot;,
+<span class="lineNum">     600 </span>            :         &quot;VALUE&quot;,
+<span class="lineNum">     601 </span>            :         &quot;VALUES&quot;,
+<span class="lineNum">     602 </span>            :         &quot;VAR_POP&quot;,
+<span class="lineNum">     603 </span>            :         &quot;VAR_SAMP&quot;,
+<span class="lineNum">     604 </span>            :         &quot;VARCHAR&quot;,
+<span class="lineNum">     605 </span>            :         &quot;VARYING&quot;,
+<span class="lineNum">     606 </span>            :         &quot;WHEN&quot;,
+<span class="lineNum">     607 </span>            :         &quot;WHENEVER&quot;,
+<span class="lineNum">     608 </span>            :         &quot;WHERE&quot;,
+<span class="lineNum">     609 </span>            :         &quot;WIDTH_BUCKET&quot;,
+<span class="lineNum">     610 </span>            :         &quot;WINDOW&quot;,
+<span class="lineNum">     611 </span>            :         &quot;WITH&quot;,
+<span class="lineNum">     612 </span>            :         &quot;WITHIN&quot;,
+<span class="lineNum">     613 </span>            :         &quot;WITHOUT&quot;,
+<span class="lineNum">     614 </span>            :         &quot;YEAR&quot;,
+<span class="lineNum">     615 </span>            :         
+<span class="lineNum">     616 </span>            :         /* reserved words that are not part of the SQL standard */
+<span class="lineNum">     617 </span>            :         &quot;TEXT&quot;
+<span class="lineNum">     618 </span>            :     };
+<span class="lineNum">     619 </span>            :     
+<span class="lineNum">     620 </span><span class="lineCov">       8032 :     for(i = 0; i &lt; sizeof(words) / sizeof(const char*); ++i) {</span>
+<span class="lineNum">     621 </span><span class="lineCov">       4008 :         if(EagleTrue == EagleUtils_CompareWithoutCase(word, words[i])) {</span>
+<span class="lineNum">     622 </span><span class="lineCov">         16 :             return EagleTrue;</span>
+<span class="lineNum">     623 </span>            :         }
+<span class="lineNum">     624 </span><span class="lineCov">       3992 :     }</span>
+<span class="lineNum">     625 </span>            :     
+<span class="lineNum">     626 </span><span class="lineCov">          8 :     return EagleFalse;</span>
+<span class="lineNum">     627 </span><span class="lineCov">         24 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

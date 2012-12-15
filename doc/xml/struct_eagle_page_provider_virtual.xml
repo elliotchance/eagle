@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page_provider_virtual" kind="struct" prot="public">
+    <compoundname>EaglePageProviderVirtual</compoundname>
+    <includes refid="_eagle_page_provider_virtual_8h" local="no">EaglePageProviderVirtual.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1a0f6be0103a76477f4caad9920b35e890" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref>(*</type>
+        <definition>EagleBoolean(* add)(void *, void *)</definition>
+        <argsstring>)(void *, void *)</argsstring>
+        <name>add</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EaglePageProviderHeader</definition>
+        <argsstring></argsstring>
+        <name>EaglePageProviderHeader</name>
+        <briefdescription>
+<para>All &quot;subtypes&quot; of <ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> will have this header. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1ab11e308af4d13f0e0e4bd2c66dd5c1a0" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* free)(void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>free</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1ade6483e105fabe59d2bd04a97966a2ba" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *(*</type>
+        <definition>EaglePage*(* getPage)(void *, int)</definition>
+        <argsstring>)(void *, int)</argsstring>
+        <name>getPage</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1af03bfed0d8201c8681b0d33191e155cd" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *(*</type>
+        <definition>EaglePage*(* nextPage)(void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>nextPage</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="39" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* obj</definition>
+        <argsstring></argsstring>
+        <name>obj</name>
+        <briefdescription>
+<para>Object to be passed to the callback functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="19" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1a34607682ff4e5edcf744b7d048df34c8" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* pagesRemaining)(void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>pagesRemaining</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="34" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_virtual_1a105e0e55b4d80bf852f6a1bac5d6baf0" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* reset)(void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>reset</name>
+        <briefdescription>
+<para>Function pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="44" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="220">
+        <label>void *</label>
+      </node>
+      <node id="218">
+        <label>EagleDataType</label>
+      </node>
+      <node id="217">
+        <label>EaglePage</label>
+        <link refid="struct_eagle_page"/>
+        <childnode refid="216" relation="usage">
+          <edgelabel>recordOffset</edgelabel>
+          <edgelabel>count</edgelabel>
+          <edgelabel>usageCount</edgelabel>
+          <edgelabel>totalSize</edgelabel>
+        </childnode>
+        <childnode refid="218" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="219" relation="usage">
+          <edgelabel>freeData</edgelabel>
+        </childnode>
+        <childnode refid="220" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="213">
+        <label>EaglePageProviderVirtual</label>
+        <link refid="struct_eagle_page_provider_virtual"/>
+        <childnode refid="214" relation="usage">
+          <edgelabel>reset</edgelabel>
+          <edgelabel>free</edgelabel>
+        </childnode>
+        <childnode refid="215" relation="usage">
+          <edgelabel>add</edgelabel>
+        </childnode>
+        <childnode refid="216" relation="usage">
+          <edgelabel>pagesRemaining</edgelabel>
+        </childnode>
+        <childnode refid="217" relation="usage">
+          <edgelabel>getPage</edgelabel>
+          <edgelabel>nextPage</edgelabel>
+        </childnode>
+        <childnode refid="220" relation="usage">
+          <edgelabel>obj</edgelabel>
+        </childnode>
+      </node>
+      <node id="216">
+        <label>int</label>
+      </node>
+      <node id="214">
+        <label>void(*)(void *)</label>
+      </node>
+      <node id="219">
+        <label>EagleBoolean</label>
+      </node>
+      <node id="215">
+        <label>EagleBoolean(*)(void *, void *)</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.h" bodystart="9" bodyend="51"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_provider_virtual_1a0f6be0103a76477f4caad9920b35e890" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>add</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>EaglePageProviderHeader</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1ab11e308af4d13f0e0e4bd2c66dd5c1a0" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>free</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1ade6483e105fabe59d2bd04a97966a2ba" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>getPage</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1af03bfed0d8201c8681b0d33191e155cd" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>nextPage</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>obj</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1a34607682ff4e5edcf744b7d048df34c8" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>pagesRemaining</name></member>
+      <member refid="struct_eagle_page_provider_virtual_1a105e0e55b4d80bf852f6a1bac5d6baf0" prot="public" virt="non-virtual"><scope>EaglePageProviderVirtual</scope><name>reset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

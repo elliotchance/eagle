@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_instance" kind="struct" prot="public">
+    <compoundname>EagleInstance</compoundname>
+    <includes refid="_eagle_instance_8h" local="no">EagleInstance.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_instance_1a60fa50d7cee12dbf1a9a7f4a094c9266" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+        <definition>EagleLock* nextJobLock</definition>
+        <argsstring></argsstring>
+        <name>nextJobLock</name>
+        <briefdescription>
+<para>To syncronise the <ref refid="_eagle_instance_8c_1a32eec2a01e622ad90ff8b679e7e292be" kindref="member">EagleInstance_nextJob()</ref> method. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="17" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_instance_1a83534f7da738950a4c67225645099239" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+        <definition>EaglePlan* plan</definition>
+        <argsstring></argsstring>
+        <name>plan</name>
+        <briefdescription>
+<para>The plan that needs to be executed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_workers" kindref="compound">EagleWorkers</ref> *</type>
+        <definition>EagleWorkers* workers</definition>
+        <argsstring></argsstring>
+        <name>workers</name>
+        <briefdescription>
+<para>The workers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An eagle instance (a database). </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="139">
+        <label>EaglePlanError</label>
+      </node>
+      <node id="137">
+        <label>EagleDataType *</label>
+      </node>
+      <node id="142">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="143" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="144" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="140">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="141" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="142" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="136" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="146">
+        <label>EagleWorker</label>
+        <link refid="struct_eagle_worker"/>
+        <childnode refid="135" relation="usage">
+          <edgelabel>lockTime</edgelabel>
+        </childnode>
+        <childnode refid="147" relation="usage">
+          <edgelabel>thread</edgelabel>
+        </childnode>
+        <childnode refid="136" relation="usage">
+          <edgelabel>workerId</edgelabel>
+        </childnode>
+        <childnode refid="132" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+      </node>
+      <node id="138">
+        <label>char *</label>
+      </node>
+      <node id="135">
+        <label>uint64_t</label>
+      </node>
+      <node id="145">
+        <label>EagleWorkers</label>
+        <link refid="struct_eagle_workers"/>
+        <childnode refid="146" relation="usage">
+          <edgelabel>workers</edgelabel>
+        </childnode>
+        <childnode refid="136" relation="usage">
+          <edgelabel>totalWorkers</edgelabel>
+        </childnode>
+      </node>
+      <node id="133">
+        <label>EaglePlan</label>
+        <link refid="struct_eagle_plan"/>
+        <childnode refid="134" relation="usage">
+          <edgelabel>result</edgelabel>
+        </childnode>
+        <childnode refid="135" relation="usage">
+          <edgelabel>executionTime</edgelabel>
+          <edgelabel>startTime</edgelabel>
+          <edgelabel>lockTime</edgelabel>
+        </childnode>
+        <childnode refid="136" relation="usage">
+          <edgelabel>pageSize</edgelabel>
+          <edgelabel>resultFields</edgelabel>
+          <edgelabel>buffersNeeded</edgelabel>
+          <edgelabel>cores</edgelabel>
+        </childnode>
+        <childnode refid="137" relation="usage">
+          <edgelabel>bufferTypes</edgelabel>
+        </childnode>
+        <childnode refid="138" relation="usage">
+          <edgelabel>errorMessage</edgelabel>
+        </childnode>
+        <childnode refid="139" relation="usage">
+          <edgelabel>errorCode</edgelabel>
+        </childnode>
+        <childnode refid="140" relation="usage">
+          <edgelabel>operations</edgelabel>
+          <edgelabel>freeObjects</edgelabel>
+          <edgelabel>providers</edgelabel>
+        </childnode>
+      </node>
+      <node id="132">
+        <label>EagleInstance</label>
+        <link refid="struct_eagle_instance"/>
+        <childnode refid="133" relation="usage">
+          <edgelabel>plan</edgelabel>
+        </childnode>
+        <childnode refid="142" relation="usage">
+          <edgelabel>nextJobLock</edgelabel>
+        </childnode>
+        <childnode refid="145" relation="usage">
+          <edgelabel>workers</edgelabel>
+        </childnode>
+      </node>
+      <node id="136">
+        <label>int</label>
+      </node>
+      <node id="143">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="144">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="134">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider"/>
+      </node>
+      <node id="141">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="147">
+        <label>pthread_t</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" bodystart="14" bodyend="18"/>
+    <listofallmembers>
+      <member refid="struct_eagle_instance_1a60fa50d7cee12dbf1a9a7f4a094c9266" prot="public" virt="non-virtual"><scope>EagleInstance</scope><name>nextJobLock</name></member>
+      <member refid="struct_eagle_instance_1a83534f7da738950a4c67225645099239" prot="public" virt="non-virtual"><scope>EagleInstance</scope><name>plan</name></member>
+      <member refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" prot="public" virt="non-virtual"><scope>EagleInstance</scope><name>workers</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

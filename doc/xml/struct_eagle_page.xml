@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page" kind="struct" prot="public">
+    <compoundname>EaglePage</compoundname>
+    <includes refid="_eagle_page_8h" local="no">EaglePage.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <briefdescription>
+<para>The amount of used records in this page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="33" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>The actual data for this page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="38" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean freeData</definition>
+        <argsstring></argsstring>
+        <name>freeData</name>
+        <briefdescription>
+<para>Free <computeroutput>data</computeroutput> when freeing the page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="43" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int recordOffset</definition>
+        <argsstring></argsstring>
+        <name>recordOffset</name>
+        <briefdescription>
+<para>An arbitrary counter for the row ID offset. </para>        </briefdescription>
+        <detaileddescription>
+<para>The first record in this page will have <computeroutput>recordOffset</computeroutput> as the record ID, the next record will be recordOffset + 1, etc </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="23" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int totalSize</definition>
+        <argsstring></argsstring>
+        <name>totalSize</name>
+        <briefdescription>
+<para>The allocated records for this page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>The data type for this page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="17" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int usageCount</definition>
+        <argsstring></argsstring>
+        <name>usageCount</name>
+        <briefdescription>
+<para>This value starts at 1 and is incremented with <ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member">EaglePage_Copy()</ref> and decremented with <ref refid="_eagle_page_8c_1a1335c4aeab6d307f25a8e06f90240d12" kindref="member">EaglePage_Delete()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>The page is only really freed when this counter hits zero. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a single page of data. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="188">
+        <label>void *</label>
+      </node>
+      <node id="186">
+        <label>EagleDataType</label>
+      </node>
+      <node id="184">
+        <label>EaglePage</label>
+        <link refid="struct_eagle_page"/>
+        <childnode refid="185" relation="usage">
+          <edgelabel>recordOffset</edgelabel>
+          <edgelabel>count</edgelabel>
+          <edgelabel>usageCount</edgelabel>
+          <edgelabel>totalSize</edgelabel>
+        </childnode>
+        <childnode refid="186" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="187" relation="usage">
+          <edgelabel>freeData</edgelabel>
+        </childnode>
+        <childnode refid="188" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="185">
+        <label>int</label>
+      </node>
+      <node id="187">
+        <label>EagleBoolean</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.h" bodystart="12" bodyend="51"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>count</name></member>
+      <member refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>data</name></member>
+      <member refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>freeData</name></member>
+      <member refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>recordOffset</name></member>
+      <member refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>totalSize</name></member>
+      <member refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>type</name></member>
+      <member refid="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" prot="public" virt="non-virtual"><scope>EaglePage</scope><name>usageCount</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

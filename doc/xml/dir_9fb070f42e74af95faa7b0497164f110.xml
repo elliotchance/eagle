@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_9fb070f42e74af95faa7b0497164f110" kind="dir">
+    <compoundname>eagle/</compoundname>
+    <innerdir refid="dir_d5e7e0a56b24dd6f912b01ced07788a2">eagle/eagle/</innerdir>
+    <innerdir refid="dir_c73d68629aa9aac03b156a88142949f2">eagle/eagledb/</innerdir>
+    <innerfile refid="main_8c">main.c</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/elliot/Xcode/eagle/eagle/"/>
+  </compounddef>
+</doxygen>

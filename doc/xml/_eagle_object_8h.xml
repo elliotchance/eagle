@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_object_8h" kind="file">
+    <compoundname>EagleObject.h</compoundname>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_boolean_8h" local="yes">EagleBoolean.h</includes>
+    <includedby refid="_eagle_page_8c" local="yes">eagle/eagle/EaglePage.c</includedby>
+    <incdepgraph>
+      <node id="760">
+        <label>eagle/eagle/EagleObject.h</label>
+        <link refid="EagleObject.h"/>
+        <childnode refid="761" relation="include">
+        </childnode>
+        <childnode refid="762" relation="include">
+        </childnode>
+      </node>
+      <node id="762">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="761">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="763">
+        <label>eagle/eagle/EagleObject.h</label>
+        <link refid="EagleObject.h"/>
+        <childnode refid="764" relation="include">
+        </childnode>
+      </node>
+      <node id="764">
+        <label>eagle/eagle/EaglePage.c</label>
+        <link refid="_eagle_page_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_object_8h_1a263140d51404fab7c64a4f61398e9bfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleObject_equals</definition>
+        <argsstring>(void *obj1, void *obj2)</argsstring>
+        <name>EagleObject_equals</name>
+        <param>
+          <type>void *</type>
+          <declname>obj1</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>obj2</declname>
+        </param>
+        <briefdescription>
+<para>Check if two objects are equal. </para>        </briefdescription>
+        <detaileddescription>
+<para>If either of the objects are NULL or both of them are NULL then the result will be EagleFalse. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">obj1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First object. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">obj2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if both parameters are not NULL and they have the same pointer address. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleObject.h" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleObject.c" bodystart="6" bodyend="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleObject_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleObject_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_boolean_8h" kindref="compound">EagleBoolean.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_object_8c_1a263140d51404fab7c64a4f61398e9bfe" kindref="member" tooltip="Check if two objects are equal.">EagleObject_equals</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj1,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj2);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleObject.h"/>
+  </compounddef>
+</doxygen>

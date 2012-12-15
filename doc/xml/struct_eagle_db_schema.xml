@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_schema" kind="struct" prot="public">
+    <compoundname>EagleDbSchema</compoundname>
+    <includes refid="_eagle_db_schema_8h" local="no">EagleDbSchema.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Schema name. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" line="33" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_schema_1a8da53e8ff5dab8b7f11051627ba3e085" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* tables</definition>
+        <argsstring></argsstring>
+        <name>tables</name>
+        <briefdescription>
+<para>This is semi managed because the linked list that contains the pointers to the tables is managed internally but the table objects themselves are managed externally (i.e. </para>        </briefdescription>
+        <detaileddescription>
+<para>deleteing a <ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> will not delete the tables it contains) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A database schema definition. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="41">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="42" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="43" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="39">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="40" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="41" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="44" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="38">
+        <label>char *</label>
+      </node>
+      <node id="37">
+        <label>EagleDbSchema</label>
+        <link refid="struct_eagle_db_schema"/>
+        <childnode refid="38" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="39" relation="usage">
+          <edgelabel>tables</edgelabel>
+        </childnode>
+      </node>
+      <node id="44">
+        <label>int</label>
+      </node>
+      <node id="42">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="43">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="40">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSchema.h" bodystart="21" bodyend="35"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" prot="public" virt="non-virtual"><scope>EagleDbSchema</scope><name>name</name></member>
+      <member refid="struct_eagle_db_schema_1a8da53e8ff5dab8b7f11051627ba3e085" prot="public" virt="non-virtual"><scope>EagleDbSchema</scope><name>tables</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_c73d68629aa9aac03b156a88142949f2" kind="dir">
+    <compoundname>eagle/eagledb/</compoundname>
+    <innerfile refid="_eagle_db_column_8c">EagleDbColumn.c</innerfile>
+    <innerfile refid="_eagle_db_column_8h">EagleDbColumn.h</innerfile>
+    <innerfile refid="_eagle_db_console_8c">EagleDbConsole.c</innerfile>
+    <innerfile refid="_eagle_db_console_8h">EagleDbConsole.h</innerfile>
+    <innerfile refid="_eagle_db_information_schema_8c">EagleDbInformationSchema.c</innerfile>
+    <innerfile refid="_eagle_db_information_schema_8h">EagleDbInformationSchema.h</innerfile>
+    <innerfile refid="_eagle_db_instance_8c">EagleDbInstance.c</innerfile>
+    <innerfile refid="_eagle_db_instance_8h">EagleDbInstance.h</innerfile>
+    <innerfile refid="_eagle_db_parser_8c">EagleDbParser.c</innerfile>
+    <innerfile refid="_eagle_db_parser_8h">EagleDbParser.h</innerfile>
+    <innerfile refid="_eagle_db_schema_8c">EagleDbSchema.c</innerfile>
+    <innerfile refid="_eagle_db_schema_8h">EagleDbSchema.h</innerfile>
+    <innerfile refid="_eagle_db_sql_binary_expression_8c">EagleDbSqlBinaryExpression.c</innerfile>
+    <innerfile refid="_eagle_db_sql_binary_expression_8h">EagleDbSqlBinaryExpression.h</innerfile>
+    <innerfile refid="_eagle_db_sql_binary_expression_operator_8c">EagleDbSqlBinaryExpressionOperator.c</innerfile>
+    <innerfile refid="_eagle_db_sql_binary_expression_operator_8h">EagleDbSqlBinaryExpressionOperator.h</innerfile>
+    <innerfile refid="_eagle_db_sql_cast_expression_8c">EagleDbSqlCastExpression.c</innerfile>
+    <innerfile refid="_eagle_db_sql_cast_expression_8h">EagleDbSqlCastExpression.h</innerfile>
+    <innerfile refid="_eagle_db_sql_expression_8c">EagleDbSqlExpression.c</innerfile>
+    <innerfile refid="_eagle_db_sql_expression_8h">EagleDbSqlExpression.h</innerfile>
+    <innerfile refid="_eagle_db_sql_expression_header_8h">EagleDbSqlExpressionHeader.h</innerfile>
+    <innerfile refid="_eagle_db_sql_expression_type_8h">EagleDbSqlExpressionType.h</innerfile>
+    <innerfile refid="_eagle_db_sql_function_expression_8c">EagleDbSqlFunctionExpression.c</innerfile>
+    <innerfile refid="_eagle_db_sql_function_expression_8h">EagleDbSqlFunctionExpression.h</innerfile>
+    <innerfile refid="_eagle_db_sql_insert_8c">EagleDbSqlInsert.c</innerfile>
+    <innerfile refid="_eagle_db_sql_insert_8h">EagleDbSqlInsert.h</innerfile>
+    <innerfile refid="_eagle_db_sql_select_8c">EagleDbSqlSelect.c</innerfile>
+    <innerfile refid="_eagle_db_sql_select_8h">EagleDbSqlSelect.h</innerfile>
+    <innerfile refid="_eagle_db_sql_statement_type_8h">EagleDbSqlStatementType.h</innerfile>
+    <innerfile refid="_eagle_db_sql_unary_expression_8c">EagleDbSqlUnaryExpression.c</innerfile>
+    <innerfile refid="_eagle_db_sql_unary_expression_8h">EagleDbSqlUnaryExpression.h</innerfile>
+    <innerfile refid="_eagle_db_sql_unary_expression_operator_8c">EagleDbSqlUnaryExpressionOperator.c</innerfile>
+    <innerfile refid="_eagle_db_sql_unary_expression_operator_8h">EagleDbSqlUnaryExpressionOperator.h</innerfile>
+    <innerfile refid="_eagle_db_sql_value_8c">EagleDbSqlValue.c</innerfile>
+    <innerfile refid="_eagle_db_sql_value_8h">EagleDbSqlValue.h</innerfile>
+    <innerfile refid="_eagle_db_sql_value_type_8c">EagleDbSqlValueType.c</innerfile>
+    <innerfile refid="_eagle_db_sql_value_type_8h">EagleDbSqlValueType.h</innerfile>
+    <innerfile refid="_eagle_db_table_8c">EagleDbTable.c</innerfile>
+    <innerfile refid="_eagle_db_table_8h">EagleDbTable.h</innerfile>
+    <innerfile refid="_eagle_db_table_data_8c">EagleDbTableData.c</innerfile>
+    <innerfile refid="_eagle_db_table_data_8h">EagleDbTableData.h</innerfile>
+    <innerfile refid="_eagle_db_tuple_8c">EagleDbTuple.c</innerfile>
+    <innerfile refid="_eagle_db_tuple_8h">EagleDbTuple.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/"/>
+  </compounddef>
+</doxygen>

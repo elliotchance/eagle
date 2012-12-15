@@ -1,0 +1,579 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_logger_8h" kind="file">
+    <compoundname>EagleLogger.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">mach/mach_time.h</includes>
+    <includes refid="_eagle_synchronizer_8h" local="yes">EagleSynchronizer.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_logger_event_8h" local="yes">EagleLoggerEvent.h</includes>
+    <includedby refid="_eagle_logger_8c" local="yes">eagle/eagle/EagleLogger.c</includedby>
+    <includedby refid="_eagle_page_8c" local="yes">eagle/eagle/EaglePage.c</includedby>
+    <includedby refid="_eagle_page_operations_8c" local="yes">eagle/eagle/EaglePageOperations.c</includedby>
+    <includedby refid="_eagle_page_provider_stream_8c" local="yes">eagle/eagle/EaglePageProviderStream.c</includedby>
+    <includedby refid="_eagle_page_provider_virtual_8c" local="yes">eagle/eagle/EaglePageProviderVirtual.c</includedby>
+    <includedby refid="_eagle_worker_8c" local="yes">eagle/eagle/EagleWorker.c</includedby>
+    <includedby refid="_eagle_db_console_8c" local="yes">eagle/eagledb/EagleDbConsole.c</includedby>
+    <includedby refid="_eagle_db_information_schema_8c" local="yes">eagle/eagledb/EagleDbInformationSchema.c</includedby>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <includedby refid="_eagle_db_schema_8c" local="yes">eagle/eagledb/EagleDbSchema.c</includedby>
+    <includedby refid="_eagle_db_table_data_8c" local="yes">eagle/eagledb/EagleDbTableData.c</includedby>
+    <includedby refid="_eagle_db_tuple_8c" local="yes">eagle/eagledb/EagleDbTuple.c</includedby>
+    <incdepgraph>
+      <node id="628">
+        <label>eagle/eagle/EagleLogger.h</label>
+        <link refid="EagleLogger.h"/>
+        <childnode refid="629" relation="include">
+        </childnode>
+        <childnode refid="630" relation="include">
+        </childnode>
+        <childnode refid="631" relation="include">
+        </childnode>
+        <childnode refid="636" relation="include">
+        </childnode>
+        <childnode refid="634" relation="include">
+        </childnode>
+        <childnode refid="638" relation="include">
+        </childnode>
+      </node>
+      <node id="636">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="631" relation="include">
+        </childnode>
+        <childnode refid="635" relation="include">
+        </childnode>
+        <childnode refid="634" relation="include">
+        </childnode>
+        <childnode refid="637" relation="include">
+        </childnode>
+      </node>
+      <node id="630">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="631">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="630" relation="include">
+        </childnode>
+        <childnode refid="632" relation="include">
+        </childnode>
+        <childnode refid="635" relation="include">
+        </childnode>
+      </node>
+      <node id="633">
+        <label>pthread.h</label>
+      </node>
+      <node id="635">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="638">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="639" relation="include">
+        </childnode>
+        <childnode refid="640" relation="include">
+        </childnode>
+        <childnode refid="634" relation="include">
+        </childnode>
+      </node>
+      <node id="634">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="639">
+        <label>time.h</label>
+      </node>
+      <node id="629">
+        <label>stdio.h</label>
+      </node>
+      <node id="640">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="632">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="633" relation="include">
+        </childnode>
+        <childnode refid="634" relation="include">
+        </childnode>
+      </node>
+      <node id="637">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="634" relation="include">
+        </childnode>
+        <childnode refid="635" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="653">
+        <label>eagle/eagledb/EagleDbTuple.c</label>
+        <link refid="_eagle_db_tuple_8c"/>
+      </node>
+      <node id="647">
+        <label>eagle/eagle/EagleWorker.c</label>
+        <link refid="_eagle_worker_8c"/>
+      </node>
+      <node id="652">
+        <label>eagle/eagledb/EagleDbTableData.c</label>
+        <link refid="_eagle_db_table_data_8c"/>
+      </node>
+      <node id="642">
+        <label>eagle/eagle/EagleLogger.c</label>
+        <link refid="_eagle_logger_8c"/>
+      </node>
+      <node id="641">
+        <label>eagle/eagle/EagleLogger.h</label>
+        <link refid="EagleLogger.h"/>
+        <childnode refid="642" relation="include">
+        </childnode>
+        <childnode refid="643" relation="include">
+        </childnode>
+        <childnode refid="644" relation="include">
+        </childnode>
+        <childnode refid="645" relation="include">
+        </childnode>
+        <childnode refid="646" relation="include">
+        </childnode>
+        <childnode refid="647" relation="include">
+        </childnode>
+        <childnode refid="648" relation="include">
+        </childnode>
+        <childnode refid="649" relation="include">
+        </childnode>
+        <childnode refid="650" relation="include">
+        </childnode>
+        <childnode refid="651" relation="include">
+        </childnode>
+        <childnode refid="652" relation="include">
+        </childnode>
+        <childnode refid="653" relation="include">
+        </childnode>
+      </node>
+      <node id="651">
+        <label>eagle/eagledb/EagleDbSchema.c</label>
+        <link refid="_eagle_db_schema_8c"/>
+      </node>
+      <node id="650">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="650" relation="include">
+        </childnode>
+      </node>
+      <node id="649">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="649" relation="include">
+        </childnode>
+      </node>
+      <node id="644">
+        <label>eagle/eagle/EaglePageOperations.c</label>
+        <link refid="_eagle_page_operations_8c"/>
+      </node>
+      <node id="648">
+        <label>eagle/eagledb/EagleDbConsole.c</label>
+        <link refid="_eagle_db_console_8c"/>
+        <childnode refid="648" relation="include">
+        </childnode>
+      </node>
+      <node id="645">
+        <label>eagle/eagle/EaglePageProviderStream.c</label>
+        <link refid="_eagle_page_provider_stream_8c"/>
+      </node>
+      <node id="643">
+        <label>eagle/eagle/EaglePage.c</label>
+        <link refid="_eagle_page_8c"/>
+      </node>
+      <node id="646">
+        <label>eagle/eagle/EaglePageProviderVirtual.c</label>
+        <link refid="_eagle_page_provider_virtual_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_logger" prot="public">EagleLogger</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_eagle_logger_8h_1a4dcb016402dcc36bca1f4355d6605510" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* EagleLogger_DefaultLogLocation</definition>
+        <argsstring></argsstring>
+        <name>EagleLogger_DefaultLogLocation</name>
+        <briefdescription>
+<para>The location to save the logs. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_logger_8h_1a8504ca6d062db6127b3dedb5e48b6bc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLogger_Delete</definition>
+        <argsstring>(EagleLogger *logger)</argsstring>
+        <name>EagleLogger_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+<para>Delete a logger. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Do not call this function unless you have a good reason. Once the logger is created it will be reused automatically.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logger to free. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="72" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="12" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a3ecf1a4816a491e1b147ee106b5b2da2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+        <definition>EagleLogger* EagleLogger_Get</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleLogger_Get</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the default logger. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the default logged has not been initialised it will be initialised automatically and returned. <simplesect kind="return"><para>The default logger. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="48" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="73" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a4045aa59ea76e6e9fe134bd061532fe1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FILE *</type>
+        <definition>FILE* EagleLogger_GetLogFile</definition>
+        <argsstring>(const char *location)</argsstring>
+        <name>EagleLogger_GetLogFile</name>
+        <param>
+          <type>const char *</type>
+          <declname>location</declname>
+        </param>
+        <briefdescription>
+<para>Get the file handle for a log location. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the log file cannot be open then stderr is returned. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">location</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The file location. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always a valid FILE handle, even in case of failure. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="115" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="62" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1ae3bd0bee4571abc3577311632a2ecfa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+        <definition>EagleLoggerEvent* EagleLogger_lastEvent</definition>
+        <argsstring>(EagleLogger *logger)</argsstring>
+        <name>EagleLogger_lastEvent</name>
+        <param>
+          <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+<para>Get the last event from a logger. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logger. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The last event or NULL if there have been no events. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="108" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1acb4a891dd0163831d8f04e4f6c3abf34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+        <definition>EagleLoggerEvent* EagleLogger_LastEvent</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleLogger_LastEvent</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the last event from the default logger. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The last event or NULL if there have been no events. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="101" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="49" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a873bd0595dca9f4bdde3eebbff5845a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+        <definition>EagleLoggerEvent* EagleLogger_log</definition>
+        <argsstring>(EagleLogger *logger, EagleLoggerSeverity severity, char *message)</argsstring>
+        <name>EagleLogger_log</name>
+        <param>
+          <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+          <declname>logger</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member">EagleLoggerSeverity</ref></type>
+          <declname>severity</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Log an event. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logger. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">severity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The severity. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The event instance that was created. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="88" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="96" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a2b11ce5acff2e74749d6ad9e181e67e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+        <definition>EagleLoggerEvent* EagleLogger_Log</definition>
+        <argsstring>(EagleLoggerSeverity severity, char *message)</argsstring>
+        <name>EagleLogger_Log</name>
+        <param>
+          <type><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member">EagleLoggerSeverity</ref></type>
+          <declname>severity</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Log an event. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">severity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The severity. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The event instance that was created. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="56" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="103" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a018aff7446c6b7dae1e93df704e8a297" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLogger_logEvent</definition>
+        <argsstring>(EagleLogger *logger, EagleLoggerEvent *event)</argsstring>
+        <name>EagleLogger_logEvent</name>
+        <param>
+          <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+          <declname>logger</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Log an event. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logger, </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="95" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="108" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a912d9dddca3ee2a33b40151723f7a688" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLogger_LogEvent</definition>
+        <argsstring>(EagleLoggerEvent *event)</argsstring>
+        <name>EagleLogger_LogEvent</name>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Log an event with the default logger. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="62" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="141" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1aa19fc6d42af9ef50be8b559e3a4d58e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+        <definition>EagleLogger* EagleLogger_New</definition>
+        <argsstring>(FILE *out)</argsstring>
+        <name>EagleLogger_New</name>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Create a new logger. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is really only used for tests, you should use <ref refid="_eagle_logger_8c_1a3ecf1a4816a491e1b147ee106b5b2da2" kindref="member">EagleLogger_Get()</ref> to get the default logger. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The file stream to send the error messages to. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new logger. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="79" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="34" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_logger_8h_1a13132985e9ef1efb42abe1b4ed98e219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLogger_reset</definition>
+        <argsstring>(EagleLogger *logger)</argsstring>
+        <name>EagleLogger_reset</name>
+        <param>
+          <type><ref refid="struct_eagle_logger" kindref="compound">EagleLogger</ref> *</type>
+          <declname>logger</declname>
+        </param>
+        <briefdescription>
+<para>Reset a logger. </para>        </briefdescription>
+        <detaileddescription>
+<para>Free the memory associated with the last error event. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">logger</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The logger. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="121" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.c" bodystart="28" bodyend="32"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleLogger_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleLogger_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mach/mach_time.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_synchronizer_8h" kindref="compound">EagleSynchronizer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_8h" kindref="compound">EagleLinkedList.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_event_8h" kindref="compound">EagleLoggerEvent.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="_eagle_logger_8c_1a4dcb016402dcc36bca1f4355d6605510" kindref="member" tooltip="The location to save the logs.">EagleLogger_DefaultLogLocation</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="struct_eagle_logger" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="struct_eagle_logger_1a99f8f5915f58c8ba08ca666378366eb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalMessages;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29" refid="struct_eagle_logger_1a8b4ccb587e896a838f5eb947d6f234f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_lock" kindref="compound" tooltip="A lock is used to synchronize code blocks between threads.">EagleLock</ref><sp/>*logLock;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="struct_eagle_logger_1a1277960b5f2b37137fe9b0b5a1ea0beb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/>FILE<sp/>*out;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39" refid="struct_eagle_logger_1a361c77fdc9fc35a47339a5283916f88b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>*lastEvent;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/><ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref>*<sp/><ref refid="_eagle_logger_8c_1a3ecf1a4816a491e1b147ee106b5b2da2" kindref="member" tooltip="Get the default logger.">EagleLogger_Get</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref>*<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member" tooltip="Every logged event has a severity.">EagleLoggerSeverity</ref><sp/>severity,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*message);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_8c_1a912d9dddca3ee2a33b40151723f7a688" kindref="member" tooltip="Log an event with the default logger.">EagleLogger_LogEvent</ref>(<ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>*event);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_8c_1a8504ca6d062db6127b3dedb5e48b6bc3" kindref="member" tooltip="Delete a logger.">EagleLogger_Delete</ref>(<ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref><sp/>*logger);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref>*<sp/><ref refid="_eagle_logger_8c_1aa19fc6d42af9ef50be8b559e3a4d58e4" kindref="member" tooltip="Create a new logger.">EagleLogger_New</ref>(FILE<sp/>*out);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref>*<sp/><ref refid="_eagle_logger_8c_1a873bd0595dca9f4bdde3eebbff5845a5" kindref="member" tooltip="Log an event.">EagleLogger_log</ref>(<ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref>*<sp/>logger,<sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member" tooltip="Every logged event has a severity.">EagleLoggerSeverity</ref><sp/>severity,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*message);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_8c_1a018aff7446c6b7dae1e93df704e8a297" kindref="member" tooltip="Log an event.">EagleLogger_logEvent</ref>(<ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref>*<sp/>logger,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>*event);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref>*<sp/><ref refid="_eagle_logger_8c_1aaff342803effc031f6213cb11c385a24" kindref="member" tooltip="Get the last event from the default logger.">EagleLogger_LastEvent</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref>*<sp/><ref refid="_eagle_logger_8c_1ae3bd0bee4571abc3577311632a2ecfa4" kindref="member" tooltip="Get the last event from a logger.">EagleLogger_lastEvent</ref>(<ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref><sp/>*logger);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal">FILE*<sp/><ref refid="_eagle_logger_8c_1a4045aa59ea76e6e9fe134bd061532fe1" kindref="member" tooltip="Get the file handle for a log location.">EagleLogger_GetLogFile</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*location);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_8c_1a13132985e9ef1efb42abe1b4ed98e219" kindref="member" tooltip="Reset a logger.">EagleLogger_reset</ref>(<ref refid="struct_eagle_logger" kindref="compound" tooltip="A logger instance.">EagleLogger</ref><sp/>*logger);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h"/>
+  </compounddef>
+</doxygen>

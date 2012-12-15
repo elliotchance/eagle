@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_plan_buffer_provider" kind="struct" prot="public">
+    <compoundname>EaglePlanBufferProvider</compoundname>
+    <includes refid="_eagle_plan_buffer_provider_8h" local="no">EaglePlanBufferProvider.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int destinationBuffer</definition>
+        <argsstring></argsstring>
+        <name>destinationBuffer</name>
+        <briefdescription>
+<para>The buffer ID where the next page will be loaded into. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1a00c1a6631eed8bc3f411b2522cdcd37d" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean freeProvider</definition>
+        <argsstring></argsstring>
+        <name>freeProvider</name>
+        <briefdescription>
+<para>Free the provider when the plan buffer provider is released. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="53" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1a6f7df7a26d0c4e4b72acf181785cd154" prot="public" static="no" mutable="no">
+        <type>struct EaglePlanBufferProvider::@1::@2</type>
+        <definition>struct EaglePlanBufferProvider::@1::@2  provider</definition>
+        <argsstring></argsstring>
+        <name>provider</name>
+        <briefdescription>
+<para>Value for a provider. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1ac91a7ca6db9fa7657a09456f764e5a89" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> *</type>
+        <definition>EaglePageProvider* provider</definition>
+        <argsstring></argsstring>
+        <name>provider</name>
+        <briefdescription>
+<para>The provider that contains the actual data for the buffer. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is semi managed because it depends on <computeroutput>freeProvider</computeroutput> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="48" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53f" kindref="member">EaglePlanBufferProviderType</ref></type>
+        <definition>EaglePlanBufferProviderType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>The provider type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="32" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1ae31b2be149d8e184d199bd4677ad1b3a" prot="public" static="no" mutable="no">
+        <type>union EaglePlanBufferProvider::@1</type>
+        <definition>union EaglePlanBufferProvider::@1  value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+<para>The value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="62"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_value" kindref="compound">EagleDbSqlValue</ref> *</type>
+        <definition>EagleDbSqlValue* value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+<para>Fixed single value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="60" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This structure acts as a link between a page providers data and the buffer for an expression it will be loaded into. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="239">
+        <label>@1</label>
+      </node>
+      <node id="241">
+        <label>@2</label>
+      </node>
+      <node id="244">
+        <label>@3</label>
+      </node>
+      <node id="245">
+        <label>char *</label>
+      </node>
+      <node id="237">
+        <label>EaglePlanBufferProviderType</label>
+      </node>
+      <node id="238">
+        <label>int</label>
+      </node>
+      <node id="243">
+        <label>double</label>
+      </node>
+      <node id="236">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider"/>
+      </node>
+      <node id="242">
+        <label>EagleDbSqlValue</label>
+        <link refid="struct_eagle_db_sql_value"/>
+        <childnode refid="243" relation="usage">
+          <edgelabel>floatValue</edgelabel>
+        </childnode>
+        <childnode refid="238" relation="usage">
+          <edgelabel>intValue</edgelabel>
+        </childnode>
+        <childnode refid="244" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="245" relation="usage">
+          <edgelabel>identifier</edgelabel>
+        </childnode>
+        <childnode refid="246" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+      </node>
+      <node id="235">
+        <label>EaglePlanBufferProvider</label>
+        <link refid="struct_eagle_plan_buffer_provider"/>
+        <childnode refid="236" relation="usage">
+          <edgelabel>provider</edgelabel>
+        </childnode>
+        <childnode refid="237" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="238" relation="usage">
+          <edgelabel>destinationBuffer</edgelabel>
+        </childnode>
+        <childnode refid="239" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="240" relation="usage">
+          <edgelabel>freeProvider</edgelabel>
+        </childnode>
+        <childnode refid="241" relation="usage">
+          <edgelabel>provider</edgelabel>
+        </childnode>
+        <childnode refid="242" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="240">
+        <label>EagleBoolean</label>
+      </node>
+      <node id="246">
+        <label>EagleDbSqlValueType</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.h" bodystart="22" bodyend="64"/>
+    <listofallmembers>
+      <member refid="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>destinationBuffer</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1a00c1a6631eed8bc3f411b2522cdcd37d" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>freeProvider</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1ac91a7ca6db9fa7657a09456f764e5a89" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>provider</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1a6f7df7a26d0c4e4b72acf181785cd154" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>provider</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>type</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>value</name></member>
+      <member refid="struct_eagle_plan_buffer_provider_1ae31b2be149d8e184d199bd4677ad1b3a" prot="public" virt="non-virtual"><scope>EaglePlanBufferProvider</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

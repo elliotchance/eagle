@@ -1,0 +1,493 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_instance_8h" kind="file">
+    <compoundname>EagleInstance.h</compoundname>
+    <includes local="no">pthread.h</includes>
+    <includes refid="_eagle_workers_8h" local="yes">EagleWorkers.h</includes>
+    <includes refid="_eagle_page_provider_8h" local="yes">EaglePageProvider.h</includes>
+    <includes refid="_eagle_plan_job_8h" local="yes">EaglePlanJob.h</includes>
+    <includes refid="_eagle_synchronizer_8h" local="yes">EagleSynchronizer.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includedby refid="_eagle_worker_8c" local="yes">eagle/eagle/EagleWorker.c</includedby>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <incdepgraph>
+      <node id="323">
+        <label>EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="325" relation="include">
+        </childnode>
+      </node>
+      <node id="342">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="320">
+        <label>eagle/eagle/EagleInstance.h</label>
+        <link refid="EagleInstance.h"/>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="322" relation="include">
+        </childnode>
+        <childnode refid="333" relation="include">
+        </childnode>
+        <childnode refid="325" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+      </node>
+      <node id="336">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+      </node>
+      <node id="339">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="328" relation="include">
+        </childnode>
+        <childnode refid="333" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+      </node>
+      <node id="328">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="333" relation="include">
+        </childnode>
+      </node>
+      <node id="327">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="343">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="334">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="327" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+      </node>
+      <node id="321">
+        <label>pthread.h</label>
+      </node>
+      <node id="338">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="331">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="332" relation="include">
+        </childnode>
+      </node>
+      <node id="344">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="333" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="340" relation="include">
+        </childnode>
+      </node>
+      <node id="332">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="330">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="324">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="341">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="342" relation="include">
+        </childnode>
+      </node>
+      <node id="345">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="322">
+        <label>EagleWorkers.h</label>
+        <link refid="_eagle_workers_8h"/>
+        <childnode refid="323" relation="include">
+        </childnode>
+      </node>
+      <node id="329">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="331" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+      </node>
+      <node id="340">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="341" relation="include">
+        </childnode>
+        <childnode refid="343" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+      </node>
+      <node id="326">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="327" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+        <childnode refid="339" relation="include">
+        </childnode>
+        <childnode refid="344" relation="include">
+        </childnode>
+        <childnode refid="345" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="336" relation="include">
+        </childnode>
+      </node>
+      <node id="333">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="336" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="338" relation="include">
+        </childnode>
+      </node>
+      <node id="335">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+      </node>
+      <node id="325">
+        <label>EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="326" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+      </node>
+      <node id="337">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="347">
+        <label>eagle/eagle/EagleWorker.c</label>
+        <link refid="_eagle_worker_8c"/>
+      </node>
+      <node id="346">
+        <label>eagle/eagle/EagleInstance.h</label>
+        <link refid="EagleInstance.h"/>
+        <childnode refid="347" relation="include">
+        </childnode>
+        <childnode refid="348" relation="include">
+        </childnode>
+      </node>
+      <node id="348">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="348" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_instance" prot="public">EagleInstance</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_instance_8h_1a04799f2a6588421bb8235faa8144f78f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleInstance_addPlan</definition>
+        <argsstring>(EagleInstance *eagle, EaglePlan *plan)</argsstring>
+        <name>EagleInstance_addPlan</name>
+        <param>
+          <type><ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>eagle</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+          <declname>plan</declname>
+        </param>
+        <briefdescription>
+<para>Add an <ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> to an <ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">eagle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">plan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The plan to execute. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="43" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_instance_8h_1a21f9875e7adcb02f2370897749e56181" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleInstance_Delete</definition>
+        <argsstring>(EagleInstance *eagle)</argsstring>
+        <name>EagleInstance_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>eagle</declname>
+        </param>
+        <briefdescription>
+<para>Free <ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">eagle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="35" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="103" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_instance_8h_1af3888839e04de3cc548480228920c3a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+        <definition>EagleInstance* EagleInstance_New</definition>
+        <argsstring>(int totalWorkers)</argsstring>
+        <name>EagleInstance_New</name>
+        <param>
+          <type>int</type>
+          <declname>totalWorkers</declname>
+        </param>
+        <briefdescription>
+<para>Create a new eagle instance. </para>        </briefdescription>
+        <detaileddescription>
+<para>The instance is effectivly a database, with a certain amount of workers (threads) that will carry out the work. Do not create multiple instances for the same database as there is no way to syncronise them.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">totalWorkers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of workers to launch, this does not include the main thread that will handle the connections and look after the workers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>New instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="9" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_instance_8h_1a32eec2a01e622ad90ff8b679e7e292be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref> *</type>
+        <definition>EaglePlanJob* EagleInstance_nextJob</definition>
+        <argsstring>(EagleInstance *eagle, int coreId)</argsstring>
+        <name>EagleInstance_nextJob</name>
+        <param>
+          <type><ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>eagle</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>coreId</declname>
+        </param>
+        <briefdescription>
+<para>Get the next finite job from the stack. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a syncronised method that all the workers will call independantly when they have nothing to do. If this method returns NULL it is upto the workers to know that there is no more work, they will check periodically after that.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">eagle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coreId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CPU core ID. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Initialised <ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref>, or NULL if there are no available jobs. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="61" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="62" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_instance_8h_1ad03ede95fd768ca7dd084250a9f3e39e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleInstance_nextJob_</definition>
+        <argsstring>(EaglePlan *plan, EaglePlanJob **job, int coreId)</argsstring>
+        <name>EagleInstance_nextJob_</name>
+        <param>
+          <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+          <declname>plan</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref> **</type>
+          <declname>job</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>coreId</declname>
+        </param>
+        <briefdescription>
+<para>This is the internal non-synchronised version of <ref refid="_eagle_instance_8c_1a32eec2a01e622ad90ff8b679e7e292be" kindref="member">EagleInstance_nextJob()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Having the core functionality in another function is mainly to help with profiling code. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">plan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The plan. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">job</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to the job. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coreId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CPU core ID. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="70" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="37" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_instance_8h_1a683dd58ebffac2f2f0fa090bf46a032d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleInstance_run</definition>
+        <argsstring>(EagleInstance *eagle)</argsstring>
+        <name>EagleInstance_run</name>
+        <param>
+          <type><ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>eagle</declname>
+        </param>
+        <briefdescription>
+<para>Run the instance. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will start it.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">eagle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance from <ref refid="_eagle_instance_8c_1af3888839e04de3cc548480228920c3a7" kindref="member">EagleInstance_New()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h" line="50" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.c" bodystart="23" bodyend="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleInstance_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleInstance_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pthread.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_workers_8h" kindref="compound">EagleWorkers.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_8h" kindref="compound">EaglePageProvider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_plan_job_8h" kindref="compound">EaglePlanJob.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_synchronizer_8h" kindref="compound">EagleSynchronizer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="struct_eagle_instance" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>{</highlight></codeline>
+<codeline lineno="15" refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><sp/><ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref><sp/>*<ref refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" kindref="member" tooltip="The workers.">workers</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="16" refid="struct_eagle_instance_1a83534f7da738950a4c67225645099239" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/><ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*<ref refid="struct_eagle_instance_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="The plan that needs to be executed.">plan</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17" refid="struct_eagle_instance_1a60fa50d7cee12dbf1a9a7f4a094c9266" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><sp/><ref refid="struct_eagle_lock" kindref="compound" tooltip="A lock is used to synchronize code blocks between threads.">EagleLock</ref><sp/>*<ref refid="struct_eagle_instance_1a60fa50d7cee12dbf1a9a7f4a094c9266" kindref="member" tooltip="To syncronise the EagleInstance_nextJob() method.">nextJobLock</ref>;<sp/></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}<sp/><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref>*<sp/><ref refid="_eagle_instance_8c_1af3888839e04de3cc548480228920c3a7" kindref="member" tooltip="Create a new eagle instance.">EagleInstance_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalWorkers);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_instance_8c_1a21f9875e7adcb02f2370897749e56181" kindref="member" tooltip="Free EagleInstance.">EagleInstance_Delete</ref>(<ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*eagle);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_instance_8c_1a04799f2a6588421bb8235faa8144f78f" kindref="member" tooltip="Add an EaglePlan to an EagleInstance.">EagleInstance_addPlan</ref>(<ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*eagle,<sp/><ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_instance_8c_1a683dd58ebffac2f2f0fa090bf46a032d" kindref="member" tooltip="Run the instance.">EagleInstance_run</ref>(<ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*eagle);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref>*<sp/><ref refid="_eagle_instance_8c_1a32eec2a01e622ad90ff8b679e7e292be" kindref="member" tooltip="Get the next finite job from the stack.">EagleInstance_nextJob</ref>(<ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*eagle,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>coreId);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_instance_8c_1ad03ede95fd768ca7dd084250a9f3e39e" kindref="member" tooltip="This is the internal non-synchronised version of EagleInstance_nextJob().">EagleInstance_nextJob_</ref>(<ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan,<sp/><ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref><sp/>**job,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>coreId);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleInstance.h"/>
+  </compounddef>
+</doxygen>

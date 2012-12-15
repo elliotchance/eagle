@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_binary_expression_8h" kind="file">
+    <compoundname>EagleDbSqlBinaryExpression.h</compoundname>
+    <includes refid="_eagle_db_sql_expression_8h" local="yes">EagleDbSqlExpression.h</includes>
+    <includes refid="_eagle_db_sql_binary_expression_operator_8h" local="yes">EagleDbSqlBinaryExpressionOperator.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_page_operations_8h" local="yes">EaglePageOperations.h</includes>
+    <includes refid="_eagle_data_type_8h" local="yes">EagleDataType.h</includes>
+    <includedby refid="_eagle_db_sql_expression_8c" local="yes">eagle/eagledb/EagleDbSqlExpression.c</includedby>
+    <incdepgraph>
+      <node id="2175">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2176" relation="include">
+        </childnode>
+        <childnode refid="2193" relation="include">
+        </childnode>
+      </node>
+      <node id="2174">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.h</label>
+        <link refid="EagleDbSqlBinaryExpression.h"/>
+        <childnode refid="2175" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2178" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+      </node>
+      <node id="2194">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="2188">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2186" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2189" relation="include">
+        </childnode>
+      </node>
+      <node id="2191">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2178" relation="include">
+        </childnode>
+        <childnode refid="2184" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2192" relation="include">
+        </childnode>
+      </node>
+      <node id="2178">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="2179" relation="include">
+        </childnode>
+        <childnode refid="2184" relation="include">
+        </childnode>
+      </node>
+      <node id="2177">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2195">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2186">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2177" relation="include">
+        </childnode>
+        <childnode refid="2187" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+      </node>
+      <node id="2185">
+        <label>pthread.h</label>
+      </node>
+      <node id="2198">
+        <label>EagleDbSqlBinaryExpressionOperator.h</label>
+        <link refid="_eagle_db_sql_binary_expression_operator_8h"/>
+      </node>
+      <node id="2190">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="2181">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2182" relation="include">
+        </childnode>
+      </node>
+      <node id="2196">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2184" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2192" relation="include">
+        </childnode>
+      </node>
+      <node id="2182">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2180">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2183">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2193">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="2194" relation="include">
+        </childnode>
+      </node>
+      <node id="2197">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="2179">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="2180" relation="include">
+        </childnode>
+        <childnode refid="2181" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+      </node>
+      <node id="2192">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2193" relation="include">
+        </childnode>
+        <childnode refid="2195" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+      </node>
+      <node id="2176">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2177" relation="include">
+        </childnode>
+        <childnode refid="2178" relation="include">
+        </childnode>
+        <childnode refid="2191" relation="include">
+        </childnode>
+        <childnode refid="2196" relation="include">
+        </childnode>
+        <childnode refid="2197" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+        <childnode refid="2188" relation="include">
+        </childnode>
+      </node>
+      <node id="2184">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="2185" relation="include">
+        </childnode>
+        <childnode refid="2179" relation="include">
+        </childnode>
+        <childnode refid="2186" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+        <childnode refid="2188" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+        <childnode refid="2190" relation="include">
+        </childnode>
+      </node>
+      <node id="2187">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2185" relation="include">
+        </childnode>
+        <childnode refid="2183" relation="include">
+        </childnode>
+      </node>
+      <node id="2189">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2180" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2200">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+        <childnode refid="2200" relation="include">
+        </childnode>
+      </node>
+      <node id="2199">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.h</label>
+        <link refid="EagleDbSqlBinaryExpression.h"/>
+        <childnode refid="2200" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_sql_binary_expression" prot="public">EagleDbSqlBinaryExpression</innerclass>
+    <innerclass refid="struct_eagle_db_sql_binary_operator" prot="public">EagleDbSqlBinaryOperator</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_eagle_db_sql_binary_expression_8h_1aef69c675a2148d74b71d9c5a29786a55" prot="public" static="no">
+        <name>EagleDbSqlBinaryOperator_Make</name>
+        <param><defname>left</defname></param>
+        <param><defname>op</defname></param>
+        <param><defname>right</defname></param>
+        <param><defname>func</defname></param>
+        <param><defname>returnType</defname></param>
+        <initializer>{ <ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref>##left, <ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref>##op, <ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref>##right, EaglePageOperations_##func, <ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref>##returnType }</initializer>
+        <briefdescription>
+<para>This is used by EagleDbSqlBinaryExpression_GetOperation(). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="13" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1a8a4a0a53b4f1b766f97d9d6acffcbb76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlBinaryExpression_Delete</definition>
+        <argsstring>(EagleDbSqlBinaryExpression *expr)</argsstring>
+        <name>EagleDbSqlBinaryExpression_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound">EagleDbSqlBinaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a binary expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a762d1a558814f2576ed01c9a32e84647" kindref="member">EagleDbSqlExpression_Delete()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="91" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="151" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1a4dd46ca294bbe26c4de55f743d5233bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlBinaryExpression_DeleteRecursive</definition>
+        <argsstring>(EagleDbSqlBinaryExpression *expr)</argsstring>
+        <name>EagleDbSqlBinaryExpression_DeleteRecursive</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound">EagleDbSqlBinaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a binary expression (recursively). </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="99" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="160" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1af6219fc1f681fee140c19b340eef62c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation</definition>
+        <argsstring>(EagleDataType left, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlBinaryOperator *match)</argsstring>
+        <name>EagleDbSqlBinaryExpression_GetLeftOperation</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound">EagleDbSqlBinaryOperator</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <briefdescription>
+<para>Find the appropriate operation for an operator. </para>        </briefdescription>
+        <detaileddescription>
+<para>&quot;Left&quot; means that the expression (not not the literal) is on the left side of the binary expression.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left data type. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If a match is found it will be copied into this output parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the operator can be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="133" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="65" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1ad16262ad459a3c8721d27ead7ebfcbe7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation</definition>
+        <argsstring>(EagleDataType left, EagleDbSqlBinaryExpressionOperator op, EagleDataType right, EagleDbSqlBinaryOperator *match)</argsstring>
+        <name>EagleDbSqlBinaryExpression_GetPageOperation</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound">EagleDbSqlBinaryOperator</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <briefdescription>
+<para>Find the appropriate page operation for an operator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left data type (first operand). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right data type (second operand). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If a match is found it will be copied into this output parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the operator can be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="120" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="106" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1aa4f5dbf8cdce7c381200814505e8e4f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation</definition>
+        <argsstring>(EagleDataType right, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlBinaryOperator *match)</argsstring>
+        <name>EagleDbSqlBinaryExpression_GetRightOperation</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound">EagleDbSqlBinaryOperator</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <briefdescription>
+<para>Find the appropriate operation for an operator. </para>        </briefdescription>
+        <detaileddescription>
+<para>&quot;Right&quot; means that the expression (not not the literal) is on the right side of the binary expression.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right data type. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If a match is found it will be copied into this output parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the operator can be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="146" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="24" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1a1c366c9d7162f6e1e240718afbe22d67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound">EagleDbSqlBinaryExpression</ref> *</type>
+        <definition>EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New</definition>
+        <argsstring>(EagleDbSqlExpression *left, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlExpression *right)</argsstring>
+        <name>EagleDbSqlBinaryExpression_New</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_db_sql_binary_expression" kindref="compound">EagleDbSqlBinaryExpression</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left operand. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right operand. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="84" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="7" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_8h_1a502073a049f81c728068755e1b3b921b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlBinaryExpression_toString</definition>
+        <argsstring>(EagleDbSqlBinaryExpression *expr)</argsstring>
+        <name>EagleDbSqlBinaryExpression_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound">EagleDbSqlBinaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Render a binary expression into a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string representation of the expression. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="106" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.c" bodystart="171" bodyend="188"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlBinaryExpression_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlBinaryExpression_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_expression_8h" kindref="compound">EagleDbSqlExpression.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_binary_expression_operator_8h" kindref="compound">EagleDbSqlBinaryExpressionOperator.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_operations_8h" kindref="compound">EaglePageOperations.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_type_8h" kindref="compound">EagleDataType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="_eagle_db_sql_binary_expression_8h_1aef69c675a2148d74b71d9c5a29786a55" refkind="member"><highlight class="preprocessor">#define<sp/>EagleDbSqlBinaryOperator_Make(left,<sp/>op,<sp/>right,<sp/>func,<sp/>returnType)<sp/>{<sp/>EagleDataType##left,<sp/>EagleDbSqlBinaryExpressionOperator##op,<sp/>EagleDataType##right,<sp/>EaglePageOperations_##func,<sp/>EagleDataType##returnType<sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="20" refid="struct_eagle_db_sql_binary_expression" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26" refid="struct_eagle_db_sql_binary_expression_1a3faf42a90228121a56f69674cdfd1b23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_header_8h_1a633261e6154fbc5ddb4db61baed3e828" kindref="member" tooltip="This header must exists in all structs that &amp;quot;extend&amp;quot; EagleDbSqlExpression...">EagleDbSqlExpressionHeader</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31" refid="struct_eagle_db_sql_binary_expression_1a74eef2f22da663e6b6ec0f2f21041c8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*left;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="struct_eagle_db_sql_binary_expression_1a43b006326afba0b0b991b2017f96b503" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41" refid="struct_eagle_db_sql_binary_expression_1a36b61b0fdd7e949b38737abba2a3fc37" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*right;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeBinaryExpression.">EagleDbSqlBinaryExpression</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="struct_eagle_db_sql_binary_operator" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="53" refid="struct_eagle_db_sql_binary_operator_1a43cfda5d9dfabde46aa2a89ad6ac4cea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>left;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58" refid="struct_eagle_db_sql_binary_operator_1a43b006326afba0b0b991b2017f96b503" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="struct_eagle_db_sql_binary_operator_1a2850dd7a0a45e905b255b747dc5b287a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_page_operations_8h_1ac1767814a5191fb263d1d7678ba6917d" kindref="member" tooltip="Function pointer.">EaglePageOperationFunction</ref>(func);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73" refid="struct_eagle_db_sql_binary_operator_1af92db6f6ffc1491f61cfbcd0a2d2a9a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>returnType;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound" tooltip="Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlBinaryOperator</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><ref refid="struct_eagle_db_sql_binary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeBinaryExpression.">EagleDbSqlBinaryExpression</ref>*<sp/><ref refid="_eagle_db_sql_binary_expression_8c_1a1c366c9d7162f6e1e240718afbe22d67" kindref="member" tooltip="Create a new EagleDbSqlBinaryExpression.">EagleDbSqlBinaryExpression_New</ref>(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*left,<sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op,<sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*right);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_binary_expression_8c_1a8a4a0a53b4f1b766f97d9d6acffcbb76" kindref="member" tooltip="Free a binary expression.">EagleDbSqlBinaryExpression_Delete</ref>(<ref refid="struct_eagle_db_sql_binary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeBinaryExpression.">EagleDbSqlBinaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_binary_expression_8c_1a4dd46ca294bbe26c4de55f743d5233bf" kindref="member" tooltip="Free a binary expression (recursively).">EagleDbSqlBinaryExpression_DeleteRecursive</ref>(<ref refid="struct_eagle_db_sql_binary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeBinaryExpression.">EagleDbSqlBinaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_binary_expression_8c_1a502073a049f81c728068755e1b3b921b" kindref="member" tooltip="Render a binary expression into a string.">EagleDbSqlBinaryExpression_toString</ref>(<ref refid="struct_eagle_db_sql_binary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeBinaryExpression.">EagleDbSqlBinaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_sql_binary_expression_8c_1ad16262ad459a3c8721d27ead7ebfcbe7" kindref="member" tooltip="Find the appropriate page operation for an operator.">EagleDbSqlBinaryExpression_GetPageOperation</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>left,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound" tooltip="Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlBinaryOperator</ref><sp/>*match);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_sql_binary_expression_8c_1af6219fc1f681fee140c19b340eef62c9" kindref="member" tooltip="Find the appropriate operation for an operator.">EagleDbSqlBinaryExpression_GetLeftOperation</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>left,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound" tooltip="Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlBinaryOperator</ref><sp/>*match);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_sql_binary_expression_8c_1aa4f5dbf8cdce7c381200814505e8e4f0" kindref="member" tooltip="Find the appropriate operation for an operator.">EagleDbSqlBinaryExpression_GetRightOperation</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_binary_operator" kindref="compound" tooltip="Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlBinaryOperator</ref><sp/>*match);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_logger_severity_8c" kind="file">
+    <compoundname>EagleLoggerSeverity.c</compoundname>
+    <includes refid="_eagle_logger_severity_8h" local="yes">EagleLoggerSeverity.h</includes>
+    <incdepgraph>
+      <node id="684">
+        <label>eagle/eagle/EagleLoggerSeverity.c</label>
+        <link refid="EagleLoggerSeverity.c"/>
+        <childnode refid="685" relation="include">
+        </childnode>
+      </node>
+      <node id="685">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_logger_severity_8c_1a69b632103528f4f6a4db6649d5b2c0ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleLoggerSeverity_toString</definition>
+        <argsstring>(EagleLoggerSeverity severity)</argsstring>
+        <name>EagleLoggerSeverity_toString</name>
+        <param>
+          <type><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member">EagleLoggerSeverity</ref></type>
+          <declname>severity</declname>
+        </param>
+        <briefdescription>
+<para>Translate an EagleLoggerSeverity value into its string representation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">severity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The severity. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String representation of a severity. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.c" line="4" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.c" bodystart="3" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_severity_8h" kindref="compound">EagleLoggerSeverity.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3" refid="_eagle_logger_severity_8h_1a69b632103528f4f6a4db6649d5b2c0ba" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_logger_severity_8c_1a69b632103528f4f6a4db6649d5b2c0ba" kindref="member" tooltip="Translate an EagleLoggerSeverity value into its string representation.">EagleLoggerSeverity_toString</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member" tooltip="Every logged event has a severity.">EagleLoggerSeverity</ref><sp/>severity)</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(severity)<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a14bb2977a2754e59e5a972d017c02db3" kindref="member" tooltip="Debug messages can be very verbose and explain this that are happening that may have...">EagleLoggerSeverityDebug</ref>:</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;DEBUG&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a9700ff46418c604971c5d000de92c1d9" kindref="member" tooltip="This describes events in the system that have no effect on the flow of execution...">EagleLoggerSeverityInfo</ref>:</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;INFO&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>:</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;USERERROR&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;ERROR&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2aa78f43f80acd5891d37028fd7f47408a" kindref="member" tooltip="A fatal error means that the program can not continue.">EagleLoggerSeverityFatal</ref>:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;FATAL&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.c"/>
+  </compounddef>
+</doxygen>

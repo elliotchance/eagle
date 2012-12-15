@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_binary_expression_operator_8h" kind="file">
+    <compoundname>EagleDbSqlBinaryExpressionOperator.h</compoundname>
+    <includedby refid="_eagle_db_sql_binary_expression_8h" local="yes">eagle/eagledb/EagleDbSqlBinaryExpression.h</includedby>
+    <includedby refid="_eagle_db_sql_binary_expression_operator_8c" local="yes">eagle/eagledb/EagleDbSqlBinaryExpressionOperator.c</includedby>
+    <includedby refid="_eagle_db_sql_expression_8c" local="yes">eagle/eagledb/EagleDbSqlExpression.c</includedby>
+    <invincdepgraph>
+      <node id="2210">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+        <childnode refid="2210" relation="include">
+        </childnode>
+      </node>
+      <node id="2209">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.h</label>
+        <link refid="_eagle_db_sql_binary_expression_8h"/>
+        <childnode refid="2210" relation="include">
+        </childnode>
+      </node>
+      <node id="2211">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpressionOperator.c</label>
+        <link refid="_eagle_db_sql_binary_expression_operator_8c"/>
+      </node>
+      <node id="2208">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpressionOperator.h</label>
+        <link refid="EagleDbSqlBinaryExpressionOperator.h"/>
+        <childnode refid="2209" relation="include">
+        </childnode>
+        <childnode refid="2211" relation="include">
+        </childnode>
+        <childnode refid="2210" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" prot="public" static="no">
+        <name>EagleDbSqlBinaryExpressionOperator</name>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ae2e6e75d3ff8f2d4106d8b06533d8091" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorPlus</name>
+          <initializer> 1</initializer>
+          <briefdescription>
+<para>Addition operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a9abb2f7771d6b8d085c50a5f0d97a9f5" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorEquals</name>
+          <initializer> 2</initializer>
+          <briefdescription>
+<para>Equals operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0edf0d810ff2d0d737338bb183aafdcb" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorModulus</name>
+          <initializer> 3</initializer>
+          <briefdescription>
+<para>Modulus (remainder) operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab0f04f820dc12cfd4173200c91d52fbb" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorMultiply</name>
+          <initializer> 4</initializer>
+          <briefdescription>
+<para>Multiplication operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030abd00b39d3d83eb1aecbe8e0614cbd68d" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorNotEquals</name>
+          <initializer> 5</initializer>
+          <briefdescription>
+<para>Not equals operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab5b98de3912b7f75bbcd98fe950a4ed3" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorGreaterThan</name>
+          <initializer> 6</initializer>
+          <briefdescription>
+<para>Greater than operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a6529df0af37b60f1ff88595111ec9f23" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorLessThan</name>
+          <initializer> 7</initializer>
+          <briefdescription>
+<para>Less than operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030afd5ad27c8a911dd6fd74f73d4e417fcb" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorGreaterThanEqual</name>
+          <initializer> 8</initializer>
+          <briefdescription>
+<para>Greater than or equal to operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0ab15eaf283a143369786cb033a26ba7" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorLessThanEqual</name>
+          <initializer> 9</initializer>
+          <briefdescription>
+<para>Greater than or equal to operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ada2a9c977ddd72a13a7dc9f39a0a6146" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorMinus</name>
+          <initializer> 10</initializer>
+          <briefdescription>
+<para>Subtraction (or negate) operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab44c3711bf3079616b86ce422b81700c" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorDivide</name>
+          <initializer> 11</initializer>
+          <briefdescription>
+<para>Division operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a4c31cfe2418b9a8f869f65be6863f41d" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorOr</name>
+          <initializer> 12</initializer>
+          <briefdescription>
+<para>Logical OR operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a63edb9d95848e20b8a2a6fa1ff6231fb" prot="public">
+          <name>EagleDbSqlBinaryExpressionOperatorAnd</name>
+          <initializer> 13</initializer>
+          <briefdescription>
+<para>Logical AND operator. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Bianry expression operators. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpressionOperator.h" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpressionOperator.h" bodystart="7" bodyend="74"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_binary_expression_operator_8h_1ac7156d543776e6912fe14e4889938cb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlBinaryExpressionOperator_toString</definition>
+        <argsstring>(EagleDbSqlBinaryExpressionOperator op)</argsstring>
+        <name>EagleDbSqlBinaryExpressionOperator_toString</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+<para>Get the string representation of the operator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string. You must free this yourself. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpressionOperator.h" line="81" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpressionOperator.c" bodystart="6" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlBinaryExpressionOperator_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlBinaryExpressionOperator_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="7" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="12" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ae2e6e75d3ff8f2d4106d8b06533d8091" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ae2e6e75d3ff8f2d4106d8b06533d8091" kindref="member" tooltip="Addition operator.">EagleDbSqlBinaryExpressionOperatorPlus</ref><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a9abb2f7771d6b8d085c50a5f0d97a9f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a9abb2f7771d6b8d085c50a5f0d97a9f5" kindref="member" tooltip="Equals operator.">EagleDbSqlBinaryExpressionOperatorEquals</ref><sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0edf0d810ff2d0d737338bb183aafdcb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0edf0d810ff2d0d737338bb183aafdcb" kindref="member" tooltip="Modulus (remainder) operator.">EagleDbSqlBinaryExpressionOperatorModulus</ref><sp/>=<sp/>3,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab0f04f820dc12cfd4173200c91d52fbb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab0f04f820dc12cfd4173200c91d52fbb" kindref="member" tooltip="Multiplication operator.">EagleDbSqlBinaryExpressionOperatorMultiply</ref><sp/>=<sp/>4,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030abd00b39d3d83eb1aecbe8e0614cbd68d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030abd00b39d3d83eb1aecbe8e0614cbd68d" kindref="member" tooltip="Not equals operator.">EagleDbSqlBinaryExpressionOperatorNotEquals</ref><sp/>=<sp/>5,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="37" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab5b98de3912b7f75bbcd98fe950a4ed3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab5b98de3912b7f75bbcd98fe950a4ed3" kindref="member" tooltip="Greater than operator.">EagleDbSqlBinaryExpressionOperatorGreaterThan</ref><sp/>=<sp/>6,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a6529df0af37b60f1ff88595111ec9f23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a6529df0af37b60f1ff88595111ec9f23" kindref="member" tooltip="Less than operator.">EagleDbSqlBinaryExpressionOperatorLessThan</ref><sp/>=<sp/>7,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="47" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030afd5ad27c8a911dd6fd74f73d4e417fcb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030afd5ad27c8a911dd6fd74f73d4e417fcb" kindref="member" tooltip="Greater than or equal to operator.">EagleDbSqlBinaryExpressionOperatorGreaterThanEqual</ref><sp/>=<sp/>8,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0ab15eaf283a143369786cb033a26ba7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a0ab15eaf283a143369786cb033a26ba7" kindref="member" tooltip="Greater than or equal to operator.">EagleDbSqlBinaryExpressionOperatorLessThanEqual</ref><sp/>=<sp/>9,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="57" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ada2a9c977ddd72a13a7dc9f39a0a6146" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ada2a9c977ddd72a13a7dc9f39a0a6146" kindref="member" tooltip="Subtraction (or negate) operator.">EagleDbSqlBinaryExpressionOperatorMinus</ref><sp/>=<sp/>10,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab44c3711bf3079616b86ce422b81700c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030ab44c3711bf3079616b86ce422b81700c" kindref="member" tooltip="Division operator.">EagleDbSqlBinaryExpressionOperatorDivide</ref><sp/>=<sp/>11,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a4c31cfe2418b9a8f869f65be6863f41d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a4c31cfe2418b9a8f869f65be6863f41d" kindref="member" tooltip="Logical OR operator.">EagleDbSqlBinaryExpressionOperatorOr</ref><sp/>=<sp/>12,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72" refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a63edb9d95848e20b8a2a6fa1ff6231fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030a63edb9d95848e20b8a2a6fa1ff6231fb" kindref="member" tooltip="Logical AND operator.">EagleDbSqlBinaryExpressionOperatorAnd</ref><sp/>=<sp/>13</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}<sp/><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_binary_expression_operator_8c_1ac7156d543776e6912fe14e4889938cb0" kindref="member" tooltip="Get the string representation of the operator.">EagleDbSqlBinaryExpressionOperator_toString</ref>(<ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member" tooltip="Bianry expression operators.">EagleDbSqlBinaryExpressionOperator</ref><sp/>op);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpressionOperator.h"/>
+  </compounddef>
+</doxygen>

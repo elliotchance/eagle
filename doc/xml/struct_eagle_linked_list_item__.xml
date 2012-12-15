@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_linked_list_item__" kind="struct" prot="public">
+    <compoundname>EagleLinkedListItem_</compoundname>
+    <includes refid="_eagle_linked_list_item_8h" local="no">EagleLinkedListItem.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_linked_list_item___1a8444d6e0dfe2bbab0b5e7b24308f1559" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <briefdescription>
+<para>A optional description of the item. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_item___1ae4c7bc6c53dbe20b0264d970462fa6ab" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* free)(void *obj)</definition>
+        <argsstring>)(void *obj)</argsstring>
+        <name>free</name>
+        <briefdescription>
+<para>A pointer to the function that will free <computeroutput>obj</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>If this is NULL then the normal <ref refid="struct_eagle_linked_list_item___1ae4c7bc6c53dbe20b0264d970462fa6ab" kindref="member">free()</ref> function will be used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="31" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_item___1ac96249cdfe6c8f377393768d52d70af6" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean freeObj</definition>
+        <argsstring></argsstring>
+        <name>freeObj</name>
+        <briefdescription>
+<para>If EagleTrue the <computeroutput>obj</computeroutput> will be freed with the list item. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_item___1a930e4651f5a085e7b0384e021d55577f" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="struct_eagle_linked_list_item__" kindref="compound">EagleLinkedListItem_</ref> *</type>
+        <definition>struct EagleLinkedListItem_* next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <briefdescription>
+<para>A pointer to the next item. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_item___1aa919482768c0eac179575481f77e0fa3" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* obj</definition>
+        <argsstring></argsstring>
+        <name>obj</name>
+        <briefdescription>
+<para>The actual item value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A linked list item. </para>    </briefdescription>
+    <detaileddescription>
+<para>A linked list can only contain instances of EagleLinkedListItem. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="160">
+        <label>void *</label>
+      </node>
+      <node id="158">
+        <label>char *</label>
+      </node>
+      <node id="156">
+        <label>EagleLinkedListItem</label>
+        <link refid="struct_eagle_linked_list_item__"/>
+        <childnode refid="157" relation="usage">
+          <edgelabel>free</edgelabel>
+        </childnode>
+        <childnode refid="156" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+        <childnode refid="158" relation="usage">
+          <edgelabel>description</edgelabel>
+        </childnode>
+        <childnode refid="159" relation="usage">
+          <edgelabel>freeObj</edgelabel>
+        </childnode>
+        <childnode refid="160" relation="usage">
+          <edgelabel>obj</edgelabel>
+        </childnode>
+      </node>
+      <node id="159">
+        <label>EagleBoolean</label>
+      </node>
+      <node id="157">
+        <label>void(*)(void *obj)</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.h" bodystart="11" bodyend="38"/>
+    <listofallmembers>
+      <member refid="struct_eagle_linked_list_item___1a8444d6e0dfe2bbab0b5e7b24308f1559" prot="public" virt="non-virtual"><scope>EagleLinkedListItem_</scope><name>description</name></member>
+      <member refid="struct_eagle_linked_list_item___1ae4c7bc6c53dbe20b0264d970462fa6ab" prot="public" virt="non-virtual"><scope>EagleLinkedListItem_</scope><name>free</name></member>
+      <member refid="struct_eagle_linked_list_item___1ac96249cdfe6c8f377393768d52d70af6" prot="public" virt="non-virtual"><scope>EagleLinkedListItem_</scope><name>freeObj</name></member>
+      <member refid="struct_eagle_linked_list_item___1a930e4651f5a085e7b0384e021d55577f" prot="public" virt="non-virtual"><scope>EagleLinkedListItem_</scope><name>next</name></member>
+      <member refid="struct_eagle_linked_list_item___1aa919482768c0eac179575481f77e0fa3" prot="public" virt="non-virtual"><scope>EagleLinkedListItem_</scope><name>obj</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

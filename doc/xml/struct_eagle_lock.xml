@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_lock" kind="struct" prot="public">
+    <compoundname>EagleLock</compoundname>
+    <includes refid="_eagle_lock_8h" local="no">EagleLock.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_lock_1a857e6704f8bd64cf25dd3a6d9608b30c" prot="public" static="no" mutable="no">
+        <type>pthread_mutexattr_t</type>
+        <definition>pthread_mutexattr_t attr</definition>
+        <argsstring></argsstring>
+        <name>attr</name>
+        <briefdescription>
+<para>Currently not in use, but it contains attributes for the internal mutex. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_lock_1a4acff8232e4aec9cd5c6dc200ac55ef3" prot="public" static="no" mutable="no">
+        <type>pthread_mutex_t</type>
+        <definition>pthread_mutex_t mutex</definition>
+        <argsstring></argsstring>
+        <name>mutex</name>
+        <briefdescription>
+<para>Internal mutex that holds the lock. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A lock is used to synchronize code blocks between threads. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="162">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="163" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="164" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="163">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="164">
+        <label>pthread_mutexattr_t</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.h" bodystart="10" bodyend="22"/>
+    <listofallmembers>
+      <member refid="struct_eagle_lock_1a857e6704f8bd64cf25dd3a6d9608b30c" prot="public" virt="non-virtual"><scope>EagleLock</scope><name>attr</name></member>
+      <member refid="struct_eagle_lock_1a4acff8232e4aec9cd5c6dc200ac55ef3" prot="public" virt="non-virtual"><scope>EagleLock</scope><name>mutex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

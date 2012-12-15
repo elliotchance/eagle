@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/eagledb/EagleDbSqlBinaryExpression.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle/eagledb</a> - EagleDbSqlBinaryExpression.c<span style="font-size: 80%;"> (source / <a href="EagleDbSqlBinaryExpression.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">71</td>
+            <td class="headerCovTableEntry">71</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<a name="5"><span class="lineNum">       5 </span>            : #include &quot;EagleMemory.h&quot;</a>
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span><span class="lineCov">       2200 : EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left,</span>
+<span class="lineNum">       8 </span><span class="lineCov">       2200 :                                                            EagleDbSqlBinaryExpressionOperator op,</span>
+<span class="lineNum">       9 </span><span class="lineCov">       2200 :                                                            EagleDbSqlExpression *right)</span>
+<span class="lineNum">      10 </span>            : {
+<span class="lineNum">      11 </span><span class="lineCov">       2200 :     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate(&quot;EagleDbSqlBinaryExpression_New.1&quot;, sizeof(EagleDbSqlBinaryExpression));</span>
+<span class="lineNum">      12 </span><span class="lineCov">       2200 :     if(NULL == expr) {</span>
+<span class="lineNum">      13 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      14 </span>            :     }
+<span class="lineNum">      15 </span>            :     
+<span class="lineNum">      16 </span><span class="lineCov">       2192 :     expr-&gt;expressionType = EagleDbSqlExpressionTypeBinaryExpression;</span>
+<span class="lineNum">      17 </span><span class="lineCov">       2192 :     expr-&gt;left = left;</span>
+<span class="lineNum">      18 </span><span class="lineCov">       2192 :     expr-&gt;op = op;</span>
+<span class="lineNum">      19 </span><span class="lineCov">       2192 :     expr-&gt;right = right;</span>
+<span class="lineNum">      20 </span>            :     
+<span class="lineNum">      21 </span><span class="lineCov">       2192 :     return expr;</span>
+<a name="22"><span class="lineNum">      22 </span><span class="lineCov">       2200 : }</span></a>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">        376 : EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation(EagleDataType right,</span>
+<span class="lineNum">      25 </span><span class="lineCov">        376 :                                                           EagleDbSqlBinaryExpressionOperator op,</span>
+<span class="lineNum">      26 </span><span class="lineCov">        376 :                                                           EagleDbSqlBinaryOperator *match)</span>
+<span class="lineNum">      27 </span>            : {
+<span class="lineNum">      28 </span><span class="lineCov">        376 :     unsigned long i;</span>
+<span class="lineNum">      29 </span>            :     static EagleDbSqlBinaryOperator ops[] = {
+<span class="lineNum">      30 </span>            :         /* Integer                    left     operator          right    function              returns */
+<span class="lineNum">      31 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, GreaterThanInt,       Integer),
+<span class="lineNum">      32 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, LessThanInt,          Integer),
+<span class="lineNum">      33 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, GreaterThanEqualsInt, Integer),
+<span class="lineNum">      34 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, LessThanEqualsInt,    Integer),
+<span class="lineNum">      35 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsInt,            Integer),
+<span class="lineNum">      36 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsInt,         Integer),
+<span class="lineNum">      37 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionInt,          Integer),
+<span class="lineNum">      38 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyInt,          Integer),
+<span class="lineNum">      39 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusRightInt,      Integer),
+<span class="lineNum">      40 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideRightInt,       Integer),
+<span class="lineNum">      41 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractRightInt,     Integer),
+<span class="lineNum">      42 </span>            :         
+<span class="lineNum">      43 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThan,           Float, GreaterThanFloat,       Integer),
+<span class="lineNum">      44 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThan,        Float, LessThanFloat,          Integer),
+<span class="lineNum">      45 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,      Float, GreaterThanEqualsFloat, Integer),
+<span class="lineNum">      46 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual,   Float, LessThanEqualsFloat,    Integer),
+<span class="lineNum">      47 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Equals,             Float, EqualsFloat,            Integer),
+<span class="lineNum">      48 </span>            :         EagleDbSqlBinaryOperator_Make(Float, NotEquals,          Float, NotEqualsFloat,         Integer),
+<span class="lineNum">      49 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Plus,               Float, AdditionFloat,          Float),
+<span class="lineNum">      50 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Multiply,           Float, MultiplyFloat,          Float),
+<span class="lineNum">      51 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Divide,             Float, DivideRightFloat,       Float),
+<span class="lineNum">      52 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Minus,              Float, SubtractRightFloat,     Float),
+<span class="lineNum">      53 </span>            :     };
+<span class="lineNum">      54 </span>            :     
+<span class="lineNum">      55 </span><span class="lineCov">       3808 :     for(i = 0; i &lt; sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {</span>
+<span class="lineNum">      56 </span><span class="lineCov">       3624 :         if(right == ops[i].right &amp;&amp; op == ops[i].op) {</span>
+<span class="lineNum">      57 </span><span class="lineCov">        368 :             *match = ops[i];</span>
+<span class="lineNum">      58 </span><span class="lineCov">        368 :             return EagleTrue;</span>
+<span class="lineNum">      59 </span>            :         }
+<span class="lineNum">      60 </span><span class="lineCov">       1528 :     }</span>
+<span class="lineNum">      61 </span>            :     
+<span class="lineNum">      62 </span><span class="lineCov">          8 :     return EagleFalse;</span>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">        376 : }</span></a>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span><span class="lineCov">        752 : EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataType left,</span>
+<span class="lineNum">      66 </span><span class="lineCov">        752 :                                                          EagleDbSqlBinaryExpressionOperator op,</span>
+<span class="lineNum">      67 </span><span class="lineCov">        752 :                                                          EagleDbSqlBinaryOperator *match)</span>
+<span class="lineNum">      68 </span>            : {
+<span class="lineNum">      69 </span><span class="lineCov">        752 :     unsigned long i;</span>
+<span class="lineNum">      70 </span>            :     static EagleDbSqlBinaryOperator ops[] = {
+<span class="lineNum">      71 </span>            :         /* Integer                    left     operator          right    function              returns */
+<span class="lineNum">      72 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanInt,       Integer),
+<span class="lineNum">      73 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanInt,          Integer),
+<span class="lineNum">      74 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualsInt, Integer),
+<span class="lineNum">      75 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualsInt,    Integer),
+<span class="lineNum">      76 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsInt,            Integer),
+<span class="lineNum">      77 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsInt,         Integer),
+<span class="lineNum">      78 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionInt,          Integer),
+<span class="lineNum">      79 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyInt,          Integer),
+<span class="lineNum">      80 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractLeftInt,      Integer),
+<span class="lineNum">      81 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideLeftInt,        Integer),
+<span class="lineNum">      82 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusLeftInt,       Integer),
+<span class="lineNum">      83 </span>            :         
+<span class="lineNum">      84 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThan,        Float, GreaterThanFloat,       Integer),
+<span class="lineNum">      85 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThan,           Float, LessThanFloat,          Integer),
+<span class="lineNum">      86 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual,   Float, GreaterThanEqualsFloat, Integer),
+<span class="lineNum">      87 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,      Float, LessThanEqualsFloat,    Integer),
+<span class="lineNum">      88 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Equals,             Float, EqualsFloat,            Integer),
+<span class="lineNum">      89 </span>            :         EagleDbSqlBinaryOperator_Make(Float, NotEquals,          Float, NotEqualsFloat,         Integer),
+<span class="lineNum">      90 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Plus,               Float, AdditionFloat,          Float),
+<span class="lineNum">      91 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Multiply,           Float, MultiplyFloat,          Float),
+<span class="lineNum">      92 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Minus,              Float, SubtractLeftFloat,      Float),
+<span class="lineNum">      93 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Divide,             Float, DivideLeftFloat,        Float),
+<span class="lineNum">      94 </span>            :     };
+<span class="lineNum">      95 </span>            :     
+<span class="lineNum">      96 </span><span class="lineCov">       7984 :     for(i = 0; i &lt; sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">       7800 :         if(left == ops[i].left &amp;&amp; op == ops[i].op) {</span>
+<span class="lineNum">      98 </span><span class="lineCov">        744 :             *match = ops[i];</span>
+<span class="lineNum">      99 </span><span class="lineCov">        744 :             return EagleTrue;</span>
+<span class="lineNum">     100 </span>            :         }
+<span class="lineNum">     101 </span><span class="lineCov">       3240 :     }</span>
+<span class="lineNum">     102 </span>            :     
+<span class="lineNum">     103 </span><span class="lineCov">          8 :     return EagleFalse;</span>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">        752 : }</span></a>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span><span class="lineCov">       1040 : EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation(EagleDataType left,</span>
+<span class="lineNum">     107 </span><span class="lineCov">       1040 :                                                          EagleDbSqlBinaryExpressionOperator op,</span>
+<span class="lineNum">     108 </span><span class="lineCov">       1040 :                                                          EagleDataType right,</span>
+<span class="lineNum">     109 </span><span class="lineCov">       1040 :                                                          EagleDbSqlBinaryOperator *match)</span>
+<span class="lineNum">     110 </span>            : {
+<span class="lineNum">     111 </span><span class="lineCov">       1040 :     unsigned long i;</span>
+<span class="lineNum">     112 </span>            :     static EagleDbSqlBinaryOperator ops[] = {
+<span class="lineNum">     113 </span>            :         /* Integer                    left     operator          right    function                 returns */
+<span class="lineNum">     114 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionPageInt,         Integer),
+<span class="lineNum">     115 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsPageInt,           Integer),
+<span class="lineNum">     116 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusPageInt,          Integer),
+<span class="lineNum">     117 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyPageInt,         Integer),
+<span class="lineNum">     118 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsPageInt,        Integer),
+<span class="lineNum">     119 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanPageInt,      Integer),
+<span class="lineNum">     120 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanPageInt,         Integer),
+<span class="lineNum">     121 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualPageInt, Integer),
+<span class="lineNum">     122 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualPageInt,    Integer),
+<span class="lineNum">     123 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractPageInt,         Integer),
+<span class="lineNum">     124 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DividePageInt,           Integer),
+<span class="lineNum">     125 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, Or,               Integer, OrPageInt,               Integer),
+<span class="lineNum">     126 </span>            :         EagleDbSqlBinaryOperator_Make(Integer, And,              Integer, AndPageInt,              Integer),
+<span class="lineNum">     127 </span>            :         
+<span class="lineNum">     128 </span>            :         /* Float                      left   operator          right  function                   returns */
+<span class="lineNum">     129 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Multiply,         Float, MultiplyPageFloat,         Float),
+<span class="lineNum">     130 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Plus,             Float, AdditionPageFloat,         Float),
+<span class="lineNum">     131 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Equals,           Float, EqualsPageFloat,           Integer),
+<span class="lineNum">     132 </span>            :         EagleDbSqlBinaryOperator_Make(Float, NotEquals,        Float, NotEqualsPageFloat,        Integer),
+<span class="lineNum">     133 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThan,      Float, GreaterThanPageFloat,      Integer),
+<span class="lineNum">     134 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThan,         Float, LessThanPageFloat,         Integer),
+<span class="lineNum">     135 </span>            :         EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual, Float, GreaterThanEqualPageFloat, Integer),
+<span class="lineNum">     136 </span>            :         EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,    Float, LessThanEqualPageFloat,    Integer),
+<span class="lineNum">     137 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Minus,            Float, SubtractPageFloat,         Float),
+<span class="lineNum">     138 </span>            :         EagleDbSqlBinaryOperator_Make(Float, Divide,           Float, DividePageFloat,           Float)
+<span class="lineNum">     139 </span>            :     };
+<span class="lineNum">     140 </span>            :     
+<span class="lineNum">     141 </span><span class="lineCov">      13872 :     for(i = 0; i &lt; sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {</span>
+<span class="lineNum">     142 </span><span class="lineCov">      19480 :         if(left == ops[i].left &amp;&amp; right == ops[i].right &amp;&amp; op == ops[i].op) {</span>
+<span class="lineNum">     143 </span><span class="lineCov">       1024 :             *match = ops[i];</span>
+<span class="lineNum">     144 </span><span class="lineCov">       1024 :             return EagleTrue;</span>
+<span class="lineNum">     145 </span>            :         }
+<span class="lineNum">     146 </span><span class="lineCov">       5896 :     }</span>
+<span class="lineNum">     147 </span>            :     
+<span class="lineNum">     148 </span><span class="lineCov">         16 :     return EagleFalse;</span>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">       1040 : }</span></a>
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span><span class="lineCov">         16 : void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">     152 </span>            : {
+<span class="lineNum">     153 </span><span class="lineCov">         16 :     if(NULL == expr) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">     155 </span>            :     }
+<span class="lineNum">     156 </span>            :     
+<span class="lineNum">     157 </span><span class="lineCov">          8 :     EagleMemory_Free(expr);</span>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">         24 : }</span></a>
+<span class="lineNum">     159 </span>            : 
+<span class="lineNum">     160 </span><span class="lineCov">       2192 : void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">     161 </span>            : {
+<span class="lineNum">     162 </span><span class="lineCov">       2192 :     if(NULL == expr) {</span>
+<span class="lineNum">     163 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">     164 </span>            :     }
+<span class="lineNum">     165 </span>            :     
+<span class="lineNum">     166 </span><span class="lineCov">       2184 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr-&gt;left);</span>
+<span class="lineNum">     167 </span><span class="lineCov">       2184 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr-&gt;right);</span>
+<span class="lineNum">     168 </span><span class="lineCov">       2184 :     EagleMemory_Free(expr);</span>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">       4376 : }</span></a>
+<span class="lineNum">     170 </span>            : 
+<span class="lineNum">     171 </span><span class="lineCov">       2144 : char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">     172 </span>            : {
+<span class="lineNum">     173 </span><span class="lineCov">       2144 :     char* s = (char*) EagleMemory_Allocate(&quot;EagleDbSqlBinaryExpression_toString.1&quot;, 1024), *left, *right, *op;</span>
+<span class="lineNum">     174 </span><span class="lineCov">       2144 :     if(NULL == s) {</span>
+<span class="lineNum">     175 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">     176 </span>            :     }
+<span class="lineNum">     177 </span>            :     
+<span class="lineNum">     178 </span><span class="lineCov">       2136 :     left = EagleDbSqlExpression_toString(expr-&gt;left);</span>
+<span class="lineNum">     179 </span><span class="lineCov">       2136 :     op = EagleDbSqlBinaryExpressionOperator_toString(expr-&gt;op);</span>
+<span class="lineNum">     180 </span><span class="lineCov">       2136 :     right = EagleDbSqlExpression_toString(expr-&gt;right);</span>
+<span class="lineNum">     181 </span>            :     
+<span class="lineNum">     182 </span><span class="lineCov">       2136 :     sprintf(s, &quot;%s %s %s&quot;, left, op, right);</span>
+<span class="lineNum">     183 </span>            :     
+<span class="lineNum">     184 </span><span class="lineCov">       2136 :     EagleMemory_Free(left);</span>
+<span class="lineNum">     185 </span><span class="lineCov">       2136 :     EagleMemory_Free(op);</span>
+<span class="lineNum">     186 </span><span class="lineCov">       2136 :     EagleMemory_Free(right);</span>
+<span class="lineNum">     187 </span><span class="lineCov">       2136 :     return s;</span>
+<span class="lineNum">     188 </span><span class="lineCov">       2144 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

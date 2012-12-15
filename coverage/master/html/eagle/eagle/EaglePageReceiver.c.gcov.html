@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - eagle/eagle/EaglePageReceiver.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../index.html">directory</a> - <a href="index.html">eagle/eagle</a> - EaglePageReceiver.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-15</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">22</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">100.0 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">22</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>                : #include &quot;EaglePageReceiver.h&quot;
+<span class="lineNum">       4 </span>                : 
+<span class="lineNum">       5 </span>                : EaglePageReceiver* EaglePageReceiver_New(void)
+<span class="lineNum">       6 </span>                : {
+<span class="lineNum">       7 </span><span class="lineCov">             15 :     EaglePageReceiver *pr = (EaglePageReceiver*) malloc(sizeof(EaglePageReceiver));</span>
+<span class="lineNum">       8 </span><span class="lineCov">             15 :     pr-&gt;allocated = 10000;</span>
+<span class="lineNum">       9 </span><span class="lineCov">             15 :     pr-&gt;buffer = (int*) calloc((size_t) pr-&gt;allocated, sizeof(int));</span>
+<span class="lineNum">      10 </span><span class="lineCov">             15 :     pr-&gt;used = 0;</span>
+<span class="lineNum">      11 </span><span class="lineCov">             15 :     pr-&gt;pushRecordIdLock = EagleSynchronizer_CreateLock();</span>
+<span class="lineNum">      12 </span><span class="lineCov">             15 :     return pr;</span>
+<span class="lineNum">      13 </span>                : }
+<span class="lineNum">      14 </span>                : 
+<span class="lineNum">      15 </span><span class="lineCov">          10163 : void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId)</span>
+<span class="lineNum">      16 </span>                : {
+<span class="lineNum">      17 </span>                :     /* synchronize this function */
+<span class="lineNum">      18 </span><span class="lineCov">          10163 :     EagleSynchronizer_Lock(pr-&gt;pushRecordIdLock);</span>
+<span class="lineNum">      19 </span>                :     
+<span class="lineNum">      20 </span><span class="lineCov">          10163 :     if(pr-&gt;used &gt;= pr-&gt;allocated) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">              1 :         EagleSynchronizer_Unlock(pr-&gt;pushRecordIdLock);</span>
+<span class="lineNum">      22 </span><span class="lineCov">              1 :         return;</span>
+<span class="lineNum">      23 </span>                :     }
+<span class="lineNum">      24 </span><span class="lineCov">          10162 :     pr-&gt;buffer[pr-&gt;used++] = recordId;</span>
+<span class="lineNum">      25 </span>                :     
+<span class="lineNum">      26 </span><span class="lineCov">          10162 :     EagleSynchronizer_Unlock(pr-&gt;pushRecordIdLock);</span>
+<span class="lineNum">      27 </span><span class="lineCov">          20325 : }</span>
+<span class="lineNum">      28 </span>                : 
+<span class="lineNum">      29 </span><span class="lineCov">             16 : void EaglePageReceiver_Delete(EaglePageReceiver *receiver)</span>
+<span class="lineNum">      30 </span>                : {
+<span class="lineNum">      31 </span><span class="lineCov">             16 :     if(NULL == receiver) {</span>
+<span class="lineNum">      32 </span><span class="lineCov">              1 :         return;</span>
+<span class="lineNum">      33 </span>                :     }
+<span class="lineNum">      34 </span><span class="lineCov">             15 :     EagleLock_Delete(receiver-&gt;pushRecordIdLock);</span>
+<span class="lineNum">      35 </span><span class="lineCov">             15 :     receiver-&gt;pushRecordIdLock = NULL;</span>
+<span class="lineNum">      36 </span><span class="lineCov">             15 :     free((void*) receiver-&gt;buffer);</span>
+<span class="lineNum">      37 </span><span class="lineCov">             15 :     free((void*) receiver);</span>
+<span class="lineNum">      38 </span><span class="lineCov">             31 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

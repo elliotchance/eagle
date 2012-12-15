@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/eagle/EagleDataType.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle/eagle</a> - EagleDataType.c<span style="font-size: 80%;"> (source / <a href="EagleDataType.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;string.h&gt;</a>
+<a name="2"><span class="lineNum">       2 </span>            : #include &quot;EagleDataType.h&quot;</a>
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span><span class="lineCov">        360 : EagleDataType EagleDataType_nameToType(char *name)</span>
+<span class="lineNum">       5 </span>            : {
+<span class="lineNum">       6 </span><span class="lineCov">        704 :     if(!strcasecmp(name, &quot;int&quot;) || !strcasecmp(name, &quot;integer&quot;)) {</span>
+<span class="lineNum">       7 </span><span class="lineCov">        248 :         return EagleDataTypeInteger;</span>
+<span class="lineNum">       8 </span>            :     }
+<span class="lineNum">       9 </span><span class="lineCov">        168 :     if(!strcasecmp(name, &quot;varchar&quot;) || !strcasecmp(name, &quot;text&quot;)) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">         56 :         return EagleDataTypeVarchar;</span>
+<span class="lineNum">      11 </span>            :     }
+<span class="lineNum">      12 </span><span class="lineCov">         72 :     if(!strcasecmp(name, &quot;float&quot;) || !strcasecmp(name, &quot;double&quot;) ||</span>
+<span class="lineNum">      13 </span><span class="lineCov">         32 :        !strcasecmp(name, &quot;double precision&quot;) || !strcasecmp(name, &quot;real&quot;)) {</span>
+<span class="lineNum">      14 </span><span class="lineCov">         40 :         return EagleDataTypeFloat;</span>
+<span class="lineNum">      15 </span>            :     }
+<span class="lineNum">      16 </span>            :     
+<span class="lineNum">      17 </span><span class="lineCov">         16 :     return EagleDataTypeUnknown;</span>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">        360 : }</span></a>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">      18912 : char* EagleDataType_typeToName(EagleDataType type)</span>
+<span class="lineNum">      21 </span>            : {
+<span class="lineNum">      22 </span><span class="lineCov">      18912 :     switch(type) {</span>
+<span class="lineNum">      23 </span>            :             
+<span class="lineNum">      24 </span>            :         case EagleDataTypeUnknown:
+<span class="lineNum">      25 </span><span class="lineCov">          8 :             return strdup(&quot;UNKNOWN&quot;);</span>
+<span class="lineNum">      26 </span>            :             
+<span class="lineNum">      27 </span>            :         case EagleDataTypeInteger:
+<span class="lineNum">      28 </span><span class="lineCov">       9072 :             return strdup(&quot;INTEGER&quot;);</span>
+<span class="lineNum">      29 </span>            :             
+<span class="lineNum">      30 </span>            :         case EagleDataTypeVarchar:
+<span class="lineNum">      31 </span><span class="lineCov">        168 :             return strdup(&quot;VARCHAR&quot;);</span>
+<span class="lineNum">      32 </span>            :             
+<span class="lineNum">      33 </span>            :         case EagleDataTypeFloat:
+<span class="lineNum">      34 </span><span class="lineCov">        208 :             return strdup(&quot;FLOAT&quot;);</span>
+<span class="lineNum">      35 </span>            :             
+<span class="lineNum">      36 </span>            :     }
+<span class="lineNum">      37 </span><span class="lineCov">       9456 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

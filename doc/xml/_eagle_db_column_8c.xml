@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_column_8c" kind="file">
+    <compoundname>EagleDbColumn.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_db_column_8c" local="yes">EagleDbColumn.h</includes>
+    <includes refid="_eagle_data_8h" local="yes">EagleData.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_data_type_8h" local="yes">EagleDataType.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includedby refid="_eagle_db_column_8c" local="yes">eagle/eagledb/EagleDbColumn.c</includedby>
+    <incdepgraph>
+      <node id="1803">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1804">
+        <label>string.h</label>
+      </node>
+      <node id="1805">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1806" relation="include">
+        </childnode>
+      </node>
+      <node id="1806">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1807">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1802">
+        <label>eagle/eagledb/EagleDbColumn.c</label>
+        <link refid="EagleDbColumn.c"/>
+        <childnode refid="1803" relation="include">
+        </childnode>
+        <childnode refid="1804" relation="include">
+        </childnode>
+        <childnode refid="1802" relation="include">
+        </childnode>
+        <childnode refid="1805" relation="include">
+        </childnode>
+        <childnode refid="1807" relation="include">
+        </childnode>
+        <childnode refid="1806" relation="include">
+        </childnode>
+        <childnode refid="1808" relation="include">
+        </childnode>
+      </node>
+      <node id="1808">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1809">
+        <label>eagle/eagledb/EagleDbColumn.c</label>
+        <link refid="EagleDbColumn.c"/>
+        <childnode refid="1809" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_column_8c_1abd7a748167744256bc7a33bef14ece7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbColumn_Delete</definition>
+        <argsstring>(EagleDbColumn *column)</argsstring>
+        <name>EagleDbColumn_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_column" kindref="compound">EagleDbColumn</ref> *</type>
+          <declname>column</declname>
+        </param>
+        <briefdescription>
+<para>Free a column. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The column. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.c" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.c" bodystart="19" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_column_8c_1ab28cf830be834c634747a83410a9d852" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_column" kindref="compound">EagleDbColumn</ref> *</type>
+        <definition>EagleDbColumn* EagleDbColumn_New</definition>
+        <argsstring>(char *name, EagleDataType type)</argsstring>
+        <name>EagleDbColumn_New</name>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Create a new table column. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name will be duplicated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type for this column. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new column instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.c" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.c" bodystart="6" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_column_8h" kindref="compound">EagleDbColumn.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="_eagle_db_column_8h_1ab28cf830be834c634747a83410a9d852" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref>*<sp/><ref refid="_eagle_db_column_8c_1ab28cf830be834c634747a83410a9d852" kindref="member" tooltip="Create a new table column.">EagleDbColumn_New</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref><sp/>*column<sp/>=<sp/>(<ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbColumn_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref>));</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>column)<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>column-&gt;<ref refid="struct_eagle_db_column_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="The name of the column.">name</ref><sp/>=<sp/>(NULL<sp/>==<sp/>name<sp/>?<sp/>NULL<sp/>:<sp/>strdup(name));</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>column-&gt;<ref refid="struct_eagle_db_column_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="Column data type.">type</ref><sp/>=<sp/>type;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>column;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="_eagle_db_column_8h_1abd7a748167744256bc7a33bef14ece7f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_column_8c_1abd7a748167744256bc7a33bef14ece7f" kindref="member" tooltip="Free a column.">EagleDbColumn_Delete</ref>(<ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref><sp/>*column)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>column)<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(column-&gt;<ref refid="struct_eagle_db_column_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="The name of the column.">name</ref>);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(column);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.c"/>
+  </compounddef>
+</doxygen>

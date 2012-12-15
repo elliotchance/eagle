@@ -1,0 +1,812 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - /Users/elliot/Xcode/eagle/eagle_test/suites/OperatorSuite.c</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../index.html">top level</a> - <a href="index.html">Users/elliot/Xcode/eagle/eagle_test/suites</a> - OperatorSuite.c<span style="font-size: 80%;"> (source / <a href="OperatorSuite.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">492</td>
+            <td class="headerCovTableEntry">536</td>
+            <td class="headerCovTableEntryHi">91.8 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-03-03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;OperatorSuite.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EaglePageOperations.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleDbInstance.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleInstance.h&quot;
+<a name="8"><span class="lineNum">       8 </span>            : #include &quot;EagleDbParser.h&quot;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">          2 : EaglePage* OperatorSuite_GeneratePage(int pageSize)</span>
+<span class="lineNum">      11 </span>            : {
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     EaglePage *page = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      13 </span>            :     
+<span class="lineNum">      14 </span>            :     // prepare
+<span class="lineNum">      15 </span><span class="lineCov">       4004 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">       2000 :         ((int*) page-&gt;data)[i] = i;</span>
+<span class="lineNum">      17 </span><span class="lineCov">       2000 :     }</span>
+<span class="lineNum">      18 </span>            :     
+<span class="lineNum">      19 </span><span class="lineCov">          2 :     return page;</span>
+<a name="20"><span class="lineNum">      20 </span>            : }</a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">       4000 : u_int32_t arc4random0(u_int32_t max)</span>
+<span class="lineNum">      23 </span>            : {
+<span class="lineNum">      24 </span><span class="lineCov">       4000 :     while(1) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">       4009 :         u_int32_t r = arc4random() % max;</span>
+<span class="lineNum">      26 </span><span class="lineCov">       4009 :         if(0 != r) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">       4000 :             return r;</span>
+<span class="lineNum">      28 </span>            :         }
+<span class="lineNum">      29 </span><span class="lineCov">          9 :     }</span>
+<a name="30"><span class="lineNum">      30 </span>            : }</a>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanInt)
+<span class="lineNum">      33 </span>            : {
+<span class="lineNum">      34 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          1 :     int testValue = arc4random();</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :     EaglePage *page = OperatorSuite_GeneratePage(pageSize);</span>
+<span class="lineNum">      37 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      38 </span><span class="lineCov">          1 :     int *int1 = EagleData_Int(testValue);</span>
+<span class="lineNum">      39 </span>            :     
+<span class="lineNum">      40 </span><span class="lineCov">          1 :     EaglePageOperations_GreaterThanInt(out, page, NULL, int1);</span>
+<span class="lineNum">      41 </span>            :     
+<span class="lineNum">      42 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">      43 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">       1000 :         if(!(((int*) page-&gt;data)[i] &gt; testValue == ((int*) out-&gt;data)[i])) {</span>
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">      47 </span>            :         }
+<span class="lineNum">      48 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">      49 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">          1 :     EagleMemory_Free(int1);</span>
+<span class="lineNum">      52 </span><span class="lineCov">          1 :     EaglePage_Delete(page);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanInt)
+<span class="lineNum">      57 </span>            : {
+<span class="lineNum">      58 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">      59 </span><span class="lineCov">          1 :     int testValue = arc4random();</span>
+<span class="lineNum">      60 </span><span class="lineCov">          1 :     EaglePage *page = OperatorSuite_GeneratePage(pageSize);</span>
+<span class="lineNum">      61 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          1 :     int *int1 = EagleData_Int(testValue);</span>
+<span class="lineNum">      63 </span>            :     
+<span class="lineNum">      64 </span><span class="lineCov">          1 :     EaglePageOperations_LessThanInt(out, page, NULL, int1);</span>
+<span class="lineNum">      65 </span>            :     
+<span class="lineNum">      66 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">      67 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">      68 </span><span class="lineCov">       1000 :         if(!(((int*) page-&gt;data)[i] &lt; testValue == ((int*) out-&gt;data)[i])) {</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">      71 </span>            :         }
+<span class="lineNum">      72 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">      73 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">      74 </span>            :     
+<span class="lineNum">      75 </span><span class="lineCov">          1 :     EagleMemory_Free(int1);</span>
+<span class="lineNum">      76 </span><span class="lineCov">          1 :     EaglePage_Delete(page);</span>
+<span class="lineNum">      77 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_AndPage)
+<span class="lineNum">      81 </span>            : {
+<span class="lineNum">      82 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">      83 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      84 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      85 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">      86 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">      87 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">      88 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">      89 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">      90 </span>            :     
+<span class="lineNum">      91 </span><span class="lineCov">          1 :     EaglePageOperations_AndPage(out, page1, page2, NULL);</span>
+<span class="lineNum">      92 </span>            :     
+<span class="lineNum">      93 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">      94 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">      95 </span><span class="lineCov">       1486 :         if(((int*) page1-&gt;data)[i] &amp;&amp; ((int*) page2-&gt;data)[i] != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">      98 </span>            :         }
+<span class="lineNum">      99 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     100 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     101 </span>            :     
+<span class="lineNum">     102 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     104 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_OrPage)
+<span class="lineNum">     108 </span>            : {
+<span class="lineNum">     109 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     110 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     111 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     112 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     113 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">     115 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">     116 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     117 </span>            :     
+<span class="lineNum">     118 </span><span class="lineCov">          1 :     EaglePageOperations_OrPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     119 </span>            :     
+<span class="lineNum">     120 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     121 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">       2507 :         if((((int*) page1-&gt;data)[i] || ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     125 </span>            :         }
+<span class="lineNum">     126 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     127 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     128 </span>            :     
+<span class="lineNum">     129 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     130 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     131 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_AdditionPage)
+<span class="lineNum">     135 </span>            : {
+<span class="lineNum">     136 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     137 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     138 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     139 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     140 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     141 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     142 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     143 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     144 </span>            :     
+<span class="lineNum">     145 </span><span class="lineCov">          1 :     EaglePageOperations_AdditionPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     146 </span>            :     
+<span class="lineNum">     147 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     148 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     149 </span><span class="lineCov">       1000 :         if(((int*) page1-&gt;data)[i] + ((int*) page2-&gt;data)[i] != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     150 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     152 </span>            :         }
+<span class="lineNum">     153 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     154 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     155 </span>            :     
+<span class="lineNum">     156 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     157 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     158 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     160 </span>            : 
+<span class="lineNum">     161 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractPage)
+<span class="lineNum">     162 </span>            : {
+<span class="lineNum">     163 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     164 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     165 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     166 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     167 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     168 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     169 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     170 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     171 </span>            :     
+<span class="lineNum">     172 </span><span class="lineCov">          1 :     EaglePageOperations_SubtractPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     173 </span>            :     
+<span class="lineNum">     174 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     175 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     176 </span><span class="lineCov">       1000 :         if(((int*) page1-&gt;data)[i] - ((int*) page2-&gt;data)[i] != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     179 </span>            :         }
+<span class="lineNum">     180 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     181 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     182 </span>            :     
+<span class="lineNum">     183 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     184 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_MultiplyPage)
+<span class="lineNum">     189 </span>            : {
+<span class="lineNum">     190 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     191 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     192 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     193 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     194 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     195 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     196 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     197 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     198 </span>            :     
+<span class="lineNum">     199 </span><span class="lineCov">          1 :     EaglePageOperations_MultiplyPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     200 </span>            :     
+<span class="lineNum">     201 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     202 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     203 </span><span class="lineCov">       1000 :         if(((int*) page1-&gt;data)[i] * ((int*) page2-&gt;data)[i] != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     206 </span>            :         }
+<span class="lineNum">     207 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     208 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     209 </span>            :     
+<span class="lineNum">     210 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     211 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     212 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="213"><span class="lineNum">     213 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_EqualsPage)
+<span class="lineNum">     216 </span>            : {
+<span class="lineNum">     217 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     218 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     219 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     220 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     221 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     222 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">     223 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">     224 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     225 </span>            :     
+<span class="lineNum">     226 </span><span class="lineCov">          1 :     EaglePageOperations_EqualsPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     227 </span>            :     
+<span class="lineNum">     228 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     229 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] == ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     233 </span>            :         }
+<span class="lineNum">     234 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     235 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     236 </span>            :     
+<span class="lineNum">     237 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     238 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     239 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_NotEqualsPage)
+<span class="lineNum">     243 </span>            : {
+<span class="lineNum">     244 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     245 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     246 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     247 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     248 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     249 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 10;</span>
+<span class="lineNum">     250 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 10;</span>
+<span class="lineNum">     251 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     252 </span>            :     
+<span class="lineNum">     253 </span><span class="lineCov">          1 :     EaglePageOperations_NotEqualsPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     254 </span>            :     
+<span class="lineNum">     255 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     256 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] != ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     260 </span>            :         }
+<span class="lineNum">     261 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     262 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     263 </span>            :     
+<span class="lineNum">     264 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     265 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     266 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="267"><span class="lineNum">     267 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     268 </span>            : 
+<span class="lineNum">     269 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_ModulusPage)
+<span class="lineNum">     270 </span>            : {
+<span class="lineNum">     271 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     272 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     273 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     274 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     275 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     276 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random0(1000);</span>
+<span class="lineNum">     277 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random0(1000);</span>
+<span class="lineNum">     278 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     279 </span>            :     
+<span class="lineNum">     280 </span>            :     // make sure the first one is 0
+<span class="lineNum">     281 </span><span class="lineCov">          1 :     ((int*) page2-&gt;data)[0] = 0;</span>
+<span class="lineNum">     282 </span>            :     
+<span class="lineNum">     283 </span><span class="lineCov">          1 :     EaglePageOperations_ModulusPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     284 </span>            :     
+<span class="lineNum">     285 </span>            :     // modulus by 0
+<span class="lineNum">     286 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_INT(0, ((int*) out-&gt;data)[0]);</span>
+<span class="lineNum">     287 </span>            :     
+<span class="lineNum">     288 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     289 </span><span class="lineCov">       2000 :     for(int i = 1; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     290 </span><span class="lineCov">        999 :         if((((int*) page1-&gt;data)[i] % ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     291 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     293 </span>            :         }
+<span class="lineNum">     294 </span><span class="lineCov">        999 :     }</span>
+<span class="lineNum">     295 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     296 </span>            :     
+<span class="lineNum">     297 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     298 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     299 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="300"><span class="lineNum">     300 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     301 </span>            : 
+<span class="lineNum">     302 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanPage)
+<span class="lineNum">     303 </span>            : {
+<span class="lineNum">     304 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     305 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     306 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     307 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     308 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     309 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     310 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     311 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     312 </span>            :     
+<span class="lineNum">     313 </span><span class="lineCov">          1 :     EaglePageOperations_GreaterThanPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     314 </span>            :     
+<span class="lineNum">     315 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     316 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     317 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] &gt; ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     318 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     319 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     320 </span>            :         }
+<span class="lineNum">     321 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     322 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     323 </span>            :     
+<span class="lineNum">     324 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     325 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     326 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     328 </span>            : 
+<span class="lineNum">     329 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanPage)
+<span class="lineNum">     330 </span>            : {
+<span class="lineNum">     331 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     332 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     333 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     334 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     335 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     336 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     337 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     338 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     339 </span>            :     
+<span class="lineNum">     340 </span><span class="lineCov">          1 :     EaglePageOperations_LessThanPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     341 </span>            :     
+<span class="lineNum">     342 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     343 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     344 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] &lt; ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     346 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     347 </span>            :         }
+<span class="lineNum">     348 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     349 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     350 </span>            :     
+<span class="lineNum">     351 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     352 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     353 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     355 </span>            : 
+<span class="lineNum">     356 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanEqualPage)
+<span class="lineNum">     357 </span>            : {
+<span class="lineNum">     358 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     359 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     360 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     361 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     362 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     363 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     364 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     365 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     366 </span>            :     
+<span class="lineNum">     367 </span><span class="lineCov">          1 :     EaglePageOperations_GreaterThanEqualPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     368 </span>            :     
+<span class="lineNum">     369 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     370 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     371 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] &gt;= ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     373 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     374 </span>            :         }
+<span class="lineNum">     375 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     376 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     377 </span>            :     
+<span class="lineNum">     378 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     379 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     380 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="381"><span class="lineNum">     381 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     382 </span>            : 
+<span class="lineNum">     383 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualPage)
+<span class="lineNum">     384 </span>            : {
+<span class="lineNum">     385 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     386 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     387 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     388 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     389 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     390 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     391 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     392 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     393 </span>            :     
+<span class="lineNum">     394 </span><span class="lineCov">          1 :     EaglePageOperations_LessThanEqualPage(out, page1, page2, NULL);</span>
+<span class="lineNum">     395 </span>            :     
+<span class="lineNum">     396 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     397 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     398 </span><span class="lineCov">       1000 :         if((((int*) page1-&gt;data)[i] &lt;= ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     399 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     400 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     401 </span>            :         }
+<span class="lineNum">     402 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     403 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     404 </span>            :     
+<span class="lineNum">     405 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     406 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     407 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="408"><span class="lineNum">     408 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     409 </span>            : 
+<span class="lineNum">     410 </span><span class="lineCov">        121 : void OperatorSuite_testOperator(EagleDbInstance *db, const char *expr, int result)</span>
+<span class="lineNum">     411 </span>            : {
+<span class="lineNum">     412 </span><span class="lineCov">        121 :     char newsql[1024];</span>
+<span class="lineNum">     413 </span>            :     
+<span class="lineNum">     414 </span>            :     /* parse sql */
+<span class="lineNum">     415 </span><span class="lineCov">        121 :     sprintf(newsql, &quot;SELECT %s FROM mytable;&quot;, expr);</span>
+<span class="lineNum">     416 </span><span class="lineCov">        121 :     EagleDbParser *p = EagleDbParser_ParseWithString(newsql);</span>
+<span class="lineNum">     417 </span><span class="lineCov">        121 :     if(EagleTrue == EagleDbParser_hasError(p)) {</span>
+<span class="lineNum">     418 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(&quot;%s&quot;, EagleDbParser_lastError(p));</span>
+<span class="lineNum">     419 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     420 </span>            :     
+<span class="lineNum">     421 </span>            :     /* compile plan */
+<span class="lineNum">     422 </span><span class="lineCov">        121 :     EaglePlan *plan = EagleDbSqlSelect_parse(p-&gt;yyparse_ast, db);</span>
+<span class="lineNum">     423 </span><span class="lineCov">        121 :     if(NULL == plan) {</span>
+<span class="lineNum">     424 </span><span class="lineNoCov">          0 :         CUNIT_ASSERT_NOT_NULL(plan);</span>
+<span class="lineNum">     425 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     426 </span><span class="lineCov">        121 :     if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">     427 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(&quot;%s&quot;, plan-&gt;errorMessage);</span>
+<span class="lineNum">     428 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     429 </span>            :     
+<span class="lineNum">     430 </span><span class="lineCov">        121 :     EagleInstance *eagle = EagleInstance_New(1);</span>
+<span class="lineNum">     431 </span><span class="lineCov">        121 :     EagleInstance_addPlan(eagle, plan);</span>
+<span class="lineNum">     432 </span><span class="lineCov">        121 :     EagleInstance_run(eagle);</span>
+<span class="lineNum">     433 </span>            :     
+<span class="lineNum">     434 </span>            :     /* check results */
+<span class="lineNum">     435 </span><span class="lineCov">        121 :     EaglePage *page = EaglePageProvider_nextPage(plan-&gt;result[0]);</span>
+<span class="lineNum">     436 </span><span class="lineCov">        121 :     if(NULL == page) {</span>
+<span class="lineNum">     437 </span><span class="lineNoCov">          0 :         CUNIT_ASSERT_NOT_NULL(page);</span>
+<span class="lineNum">     438 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     439 </span>            :     
+<span class="lineNum">     440 </span><span class="lineCov">        484 :     for(int i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">     441 </span><span class="lineCov">        121 :         if(((int*) page-&gt;data)[i] != result) {</span>
+<span class="lineNum">     442 </span><span class="lineNoCov">          0 :             CUNIT_FAIL(&quot;Expression failed (%s): Expected %d, received %d&quot;, expr, result, ((int*) page-&gt;data)[i]);</span>
+<span class="lineNum">     443 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     444 </span><span class="lineCov">        121 :     }</span>
+<span class="lineNum">     445 </span>            :     
+<span class="lineNum">     446 </span><span class="lineCov">        121 :     EagleDbSqlExpression_DeleteRecursive(p-&gt;yyparse_ast);</span>
+<span class="lineNum">     447 </span><span class="lineCov">        121 :     EaglePage_Delete(page);</span>
+<span class="lineNum">     448 </span><span class="lineCov">        121 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     449 </span><span class="lineCov">        121 :     EagleDbParser_Delete(p);</span>
+<span class="lineNum">     450 </span><span class="lineCov">        121 :     EagleInstance_Delete(eagle);</span>
+<a name="451"><span class="lineNum">     451 </span><span class="lineCov">        121 : }</span></a>
+<span class="lineNum">     452 </span>            : 
+<span class="lineNum">     453 </span>            : CUNIT_TEST(OperatorSuite, OperatorPrecedence)
+<span class="lineNum">     454 </span>            : {
+<span class="lineNum">     455 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     456 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(pageSize);</span>
+<span class="lineNum">     457 </span>            :     
+<span class="lineNum">     458 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     459 </span>            :     
+<span class="lineNum">     460 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     461 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col1&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     462 </span>            :     
+<span class="lineNum">     463 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);</span>
+<span class="lineNum">     464 </span><span class="lineCov">          1 :     EagleDbSchema_addTable(schema, td);</span>
+<span class="lineNum">     465 </span>            :     
+<span class="lineNum">     466 </span><span class="lineCov">          4 :     for(int i = 0; i &lt; 1; ++i) {</span>
+<span class="lineNum">     467 </span>            :         // create a record
+<span class="lineNum">     468 </span><span class="lineCov">          1 :         EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     469 </span><span class="lineCov">          1 :         EagleDbTuple_setInt(tuple, 0, i);</span>
+<span class="lineNum">     470 </span>            :         
+<span class="lineNum">     471 </span>            :         // put record in
+<span class="lineNum">     472 </span><span class="lineCov">          1 :         EagleDbTableData_insert(td, tuple);</span>
+<span class="lineNum">     473 </span>            :         
+<span class="lineNum">     474 </span><span class="lineCov">          1 :         EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     475 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     476 </span>            :     
+<span class="lineNum">     477 </span>            :     /*~ operators ~*/
+<span class="lineNum">     478 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 &gt;= 563&quot;, 601 &gt;= 417 &gt;= 563);</span>
+<span class="lineNum">     479 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 &lt;= 695&quot;, 601 &gt;= 417 &lt;= 695);</span>
+<span class="lineNum">     480 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 != 479&quot;, 601 &gt;= 417 != 479);</span>
+<span class="lineNum">     481 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 &gt; 295&quot;, 601 &gt;= 417 &gt; 295);</span>
+<span class="lineNum">     482 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 &lt; 962&quot;, 601 &gt;= 417 &lt; 962);</span>
+<span class="lineNum">     483 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 * 432&quot;, 601 &gt;= 417 * 432);</span>
+<span class="lineNum">     484 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 + 456&quot;, 601 &gt;= 417 + 456);</span>
+<span class="lineNum">     485 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 - 245&quot;, 601 &gt;= 417 - 245);</span>
+<span class="lineNum">     486 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 / 837&quot;, 601 &gt;= 417 / 837);</span>
+<span class="lineNum">     487 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 % 703&quot;, 601 &gt;= 417 % 703);</span>
+<span class="lineNum">     488 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt;= 417 = 565&quot;, 601 &gt;= 417 == 565);</span>
+<span class="lineNum">     489 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 &gt;= 216&quot;, 601 &lt;= 271 &gt;= 216);</span>
+<span class="lineNum">     490 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 &lt;= 346&quot;, 601 &lt;= 271 &lt;= 346);</span>
+<span class="lineNum">     491 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 != 147&quot;, 601 &lt;= 271 != 147);</span>
+<span class="lineNum">     492 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 &gt; 562&quot;, 601 &lt;= 271 &gt; 562);</span>
+<span class="lineNum">     493 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 &lt; 436&quot;, 601 &lt;= 271 &lt; 436);</span>
+<span class="lineNum">     494 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 * 185&quot;, 601 &lt;= 271 * 185);</span>
+<span class="lineNum">     495 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 + 349&quot;, 601 &lt;= 271 + 349);</span>
+<span class="lineNum">     496 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 - 326&quot;, 601 &lt;= 271 - 326);</span>
+<span class="lineNum">     497 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 / 288&quot;, 601 &lt;= 271 / 288);</span>
+<span class="lineNum">     498 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 % 322&quot;, 601 &lt;= 271 % 322);</span>
+<span class="lineNum">     499 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt;= 271 = 599&quot;, 601 &lt;= 271 == 599);</span>
+<span class="lineNum">     500 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 &gt;= 366&quot;, 601 != 226 &gt;= 366);</span>
+<span class="lineNum">     501 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 &lt;= 227&quot;, 601 != 226 &lt;= 227);</span>
+<span class="lineNum">     502 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 != 347&quot;, 601 != 226 != 347);</span>
+<span class="lineNum">     503 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 &gt; 752&quot;, 601 != 226 &gt; 752);</span>
+<span class="lineNum">     504 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 &lt; 435&quot;, 601 != 226 &lt; 435);</span>
+<span class="lineNum">     505 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 * 948&quot;, 601 != 226 * 948);</span>
+<span class="lineNum">     506 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 + 521&quot;, 601 != 226 + 521);</span>
+<span class="lineNum">     507 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 - 999&quot;, 601 != 226 - 999);</span>
+<span class="lineNum">     508 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 / 644&quot;, 601 != 226 / 644);</span>
+<span class="lineNum">     509 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 % 1&quot;, 601 != 226 % 1);</span>
+<span class="lineNum">     510 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 != 226 = 646&quot;, 601 != 226 == 646);</span>
+<span class="lineNum">     511 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 &gt;= 433&quot;, 601 &gt; 606 &gt;= 433);</span>
+<span class="lineNum">     512 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 &lt;= 454&quot;, 601 &gt; 606 &lt;= 454);</span>
+<span class="lineNum">     513 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 != 204&quot;, 601 &gt; 606 != 204);</span>
+<span class="lineNum">     514 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 &gt; 622&quot;, 601 &gt; 606 &gt; 622);</span>
+<span class="lineNum">     515 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 &lt; 157&quot;, 601 &gt; 606 &lt; 157);</span>
+<span class="lineNum">     516 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 * 769&quot;, 601 &gt; 606 * 769);</span>
+<span class="lineNum">     517 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 + 246&quot;, 601 &gt; 606 + 246);</span>
+<span class="lineNum">     518 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 - 725&quot;, 601 &gt; 606 - 725);</span>
+<span class="lineNum">     519 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 / 115&quot;, 601 &gt; 606 / 115);</span>
+<span class="lineNum">     520 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 % 745&quot;, 601 &gt; 606 % 745);</span>
+<span class="lineNum">     521 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &gt; 606 = 639&quot;, 601 &gt; 606 == 639);</span>
+<span class="lineNum">     522 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 &gt;= 930&quot;, 601 &lt; 903 &gt;= 930);</span>
+<span class="lineNum">     523 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 &lt;= 989&quot;, 601 &lt; 903 &lt;= 989);</span>
+<span class="lineNum">     524 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 != 581&quot;, 601 &lt; 903 != 581);</span>
+<span class="lineNum">     525 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 &gt; 570&quot;, 601 &lt; 903 &gt; 570);</span>
+<span class="lineNum">     526 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 &lt; 663&quot;, 601 &lt; 903 &lt; 663);</span>
+<span class="lineNum">     527 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 * 181&quot;, 601 &lt; 903 * 181);</span>
+<span class="lineNum">     528 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 + 796&quot;, 601 &lt; 903 + 796);</span>
+<span class="lineNum">     529 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 - 29&quot;, 601 &lt; 903 - 29);</span>
+<span class="lineNum">     530 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 / 760&quot;, 601 &lt; 903 / 760);</span>
+<span class="lineNum">     531 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 % 496&quot;, 601 &lt; 903 % 496);</span>
+<span class="lineNum">     532 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 &lt; 903 = 134&quot;, 601 &lt; 903 == 134);</span>
+<span class="lineNum">     533 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 &gt;= 444&quot;, 601 * 196 &gt;= 444);</span>
+<span class="lineNum">     534 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 &lt;= 655&quot;, 601 * 196 &lt;= 655);</span>
+<span class="lineNum">     535 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 != 547&quot;, 601 * 196 != 547);</span>
+<span class="lineNum">     536 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 &gt; 440&quot;, 601 * 196 &gt; 440);</span>
+<span class="lineNum">     537 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 &lt; 8&quot;, 601 * 196 &lt; 8);</span>
+<span class="lineNum">     538 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 * 193&quot;, 601 * 196 * 193);</span>
+<span class="lineNum">     539 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 + 399&quot;, 601 * 196 + 399);</span>
+<span class="lineNum">     540 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 - 793&quot;, 601 * 196 - 793);</span>
+<span class="lineNum">     541 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 / 647&quot;, 601 * 196 / 647);</span>
+<span class="lineNum">     542 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 % 603&quot;, 601 * 196 % 603);</span>
+<span class="lineNum">     543 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 * 196 = 768&quot;, 601 * 196 == 768);</span>
+<span class="lineNum">     544 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 &gt;= 372&quot;, 601 + 156 &gt;= 372);</span>
+<span class="lineNum">     545 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 &lt;= 14&quot;, 601 + 156 &lt;= 14);</span>
+<span class="lineNum">     546 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 != 233&quot;, 601 + 156 != 233);</span>
+<span class="lineNum">     547 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 &gt; 839&quot;, 601 + 156 &gt; 839);</span>
+<span class="lineNum">     548 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 &lt; 111&quot;, 601 + 156 &lt; 111);</span>
+<span class="lineNum">     549 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 * 873&quot;, 601 + 156 * 873);</span>
+<span class="lineNum">     550 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 + 94&quot;, 601 + 156 + 94);</span>
+<span class="lineNum">     551 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 - 41&quot;, 601 + 156 - 41);</span>
+<span class="lineNum">     552 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 / 214&quot;, 601 + 156 / 214);</span>
+<span class="lineNum">     553 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 % 675&quot;, 601 + 156 % 675);</span>
+<span class="lineNum">     554 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 + 156 = 612&quot;, 601 + 156 == 612);</span>
+<span class="lineNum">     555 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 &gt;= 208&quot;, 601 - 877 &gt;= 208);</span>
+<span class="lineNum">     556 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 &lt;= 760&quot;, 601 - 877 &lt;= 760);</span>
+<span class="lineNum">     557 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 != 906&quot;, 601 - 877 != 906);</span>
+<span class="lineNum">     558 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 &gt; 969&quot;, 601 - 877 &gt; 969);</span>
+<span class="lineNum">     559 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 &lt; 256&quot;, 601 - 877 &lt; 256);</span>
+<span class="lineNum">     560 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 * 392&quot;, 601 - 877 * 392);</span>
+<span class="lineNum">     561 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 + 517&quot;, 601 - 877 + 517);</span>
+<span class="lineNum">     562 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 - 53&quot;, 601 - 877 - 53);</span>
+<span class="lineNum">     563 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 / 400&quot;, 601 - 877 / 400);</span>
+<span class="lineNum">     564 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 % 64&quot;, 601 - 877 % 64);</span>
+<span class="lineNum">     565 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 - 877 = 493&quot;, 601 - 877 == 493);</span>
+<span class="lineNum">     566 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 &gt;= 609&quot;, 601 / 408 &gt;= 609);</span>
+<span class="lineNum">     567 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 &lt;= 244&quot;, 601 / 408 &lt;= 244);</span>
+<span class="lineNum">     568 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 != 202&quot;, 601 / 408 != 202);</span>
+<span class="lineNum">     569 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 &gt; 608&quot;, 601 / 408 &gt; 608);</span>
+<span class="lineNum">     570 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 &lt; 847&quot;, 601 / 408 &lt; 847);</span>
+<span class="lineNum">     571 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 * 970&quot;, 601 / 408 * 970);</span>
+<span class="lineNum">     572 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 + 116&quot;, 601 / 408 + 116);</span>
+<span class="lineNum">     573 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 - 571&quot;, 601 / 408 - 571);</span>
+<span class="lineNum">     574 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 / 336&quot;, 601 / 408 / 336);</span>
+<span class="lineNum">     575 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 % 349&quot;, 601 / 408 % 349);</span>
+<span class="lineNum">     576 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 / 408 = 762&quot;, 601 / 408 == 762);</span>
+<span class="lineNum">     577 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 &gt;= 222&quot;, 601 % 447 &gt;= 222);</span>
+<span class="lineNum">     578 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 &lt;= 856&quot;, 601 % 447 &lt;= 856);</span>
+<span class="lineNum">     579 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 != 840&quot;, 601 % 447 != 840);</span>
+<span class="lineNum">     580 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 &gt; 788&quot;, 601 % 447 &gt; 788);</span>
+<span class="lineNum">     581 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 &lt; 884&quot;, 601 % 447 &lt; 884);</span>
+<span class="lineNum">     582 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 * 804&quot;, 601 % 447 * 804);</span>
+<span class="lineNum">     583 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 + 665&quot;, 601 % 447 + 665);</span>
+<span class="lineNum">     584 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 - 444&quot;, 601 % 447 - 444);</span>
+<span class="lineNum">     585 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 / 917&quot;, 601 % 447 / 917);</span>
+<span class="lineNum">     586 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 % 924&quot;, 601 % 447 % 924);</span>
+<span class="lineNum">     587 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 % 447 = 765&quot;, 601 % 447 == 765);</span>
+<span class="lineNum">     588 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 &gt;= 316&quot;, 601 == 525 &gt;= 316);</span>
+<span class="lineNum">     589 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 &lt;= 282&quot;, 601 == 525 &lt;= 282);</span>
+<span class="lineNum">     590 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 != 578&quot;, 601 == 525 != 578);</span>
+<span class="lineNum">     591 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 &gt; 716&quot;, 601 == 525 &gt; 716);</span>
+<span class="lineNum">     592 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 &lt; 698&quot;, 601 == 525 &lt; 698);</span>
+<span class="lineNum">     593 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 * 424&quot;, 601 == 525 * 424);</span>
+<span class="lineNum">     594 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 + 477&quot;, 601 == 525 + 477);</span>
+<span class="lineNum">     595 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 - 659&quot;, 601 == 525 - 659);</span>
+<span class="lineNum">     596 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 / 668&quot;, 601 == 525 / 668);</span>
+<span class="lineNum">     597 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 % 679&quot;, 601 == 525 % 679);</span>
+<span class="lineNum">     598 </span><span class="lineCov">          1 :     OperatorSuite_testOperator(db, &quot;601 = 525 = 267&quot;, 601 == 525 == 267);</span>
+<span class="lineNum">     599 </span>            :     /*~ /operators ~*/
+<span class="lineNum">     600 </span>            :     
+<span class="lineNum">     601 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     602 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<span class="lineNum">     603 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<a name="604"><span class="lineNum">     604 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     605 </span>            : 
+<span class="lineNum">     606 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_DividePage)
+<span class="lineNum">     607 </span>            : {
+<span class="lineNum">     608 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     609 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     610 </span><span class="lineCov">          1 :     EaglePage *page2 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     611 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     612 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     613 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random0(1000);</span>
+<span class="lineNum">     614 </span><span class="lineCov">       1000 :         ((int*) page2-&gt;data)[i] = arc4random0(1000);</span>
+<span class="lineNum">     615 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     616 </span>            :     
+<span class="lineNum">     617 </span>            :     // make sure the first one is 0
+<span class="lineNum">     618 </span><span class="lineCov">          1 :     ((int*) page2-&gt;data)[0] = 0;</span>
+<span class="lineNum">     619 </span>            :     
+<span class="lineNum">     620 </span><span class="lineCov">          1 :     EaglePageOperations_DividePage(out, page1, page2, NULL);</span>
+<span class="lineNum">     621 </span>            :     
+<span class="lineNum">     622 </span>            :     // modulus by 0
+<span class="lineNum">     623 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_INT(0, ((int*) out-&gt;data)[0]);</span>
+<span class="lineNum">     624 </span>            :     
+<span class="lineNum">     625 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     626 </span><span class="lineCov">       2000 :     for(int i = 1; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     627 </span><span class="lineCov">        999 :         if((((int*) page1-&gt;data)[i] / ((int*) page2-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     628 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     629 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     630 </span>            :         }
+<span class="lineNum">     631 </span><span class="lineCov">        999 :     }</span>
+<span class="lineNum">     632 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     633 </span>            :     
+<span class="lineNum">     634 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     635 </span><span class="lineCov">          1 :     EaglePage_Delete(page2);</span>
+<span class="lineNum">     636 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="637"><span class="lineNum">     637 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     638 </span>            : 
+<span class="lineNum">     639 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_NegatePage)
+<span class="lineNum">     640 </span>            : {
+<span class="lineNum">     641 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     642 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     643 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     644 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     645 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 100;</span>
+<span class="lineNum">     646 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     647 </span>            :     
+<span class="lineNum">     648 </span><span class="lineCov">          1 :     EaglePageOperations_NegatePage(out, page1, NULL, NULL);</span>
+<span class="lineNum">     649 </span>            :     
+<span class="lineNum">     650 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     651 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     652 </span><span class="lineCov">       1000 :         if(-((int*) page1-&gt;data)[i] != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     653 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     654 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     655 </span>            :         }
+<span class="lineNum">     656 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     657 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     658 </span>            :     
+<span class="lineNum">     659 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     660 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="661"><span class="lineNum">     661 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     662 </span>            : 
+<span class="lineNum">     663 </span>            : CUNIT_TEST(OperatorSuite, EaglePageOperations_NotPage)
+<span class="lineNum">     664 </span>            : {
+<span class="lineNum">     665 </span><span class="lineCov">          1 :     int pageSize = 1000;</span>
+<span class="lineNum">     666 </span><span class="lineCov">          1 :     EaglePage *page1 = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     667 </span><span class="lineCov">          1 :     EaglePage *out = EaglePage_AllocInt(pageSize);</span>
+<span class="lineNum">     668 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     669 </span><span class="lineCov">       1000 :         ((int*) page1-&gt;data)[i] = arc4random() % 2;</span>
+<span class="lineNum">     670 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     671 </span>            :     
+<span class="lineNum">     672 </span><span class="lineCov">          1 :     EaglePageOperations_NotPage(out, page1, NULL, NULL);</span>
+<span class="lineNum">     673 </span>            :     
+<span class="lineNum">     674 </span><span class="lineCov">          1 :     int valid = 1;</span>
+<span class="lineNum">     675 </span><span class="lineCov">       2002 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     676 </span><span class="lineCov">       1000 :         if((!((int*) page1-&gt;data)[i]) != ((int*) out-&gt;data)[i]) {</span>
+<span class="lineNum">     677 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     678 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     679 </span>            :         }
+<span class="lineNum">     680 </span><span class="lineCov">       1000 :     }</span>
+<span class="lineNum">     681 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     682 </span>            :     
+<span class="lineNum">     683 </span><span class="lineCov">          1 :     EaglePage_Delete(page1);</span>
+<span class="lineNum">     684 </span><span class="lineCov">          1 :     EaglePage_Delete(out);</span>
+<a name="685"><span class="lineNum">     685 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     686 </span>            : 
+<span class="lineNum">     687 </span>            : CUnitTests* OperatorSuite_tests()
+<span class="lineNum">     688 </span>            : {
+<span class="lineNum">     689 </span><span class="lineCov">          1 :     CUnitTests *tests = CUnitTests_New(100);</span>
+<span class="lineNum">     690 </span>            :     
+<span class="lineNum">     691 </span>            :     // method tests
+<span class="lineNum">     692 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));</span>
+<span class="lineNum">     693 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DividePage, &quot;page(int) / page(int)&quot;));</span>
+<span class="lineNum">     694 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, &quot;int &gt; int&quot;));</span>
+<span class="lineNum">     695 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanInt, &quot;int &lt; int&quot;));</span>
+<span class="lineNum">     696 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanPage, &quot;page(int) &gt; page(int)&quot;));</span>
+<span class="lineNum">     697 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanPage, &quot;page(int) &lt; page(int)&quot;));</span>
+<span class="lineNum">     698 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanEqualPage, &quot;page(int) &gt;= page(int)&quot;));</span>
+<span class="lineNum">     699 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanEqualPage, &quot;page(int) &lt;= page(int)&quot;));</span>
+<span class="lineNum">     700 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AndPage, &quot;page(int) AND page(int)&quot;));</span>
+<span class="lineNum">     701 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AdditionPage, &quot;page(int) + page(int)&quot;));</span>
+<span class="lineNum">     702 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_SubtractPage, &quot;page(int) - page(int)&quot;));</span>
+<span class="lineNum">     703 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_EqualsPage, &quot;page(int) = page(int)&quot;));</span>
+<span class="lineNum">     704 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_NotEqualsPage, &quot;page(int) != page(int)&quot;));</span>
+<span class="lineNum">     705 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_ModulusPage, &quot;page(int) % page(int)&quot;));</span>
+<span class="lineNum">     706 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_MultiplyPage, &quot;page(int) * page(int)&quot;));</span>
+<span class="lineNum">     707 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_NegatePage, &quot;- page(int)&quot;));</span>
+<span class="lineNum">     708 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_NotPage, &quot;NOT page(int)&quot;));</span>
+<span class="lineNum">     709 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_OrPage, &quot;page(int) OR page(int)&quot;));</span>
+<span class="lineNum">     710 </span>            :     
+<span class="lineNum">     711 </span><span class="lineCov">          1 :     return tests;</span>
+<span class="lineNum">     712 </span>            : }
+<span class="lineNum">     713 </span>            : 
+<span class="lineNum">     714 </span>            : /**
+<a name="715"><span class="lineNum">     715 </span>            :  * The suite init function.</a>
+<span class="lineNum">     716 </span>            :  */
+<span class="lineNum">     717 </span>            : int OperatorSuite_init()
+<span class="lineNum">     718 </span>            : {
+<span class="lineNum">     719 </span><span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">     720 </span>            : }
+<span class="lineNum">     721 </span>            : 
+<span class="lineNum">     722 </span>            : /**
+<a name="723"><span class="lineNum">     723 </span>            :  * The suite cleanup function.</a>
+<span class="lineNum">     724 </span>            :  */
+<span class="lineNum">     725 </span>            : int OperatorSuite_clean()
+<span class="lineNum">     726 </span>            : {
+<span class="lineNum">     727 </span><span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">     728 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

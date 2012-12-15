@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - eagle/eagle/EagleInstance.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../index.html">directory</a> - <a href="index.html">eagle/eagle</a> - EagleInstance.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-15</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">36</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">100.0 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">36</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>                : #include &quot;EagleInstance.h&quot;
+<span class="lineNum">       4 </span>                : 
+<span class="lineNum">       5 </span><span class="lineCov">             14 : EagleInstance* EagleInstance_New(int totalWorkers)</span>
+<span class="lineNum">       6 </span>                : {
+<span class="lineNum">       7 </span><span class="lineCov">             14 :     EagleInstance *instance = (EagleInstance*) malloc(sizeof(EagleInstance));</span>
+<span class="lineNum">       8 </span><span class="lineCov">             14 :     instance-&gt;workers = EagleWorkers_New(totalWorkers, instance);</span>
+<span class="lineNum">       9 </span><span class="lineCov">             14 :     instance-&gt;nextJobLock = EagleSynchronizer_CreateLock();</span>
+<span class="lineNum">      10 </span><span class="lineCov">             14 :     return instance;</span>
+<span class="lineNum">      11 </span>                : }
+<span class="lineNum">      12 </span>                : 
+<span class="lineNum">      13 </span><span class="lineCov">             14 : void EagleInstance_run(EagleInstance *eagle)</span>
+<span class="lineNum">      14 </span>                : {
+<span class="lineNum">      15 </span>                :     /* start workers */
+<span class="lineNum">      16 </span><span class="lineCov">             14 :     EagleWorkers_start(eagle-&gt;workers);</span>
+<span class="lineNum">      17 </span>                :     
+<span class="lineNum">      18 </span>                :     /* close workers */
+<span class="lineNum">      19 </span><span class="lineCov">             14 :     EagleWorkers_joinAll(eagle-&gt;workers);</span>
+<span class="lineNum">      20 </span><span class="lineCov">             14 : }</span>
+<span class="lineNum">      21 </span>                : 
+<span class="lineNum">      22 </span>                : /**
+<span class="lineNum">      23 </span>                :  Add an EaglePlan to an EagleInstance.
+<span class="lineNum">      24 </span>                :  */
+<span class="lineNum">      25 </span><span class="lineCov">             14 : void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)</span>
+<span class="lineNum">      26 </span>                : {
+<span class="lineNum">      27 </span><span class="lineCov">             14 :     eagle-&gt;plan = plan;</span>
+<span class="lineNum">      28 </span><span class="lineCov">             14 : }</span>
+<span class="lineNum">      29 </span>                : 
+<span class="lineNum">      30 </span><span class="lineCov">            504 : EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)</span>
+<span class="lineNum">      31 </span>                : {
+<span class="lineNum">      32 </span><span class="lineCov">            504 :     EaglePlan *plan = NULL;</span>
+<span class="lineNum">      33 </span><span class="lineCov">            504 :     EaglePlanJob *job = NULL;</span>
+<span class="lineNum">      34 </span><span class="lineCov">            504 :     int i;</span>
+<span class="lineNum">      35 </span>                :     
+<span class="lineNum">      36 </span>                :     /* synchronize this function */
+<span class="lineNum">      37 </span><span class="lineCov">            504 :     EagleSynchronizer_Lock(eagle-&gt;nextJobLock);</span>
+<span class="lineNum">      38 </span>                :     
+<span class="lineNum">      39 </span><span class="lineCov">            504 :     plan = eagle-&gt;plan;</span>
+<span class="lineNum">      40 </span><span class="lineCov">            504 :     job = EaglePlanJob_New(plan, 4);</span>
+<span class="lineNum">      41 </span>                :     
+<span class="lineNum">      42 </span><span class="lineCov">           1906 :     for(i = 0; i &lt; plan-&gt;usedProviders; ++i) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">            505 :         EaglePlanBufferProvider *provider = plan-&gt;providers[i];</span>
+<span class="lineNum">      44 </span><span class="lineCov">            505 :         if(EaglePageProvider_pagesRemaining(provider-&gt;provider) == 0) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">             56 :             EaglePlanJob_Delete(job);</span>
+<span class="lineNum">      46 </span><span class="lineCov">             56 :             job = NULL;</span>
+<span class="lineNum">      47 </span><span class="lineCov">             56 :             break;</span>
+<span class="lineNum">      48 </span>                :         }
+<span class="lineNum">      49 </span>                :         
+<span class="lineNum">      50 </span><span class="lineCov">            449 :         EaglePage_Delete(job-&gt;buffers[provider-&gt;destinationBuffer]);</span>
+<span class="lineNum">      51 </span><span class="lineCov">            449 :         job-&gt;buffers[provider-&gt;destinationBuffer] = EaglePageProvider_nextPage(provider-&gt;provider);</span>
+<span class="lineNum">      52 </span><span class="lineCov">            449 :     }</span>
+<span class="lineNum">      53 </span>                :     
+<span class="lineNum">      54 </span><span class="lineCov">            504 :     EagleSynchronizer_Unlock(eagle-&gt;nextJobLock);</span>
+<span class="lineNum">      55 </span><span class="lineCov">            504 :     return job;</span>
+<span class="lineNum">      56 </span>                : }
+<span class="lineNum">      57 </span>                : 
+<span class="lineNum">      58 </span><span class="lineCov">             14 : void EagleInstance_Delete(EagleInstance *eagle)</span>
+<span class="lineNum">      59 </span>                : {
+<span class="lineNum">      60 </span><span class="lineCov">             14 :     EagleWorkers_Delete(eagle-&gt;workers);</span>
+<span class="lineNum">      61 </span><span class="lineCov">             14 :     EagleLock_Delete(eagle-&gt;nextJobLock);</span>
+<span class="lineNum">      62 </span><span class="lineCov">             14 :     EaglePlan_Delete(eagle-&gt;plan);</span>
+<span class="lineNum">      63 </span><span class="lineCov">             14 :     free(eagle);</span>
+<span class="lineNum">      64 </span><span class="lineCov">             14 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

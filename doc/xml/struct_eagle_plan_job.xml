@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_plan_job" kind="struct" prot="public">
+    <compoundname>EaglePlanJob</compoundname>
+    <includes refid="_eagle_plan_job_8h" local="no">EaglePlanJob.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> **</type>
+        <definition>EaglePage** buffers</definition>
+        <argsstring></argsstring>
+        <name>buffers</name>
+        <briefdescription>
+<para>The buffers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+        <definition>EaglePlan* plan</definition>
+        <argsstring></argsstring>
+        <name>plan</name>
+        <briefdescription>
+<para>A reference to the plan. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A plan is divided up into single jobs that are run simultaneously. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="255">
+        <label>EaglePlanError</label>
+      </node>
+      <node id="253">
+        <label>EagleDataType *</label>
+      </node>
+      <node id="264">
+        <label>void *</label>
+      </node>
+      <node id="258">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="259" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="260" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="256">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="257" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="258" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="252" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="262">
+        <label>EagleDataType</label>
+      </node>
+      <node id="261">
+        <label>EaglePage</label>
+        <link refid="struct_eagle_page"/>
+        <childnode refid="252" relation="usage">
+          <edgelabel>recordOffset</edgelabel>
+          <edgelabel>count</edgelabel>
+          <edgelabel>usageCount</edgelabel>
+          <edgelabel>totalSize</edgelabel>
+        </childnode>
+        <childnode refid="262" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="263" relation="usage">
+          <edgelabel>freeData</edgelabel>
+        </childnode>
+        <childnode refid="264" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="254">
+        <label>char *</label>
+      </node>
+      <node id="251">
+        <label>uint64_t</label>
+      </node>
+      <node id="249">
+        <label>EaglePlan</label>
+        <link refid="struct_eagle_plan"/>
+        <childnode refid="250" relation="usage">
+          <edgelabel>result</edgelabel>
+        </childnode>
+        <childnode refid="251" relation="usage">
+          <edgelabel>executionTime</edgelabel>
+          <edgelabel>startTime</edgelabel>
+          <edgelabel>lockTime</edgelabel>
+        </childnode>
+        <childnode refid="252" relation="usage">
+          <edgelabel>pageSize</edgelabel>
+          <edgelabel>resultFields</edgelabel>
+          <edgelabel>buffersNeeded</edgelabel>
+          <edgelabel>cores</edgelabel>
+        </childnode>
+        <childnode refid="253" relation="usage">
+          <edgelabel>bufferTypes</edgelabel>
+        </childnode>
+        <childnode refid="254" relation="usage">
+          <edgelabel>errorMessage</edgelabel>
+        </childnode>
+        <childnode refid="255" relation="usage">
+          <edgelabel>errorCode</edgelabel>
+        </childnode>
+        <childnode refid="256" relation="usage">
+          <edgelabel>operations</edgelabel>
+          <edgelabel>freeObjects</edgelabel>
+          <edgelabel>providers</edgelabel>
+        </childnode>
+      </node>
+      <node id="248">
+        <label>EaglePlanJob</label>
+        <link refid="struct_eagle_plan_job"/>
+        <childnode refid="249" relation="usage">
+          <edgelabel>plan</edgelabel>
+        </childnode>
+        <childnode refid="261" relation="usage">
+          <edgelabel>buffers</edgelabel>
+        </childnode>
+      </node>
+      <node id="252">
+        <label>int</label>
+      </node>
+      <node id="259">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="260">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="250">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider"/>
+      </node>
+      <node id="257">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="263">
+        <label>EagleBoolean</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanJob.h" bodystart="10" bodyend="22"/>
+    <listofallmembers>
+      <member refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" prot="public" virt="non-virtual"><scope>EaglePlanJob</scope><name>buffers</name></member>
+      <member refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" prot="public" virt="non-virtual"><scope>EaglePlanJob</scope><name>plan</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

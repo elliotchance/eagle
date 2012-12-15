@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - eagle/eagle/EaglePlanJob.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../index.html">directory</a> - <a href="index.html">eagle/eagle</a> - EaglePlanJob.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-15</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">21</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">95.2 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">20</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &quot;EaglePlanJob.h&quot;
+<span class="lineNum">       3 </span>                : 
+<span class="lineNum">       4 </span><span class="lineCov">            504 : EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)</span>
+<span class="lineNum">       5 </span>                : {
+<span class="lineNum">       6 </span><span class="lineCov">            504 :     EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));</span>
+<span class="lineNum">       7 </span><span class="lineCov">            504 :     int i;</span>
+<span class="lineNum">       8 </span>                :     
+<span class="lineNum">       9 </span><span class="lineCov">            504 :     job-&gt;plan = plan;</span>
+<span class="lineNum">      10 </span>                :     
+<span class="lineNum">      11 </span>                :     /* initialize all buffers now */
+<span class="lineNum">      12 </span><span class="lineCov">            504 :     job-&gt;allocatedBuffers = allocatedBuffers;</span>
+<span class="lineNum">      13 </span><span class="lineCov">            504 :     job-&gt;buffers = (EaglePage**) calloc((size_t) job-&gt;allocatedBuffers, sizeof(EaglePage*));</span>
+<span class="lineNum">      14 </span><span class="lineCov">           5040 :     for(i = 0; i &lt; job-&gt;allocatedBuffers; ++i) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">           2016 :         job-&gt;buffers[i] = EaglePage_Alloc(plan-&gt;pageSize);</span>
+<span class="lineNum">      16 </span><span class="lineCov">           2016 :     }</span>
+<span class="lineNum">      17 </span>                :     
+<span class="lineNum">      18 </span><span class="lineCov">            504 :     return job;</span>
+<span class="lineNum">      19 </span>                : }
+<span class="lineNum">      20 </span>                : 
+<span class="lineNum">      21 </span><span class="lineCov">            504 : void EaglePlanJob_Delete(EaglePlanJob *job)</span>
+<span class="lineNum">      22 </span>                : {
+<span class="lineNum">      23 </span><span class="lineCov">            504 :     int i;</span>
+<span class="lineNum">      24 </span>                :     
+<span class="lineNum">      25 </span><span class="lineCov">            504 :     if(!job) {</span>
+<span class="lineNum">      26 </span><span class="lineNoCov">              0 :         return;</span>
+<span class="lineNum">      27 </span>                :     }
+<span class="lineNum">      28 </span>                :     
+<span class="lineNum">      29 </span><span class="lineCov">           5039 :     for(i = 0; i &lt; job-&gt;allocatedBuffers; ++i) {</span>
+<span class="lineNum">      30 </span><span class="lineCov">           2015 :         EaglePage_Delete(job-&gt;buffers[i]);</span>
+<span class="lineNum">      31 </span><span class="lineCov">           2015 :     }</span>
+<span class="lineNum">      32 </span><span class="lineCov">            504 :     free((void*) job-&gt;buffers);</span>
+<span class="lineNum">      33 </span>                :     
+<span class="lineNum">      34 </span><span class="lineCov">            504 :     free((void*) job);</span>
+<span class="lineNum">      35 </span><span class="lineCov">            504 :     job = NULL;</span>
+<span class="lineNum">      36 </span><span class="lineCov">           1008 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

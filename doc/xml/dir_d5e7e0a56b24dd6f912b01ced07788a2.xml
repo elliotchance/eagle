@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_d5e7e0a56b24dd6f912b01ced07788a2" kind="dir">
+    <compoundname>eagle/eagle/</compoundname>
+    <innerfile refid="_eagle_8h">Eagle.h</innerfile>
+    <innerfile refid="_eagle_boolean_8h">EagleBoolean.h</innerfile>
+    <innerfile refid="_eagle_data_8c">EagleData.c</innerfile>
+    <innerfile refid="_eagle_data_8h">EagleData.h</innerfile>
+    <innerfile refid="_eagle_data_type_8c">EagleDataType.c</innerfile>
+    <innerfile refid="_eagle_data_type_8h">EagleDataType.h</innerfile>
+    <innerfile refid="_eagle_instance_8c">EagleInstance.c</innerfile>
+    <innerfile refid="_eagle_instance_8h">EagleInstance.h</innerfile>
+    <innerfile refid="_eagle_linked_list_8c">EagleLinkedList.c</innerfile>
+    <innerfile refid="_eagle_linked_list_8h">EagleLinkedList.h</innerfile>
+    <innerfile refid="_eagle_linked_list_item_8c">EagleLinkedListItem.c</innerfile>
+    <innerfile refid="_eagle_linked_list_item_8h">EagleLinkedListItem.h</innerfile>
+    <innerfile refid="_eagle_lock_8c">EagleLock.c</innerfile>
+    <innerfile refid="_eagle_lock_8h">EagleLock.h</innerfile>
+    <innerfile refid="_eagle_logger_8c">EagleLogger.c</innerfile>
+    <innerfile refid="_eagle_logger_8h">EagleLogger.h</innerfile>
+    <innerfile refid="_eagle_logger_event_8c">EagleLoggerEvent.c</innerfile>
+    <innerfile refid="_eagle_logger_event_8h">EagleLoggerEvent.h</innerfile>
+    <innerfile refid="_eagle_logger_severity_8c">EagleLoggerSeverity.c</innerfile>
+    <innerfile refid="_eagle_logger_severity_8h">EagleLoggerSeverity.h</innerfile>
+    <innerfile refid="_eagle_memory_8c">EagleMemory.c</innerfile>
+    <innerfile refid="_eagle_memory_8h">EagleMemory.h</innerfile>
+    <innerfile refid="_eagle_object_8c">EagleObject.c</innerfile>
+    <innerfile refid="_eagle_object_8h">EagleObject.h</innerfile>
+    <innerfile refid="_eagle_page_8c">EaglePage.c</innerfile>
+    <innerfile refid="_eagle_page_8h">EaglePage.h</innerfile>
+    <innerfile refid="_eagle_page_operations_8c">EaglePageOperations.c</innerfile>
+    <innerfile refid="_eagle_page_operations_8h">EaglePageOperations.h</innerfile>
+    <innerfile refid="_eagle_page_provider_8c">EaglePageProvider.c</innerfile>
+    <innerfile refid="_eagle_page_provider_8h">EaglePageProvider.h</innerfile>
+    <innerfile refid="_eagle_page_provider_array_8c">EaglePageProviderArray.c</innerfile>
+    <innerfile refid="_eagle_page_provider_array_8h">EaglePageProviderArray.h</innerfile>
+    <innerfile refid="_eagle_page_provider_single_8c">EaglePageProviderSingle.c</innerfile>
+    <innerfile refid="_eagle_page_provider_single_8h">EaglePageProviderSingle.h</innerfile>
+    <innerfile refid="_eagle_page_provider_stream_8c">EaglePageProviderStream.c</innerfile>
+    <innerfile refid="_eagle_page_provider_stream_8h">EaglePageProviderStream.h</innerfile>
+    <innerfile refid="_eagle_page_provider_type_8h">EaglePageProviderType.h</innerfile>
+    <innerfile refid="_eagle_page_provider_virtual_8c">EaglePageProviderVirtual.c</innerfile>
+    <innerfile refid="_eagle_page_provider_virtual_8h">EaglePageProviderVirtual.h</innerfile>
+    <innerfile refid="_eagle_plan_8c">EaglePlan.c</innerfile>
+    <innerfile refid="_eagle_plan_8h">EaglePlan.h</innerfile>
+    <innerfile refid="_eagle_plan_buffer_provider_8c">EaglePlanBufferProvider.c</innerfile>
+    <innerfile refid="_eagle_plan_buffer_provider_8h">EaglePlanBufferProvider.h</innerfile>
+    <innerfile refid="_eagle_plan_error_8h">EaglePlanError.h</innerfile>
+    <innerfile refid="_eagle_plan_job_8c">EaglePlanJob.c</innerfile>
+    <innerfile refid="_eagle_plan_job_8h">EaglePlanJob.h</innerfile>
+    <innerfile refid="_eagle_plan_operation_8c">EaglePlanOperation.c</innerfile>
+    <innerfile refid="_eagle_plan_operation_8h">EaglePlanOperation.h</innerfile>
+    <innerfile refid="_eagle_synchronizer_8c">EagleSynchronizer.c</innerfile>
+    <innerfile refid="_eagle_synchronizer_8h">EagleSynchronizer.h</innerfile>
+    <innerfile refid="_eagle_utils_8c">EagleUtils.c</innerfile>
+    <innerfile refid="_eagle_utils_8h">EagleUtils.h</innerfile>
+    <innerfile refid="_eagle_worker_8c">EagleWorker.c</innerfile>
+    <innerfile refid="_eagle_worker_8h">EagleWorker.h</innerfile>
+    <innerfile refid="_eagle_workers_8c">EagleWorkers.c</innerfile>
+    <innerfile refid="_eagle_workers_8h">EagleWorkers.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/"/>
+  </compounddef>
+</doxygen>

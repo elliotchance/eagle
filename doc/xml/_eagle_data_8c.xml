@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_data_8c" kind="file">
+    <compoundname>EagleData.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_data_8c" local="yes">EagleData.h</includes>
+    <includes local="no">mach/mach_time.h</includes>
+    <includedby refid="_eagle_data_8c" local="yes">eagle/eagle/EagleData.c</includedby>
+    <incdepgraph>
+      <node id="153">
+        <label>stdlib.h</label>
+      </node>
+      <node id="156">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="154">
+        <label>string.h</label>
+      </node>
+      <node id="152">
+        <label>eagle/eagle/EagleData.c</label>
+        <link refid="EagleData.c"/>
+        <childnode refid="153" relation="include">
+        </childnode>
+        <childnode refid="154" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
+        <childnode refid="152" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+      </node>
+      <node id="155">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="157">
+        <label>eagle/eagle/EagleData.c</label>
+        <link refid="EagleData.c"/>
+        <childnode refid="157" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_data_8c_1a7093a7a2c7fc9a44189f0c6d66ec8c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member">EagleDataTypeFloatType</ref> *</type>
+        <definition>EagleDataTypeFloatType* EagleData_Float</definition>
+        <argsstring>(EagleDataTypeFloatType value)</argsstring>
+        <name>EagleData_Float</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member">EagleDataTypeFloatType</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a float and return the pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to set into newly allocated space. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>New allocation containing the float. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleData.c" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleData.c" bodystart="19" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_data_8c_1a9c6598608002abd11eca88e9175698f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member">EagleDataTypeIntegerType</ref> *</type>
+        <definition>EagleDataTypeIntegerType* EagleData_Int</definition>
+        <argsstring>(EagleDataTypeIntegerType value)</argsstring>
+        <name>EagleData_Int</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member">EagleDataTypeIntegerType</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Allocate an integer and return the pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to set into newly allocated space. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>New allocation containing the integer. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleData.c" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleData.c" bodystart="8" bodyend="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_8h" kindref="compound">EagleData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_utils_8h" kindref="compound">EagleUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="_eagle_data_8h_1a9c6598608002abd11eca88e9175698f2" refkind="member"><highlight class="normal"><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>*<sp/><ref refid="_eagle_data_8c_1a9c6598608002abd11eca88e9175698f2" kindref="member" tooltip="Allocate an integer and return the pointer.">EagleData_Int</ref>(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>value)</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>*r<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleData_Int.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>));</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>r)<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>*r<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="_eagle_data_8h_1a7093a7a2c7fc9a44189f0c6d66ec8c36" refkind="member"><highlight class="normal"><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>*<sp/><ref refid="_eagle_data_8c_1a7093a7a2c7fc9a44189f0c6d66ec8c36" kindref="member" tooltip="Allocate a float and return the pointer.">EagleData_Float</ref>(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>value)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>*r<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleData_Float.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>));</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>r)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>*r<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleData.c"/>
+  </compounddef>
+</doxygen>

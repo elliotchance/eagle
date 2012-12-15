@@ -1,0 +1,484 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_cast_expression_8c" kind="file">
+    <compoundname>EagleDbSqlCastExpression.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_db_sql_cast_expression_8c" local="yes">EagleDbSqlCastExpression.h</includes>
+    <includes refid="_eagle_db_sql_expression_8h" local="yes">EagleDbSqlExpression.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includedby refid="_eagle_db_sql_cast_expression_8c" local="yes">eagle/eagledb/EagleDbSqlCastExpression.c</includedby>
+    <incdepgraph>
+      <node id="2215">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2216" relation="include">
+        </childnode>
+        <childnode refid="2233" relation="include">
+        </childnode>
+      </node>
+      <node id="2213">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2234">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="2212">
+        <label>eagle/eagledb/EagleDbSqlCastExpression.c</label>
+        <link refid="EagleDbSqlCastExpression.c"/>
+        <childnode refid="2213" relation="include">
+        </childnode>
+        <childnode refid="2214" relation="include">
+        </childnode>
+        <childnode refid="2212" relation="include">
+        </childnode>
+        <childnode refid="2215" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2238" relation="include">
+        </childnode>
+      </node>
+      <node id="2228">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2226" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2229" relation="include">
+        </childnode>
+      </node>
+      <node id="2231">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2218" relation="include">
+        </childnode>
+        <childnode refid="2224" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2232" relation="include">
+        </childnode>
+      </node>
+      <node id="2218">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="2219" relation="include">
+        </childnode>
+        <childnode refid="2224" relation="include">
+        </childnode>
+      </node>
+      <node id="2217">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2235">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2226">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2217" relation="include">
+        </childnode>
+        <childnode refid="2227" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+      </node>
+      <node id="2225">
+        <label>pthread.h</label>
+      </node>
+      <node id="2230">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="2221">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2222" relation="include">
+        </childnode>
+      </node>
+      <node id="2236">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2224" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2232" relation="include">
+        </childnode>
+      </node>
+      <node id="2222">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2220">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2223">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2233">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="2234" relation="include">
+        </childnode>
+      </node>
+      <node id="2237">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="2238">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="2219">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="2220" relation="include">
+        </childnode>
+        <childnode refid="2221" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2222" relation="include">
+        </childnode>
+      </node>
+      <node id="2232">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2233" relation="include">
+        </childnode>
+        <childnode refid="2235" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2222" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+      </node>
+      <node id="2216">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2217" relation="include">
+        </childnode>
+        <childnode refid="2218" relation="include">
+        </childnode>
+        <childnode refid="2231" relation="include">
+        </childnode>
+        <childnode refid="2236" relation="include">
+        </childnode>
+        <childnode refid="2237" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2222" relation="include">
+        </childnode>
+        <childnode refid="2228" relation="include">
+        </childnode>
+      </node>
+      <node id="2214">
+        <label>stdio.h</label>
+      </node>
+      <node id="2224">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="2225" relation="include">
+        </childnode>
+        <childnode refid="2219" relation="include">
+        </childnode>
+        <childnode refid="2226" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+        <childnode refid="2228" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2222" relation="include">
+        </childnode>
+        <childnode refid="2230" relation="include">
+        </childnode>
+      </node>
+      <node id="2227">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2225" relation="include">
+        </childnode>
+        <childnode refid="2223" relation="include">
+        </childnode>
+      </node>
+      <node id="2229">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2223" relation="include">
+        </childnode>
+        <childnode refid="2220" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2239">
+        <label>eagle/eagledb/EagleDbSqlCastExpression.c</label>
+        <link refid="EagleDbSqlCastExpression.c"/>
+        <childnode refid="2239" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_cast_expression_8c_1a5b36009497b411b980969eeb89cf3771" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlCastExpression_Delete</definition>
+        <argsstring>(EagleDbSqlCastExpression *expr)</argsstring>
+        <name>EagleDbSqlCastExpression_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound">EagleDbSqlCastExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a cast expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a762d1a558814f2576ed01c9a32e84647" kindref="member">EagleDbSqlExpression_Delete()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" bodystart="20" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_cast_expression_8c_1a9a28b39b23dbaaa34867f548abe8eba1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlCastExpression_DeleteRecursive</definition>
+        <argsstring>(EagleDbSqlCastExpression *expr)</argsstring>
+        <name>EagleDbSqlCastExpression_DeleteRecursive</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound">EagleDbSqlCastExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a cast expression (recursively). </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" line="30" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" bodystart="29" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_cast_expression_8c_1a4ab2804e4fbbb0177000c0d8897d6221" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbSqlCastExpression_GetOperation</definition>
+        <argsstring>(EagleDataType left, EagleDataType right, EagleDbSqlCastOperator *match)</argsstring>
+        <name>EagleDbSqlCastExpression_GetOperation</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_cast_operator" kindref="compound">EagleDbSqlCastOperator</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <briefdescription>
+<para>Find the appropriate page operation for a cast expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Left data type (first operand). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right data type (second operand). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If a match is found it will be copied into this output parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the operator can be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" line="59" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" bodystart="56" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_cast_expression_8c_1ac0987370fea40f7f42f8ec763aa81a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound">EagleDbSqlCastExpression</ref> *</type>
+        <definition>EagleDbSqlCastExpression* EagleDbSqlCastExpression_New</definition>
+        <argsstring>(EagleDbSqlExpression *expr, EagleDataType castAs)</argsstring>
+        <name>EagleDbSqlCastExpression_New</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>castAs</declname>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_db_sql_cast_expression" kindref="compound">EagleDbSqlCastExpression</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expression. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">castAs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cast expression to data type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" bodystart="6" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_cast_expression_8c_1a348b16df749e335c62509d931f7e18f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlCastExpression_toString</definition>
+        <argsstring>(EagleDbSqlCastExpression *expr)</argsstring>
+        <name>EagleDbSqlCastExpression_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound">EagleDbSqlCastExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Render a cast expression into a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string representation of the expression. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" line="40" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c" bodystart="39" bodyend="54"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_cast_expression_8h" kindref="compound">EagleDbSqlCastExpression.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="_eagle_db_sql_cast_expression_8h_1ac0987370fea40f7f42f8ec763aa81a62" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref>*<sp/><ref refid="_eagle_db_sql_cast_expression_8c_1ac0987370fea40f7f42f8ec763aa81a62" kindref="member" tooltip="Create a new EagleDbSqlCastExpression.">EagleDbSqlCastExpression_New</ref>(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*expr,<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>castAs)</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref><sp/>*exp<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbSqlCastExpression_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref>));</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>exp)<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>exp-&gt;expressionType<sp/>=<sp/><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7da787621af44dc6c6ad9fcb68dfa4eeb0e" kindref="member" tooltip="Real type is EagleDbSqlCastExpression.">EagleDbSqlExpressionTypeCastExpression</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>exp-&gt;<ref refid="struct_eagle_db_sql_cast_expression_1a1929121f9116e94f8a2b45cee4787686" kindref="member" tooltip="The operand.">expr</ref><sp/>=<sp/>expr;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>exp-&gt;<ref refid="struct_eagle_db_sql_cast_expression_1aa344b33a041d4ebb99726f5ca2c217be" kindref="member" tooltip="The type to cast to.">castAs</ref><sp/>=<sp/>castAs;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>exp;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="_eagle_db_sql_cast_expression_8h_1a5b36009497b411b980969eeb89cf3771" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_cast_expression_8c_1a5b36009497b411b980969eeb89cf3771" kindref="member" tooltip="Free a cast expression.">EagleDbSqlCastExpression_Delete</ref>(<ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref><sp/>*expr)</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>expr)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(expr);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="_eagle_db_sql_cast_expression_8h_1a9a28b39b23dbaaa34867f548abe8eba1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_cast_expression_8c_1a9a28b39b23dbaaa34867f548abe8eba1" kindref="member" tooltip="Free a cast expression (recursively).">EagleDbSqlCastExpression_DeleteRecursive</ref>(<ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref><sp/>*expr)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>expr)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive</ref>((<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>*)<sp/>expr-&gt;<ref refid="struct_eagle_db_sql_cast_expression_1a1929121f9116e94f8a2b45cee4787686" kindref="member" tooltip="The operand.">expr</ref>);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(expr);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="_eagle_db_sql_cast_expression_8h_1a348b16df749e335c62509d931f7e18f6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_cast_expression_8c_1a348b16df749e335c62509d931f7e18f6" kindref="member" tooltip="Render a cast expression into a string.">EagleDbSqlCastExpression_toString</ref>(<ref refid="struct_eagle_db_sql_cast_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeCastExpression.">EagleDbSqlCastExpression</ref><sp/>*expr)</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>s<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbSqlCastExpression_toString.1&quot;</highlight><highlight class="normal">,<sp/>1024),<sp/>*exp,<sp/>*castAs;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>s)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>exp<sp/>=<sp/><ref refid="_eagle_db_sql_expression_8c_1a7951dc2d4ddeae124336eb9475ecb266" kindref="member" tooltip="Render an expression (of any type) to a string.">EagleDbSqlExpression_toString</ref>(expr-&gt;<ref refid="struct_eagle_db_sql_cast_expression_1a1929121f9116e94f8a2b45cee4787686" kindref="member" tooltip="The operand.">expr</ref>);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>castAs<sp/>=<sp/><ref refid="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" kindref="member" tooltip="Convert a type to a string.">EagleDataType_typeToName</ref>(expr-&gt;<ref refid="struct_eagle_db_sql_cast_expression_1aa344b33a041d4ebb99726f5ca2c217be" kindref="member" tooltip="The type to cast to.">castAs</ref>);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>sprintf(s,<sp/></highlight><highlight class="stringliteral">&quot;CAST(%s<sp/>AS<sp/>%s)&quot;</highlight><highlight class="normal">,<sp/>exp,<sp/>castAs);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(exp);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(castAs);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>s;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="_eagle_db_sql_cast_expression_8h_1a4ab2804e4fbbb0177000c0d8897d6221" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_sql_cast_expression_8c_1a4ab2804e4fbbb0177000c0d8897d6221" kindref="member" tooltip="Find the appropriate page operation for a cast expression.">EagleDbSqlCastExpression_GetOperation</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>left,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_cast_operator" kindref="compound" tooltip="Used by EagleDbSqlCastExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlCastOperator</ref><sp/>*match)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_sql_cast_operator" kindref="compound" tooltip="Used by EagleDbSqlCastExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlCastOperator</ref><sp/>ops[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>,<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>,<sp/><ref refid="_eagle_page_operations_8c_1a284428e6f5f611cfa65599323b5aac0f" kindref="member" tooltip="Cast INTEGER page to FLOAT page.">EaglePageOperations_CastPageIntFloat</ref><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(ops)<sp/>/<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_sql_cast_operator" kindref="compound" tooltip="Used by EagleDbSqlCastExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlCastOperator</ref>);<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(left<sp/>==<sp/>ops[i].left<sp/>&amp;&amp;<sp/>right<sp/>==<sp/>ops[i].right)<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*match<sp/>=<sp/>ops[i];</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.c"/>
+  </compounddef>
+</doxygen>

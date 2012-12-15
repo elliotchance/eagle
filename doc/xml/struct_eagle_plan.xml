@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_plan" kind="struct" prot="public">
+    <compoundname>EaglePlan</compoundname>
+    <includes refid="_eagle_plan_8h" local="no">EaglePlan.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int buffersNeeded</definition>
+        <argsstring></argsstring>
+        <name>buffersNeeded</name>
+        <briefdescription>
+<para>The number of buffers needed for the execution. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="72" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1aded4db24d0e11cc63687efdda334e3ac" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref> *</type>
+        <definition>EagleDataType* bufferTypes</definition>
+        <argsstring></argsstring>
+        <name>bufferTypes</name>
+        <briefdescription>
+<para>The types for each buffer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="77" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a02463760ed5bc5ebcc0101fa9489a622" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int cores</definition>
+        <argsstring></argsstring>
+        <name>cores</name>
+        <briefdescription>
+<para>The number of CPU cores. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="87" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a76d494f6fca60a76a9ecb32309bf8e80" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_plan_error_8h_1a0caae9eb4d0a119af359eada34628bef" kindref="member">EaglePlanError</ref></type>
+        <definition>EaglePlanError errorCode</definition>
+        <argsstring></argsstring>
+        <name>errorCode</name>
+        <briefdescription>
+<para>The error status. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="37" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a9957046d991c59851a5052435e95ce0a" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* errorMessage</definition>
+        <argsstring></argsstring>
+        <name>errorMessage</name>
+        <briefdescription>
+<para>Further details about the error, this may be NULL. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="42" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1ac2a54e490b7f5500768c6bf11d2d57e4" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* executionTime</definition>
+        <argsstring></argsstring>
+        <name>executionTime</name>
+        <briefdescription>
+<para>The total time the query took to execute. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="57" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a3269dca90a95e13999422383b0ed9278" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* freeObjects</definition>
+        <argsstring></argsstring>
+        <name>freeObjects</name>
+        <briefdescription>
+<para>This is a stack of objects to be freed when this object is deleted. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="82" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a2e37519c175daf57b714863ffb54d0df" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* lockTime</definition>
+        <argsstring></argsstring>
+        <name>lockTime</name>
+        <briefdescription>
+<para>The total time the thread was left waiting for a mutex lock to be release. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="62" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a165d50b85dcb8a5e1f68878845eb2db0" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* operations</definition>
+        <argsstring></argsstring>
+        <name>operations</name>
+        <briefdescription>
+<para>The operations. </para>        </briefdescription>
+        <detaileddescription>
+<para>An operation is a task done on a page. This is semi managed because the actual array that contains the operations will be managed by the object, but the individual operations will be managed externally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int pageSize</definition>
+        <argsstring></argsstring>
+        <name>pageSize</name>
+        <briefdescription>
+<para>The amount of records to read per page. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="32" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a187318c3565430d91292e21174716f1f" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* providers</definition>
+        <argsstring></argsstring>
+        <name>providers</name>
+        <briefdescription>
+<para>The page providers. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is where external data comes into the expression. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> **</type>
+        <definition>EaglePageProvider** result</definition>
+        <argsstring></argsstring>
+        <name>result</name>
+        <briefdescription>
+<para>Result set after execution. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="47" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int resultFields</definition>
+        <argsstring></argsstring>
+        <name>resultFields</name>
+        <briefdescription>
+<para>The number of providers in <computeroutput>result</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="52" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t startTime</definition>
+        <argsstring></argsstring>
+        <name>startTime</name>
+        <briefdescription>
+<para>The absolute start time. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="67" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>An execution plan. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="228">
+        <label>EaglePlanError</label>
+      </node>
+      <node id="226">
+        <label>EagleDataType *</label>
+      </node>
+      <node id="231">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="232" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="233" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="229">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="230" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="231" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="225" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="227">
+        <label>char *</label>
+      </node>
+      <node id="224">
+        <label>uint64_t</label>
+      </node>
+      <node id="222">
+        <label>EaglePlan</label>
+        <link refid="struct_eagle_plan"/>
+        <childnode refid="223" relation="usage">
+          <edgelabel>result</edgelabel>
+        </childnode>
+        <childnode refid="224" relation="usage">
+          <edgelabel>executionTime</edgelabel>
+          <edgelabel>startTime</edgelabel>
+          <edgelabel>lockTime</edgelabel>
+        </childnode>
+        <childnode refid="225" relation="usage">
+          <edgelabel>pageSize</edgelabel>
+          <edgelabel>resultFields</edgelabel>
+          <edgelabel>buffersNeeded</edgelabel>
+          <edgelabel>cores</edgelabel>
+        </childnode>
+        <childnode refid="226" relation="usage">
+          <edgelabel>bufferTypes</edgelabel>
+        </childnode>
+        <childnode refid="227" relation="usage">
+          <edgelabel>errorMessage</edgelabel>
+        </childnode>
+        <childnode refid="228" relation="usage">
+          <edgelabel>errorCode</edgelabel>
+        </childnode>
+        <childnode refid="229" relation="usage">
+          <edgelabel>operations</edgelabel>
+          <edgelabel>freeObjects</edgelabel>
+          <edgelabel>providers</edgelabel>
+        </childnode>
+      </node>
+      <node id="225">
+        <label>int</label>
+      </node>
+      <node id="232">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="233">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="223">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider"/>
+      </node>
+      <node id="230">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlan.h" bodystart="16" bodyend="89"/>
+    <listofallmembers>
+      <member refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>buffersNeeded</name></member>
+      <member refid="struct_eagle_plan_1aded4db24d0e11cc63687efdda334e3ac" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>bufferTypes</name></member>
+      <member refid="struct_eagle_plan_1a02463760ed5bc5ebcc0101fa9489a622" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>cores</name></member>
+      <member refid="struct_eagle_plan_1a76d494f6fca60a76a9ecb32309bf8e80" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>errorCode</name></member>
+      <member refid="struct_eagle_plan_1a9957046d991c59851a5052435e95ce0a" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>errorMessage</name></member>
+      <member refid="struct_eagle_plan_1ac2a54e490b7f5500768c6bf11d2d57e4" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>executionTime</name></member>
+      <member refid="struct_eagle_plan_1a3269dca90a95e13999422383b0ed9278" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>freeObjects</name></member>
+      <member refid="struct_eagle_plan_1a2e37519c175daf57b714863ffb54d0df" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>lockTime</name></member>
+      <member refid="struct_eagle_plan_1a165d50b85dcb8a5e1f68878845eb2db0" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>operations</name></member>
+      <member refid="struct_eagle_plan_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>pageSize</name></member>
+      <member refid="struct_eagle_plan_1a187318c3565430d91292e21174716f1f" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>providers</name></member>
+      <member refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>result</name></member>
+      <member refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>resultFields</name></member>
+      <member refid="struct_eagle_plan_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" prot="public" virt="non-virtual"><scope>EaglePlan</scope><name>startTime</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

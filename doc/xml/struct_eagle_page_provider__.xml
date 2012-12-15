@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page_provider__" kind="struct" prot="public">
+    <compoundname>EaglePageProvider_</compoundname>
+    <includes refid="_eagle_page_provider_8h" local="no">EaglePageProvider.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a465ee8ff74cad40467bfb1fdaa64a740" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref>(*</type>
+        <definition>EagleBoolean(* add)(struct EaglePageProvider_ *epp, void *data)</definition>
+        <argsstring>)(struct EaglePageProvider_ *epp, void *data)</argsstring>
+        <name>add</name>
+        <briefdescription>
+<para>Some data provider types allow the addition of data. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>EagleTrue if the data was added on, EagleFalse otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="58" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a64d700c2e2b025ec902c833466d7fb49" prot="public" static="no" mutable="no">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* cursor</definition>
+        <argsstring></argsstring>
+        <name>cursor</name>
+        <briefdescription>
+<para>This is used by streams. </para>        </briefdescription>
+        <detaileddescription>
+<para>It allows it to keep the page it is upto when requesting the next page. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="88" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1ab9eaa681fa2ba56748139b6a5dbdee24" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* free)(struct EaglePageProvider_ *epp)</definition>
+        <argsstring>)(struct EaglePageProvider_ *epp)</argsstring>
+        <name>free</name>
+        <briefdescription>
+<para>Virtual method for freeing this structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="63" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a5ac083a645d964373f022d03df4849c8" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>An optional name. </para>        </briefdescription>
+        <detaileddescription>
+<para>For example, a column name. This is so named columns can be identified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="78" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1ad89313970929261b72bb99ed57f91af8" prot="public" static="no" mutable="no">
+        <type>EaglePage *(*</type>
+        <definition>EaglePage*(* nextPage)(struct EaglePageProvider_ *epp)</definition>
+        <argsstring>)(struct EaglePageProvider_ *epp)</argsstring>
+        <name>nextPage</name>
+        <briefdescription>
+<para>Fetch the next page from the provider. </para>        </briefdescription>
+        <detaileddescription>
+<para>If no more data is available this will return NULL. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="46" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a35af3476dcf04b4a47c3ff89c5177ccc" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+        <definition>EagleLock* nextPageLock</definition>
+        <argsstring></argsstring>
+        <name>nextPageLock</name>
+        <briefdescription>
+<para>Synchronize <ref refid="_eagle_page_provider_8c_1a0ceaedea95767ce9e5d3134ca0ac90a8" kindref="member">EaglePageProvider_nextPage()</ref> and <ref refid="_eagle_page_provider_8c_1a2c871cdcad6ce101ef48504808713bc2" kindref="member">EaglePageProvider_pagesRemaining()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="73" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a43afd3c921ea1cf1b530ec6ebfed3ebe" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int offsetRecords</definition>
+        <argsstring></argsstring>
+        <name>offsetRecords</name>
+        <briefdescription>
+<para>The cursor position. </para>        </briefdescription>
+        <detaileddescription>
+<para>An internal counter of the position of the stream. If the stream has more pages this will be incremented with each <ref refid="struct_eagle_page_provider___1ad89313970929261b72bb99ed57f91af8" kindref="member">nextPage()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a70454b44edd41d398776681234301390" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* pagesRemaining)(struct EaglePageProvider_ *epp)</definition>
+        <argsstring>)(struct EaglePageProvider_ *epp)</argsstring>
+        <name>pagesRemaining</name>
+        <briefdescription>
+<para>Ask the provider if there is more data available. </para>        </briefdescription>
+        <detaileddescription>
+<para>This must be invoked before every <ref refid="struct_eagle_page_provider___1ad89313970929261b72bb99ed57f91af8" kindref="member">nextPage()</ref> - since the stream might be variable and more data may be added to the stream while your reading from it. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="52" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a13656e5d0e264ac3f822f2661a288b79" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* records</definition>
+        <argsstring></argsstring>
+        <name>records</name>
+        <briefdescription>
+<para>A pointer to the actual data that will be fed into pages. </para>        </briefdescription>
+        <detaileddescription>
+<para>You should not rely on accessing this directly because its type and implementation will be different depending on the type of page provider. Use the appropriate methods <ref refid="struct_eagle_page_provider___1ad89313970929261b72bb99ed57f91af8" kindref="member">nextPage()</ref> and <ref refid="struct_eagle_page_provider___1a70454b44edd41d398776681234301390" kindref="member">pagesRemaining()</ref>.</para><para>The memory for this instance variable is only managed when the page provider is a stream type. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="41" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a843b3b6851cb04baf514003ecd135183" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int recordsPerPage</definition>
+        <argsstring></argsstring>
+        <name>recordsPerPage</name>
+        <briefdescription>
+<para>For convenience the page provider has a default page size. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="32" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a7914998dad76a9b6ed4ee3645e39747e" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* reset)(struct EaglePageProvider_ *epp)</definition>
+        <argsstring>)(struct EaglePageProvider_ *epp)</argsstring>
+        <name>reset</name>
+        <briefdescription>
+<para>Virtual method for resetting the page provider. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="68" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a6d229dced099552a8e8b7708f636e0d9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int totalRecords</definition>
+        <argsstring></argsstring>
+        <name>totalRecords</name>
+        <briefdescription>
+<para>The total amount of records. </para>        </briefdescription>
+        <detaileddescription>
+<para>You should never access this directly since its value may be virtual or invalid - instead use <ref refid="_eagle_page_provider_8c_1a2c871cdcad6ce101ef48504808713bc2" kindref="member">EaglePageProvider_pagesRemaining()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider___1a1098a844c26196961003dc0ebc21a1c0" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>The data type for this provider. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="83" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A page provider. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="177">
+        <label>void(*)(struct EaglePageProvider_ *epp)</label>
+      </node>
+      <node id="185">
+        <label>void *</label>
+      </node>
+      <node id="179">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="180" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="181" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="183">
+        <label>EagleDataType</label>
+      </node>
+      <node id="184">
+        <label>char *</label>
+      </node>
+      <node id="178">
+        <label>EagleBoolean(*)(struct EaglePageProvider_ *epp, void *data)</label>
+      </node>
+      <node id="182">
+        <label>int</label>
+      </node>
+      <node id="180">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="181">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="174">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider__"/>
+        <childnode refid="175" relation="usage">
+          <edgelabel>cursor</edgelabel>
+        </childnode>
+        <childnode refid="176" relation="usage">
+          <edgelabel>nextPage</edgelabel>
+        </childnode>
+        <childnode refid="177" relation="usage">
+          <edgelabel>reset</edgelabel>
+          <edgelabel>free</edgelabel>
+        </childnode>
+        <childnode refid="178" relation="usage">
+          <edgelabel>add</edgelabel>
+        </childnode>
+        <childnode refid="179" relation="usage">
+          <edgelabel>nextPageLock</edgelabel>
+        </childnode>
+        <childnode refid="182" relation="usage">
+          <edgelabel>pagesRemaining</edgelabel>
+          <edgelabel>totalRecords</edgelabel>
+          <edgelabel>recordsPerPage</edgelabel>
+          <edgelabel>offsetRecords</edgelabel>
+        </childnode>
+        <childnode refid="183" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="184" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="185" relation="usage">
+          <edgelabel>records</edgelabel>
+        </childnode>
+      </node>
+      <node id="175">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="176">
+        <label>EaglePage *(*)(struct EaglePageProvider_ *epp)</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="15" bodyend="90"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_provider___1a465ee8ff74cad40467bfb1fdaa64a740" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>add</name></member>
+      <member refid="struct_eagle_page_provider___1a64d700c2e2b025ec902c833466d7fb49" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>cursor</name></member>
+      <member refid="struct_eagle_page_provider___1ab9eaa681fa2ba56748139b6a5dbdee24" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>free</name></member>
+      <member refid="struct_eagle_page_provider___1a5ac083a645d964373f022d03df4849c8" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>name</name></member>
+      <member refid="struct_eagle_page_provider___1ad89313970929261b72bb99ed57f91af8" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>nextPage</name></member>
+      <member refid="struct_eagle_page_provider___1a35af3476dcf04b4a47c3ff89c5177ccc" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>nextPageLock</name></member>
+      <member refid="struct_eagle_page_provider___1a43afd3c921ea1cf1b530ec6ebfed3ebe" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>offsetRecords</name></member>
+      <member refid="struct_eagle_page_provider___1a70454b44edd41d398776681234301390" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>pagesRemaining</name></member>
+      <member refid="struct_eagle_page_provider___1a13656e5d0e264ac3f822f2661a288b79" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>records</name></member>
+      <member refid="struct_eagle_page_provider___1a843b3b6851cb04baf514003ecd135183" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>recordsPerPage</name></member>
+      <member refid="struct_eagle_page_provider___1a7914998dad76a9b6ed4ee3645e39747e" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>reset</name></member>
+      <member refid="struct_eagle_page_provider___1a6d229dced099552a8e8b7708f636e0d9" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>totalRecords</name></member>
+      <member refid="struct_eagle_page_provider___1a1098a844c26196961003dc0ebc21a1c0" prot="public" virt="non-virtual"><scope>EaglePageProvider_</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

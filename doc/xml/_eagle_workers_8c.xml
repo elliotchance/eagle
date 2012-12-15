@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_workers_8c" kind="file">
+    <compoundname>EagleWorkers.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="_eagle_workers_8h" local="yes">EagleWorkers.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <incdepgraph>
+      <node id="1746">
+        <label>EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="1747" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1749" relation="include">
+        </childnode>
+      </node>
+      <node id="1744">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1766">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1760">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1758" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1761" relation="include">
+        </childnode>
+      </node>
+      <node id="1763">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="1752" relation="include">
+        </childnode>
+        <childnode refid="1757" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1764" relation="include">
+        </childnode>
+      </node>
+      <node id="1752">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="1753" relation="include">
+        </childnode>
+        <childnode refid="1757" relation="include">
+        </childnode>
+      </node>
+      <node id="1751">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1767">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1758">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1751" relation="include">
+        </childnode>
+        <childnode refid="1759" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+      </node>
+      <node id="1747">
+        <label>pthread.h</label>
+      </node>
+      <node id="1762">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1755">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1756" relation="include">
+        </childnode>
+      </node>
+      <node id="1768">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="1757" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1764" relation="include">
+        </childnode>
+      </node>
+      <node id="1756">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1754">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1748">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1765">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1766" relation="include">
+        </childnode>
+      </node>
+      <node id="1769">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="1770">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1743">
+        <label>eagle/eagle/EagleWorkers.c</label>
+        <link refid="EagleWorkers.c"/>
+        <childnode refid="1744" relation="include">
+        </childnode>
+        <childnode refid="1745" relation="include">
+        </childnode>
+        <childnode refid="1770" relation="include">
+        </childnode>
+      </node>
+      <node id="1745">
+        <label>EagleWorkers.h</label>
+        <link refid="_eagle_workers_8h"/>
+        <childnode refid="1746" relation="include">
+        </childnode>
+      </node>
+      <node id="1753">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1754" relation="include">
+        </childnode>
+        <childnode refid="1755" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1756" relation="include">
+        </childnode>
+      </node>
+      <node id="1764">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1765" relation="include">
+        </childnode>
+        <childnode refid="1767" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1756" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+      </node>
+      <node id="1750">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="1751" relation="include">
+        </childnode>
+        <childnode refid="1752" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+        <childnode refid="1768" relation="include">
+        </childnode>
+        <childnode refid="1769" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1756" relation="include">
+        </childnode>
+        <childnode refid="1760" relation="include">
+        </childnode>
+      </node>
+      <node id="1757">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1747" relation="include">
+        </childnode>
+        <childnode refid="1753" relation="include">
+        </childnode>
+        <childnode refid="1758" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+        <childnode refid="1760" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1756" relation="include">
+        </childnode>
+        <childnode refid="1762" relation="include">
+        </childnode>
+      </node>
+      <node id="1759">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1747" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+      </node>
+      <node id="1749">
+        <label>EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="1750" relation="include">
+        </childnode>
+        <childnode refid="1748" relation="include">
+        </childnode>
+      </node>
+      <node id="1761">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1748" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_workers_8c_1af409e7dcd3ed135dc4daae5f40ab4a4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorkers_Delete</definition>
+        <argsstring>(EagleWorkers *workers)</argsstring>
+        <name>EagleWorkers_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_workers" kindref="compound">EagleWorkers</ref> *</type>
+          <declname>workers</declname>
+        </param>
+        <briefdescription>
+<para>Delete a pool of workers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">workers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" line="45" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" bodystart="44" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_workers_8c_1a47cf93cd3e01b6f6c179f39381fc90b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorkers_joinAll</definition>
+        <argsstring>(EagleWorkers *workers)</argsstring>
+        <name>EagleWorkers_joinAll</name>
+        <param>
+          <type><ref refid="struct_eagle_workers" kindref="compound">EagleWorkers</ref> *</type>
+          <declname>workers</declname>
+        </param>
+        <briefdescription>
+<para>Wait for all workers to finish. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is used when closing down the instance. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">workers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The workers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" bodystart="35" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_workers_8c_1afec90f270653a4e59db8d82b523b74e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_workers" kindref="compound">EagleWorkers</ref> *</type>
+        <definition>EagleWorkers* EagleWorkers_New</definition>
+        <argsstring>(int totalWorkers, struct EagleInstance *instance)</argsstring>
+        <name>EagleWorkers_New</name>
+        <param>
+          <type>int</type>
+          <declname>totalWorkers</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>instance</declname>
+        </param>
+        <briefdescription>
+<para>Create a new pool of workers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">totalWorkers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>All the workers will be initialised (but not started) when the pool is created. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The eagle instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>New pool of workers. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" line="6" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" bodystart="5" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_workers_8c_1a61f9797eee35f27a4a9e308d6d235e94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorkers_start</definition>
+        <argsstring>(EagleWorkers *workers)</argsstring>
+        <name>EagleWorkers_start</name>
+        <param>
+          <type><ref refid="struct_eagle_workers" kindref="compound">EagleWorkers</ref> *</type>
+          <declname>workers</declname>
+        </param>
+        <briefdescription>
+<para>Start the pool of workers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">workers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The workers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c" bodystart="26" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_workers_8h" kindref="compound">EagleWorkers.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="_eagle_workers_8h_1afec90f270653a4e59db8d82b523b74e7" refkind="member"><highlight class="normal"><ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref>*<sp/><ref refid="_eagle_workers_8c_1afec90f270653a4e59db8d82b523b74e7" kindref="member" tooltip="Create a new pool of workers.">EagleWorkers_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalWorkers,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*instance)</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref><sp/>*<ref refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" kindref="member" tooltip="The workers.">workers</ref><sp/>=<sp/>(<ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleWorkers_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref>));</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>workers)<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref><sp/>=<sp/>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>**)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleWorkers_New.2&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>*),<sp/>totalWorkers);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(workers);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>totalWorkers;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>[i]<sp/>=<sp/><ref refid="_eagle_worker_8c_1aef7a63ffea66cc75cfd5aa95257f8136" kindref="member" tooltip="Create a new worker (thread).">EagleWorker_New</ref>(i,<sp/>instance);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>workers-&gt;<ref refid="struct_eagle_workers_1a71a6e61323d6ebd016ffc2abbf5387de" kindref="member" tooltip="The number of workers in this pool.">totalWorkers</ref><sp/>=<sp/>totalWorkers;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>workers;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="_eagle_workers_8h_1a61f9797eee35f27a4a9e308d6d235e94" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_workers_8c_1a61f9797eee35f27a4a9e308d6d235e94" kindref="member" tooltip="Start the pool of workers.">EagleWorkers_start</ref>(<ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref><sp/>*<ref refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" kindref="member" tooltip="The workers.">workers</ref>)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>workers-&gt;<ref refid="struct_eagle_workers_1a71a6e61323d6ebd016ffc2abbf5387de" kindref="member" tooltip="The number of workers in this pool.">totalWorkers</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a64b80345a8d1c3469f64bed26b621b53" kindref="member" tooltip="Start a worker.">EagleWorker_start</ref>(workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>[i]);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="_eagle_workers_8h_1a47cf93cd3e01b6f6c179f39381fc90b8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_workers_8c_1a47cf93cd3e01b6f6c179f39381fc90b8" kindref="member" tooltip="Wait for all workers to finish.">EagleWorkers_joinAll</ref>(<ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref><sp/>*<ref refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" kindref="member" tooltip="The workers.">workers</ref>)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>workers-&gt;<ref refid="struct_eagle_workers_1a71a6e61323d6ebd016ffc2abbf5387de" kindref="member" tooltip="The number of workers in this pool.">totalWorkers</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a8fc8e06b39f78e5d4e40c586e4f06c81" kindref="member" tooltip="Wait for a worker to complete and shutdown.">EagleWorker_join</ref>(workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>[i]);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="_eagle_workers_8h_1af409e7dcd3ed135dc4daae5f40ab4a4d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_workers_8c_1af409e7dcd3ed135dc4daae5f40ab4a4d" kindref="member" tooltip="Delete a pool of workers.">EagleWorkers_Delete</ref>(<ref refid="struct_eagle_workers" kindref="compound" tooltip="A pool of workers.">EagleWorkers</ref><sp/>*<ref refid="struct_eagle_instance_1a502a8778d8c7547ef08ac823d3764d97" kindref="member" tooltip="The workers.">workers</ref>)</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>workers)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>workers-&gt;<ref refid="struct_eagle_workers_1a71a6e61323d6ebd016ffc2abbf5387de" kindref="member" tooltip="The number of workers in this pool.">totalWorkers</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a714713eb91e6f2d8000890f72911f666" kindref="member" tooltip="Delete a worker.">EagleWorker_Delete</ref>(workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>[i]);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>((</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>workers-&gt;<ref refid="struct_eagle_workers_1ad0ca09cc2f6b9826fa179c4ed448d6be" kindref="member" tooltip="The workers in this pool.">workers</ref>);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>((</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>workers);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorkers.c"/>
+  </compounddef>
+</doxygen>

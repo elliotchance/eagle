@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_insert_8h" kind="file">
+    <compoundname>EagleDbSqlInsert.h</compoundname>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includedby refid="_eagle_db_instance_8h" local="yes">eagle/eagledb/EagleDbInstance.h</includedby>
+    <includedby refid="_eagle_db_sql_insert_8c" local="yes">eagle/eagledb/EagleDbSqlInsert.c</includedby>
+    <incdepgraph>
+      <node id="2505">
+        <label>eagle/eagledb/EagleDbSqlInsert.h</label>
+        <link refid="EagleDbSqlInsert.h"/>
+        <childnode refid="2506" relation="include">
+        </childnode>
+        <childnode refid="2507" relation="include">
+        </childnode>
+      </node>
+      <node id="2507">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2508" relation="include">
+        </childnode>
+        <childnode refid="2512" relation="include">
+        </childnode>
+        <childnode refid="2506" relation="include">
+        </childnode>
+        <childnode refid="2513" relation="include">
+        </childnode>
+      </node>
+      <node id="2509">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2508">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2509" relation="include">
+        </childnode>
+        <childnode refid="2510" relation="include">
+        </childnode>
+        <childnode refid="2512" relation="include">
+        </childnode>
+      </node>
+      <node id="2511">
+        <label>pthread.h</label>
+      </node>
+      <node id="2512">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2506">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2510">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2511" relation="include">
+        </childnode>
+        <childnode refid="2506" relation="include">
+        </childnode>
+      </node>
+      <node id="2513">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2506" relation="include">
+        </childnode>
+        <childnode refid="2512" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2520">
+        <label>eagle/eagledb/EagleDbSqlInsert.c</label>
+        <link refid="_eagle_db_sql_insert_8c"/>
+      </node>
+      <node id="2514">
+        <label>eagle/eagledb/EagleDbSqlInsert.h</label>
+        <link refid="EagleDbSqlInsert.h"/>
+        <childnode refid="2515" relation="include">
+        </childnode>
+        <childnode refid="2520" relation="include">
+        </childnode>
+      </node>
+      <node id="2519">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="2518">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="2518" relation="include">
+        </childnode>
+      </node>
+      <node id="2515">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="2516" relation="include">
+        </childnode>
+        <childnode refid="2517" relation="include">
+        </childnode>
+        <childnode refid="2518" relation="include">
+        </childnode>
+        <childnode refid="2519" relation="include">
+        </childnode>
+      </node>
+      <node id="2516">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="2516" relation="include">
+        </childnode>
+      </node>
+      <node id="2517">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="2518" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_sql_insert" prot="public">EagleDbSqlInsert</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_insert_8h_1a25f44a039d53c5a59d4efac617b543f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlInsert_Delete</definition>
+        <argsstring>(EagleDbSqlInsert *insert)</argsstring>
+        <name>EagleDbSqlInsert_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_insert" kindref="compound">EagleDbSqlInsert</ref> *</type>
+          <declname>insert</declname>
+        </param>
+        <briefdescription>
+<para>Delete an INSERT object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">insert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="39" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.c" bodystart="18" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_insert_8h_1a4b8864c03fe364d041369e26cc6b662e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_sql_insert" kindref="compound">EagleDbSqlInsert</ref> *</type>
+        <definition>EagleDbSqlInsert* EagleDbSqlInsert_New</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleDbSqlInsert_New</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new INSERT. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>New instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="33" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.c" bodystart="4" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlInsert_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlInsert_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_8h" kindref="compound">EagleLinkedList.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="struct_eagle_db_sql_insert" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="15" refid="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*table;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20" refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*names;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25" refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*values;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref>*<sp/><ref refid="_eagle_db_sql_insert_8c_1a8d256a5a4e573882b8a662fa7fba4dac" kindref="member" tooltip="Create a new INSERT.">EagleDbSqlInsert_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_insert_8c_1a25f44a039d53c5a59d4efac617b543f6" kindref="member" tooltip="Delete an INSERT object.">EagleDbSqlInsert_Delete</ref>(<ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref><sp/>*insert);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h"/>
+  </compounddef>
+</doxygen>

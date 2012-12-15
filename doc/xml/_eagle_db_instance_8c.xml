@@ -1,0 +1,1500 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_instance_8c" kind="file">
+    <compoundname>EagleDbInstance.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_db_instance_8h" local="yes">EagleDbInstance.h</includes>
+    <includes refid="_eagle_db_table_8h" local="yes">EagleDbTable.h</includes>
+    <includes refid="_eagle_db_tuple_8h" local="yes">EagleDbTuple.h</includes>
+    <includes refid="_eagle_db_sql_select_8h" local="yes">EagleDbSqlSelect.h</includes>
+    <includes refid="_eagle_page_provider_8h" local="yes">EaglePageProvider.h</includes>
+    <includes refid="_eagle_instance_8h" local="yes">EagleInstance.h</includes>
+    <includes refid="_eagle_db_table_data_8h" local="yes">EagleDbTableData.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_db_instance_8c" local="yes">EagleDbParser.h</includes>
+    <includes refid="_eagle_data_8h" local="yes">EagleData.h</includes>
+    <includes refid="_eagle_db_sql_statement_type_8h" local="yes">EagleDbSqlStatementType.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includes refid="_eagle_logger_8h" local="yes">EagleLogger.h</includes>
+    <includes refid="_eagle_db_schema_8h" local="yes">EagleDbSchema.h</includes>
+    <includes refid="_eagle_db_information_schema_8h" local="yes">EagleDbInformationSchema.h</includes>
+    <includes refid="_eagle_data_type_8h" local="yes">EagleDataType.h</includes>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <incdepgraph>
+      <node id="1972">
+        <label>EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="1958" relation="include">
+        </childnode>
+        <childnode refid="1957" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1973" relation="include">
+        </childnode>
+      </node>
+      <node id="1984">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="1977" relation="include">
+        </childnode>
+        <childnode refid="1974" relation="include">
+        </childnode>
+      </node>
+      <node id="1991">
+        <label>EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="1966" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1992" relation="include">
+        </childnode>
+      </node>
+      <node id="1985">
+        <label>EagleDbSqlInsert.h</label>
+        <link refid="_eagle_db_sql_insert_8h"/>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+      </node>
+      <node id="1956">
+        <label>EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="1957" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1972" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+      </node>
+      <node id="1983">
+        <label>EagleDbSqlSelect.h</label>
+        <link refid="_eagle_db_sql_select_8h"/>
+        <childnode refid="1984" relation="include">
+        </childnode>
+        <childnode refid="1973" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+      </node>
+      <node id="1951">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1994">
+        <label>EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="1952" relation="include">
+        </childnode>
+        <childnode refid="1964" relation="include">
+        </childnode>
+        <childnode refid="1963" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1986" relation="include">
+        </childnode>
+      </node>
+      <node id="1975">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1989">
+        <label>EagleInstance.h</label>
+        <link refid="_eagle_instance_8h"/>
+        <childnode refid="1966" relation="include">
+        </childnode>
+        <childnode refid="1990" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1992" relation="include">
+        </childnode>
+        <childnode refid="1963" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+      </node>
+      <node id="1955">
+        <label>EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="1956" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+      </node>
+      <node id="1950">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="EagleDbInstance.c"/>
+        <childnode refid="1951" relation="include">
+        </childnode>
+        <childnode refid="1952" relation="include">
+        </childnode>
+        <childnode refid="1953" relation="include">
+        </childnode>
+        <childnode refid="1954" relation="include">
+        </childnode>
+        <childnode refid="1957" relation="include">
+        </childnode>
+        <childnode refid="1972" relation="include">
+        </childnode>
+        <childnode refid="1983" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1989" relation="include">
+        </childnode>
+        <childnode refid="1956" relation="include">
+        </childnode>
+        <childnode refid="1993" relation="include">
+        </childnode>
+        <childnode refid="1950" relation="include">
+        </childnode>
+        <childnode refid="1959" relation="include">
+        </childnode>
+        <childnode refid="1982" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+        <childnode refid="1994" relation="include">
+        </childnode>
+        <childnode refid="1955" relation="include">
+        </childnode>
+        <childnode refid="1995" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+      </node>
+      <node id="1954">
+        <label>EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="1955" relation="include">
+        </childnode>
+        <childnode refid="1977" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1982" relation="include">
+        </childnode>
+        <childnode refid="1983" relation="include">
+        </childnode>
+        <childnode refid="1985" relation="include">
+        </childnode>
+        <childnode refid="1986" relation="include">
+        </childnode>
+      </node>
+      <node id="1995">
+        <label>EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="1996" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1955" relation="include">
+        </childnode>
+        <childnode refid="1954" relation="include">
+        </childnode>
+      </node>
+      <node id="1962">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1963" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1968" relation="include">
+        </childnode>
+      </node>
+      <node id="1979">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="1978" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1973" relation="include">
+        </childnode>
+      </node>
+      <node id="1978">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="1970" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+      </node>
+      <node id="1964">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1976">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1963">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1964" relation="include">
+        </childnode>
+        <childnode refid="1965" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+      </node>
+      <node id="1966">
+        <label>pthread.h</label>
+      </node>
+      <node id="1953">
+        <label>string.h</label>
+      </node>
+      <node id="1971">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1959">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1960" relation="include">
+        </childnode>
+      </node>
+      <node id="1980">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1973" relation="include">
+        </childnode>
+      </node>
+      <node id="1960">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1967">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1986">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="1987" relation="include">
+        </childnode>
+        <childnode refid="1988" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+      </node>
+      <node id="1961">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1987">
+        <label>time.h</label>
+      </node>
+      <node id="1974">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1975" relation="include">
+        </childnode>
+      </node>
+      <node id="1981">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="1958">
+        <label>EagleDbColumn.h</label>
+        <link refid="_eagle_db_column_8h"/>
+        <childnode refid="1959" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+      </node>
+      <node id="1993">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1990">
+        <label>EagleWorkers.h</label>
+        <link refid="_eagle_workers_8h"/>
+        <childnode refid="1991" relation="include">
+        </childnode>
+      </node>
+      <node id="1970">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1959" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+      </node>
+      <node id="1996">
+        <label>EaglePageProviderVirtual.h</label>
+        <link refid="_eagle_page_provider_virtual_8h"/>
+        <childnode refid="1960" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1970" relation="include">
+        </childnode>
+        <childnode refid="1969" relation="include">
+        </childnode>
+      </node>
+      <node id="1982">
+        <label>EagleDbSqlStatementType.h</label>
+        <link refid="_eagle_db_sql_statement_type_8h"/>
+      </node>
+      <node id="1973">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1974" relation="include">
+        </childnode>
+        <childnode refid="1976" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+      </node>
+      <node id="1977">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="1964" relation="include">
+        </childnode>
+        <childnode refid="1978" relation="include">
+        </childnode>
+        <childnode refid="1979" relation="include">
+        </childnode>
+        <childnode refid="1980" relation="include">
+        </childnode>
+        <childnode refid="1981" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+      </node>
+      <node id="1957">
+        <label>EagleDbTable.h</label>
+        <link refid="_eagle_db_table_8h"/>
+        <childnode refid="1958" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+      </node>
+      <node id="1952">
+        <label>stdio.h</label>
+      </node>
+      <node id="1988">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="1969">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1966" relation="include">
+        </childnode>
+        <childnode refid="1970" relation="include">
+        </childnode>
+        <childnode refid="1963" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+        <childnode refid="1962" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1960" relation="include">
+        </childnode>
+        <childnode refid="1971" relation="include">
+        </childnode>
+      </node>
+      <node id="1965">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1966" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+      </node>
+      <node id="1992">
+        <label>EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="1977" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+      </node>
+      <node id="1968">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1967" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1997">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="EagleDbInstance.c"/>
+        <childnode refid="1997" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_instance_8c_1add8762c04bef098dce4b034c0a3a8597" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_addSchema</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSchema *schema)</argsstring>
+        <name>EagleDbInstance_addSchema</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> *</type>
+          <declname>schema</declname>
+        </param>
+        <briefdescription>
+<para>Add a schema to the instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">schema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if it is successful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="545" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="544" bodyend="557"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a38146e6883ba5579dca8ffa7297a2947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_Delete</definition>
+        <argsstring>(EagleDbInstance *db)</argsstring>
+        <name>EagleDbInstance_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Free an instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="452" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="451" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a83d0e34ee0a71c8a3a54682622186d4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_DeleteAll</definition>
+        <argsstring>(EagleDbInstance *db)</argsstring>
+        <name>EagleDbInstance_DeleteAll</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Free an instance and ALL of the schemas and tables. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="479" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="478" bodyend="507"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a8a4be2e96111059cd3fa71cb36fd8823" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_execute</definition>
+        <argsstring>(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_execute</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>sql</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute an arbitrary SQL statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SQL statement. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="427" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="426" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1adbaa47551abe62bb775bdd24dcb56f2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeCreateTable</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbTable *table, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeCreateTable</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute a CREATE TABLE statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The table definition to create. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="365" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="364" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a82ede5483d3e553aa77414643f8a865a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeInsert</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSqlInsert *insert, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeInsert</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_insert" kindref="compound">EagleDbSqlInsert</ref> *</type>
+          <declname>insert</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute an INSERT statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">insert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>INSERT statement. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue on success. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="262" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="261" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a50c986867f7d80634d0f24259e29f26c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeParser</definition>
+        <argsstring>(EagleDbInstance *db, struct EagleDbParser *p, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeParser</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Mostly for internal use. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="_eagle_db_instance_8c_1a8a4be2e96111059cd3fa71cb36fd8823" kindref="member">EagleDbInstance_execute()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parser instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Success status. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="398" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="397" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a843dbb73da6a3758396873cf7cdfda23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeSelect</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSqlSelect *select, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeSelect</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute a SELECT statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SELECT statement (compiled). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="234" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="233" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> *</type>
+        <definition>EagleDbSchema* EagleDbInstance_getSchema</definition>
+        <argsstring>(EagleDbInstance *db, const char *schemaName)</argsstring>
+        <name>EagleDbInstance_getSchema</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>schemaName</declname>
+        </param>
+        <briefdescription>
+<para>Get a schema by name. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">schemaName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the schema can not be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="532" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="531" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a47d828d875d510e051bbc68de2f3a0ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_table_data" kindref="compound">EagleDbTableData</ref> *</type>
+        <definition>EagleDbTableData* EagleDbInstance_getTable</definition>
+        <argsstring>(EagleDbInstance *db, char *tableName)</argsstring>
+        <name>EagleDbInstance_getTable</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>tableName</declname>
+        </param>
+        <briefdescription>
+<para>Get a table by name. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will only search the EagleDbSchema_DefaultSchemaName schema. It does not support schema name with a dot, yet. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tableName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The raw table name. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the table can not be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="510" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="509" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1ae4c73f4a21a02fc1f3eb9a3bc0031ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+        <definition>EagleDbInstance* EagleDbInstance_New</definition>
+        <argsstring>(int pageSize, int cores)</argsstring>
+        <name>EagleDbInstance_New</name>
+        <param>
+          <type>int</type>
+          <declname>pageSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cores</declname>
+        </param>
+        <briefdescription>
+<para>Create a new database instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pageSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The default page size to use for <ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cores</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of CPU cores. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="19" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8c_1a3caa1842c5ff5bcb28c65e40f2f6750b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_PrintResults</definition>
+        <argsstring>(EaglePlan *plan)</argsstring>
+        <name>EagleDbInstance_PrintResults</name>
+        <param>
+          <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+          <declname>plan</declname>
+        </param>
+        <briefdescription>
+<para>Print a result set (fancy). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">plan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The plan contains a pointer to the result set once it is executed. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" line="46" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="45" bodyend="231"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_instance_8h" kindref="compound">EagleDbInstance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_table_8h" kindref="compound">EagleDbTable.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_tuple_8h" kindref="compound">EagleDbTuple.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_select_8h" kindref="compound">EagleDbSqlSelect.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_8h" kindref="compound">EaglePageProvider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_instance_8h" kindref="compound">EagleInstance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_table_data_8h" kindref="compound">EagleDbTableData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_instance_8h" kindref="compound">EagleDbInstance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_parser_8h" kindref="compound">EagleDbParser.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_8h" kindref="compound">EagleLogger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_schema_8h" kindref="compound">EagleDbSchema.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_information_schema_8h" kindref="compound">EagleDbInformationSchema.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_type_8h" kindref="compound">EagleDataType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="_eagle_db_instance_8h_1ae4c73f4a21a02fc1f3eb9a3bc0031ae4" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref>*<sp/><ref refid="_eagle_db_instance_8c_1ae4c73f4a21a02fc1f3eb9a3bc0031ae4" kindref="member" tooltip="Create a new database instance.">EagleDbInstance_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pageSize,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>cores)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db<sp/>=<sp/>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbInstance_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref>));</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*defaultSchema,<sp/>*infoSchema;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>db)<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref><sp/>=<sp/>pageSize;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" kindref="member" tooltip="The number of CPU cores.">cores</ref><sp/>=<sp/>cores;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>schemas<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref><sp/>=<sp/><ref refid="_eagle_linked_list_8c_1ae9bcde0ae223ae3b8220c4967fbce417" kindref="member" tooltip="Create a new linked list.">EagleLinkedList_New</ref>();</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>defaultSchema<sp/>=<sp/><ref refid="_eagle_db_schema_8c_1a436cce7c76709dc0362d50fbc9b2e6ee" kindref="member">EagleDbSchema_New</ref>((</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>infoSchema<sp/>=<sp/><ref refid="_eagle_db_schema_8c_1a436cce7c76709dc0362d50fbc9b2e6ee" kindref="member">EagleDbSchema_New</ref>((</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_db_schema_8c_1ada5e6382ddae617ae9f72c6e9bd07bbc" kindref="member" tooltip="The name of the information_schema.">EagleDbSchema_InformationSchemaName</ref>);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_instance_8c_1add8762c04bef098dce4b034c0a3a8597" kindref="member" tooltip="Add a schema to the instance.">EagleDbInstance_addSchema</ref>(db,<sp/>defaultSchema);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_instance_8c_1add8762c04bef098dce4b034c0a3a8597" kindref="member" tooltip="Add a schema to the instance.">EagleDbInstance_addSchema</ref>(db,<sp/>infoSchema);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>setup<sp/>information<sp/>schema<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_information_schema_8c_1ab0cbfd0be6522fd875a758f08d0fd5e0" kindref="member" tooltip="Initialise the virtual tables for the information_schema.">EagleDbInformationSchema_Init</ref>(db,<sp/>defaultSchema);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>db;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="_eagle_db_instance_8h_1a3caa1842c5ff5bcb28c65e40f2f6750b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a3caa1842c5ff5bcb28c65e40f2f6750b" kindref="member" tooltip="Print a result set (fancy).">EagleDbInstance_PrintResults</ref>(<ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan)</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>**pages;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/>totalRecords<sp/>=<sp/>0,<sp/>j;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>*widths;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>plan)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref><sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/><ref refid="_eagle_page_provider_8c_1a2c871cdcad6ce101ef48504808713bc2" kindref="member" tooltip="Return the amount of pages remaining.">EaglePageProvider_pagesRemaining</ref>(plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[0])<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>calculate<sp/>the<sp/>widths<sp/>of<sp/>the<sp/>fields<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>widths<sp/>=<sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbInstance_PrintResults.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal">),<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>widths)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>widths[i]<sp/>=<sp/>strlen(plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[i]-&gt;name);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(NULL<sp/>!=<sp/>(page<sp/>=<sp/><ref refid="_eagle_page_provider_8c_1a0ceaedea95767ce9e5d3134ca0ac90a8" kindref="member" tooltip="Get the next page from a provider.">EaglePageProvider_nextPage</ref>(plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[i])))<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[30];</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>len;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(buf,<sp/></highlight><highlight class="stringliteral">&quot;%d&quot;</highlight><highlight class="normal">,<sp/>((<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>)[j]);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>len<sp/>=<sp/>strlen(buf);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(len<sp/>&gt;<sp/>widths[i])<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>widths[i]<sp/>=<sp/>len;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>len<sp/>=<sp/>strlen(((<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>)[j]);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(len<sp/>&gt;<sp/>widths[i])<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>widths[i]<sp/>=<sp/>len;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[30];</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>len;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(buf,<sp/></highlight><highlight class="stringliteral">&quot;%g&quot;</highlight><highlight class="normal">,<sp/>((<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>)[j]);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>len<sp/>=<sp/>strlen(buf);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(len<sp/>&gt;<sp/>widths[i])<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>widths[i]<sp/>=<sp/>len;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_8c_1a1335c4aeab6d307f25a8e06f90240d12" kindref="member" tooltip="Free a page.">EaglePage_Delete</ref>(page);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_provider_8c_1a90d7702a512bc366d8ebe2f505fbf263" kindref="member" tooltip="Reset the cursor of a provider.">EaglePageProvider_reset</ref>(plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[i]);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>heading<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(i<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>%s<sp/>&quot;</highlight><highlight class="normal">,<sp/>plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[i]-&gt;name);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(i<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;+&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>(int)<sp/>widths[i]<sp/>+<sp/>2;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="145"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>this<sp/>is<sp/>just<sp/>so<sp/>the<sp/>compile<sp/>doesn&apos;t<sp/>give<sp/>a<sp/>warning<sp/>that<sp/>totalRecords<sp/>is<sp/>not<sp/>used<sp/>when<sp/>CUNIT<sp/>is<sp/>running<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>j<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="148"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>render<sp/>out<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pages<sp/>=<sp/>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>**)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbInstance_PrintResults.2&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*),<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>pages)<sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(widths);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="157"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(1)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>k;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>finished<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page<sp/>=<sp/><ref refid="_eagle_page_provider_8c_1a0ceaedea95767ce9e5d3134ca0ac90a8" kindref="member" tooltip="Get the next page from a provider.">EaglePageProvider_nextPage</ref>(plan-&gt;<ref refid="struct_eagle_plan_1a5d79e47d901db222a71b208b098c3d6d" kindref="member" tooltip="Result set after execution.">result</ref>[i]);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>finished<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pages[i]<sp/>=<sp/>page;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(finished<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>pages[0]-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(k<sp/>=<sp/>0;<sp/>k<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++k)<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(k<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(pages[k]-&gt;type)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>%*s<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>widths[k],<sp/></highlight><highlight class="stringliteral">&quot;?&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>*d<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>*)<sp/>pages[k]-&gt;data;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>%*d<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>widths[k],<sp/>d[j]);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*d<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>pages[k]-&gt;data;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>%-*s<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>widths[k],<sp/>d[j]);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>*d<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>*)<sp/>pages[k]-&gt;data;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>%*g<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>widths[k],<sp/>d[j]);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++totalRecords;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(k<sp/>=<sp/>0;<sp/>k<sp/>&lt;<sp/>plan-&gt;<ref refid="struct_eagle_plan_1afed368b2757680c7fcd64d2ffc079c38" kindref="member" tooltip="The number of providers in result.">resultFields</ref>;<sp/>++k)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_8c_1a1335c4aeab6d307f25a8e06f90240d12" kindref="member" tooltip="Free a page.">EaglePage_Delete</ref>(pages[k]);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="221"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(widths);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(pages);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="226"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%d<sp/>record%s,<sp/>%.3f<sp/>seconds\n\n&quot;</highlight><highlight class="normal">,<sp/>totalRecords,<sp/>(totalRecords<sp/>==<sp/>1<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">),<sp/><ref refid="_eagle_plan_8c_1a147dbc6cec2a888fab3cf9e10e486748" kindref="member" tooltip="Get the total execution time for all CPUs in seconds.">EaglePlan_getExecutionSeconds</ref>(plan));</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="228"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>this<sp/>is<sp/>just<sp/>so<sp/>the<sp/>compile<sp/>doesn&apos;t<sp/>give<sp/>a<sp/>warning<sp/>that<sp/>totalRecords<sp/>is<sp/>not<sp/>used<sp/>when<sp/>CUNIT<sp/>is<sp/>running<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>totalRecords<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="231"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233" refid="_eagle_db_instance_8h_1a843dbb73da6a3758396873cf7cdfda23" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a843dbb73da6a3758396873cf7cdfda23" kindref="member" tooltip="Execute a SELECT statement.">EagleDbInstance_executeSelect</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error)</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>plan<sp/>=<sp/><ref refid="_eagle_db_sql_select_8c_1aa484ab85018875ab938559b646cbbed8" kindref="member" tooltip="Parse a SELECT and compile it into a plan.">EagleDbSqlSelect_parse</ref>(select,<sp/>db);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*printf(&quot;%s\n&quot;,<sp/>EaglePlan_toString(plan));*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>catch<sp/>compilation<sp/>error<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_plan_8c_1acd76c6215c59c346a4d68bacbc552e3f" kindref="member" tooltip="Check if the plan is currently in an error state.">EaglePlan_isError</ref>(plan))<sp/>{</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>plan-&gt;<ref refid="struct_eagle_plan_1a9957046d991c59851a5052435e95ce0a" kindref="member" tooltip="Further details about the error, this may be NULL.">errorMessage</ref>);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>execute<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*eagle<sp/>=<sp/><ref refid="_eagle_instance_8c_1af3888839e04de3cc548480228920c3a7" kindref="member" tooltip="Create a new eagle instance.">EagleInstance_New</ref>(1);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_instance_8c_1a04799f2a6588421bb8235faa8144f78f" kindref="member" tooltip="Add an EaglePlan to an EagleInstance.">EagleInstance_addPlan</ref>(eagle,<sp/>plan);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_instance_8c_1a683dd58ebffac2f2f0fa090bf46a032d" kindref="member" tooltip="Run the instance.">EagleInstance_run</ref>(eagle);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>print<sp/>results<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_instance_8c_1a3caa1842c5ff5bcb28c65e40f2f6750b" kindref="member" tooltip="Print a result set (fancy).">EagleDbInstance_PrintResults</ref>(plan);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_instance_8c_1a21f9875e7adcb02f2370897749e56181" kindref="member" tooltip="Free EagleInstance.">EagleInstance_Delete</ref>(eagle);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_plan_8c_1a446330890465751822500e308aa306a8" kindref="member" tooltip="Delete a plan.">EaglePlan_Delete</ref>(plan);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>success;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261" refid="_eagle_db_instance_8h_1a82ede5483d3e553aa77414643f8a865a" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a82ede5483d3e553aa77414643f8a865a" kindref="member" tooltip="Execute an INSERT statement.">EagleDbInstance_executeInsert</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref><sp/>*insert,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error)</highlight></codeline>
+<codeline lineno="262"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*cursor;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i,<sp/>rowsInserted<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_tuple" kindref="compound" tooltip="A tuple represents a row in a table.">EagleDbTuple</ref><sp/>*tuple;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>make<sp/>the<sp/>table<sp/>exists<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref><sp/>*td<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a47d828d875d510e051bbc68de2f3a0ce" kindref="member" tooltip="Get a table by name.">EagleDbInstance_getTable</ref>(db,<sp/>insert-&gt;<ref refid="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" kindref="member" tooltip="The name of the table to insert into.">table</ref>);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>td)<sp/>{</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;No<sp/>such<sp/>table<sp/>&apos;%s&apos;&quot;</highlight><highlight class="normal">,<sp/>insert-&gt;<ref refid="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" kindref="member" tooltip="The name of the table to insert into.">table</ref>);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>make<sp/>sure<sp/>the<sp/>number<sp/>of<sp/>columns<sp/>match<sp/>the<sp/>number<sp/>of<sp/>values<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" kindref="member" tooltip="A linked list of C strings for columns names.">names</ref>)<sp/>!=<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" kindref="member" tooltip="A linked list of EagleDbSqlExpression&amp;#39;s for VALUES.">values</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;There<sp/>are<sp/>%d<sp/>columns<sp/>and<sp/>%d<sp/>values&quot;</highlight><highlight class="normal">,<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" kindref="member" tooltip="A linked list of C strings for columns names.">names</ref>),</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" kindref="member" tooltip="A linked list of EagleDbSqlExpression&amp;#39;s for VALUES.">values</ref>));</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>make<sp/>sure<sp/>all<sp/>the<sp/>columns<sp/>exist<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(cursor<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" kindref="member" tooltip="A linked list of C strings for columns names.">names</ref>),<sp/>i<sp/>=<sp/>0;<sp/>NULL<sp/>!=<sp/>cursor;<sp/>cursor<sp/>=<sp/>cursor-&gt;next,<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*expr<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>*)<sp/>cursor-&gt;obj,<sp/>*valueExpr;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref><sp/>*value;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref><sp/>*col;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>they<sp/>must<sp/>be<sp/>column<sp/>names,<sp/>expressions<sp/>are<sp/>not<sp/>acceptable<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7da50223901e3ba6904cab8def43831c737" kindref="member" tooltip="Real type is EagleDbSqlValue.">EagleDbSqlExpressionTypeValue</ref><sp/>!=<sp/>expr-&gt;expressionType)<sp/>{</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/></highlight><highlight class="stringliteral">&quot;You<sp/>cannot<sp/>use<sp/>expressions<sp/>for<sp/>column<sp/>names&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/>expr;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a5f0bf7d20910a8563b25447671fe0cfc" kindref="member" tooltip="The name of a column.">EagleDbSqlValueTypeIdentifier</ref><sp/>!=<sp/>value-&gt;type)<sp/>{</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/></highlight><highlight class="stringliteral">&quot;You<sp/>cannot<sp/>use<sp/>expressions<sp/>for<sp/>column<sp/>names&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>column<sp/>name<sp/>exists<sp/>in<sp/>the<sp/>table?<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>col<sp/>=<sp/><ref refid="_eagle_db_table_8c_1a741948d5e651fda1e91510c1a718cae5" kindref="member" tooltip="Get a column of a table by its name.">EagleDbTable_getColumnByName</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>,<sp/>value-&gt;value.identifier);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>col)<sp/>{</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;No<sp/>such<sp/>column<sp/>&apos;%s&apos;<sp/>in<sp/>table<sp/>&apos;%s&apos;&quot;</highlight><highlight class="normal">,<sp/>value-&gt;value.identifier,<sp/>insert-&gt;<ref refid="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" kindref="member" tooltip="The name of the table to insert into.">table</ref>);</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>make<sp/>sure<sp/>the<sp/>types<sp/>are<sp/>correct<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>valueExpr<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>*)<sp/><ref refid="_eagle_linked_list_8c_1ab8955131cc2a2087ca90ee6c225db837" kindref="member" tooltip="Get an item by index.">EagleLinkedList_get</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" kindref="member" tooltip="A linked list of EagleDbSqlExpression&amp;#39;s for VALUES.">values</ref>,<sp/>i);</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7da50223901e3ba6904cab8def43831c737" kindref="member" tooltip="Real type is EagleDbSqlValue.">EagleDbSqlExpressionTypeValue</ref><sp/>!=<sp/>valueExpr-&gt;expressionType)<sp/>{</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Expressions<sp/>in<sp/>VALUES<sp/>are<sp/>not<sp/>yet<sp/>supported<sp/>for<sp/>column<sp/>&apos;%s&apos;&quot;</highlight><highlight class="normal">,<sp/>col-&gt;name);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>match<sp/>data<sp/>type<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref><sp/>==<sp/><ref refid="_eagle_db_sql_value_8c_1a5666e74400e97d26054218f2bc382388" kindref="member" tooltip="Check if a EagleDbSqlValue can be cast into a data type.">EagleDbSqlValue_castable</ref>((<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/>valueExpr,<sp/>col-&gt;type))<sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*type1<sp/>=<sp/><ref refid="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" kindref="member" tooltip="Convert a type to a string.">EagleDataType_typeToName</ref>(col-&gt;type);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*type2<sp/>=<sp/><ref refid="_eagle_db_sql_value_type_8c_1a13fa6fb3475f724c130bbe0c338eb174" kindref="member" tooltip="Get the string representation of a EagleDbSqlValueType.">EagleDbSqlValueType_toString</ref>(((<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/>valueExpr)-&gt;type);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Type<sp/>for<sp/>column<sp/>%s<sp/>is<sp/>%s,<sp/>but<sp/>%s<sp/>given.&quot;</highlight><highlight class="normal">,<sp/>col-&gt;name,<sp/>type1,<sp/>type2);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(type1);</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(type2);</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>everything<sp/>looks<sp/>good,<sp/>we<sp/>can<sp/>create<sp/>the<sp/>tuple<sp/>now<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/>tuple<sp/>=<sp/><ref refid="_eagle_db_tuple_8c_1a2b2b8f183f9a5c082ab5a12a7f34440d" kindref="member" tooltip="Create a new tuple (record).">EagleDbTuple_New</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(cursor<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" kindref="member" tooltip="A linked list of C strings for columns names.">names</ref>),<sp/>i<sp/>=<sp/>0;<sp/>NULL<sp/>!=<sp/>cursor;<sp/>cursor<sp/>=<sp/>cursor-&gt;next,<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*colName<sp/>=<sp/>((<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/>cursor-&gt;obj)-&gt;value.identifier;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref><sp/>*col;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>colIndex;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref><sp/>*v;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>colIndex<sp/>=<sp/><ref refid="_eagle_db_table_8c_1a41fbf672f4b048f1ee3c7c1251cb6465" kindref="member" tooltip="Find the column index by its name.">EagleDbTable_getColumnIndex</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>,<sp/>colName);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>col<sp/>=<sp/><ref refid="_eagle_db_table_8c_1a741948d5e651fda1e91510c1a718cae5" kindref="member" tooltip="Get a column of a table by its name.">EagleDbTable_getColumnByName</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>,<sp/>colName);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v<sp/>=<sp/>((<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/><ref refid="_eagle_linked_list_8c_1ab8955131cc2a2087ca90ee6c225db837" kindref="member" tooltip="Get an item by index.">EagleLinkedList_get</ref>(insert-&gt;<ref refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" kindref="member" tooltip="A linked list of EagleDbSqlExpression&amp;#39;s for VALUES.">values</ref>,<sp/>i));</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_tuple_8c_1a6aee184f4be56944f33b2cbcd12a1cfd" kindref="member" tooltip="Set a tuple column with a dynamic value.">EagleDbTuple_set</ref>(tuple,<sp/>colIndex,<sp/>v,<sp/>col-&gt;<ref refid="struct_eagle_db_column_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="Column data type.">type</ref>);</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>do<sp/>the<sp/>INSERT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_data_8c_1a43cb80a9bba6a9cea828367e92f3b9dc" kindref="member" tooltip="INSERT a new tuple (record) onto the table data.">EagleDbTableData_insert</ref>(td,<sp/>tuple);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>cleanup<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_tuple_8c_1af97cca184b3284c6cba8012086fcfa3c" kindref="member" tooltip="Delete a tuple.">EagleDbTuple_Delete</ref>(tuple);</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="355"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%d<sp/>row%s<sp/>inserted\n\n&quot;</highlight><highlight class="normal">,<sp/>rowsInserted,<sp/>(rowsInserted<sp/>==<sp/>1<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="357"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>this<sp/>is<sp/>so<sp/>the<sp/>compiler<sp/>does<sp/>not<sp/>complain<sp/>about<sp/>unused<sp/>variable<sp/>while<sp/>in<sp/>CUNIT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>rowsInserted<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="360"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="362"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight></codeline>
+<codeline lineno="364" refid="_eagle_db_instance_8h_1adbaa47551abe62bb775bdd24dcb56f2f" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1adbaa47551abe62bb775bdd24dcb56f2f" kindref="member" tooltip="Execute a CREATE TABLE statement.">EagleDbInstance_executeCreateTable</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error)</highlight></codeline>
+<codeline lineno="365"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref><sp/>*td;</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema;</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>create<sp/>the<sp/>table<sp/>data<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/>td<sp/>=<sp/><ref refid="_eagle_db_table_data_8c_1a6dfb3391f88afb02e8ecc6557b36e57f" kindref="member" tooltip="Create a new table data instance.">EagleDbTableData_New</ref>(table,<sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>);</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>add<sp/>table<sp/>to<sp/>default<sp/>schema<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>schema<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(db,<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>);</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_db_schema_8c_1a62f7ae1445055123302f56f404b7b562" kindref="member">EagleDbSchema_addTable</ref>(schema,<sp/>td))<sp/>{</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Table<sp/>\&quot;%s.%s\&quot;<sp/>created.&quot;</highlight><highlight class="normal">,<sp/>schema-&gt;<ref refid="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="Schema name.">name</ref>,<sp/>table-&gt;<ref refid="struct_eagle_db_table_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="The raw name of the table.">name</ref>);</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a9700ff46418c604971c5d000de92c1d9" kindref="member" tooltip="This describes events in the system that have no effect on the flow of execution...">EagleLoggerSeverityInfo</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Table<sp/>\&quot;%s.%s\&quot;<sp/>already<sp/>exists.&quot;</highlight><highlight class="normal">,<sp/>schema-&gt;<ref refid="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="Schema name.">name</ref>,<sp/>table-&gt;<ref refid="struct_eagle_db_table_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="The raw name of the table.">name</ref>);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>clean<sp/>up<sp/>resources<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_8c_1a4ebfc8bb4977c775377e366e2579f774" kindref="member" tooltip="Free a table with its column definitions.">EagleDbTable_DeleteWithColumns</ref>(table);</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_data_8c_1ad581de5c335c11d9fcde1546740dc525" kindref="member" tooltip="Free a table data.">EagleDbTableData_Delete</ref>(td);</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="391"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%s\n\n&quot;</highlight><highlight class="normal">,<sp/>msg);</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="393"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>success;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight></codeline>
+<codeline lineno="397" refid="_eagle_db_instance_8h_1a50c986867f7d80634d0f24259e29f26c" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a50c986867f7d80634d0f24259e29f26c" kindref="member" tooltip="Mostly for internal use.">EagleDbInstance_executeParser</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error)</highlight></codeline>
+<codeline lineno="398"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(p-&gt;<ref refid="struct_eagle_db_parser_1a7fe33855e7e2360992d082708a38463a" kindref="member" tooltip="The type of statement.">yystatementtype</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a310304cc8b15b7784589b2da5f514590" kindref="member" tooltip="Indicated a blank SQL statement.">EagleDbSqlStatementTypeNone</ref>:</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>lets<sp/>not<sp/>consider<sp/>this<sp/>an<sp/>error<sp/>and<sp/>ignore<sp/>it<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a0ad7931cd9f63795a37fe7b848e77b65" kindref="member" tooltip="SELECT statement.">EagleDbSqlStatementTypeSelect</ref>:</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a843dbb73da6a3758396873cf7cdfda23" kindref="member" tooltip="Execute a SELECT statement.">EagleDbInstance_executeSelect</ref>(db,<sp/>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref>*)<sp/>p-&gt;<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>,<sp/>error);</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_select_8c_1a1e0f9b008cc505d6178507f493a60e8d" kindref="member" tooltip="Free a SELECT expression (recursively).">EagleDbSqlSelect_DeleteRecursive</ref>((<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref>*)<sp/>p-&gt;<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>);</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5ac0de33042f4c9a65120c5cb35d4ab672" kindref="member" tooltip="CREATE TABLE statement.">EagleDbSqlStatementTypeCreateTable</ref>:</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1adbaa47551abe62bb775bdd24dcb56f2f" kindref="member" tooltip="Execute a CREATE TABLE statement.">EagleDbInstance_executeCreateTable</ref>(db,<sp/>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref>*)<sp/>p-&gt;<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>,<sp/>error);</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a618727a3b7f2444023d38de932e7d5b2" kindref="member" tooltip="INSERT statement.">EagleDbSqlStatementTypeInsert</ref>:</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a82ede5483d3e553aa77414643f8a865a" kindref="member" tooltip="Execute an INSERT statement.">EagleDbInstance_executeInsert</ref>(db,<sp/>(<ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref>*)<sp/>p-&gt;<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>,<sp/>error);</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_insert_8c_1a25f44a039d53c5a59d4efac617b543f6" kindref="member" tooltip="Delete an INSERT object.">EagleDbSqlInsert_Delete</ref>((<ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref>*)<sp/>p-&gt;<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>);</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="421"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="422"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>success;</highlight></codeline>
+<codeline lineno="424"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426" refid="_eagle_db_instance_8h_1a8a4be2e96111059cd3fa71cb36fd8823" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a8a4be2e96111059cd3fa71cb36fd8823" kindref="member" tooltip="Execute an arbitrary SQL statement.">EagleDbInstance_execute</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*sql,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error)</highlight></codeline>
+<codeline lineno="427"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p;</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>parse<sp/>sql<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/><ref refid="_eagle_db_parser_8c_1a2c41ab13c3c14fd3dcf4374b2e90e72f" kindref="member" tooltip="Parse a SQL string now.">EagleDbParser_ParseWithString</ref>(sql);</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>check<sp/>for<sp/>errors<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_db_parser_8c_1a717401522952d15907b9e0b5ba9a5688" kindref="member" tooltip="Did the parser encounter any errors?">EagleDbParser_hasError</ref>(p))<sp/>{</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/><ref refid="_eagle_db_parser_8c_1a1dba7eb9bc127471b1b2f4e5477bbadd" kindref="member" tooltip="Get the last error from the parser.">EagleDbParser_lastError</ref>(p));</highlight></codeline>
+<codeline lineno="438"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*error<sp/>=<sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="440"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>success<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a50c986867f7d80634d0f24259e29f26c" kindref="member" tooltip="Mostly for internal use.">EagleDbInstance_executeParser</ref>(db,<sp/>p,<sp/>error);</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>clean<sp/>up<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_parser_8c_1a50139d2484304b09db76c60f020515f5" kindref="member" tooltip="Delete the parser instance.">EagleDbParser_Delete</ref>(p);</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>success;</highlight></codeline>
+<codeline lineno="449"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"></highlight></codeline>
+<codeline lineno="451" refid="_eagle_db_instance_8h_1a38146e6883ba5579dca8ffa7297a2947" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a38146e6883ba5579dca8ffa7297a2947" kindref="member" tooltip="Free an instance.">EagleDbInstance_Delete</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db)</highlight></codeline>
+<codeline lineno="452"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="453"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>db)<sp/>{</highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="457"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>always<sp/>clean<sp/>up<sp/>the<sp/>information<sp/>schema<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_information_schema_8c_1ab6f163e3a5b32f5b0b360ab0022163ff" kindref="member" tooltip="Remove/free the virtual tables.">EagleDbInformationSchema_Cleanup</ref>(db);</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*,<sp/>schema)</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(schema-&gt;name,<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>)<sp/>||</highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/>==<sp/>strcmp(schema-&gt;name,<sp/><ref refid="_eagle_db_schema_8c_1ada5e6382ddae617ae9f72c6e9bd07bbc" kindref="member" tooltip="The name of the information_schema.">EagleDbSchema_InformationSchemaName</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_schema_8c_1a749039f12e024378ae3465d181987321" kindref="member">EagleDbSchema_Delete</ref>(schema);</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="470"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1af1c0fba45fb3112e7687a4c1a3f537bb" kindref="member" tooltip="Delete a linked list and all the items contained in it.">EagleLinkedList_DeleteWithItems</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>);</highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(db);</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>clean<sp/>up<sp/>logger<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a13132985e9ef1efb42abe1b4ed98e219" kindref="member" tooltip="Reset a logger.">EagleLogger_reset</ref>(<ref refid="_eagle_logger_8c_1a3ecf1a4816a491e1b147ee106b5b2da2" kindref="member" tooltip="Get the default logger.">EagleLogger_Get</ref>());</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="476"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"></highlight></codeline>
+<codeline lineno="478" refid="_eagle_db_instance_8h_1a83d0e34ee0a71c8a3a54682622186d4b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a83d0e34ee0a71c8a3a54682622186d4b" kindref="member" tooltip="Free an instance and ALL of the schemas and tables.">EagleDbInstance_DeleteAll</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db)</highlight></codeline>
+<codeline lineno="479"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>db)<sp/>{</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>always<sp/>clean<sp/>up<sp/>the<sp/>information<sp/>schema<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_information_schema_8c_1ab6f163e3a5b32f5b0b360ab0022163ff" kindref="member" tooltip="Remove/free the virtual tables.">EagleDbInformationSchema_Cleanup</ref>(db);</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*,<sp/>schema)</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(schema-&gt;tables,<sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref>*,<sp/>table)</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_8c_1a4ebfc8bb4977c775377e366e2579f774" kindref="member" tooltip="Free a table with its column definitions.">EagleDbTable_DeleteWithColumns</ref>(table-&gt;table);</highlight></codeline>
+<codeline lineno="493"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_data_8c_1ad581de5c335c11d9fcde1546740dc525" kindref="member" tooltip="Free a table data.">EagleDbTableData_Delete</ref>(table);</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_db_schema_8c_1a749039f12e024378ae3465d181987321" kindref="member">EagleDbSchema_Delete</ref>(schema);</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1af1c0fba45fb3112e7687a4c1a3f537bb" kindref="member" tooltip="Delete a linked list and all the items contained in it.">EagleLinkedList_DeleteWithItems</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>);</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(db);</highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>clean<sp/>up<sp/>logger<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a13132985e9ef1efb42abe1b4ed98e219" kindref="member" tooltip="Reset a logger.">EagleLogger_reset</ref>(<ref refid="_eagle_logger_8c_1a3ecf1a4816a491e1b147ee106b5b2da2" kindref="member" tooltip="Get the default logger.">EagleLogger_Get</ref>());</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="507"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"></highlight></codeline>
+<codeline lineno="509" refid="_eagle_db_instance_8h_1a47d828d875d510e051bbc68de2f3a0ce" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref>*<sp/><ref refid="_eagle_db_instance_8c_1a47d828d875d510e051bbc68de2f3a0ce" kindref="member" tooltip="Get a table by name.">EagleDbInstance_getTable</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*tableName)</highlight></codeline>
+<codeline lineno="510"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema;</highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="513"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>tableName)<sp/>{</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/>schema<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(db,<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>);</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>schema)<sp/>{</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(schema-&gt;<ref refid="struct_eagle_db_schema_1a8da53e8ff5dab8b7f11051627ba3e085" kindref="member" tooltip="This is semi managed because the linked list that contains the pointers to the tables...">tables</ref>,<sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref>*,<sp/>table)</highlight></codeline>
+<codeline lineno="520"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="521"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(tableName,<sp/>table-&gt;table-&gt;name))<sp/>{</highlight></codeline>
+<codeline lineno="522"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>table;</highlight></codeline>
+<codeline lineno="523"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="524"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="525"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="528"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="529"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="530"><highlight class="normal"></highlight></codeline>
+<codeline lineno="531" refid="_eagle_db_instance_8h_1a2fd8ec2b0a60f678e0c2e562f881cf0f" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*schemaName)</highlight></codeline>
+<codeline lineno="532"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="533"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*,<sp/>schema)</highlight></codeline>
+<codeline lineno="534"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="535"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(schemaName,<sp/>schema-&gt;name))<sp/>{</highlight></codeline>
+<codeline lineno="536"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>schema;</highlight></codeline>
+<codeline lineno="537"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="540"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="541"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="542"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight></codeline>
+<codeline lineno="544" refid="_eagle_db_instance_8h_1add8762c04bef098dce4b034c0a3a8597" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1add8762c04bef098dce4b034c0a3a8597" kindref="member" tooltip="Add a schema to the instance.">EagleDbInstance_addSchema</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema)</highlight></codeline>
+<codeline lineno="545"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="546"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>check<sp/>if<sp/>the<sp/>schema<sp/>exists<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="547"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(db,<sp/>schema-&gt;<ref refid="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="Schema name.">name</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="548"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="549"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>Schema<sp/>\&quot;%s\&quot;<sp/>already<sp/>exists.&quot;</highlight><highlight class="normal">,<sp/>schema-&gt;<ref refid="struct_eagle_db_schema_1a5ac083a645d964373f022d03df4849c8" kindref="member" tooltip="Schema name.">name</ref>);</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="551"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1afd0bf44a5933e8d4f06872286fb3607f" kindref="member" tooltip="Add an object to the list.">EagleLinkedList_addObject</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/>schema,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>,<sp/>NULL);</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="556"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="557"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c"/>
+  </compounddef>
+</doxygen>

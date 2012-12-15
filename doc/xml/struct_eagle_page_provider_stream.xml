@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page_provider_stream" kind="struct" prot="public">
+    <compoundname>EaglePageProviderStream</compoundname>
+    <includes refid="_eagle_page_provider_stream_8h" local="no">EaglePageProviderStream.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a64d700c2e2b025ec902c833466d7fb49" prot="public" static="no" mutable="no">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* cursor</definition>
+        <argsstring></argsstring>
+        <name>cursor</name>
+        <briefdescription>
+<para>This is used by streams. </para>        </briefdescription>
+        <detaileddescription>
+<para>It allows it to keep the page it is upto when requesting the next page. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="19" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EaglePageProviderHeader</definition>
+        <argsstring></argsstring>
+        <name>EaglePageProviderHeader</name>
+        <briefdescription>
+<para>All &quot;subtypes&quot; of <ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> will have this header. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a27732bb136aef4663677329eced0c99c" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* list</definition>
+        <argsstring></argsstring>
+        <name>list</name>
+        <briefdescription>
+<para>A list containing EaglePage&apos;s with the records. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a35af3476dcf04b4a47c3ff89c5177ccc" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+        <definition>EagleLock* nextPageLock</definition>
+        <argsstring></argsstring>
+        <name>nextPageLock</name>
+        <briefdescription>
+<para>Synchronize <ref refid="_eagle_page_provider_8c_1a0ceaedea95767ce9e5d3134ca0ac90a8" kindref="member">EaglePageProvider_nextPage()</ref> and <ref refid="_eagle_page_provider_8c_1a2c871cdcad6ce101ef48504808713bc2" kindref="member">EaglePageProvider_pagesRemaining()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="41" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a43afd3c921ea1cf1b530ec6ebfed3ebe" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int offsetRecords</definition>
+        <argsstring></argsstring>
+        <name>offsetRecords</name>
+        <briefdescription>
+<para>The cursor position. </para>        </briefdescription>
+        <detaileddescription>
+<para>An internal counter of the position of the stream. If the stream has more pages this will be incremented with each nextPage(). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="30" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_stream_1a6d229dced099552a8e8b7708f636e0d9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int totalRecords</definition>
+        <argsstring></argsstring>
+        <name>totalRecords</name>
+        <briefdescription>
+<para>The total amount of records. </para>        </briefdescription>
+        <detaileddescription>
+<para>You should never access this directly since its value may be virtual or invalid - instead use <ref refid="_eagle_page_provider_8c_1a2c871cdcad6ce101ef48504808713bc2" kindref="member">EaglePageProvider_pagesRemaining()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="207">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="208" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="209" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="205">
+        <label>EaglePageProviderStream</label>
+        <link refid="struct_eagle_page_provider_stream"/>
+        <childnode refid="206" relation="usage">
+          <edgelabel>cursor</edgelabel>
+        </childnode>
+        <childnode refid="207" relation="usage">
+          <edgelabel>nextPageLock</edgelabel>
+        </childnode>
+        <childnode refid="210" relation="usage">
+          <edgelabel>totalRecords</edgelabel>
+          <edgelabel>offsetRecords</edgelabel>
+        </childnode>
+        <childnode refid="211" relation="usage">
+          <edgelabel>list</edgelabel>
+        </childnode>
+      </node>
+      <node id="211">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="206" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="207" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="210" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="210">
+        <label>int</label>
+      </node>
+      <node id="208">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="209">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="206">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" bodystart="9" bodyend="43"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_provider_stream_1a64d700c2e2b025ec902c833466d7fb49" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>cursor</name></member>
+      <member refid="struct_eagle_page_provider_stream_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>EaglePageProviderHeader</name></member>
+      <member refid="struct_eagle_page_provider_stream_1a27732bb136aef4663677329eced0c99c" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>list</name></member>
+      <member refid="struct_eagle_page_provider_stream_1a35af3476dcf04b4a47c3ff89c5177ccc" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>nextPageLock</name></member>
+      <member refid="struct_eagle_page_provider_stream_1a43afd3c921ea1cf1b530ec6ebfed3ebe" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>offsetRecords</name></member>
+      <member refid="struct_eagle_page_provider_stream_1a6d229dced099552a8e8b7708f636e0d9" prot="public" virt="non-virtual"><scope>EaglePageProviderStream</scope><name>totalRecords</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

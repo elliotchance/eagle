@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_linked_list" kind="struct" prot="public">
+    <compoundname>EagleLinkedList</compoundname>
+    <includes refid="_eagle_linked_list_8h" local="no">EagleLinkedList.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" prot="public" static="no" mutable="no">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* first</definition>
+        <argsstring></argsstring>
+        <name>first</name>
+        <briefdescription>
+<para>A pointer to the first item. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" line="54" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" prot="public" static="no" mutable="no">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* last</definition>
+        <argsstring></argsstring>
+        <name>last</name>
+        <briefdescription>
+<para>A pointer to the last item. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+<para>The amount of items in this linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member">EagleLinkedList_length()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" line="60" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+        <definition>EagleLock* modifyLock</definition>
+        <argsstring></argsstring>
+        <name>modifyLock</name>
+        <briefdescription>
+<para>Lock to synchronize list modifications. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" line="65" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A linked list (FIFO). </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="151">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="152" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="153" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="149">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="150" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="151" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="154" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="154">
+        <label>int</label>
+      </node>
+      <node id="152">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="153">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="150">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" line="44" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.h" bodystart="44" bodyend="67"/>
+    <listofallmembers>
+      <member refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" prot="public" virt="non-virtual"><scope>EagleLinkedList</scope><name>first</name></member>
+      <member refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" prot="public" virt="non-virtual"><scope>EagleLinkedList</scope><name>last</name></member>
+      <member refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" prot="public" virt="non-virtual"><scope>EagleLinkedList</scope><name>length</name></member>
+      <member refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" prot="public" virt="non-virtual"><scope>EagleLinkedList</scope><name>modifyLock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

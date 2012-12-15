@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_column" kind="struct" prot="public">
+    <compoundname>EagleDbColumn</compoundname>
+    <includes refid="_eagle_db_column_8h" local="no">EagleDbColumn.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_column_1a5ac083a645d964373f022d03df4849c8" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>The name of the column. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_column_1a1098a844c26196961003dc0ebc21a1c0" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Column data type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The definition for a table column. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>EagleDbColumn</label>
+        <link refid="struct_eagle_db_column"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>EagleDataType</label>
+      </node>
+      <node id="3">
+        <label>char *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbColumn.h" bodystart="11" bodyend="23"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_column_1a5ac083a645d964373f022d03df4849c8" prot="public" virt="non-virtual"><scope>EagleDbColumn</scope><name>name</name></member>
+      <member refid="struct_eagle_db_column_1a1098a844c26196961003dc0ebc21a1c0" prot="public" virt="non-virtual"><scope>EagleDbColumn</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

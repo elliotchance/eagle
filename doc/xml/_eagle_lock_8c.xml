@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_lock_8c" kind="file">
+    <compoundname>EagleLock.c</compoundname>
+    <includes refid="_eagle_lock_8h" local="yes">EagleLock.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <incdepgraph>
+      <node id="521">
+        <label>pthread.h</label>
+      </node>
+      <node id="522">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="523">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="519">
+        <label>eagle/eagle/EagleLock.c</label>
+        <link refid="EagleLock.c"/>
+        <childnode refid="520" relation="include">
+        </childnode>
+        <childnode refid="523" relation="include">
+        </childnode>
+      </node>
+      <node id="520">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="521" relation="include">
+        </childnode>
+        <childnode refid="522" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_lock_8c_1a87e2254b1b165636debfd228f13bd4d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLock_Delete</definition>
+        <argsstring>(EagleLock *lock)</argsstring>
+        <name>EagleLock_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+          <declname>lock</declname>
+        </param>
+        <briefdescription>
+<para>Free a lock. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">lock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lock. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.c" line="5" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.c" bodystart="4" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_lock_8h" kindref="compound">EagleLock.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="_eagle_lock_8h_1a87e2254b1b165636debfd228f13bd4d6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_lock_8c_1a87e2254b1b165636debfd228f13bd4d6" kindref="member" tooltip="Free a lock.">EagleLock_Delete</ref>(<ref refid="struct_eagle_lock" kindref="compound" tooltip="A lock is used to synchronize code blocks between threads.">EagleLock</ref><sp/>*lock)</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>lock)<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/>pthread_mutex_destroy(&amp;lock-&gt;<ref refid="struct_eagle_lock_1a4acff8232e4aec9cd5c6dc200ac55ef3" kindref="member" tooltip="Internal mutex that holds the lock.">mutex</ref>);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>pthread_mutexattr_destroy(&amp;lock-&gt;<ref refid="struct_eagle_lock_1a857e6704f8bd64cf25dd3a6d9608b30c" kindref="member" tooltip="Currently not in use, but it contains attributes for the internal mutex.">attr</ref>);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(lock);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLock.c"/>
+  </compounddef>
+</doxygen>

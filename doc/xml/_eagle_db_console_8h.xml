@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_console_8h" kind="file">
+    <compoundname>EagleDbConsole.h</compoundname>
+    <includes local="no">mach/mach_time.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includedby refid="main_8c" local="yes">eagle/main.c</includedby>
+    <incdepgraph>
+      <node id="1865">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1864">
+        <label>eagle/eagledb/EagleDbConsole.h</label>
+        <link refid="EagleDbConsole.h"/>
+        <childnode refid="1865" relation="include">
+        </childnode>
+        <childnode refid="1866" relation="include">
+        </childnode>
+      </node>
+      <node id="1866">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1867">
+        <label>eagle/eagledb/EagleDbConsole.h</label>
+        <link refid="EagleDbConsole.h"/>
+        <childnode refid="1868" relation="include">
+        </childnode>
+      </node>
+      <node id="1868">
+        <label>eagle/main.c</label>
+        <link refid="main_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_console" prot="public">EagleDbConsole</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_console_8h_1aa83c4738da20f1e634feb654921b9c16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbConsole_Delete</definition>
+        <argsstring>(EagleDbConsole *console)</argsstring>
+        <name>EagleDbConsole_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_console" kindref="compound">EagleDbConsole</ref> *</type>
+          <declname>console</declname>
+        </param>
+        <briefdescription>
+<para>Free the console. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">console</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Console instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="35" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.c" bodystart="133" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_console_8h_1a913ab44dfbb6894a7794b24c8b0ee5d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbConsole_GetLine</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleDbConsole_GetLine</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Read a line from the user. </para>        </briefdescription>
+        <detaileddescription>
+<para><ulink url="http://stackoverflow.com/a/314422/1470961">http://stackoverflow.com/a/314422/1470961</ulink> <simplesect kind="return"><para>The line input from the user. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="42" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.c" bodystart="24" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_console_8h_1a376aa6dd2244f310357758054967297d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_console" kindref="compound">EagleDbConsole</ref> *</type>
+        <definition>EagleDbConsole* EagleDbConsole_New</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleDbConsole_New</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new console. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>New console instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="23" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.c" bodystart="12" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_console_8h_1a5c415f75867fbf4af0e1abe06c24cd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbConsole_run</definition>
+        <argsstring>(EagleDbConsole *console)</argsstring>
+        <name>EagleDbConsole_run</name>
+        <param>
+          <type><ref refid="struct_eagle_db_console" kindref="compound">EagleDbConsole</ref> *</type>
+          <declname>console</declname>
+        </param>
+        <briefdescription>
+<para>Begin the console input. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">console</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Console instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.c" bodystart="79" bodyend="131"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbConsole_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbConsole_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mach/mach_time.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="struct_eagle_db_console" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="15" refid="struct_eagle_db_console_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/>uint64_t<sp/>startTime;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_console" kindref="compound" tooltip="Console instance.">EagleDbConsole</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><ref refid="struct_eagle_db_console" kindref="compound" tooltip="Console instance.">EagleDbConsole</ref>*<sp/><ref refid="_eagle_db_console_8c_1a376aa6dd2244f310357758054967297d" kindref="member" tooltip="Create a new console.">EagleDbConsole_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_console_8c_1a5c415f75867fbf4af0e1abe06c24cd95" kindref="member" tooltip="Begin the console input.">EagleDbConsole_run</ref>(<ref refid="struct_eagle_db_console" kindref="compound" tooltip="Console instance.">EagleDbConsole</ref><sp/>*console);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_console_8c_1aa83c4738da20f1e634feb654921b9c16" kindref="member" tooltip="Free the console.">EagleDbConsole_Delete</ref>(<ref refid="struct_eagle_db_console" kindref="compound" tooltip="Console instance.">EagleDbConsole</ref><sp/>*console);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_console_8c_1a913ab44dfbb6894a7794b24c8b0ee5d4" kindref="member" tooltip="Read a line from the user.">EagleDbConsole_GetLine</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h"/>
+  </compounddef>
+</doxygen>

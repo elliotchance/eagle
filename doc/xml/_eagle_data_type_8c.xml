@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_data_type_8c" kind="file">
+    <compoundname>EagleDataType.c</compoundname>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_data_type_8h" local="yes">EagleDataType.h</includes>
+    <incdepgraph>
+      <node id="221">
+        <label>string.h</label>
+      </node>
+      <node id="220">
+        <label>eagle/eagle/EagleDataType.c</label>
+        <link refid="EagleDataType.c"/>
+        <childnode refid="221" relation="include">
+        </childnode>
+        <childnode refid="222" relation="include">
+        </childnode>
+      </node>
+      <node id="222">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_data_type_8c_1a70400812692487ceb466ba71bda8198c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType EagleDataType_nameToType</definition>
+        <argsstring>(char *name)</argsstring>
+        <name>EagleDataType_nameToType</name>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Convert a type name to its enum value. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function is not case-sensitive.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleDataTypeUnknown if the type is unknown. Otherwise the correct enum value for the type. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleDataType.c" line="5" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleDataType.c" bodystart="4" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDataType_typeToName</definition>
+        <argsstring>(EagleDataType type)</argsstring>
+        <name>EagleDataType_typeToName</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Convert a type to a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string (you must free it) </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleDataType.c" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleDataType.c" bodystart="20" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_type_8h" kindref="compound">EagleDataType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="_eagle_data_type_8h_1a70400812692487ceb466ba71bda8198c" refkind="member"><highlight class="normal"><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/><ref refid="_eagle_data_type_8c_1a70400812692487ceb466ba71bda8198c" kindref="member" tooltip="Convert a type name to its enum value.">EagleDataType_nameToType</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name)</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;int&quot;</highlight><highlight class="normal">)<sp/>||<sp/>!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;integer&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;varchar&quot;</highlight><highlight class="normal">)<sp/>||<sp/>!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;text&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;float&quot;</highlight><highlight class="normal">)<sp/>||<sp/>!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;double&quot;</highlight><highlight class="normal">)<sp/>||</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;double<sp/>precision&quot;</highlight><highlight class="normal">)<sp/>||<sp/>!strcasecmp(name,<sp/></highlight><highlight class="stringliteral">&quot;real&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="_eagle_data_type_8h_1a85eab167ee14bb2c94221f627a9879fe" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" kindref="member" tooltip="Convert a type to a string.">EagleDataType_typeToName</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(type)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;UNKNOWN&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;INTEGER&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;VARCHAR&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;FLOAT&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleDataType.c"/>
+  </compounddef>
+</doxygen>

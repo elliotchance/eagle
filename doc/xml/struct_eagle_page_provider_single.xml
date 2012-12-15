@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page_provider_single" kind="struct" prot="public">
+    <compoundname>EaglePageProviderSingle</compoundname>
+    <includes refid="_eagle_page_provider_single_8h" local="no">EaglePageProviderSingle.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_provider_single_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EaglePageProviderHeader</definition>
+        <argsstring></argsstring>
+        <name>EaglePageProviderHeader</name>
+        <briefdescription>
+<para>All &quot;subtypes&quot; of <ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> will have this header. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_single_1a4d566c1fceb610a562ff221cba447f16" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member">EagleDataTypeFloatType</ref></type>
+        <definition>EagleDataTypeFloatType floatValue</definition>
+        <argsstring></argsstring>
+        <name>floatValue</name>
+        <briefdescription>
+<para>Floating point value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="31" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_single_1a34aa1b9d94871f740efabef1b6d52b2f" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member">EagleDataTypeIntegerType</ref></type>
+        <definition>EagleDataTypeIntegerType intValue</definition>
+        <argsstring></argsstring>
+        <name>intValue</name>
+        <briefdescription>
+<para>Integer value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_single_1aecaa5d05e98d29c71798d558e07cf419" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member">EagleDataTypeVarcharType</ref></type>
+        <definition>EagleDataTypeVarcharType strValue</definition>
+        <argsstring></argsstring>
+        <name>strValue</name>
+        <briefdescription>
+<para>String value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_page_provider_single_1a014a7eec4b30b173d9306044d7e2ddd0" prot="public" static="no" mutable="no">
+        <type>union EaglePageProviderSingle::@0</type>
+        <definition>union EaglePageProviderSingle::@0  value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+<para>Contains the value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="203">
+        <label>@0</label>
+      </node>
+      <node id="202">
+        <label>char *</label>
+      </node>
+      <node id="201">
+        <label>int</label>
+      </node>
+      <node id="200">
+        <label>double</label>
+      </node>
+      <node id="199">
+        <label>EaglePageProviderSingle</label>
+        <link refid="struct_eagle_page_provider_single"/>
+        <childnode refid="200" relation="usage">
+          <edgelabel>floatValue</edgelabel>
+        </childnode>
+        <childnode refid="201" relation="usage">
+          <edgelabel>intValue</edgelabel>
+        </childnode>
+        <childnode refid="202" relation="usage">
+          <edgelabel>strValue</edgelabel>
+        </childnode>
+        <childnode refid="203" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="6" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" bodystart="6" bodyend="35"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_provider_single_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" virt="non-virtual"><scope>EaglePageProviderSingle</scope><name>EaglePageProviderHeader</name></member>
+      <member refid="struct_eagle_page_provider_single_1a4d566c1fceb610a562ff221cba447f16" prot="public" virt="non-virtual"><scope>EaglePageProviderSingle</scope><name>floatValue</name></member>
+      <member refid="struct_eagle_page_provider_single_1a34aa1b9d94871f740efabef1b6d52b2f" prot="public" virt="non-virtual"><scope>EaglePageProviderSingle</scope><name>intValue</name></member>
+      <member refid="struct_eagle_page_provider_single_1aecaa5d05e98d29c71798d558e07cf419" prot="public" virt="non-virtual"><scope>EaglePageProviderSingle</scope><name>strValue</name></member>
+      <member refid="struct_eagle_page_provider_single_1a014a7eec4b30b173d9306044d7e2ddd0" prot="public" virt="non-virtual"><scope>EaglePageProviderSingle</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

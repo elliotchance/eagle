@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_unary_expression_8h" kind="file">
+    <compoundname>EagleDbSqlUnaryExpression.h</compoundname>
+    <includes refid="_eagle_db_sql_expression_8h" local="yes">EagleDbSqlExpression.h</includes>
+    <includes refid="_eagle_db_sql_unary_expression_operator_8h" local="yes">EagleDbSqlUnaryExpressionOperator.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includedby refid="_eagle_db_sql_unary_expression_8c" local="yes">eagle/eagledb/EagleDbSqlUnaryExpression.c</includedby>
+    <incdepgraph>
+      <node id="2634">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2635" relation="include">
+        </childnode>
+        <childnode refid="2652" relation="include">
+        </childnode>
+      </node>
+      <node id="2633">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpression.h</label>
+        <link refid="EagleDbSqlUnaryExpression.h"/>
+        <childnode refid="2634" relation="include">
+        </childnode>
+        <childnode refid="2657" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+      </node>
+      <node id="2657">
+        <label>EagleDbSqlUnaryExpressionOperator.h</label>
+        <link refid="_eagle_db_sql_unary_expression_operator_8h"/>
+      </node>
+      <node id="2653">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="2647">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2645" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2648" relation="include">
+        </childnode>
+      </node>
+      <node id="2650">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2643" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2651" relation="include">
+        </childnode>
+      </node>
+      <node id="2637">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="2638" relation="include">
+        </childnode>
+        <childnode refid="2643" relation="include">
+        </childnode>
+      </node>
+      <node id="2636">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2654">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2645">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2636" relation="include">
+        </childnode>
+        <childnode refid="2646" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+      </node>
+      <node id="2644">
+        <label>pthread.h</label>
+      </node>
+      <node id="2649">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="2640">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2641" relation="include">
+        </childnode>
+      </node>
+      <node id="2655">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2643" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2651" relation="include">
+        </childnode>
+      </node>
+      <node id="2641">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2639">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2642">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2652">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="2653" relation="include">
+        </childnode>
+      </node>
+      <node id="2656">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="2638">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2640" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2641" relation="include">
+        </childnode>
+      </node>
+      <node id="2651">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2652" relation="include">
+        </childnode>
+        <childnode refid="2654" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+      </node>
+      <node id="2635">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2636" relation="include">
+        </childnode>
+        <childnode refid="2637" relation="include">
+        </childnode>
+        <childnode refid="2650" relation="include">
+        </childnode>
+        <childnode refid="2655" relation="include">
+        </childnode>
+        <childnode refid="2656" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2647" relation="include">
+        </childnode>
+      </node>
+      <node id="2643">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="2644" relation="include">
+        </childnode>
+        <childnode refid="2638" relation="include">
+        </childnode>
+        <childnode refid="2645" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+        <childnode refid="2647" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2649" relation="include">
+        </childnode>
+      </node>
+      <node id="2646">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2644" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+      </node>
+      <node id="2648">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2642" relation="include">
+        </childnode>
+        <childnode refid="2639" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2659">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpression.c</label>
+        <link refid="_eagle_db_sql_unary_expression_8c"/>
+      </node>
+      <node id="2658">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpression.h</label>
+        <link refid="EagleDbSqlUnaryExpression.h"/>
+        <childnode refid="2659" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_sql_unary_expression" prot="public">EagleDbSqlUnaryExpression</innerclass>
+    <innerclass refid="struct_eagle_db_sql_unary_operator" prot="public">EagleDbSqlUnaryOperator</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_eagle_db_sql_unary_expression_8h_1a4d56f19502ad4110ba52bcb0a0bc6976" prot="public" static="no">
+        <name>EagleDbSqlUnaryOperator_Make</name>
+        <param><defname>op</defname></param>
+        <param><defname>right</defname></param>
+        <param><defname>func</defname></param>
+        <param><defname>returnType</defname></param>
+        <initializer>{ <ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member">EagleDbSqlUnaryExpressionOperator</ref>##op, <ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref>##right, EaglePageOperations_##func, <ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref>##returnType }</initializer>
+        <briefdescription>
+<para>This is used by <ref refid="_eagle_db_sql_unary_expression_8c_1a6307a0a99f32f028bc53dc53799e81d2" kindref="member">EagleDbSqlUnaryExpression_GetOperation()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_8h_1a9739bbbf0f9cb8a83613fdaf0f5fb1f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlUnaryExpression_Delete</definition>
+        <argsstring>(EagleDbSqlUnaryExpression *expr)</argsstring>
+        <name>EagleDbSqlUnaryExpression_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound">EagleDbSqlUnaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a unary expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a762d1a558814f2576ed01c9a32e84647" kindref="member">EagleDbSqlExpression_Delete()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="78" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.c" bodystart="20" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_8h_1ab63243675c366a930a38ace17911b6ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlUnaryExpression_DeleteRecursive</definition>
+        <argsstring>(EagleDbSqlUnaryExpression *expr)</argsstring>
+        <name>EagleDbSqlUnaryExpression_DeleteRecursive</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound">EagleDbSqlUnaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Free a unary expression (recursively). </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="86" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.c" bodystart="29" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_8h_1a6307a0a99f32f028bc53dc53799e81d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbSqlUnaryExpression_GetOperation</definition>
+        <argsstring>(EagleDbSqlUnaryExpressionOperator op, EagleDataType right, EagleDbSqlUnaryOperator *match)</argsstring>
+        <name>EagleDbSqlUnaryExpression_GetOperation</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member">EagleDbSqlUnaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_unary_operator" kindref="compound">EagleDbSqlUnaryOperator</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <briefdescription>
+<para>Find the appropriate page operation for an operator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Right data type (first operand). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If a match is found it will be copied into this output parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the operator can be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="105" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.c" bodystart="58" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_8h_1a858fa3d60e5d946a29fb0c38d7a5d052" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound">EagleDbSqlUnaryExpression</ref> *</type>
+        <definition>EagleDbSqlUnaryExpression* EagleDbSqlUnaryExpression_New</definition>
+        <argsstring>(EagleDbSqlUnaryExpressionOperator op, EagleDbSqlExpression *expr)</argsstring>
+        <name>EagleDbSqlUnaryExpression_New</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member">EagleDbSqlUnaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_db_sql_unary_expression" kindref="compound">EagleDbSqlUnaryExpression</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expression. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="71" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.c" bodystart="6" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_8h_1ae55c7e4e1f9040a5ced2b0b4ea8370bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlUnaryExpression_toString</definition>
+        <argsstring>(EagleDbSqlUnaryExpression *expr)</argsstring>
+        <name>EagleDbSqlUnaryExpression_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound">EagleDbSqlUnaryExpression</ref> *</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+<para>Render a unary expression into a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string representation of the expression. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="93" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.c" bodystart="39" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlUnaryExpression_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlUnaryExpression_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_expression_8h" kindref="compound">EagleDbSqlExpression.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_unary_expression_operator_8h" kindref="compound">EagleDbSqlUnaryExpressionOperator.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="_eagle_db_sql_unary_expression_8h_1a4d56f19502ad4110ba52bcb0a0bc6976" refkind="member"><highlight class="preprocessor">#define<sp/>EagleDbSqlUnaryOperator_Make(op,<sp/>right,<sp/>func,<sp/>returnType)<sp/>{<sp/>EagleDbSqlUnaryExpressionOperator##op,<sp/>EagleDataType##right,<sp/>EaglePageOperations_##func,<sp/>EagleDataType##returnType<sp/>}</highlight></codeline>
+<codeline lineno="12"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="18" refid="struct_eagle_db_sql_unary_expression" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="struct_eagle_db_sql_unary_expression_1a3faf42a90228121a56f69674cdfd1b23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_header_8h_1a633261e6154fbc5ddb4db61baed3e828" kindref="member" tooltip="This header must exists in all structs that &amp;quot;extend&amp;quot; EagleDbSqlExpression...">EagleDbSqlExpressionHeader</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29" refid="struct_eagle_db_sql_unary_expression_1a0bb91c4e7ee869591aa0b6d4810d5102" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member" tooltip="Unary expression operators.">EagleDbSqlUnaryExpressionOperator</ref><sp/>op;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="struct_eagle_db_sql_unary_expression_1a1929121f9116e94f8a2b45cee4787686" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*expr;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeUnaryExpression.">EagleDbSqlUnaryExpression</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="struct_eagle_db_sql_unary_operator" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46" refid="struct_eagle_db_sql_unary_operator_1a0bb91c4e7ee869591aa0b6d4810d5102" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member" tooltip="Unary expression operators.">EagleDbSqlUnaryExpressionOperator</ref><sp/>op;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51" refid="struct_eagle_db_sql_unary_operator_1a2850dd7a0a45e905b255b747dc5b287a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_page_operations_8h_1ac1767814a5191fb263d1d7678ba6917d" kindref="member" tooltip="Function pointer.">EaglePageOperationFunction</ref>(func);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61" refid="struct_eagle_db_sql_unary_operator_1af92db6f6ffc1491f61cfbcd0a2d2a9a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>returnType;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_sql_unary_operator" kindref="compound" tooltip="Used by EagleDbSqlUnaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlUnaryOperator</ref>;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><ref refid="struct_eagle_db_sql_unary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeUnaryExpression.">EagleDbSqlUnaryExpression</ref>*<sp/><ref refid="_eagle_db_sql_unary_expression_8c_1a858fa3d60e5d946a29fb0c38d7a5d052" kindref="member" tooltip="Create a new EagleDbSqlUnaryExpression.">EagleDbSqlUnaryExpression_New</ref>(<ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member" tooltip="Unary expression operators.">EagleDbSqlUnaryExpressionOperator</ref><sp/>op,<sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_8c_1a9739bbbf0f9cb8a83613fdaf0f5fb1f3" kindref="member" tooltip="Free a unary expression.">EagleDbSqlUnaryExpression_Delete</ref>(<ref refid="struct_eagle_db_sql_unary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeUnaryExpression.">EagleDbSqlUnaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_8c_1ab63243675c366a930a38ace17911b6ae" kindref="member" tooltip="Free a unary expression (recursively).">EagleDbSqlUnaryExpression_DeleteRecursive</ref>(<ref refid="struct_eagle_db_sql_unary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeUnaryExpression.">EagleDbSqlUnaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_unary_expression_8c_1ae55c7e4e1f9040a5ced2b0b4ea8370bd" kindref="member" tooltip="Render a unary expression into a string.">EagleDbSqlUnaryExpression_toString</ref>(<ref refid="struct_eagle_db_sql_unary_expression" kindref="compound" tooltip="Expression type is EagleDbSqlExpressionTypeUnaryExpression.">EagleDbSqlUnaryExpression</ref><sp/>*expr);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_sql_unary_expression_8c_1a6307a0a99f32f028bc53dc53799e81d2" kindref="member" tooltip="Find the appropriate page operation for an operator.">EagleDbSqlUnaryExpression_GetOperation</ref>(<ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member" tooltip="Unary expression operators.">EagleDbSqlUnaryExpressionOperator</ref><sp/>op,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>right,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_unary_operator" kindref="compound" tooltip="Used by EagleDbSqlUnaryExpression_GetOperation() to find the appropriate page operation...">EagleDbSqlUnaryOperator</ref><sp/>*match);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h"/>
+  </compounddef>
+</doxygen>

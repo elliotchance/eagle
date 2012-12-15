@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_plan_operation" kind="struct" prot="public">
+    <compoundname>EaglePlanOperation</compoundname>
+    <includes refid="_eagle_plan_operation_8h" local="no">EaglePlanOperation.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <briefdescription>
+<para>A description of this operation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="64" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int destination</definition>
+        <argsstring></argsstring>
+        <name>destination</name>
+        <briefdescription>
+<para>Destination buffer ID. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="34" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1ac96249cdfe6c8f377393768d52d70af6" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean freeObj</definition>
+        <argsstring></argsstring>
+        <name>freeObj</name>
+        <briefdescription>
+<para>If EagleTrue the <computeroutput>obj</computeroutput> will be freed when the <ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> is freed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="54" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* obj</definition>
+        <argsstring></argsstring>
+        <name>obj</name>
+        <briefdescription>
+<para>An optional attachment object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int source1</definition>
+        <argsstring></argsstring>
+        <name>source1</name>
+        <briefdescription>
+<para>First argument buffer ID. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="39" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int source2</definition>
+        <argsstring></argsstring>
+        <name>source2</name>
+        <briefdescription>
+<para>Second buffer argument ID. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="44" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_plan_operation_1a8b792725c6256726e577ae22694a705f" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_plan_operation_8h_1afb5605fd8b35da9e3b90946b2a4840df" kindref="member">EaglePlanOperationType</ref></type>
+        <definition>EaglePlanOperationType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>The plan operation type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_eagle_plan_operation_1a3193e5b135b864c1dbcdf217d903e63d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EaglePageOperationFunction</definition>
+        <argsstring>(function)</argsstring>
+        <name>EaglePageOperationFunction</name>
+        <param>
+          <type>function</type>
+        </param>
+        <briefdescription>
+<para>The function pointer to perform the operation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a plan operation, or a single step in the executation of an expression. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="270">
+        <label>void *</label>
+      </node>
+      <node id="271">
+        <label>EaglePlanOperationType</label>
+      </node>
+      <node id="267">
+        <label>int</label>
+      </node>
+      <node id="268">
+        <label>const char *</label>
+      </node>
+      <node id="269">
+        <label>EagleBoolean</label>
+      </node>
+      <node id="266">
+        <label>EaglePlanOperation</label>
+        <link refid="struct_eagle_plan_operation"/>
+        <childnode refid="267" relation="usage">
+          <edgelabel>destination</edgelabel>
+          <edgelabel>source1</edgelabel>
+          <edgelabel>source2</edgelabel>
+        </childnode>
+        <childnode refid="268" relation="usage">
+          <edgelabel>description</edgelabel>
+        </childnode>
+        <childnode refid="269" relation="usage">
+          <edgelabel>freeObj</edgelabel>
+        </childnode>
+        <childnode refid="270" relation="usage">
+          <edgelabel>obj</edgelabel>
+        </childnode>
+        <childnode refid="271" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.h" bodystart="24" bodyend="66"/>
+    <listofallmembers>
+      <member refid="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>description</name></member>
+      <member refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>destination</name></member>
+      <member refid="struct_eagle_plan_operation_1a3193e5b135b864c1dbcdf217d903e63d" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>EaglePageOperationFunction</name></member>
+      <member refid="struct_eagle_plan_operation_1ac96249cdfe6c8f377393768d52d70af6" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>freeObj</name></member>
+      <member refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>obj</name></member>
+      <member refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>source1</name></member>
+      <member refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>source2</name></member>
+      <member refid="struct_eagle_plan_operation_1a8b792725c6256726e577ae22694a705f" prot="public" virt="non-virtual"><scope>EaglePlanOperation</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

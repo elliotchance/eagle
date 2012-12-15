@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - /Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.c</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../../../../../index.html">directory</a> - <a href="index.html">Users/elliot/Xcode/eagle/eagle/eagledb</a> - EagleDbTuple.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-16</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">33</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">100.0 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">33</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>                : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>                : #include &quot;EagleDbTuple.h&quot;
+<span class="lineNum">       5 </span>                : #include &quot;EagleData.h&quot;
+<span class="lineNum">       6 </span>                : 
+<span class="lineNum">       7 </span><span class="lineCov">              4 : EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)</span>
+<span class="lineNum">       8 </span>                : {
+<span class="lineNum">       9 </span><span class="lineCov">              4 :     EagleDbTuple *tuple = (EagleDbTuple*) malloc(sizeof(EagleDbTuple));</span>
+<span class="lineNum">      10 </span>                :     
+<span class="lineNum">      11 </span><span class="lineCov">              4 :     tuple-&gt;table = table;</span>
+<span class="lineNum">      12 </span><span class="lineCov">              4 :     tuple-&gt;data = (void**) calloc((size_t) table-&gt;usedColumns, sizeof(void*));</span>
+<span class="lineNum">      13 </span>                :     
+<span class="lineNum">      14 </span><span class="lineCov">              4 :     return tuple;</span>
+<span class="lineNum">      15 </span>                : }
+<span class="lineNum">      16 </span>                : 
+<span class="lineNum">      17 </span><span class="lineCov">              4 : void EagleDbTuple_Delete(EagleDbTuple *tuple)</span>
+<span class="lineNum">      18 </span>                : {
+<span class="lineNum">      19 </span><span class="lineCov">              2 :     int i;</span>
+<span class="lineNum">      20 </span>                :     
+<span class="lineNum">      21 </span><span class="lineCov">             24 :     for(i = 0; i &lt; tuple-&gt;table-&gt;usedColumns; ++i) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">              8 :         free(tuple-&gt;data[i]);</span>
+<span class="lineNum">      23 </span><span class="lineCov">              4 :     }</span>
+<span class="lineNum">      24 </span><span class="lineCov">              4 :     free(tuple-&gt;data);</span>
+<span class="lineNum">      25 </span>                :     
+<span class="lineNum">      26 </span><span class="lineCov">              4 :     free(tuple);</span>
+<span class="lineNum">      27 </span><span class="lineCov">              4 : }</span>
+<span class="lineNum">      28 </span>                : 
+<span class="lineNum">      29 </span><span class="lineCov">              8 : void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)</span>
+<span class="lineNum">      30 </span>                : {
+<span class="lineNum">      31 </span><span class="lineCov">              8 :     tuple-&gt;data[position] = EagleData_Int(value);</span>
+<span class="lineNum">      32 </span><span class="lineCov">              8 : }</span>
+<span class="lineNum">      33 </span>                : 
+<span class="lineNum">      34 </span><span class="lineCov">              2 : char* EagleDbTuple_toString(EagleDbTuple *tuple)</span>
+<span class="lineNum">      35 </span>                : {
+<span class="lineNum">      36 </span><span class="lineCov">              2 :     char *desc = (char*) malloc(1024);</span>
+<span class="lineNum">      37 </span><span class="lineCov">              1 :     int i;</span>
+<span class="lineNum">      38 </span>                :     
+<span class="lineNum">      39 </span><span class="lineCov">              2 :     desc[0] = 0;</span>
+<span class="lineNum">      40 </span><span class="lineCov">              5 :     strcat(desc, &quot;(&quot;);</span>
+<span class="lineNum">      41 </span><span class="lineCov">             12 :     for(i = 0; i &lt; tuple-&gt;table-&gt;usedColumns; ++i) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">              4 :         if(i &gt; 0) {</span>
+<span class="lineNum">      43 </span><span class="lineCov">              5 :             strcat(desc, &quot;,&quot;);</span>
+<span class="lineNum">      44 </span><span class="lineCov">              1 :         }</span>
+<span class="lineNum">      45 </span><span class="lineCov">             10 :         strcat(desc, tuple-&gt;table-&gt;columns[i]-&gt;name);</span>
+<span class="lineNum">      46 </span><span class="lineCov">             10 :         strcat(desc, &quot;=&quot;);</span>
+<span class="lineNum">      47 </span>                :         
+<span class="lineNum">      48 </span><span class="lineCov">              4 :         switch(tuple-&gt;table-&gt;columns[i]-&gt;type) {</span>
+<span class="lineNum">      49 </span>                :             case EagleDbColumnTypeInteger:
+<span class="lineNum">      50 </span><span class="lineCov">              4 :                 sprintf(desc, &quot;%s%d&quot;, desc, *((int*) tuple-&gt;data[i]));</span>
+<span class="lineNum">      51 </span><span class="lineCov">              4 :                 break;</span>
+<span class="lineNum">      52 </span>                :         }
+<span class="lineNum">      53 </span><span class="lineCov">              2 :     }</span>
+<span class="lineNum">      54 </span><span class="lineCov">              5 :     strcat(desc, &quot;)&quot;);</span>
+<span class="lineNum">      55 </span>                :     
+<span class="lineNum">      56 </span><span class="lineCov">              2 :     return desc;</span>
+<span class="lineNum">      57 </span>                : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_function_expression" kind="struct" prot="public">
+    <compoundname>EagleDbSqlFunctionExpression</compoundname>
+    <includes refid="_eagle_db_sql_function_expression_8h" local="no">EagleDbSqlFunctionExpression.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_function_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Header. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_function_expression_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" line="18" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_function_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* expr</definition>
+        <argsstring></argsstring>
+        <name>expr</name>
+        <briefdescription>
+<para>The first argument. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_function_expression_1a5ac083a645d964373f022d03df4849c8" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>The name of the function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" line="23" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Expression type is EagleDbSqlExpressionTypeFunctionExpression. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7d" kindref="member">EagleDbSqlExpressionType</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="65">
+        <label>char *</label>
+      </node>
+      <node id="64">
+        <label>EagleDbSqlExpression</label>
+        <link refid="struct_eagle_db_sql_expression"/>
+      </node>
+      <node id="63">
+        <label>EagleDbSqlFunctionExpression</label>
+        <link refid="struct_eagle_db_sql_function_expression"/>
+        <childnode refid="64" relation="usage">
+          <edgelabel>expr</edgelabel>
+        </childnode>
+        <childnode refid="65" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlFunctionExpression.h" bodystart="12" bodyend="30"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_function_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlFunctionExpression</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_function_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" virt="non-virtual"><scope>EagleDbSqlFunctionExpression</scope><name>expr</name></member>
+      <member refid="struct_eagle_db_sql_function_expression_1a5ac083a645d964373f022d03df4849c8" prot="public" virt="non-virtual"><scope>EagleDbSqlFunctionExpression</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

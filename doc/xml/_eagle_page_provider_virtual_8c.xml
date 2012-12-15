@@ -1,0 +1,593 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_page_provider_virtual_8c" kind="file">
+    <compoundname>EaglePageProviderVirtual.c</compoundname>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_page_provider_virtual_8h" local="yes">EaglePageProviderVirtual.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_logger_8h" local="yes">EagleLogger.h</includes>
+    <incdepgraph>
+      <node id="1208">
+        <label>EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="1209" relation="include">
+        </childnode>
+        <childnode refid="1202" relation="include">
+        </childnode>
+        <childnode refid="1201" relation="include">
+        </childnode>
+        <childnode refid="1204" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1210" relation="include">
+        </childnode>
+      </node>
+      <node id="1204">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1201" relation="include">
+        </childnode>
+        <childnode refid="1195" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1205" relation="include">
+        </childnode>
+      </node>
+      <node id="1202">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1201">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1202" relation="include">
+        </childnode>
+        <childnode refid="1203" relation="include">
+        </childnode>
+        <childnode refid="1195" relation="include">
+        </childnode>
+      </node>
+      <node id="1200">
+        <label>pthread.h</label>
+      </node>
+      <node id="1192">
+        <label>string.h</label>
+      </node>
+      <node id="1206">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1197">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1194" relation="include">
+        </childnode>
+      </node>
+      <node id="1194">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1195">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1210">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="1211" relation="include">
+        </childnode>
+        <childnode refid="1212" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+      </node>
+      <node id="1198">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1211">
+        <label>time.h</label>
+      </node>
+      <node id="1207">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1196">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1195" relation="include">
+        </childnode>
+        <childnode refid="1197" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1194" relation="include">
+        </childnode>
+      </node>
+      <node id="1191">
+        <label>eagle/eagle/EaglePageProviderVirtual.c</label>
+        <link refid="EaglePageProviderVirtual.c"/>
+        <childnode refid="1192" relation="include">
+        </childnode>
+        <childnode refid="1193" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+        <childnode refid="1208" relation="include">
+        </childnode>
+      </node>
+      <node id="1193">
+        <label>EaglePageProviderVirtual.h</label>
+        <link refid="_eagle_page_provider_virtual_8h"/>
+        <childnode refid="1194" relation="include">
+        </childnode>
+        <childnode refid="1195" relation="include">
+        </childnode>
+        <childnode refid="1196" relation="include">
+        </childnode>
+        <childnode refid="1199" relation="include">
+        </childnode>
+      </node>
+      <node id="1209">
+        <label>stdio.h</label>
+      </node>
+      <node id="1212">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="1199">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1200" relation="include">
+        </childnode>
+        <childnode refid="1196" relation="include">
+        </childnode>
+        <childnode refid="1201" relation="include">
+        </childnode>
+        <childnode refid="1195" relation="include">
+        </childnode>
+        <childnode refid="1204" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1194" relation="include">
+        </childnode>
+        <childnode refid="1206" relation="include">
+        </childnode>
+      </node>
+      <node id="1203">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1200" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+      </node>
+      <node id="1205">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1195" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a826f788228b9510b529cffaea06072d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePageProviderVirtual_add</definition>
+        <argsstring>(EaglePageProviderVirtual *epp, void *data)</argsstring>
+        <name>EaglePageProviderVirtual_add</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Add a record to a writable provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data to add to the stream. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue on success. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="51" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a9bdfa94e5cb1b5ce96fdbc93aece6c91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderVirtual_Delete</definition>
+        <argsstring>(EaglePageProviderVirtual *epp)</argsstring>
+        <name>EaglePageProviderVirtual_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Free a page provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Page provider instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="38" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="37" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a72b4d1bbd196fe85a19cc933d2699b4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderVirtual_getPage</definition>
+        <argsstring>(EaglePageProviderVirtual *epp, int pageNumber)</argsstring>
+        <name>EaglePageProviderVirtual_getPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pageNumber</declname>
+        </param>
+        <briefdescription>
+<para>Get a random page from a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para>You may only use this if <ref refid="_eagle_page_provider_8c_1a8c7f6eaf3a9132a15b2020473a7b69fa" kindref="member">EaglePageProvider_isRandomAccess()</ref> returns EagleTrue. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pageNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of the page where the first page will be 0. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="79" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a4dc3021059eeb8b550027072b00cc3d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePageProviderVirtual_isRandomAccess</definition>
+        <argsstring>(EaglePageProviderVirtual *epp)</argsstring>
+        <name>EaglePageProviderVirtual_isRandomAccess</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Check is a providers pages can be access in any order with <ref refid="_eagle_page_provider_8c_1addcb8c0174aa93f30996b7ed0c5183dc" kindref="member">EaglePageProvider_getPage()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="71" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="70" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a1eaae0d2cf9987a858ee6e39db296680" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+        <definition>EaglePageProviderVirtual* EaglePageProviderVirtual_New</definition>
+        <argsstring>(int recordsPerPage, char *name, EagleDataType type, void *obj, void(*free)(void *), EagleBoolean(*add)(void *, void *), int(*pagesRemaining)(void *), EaglePage *(*nextPage)(void *), void(*reset)(void *), EaglePage *(*getPage)(void *, int))</argsstring>
+        <name>EaglePageProviderVirtual_New</name>
+        <param>
+          <type>int</type>
+          <declname>recordsPerPage</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>void(*)(void *)</type>
+          <declname>free</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref>(*)(void *, void *)</type>
+          <declname>add</declname>
+        </param>
+        <param>
+          <type>int(*)(void *)</type>
+          <declname>pagesRemaining</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *(*)(void *)</type>
+          <declname>nextPage</declname>
+        </param>
+        <param>
+          <type>void(*)(void *)</type>
+          <declname>reset</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *(*)(void *, int)</type>
+          <declname>getPage</declname>
+        </param>
+        <briefdescription>
+<para>Create a new writable page provider with zero records. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">recordsPerPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of records per page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data type. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This object is passed as the first argument to all callback functions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">free</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">add</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pagesRemaining</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nextPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">reset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">getPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function pointer. If this is NULL then <ref refid="_eagle_page_provider_8c_1a8c7f6eaf3a9132a15b2020473a7b69fa" kindref="member">EaglePageProvider_isRandomAccess()</ref> will return EagleFalse. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new virtual provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="6" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a5b76c411c438632609413a771778e37e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderVirtual_nextPage</definition>
+        <argsstring>(EaglePageProviderVirtual *epp)</argsstring>
+        <name>EaglePageProviderVirtual_nextPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Get the next page. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The next page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="61" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1a3f613bb973bc1ad91a56961ba605b233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EaglePageProviderVirtual_pagesRemaining</definition>
+        <argsstring>(EaglePageProviderVirtual *epp)</argsstring>
+        <name>EaglePageProviderVirtual_pagesRemaining</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Return the amount of pages remaining. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of pages available for reading. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="56" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="55" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_virtual_8c_1ab6b4878e516cccc97a0b805032265b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderVirtual_reset</definition>
+        <argsstring>(EaglePageProviderVirtual *epp)</argsstring>
+        <name>EaglePageProviderVirtual_reset</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Reset the cursor of a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" line="66" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c" bodystart="65" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_virtual_8h" kindref="compound">EaglePageProviderVirtual.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_8h" kindref="compound">EagleLogger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="_eagle_page_provider_virtual_8h_1a1eaae0d2cf9987a858ee6e39db296680" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref>*<sp/><ref refid="_eagle_page_provider_virtual_8c_1a1eaae0d2cf9987a858ee6e39db296680" kindref="member" tooltip="Create a new writable page provider with zero records.">EaglePageProviderVirtual_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordsPerPage,</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type,</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*free)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>(*add)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>(*pagesRemaining)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/>(*nextPage)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*reset)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/>(*getPage)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*pageProvider<sp/>=<sp/>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePageProviderVirtual_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref>));</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>pageProvider)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;providerType<sp/>=<sp/><ref refid="_eagle_page_provider_type_8h_1a87939b197bf22df261df8c4aec3de182a28499ece7b81771ce977c57196213ab6" kindref="member" tooltip="A virtual table does not contain any actual data, but rather relies on callback functions...">EaglePageProviderTypeVirtual</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;recordsPerPage<sp/>=<sp/>recordsPerPage;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;name<sp/>=<sp/>(NULL<sp/>==<sp/>name<sp/>?<sp/>NULL<sp/>:<sp/>strdup(name));</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;type<sp/>=<sp/>type;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref><sp/>=<sp/>obj;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1a0f6be0103a76477f4caad9920b35e890" kindref="member" tooltip="Function pointer.">add</ref><sp/>=<sp/>add;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1ab11e308af4d13f0e0e4bd2c66dd5c1a0" kindref="member" tooltip="Function pointer.">free</ref><sp/>=<sp/>free;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1af03bfed0d8201c8681b0d33191e155cd" kindref="member" tooltip="Function pointer.">nextPage</ref><sp/>=<sp/>nextPage;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1a34607682ff4e5edcf744b7d048df34c8" kindref="member" tooltip="Function pointer.">pagesRemaining</ref><sp/>=<sp/>pagesRemaining;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1a105e0e55b4d80bf852f6a1bac5d6baf0" kindref="member" tooltip="Function pointer.">reset</ref><sp/>=<sp/>reset;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>pageProvider-&gt;<ref refid="struct_eagle_page_provider_virtual_1ade6483e105fabe59d2bd04a97966a2ba" kindref="member" tooltip="Function pointer.">getPage</ref><sp/>=<sp/>getPage;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pageProvider;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="_eagle_page_provider_virtual_8h_1a9bdfa94e5cb1b5ce96fdbc93aece6c91" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_virtual_8c_1a9bdfa94e5cb1b5ce96fdbc93aece6c91" kindref="member" tooltip="Free a page provider.">EaglePageProviderVirtual_Delete</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>epp)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1ab11e308af4d13f0e0e4bd2c66dd5c1a0" kindref="member" tooltip="Function pointer.">free</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1ab11e308af4d13f0e0e4bd2c66dd5c1a0" kindref="member" tooltip="Function pointer.">free</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(epp-&gt;name);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(epp);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="_eagle_page_provider_virtual_8h_1a826f788228b9510b529cffaea06072d0" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_provider_virtual_8c_1a826f788228b9510b529cffaea06072d0" kindref="member" tooltip="Add a record to a writable provider.">EaglePageProviderVirtual_add</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data)</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1a0f6be0103a76477f4caad9920b35e890" kindref="member" tooltip="Function pointer.">add</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>,<sp/>data);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="_eagle_page_provider_virtual_8h_1a3f613bb973bc1ad91a56961ba605b233" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_virtual_8c_1a3f613bb973bc1ad91a56961ba605b233" kindref="member" tooltip="Return the amount of pages remaining.">EaglePageProviderVirtual_pagesRemaining</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1a34607682ff4e5edcf744b7d048df34c8" kindref="member" tooltip="Function pointer.">pagesRemaining</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="_eagle_page_provider_virtual_8h_1a5b76c411c438632609413a771778e37e" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_virtual_8c_1a5b76c411c438632609413a771778e37e" kindref="member" tooltip="Get the next page.">EaglePageProviderVirtual_nextPage</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1af03bfed0d8201c8681b0d33191e155cd" kindref="member" tooltip="Function pointer.">nextPage</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="_eagle_page_provider_virtual_8h_1ab6b4878e516cccc97a0b805032265b74" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_virtual_8c_1ab6b4878e516cccc97a0b805032265b74" kindref="member" tooltip="Reset the cursor of a provider.">EaglePageProviderVirtual_reset</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp)</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1a105e0e55b4d80bf852f6a1bac5d6baf0" kindref="member" tooltip="Function pointer.">reset</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="_eagle_page_provider_virtual_8h_1a4dc3021059eeb8b550027072b00cc3d1" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_provider_virtual_8c_1a4dc3021059eeb8b550027072b00cc3d1" kindref="member" tooltip="Check is a providers pages can be access in any order with EaglePageProvider_getPage()...">EaglePageProviderVirtual_isRandomAccess</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1ade6483e105fabe59d2bd04a97966a2ba" kindref="member" tooltip="Function pointer.">getPage</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="_eagle_page_provider_virtual_8h_1a72b4d1bbd196fe85a19cc933d2699b4c" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_virtual_8c_1a72b4d1bbd196fe85a19cc933d2699b4c" kindref="member" tooltip="Get a random page from a provider.">EaglePageProviderVirtual_getPage</ref>(<ref refid="struct_eagle_page_provider_virtual" kindref="compound">EaglePageProviderVirtual</ref><sp/>*epp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pageNumber)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1ade6483e105fabe59d2bd04a97966a2ba" kindref="member" tooltip="Function pointer.">getPage</ref>(epp-&gt;<ref refid="struct_eagle_page_provider_virtual_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="Object to be passed to the callback functions.">obj</ref>,<sp/>pageNumber);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderVirtual.c"/>
+  </compounddef>
+</doxygen>

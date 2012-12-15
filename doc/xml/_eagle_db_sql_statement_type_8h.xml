@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_statement_type_8h" kind="file">
+    <compoundname>EagleDbSqlStatementType.h</compoundname>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <includedby refid="_eagle_db_instance_8h" local="yes">eagle/eagledb/EagleDbInstance.h</includedby>
+    <includedby refid="_eagle_db_parser_8c" local="yes">eagle/eagledb/EagleDbParser.c</includedby>
+    <includedby refid="_eagle_db_parser_8h" local="yes">eagle/eagledb/EagleDbParser.h</includedby>
+    <invincdepgraph>
+      <node id="2600">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="2601">
+        <label>eagle/eagledb/EagleDbParser.c</label>
+        <link refid="_eagle_db_parser_8c"/>
+      </node>
+      <node id="2602">
+        <label>eagle/eagledb/EagleDbParser.h</label>
+        <link refid="_eagle_db_parser_8h"/>
+        <childnode refid="2601" relation="include">
+        </childnode>
+      </node>
+      <node id="2596">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="2596" relation="include">
+        </childnode>
+      </node>
+      <node id="2597">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="2598" relation="include">
+        </childnode>
+        <childnode refid="2599" relation="include">
+        </childnode>
+        <childnode refid="2596" relation="include">
+        </childnode>
+        <childnode refid="2600" relation="include">
+        </childnode>
+      </node>
+      <node id="2598">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="2598" relation="include">
+        </childnode>
+      </node>
+      <node id="2599">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="2596" relation="include">
+        </childnode>
+      </node>
+      <node id="2595">
+        <label>eagle/eagledb/EagleDbSqlStatementType.h</label>
+        <link refid="EagleDbSqlStatementType.h"/>
+        <childnode refid="2596" relation="include">
+        </childnode>
+        <childnode refid="2597" relation="include">
+        </childnode>
+        <childnode refid="2601" relation="include">
+        </childnode>
+        <childnode refid="2602" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5" prot="public" static="no">
+        <name>EagleDbSqlStatementType</name>
+        <enumvalue id="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a310304cc8b15b7784589b2da5f514590" prot="public">
+          <name>EagleDbSqlStatementTypeNone</name>
+          <initializer> 0</initializer>
+          <briefdescription>
+<para>Indicated a blank SQL statement. </para>          </briefdescription>
+          <detaileddescription>
+<para>This may or may not be an error depending on the context. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a0ad7931cd9f63795a37fe7b848e77b65" prot="public">
+          <name>EagleDbSqlStatementTypeSelect</name>
+          <initializer> 1</initializer>
+          <briefdescription>
+<para>SELECT statement. </para>          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> </para></simplesect>
+</para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5ac0de33042f4c9a65120c5cb35d4ab672" prot="public">
+          <name>EagleDbSqlStatementTypeCreateTable</name>
+          <initializer> 2</initializer>
+          <briefdescription>
+<para>CREATE TABLE statement. </para>          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> </para></simplesect>
+</para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a618727a3b7f2444023d38de932e7d5b2" prot="public">
+          <name>EagleDbSqlStatementTypeInsert</name>
+          <initializer> 3</initializer>
+          <briefdescription>
+<para>INSERT statement. </para>          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_insert" kindref="compound">EagleDbSqlInsert</ref> </para></simplesect>
+</para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The SQL statement type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlStatementType.h" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlStatementType.h" bodystart="7" bodyend="32"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlStatementType_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlStatementType_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="7" refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="12" refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a310304cc8b15b7784589b2da5f514590" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a310304cc8b15b7784589b2da5f514590" kindref="member" tooltip="Indicated a blank SQL statement.">EagleDbSqlStatementTypeNone</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18" refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a0ad7931cd9f63795a37fe7b848e77b65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a0ad7931cd9f63795a37fe7b848e77b65" kindref="member" tooltip="SELECT statement.">EagleDbSqlStatementTypeSelect</ref><sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5ac0de33042f4c9a65120c5cb35d4ab672" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5ac0de33042f4c9a65120c5cb35d4ab672" kindref="member" tooltip="CREATE TABLE statement.">EagleDbSqlStatementTypeCreateTable</ref><sp/>=<sp/>2,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30" refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a618727a3b7f2444023d38de932e7d5b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5a618727a3b7f2444023d38de932e7d5b2" kindref="member" tooltip="INSERT statement.">EagleDbSqlStatementTypeInsert</ref><sp/>=<sp/>3</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal">}<sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5" kindref="member" tooltip="The SQL statement type.">EagleDbSqlStatementType</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlStatementType.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1030 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle_test/suites/MemorySuite1.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle_test/suites</a> - MemorySuite1.c<span style="font-size: 80%;"> (source / <a href="MemorySuite1.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">551</td>
+            <td class="headerCovTableEntry">551</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;MemorySuite.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleData.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleDbColumn.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleDbConsole.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleDbInstance.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleDbSqlValue.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;EagleDbSqlSelect.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;EagleDbTableData.h&quot;
+<span class="lineNum">      13 </span>            : #include &quot;EagleLinkedList.h&quot;
+<span class="lineNum">      14 </span>            : #include &quot;EagleDbTuple.h&quot;
+<span class="lineNum">      15 </span>            : #include &quot;EagleInstance.h&quot;
+<span class="lineNum">      16 </span>            : #include &quot;EaglePlanJob.h&quot;
+<span class="lineNum">      17 </span>            : #include &quot;EagleWorker.h&quot;
+<span class="lineNum">      18 </span>            : #include &quot;EagleWorkers.h&quot;
+<span class="lineNum">      19 </span>            : #include &quot;EaglePage.h&quot;
+<span class="lineNum">      20 </span>            : #include &quot;EaglePlan.h&quot;
+<span class="lineNum">      21 </span>            : #include &quot;EagleDbSchema.h&quot;
+<span class="lineNum">      22 </span>            : #include &quot;EagleLogger.h&quot;
+<span class="lineNum">      23 </span>            : #include &quot;EagleDbParser.h&quot;
+<span class="lineNum">      24 </span>            : #include &quot;EagleDbSqlUnaryExpression.h&quot;
+<span class="lineNum">      25 </span>            : #include &quot;EaglePageProviderStream.h&quot;
+<span class="lineNum">      26 </span>            : #include &quot;EaglePageProviderArray.h&quot;
+<span class="lineNum">      27 </span>            : #include &quot;EaglePageProviderSingle.h&quot;
+<span class="lineNum">      28 </span>            : #include &quot;EaglePageProviderVirtual.h&quot;
+<span class="lineNum">      29 </span>            : #include &quot;EagleDbInformationSchema.h&quot;
+<a name="30"><span class="lineNum">      30 </span>            : #include &quot;EagleUtils.h&quot;</a>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            : CUNIT_TEST(MemorySuite, EagleData_Int)
+<span class="lineNum">      33 </span>            : {
+<span class="lineNum">      34 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      35 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleData_Int.1&quot;);</span>
+<span class="lineNum">      36 </span>            :     
+<span class="lineNum">      37 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleData_Int(123));</span>
+<span class="lineNum">      38 </span>            :     
+<span class="lineNum">      39 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      40 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : CUNIT_TEST(MemorySuite, EagleDbColumn_New)
+<span class="lineNum">      44 </span>            : {
+<span class="lineNum">      45 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      46 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbColumn_New.1&quot;);</span>
+<span class="lineNum">      47 </span>            :     
+<span class="lineNum">      48 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbColumn_New(&quot;abc&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">      49 </span>            :     
+<span class="lineNum">      50 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      51 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            : CUNIT_TEST(MemorySuite, EagleDbConsole_New)
+<span class="lineNum">      55 </span>            : {
+<span class="lineNum">      56 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      57 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbConsole_New.1&quot;);</span>
+<span class="lineNum">      58 </span>            :     
+<span class="lineNum">      59 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbConsole_New());</span>
+<span class="lineNum">      60 </span>            :     
+<span class="lineNum">      61 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      64 </span>            : 
+<span class="lineNum">      65 </span>            : CUNIT_TEST(MemorySuite, EagleDbConsole_GetLine)
+<span class="lineNum">      66 </span>            : {
+<span class="lineNum">      67 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      68 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbConsole_GetLine.1&quot;);</span>
+<span class="lineNum">      69 </span>            :     
+<span class="lineNum">      70 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbConsole_GetLine());</span>
+<span class="lineNum">      71 </span>            :     
+<span class="lineNum">      72 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            : CUNIT_TEST(MemorySuite, EagleDbInstance_New)
+<span class="lineNum">      77 </span>            : {
+<span class="lineNum">      78 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      79 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbInstance_New.1&quot;);</span>
+<span class="lineNum">      80 </span>            :     
+<span class="lineNum">      81 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbInstance_New(1000, 1));</span>
+<span class="lineNum">      82 </span>            :     
+<span class="lineNum">      83 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      84 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_New)
+<span class="lineNum">      88 </span>            : {
+<span class="lineNum">      89 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">      90 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlBinaryExpression_New.1&quot;);</span>
+<span class="lineNum">      91 </span>            :     
+<span class="lineNum">      92 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlBinaryExpressionOperatorEquals, NULL));</span>
+<span class="lineNum">      93 </span>            :     
+<span class="lineNum">      94 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">      95 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_toString)
+<span class="lineNum">      99 </span>            : {
+<span class="lineNum">     100 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     101 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlBinaryExpression_toString.1&quot;);</span>
+<span class="lineNum">     102 </span>            :     
+<span class="lineNum">     103 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_toString(NULL));</span>
+<span class="lineNum">     104 </span>            :     
+<span class="lineNum">     105 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     106 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlUnaryExpression_toString)
+<span class="lineNum">     110 </span>            : {
+<span class="lineNum">     111 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     112 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlUnaryExpression_toString.1&quot;);</span>
+<span class="lineNum">     113 </span>            :     
+<span class="lineNum">     114 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlUnaryExpression_toString(NULL));</span>
+<span class="lineNum">     115 </span>            :     
+<span class="lineNum">     116 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     117 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlSelect_New)
+<span class="lineNum">     121 </span>            : {
+<span class="lineNum">     122 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     123 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlSelect_New.1&quot;);</span>
+<span class="lineNum">     124 </span>            :     
+<span class="lineNum">     125 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlSelect_New());</span>
+<span class="lineNum">     126 </span>            :     
+<span class="lineNum">     127 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     128 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithInteger)
+<span class="lineNum">     132 </span>            : {
+<span class="lineNum">     133 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     134 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_NewWithInteger.1&quot;);</span>
+<span class="lineNum">     135 </span>            :     
+<span class="lineNum">     136 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithInteger(123));</span>
+<span class="lineNum">     137 </span>            :     
+<span class="lineNum">     138 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     139 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithAsterisk)
+<span class="lineNum">     143 </span>            : {
+<span class="lineNum">     144 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     145 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_NewWithAsterisk.1&quot;);</span>
+<span class="lineNum">     146 </span>            :     
+<span class="lineNum">     147 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithAsterisk());</span>
+<span class="lineNum">     148 </span>            :     
+<span class="lineNum">     149 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     150 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     152 </span>            : 
+<span class="lineNum">     153 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithIdentifier)
+<span class="lineNum">     154 </span>            : {
+<span class="lineNum">     155 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     156 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_NewWithIdentifier.1&quot;);</span>
+<span class="lineNum">     157 </span>            :     
+<span class="lineNum">     158 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithIdentifier(&quot;something&quot;));</span>
+<span class="lineNum">     159 </span>            :     
+<span class="lineNum">     160 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     161 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     163 </span>            : 
+<span class="lineNum">     164 </span>            : CUNIT_TEST(MemorySuite, EagleDbTable_New_1)
+<span class="lineNum">     165 </span>            : {
+<span class="lineNum">     166 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     167 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTable_New.1&quot;);</span>
+<span class="lineNum">     168 </span>            :     
+<span class="lineNum">     169 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTable_New(&quot;something&quot;));</span>
+<span class="lineNum">     170 </span>            :     
+<span class="lineNum">     171 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     172 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     174 </span>            : 
+<span class="lineNum">     175 </span>            : CUNIT_TEST(MemorySuite, EagleDbTableData_New_1)
+<span class="lineNum">     176 </span>            : {
+<span class="lineNum">     177 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     178 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTableData_New.1&quot;);</span>
+<span class="lineNum">     179 </span>            :     
+<span class="lineNum">     180 </span><span class="lineCov">          8 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     181 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTableData_New(table, 1000));</span>
+<span class="lineNum">     182 </span><span class="lineCov">          8 :     EagleDbTable_Delete(table);</span>
+<span class="lineNum">     183 </span>            :     
+<span class="lineNum">     184 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            : CUNIT_TEST(MemorySuite, EagleDbTableData_New_2)
+<span class="lineNum">     189 </span>            : {
+<span class="lineNum">     190 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     191 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTableData_New.2&quot;);</span>
+<span class="lineNum">     192 </span>            :     
+<span class="lineNum">     193 </span><span class="lineCov">          8 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     194 </span><span class="lineCov">          8 :     EagleDbColumn *column = EagleDbColumn_New(&quot;test&quot;, EagleDataTypeInteger);</span>
+<span class="lineNum">     195 </span><span class="lineCov">          8 :     EagleDbTable_addColumn(table, column);</span>
+<span class="lineNum">     196 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTableData_New(table, 1000));</span>
+<span class="lineNum">     197 </span><span class="lineCov">          8 :     EagleDbTable_DeleteWithColumns(table);</span>
+<span class="lineNum">     198 </span>            :     
+<span class="lineNum">     199 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     200 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     202 </span>            : 
+<span class="lineNum">     203 </span>            : CUNIT_TEST(MemorySuite, EagleDbTuple_New_1)
+<span class="lineNum">     204 </span>            : {
+<span class="lineNum">     205 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     206 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTuple_New.1&quot;);</span>
+<span class="lineNum">     207 </span>            :     
+<span class="lineNum">     208 </span><span class="lineCov">          8 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     209 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTuple_New(table));</span>
+<span class="lineNum">     210 </span><span class="lineCov">          8 :     EagleDbTable_Delete(table);</span>
+<span class="lineNum">     211 </span>            :     
+<span class="lineNum">     212 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     213 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     215 </span>            : 
+<span class="lineNum">     216 </span>            : CUNIT_TEST(MemorySuite, EagleDbTuple_New_2)
+<span class="lineNum">     217 </span>            : {
+<span class="lineNum">     218 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     219 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTuple_New.2&quot;);</span>
+<span class="lineNum">     220 </span>            :     
+<span class="lineNum">     221 </span><span class="lineCov">          8 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     222 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTuple_New(table));</span>
+<span class="lineNum">     223 </span><span class="lineCov">          8 :     EagleDbTable_Delete(table);</span>
+<span class="lineNum">     224 </span>            :     
+<span class="lineNum">     225 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     226 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="227"><span class="lineNum">     227 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     228 </span>            : 
+<span class="lineNum">     229 </span>            : CUNIT_TEST(MemorySuite, EagleDbTuple_toString)
+<span class="lineNum">     230 </span>            : {
+<span class="lineNum">     231 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     232 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbTuple_toString.1&quot;);</span>
+<span class="lineNum">     233 </span>            :     
+<span class="lineNum">     234 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbTuple_toString(NULL));</span>
+<span class="lineNum">     235 </span>            :     
+<span class="lineNum">     236 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     237 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     239 </span>            : 
+<span class="lineNum">     240 </span>            : CUNIT_TEST(MemorySuite, EagleInstance_New)
+<span class="lineNum">     241 </span>            : {
+<span class="lineNum">     242 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     243 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleInstance_New.1&quot;);</span>
+<span class="lineNum">     244 </span>            :     
+<span class="lineNum">     245 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleInstance_New(1));</span>
+<span class="lineNum">     246 </span>            :     
+<span class="lineNum">     247 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     248 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     250 </span>            : 
+<span class="lineNum">     251 </span>            : CUNIT_TEST(MemorySuite, EagleLinkedListItem_NewWithDescription)
+<span class="lineNum">     252 </span>            : {
+<span class="lineNum">     253 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     254 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleLinkedListItem_NewWithDescription.1&quot;);</span>
+<span class="lineNum">     255 </span>            :     
+<span class="lineNum">     256 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleLinkedListItem_NewWithDescription(NULL, EagleFalse, NULL, NULL));</span>
+<span class="lineNum">     257 </span>            :     
+<span class="lineNum">     258 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     259 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span>            : CUNIT_TEST(MemorySuite, EagleLinkedList_New)
+<span class="lineNum">     263 </span>            : {
+<span class="lineNum">     264 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     265 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleLinkedList_New.1&quot;);</span>
+<span class="lineNum">     266 </span>            :     
+<span class="lineNum">     267 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleLinkedList_New());</span>
+<span class="lineNum">     268 </span>            :     
+<span class="lineNum">     269 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     270 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     272 </span>            : 
+<span class="lineNum">     273 </span>            : CUNIT_TEST(MemorySuite, EaglePage_New)
+<span class="lineNum">     274 </span>            : {
+<span class="lineNum">     275 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     276 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_New.1&quot;);</span>
+<span class="lineNum">     277 </span>            :     
+<span class="lineNum">     278 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_New(EagleDataTypeUnknown, NULL, 0, 0, 0, EagleFalse));</span>
+<span class="lineNum">     279 </span>            :     
+<span class="lineNum">     280 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     281 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="282"><span class="lineNum">     282 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span>            : CUNIT_TEST(MemorySuite, EaglePage_CopyInt_)
+<span class="lineNum">     285 </span>            : {
+<span class="lineNum">     286 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     287 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_CopyInt_.1&quot;);</span>
+<span class="lineNum">     288 </span>            :     
+<span class="lineNum">     289 </span><span class="lineCov">          8 :     EaglePage *page = EaglePage_AllocInt(1);</span>
+<span class="lineNum">     290 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_RealCopyInt_(page));</span>
+<span class="lineNum">     291 </span><span class="lineCov">          8 :     EaglePage_Delete(page);</span>
+<span class="lineNum">     292 </span>            :     
+<span class="lineNum">     293 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     294 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     296 </span>            : 
+<span class="lineNum">     297 </span>            : CUNIT_TEST(MemorySuite, EaglePage_toString)
+<span class="lineNum">     298 </span>            : {
+<span class="lineNum">     299 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     300 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_toString.1&quot;);</span>
+<span class="lineNum">     301 </span>            :     
+<span class="lineNum">     302 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_toString(NULL));</span>
+<span class="lineNum">     303 </span>            :     
+<span class="lineNum">     304 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     305 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="306"><span class="lineNum">     306 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     307 </span>            : 
+<span class="lineNum">     308 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderArray_New)
+<span class="lineNum">     309 </span>            : {
+<span class="lineNum">     310 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     311 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderArray_New.1&quot;);</span>
+<span class="lineNum">     312 </span>            :     
+<span class="lineNum">     313 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 0, NULL));</span>
+<span class="lineNum">     314 </span>            :     
+<span class="lineNum">     315 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     316 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     318 </span>            : 
+<span class="lineNum">     319 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderStream_New)
+<span class="lineNum">     320 </span>            : {
+<span class="lineNum">     321 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     322 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderStream_New.1&quot;);</span>
+<span class="lineNum">     323 </span>            :     
+<span class="lineNum">     324 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePageProviderStream_New(EagleDataTypeUnknown, 0, NULL));</span>
+<span class="lineNum">     325 </span>            :     
+<span class="lineNum">     326 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     327 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     329 </span>            : 
+<span class="lineNum">     330 </span>            : CUNIT_TEST(MemorySuite, EaglePlan_New_1)
+<span class="lineNum">     331 </span>            : {
+<span class="lineNum">     332 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     333 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlan_New.1&quot;);</span>
+<span class="lineNum">     334 </span>            :     
+<span class="lineNum">     335 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     336 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(plan);</span>
+<span class="lineNum">     337 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     338 </span>            :     
+<span class="lineNum">     339 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     340 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="341"><span class="lineNum">     341 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            : CUNIT_TEST(MemorySuite, EaglePlan_toString_1)
+<span class="lineNum">     344 </span>            : {
+<span class="lineNum">     345 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     346 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlan_toString.1&quot;);</span>
+<span class="lineNum">     347 </span>            :     
+<span class="lineNum">     348 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     349 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlan_toString(plan));</span>
+<span class="lineNum">     350 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     351 </span>            :     
+<span class="lineNum">     352 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     353 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="354"><span class="lineNum">     354 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     355 </span>            : 
+<span class="lineNum">     356 </span>            : CUNIT_TEST(MemorySuite, EaglePlan_toString_2)
+<span class="lineNum">     357 </span>            : {
+<span class="lineNum">     358 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     359 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlan_toString.2&quot;);</span>
+<span class="lineNum">     360 </span>            :     
+<span class="lineNum">     361 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     362 </span><span class="lineCov">          8 :     EaglePlan_prepareBuffers(plan, 1);</span>
+<span class="lineNum">     363 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlan_toString(plan));</span>
+<span class="lineNum">     364 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     365 </span>            :     
+<span class="lineNum">     366 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     367 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="368"><span class="lineNum">     368 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     369 </span>            : 
+<span class="lineNum">     370 </span>            : CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_NewWithProvider)
+<span class="lineNum">     371 </span>            : {
+<span class="lineNum">     372 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     373 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanBufferProvider_NewWithProvider.1&quot;);</span>
+<span class="lineNum">     374 </span>            :     
+<span class="lineNum">     375 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanBufferProvider_NewWithProvider(0, NULL, EagleFalse));</span>
+<span class="lineNum">     376 </span>            :     
+<span class="lineNum">     377 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     378 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     380 </span>            : 
+<span class="lineNum">     381 </span>            : CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_toString)
+<span class="lineNum">     382 </span>            : {
+<span class="lineNum">     383 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     384 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanBufferProvider_toString.1&quot;);</span>
+<span class="lineNum">     385 </span>            :     
+<span class="lineNum">     386 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanBufferProvider_toString(NULL));</span>
+<span class="lineNum">     387 </span>            :     
+<span class="lineNum">     388 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     389 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="390"><span class="lineNum">     390 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     391 </span>            : 
+<span class="lineNum">     392 </span>            : CUNIT_TEST(MemorySuite, EaglePlanJob_New_1)
+<span class="lineNum">     393 </span>            : {
+<span class="lineNum">     394 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     395 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanJob_New.1&quot;);</span>
+<span class="lineNum">     396 </span>            :     
+<span class="lineNum">     397 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     398 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanJob_New(plan));</span>
+<span class="lineNum">     399 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     400 </span>            :     
+<span class="lineNum">     401 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     402 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     404 </span>            : 
+<span class="lineNum">     405 </span>            : CUNIT_TEST(MemorySuite, EaglePlanJob_New_2)
+<span class="lineNum">     406 </span>            : {
+<span class="lineNum">     407 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     408 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanJob_New.2&quot;);</span>
+<span class="lineNum">     409 </span>            :     
+<span class="lineNum">     410 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     411 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanJob_New(plan));</span>
+<span class="lineNum">     412 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     413 </span>            :     
+<span class="lineNum">     414 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     415 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="416"><span class="lineNum">     416 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     417 </span>            : 
+<span class="lineNum">     418 </span>            : CUNIT_TEST(MemorySuite, EaglePlanOperation_NewWithLiteral)
+<span class="lineNum">     419 </span>            : {
+<span class="lineNum">     420 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     421 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanOperation_NewWithLiteral.1&quot;);</span>
+<span class="lineNum">     422 </span>            :     
+<span class="lineNum">     423 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanOperation_NewWithLiteral(NULL, 0, 0, NULL, EagleFalse, NULL));</span>
+<span class="lineNum">     424 </span>            :     
+<span class="lineNum">     425 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     426 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="427"><span class="lineNum">     427 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     428 </span>            : 
+<span class="lineNum">     429 </span>            : CUNIT_TEST(MemorySuite, EaglePlanOperation_NewWithPage)
+<span class="lineNum">     430 </span>            : {
+<span class="lineNum">     431 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     432 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlanOperation_NewWithPage.1&quot;);</span>
+<span class="lineNum">     433 </span>            :     
+<span class="lineNum">     434 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePlanOperation_NewWithPage(NULL, 0, 0, 0, NULL, EagleFalse, NULL));</span>
+<span class="lineNum">     435 </span>            :     
+<span class="lineNum">     436 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     437 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="438"><span class="lineNum">     438 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     439 </span>            : 
+<span class="lineNum">     440 </span>            : CUNIT_TEST(MemorySuite, EagleSynchronizer_CreateLock)
+<span class="lineNum">     441 </span>            : {
+<span class="lineNum">     442 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     443 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleSynchronizer_CreateLock.1&quot;);</span>
+<span class="lineNum">     444 </span>            :     
+<span class="lineNum">     445 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleSynchronizer_CreateLock());</span>
+<span class="lineNum">     446 </span>            :     
+<span class="lineNum">     447 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     448 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="449"><span class="lineNum">     449 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     450 </span>            : 
+<span class="lineNum">     451 </span>            : CUNIT_TEST(MemorySuite, EagleWorker_New)
+<span class="lineNum">     452 </span>            : {
+<span class="lineNum">     453 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     454 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleWorker_New.1&quot;);</span>
+<span class="lineNum">     455 </span>            :     
+<span class="lineNum">     456 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleWorker_New(1, NULL));</span>
+<span class="lineNum">     457 </span>            :     
+<span class="lineNum">     458 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     459 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="460"><span class="lineNum">     460 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     461 </span>            : 
+<span class="lineNum">     462 </span>            : CUNIT_TEST(MemorySuite, EagleWorkers_New_1)
+<span class="lineNum">     463 </span>            : {
+<span class="lineNum">     464 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     465 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleWorkers_New.1&quot;);</span>
+<span class="lineNum">     466 </span>            :     
+<span class="lineNum">     467 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleWorkers_New(1, NULL));</span>
+<span class="lineNum">     468 </span>            :     
+<span class="lineNum">     469 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     470 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="471"><span class="lineNum">     471 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     472 </span>            : 
+<span class="lineNum">     473 </span>            : CUNIT_TEST(MemorySuite, EagleWorkers_New_2)
+<span class="lineNum">     474 </span>            : {
+<span class="lineNum">     475 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     476 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleWorkers_New.2&quot;);</span>
+<span class="lineNum">     477 </span>            :     
+<span class="lineNum">     478 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleWorkers_New(1, NULL));</span>
+<span class="lineNum">     479 </span>            :     
+<span class="lineNum">     480 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     481 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="482"><span class="lineNum">     482 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     483 </span>            : 
+<span class="lineNum">     484 </span>            : CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_1)
+<span class="lineNum">     485 </span>            : {
+<span class="lineNum">     486 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     487 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbInstance_PrintResults.1&quot;);</span>
+<span class="lineNum">     488 </span>            :     
+<span class="lineNum">     489 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     490 </span><span class="lineCov">          8 :     plan-&gt;resultFields = 1;</span>
+<span class="lineNum">     491 </span><span class="lineCov">          8 :     plan-&gt;result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));</span>
+<span class="lineNum">     492 </span><span class="lineCov">          8 :     plan-&gt;result[0] = (EaglePageProvider*) EaglePageProviderSingle_NewInt(1, 1, &quot;name&quot;);</span>
+<span class="lineNum">     493 </span><span class="lineCov">          8 :     EagleDbInstance_PrintResults(plan);</span>
+<span class="lineNum">     494 </span>            :     
+<span class="lineNum">     495 </span><span class="lineCov">          8 :     EaglePageProvider_Delete(plan-&gt;result[0]);</span>
+<span class="lineNum">     496 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     497 </span>            :     
+<span class="lineNum">     498 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     499 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="500"><span class="lineNum">     500 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     501 </span>            : 
+<span class="lineNum">     502 </span>            : CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_2)
+<span class="lineNum">     503 </span>            : {
+<span class="lineNum">     504 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     505 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbInstance_PrintResults.2&quot;);</span>
+<span class="lineNum">     506 </span>            :     
+<span class="lineNum">     507 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     508 </span><span class="lineCov">          8 :     plan-&gt;resultFields = 1;</span>
+<span class="lineNum">     509 </span><span class="lineCov">          8 :     plan-&gt;result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));</span>
+<span class="lineNum">     510 </span><span class="lineCov">          8 :     int data[1];</span>
+<span class="lineNum">     511 </span><span class="lineCov">          8 :     plan-&gt;result[0] = (EaglePageProvider*) EaglePageProviderArray_New(EagleDataTypeInteger, data, 1, 1, &quot;name&quot;);</span>
+<span class="lineNum">     512 </span><span class="lineCov">          8 :     EagleDbInstance_PrintResults(plan);</span>
+<span class="lineNum">     513 </span>            :     
+<span class="lineNum">     514 </span><span class="lineCov">          8 :     EaglePageProvider_Delete(plan-&gt;result[0]);</span>
+<span class="lineNum">     515 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     516 </span>            :     
+<span class="lineNum">     517 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     518 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="519"><span class="lineNum">     519 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     520 </span>            : 
+<span class="lineNum">     521 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlan_1)
+<span class="lineNum">     522 </span>            : {
+<span class="lineNum">     523 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     524 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlExpression_CompilePlan.1&quot;);</span>
+<span class="lineNum">     525 </span>            :     
+<span class="lineNum">     526 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     527 </span><span class="lineCov">          8 :     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, NULL);</span>
+<span class="lineNum">     528 </span><span class="lineCov">          8 :     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, plan);</span>
+<span class="lineNum">     529 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     530 </span>            :     
+<span class="lineNum">     531 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     532 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="533"><span class="lineNum">     533 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     534 </span>            : 
+<span class="lineNum">     535 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlan_2)
+<span class="lineNum">     536 </span>            : {
+<span class="lineNum">     537 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     538 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlExpression_CompilePlan.2&quot;);</span>
+<span class="lineNum">     539 </span>            :     
+<span class="lineNum">     540 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     541 </span><span class="lineCov">          8 :     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, plan);</span>
+<span class="lineNum">     542 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     543 </span>            :     
+<span class="lineNum">     544 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     545 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="546"><span class="lineNum">     546 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     547 </span>            : 
+<span class="lineNum">     548 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
+<span class="lineNum">     549 </span>            : {
+<span class="lineNum">     550 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     551 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlSelect_parse.2&quot;);</span>
+<span class="lineNum">     552 </span>            :     
+<span class="lineNum">     553 </span><span class="lineCov">          8 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     554 </span><span class="lineCov">          8 :     select-&gt;tableName = strdup(&quot;mytable&quot;);</span>
+<span class="lineNum">     555 </span><span class="lineCov">          8 :     EagleDbInstance *instance = EagleDbInstance_New(1000, 1);</span>
+<span class="lineNum">     556 </span>            :     
+<span class="lineNum">     557 </span><span class="lineCov">          8 :     EagleDbSchema *schema = EagleDbInstance_getSchema(instance, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     558 </span><span class="lineCov">          8 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     559 </span><span class="lineCov">          8 :     EagleDbTableData *td = EagleDbTableData_New(table, 1000);</span>
+<span class="lineNum">     560 </span><span class="lineCov">          8 :     EagleDbSchema_addTable(schema, td);</span>
+<span class="lineNum">     561 </span>            :     
+<span class="lineNum">     562 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));</span>
+<span class="lineNum">     563 </span>            :     
+<span class="lineNum">     564 </span><span class="lineCov">          8 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<span class="lineNum">     565 </span><span class="lineCov">          8 :     EagleDbTable_Delete(table);</span>
+<span class="lineNum">     566 </span><span class="lineCov">          8 :     EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     567 </span><span class="lineCov">          8 :     EagleDbInstance_Delete(instance);</span>
+<span class="lineNum">     568 </span>            :     
+<span class="lineNum">     569 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     570 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="571"><span class="lineNum">     571 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     572 </span>            : 
+<span class="lineNum">     573 </span>            : CUNIT_TEST(MemorySuite, EaglePage_AllocInt)
+<span class="lineNum">     574 </span>            : {
+<span class="lineNum">     575 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     576 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_AllocInt.1&quot;);</span>
+<span class="lineNum">     577 </span>            :     
+<span class="lineNum">     578 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_AllocInt(1));</span>
+<span class="lineNum">     579 </span>            :     
+<span class="lineNum">     580 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     581 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="582"><span class="lineNum">     582 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     583 </span>            : 
+<span class="lineNum">     584 </span>            : CUNIT_TEST(MemorySuite, EaglePage_AllocVarchar)
+<span class="lineNum">     585 </span>            : {
+<span class="lineNum">     586 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     587 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_AllocVarchar.1&quot;);</span>
+<span class="lineNum">     588 </span>            :     
+<span class="lineNum">     589 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_AllocVarchar(1));</span>
+<span class="lineNum">     590 </span>            :     
+<span class="lineNum">     591 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     592 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="593"><span class="lineNum">     593 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     594 </span>            : 
+<span class="lineNum">     595 </span>            : CUNIT_TEST(MemorySuite, EaglePage_CopyVarchar_)
+<span class="lineNum">     596 </span>            : {
+<span class="lineNum">     597 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     598 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePage_CopyVarchar_.1&quot;);</span>
+<span class="lineNum">     599 </span>            :     
+<span class="lineNum">     600 </span><span class="lineCov">          8 :     EaglePage *page = EaglePage_AllocVarchar(1);</span>
+<span class="lineNum">     601 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePage_RealCopyVarchar_(page));</span>
+<span class="lineNum">     602 </span><span class="lineCov">          8 :     EaglePage_Delete(page);</span>
+<span class="lineNum">     603 </span>            :     
+<span class="lineNum">     604 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     605 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="606"><span class="lineNum">     606 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     607 </span>            : 
+<span class="lineNum">     608 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderSingle_NewInt)
+<span class="lineNum">     609 </span>            : {
+<span class="lineNum">     610 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     611 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderSingle_NewInt.1&quot;);</span>
+<span class="lineNum">     612 </span>            :     
+<span class="lineNum">     613 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePageProviderSingle_NewInt(0, 1, NULL));</span>
+<span class="lineNum">     614 </span>            :     
+<span class="lineNum">     615 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     616 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="617"><span class="lineNum">     617 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     618 </span>            : 
+<span class="lineNum">     619 </span>            : CUNIT_TEST(MemorySuite, EaglePlan_prepareBuffers)
+<span class="lineNum">     620 </span>            : {
+<span class="lineNum">     621 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     622 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePlan_prepareBuffers.1&quot;);</span>
+<span class="lineNum">     623 </span>            :     
+<span class="lineNum">     624 </span><span class="lineCov">          8 :     EaglePlan *plan = EaglePlan_New(1, 1);</span>
+<span class="lineNum">     625 </span><span class="lineCov">          8 :     EaglePlan_prepareBuffers(plan, 2);</span>
+<span class="lineNum">     626 </span><span class="lineCov">          8 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     627 </span>            :     
+<span class="lineNum">     628 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     629 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="630"><span class="lineNum">     630 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     631 </span>            : 
+<span class="lineNum">     632 </span>            : CUNIT_TEST(MemorySuite, EagleDbSchema_New)
+<span class="lineNum">     633 </span>            : {
+<span class="lineNum">     634 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     635 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSchema_New.1&quot;);</span>
+<span class="lineNum">     636 </span>            :     
+<span class="lineNum">     637 </span><span class="lineCov">          8 :     EagleDbSchema *schema = EagleDbSchema_New(&quot;public&quot;);</span>
+<span class="lineNum">     638 </span><span class="lineCov">          8 :     EagleDbSchema_Delete(schema);</span>
+<span class="lineNum">     639 </span>            :     
+<span class="lineNum">     640 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     641 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="642"><span class="lineNum">     642 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span>            : CUNIT_TEST(MemorySuite, EagleLoggerEvent_New)
+<span class="lineNum">     645 </span>            : {
+<span class="lineNum">     646 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     647 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleLoggerEvent_New.1&quot;);</span>
+<span class="lineNum">     648 </span>            :     
+<span class="lineNum">     649 </span><span class="lineCov">          8 :     EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, &quot;something&quot;);</span>
+<span class="lineNum">     650 </span><span class="lineCov">          8 :     EagleLoggerEvent_Delete(event);</span>
+<span class="lineNum">     651 </span>            :     
+<span class="lineNum">     652 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     653 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="654"><span class="lineNum">     654 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     655 </span>            : 
+<span class="lineNum">     656 </span>            : CUNIT_TEST(MemorySuite, EagleLogger_New)
+<span class="lineNum">     657 </span>            : {
+<span class="lineNum">     658 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     659 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleLogger_New.1&quot;);</span>
+<span class="lineNum">     660 </span>            :     
+<span class="lineNum">     661 </span><span class="lineCov">          8 :     EagleLogger *logger = EagleLogger_New(stderr);</span>
+<span class="lineNum">     662 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(logger);</span>
+<span class="lineNum">     663 </span><span class="lineCov">          8 :     EagleLogger_Delete(logger);</span>
+<span class="lineNum">     664 </span>            :     
+<span class="lineNum">     665 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     666 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="667"><span class="lineNum">     667 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     668 </span>            : 
+<span class="lineNum">     669 </span>            : CUNIT_TEST(MemorySuite, EagleDbParser_New)
+<span class="lineNum">     670 </span>            : {
+<span class="lineNum">     671 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     672 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbParser_New.1&quot;);</span>
+<span class="lineNum">     673 </span>            :     
+<span class="lineNum">     674 </span><span class="lineCov">          8 :     EagleDbParser *parser = EagleDbParser_New();</span>
+<span class="lineNum">     675 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(parser);</span>
+<span class="lineNum">     676 </span>            :     
+<span class="lineNum">     677 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     678 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="679"><span class="lineNum">     679 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     680 </span>            : 
+<span class="lineNum">     681 </span>            : CUNIT_TEST(MemorySuite, EagleLinkedList_toArray)
+<span class="lineNum">     682 </span>            : {
+<span class="lineNum">     683 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     684 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleLinkedList_toArray.1&quot;);</span>
+<span class="lineNum">     685 </span>            :     
+<span class="lineNum">     686 </span><span class="lineCov">          8 :     EagleLinkedList *list = EagleLinkedList_New();</span>
+<span class="lineNum">     687 </span><span class="lineCov">          8 :     int size;</span>
+<span class="lineNum">     688 </span><span class="lineCov">          8 :     void **d = EagleLinkedList_toArray(list, &amp;size);</span>
+<span class="lineNum">     689 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(d);</span>
+<span class="lineNum">     690 </span><span class="lineCov">          8 :     EagleLinkedList_DeleteWithItems(list);</span>
+<span class="lineNum">     691 </span>            :     
+<span class="lineNum">     692 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     693 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="694"><span class="lineNum">     694 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     695 </span>            : 
+<span class="lineNum">     696 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlInsert_New)
+<span class="lineNum">     697 </span>            : {
+<span class="lineNum">     698 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     699 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlInsert_New.1&quot;);</span>
+<span class="lineNum">     700 </span>            :     
+<span class="lineNum">     701 </span><span class="lineCov">          8 :     EagleDbSqlInsert *insert = EagleDbSqlInsert_New();</span>
+<span class="lineNum">     702 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(insert);</span>
+<span class="lineNum">     703 </span>            :     
+<span class="lineNum">     704 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     705 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="706"><span class="lineNum">     706 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     707 </span>            : 
+<span class="lineNum">     708 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlSelect_toString)
+<span class="lineNum">     709 </span>            : {
+<span class="lineNum">     710 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     711 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlSelect_toString.1&quot;);</span>
+<span class="lineNum">     712 </span>            :     
+<span class="lineNum">     713 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbSqlSelect_toString(NULL));</span>
+<span class="lineNum">     714 </span>            :     
+<span class="lineNum">     715 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     716 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="717"><span class="lineNum">     717 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     718 </span>            : 
+<span class="lineNum">     719 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlUnaryExpression_New)
+<span class="lineNum">     720 </span>            : {
+<span class="lineNum">     721 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     722 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlUnaryExpression_New.1&quot;);</span>
+<span class="lineNum">     723 </span>            :     
+<span class="lineNum">     724 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL));</span>
+<span class="lineNum">     725 </span>            :     
+<span class="lineNum">     726 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     727 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="728"><span class="lineNum">     728 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     729 </span>            : 
+<span class="lineNum">     730 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage_1)
+<span class="lineNum">     731 </span>            : {
+<span class="lineNum">     732 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     733 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderSingle_nextPage.1&quot;);</span>
+<span class="lineNum">     734 </span>            :     
+<span class="lineNum">     735 </span><span class="lineCov">          8 :     EaglePageProviderSingle *epp = EaglePageProviderSingle_NewInt(123, 1, &quot;bla&quot;);</span>
+<span class="lineNum">     736 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EaglePageProviderSingle_nextPage(epp));</span>
+<span class="lineNum">     737 </span><span class="lineCov">          8 :     EaglePageProviderSingle_Delete(epp);</span>
+<span class="lineNum">     738 </span>            :     
+<span class="lineNum">     739 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     740 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="741"><span class="lineNum">     741 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     742 </span>            : 
+<span class="lineNum">     743 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderVirtual_New)
+<span class="lineNum">     744 </span>            : {
+<span class="lineNum">     745 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     746 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderVirtual_New.1&quot;);</span>
+<span class="lineNum">     747 </span>            :     
+<span class="lineNum">     748 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EaglePageProviderVirtual_New(1, NULL, EagleDataTypeUnknown, NULL, NULL, NULL, NULL, NULL, NULL, NULL));</span>
+<span class="lineNum">     749 </span>            :     
+<span class="lineNum">     750 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     751 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="752"><span class="lineNum">     752 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     753 </span>            : 
+<span class="lineNum">     754 </span>            : CUNIT_TEST(MemorySuite, EagleDbInformationSchema_New)
+<span class="lineNum">     755 </span>            : {
+<span class="lineNum">     756 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     757 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbInformationSchema_New.1&quot;);</span>
+<span class="lineNum">     758 </span>            :     
+<span class="lineNum">     759 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbInformationSchema_New(NULL, NULL));</span>
+<span class="lineNum">     760 </span>            :     
+<span class="lineNum">     761 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     762 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="763"><span class="lineNum">     763 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     764 </span>            : 
+<span class="lineNum">     765 </span>            : CUNIT_TEST(MemorySuite, EagleDbInformationSchema_tables_nextPage)
+<span class="lineNum">     766 </span>            : {
+<span class="lineNum">     767 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     768 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbInformationSchema_tables_nextPage.1&quot;);</span>
+<span class="lineNum">     769 </span>            :     
+<span class="lineNum">     770 </span><span class="lineCov">          8 :     EagleDbInstance *db = EagleDbInstance_New(10, 1);</span>
+<span class="lineNum">     771 </span><span class="lineCov">          8 :     EagleDbInformationSchema *infoSchema = EagleDbInformationSchema_New(db, NULL);</span>
+<span class="lineNum">     772 </span>            :     
+<span class="lineNum">     773 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbInformationSchema_tables_nextPage(infoSchema));</span>
+<span class="lineNum">     774 </span>            :     
+<span class="lineNum">     775 </span><span class="lineCov">          8 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     776 </span><span class="lineCov">          8 :     EagleDbInformationSchema_Delete(infoSchema);</span>
+<span class="lineNum">     777 </span>            :     
+<span class="lineNum">     778 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     779 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="780"><span class="lineNum">     780 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     781 </span>            : 
+<span class="lineNum">     782 </span>            : CUNIT_TEST(MemorySuite, EagleUtils_ToLowerCaseCopy)
+<span class="lineNum">     783 </span>            : {
+<span class="lineNum">     784 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     785 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleUtils_ToLowerCaseCopy.1&quot;);</span>
+<span class="lineNum">     786 </span>            :     
+<span class="lineNum">     787 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy(NULL));</span>
+<span class="lineNum">     788 </span>            :     
+<span class="lineNum">     789 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy(&quot;abc&quot;));</span>
+<span class="lineNum">     790 </span>            :     
+<span class="lineNum">     791 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     792 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     794 </span>            : 
+<span class="lineNum">     795 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithString_1)
+<span class="lineNum">     796 </span>            : {
+<span class="lineNum">     797 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     798 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_NewWithString.1&quot;);</span>
+<span class="lineNum">     799 </span>            :     
+<span class="lineNum">     800 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithString(&quot;something&quot;, EagleFalse));</span>
+<span class="lineNum">     801 </span>            :     
+<span class="lineNum">     802 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     803 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="804"><span class="lineNum">     804 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     805 </span>            : 
+<span class="lineNum">     806 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithString_2)
+<span class="lineNum">     807 </span>            : {
+<span class="lineNum">     808 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     809 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_NewWithString.2&quot;);</span>
+<span class="lineNum">     810 </span>            :     
+<span class="lineNum">     811 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithString(&quot;'something'&quot;, EagleTrue));</span>
+<span class="lineNum">     812 </span>            :     
+<span class="lineNum">     813 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     814 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="815"><span class="lineNum">     815 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     816 </span>            : 
+<span class="lineNum">     817 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderSingle_NewVarchar)
+<span class="lineNum">     818 </span>            : {
+<span class="lineNum">     819 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     820 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderSingle_NewVarchar.1&quot;);</span>
+<span class="lineNum">     821 </span>            :     
+<span class="lineNum">     822 </span><span class="lineCov">         16 :     CUNIT_ASSERT_NULL(EaglePageProviderSingle_NewVarchar(&quot;&quot;, 1, NULL));</span>
+<span class="lineNum">     823 </span>            :     
+<span class="lineNum">     824 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     825 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="826"><span class="lineNum">     826 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     827 </span>            : 
+<span class="lineNum">     828 </span>            : CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage_2)
+<span class="lineNum">     829 </span>            : {
+<span class="lineNum">     830 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     831 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EaglePageProviderSingle_nextPage.2&quot;);</span>
+<span class="lineNum">     832 </span>            :     
+<span class="lineNum">     833 </span><span class="lineCov">          8 :     EaglePageProviderSingle *epp = EaglePageProviderSingle_NewVarchar(&quot;123&quot;, 1, &quot;bla&quot;);</span>
+<span class="lineNum">     834 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EaglePageProviderSingle_nextPage(epp));</span>
+<span class="lineNum">     835 </span><span class="lineCov">          8 :     EaglePageProviderSingle_Delete(epp);</span>
+<span class="lineNum">     836 </span>            :     
+<span class="lineNum">     837 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     838 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="839"><span class="lineNum">     839 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     840 </span>            : 
+<span class="lineNum">     841 </span>            : CUNIT_TEST(MemorySuite, EagleDbSqlValue_toString)
+<span class="lineNum">     842 </span>            : {
+<span class="lineNum">     843 </span><span class="lineCov">          8 :     EagleMemory_MockInit();</span>
+<span class="lineNum">     844 </span><span class="lineCov">          8 :     EagleMemory_Mock(&quot;EagleDbSqlValue_toString.1&quot;);</span>
+<span class="lineNum">     845 </span>            :     
+<span class="lineNum">     846 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbSqlValue_toString(NULL));</span>
+<span class="lineNum">     847 </span>            :     
+<span class="lineNum">     848 </span><span class="lineCov">          8 :     EagleDbSqlValue *value = EagleDbSqlValue_NewWithString(&quot;abc&quot;, EagleFalse);</span>
+<span class="lineNum">     849 </span><span class="lineCov">         16 :     CUNIT_VERIFY_NULL(EagleDbSqlValue_toString(value));</span>
+<span class="lineNum">     850 </span><span class="lineCov">          8 :     EagleDbSqlValue_Delete(value);</span>
+<span class="lineNum">     851 </span>            :     
+<span class="lineNum">     852 </span><span class="lineCov">         16 :     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);</span>
+<span class="lineNum">     853 </span><span class="lineCov">          8 :     EagleMemory_MockFinish();</span>
+<a name="854"><span class="lineNum">     854 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">     855 </span>            : 
+<span class="lineNum">     856 </span>            : CUnitTests* MemorySuite1_tests()
+<span class="lineNum">     857 </span>            : {
+<span class="lineNum">     858 </span><span class="lineCov">          8 :     CUnitTests *tests = CUnitTests_New(100);</span>
+<span class="lineNum">     859 </span>            :     
+<span class="lineNum">     860 </span>            :     // method tests
+<span class="lineNum">     861 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_NewWithLiteral));</span>
+<span class="lineNum">     862 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_toString));</span>
+<span class="lineNum">     863 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewVarchar));</span>
+<span class="lineNum">     864 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_2));</span>
+<span class="lineNum">     865 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithString_2));</span>
+<span class="lineNum">     866 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithString_1));</span>
+<span class="lineNum">     867 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleUtils_ToLowerCaseCopy));</span>
+<span class="lineNum">     868 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_New));</span>
+<span class="lineNum">     869 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_tables_nextPage));</span>
+<span class="lineNum">     870 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderVirtual_New));</span>
+<span class="lineNum">     871 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_1));</span>
+<span class="lineNum">     872 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_toString));</span>
+<span class="lineNum">     873 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_New));</span>
+<span class="lineNum">     874 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_toString));</span>
+<span class="lineNum">     875 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlInsert_New));</span>
+<span class="lineNum">     876 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_toArray));</span>
+<span class="lineNum">     877 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));</span>
+<span class="lineNum">     878 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));</span>
+<span class="lineNum">     879 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));</span>
+<span class="lineNum">     880 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_New));</span>
+<span class="lineNum">     881 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_GetLine));</span>
+<span class="lineNum">     882 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New));</span>
+<span class="lineNum">     883 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_New));</span>
+<span class="lineNum">     884 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_toString));</span>
+<span class="lineNum">     885 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_New));</span>
+<span class="lineNum">     886 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithInteger));</span>
+<span class="lineNum">     887 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithAsterisk));</span>
+<span class="lineNum">     888 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithIdentifier));</span>
+<span class="lineNum">     889 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTable_New_1));</span>
+<span class="lineNum">     890 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTableData_New_1));</span>
+<span class="lineNum">     891 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_New_1));</span>
+<span class="lineNum">     892 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_toString));</span>
+<span class="lineNum">     893 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleInstance_New));</span>
+<span class="lineNum">     894 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedListItem_NewWithDescription));</span>
+<span class="lineNum">     895 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_New));</span>
+<span class="lineNum">     896 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_New));</span>
+<span class="lineNum">     897 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyInt_));</span>
+<span class="lineNum">     898 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_toString));</span>
+<span class="lineNum">     899 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderArray_New));</span>
+<span class="lineNum">     900 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderStream_New));</span>
+<span class="lineNum">     901 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New_1));</span>
+<span class="lineNum">     902 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_toString_1));</span>
+<span class="lineNum">     903 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_toString_2));</span>
+<span class="lineNum">     904 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_NewWithProvider));</span>
+<span class="lineNum">     905 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_toString));</span>
+<span class="lineNum">     906 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_1));</span>
+<span class="lineNum">     907 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_NewWithPage));</span>
+<span class="lineNum">     908 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleSynchronizer_CreateLock));</span>
+<span class="lineNum">     909 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorker_New));</span>
+<span class="lineNum">     910 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_1));</span>
+<span class="lineNum">     911 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_1));</span>
+<span class="lineNum">     912 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_2));</span>
+<span class="lineNum">     913 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New));</span>
+<span class="lineNum">     914 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_1));</span>
+<span class="lineNum">     915 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_2));</span>
+<span class="lineNum">     916 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_parse_2));</span>
+<span class="lineNum">     917 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTableData_New_2));</span>
+<span class="lineNum">     918 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_New_2));</span>
+<span class="lineNum">     919 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocInt));</span>
+<span class="lineNum">     920 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocVarchar));</span>
+<span class="lineNum">     921 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyVarchar_));</span>
+<span class="lineNum">     922 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewInt));</span>
+<span class="lineNum">     923 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_prepareBuffers));</span>
+<span class="lineNum">     924 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_2));</span>
+<span class="lineNum">     925 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_2));</span>
+<span class="lineNum">     926 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));</span>
+<span class="lineNum">     927 </span><span class="lineCov">          8 :     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_New));</span>
+<span class="lineNum">     928 </span>            :     
+<span class="lineNum">     929 </span><span class="lineCov">          8 :     return tests;</span>
+<span class="lineNum">     930 </span>            : }
+<span class="lineNum">     931 </span>            : 
+<span class="lineNum">     932 </span>            : /**
+<a name="933"><span class="lineNum">     933 </span>            :  * The suite init function.</a>
+<span class="lineNum">     934 </span>            :  */
+<span class="lineNum">     935 </span>            : int MemorySuite_init()
+<span class="lineNum">     936 </span>            : {
+<span class="lineNum">     937 </span><span class="lineCov">          8 :     return 0;</span>
+<span class="lineNum">     938 </span>            : }
+<span class="lineNum">     939 </span>            : 
+<span class="lineNum">     940 </span>            : /**
+<a name="941"><span class="lineNum">     941 </span>            :  * The suite cleanup function.</a>
+<span class="lineNum">     942 </span>            :  */
+<span class="lineNum">     943 </span>            : int MemorySuite_clean()
+<span class="lineNum">     944 </span>            : {
+<span class="lineNum">     945 </span><span class="lineCov">          8 :     return 0;</span>
+<span class="lineNum">     946 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

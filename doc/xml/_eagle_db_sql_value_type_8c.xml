@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_value_type_8c" kind="file">
+    <compoundname>EagleDbSqlValueType.c</compoundname>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_db_sql_value_type_8h" local="yes">EagleDbSqlValueType.h</includes>
+    <incdepgraph>
+      <node id="2736">
+        <label>eagle/eagledb/EagleDbSqlValueType.c</label>
+        <link refid="EagleDbSqlValueType.c"/>
+        <childnode refid="2737" relation="include">
+        </childnode>
+        <childnode refid="2738" relation="include">
+        </childnode>
+      </node>
+      <node id="2738">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2737">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_value_type_8c_1a13fa6fb3475f724c130bbe0c338eb174" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlValueType_toString</definition>
+        <argsstring>(EagleDbSqlValueType type)</argsstring>
+        <name>EagleDbSqlValueType_toString</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25" kindref="member">EagleDbSqlValueType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Get the string representation of a EagleDbSqlValueType. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A newly allocated string is always returned, you must free this manually when you are finished with it. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValueType.c" line="5" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValueType.c" bodystart="4" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_value_type_8h" kindref="compound">EagleDbSqlValueType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="_eagle_db_sql_value_type_8h_1a13fa6fb3475f724c130bbe0c338eb174" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_value_type_8c_1a13fa6fb3475f724c130bbe0c338eb174" kindref="member" tooltip="Get the string representation of a EagleDbSqlValueType.">EagleDbSqlValueType_toString</ref>(<ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25" kindref="member" tooltip="A value can contain several types.">EagleDbSqlValueType</ref><sp/>type)</highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(type)<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25ab15c25b9291c87cc06e389aeb5b3ceb5" kindref="member" tooltip="Asterisk expression for selecting multiple columns.">EagleDbSqlValueTypeAsterisk</ref>:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;Asterisk&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a1c2e09ed37350b5fdfa2ec539eb2eb75" kindref="member" tooltip="A floating point number.">EagleDbSqlValueTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;FLOAT&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a5f0bf7d20910a8563b25447671fe0cfc" kindref="member" tooltip="The name of a column.">EagleDbSqlValueTypeIdentifier</ref>:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;Identifier&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a45a5b1dc7f1b44c879e18afe76d70c47" kindref="member" tooltip="Use intValue.">EagleDbSqlValueTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;INTEGER&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25ac3cd29c912f78a7ff5c7b0a615735ff3" kindref="member" tooltip="A string literal.">EagleDbSqlValueTypeString</ref>:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(</highlight><highlight class="stringliteral">&quot;VARCHAR&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValueType.c"/>
+  </compounddef>
+</doxygen>

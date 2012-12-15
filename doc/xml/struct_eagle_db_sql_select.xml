@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_select" kind="struct" prot="public">
+    <compoundname>EagleDbSqlSelect</compoundname>
+    <includes refid="_eagle_db_sql_select_8h" local="no">EagleDbSqlSelect.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_select_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Heading. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_select_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* selectExpressions</definition>
+        <argsstring></argsstring>
+        <name>selectExpressions</name>
+        <briefdescription>
+<para>Represents the expressions for the columns. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" line="37" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* tableName</definition>
+        <argsstring></argsstring>
+        <name>tableName</name>
+        <briefdescription>
+<para>The name of the table in the FROM clause. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* whereExpression</definition>
+        <argsstring></argsstring>
+        <name>whereExpression</name>
+        <briefdescription>
+<para>An optional WHERE clause. </para>        </briefdescription>
+        <detaileddescription>
+<para>This may be NULL indicating there was no WHERE specified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" line="32" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>SQL SELECT expression. </para>    </briefdescription>
+    <detaileddescription>
+<para>Expression type is EagleDbSqlExpressionTypeSelect. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="81">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="82" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="83" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="79">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="80" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="81" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="84" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="78">
+        <label>char *</label>
+      </node>
+      <node id="84">
+        <label>int</label>
+      </node>
+      <node id="82">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="77">
+        <label>EagleDbSqlExpression</label>
+        <link refid="struct_eagle_db_sql_expression"/>
+      </node>
+      <node id="83">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="80">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="76">
+        <label>EagleDbSqlSelect</label>
+        <link refid="struct_eagle_db_sql_select"/>
+        <childnode refid="77" relation="usage">
+          <edgelabel>whereExpression</edgelabel>
+        </childnode>
+        <childnode refid="78" relation="usage">
+          <edgelabel>tableName</edgelabel>
+        </childnode>
+        <childnode refid="79" relation="usage">
+          <edgelabel>selectExpressions</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.h" bodystart="16" bodyend="39"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_select_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlSelect</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" prot="public" virt="non-virtual"><scope>EagleDbSqlSelect</scope><name>selectExpressions</name></member>
+      <member refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" prot="public" virt="non-virtual"><scope>EagleDbSqlSelect</scope><name>tableName</name></member>
+      <member refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" prot="public" virt="non-virtual"><scope>EagleDbSqlSelect</scope><name>whereExpression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

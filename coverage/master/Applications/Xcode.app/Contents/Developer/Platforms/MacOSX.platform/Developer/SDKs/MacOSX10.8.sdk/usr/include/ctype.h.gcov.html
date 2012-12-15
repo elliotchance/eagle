@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include/ctype.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../../../../../../../../index.html">top level</a> - <a href="index.html">Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/include</a> - ctype.h<span style="font-size: 80%;"> (source / <a href="ctype.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*</a>
+<span class="lineNum">       2 </span>            :  * Copyright (c) 2000, 2005, 2008 Apple Inc. All rights reserved.
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  * @APPLE_LICENSE_HEADER_START@
+<span class="lineNum">       5 </span>            :  * 
+<span class="lineNum">       6 </span>            :  * This file contains Original Code and/or Modifications of Original Code
+<span class="lineNum">       7 </span>            :  * as defined in and that are subject to the Apple Public Source License
+<span class="lineNum">       8 </span>            :  * Version 2.0 (the 'License'). You may not use this file except in
+<span class="lineNum">       9 </span>            :  * compliance with the License. Please obtain a copy of the License at
+<span class="lineNum">      10 </span>            :  * http://www.opensource.apple.com/apsl/ and read it before using this
+<span class="lineNum">      11 </span>            :  * file.
+<span class="lineNum">      12 </span>            :  * 
+<span class="lineNum">      13 </span>            :  * The Original Code and all software distributed under the License are
+<span class="lineNum">      14 </span>            :  * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+<span class="lineNum">      15 </span>            :  * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+<span class="lineNum">      16 </span>            :  * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+<span class="lineNum">      17 </span>            :  * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+<span class="lineNum">      18 </span>            :  * Please see the License for the specific language governing rights and
+<span class="lineNum">      19 </span>            :  * limitations under the License.
+<span class="lineNum">      20 </span>            :  * 
+<span class="lineNum">      21 </span>            :  * @APPLE_LICENSE_HEADER_END@
+<span class="lineNum">      22 </span>            :  */
+<span class="lineNum">      23 </span>            : /*
+<span class="lineNum">      24 </span>            :  * Copyright (c) 1989, 1993
+<span class="lineNum">      25 </span>            :  *      The Regents of the University of California.  All rights reserved.
+<span class="lineNum">      26 </span>            :  * (c) UNIX System Laboratories, Inc.
+<span class="lineNum">      27 </span>            :  * All or some portions of this file are derived from material licensed
+<span class="lineNum">      28 </span>            :  * to the University of California by American Telephone and Telegraph
+<span class="lineNum">      29 </span>            :  * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+<span class="lineNum">      30 </span>            :  * the permission of UNIX System Laboratories, Inc.
+<span class="lineNum">      31 </span>            :  *
+<span class="lineNum">      32 </span>            :  * This code is derived from software contributed to Berkeley by
+<span class="lineNum">      33 </span>            :  * Paul Borman at Krystal Technologies.
+<span class="lineNum">      34 </span>            :  *
+<span class="lineNum">      35 </span>            :  * Redistribution and use in source and binary forms, with or without
+<span class="lineNum">      36 </span>            :  * modification, are permitted provided that the following conditions
+<span class="lineNum">      37 </span>            :  * are met:
+<span class="lineNum">      38 </span>            :  * 1. Redistributions of source code must retain the above copyright
+<span class="lineNum">      39 </span>            :  *    notice, this list of conditions and the following disclaimer.
+<span class="lineNum">      40 </span>            :  * 2. Redistributions in binary form must reproduce the above copyright
+<span class="lineNum">      41 </span>            :  *    notice, this list of conditions and the following disclaimer in the
+<span class="lineNum">      42 </span>            :  *    documentation and/or other materials provided with the distribution.
+<span class="lineNum">      43 </span>            :  * 3. All advertising materials mentioning features or use of this software
+<span class="lineNum">      44 </span>            :  *    must display the following acknowledgement:
+<span class="lineNum">      45 </span>            :  *      This product includes software developed by the University of
+<span class="lineNum">      46 </span>            :  *      California, Berkeley and its contributors.
+<span class="lineNum">      47 </span>            :  * 4. Neither the name of the University nor the names of its contributors
+<span class="lineNum">      48 </span>            :  *    may be used to endorse or promote products derived from this software
+<span class="lineNum">      49 </span>            :  *    without specific prior written permission.
+<span class="lineNum">      50 </span>            :  *
+<span class="lineNum">      51 </span>            :  * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+<span class="lineNum">      52 </span>            :  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+<span class="lineNum">      53 </span>            :  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+<span class="lineNum">      54 </span>            :  * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+<span class="lineNum">      55 </span>            :  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+<span class="lineNum">      56 </span>            :  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+<span class="lineNum">      57 </span>            :  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+<span class="lineNum">      58 </span>            :  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+<span class="lineNum">      59 </span>            :  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+<span class="lineNum">      60 </span>            :  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+<span class="lineNum">      61 </span>            :  * SUCH DAMAGE.
+<span class="lineNum">      62 </span>            :  *
+<span class="lineNum">      63 </span>            :  *      @(#)ctype.h     8.4 (Berkeley) 1/21/94
+<span class="lineNum">      64 </span>            :  */
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : #ifndef _CTYPE_H_
+<span class="lineNum">      67 </span>            : #define _CTYPE_H_
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span>            : #include &lt;runetype.h&gt;
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            : #define _CTYPE_A        0x00000100L             /* Alpha */
+<span class="lineNum">      72 </span>            : #define _CTYPE_C        0x00000200L             /* Control */
+<span class="lineNum">      73 </span>            : #define _CTYPE_D        0x00000400L             /* Digit */
+<span class="lineNum">      74 </span>            : #define _CTYPE_G        0x00000800L             /* Graph */
+<span class="lineNum">      75 </span>            : #define _CTYPE_L        0x00001000L             /* Lower */
+<span class="lineNum">      76 </span>            : #define _CTYPE_P        0x00002000L             /* Punct */
+<span class="lineNum">      77 </span>            : #define _CTYPE_S        0x00004000L             /* Space */
+<span class="lineNum">      78 </span>            : #define _CTYPE_U        0x00008000L             /* Upper */
+<span class="lineNum">      79 </span>            : #define _CTYPE_X        0x00010000L             /* X digit */
+<span class="lineNum">      80 </span>            : #define _CTYPE_B        0x00020000L             /* Blank */
+<span class="lineNum">      81 </span>            : #define _CTYPE_R        0x00040000L             /* Print */
+<span class="lineNum">      82 </span>            : #define _CTYPE_I        0x00080000L             /* Ideogram */
+<span class="lineNum">      83 </span>            : #define _CTYPE_T        0x00100000L             /* Special */
+<span class="lineNum">      84 </span>            : #define _CTYPE_Q        0x00200000L             /* Phonogram */
+<span class="lineNum">      85 </span>            : #define _CTYPE_SW0      0x20000000L             /* 0 width character */
+<span class="lineNum">      86 </span>            : #define _CTYPE_SW1      0x40000000L             /* 1 width character */
+<span class="lineNum">      87 </span>            : #define _CTYPE_SW2      0x80000000L             /* 2 width character */
+<span class="lineNum">      88 </span>            : #define _CTYPE_SW3      0xc0000000L             /* 3 width character */
+<span class="lineNum">      89 </span>            : #define _CTYPE_SWM      0xe0000000L             /* Mask for screen width data */
+<span class="lineNum">      90 </span>            : #define _CTYPE_SWS      30                      /* Bits to shift to get width */
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span>            : #ifdef _NONSTD_SOURCE
+<span class="lineNum">      93 </span>            : /*
+<span class="lineNum">      94 </span>            :  * Backward compatibility
+<span class="lineNum">      95 </span>            :  */
+<span class="lineNum">      96 </span>            : #define _A              _CTYPE_A                /* Alpha */
+<span class="lineNum">      97 </span>            : #define _C              _CTYPE_C                /* Control */
+<span class="lineNum">      98 </span>            : #define _D              _CTYPE_D                /* Digit */
+<span class="lineNum">      99 </span>            : #define _G              _CTYPE_G                /* Graph */
+<span class="lineNum">     100 </span>            : #define _L              _CTYPE_L                /* Lower */
+<span class="lineNum">     101 </span>            : #define _P              _CTYPE_P                /* Punct */
+<span class="lineNum">     102 </span>            : #define _S              _CTYPE_S                /* Space */
+<span class="lineNum">     103 </span>            : #define _U              _CTYPE_U                /* Upper */
+<span class="lineNum">     104 </span>            : #define _X              _CTYPE_X                /* X digit */
+<span class="lineNum">     105 </span>            : #define _B              _CTYPE_B                /* Blank */
+<span class="lineNum">     106 </span>            : #define _R              _CTYPE_R                /* Print */
+<span class="lineNum">     107 </span>            : #define _I              _CTYPE_I                /* Ideogram */
+<span class="lineNum">     108 </span>            : #define _T              _CTYPE_T                /* Special */
+<span class="lineNum">     109 </span>            : #define _Q              _CTYPE_Q                /* Phonogram */
+<span class="lineNum">     110 </span>            : #define _SW0            _CTYPE_SW0              /* 0 width character */
+<span class="lineNum">     111 </span>            : #define _SW1            _CTYPE_SW1              /* 1 width character */
+<span class="lineNum">     112 </span>            : #define _SW2            _CTYPE_SW2              /* 2 width character */
+<span class="lineNum">     113 </span>            : #define _SW3            _CTYPE_SW3              /* 3 width character */
+<span class="lineNum">     114 </span>            : #endif /* _NONSTD_SOURCE */
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            : /*
+<span class="lineNum">     117 </span>            :  * _EXTERNALIZE_CTYPE_INLINES_ is defined in locale/nomacros.c to tell us
+<span class="lineNum">     118 </span>            :  * to generate code for extern versions of all intermediate inline functions.
+<span class="lineNum">     119 </span>            :  */
+<span class="lineNum">     120 </span>            : #ifdef _EXTERNALIZE_CTYPE_INLINES_
+<span class="lineNum">     121 </span>            : #define _USE_CTYPE_INLINE_
+<span class="lineNum">     122 </span>            : #define __DARWIN_CTYPE_static_inline
+<span class="lineNum">     123 </span>            : #else /* !_EXTERNALIZE_CTYPE_INLINES_ */
+<span class="lineNum">     124 </span>            : #define __DARWIN_CTYPE_static_inline            static __inline
+<span class="lineNum">     125 </span>            : #endif /* !_EXTERNALIZE_CTYPE_INLINES_ */
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            : /*
+<span class="lineNum">     128 </span>            :  * _EXTERNALIZE_CTYPE_INLINES_TOP_ is defined in locale/isctype.c to tell us
+<span class="lineNum">     129 </span>            :  * to generate code for extern versions of all top-level inline functions.
+<span class="lineNum">     130 </span>            :  */
+<span class="lineNum">     131 </span>            : #ifdef _EXTERNALIZE_CTYPE_INLINES_TOP_
+<span class="lineNum">     132 </span>            : #define _USE_CTYPE_INLINE_
+<span class="lineNum">     133 </span>            : #define __DARWIN_CTYPE_TOP_static_inline
+<span class="lineNum">     134 </span>            : #else /* !_EXTERNALIZE_CTYPE_INLINES_TOP_ */
+<span class="lineNum">     135 </span>            : #define __DARWIN_CTYPE_TOP_static_inline        static __inline
+<span class="lineNum">     136 </span>            : #endif /* _EXTERNALIZE_CTYPE_INLINES_TOP_ */
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : /*
+<span class="lineNum">     139 </span>            :  * Use inline functions if we are allowed to and the compiler supports them.
+<span class="lineNum">     140 </span>            :  */
+<span class="lineNum">     141 </span>            : #if !defined(_DONT_USE_CTYPE_INLINE_) &amp;&amp; \
+<span class="lineNum">     142 </span>            :     (defined(_USE_CTYPE_INLINE_) || defined(__GNUC__) || defined(__cplusplus))
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : /* See comments in &lt;machine/_type.h&gt; about __darwin_ct_rune_t. */
+<span class="lineNum">     145 </span>            : __BEGIN_DECLS
+<span class="lineNum">     146 </span>            : unsigned long           ___runetype(__darwin_ct_rune_t);
+<span class="lineNum">     147 </span>            : __darwin_ct_rune_t      ___tolower(__darwin_ct_rune_t);
+<span class="lineNum">     148 </span>            : __darwin_ct_rune_t      ___toupper(__darwin_ct_rune_t);
+<span class="lineNum">     149 </span>            : __END_DECLS
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     152 </span>            : isascii(int _c)
+<span class="lineNum">     153 </span>            : {
+<span class="lineNum">     154 </span>            :         return ((_c &amp; ~0x7F) == 0);
+<span class="lineNum">     155 </span>            : }
+<span class="lineNum">     156 </span>            : 
+<span class="lineNum">     157 </span>            : #ifdef USE_ASCII
+<span class="lineNum">     158 </span>            : __DARWIN_CTYPE_static_inline int     
+<span class="lineNum">     159 </span>            : __maskrune(__darwin_ct_rune_t _c, unsigned long _f)
+<span class="lineNum">     160 </span>            : {
+<span class="lineNum">     161 </span>            :         return _DefaultRuneLocale.__runetype[_c &amp; 0xff] &amp; _f;
+<span class="lineNum">     162 </span>            : }
+<span class="lineNum">     163 </span>            : #else /* !USE_ASCII */
+<span class="lineNum">     164 </span>            : __BEGIN_DECLS
+<span class="lineNum">     165 </span>            : int                     __maskrune(__darwin_ct_rune_t, unsigned long);   
+<span class="lineNum">     166 </span>            : __END_DECLS
+<span class="lineNum">     167 </span>            : #endif /* USE_ASCII */
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span>            : __DARWIN_CTYPE_static_inline int
+<span class="lineNum">     170 </span>            : __istype(__darwin_ct_rune_t _c, unsigned long _f)
+<span class="lineNum">     171 </span>            : {
+<span class="lineNum">     172 </span>            : #ifdef USE_ASCII
+<span class="lineNum">     173 </span>            :         return !!(__maskrune(_c, _f));
+<span class="lineNum">     174 </span>            : #else /* USE_ASCII */
+<span class="lineNum">     175 </span>            :         return (isascii(_c) ? !!(_DefaultRuneLocale.__runetype[_c] &amp; _f)
+<span class="lineNum">     176 </span>            :                 : !!__maskrune(_c, _f));
+<span class="lineNum">     177 </span>            : #endif /* USE_ASCII */
+<span class="lineNum">     178 </span>            : }
+<span class="lineNum">     179 </span>            : 
+<span class="lineNum">     180 </span>            : __DARWIN_CTYPE_static_inline __darwin_ct_rune_t
+<span class="lineNum">     181 </span>            : __isctype(__darwin_ct_rune_t _c, unsigned long _f)
+<span class="lineNum">     182 </span>            : {
+<span class="lineNum">     183 </span>            : #ifdef USE_ASCII
+<span class="lineNum">     184 </span>            :         return !!(__maskrune(_c, _f));
+<span class="lineNum">     185 </span>            : #else /* USE_ASCII */
+<span class="lineNum">     186 </span>            :         return (_c &lt; 0 || _c &gt;= _CACHED_RUNES) ? 0 :
+<span class="lineNum">     187 </span>            :                 !!(_DefaultRuneLocale.__runetype[_c] &amp; _f);
+<span class="lineNum">     188 </span>            : #endif /* USE_ASCII */
+<span class="lineNum">     189 </span>            : }
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span>            : #ifdef USE_ASCII
+<span class="lineNum">     192 </span>            : __DARWIN_CTYPE_static_inline __darwin_ct_rune_t
+<span class="lineNum">     193 </span>            : __toupper(__darwin_ct_rune_t _c)
+<span class="lineNum">     194 </span>            : {
+<span class="lineNum">     195 </span>            :         return _DefaultRuneLocale.__mapupper[_c &amp; 0xff];
+<span class="lineNum">     196 </span>            : }
+<span class="lineNum">     197 </span>            : 
+<span class="lineNum">     198 </span>            : __DARWIN_CTYPE_static_inline __darwin_ct_rune_t
+<span class="lineNum">     199 </span>            : __tolower(__darwin_ct_rune_t _c)
+<span class="lineNum">     200 </span>            : {
+<span class="lineNum">     201 </span>            :         return _DefaultRuneLocale.__maplower[_c &amp; 0xff];
+<span class="lineNum">     202 </span>            : }
+<span class="lineNum">     203 </span>            : #else /* !USE_ASCII */
+<span class="lineNum">     204 </span>            : __BEGIN_DECLS
+<span class="lineNum">     205 </span>            : __darwin_ct_rune_t      __toupper(__darwin_ct_rune_t);
+<span class="lineNum">     206 </span>            : __darwin_ct_rune_t      __tolower(__darwin_ct_rune_t);
+<span class="lineNum">     207 </span>            : __END_DECLS
+<span class="lineNum">     208 </span>            : #endif /* USE_ASCII */
+<span class="lineNum">     209 </span>            : 
+<span class="lineNum">     210 </span>            : __DARWIN_CTYPE_static_inline int
+<span class="lineNum">     211 </span>            : __wcwidth(__darwin_ct_rune_t _c)
+<span class="lineNum">     212 </span>            : {
+<span class="lineNum">     213 </span>            :         unsigned int _x;
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span>            :         if (_c == 0)
+<span class="lineNum">     216 </span>            :                 return (0);
+<span class="lineNum">     217 </span>            :         _x = (unsigned int)__maskrune(_c, _CTYPE_SWM|_CTYPE_R);
+<span class="lineNum">     218 </span>            :         if ((_x &amp; _CTYPE_SWM) != 0)
+<span class="lineNum">     219 </span>            :                 return ((_x &amp; _CTYPE_SWM) &gt;&gt; _CTYPE_SWS);
+<span class="lineNum">     220 </span>            :         return ((_x &amp; _CTYPE_R) != 0 ? 1 : -1);
+<span class="lineNum">     221 </span>            : }
+<span class="lineNum">     222 </span>            : 
+<span class="lineNum">     223 </span>            : #ifndef _EXTERNALIZE_CTYPE_INLINES_
+<span class="lineNum">     224 </span>            : 
+<span class="lineNum">     225 </span>            : #define _tolower(c)     __tolower(c)
+<span class="lineNum">     226 </span>            : #define _toupper(c)     __toupper(c)
+<span class="lineNum">     227 </span>            : 
+<span class="lineNum">     228 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     229 </span>            : isalnum(int _c)
+<span class="lineNum">     230 </span>            : {
+<span class="lineNum">     231 </span>            :         return (__istype(_c, _CTYPE_A|_CTYPE_D));
+<span class="lineNum">     232 </span>            : }
+<span class="lineNum">     233 </span>            : 
+<span class="lineNum">     234 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     235 </span>            : isalpha(int _c)
+<span class="lineNum">     236 </span>            : {
+<span class="lineNum">     237 </span>            :         return (__istype(_c, _CTYPE_A));
+<span class="lineNum">     238 </span>            : }
+<span class="lineNum">     239 </span>            : 
+<span class="lineNum">     240 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     241 </span>            : isblank(int _c)
+<span class="lineNum">     242 </span>            : {
+<span class="lineNum">     243 </span>            :         return (__istype(_c, _CTYPE_B));
+<span class="lineNum">     244 </span>            : }
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     247 </span>            : iscntrl(int _c)
+<span class="lineNum">     248 </span>            : {
+<span class="lineNum">     249 </span>            :         return (__istype(_c, _CTYPE_C));
+<span class="lineNum">     250 </span>            : }
+<span class="lineNum">     251 </span>            : 
+<span class="lineNum">     252 </span>            : /* ANSI -- locale independent */
+<span class="lineNum">     253 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     254 </span>            : isdigit(int _c)
+<span class="lineNum">     255 </span>            : {
+<span class="lineNum">     256 </span>            :         return (__isctype(_c, _CTYPE_D));
+<span class="lineNum">     257 </span>            : }
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     260 </span>            : isgraph(int _c)
+<span class="lineNum">     261 </span>            : {
+<span class="lineNum">     262 </span>            :         return (__istype(_c, _CTYPE_G));
+<span class="lineNum">     263 </span>            : }
+<span class="lineNum">     264 </span>            : 
+<span class="lineNum">     265 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     266 </span>            : islower(int _c)
+<span class="lineNum">     267 </span>            : {
+<span class="lineNum">     268 </span>            :         return (__istype(_c, _CTYPE_L));
+<span class="lineNum">     269 </span>            : }
+<span class="lineNum">     270 </span>            : 
+<span class="lineNum">     271 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     272 </span>            : isprint(int _c)
+<span class="lineNum">     273 </span>            : {
+<span class="lineNum">     274 </span>            :         return (__istype(_c, _CTYPE_R));
+<span class="lineNum">     275 </span>            : }
+<span class="lineNum">     276 </span>            : 
+<span class="lineNum">     277 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     278 </span>            : ispunct(int _c)
+<span class="lineNum">     279 </span>            : {
+<span class="lineNum">     280 </span>            :         return (__istype(_c, _CTYPE_P));
+<span class="lineNum">     281 </span>            : }
+<span class="lineNum">     282 </span>            : 
+<span class="lineNum">     283 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     284 </span>            : isspace(int _c)
+<span class="lineNum">     285 </span>            : {
+<span class="lineNum">     286 </span>            :         return (__istype(_c, _CTYPE_S));
+<span class="lineNum">     287 </span>            : }
+<span class="lineNum">     288 </span>            : 
+<span class="lineNum">     289 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     290 </span>            : isupper(int _c)
+<span class="lineNum">     291 </span>            : {
+<span class="lineNum">     292 </span>            :         return (__istype(_c, _CTYPE_U));
+<span class="lineNum">     293 </span>            : }
+<span class="lineNum">     294 </span>            : 
+<span class="lineNum">     295 </span>            : /* ANSI -- locale independent */
+<span class="lineNum">     296 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     297 </span>            : isxdigit(int _c)
+<span class="lineNum">     298 </span>            : {
+<span class="lineNum">     299 </span>            :         return (__isctype(_c, _CTYPE_X));
+<span class="lineNum">     300 </span>            : }
+<span class="lineNum">     301 </span>            : 
+<span class="lineNum">     302 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     303 </span>            : toascii(int _c)
+<span class="lineNum">     304 </span>            : {
+<span class="lineNum">     305 </span>            :         return (_c &amp; 0x7F);
+<span class="lineNum">     306 </span>            : }
+<a name="307"><span class="lineNum">     307 </span>            : </a>
+<span class="lineNum">     308 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     309 </span><span class="lineCov">       2000 : tolower(int _c)</span>
+<span class="lineNum">     310 </span>            : {
+<span class="lineNum">     311 </span><span class="lineCov">       2000 :         return (__tolower(_c));</span>
+<span class="lineNum">     312 </span>            : }
+<span class="lineNum">     313 </span>            : 
+<span class="lineNum">     314 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     315 </span>            : toupper(int _c)
+<span class="lineNum">     316 </span>            : {
+<span class="lineNum">     317 </span>            :         return (__toupper(_c));
+<span class="lineNum">     318 </span>            : }
+<span class="lineNum">     319 </span>            : 
+<span class="lineNum">     320 </span>            : #if !defined(_ANSI_SOURCE) &amp;&amp; (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
+<span class="lineNum">     321 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     322 </span>            : digittoint(int _c)
+<span class="lineNum">     323 </span>            : {
+<span class="lineNum">     324 </span>            :         return (__maskrune(_c, 0x0F));
+<span class="lineNum">     325 </span>            : }
+<span class="lineNum">     326 </span>            : 
+<span class="lineNum">     327 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     328 </span>            : ishexnumber(int _c)
+<span class="lineNum">     329 </span>            : {
+<span class="lineNum">     330 </span>            :         return (__istype(_c, _CTYPE_X));
+<span class="lineNum">     331 </span>            : }
+<span class="lineNum">     332 </span>            : 
+<span class="lineNum">     333 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     334 </span>            : isideogram(int _c)
+<span class="lineNum">     335 </span>            : {
+<span class="lineNum">     336 </span>            :         return (__istype(_c, _CTYPE_I));
+<span class="lineNum">     337 </span>            : }
+<span class="lineNum">     338 </span>            : 
+<span class="lineNum">     339 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     340 </span>            : isnumber(int _c)
+<span class="lineNum">     341 </span>            : {
+<span class="lineNum">     342 </span>            :         return (__istype(_c, _CTYPE_D));
+<span class="lineNum">     343 </span>            : }
+<span class="lineNum">     344 </span>            : 
+<span class="lineNum">     345 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     346 </span>            : isphonogram(int _c)
+<span class="lineNum">     347 </span>            : {
+<span class="lineNum">     348 </span>            :         return (__istype(_c, _CTYPE_Q));
+<span class="lineNum">     349 </span>            : }
+<span class="lineNum">     350 </span>            : 
+<span class="lineNum">     351 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     352 </span>            : isrune(int _c)
+<span class="lineNum">     353 </span>            : {
+<span class="lineNum">     354 </span>            :         return (__istype(_c, 0xFFFFFFF0L));
+<span class="lineNum">     355 </span>            : }
+<span class="lineNum">     356 </span>            : 
+<span class="lineNum">     357 </span>            : __DARWIN_CTYPE_TOP_static_inline int
+<span class="lineNum">     358 </span>            : isspecial(int _c)
+<span class="lineNum">     359 </span>            : {
+<span class="lineNum">     360 </span>            :         return (__istype(_c, _CTYPE_T));
+<span class="lineNum">     361 </span>            : }
+<span class="lineNum">     362 </span>            : #endif /* !_ANSI_SOURCE &amp;&amp; (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
+<span class="lineNum">     363 </span>            : #endif /* _EXTERNALIZE_CTYPE_INLINES_ */
+<span class="lineNum">     364 </span>            : 
+<span class="lineNum">     365 </span>            : #else /* not using inlines */
+<span class="lineNum">     366 </span>            : 
+<span class="lineNum">     367 </span>            : __BEGIN_DECLS
+<span class="lineNum">     368 </span>            : int     isalnum(int);
+<span class="lineNum">     369 </span>            : int     isalpha(int);
+<span class="lineNum">     370 </span>            : int     isblank(int);
+<span class="lineNum">     371 </span>            : int     iscntrl(int);
+<span class="lineNum">     372 </span>            : int     isdigit(int);
+<span class="lineNum">     373 </span>            : int     isgraph(int);
+<span class="lineNum">     374 </span>            : int     islower(int);
+<span class="lineNum">     375 </span>            : int     isprint(int);
+<span class="lineNum">     376 </span>            : int     ispunct(int);
+<span class="lineNum">     377 </span>            : int     isspace(int);
+<span class="lineNum">     378 </span>            : int     isupper(int);
+<span class="lineNum">     379 </span>            : int     isxdigit(int);
+<span class="lineNum">     380 </span>            : int     tolower(int);
+<span class="lineNum">     381 </span>            : int     toupper(int);
+<span class="lineNum">     382 </span>            : int     isascii(int);
+<span class="lineNum">     383 </span>            : int     toascii(int);
+<span class="lineNum">     384 </span>            : 
+<span class="lineNum">     385 </span>            : #if !defined(_ANSI_SOURCE) &amp;&amp; (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
+<span class="lineNum">     386 </span>            : int     _tolower(int);
+<span class="lineNum">     387 </span>            : int     _toupper(int);
+<span class="lineNum">     388 </span>            : int     digittoint(int);
+<span class="lineNum">     389 </span>            : int     ishexnumber(int);
+<span class="lineNum">     390 </span>            : int     isideogram(int);
+<span class="lineNum">     391 </span>            : int     isnumber(int);
+<span class="lineNum">     392 </span>            : int     isphonogram(int);
+<span class="lineNum">     393 </span>            : int     isrune(int);
+<span class="lineNum">     394 </span>            : int     isspecial(int);
+<span class="lineNum">     395 </span>            : #endif
+<span class="lineNum">     396 </span>            : __END_DECLS
+<span class="lineNum">     397 </span>            : 
+<span class="lineNum">     398 </span>            : #endif /* using inlines */
+<span class="lineNum">     399 </span>            : 
+<span class="lineNum">     400 </span>            : #ifdef _USE_EXTENDED_LOCALES_
+<span class="lineNum">     401 </span>            : #include &lt;xlocale/_ctype.h&gt;
+<span class="lineNum">     402 </span>            : #endif /* _USE_EXTENDED_LOCALES_ */
+<span class="lineNum">     403 </span>            : 
+<span class="lineNum">     404 </span>            : #endif /* !_CTYPE_H_ */
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

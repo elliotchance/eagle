@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_cast_operator" kind="struct" prot="public">
+    <compoundname>EagleDbSqlCastOperator</compoundname>
+    <includes refid="_eagle_db_sql_cast_expression_8h" local="no">EagleDbSqlCastExpression.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_cast_operator_1a43cfda5d9dfabde46aa2a89ad6ac4cea" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType left</definition>
+        <argsstring></argsstring>
+        <name>left</name>
+        <briefdescription>
+<para>Data type of the left side (first operand). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="40" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_cast_operator_1a2850dd7a0a45e905b255b747dc5b287a" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType right</definition>
+        <argsstring></argsstring>
+        <name>right</name>
+        <briefdescription>
+<para>Data type of the right side (second operand). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="45" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_eagle_db_sql_cast_operator_1ac4e76cb21c69854b0a80118ad60b1e9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EaglePageOperationFunction</definition>
+        <argsstring>(func)</argsstring>
+        <name>EaglePageOperationFunction</name>
+        <param>
+          <type>func</type>
+        </param>
+        <briefdescription>
+<para>The page operation function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used by <ref refid="_eagle_db_sql_cast_expression_8c_1a4ab2804e4fbbb0177000c0d8897d6221" kindref="member">EagleDbSqlCastExpression_GetOperation()</ref> to find the appropriate page operation for an cast operation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="59">
+        <label>EagleDataType</label>
+      </node>
+      <node id="58">
+        <label>EagleDbSqlCastOperator</label>
+        <link refid="struct_eagle_db_sql_cast_operator"/>
+        <childnode refid="59" relation="usage">
+          <edgelabel>right</edgelabel>
+          <edgelabel>left</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="35" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="35" bodyend="52"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_cast_operator_1ac4e76cb21c69854b0a80118ad60b1e9b" prot="public" virt="non-virtual"><scope>EagleDbSqlCastOperator</scope><name>EaglePageOperationFunction</name></member>
+      <member refid="struct_eagle_db_sql_cast_operator_1a43cfda5d9dfabde46aa2a89ad6ac4cea" prot="public" virt="non-virtual"><scope>EagleDbSqlCastOperator</scope><name>left</name></member>
+      <member refid="struct_eagle_db_sql_cast_operator_1a2850dd7a0a45e905b255b747dc5b287a" prot="public" virt="non-virtual"><scope>EagleDbSqlCastOperator</scope><name>right</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

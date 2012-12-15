@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/eagle/EagleLinkedList.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle/eagle</a> - EagleLinkedList.c<span style="font-size: 80%;"> (source / <a href="EagleLinkedList.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntry">182</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &quot;EagleLinkedList.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleWorker.h&quot;
+<a name="6"><span class="lineNum">       6 </span>            : #include &quot;EagleUtils.h&quot;</a>
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : EagleLinkedList* EagleLinkedList_New(void)
+<span class="lineNum">       9 </span>            : {
+<span class="lineNum">      10 </span><span class="lineCov">      11862 :     EagleLinkedList *list = (EagleLinkedList*) EagleMemory_Allocate(&quot;EagleLinkedList_New.1&quot;, sizeof(EagleLinkedList));</span>
+<span class="lineNum">      11 </span><span class="lineCov">      11862 :     if(NULL == list) {</span>
+<span class="lineNum">      12 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      13 </span>            :     }
+<span class="lineNum">      14 </span>            :     
+<span class="lineNum">      15 </span><span class="lineCov">      11854 :     list-&gt;modifyLock = EagleSynchronizer_CreateLock();</span>
+<span class="lineNum">      16 </span><span class="lineCov">      11854 :     list-&gt;first = NULL;</span>
+<span class="lineNum">      17 </span><span class="lineCov">      11854 :     list-&gt;last = NULL;</span>
+<span class="lineNum">      18 </span><span class="lineCov">      11854 :     list-&gt;length = 0;</span>
+<span class="lineNum">      19 </span>            :     
+<span class="lineNum">      20 </span><span class="lineCov">      11854 :     return list;</span>
+<a name="21"><span class="lineNum">      21 </span><span class="lineCov">      11862 : }</span></a>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">      18911 : void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item)</span>
+<span class="lineNum">      24 </span>            : {
+<span class="lineNum">      25 </span><span class="lineCov">      18911 :     if(NULL == list) {</span>
+<span class="lineNum">      26 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">      27 </span>            :     }
+<span class="lineNum">      28 </span><span class="lineCov">      18903 :     if(NULL == item) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">      30 </span>            :     }
+<span class="lineNum">      31 </span>            :     
+<span class="lineNum">      32 </span><span class="lineCov">      20302 :     EagleSynchronizer_Lock(list-&gt;modifyLock);</span>
+<span class="lineNum">      33 </span><span class="lineCov">      18895 :     item-&gt;next = NULL;</span>
+<span class="lineNum">      34 </span><span class="lineCov">      18895 :     if(NULL == list-&gt;last) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">       8359 :         list-&gt;last = list-&gt;first = item;</span>
+<span class="lineNum">      36 </span><span class="lineCov">       8359 :     }</span>
+<span class="lineNum">      37 </span>            :     else {
+<span class="lineNum">      38 </span><span class="lineCov">      10536 :         EagleLinkedListItem *current = list-&gt;last;</span>
+<span class="lineNum">      39 </span><span class="lineCov">      10536 :         current-&gt;next = item;</span>
+<span class="lineNum">      40 </span><span class="lineCov">      10536 :         current = current-&gt;next;</span>
+<span class="lineNum">      41 </span><span class="lineCov">      10536 :         list-&gt;last = current;</span>
+<span class="lineNum">      42 </span>            :     }
+<span class="lineNum">      43 </span><span class="lineCov">      18895 :     ++list-&gt;length;</span>
+<span class="lineNum">      44 </span><span class="lineCov">      18895 :     EagleSynchronizer_Unlock(list-&gt;modifyLock);</span>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">      37806 : }</span></a>
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineCov">      18472 : int EagleLinkedList_length(EagleLinkedList *list)</span>
+<span class="lineNum">      48 </span>            : {
+<span class="lineNum">      49 </span><span class="lineCov">      18472 :     int length;</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">      18472 :     if(NULL == list) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">         48 :         return 0;</span>
+<span class="lineNum">      53 </span>            :     }
+<span class="lineNum">      54 </span>            :     
+<span class="lineNum">      55 </span><span class="lineCov">      18480 :     EagleSynchronizer_Lock(list-&gt;modifyLock);</span>
+<span class="lineNum">      56 </span><span class="lineCov">      18424 :     length = list-&gt;length;</span>
+<span class="lineNum">      57 </span><span class="lineCov">      18424 :     EagleSynchronizer_Unlock(list-&gt;modifyLock);</span>
+<span class="lineNum">      58 </span>            :     
+<span class="lineNum">      59 </span><span class="lineCov">      18424 :     return length;</span>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">      18472 : }</span></a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">      11646 : void EagleLinkedList_Delete(EagleLinkedList *list)</span>
+<span class="lineNum">      63 </span>            : {
+<span class="lineNum">      64 </span><span class="lineCov">      11646 :     if(NULL == list) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">         48 :         return;</span>
+<span class="lineNum">      66 </span>            :     }
+<span class="lineNum">      67 </span>            :     
+<span class="lineNum">      68 </span><span class="lineCov">      11598 :     EagleLock_Delete(list-&gt;modifyLock);</span>
+<span class="lineNum">      69 </span><span class="lineCov">      11598 :     EagleMemory_Free(list);</span>
+<a name="70"><span class="lineNum">      70 </span><span class="lineCov">      23244 : }</span></a>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineCov">      11598 : void EagleLinkedList_DeleteItems(EagleLinkedList *list)</span>
+<span class="lineNum">      73 </span>            : {
+<span class="lineNum">      74 </span><span class="lineCov">      11598 :     if(NULL == list) {</span>
+<span class="lineNum">      75 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">      76 </span>            :     }
+<span class="lineNum">      77 </span><span class="lineCov">      11590 :     if(EagleTrue == EagleLinkedList_isEmpty(list)) {</span>
+<span class="lineNum">      78 </span><span class="lineCov">       3599 :         return;</span>
+<span class="lineNum">      79 </span>            :     }
+<span class="lineNum">      80 </span>            :     
+<span class="lineNum">      81 </span>            :     {
+<span class="lineNum">      82 </span><span class="lineCov">       7991 :         EagleLinkedListItem *p, *next;</span>
+<span class="lineNum">      83 </span><span class="lineCov">       7991 :         EagleSynchronizer_Lock(list-&gt;modifyLock);</span>
+<span class="lineNum">      84 </span>            :         
+<span class="lineNum">      85 </span><span class="lineCov">      52428 :         for(p = list-&gt;first; NULL != p; p = next) {</span>
+<span class="lineNum">      86 </span><span class="lineCov">      18223 :             next = p-&gt;next;</span>
+<span class="lineNum">      87 </span><span class="lineCov">      18223 :             EagleLinkedListItem_Delete(p);</span>
+<span class="lineNum">      88 </span><span class="lineCov">      18223 :         }</span>
+<span class="lineNum">      89 </span><span class="lineCov">       7991 :         list-&gt;first = list-&gt;last = NULL;</span>
+<span class="lineNum">      90 </span><span class="lineCov">       7991 :         list-&gt;length = 0;</span>
+<span class="lineNum">      91 </span>            :         
+<span class="lineNum">      92 </span><span class="lineCov">       7991 :         EagleSynchronizer_Unlock(list-&gt;modifyLock);</span>
+<span class="lineNum">      93 </span>            :     }
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">      19589 : }</span></a>
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span><span class="lineCov">      11654 : void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)</span>
+<span class="lineNum">      97 </span>            : {
+<span class="lineNum">      98 </span><span class="lineCov">      11654 :     if(NULL == list) {</span>
+<span class="lineNum">      99 </span><span class="lineCov">         64 :         return;</span>
+<span class="lineNum">     100 </span>            :     }
+<span class="lineNum">     101 </span>            :     
+<span class="lineNum">     102 </span><span class="lineCov">      11590 :     EagleLinkedList_DeleteItems(list);</span>
+<span class="lineNum">     103 </span><span class="lineCov">      11590 :     EagleLinkedList_Delete(list);</span>
+<a name="104"><span class="lineNum">     104 </span><span class="lineCov">      23244 : }</span></a>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span><span class="lineCov">         88 : void* EagleLinkedList_first(EagleLinkedList *list)</span>
+<span class="lineNum">     107 </span>            : {
+<span class="lineNum">     108 </span><span class="lineCov">         88 :     EagleLinkedListItem *first = EagleLinkedList_begin(list);</span>
+<span class="lineNum">     109 </span>            :     
+<span class="lineNum">     110 </span><span class="lineCov">         88 :     if(NULL == first) {</span>
+<span class="lineNum">     111 </span><span class="lineCov">         40 :         return NULL;</span>
+<span class="lineNum">     112 </span>            :     }
+<span class="lineNum">     113 </span>            :     
+<span class="lineNum">     114 </span><span class="lineCov">         48 :     return first-&gt;obj;</span>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">         88 : }</span></a>
+<span class="lineNum">     116 </span>            : 
+<span class="lineNum">     117 </span><span class="lineCov">         88 : void* EagleLinkedList_last(EagleLinkedList *list)</span>
+<span class="lineNum">     118 </span>            : {
+<span class="lineNum">     119 </span><span class="lineCov">         88 :     EagleLinkedListItem *last = EagleLinkedList_end(list);</span>
+<span class="lineNum">     120 </span>            :     
+<span class="lineNum">     121 </span><span class="lineCov">         88 :     if(NULL == last) {</span>
+<span class="lineNum">     122 </span><span class="lineCov">         40 :         return NULL;</span>
+<span class="lineNum">     123 </span>            :     }
+<span class="lineNum">     124 </span>            :     
+<span class="lineNum">     125 </span><span class="lineCov">         48 :     return last-&gt;obj;</span>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">         88 : }</span></a>
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span><span class="lineCov">      21856 : EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)</span>
+<span class="lineNum">     129 </span>            : {
+<span class="lineNum">     130 </span><span class="lineCov">      21856 :     EagleLinkedListItem *first = NULL;</span>
+<span class="lineNum">     131 </span>            :     
+<span class="lineNum">     132 </span><span class="lineCov">      21856 :     if(NULL == list) {</span>
+<span class="lineNum">     133 </span><span class="lineCov">         16 :         return NULL;</span>
+<span class="lineNum">     134 </span>            :     }
+<span class="lineNum">     135 </span>            :     
+<span class="lineNum">     136 </span><span class="lineCov">      35032 :     EagleSynchronizer_Lock(list-&gt;modifyLock);</span>
+<span class="lineNum">     137 </span><span class="lineCov">      21840 :     first = list-&gt;first;</span>
+<span class="lineNum">     138 </span><span class="lineCov">      21840 :     EagleSynchronizer_Unlock(list-&gt;modifyLock);</span>
+<span class="lineNum">     139 </span><span class="lineCov">      21840 :     return first;</span>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">      21856 : }</span></a>
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span><span class="lineCov">       3437 : EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)</span>
+<span class="lineNum">     143 </span>            : {
+<span class="lineNum">     144 </span><span class="lineCov">       3437 :     EagleLinkedListItem *head = NULL;</span>
+<span class="lineNum">     145 </span>            :     
+<span class="lineNum">     146 </span><span class="lineCov">       3437 :     if(NULL == list) {</span>
+<span class="lineNum">     147 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">     148 </span>            :     }
+<span class="lineNum">     149 </span>            :     
+<span class="lineNum">     150 </span><span class="lineCov">       6330 :     EagleSynchronizer_Lock(list-&gt;modifyLock);</span>
+<span class="lineNum">     151 </span><span class="lineCov">       3429 :     head = list-&gt;last;</span>
+<span class="lineNum">     152 </span><span class="lineCov">       3429 :     EagleSynchronizer_Unlock(list-&gt;modifyLock);</span>
+<span class="lineNum">     153 </span><span class="lineCov">       3429 :     return head;</span>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">       3437 : }</span></a>
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span><span class="lineCov">         56 : EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)</span>
+<span class="lineNum">     157 </span>            : {
+<span class="lineNum">     158 </span><span class="lineCov">         56 :     EagleLinkedListItem *next, *r;</span>
+<span class="lineNum">     159 </span><span class="lineCov">         56 :     int i;</span>
+<span class="lineNum">     160 </span>            :     
+<span class="lineNum">     161 </span><span class="lineCov">         56 :     if(EagleLinkedList_length(list) == 0) {</span>
+<span class="lineNum">     162 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">     163 </span>            :     }
+<span class="lineNum">     164 </span><span class="lineCov">         48 :     if(EagleLinkedList_length(list) == 1) {</span>
+<span class="lineNum">     165 </span><span class="lineCov">         24 :         EagleLinkedListItem *item = list-&gt;first;</span>
+<span class="lineNum">     166 </span><span class="lineCov">         24 :         list-&gt;first = list-&gt;last = NULL;</span>
+<span class="lineNum">     167 </span><span class="lineCov">         24 :         --list-&gt;length;</span>
+<span class="lineNum">     168 </span><span class="lineCov">         24 :         item-&gt;next = NULL;</span>
+<span class="lineNum">     169 </span><span class="lineCov">         24 :         return item;</span>
+<span class="lineNum">     170 </span>            :     }
+<span class="lineNum">     171 </span>            :     
+<span class="lineNum">     172 </span>            :     /* find the second last item */
+<span class="lineNum">     173 </span><span class="lineCov">         24 :     next = list-&gt;first;</span>
+<span class="lineNum">     174 </span><span class="lineCov">         64 :     for(i = 0; i &lt; list-&gt;length - 2; ++i) {</span>
+<span class="lineNum">     175 </span><span class="lineCov">          8 :         next = next-&gt;next;</span>
+<span class="lineNum">     176 </span><span class="lineCov">          8 :     }</span>
+<span class="lineNum">     177 </span>            :     
+<span class="lineNum">     178 </span><span class="lineCov">         24 :     --list-&gt;length;</span>
+<span class="lineNum">     179 </span><span class="lineCov">         24 :     list-&gt;last = next;</span>
+<span class="lineNum">     180 </span><span class="lineCov">         24 :     next-&gt;next-&gt;next = NULL;</span>
+<span class="lineNum">     181 </span><span class="lineCov">         24 :     r = next-&gt;next;</span>
+<span class="lineNum">     182 </span><span class="lineCov">         24 :     list-&gt;last-&gt;next = NULL;</span>
+<span class="lineNum">     183 </span><span class="lineCov">         24 :     return r;</span>
+<a name="184"><span class="lineNum">     184 </span><span class="lineCov">         56 : }</span></a>
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span><span class="lineCov">      13638 : EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)</span>
+<span class="lineNum">     187 </span>            : {
+<span class="lineNum">     188 </span><span class="lineCov">      13638 :     if(NULL == list) {</span>
+<span class="lineNum">     189 </span><span class="lineCov">          8 :         return EagleTrue;</span>
+<span class="lineNum">     190 </span>            :     }
+<span class="lineNum">     191 </span><span class="lineCov">      13630 :     if(0 == list-&gt;length) {</span>
+<span class="lineNum">     192 </span><span class="lineCov">       5135 :         return EagleTrue;</span>
+<span class="lineNum">     193 </span>            :     }
+<span class="lineNum">     194 </span><span class="lineCov">       8495 :     return EagleFalse;</span>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">      13638 : }</span></a>
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span><span class="lineCov">         24 : void** EagleLinkedList_toArray(EagleLinkedList *list, int *size)</span>
+<span class="lineNum">     198 </span>            : {
+<span class="lineNum">     199 </span><span class="lineCov">         24 :     void **array;</span>
+<span class="lineNum">     200 </span><span class="lineCov">         24 :     EagleLinkedListItem *p, *next;</span>
+<span class="lineNum">     201 </span><span class="lineCov">         24 :     int i;</span>
+<span class="lineNum">     202 </span>            :     
+<span class="lineNum">     203 </span><span class="lineCov">         24 :     if(NULL == list) {</span>
+<span class="lineNum">     204 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">     205 </span>            :     }
+<span class="lineNum">     206 </span>            :     
+<span class="lineNum">     207 </span><span class="lineCov">         16 :     *size = EagleLinkedList_length(list);</span>
+<span class="lineNum">     208 </span><span class="lineCov">         16 :     array = (void**) EagleMemory_MultiAllocate(&quot;EagleLinkedList_toArray.1&quot;, sizeof(void*), *size);</span>
+<span class="lineNum">     209 </span>            :     
+<span class="lineNum">     210 </span><span class="lineCov">         80 :     for(p = list-&gt;first, i = 0; NULL != p; p = next, ++i) {</span>
+<span class="lineNum">     211 </span><span class="lineCov">         24 :         array[i] = p-&gt;obj;</span>
+<span class="lineNum">     212 </span><span class="lineCov">         24 :         next = p-&gt;next;</span>
+<span class="lineNum">     213 </span><span class="lineCov">         24 :     }</span>
+<span class="lineNum">     214 </span>            :     
+<span class="lineNum">     215 </span><span class="lineCov">         16 :     return array;</span>
+<a name="216"><span class="lineNum">     216 </span><span class="lineCov">         24 : }</span></a>
+<span class="lineNum">     217 </span>            : 
+<span class="lineNum">     218 </span><span class="lineCov">       6664 : void* EagleLinkedList_get(EagleLinkedList *list, int index)</span>
+<span class="lineNum">     219 </span>            : {
+<span class="lineNum">     220 </span><span class="lineCov">       6664 :     EagleLinkedListItem *next;</span>
+<span class="lineNum">     221 </span><span class="lineCov">       6664 :     int i;</span>
+<span class="lineNum">     222 </span>            :     
+<span class="lineNum">     223 </span>            :     /* out of bounds */
+<span class="lineNum">     224 </span><span class="lineCov">      13320 :     if(index &lt; 0 || index &gt;= EagleLinkedList_length(list)) {</span>
+<span class="lineNum">     225 </span><span class="lineCov">         16 :         return NULL;</span>
+<span class="lineNum">     226 </span>            :     }
+<span class="lineNum">     227 </span>            :     
+<span class="lineNum">     228 </span><span class="lineCov">       6648 :     next = list-&gt;first;</span>
+<span class="lineNum">     229 </span><span class="lineCov">      17904 :     for(i = 0; i &lt; index; ++i) {</span>
+<span class="lineNum">     230 </span><span class="lineCov">       2304 :         next = next-&gt;next;</span>
+<span class="lineNum">     231 </span><span class="lineCov">       2304 :     }</span>
+<span class="lineNum">     232 </span>            :     
+<span class="lineNum">     233 </span><span class="lineCov">       6648 :     return next-&gt;obj;</span>
+<a name="234"><span class="lineNum">     234 </span><span class="lineCov">       6664 : }</span></a>
+<span class="lineNum">     235 </span>            : 
+<span class="lineNum">     236 </span><span class="lineCov">       9304 : void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj))</span>
+<span class="lineNum">     237 </span>            : {
+<span class="lineNum">     238 </span><span class="lineCov">       9304 :     EagleLinkedList_add(list, EagleLinkedListItem_New(obj, freeObj, free));</span>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">       9304 : }</span></a>
+<span class="lineNum">     240 </span>            : 
+<span class="lineNum">     241 </span><span class="lineCov">        312 : EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj)</span>
+<span class="lineNum">     242 </span>            : {
+<span class="lineNum">     243 </span><span class="lineCov">        312 :     EagleLinkedListItem *last, *cursor;</span>
+<span class="lineNum">     244 </span>            :     
+<span class="lineNum">     245 </span>            :     /* problems */
+<span class="lineNum">     246 </span><span class="lineCov">        312 :     if(NULL == obj) {</span>
+<span class="lineNum">     247 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     248 </span>            :     }
+<span class="lineNum">     249 </span><span class="lineCov">        304 :     if(EagleTrue == EagleLinkedList_isEmpty(list)) {</span>
+<span class="lineNum">     250 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     251 </span>            :     }
+<span class="lineNum">     252 </span>            :     
+<span class="lineNum">     253 </span>            :     /* one item */
+<span class="lineNum">     254 </span><span class="lineCov">        296 :     if(EagleLinkedList_length(list) == 1) {</span>
+<span class="lineNum">     255 </span><span class="lineCov">         96 :         if(list-&gt;first-&gt;obj == obj) {</span>
+<span class="lineNum">     256 </span><span class="lineCov">         88 :             EagleLinkedListItem_Delete(list-&gt;first);</span>
+<span class="lineNum">     257 </span><span class="lineCov">         88 :             list-&gt;length = 0;</span>
+<span class="lineNum">     258 </span><span class="lineCov">         88 :             list-&gt;first = NULL;</span>
+<span class="lineNum">     259 </span><span class="lineCov">         88 :             list-&gt;last = NULL;</span>
+<span class="lineNum">     260 </span>            :             
+<span class="lineNum">     261 </span><span class="lineCov">         88 :             return EagleTrue;</span>
+<span class="lineNum">     262 </span>            :         }
+<span class="lineNum">     263 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     264 </span>            :     }
+<span class="lineNum">     265 </span>            :     
+<span class="lineNum">     266 </span>            :     /* begin item */
+<span class="lineNum">     267 </span><span class="lineCov">        200 :     if(EagleLinkedList_begin(list)-&gt;obj == obj) {</span>
+<span class="lineNum">     268 </span><span class="lineCov">        176 :         EagleLinkedListItem *second = list-&gt;first-&gt;next;</span>
+<span class="lineNum">     269 </span>            :         
+<span class="lineNum">     270 </span><span class="lineCov">        176 :         EagleLinkedListItem_Delete(list-&gt;first);</span>
+<span class="lineNum">     271 </span><span class="lineCov">        176 :         --list-&gt;length;</span>
+<span class="lineNum">     272 </span><span class="lineCov">        176 :         list-&gt;first = second;</span>
+<span class="lineNum">     273 </span>            :         
+<span class="lineNum">     274 </span><span class="lineCov">        176 :         return EagleTrue;</span>
+<span class="lineNum">     275 </span>            :     }
+<span class="lineNum">     276 </span>            :     
+<span class="lineNum">     277 </span>            :     /* some item after the first */
+<span class="lineNum">     278 </span><span class="lineCov">         24 :     last = EagleLinkedList_begin(list);</span>
+<span class="lineNum">     279 </span><span class="lineCov">         96 :     for(cursor = last-&gt;next; NULL != cursor; cursor = cursor-&gt;next, last = last-&gt;next) {</span>
+<span class="lineNum">     280 </span><span class="lineCov">         40 :         if(obj == cursor-&gt;obj) {</span>
+<span class="lineNum">     281 </span>            :             /* if this is the last item we need to fix the last pointer */
+<span class="lineNum">     282 </span><span class="lineCov">         16 :             if(list-&gt;last == cursor) {</span>
+<span class="lineNum">     283 </span><span class="lineCov">          8 :                 list-&gt;last = last;</span>
+<span class="lineNum">     284 </span><span class="lineCov">          8 :             }</span>
+<span class="lineNum">     285 </span>            :             
+<span class="lineNum">     286 </span><span class="lineCov">         16 :             last-&gt;next = cursor-&gt;next;</span>
+<span class="lineNum">     287 </span><span class="lineCov">         16 :             EagleLinkedListItem_Delete(cursor);</span>
+<span class="lineNum">     288 </span><span class="lineCov">         16 :             --list-&gt;length;</span>
+<span class="lineNum">     289 </span><span class="lineCov">         16 :             return EagleTrue;</span>
+<span class="lineNum">     290 </span>            :         }
+<span class="lineNum">     291 </span><span class="lineCov">         24 :     }</span>
+<span class="lineNum">     292 </span>            :     
+<span class="lineNum">     293 </span>            :     /* object not found on list */
+<span class="lineNum">     294 </span><span class="lineCov">          8 :     return EagleFalse;</span>
+<span class="lineNum">     295 </span><span class="lineCov">        312 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

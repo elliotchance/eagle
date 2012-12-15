@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_plan_buffer_provider_8c" kind="file">
+    <compoundname>EaglePlanBufferProvider.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_plan_buffer_provider_8h" local="yes">EaglePlanBufferProvider.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_db_sql_value_8h" local="yes">EagleDbSqlValue.h</includes>
+    <incdepgraph>
+      <node id="1317">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1335">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1330">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1327" relation="include">
+        </childnode>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1331" relation="include">
+        </childnode>
+      </node>
+      <node id="1328">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1336">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1327">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1328" relation="include">
+        </childnode>
+        <childnode refid="1329" relation="include">
+        </childnode>
+        <childnode refid="1323" relation="include">
+        </childnode>
+      </node>
+      <node id="1321">
+        <label>pthread.h</label>
+      </node>
+      <node id="1332">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1324">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1316">
+        <label>eagle/eagle/EaglePlanBufferProvider.c</label>
+        <link refid="EaglePlanBufferProvider.c"/>
+        <childnode refid="1317" relation="include">
+        </childnode>
+        <childnode refid="1318" relation="include">
+        </childnode>
+        <childnode refid="1319" relation="include">
+        </childnode>
+        <childnode refid="1337" relation="include">
+        </childnode>
+        <childnode refid="1333" relation="include">
+        </childnode>
+      </node>
+      <node id="1319">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="1320" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1333" relation="include">
+        </childnode>
+      </node>
+      <node id="1325">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1323">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1326">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1334">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1335" relation="include">
+        </childnode>
+      </node>
+      <node id="1337">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1322">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1333">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1334" relation="include">
+        </childnode>
+        <childnode refid="1336" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+        <childnode refid="1323" relation="include">
+        </childnode>
+      </node>
+      <node id="1318">
+        <label>stdio.h</label>
+      </node>
+      <node id="1320">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1321" relation="include">
+        </childnode>
+        <childnode refid="1322" relation="include">
+        </childnode>
+        <childnode refid="1327" relation="include">
+        </childnode>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1330" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+        <childnode refid="1332" relation="include">
+        </childnode>
+      </node>
+      <node id="1329">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1321" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+      </node>
+      <node id="1331">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1323" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_plan_buffer_provider_8c_1a579e973657cf248c39c0b7a047778634" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePlanBufferProvider_Delete</definition>
+        <argsstring>(EaglePlanBufferProvider *bp)</argsstring>
+        <name>EaglePlanBufferProvider_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_buffer_provider" kindref="compound">EaglePlanBufferProvider</ref> *</type>
+          <declname>bp</declname>
+        </param>
+        <briefdescription>
+<para>Delete a plan buffer provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" line="70" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" bodystart="69" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_buffer_provider_8c_1a1dcc9900282ed8df5c5d945c86feed8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan_buffer_provider" kindref="compound">EaglePlanBufferProvider</ref> *</type>
+        <definition>EaglePlanBufferProvider* EaglePlanBufferProvider_NewWithProvider</definition>
+        <argsstring>(int destinationBuffer, EaglePageProvider *provider, EagleBoolean freeProvider)</argsstring>
+        <name>EaglePlanBufferProvider_NewWithProvider</name>
+        <param>
+          <type>int</type>
+          <declname>destinationBuffer</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> *</type>
+          <declname>provider</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeProvider</declname>
+        </param>
+        <briefdescription>
+<para>Create a new plan buffer provider with a generic provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">destinationBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination buffer ID. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">provider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeProvider</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the <computeroutput>provider</computeroutput> when this instance is deleted? </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new plan buffer provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" bodystart="7" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_buffer_provider_8c_1a2195707d78b35a4c40e7143965880b46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan_buffer_provider" kindref="compound">EaglePlanBufferProvider</ref> *</type>
+        <definition>EaglePlanBufferProvider* EaglePlanBufferProvider_NewWithValue</definition>
+        <argsstring>(int destinationBuffer, EagleDbSqlValue *value)</argsstring>
+        <name>EaglePlanBufferProvider_NewWithValue</name>
+        <param>
+          <type>int</type>
+          <declname>destinationBuffer</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_value" kindref="compound">EagleDbSqlValue</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Create a new plan buffer provider with a <ref refid="struct_eagle_db_sql_value" kindref="compound">EagleDbSqlValue</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">destinationBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The destination buffer ID. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new plan buffer provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" bodystart="24" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_buffer_provider_8c_1a530d5d1d70c50966c92b60a4b3cdecf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EaglePlanBufferProvider_toString</definition>
+        <argsstring>(EaglePlanBufferProvider *bp)</argsstring>
+        <name>EaglePlanBufferProvider_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_buffer_provider" kindref="compound">EaglePlanBufferProvider</ref> *</type>
+          <declname>bp</declname>
+        </param>
+        <briefdescription>
+<para>Get the description for a plan buffer provider. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will return a new string that you will have to free when you&apos;re finished with it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string description. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" line="40" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c" bodystart="39" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_plan_buffer_provider_8h" kindref="compound">EaglePlanBufferProvider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_value_8h" kindref="compound">EagleDbSqlValue.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="_eagle_plan_buffer_provider_8h_1a1dcc9900282ed8df5c5d945c86feed8d" refkind="member"><highlight class="normal"><ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>*<sp/><ref refid="_eagle_plan_buffer_provider_8c_1a1dcc9900282ed8df5c5d945c86feed8d" kindref="member" tooltip="Create a new plan buffer provider with a generic provider.">EaglePlanBufferProvider_NewWithProvider</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>destinationBuffer,</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page_provider" kindref="compound" tooltip="A page provider.">EaglePageProvider</ref><sp/>*provider,</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeProvider)</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref><sp/>*bp<sp/>=<sp/>(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePlanBufferProvider_NewWithProvider.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>));</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>bp)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" kindref="member" tooltip="The provider type.">type</ref><sp/>=<sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fa74ac7b20c301315f9374dafeebae3c61" kindref="member" tooltip="This buffer provider wraps a generic page provider.">EaglePlanBufferProviderTypeProvider</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" kindref="member" tooltip="The buffer ID where the next page will be loaded into.">destinationBuffer</ref><sp/>=<sp/>destinationBuffer;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.provider<sp/>=<sp/>provider;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.freeProvider<sp/>=<sp/>freeProvider;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bp;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="_eagle_plan_buffer_provider_8h_1a2195707d78b35a4c40e7143965880b46" refkind="member"><highlight class="normal"><ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>*<sp/><ref refid="_eagle_plan_buffer_provider_8c_1a2195707d78b35a4c40e7143965880b46" kindref="member" tooltip="Create a new plan buffer provider with a EagleDbSqlValue.">EaglePlanBufferProvider_NewWithValue</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>destinationBuffer,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref><sp/>*value)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref><sp/>*bp<sp/>=<sp/>(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePlanBufferProvider_NewWithValue.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref>));</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>bp)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" kindref="member" tooltip="The provider type.">type</ref><sp/>=<sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fae222719d19331498831c9dea0c496adc" kindref="member" tooltip="This buffer provider wraps a EagleDbSqlValue.">EaglePlanBufferProviderTypeValue</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" kindref="member" tooltip="The buffer ID where the next page will be loaded into.">destinationBuffer</ref><sp/>=<sp/>destinationBuffer;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.<ref refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" kindref="member" tooltip="Contains the actual value, depending on the type.">value</ref><sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bp;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="_eagle_plan_buffer_provider_8h_1a530d5d1d70c50966c92b60a4b3cdecf2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_plan_buffer_provider_8c_1a530d5d1d70c50966c92b60a4b3cdecf2" kindref="member" tooltip="Get the description for a plan buffer provider.">EaglePlanBufferProvider_toString</ref>(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref><sp/>*bp)</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*msg<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePlanBufferProvider_toString.1&quot;</highlight><highlight class="normal">,<sp/>1024),<sp/>*name;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>msg)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" kindref="member" tooltip="The provider type.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fa74ac7b20c301315f9374dafeebae3c61" kindref="member" tooltip="This buffer provider wraps a generic page provider.">EaglePlanBufferProviderTypeProvider</ref>:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>=<sp/><ref refid="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" kindref="member" tooltip="Convert a type to a string.">EagleDataType_typeToName</ref>(bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.provider-&gt;<ref refid="struct_eagle_db_sql_value_1ad77ce651fe9b80a9eaae740340be2082" kindref="member" tooltip="Value type.">type</ref>);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;destination<sp/>=<sp/>%d,<sp/>name<sp/>=<sp/>%s,<sp/>type<sp/>=<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" kindref="member" tooltip="The buffer ID where the next page will be loaded into.">destinationBuffer</ref>,<sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.provider-&gt;name,<sp/>name);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(name);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fae222719d19331498831c9dea0c496adc" kindref="member" tooltip="This buffer provider wraps a EagleDbSqlValue.">EaglePlanBufferProviderTypeValue</ref>:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>=<sp/><ref refid="_eagle_db_sql_value_type_8c_1a13fa6fb3475f724c130bbe0c338eb174" kindref="member" tooltip="Get the string representation of a EagleDbSqlValueType.">EagleDbSqlValueType_toString</ref>(bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.<ref refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" kindref="member" tooltip="Contains the actual value, depending on the type.">value</ref>-&gt;<ref refid="struct_eagle_db_sql_value_1ad77ce651fe9b80a9eaae740340be2082" kindref="member" tooltip="Value type.">type</ref>);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;destination<sp/>=<sp/>%d,<sp/>type<sp/>=<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a8523b510ebeb9f430d2f9c8346046c6a" kindref="member" tooltip="The buffer ID where the next page will be loaded into.">destinationBuffer</ref>,<sp/>name);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(name);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="_eagle_plan_buffer_provider_8h_1a579e973657cf248c39c0b7a047778634" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_buffer_provider_8c_1a579e973657cf248c39c0b7a047778634" kindref="member" tooltip="Delete a plan buffer provider.">EaglePlanBufferProvider_Delete</ref>(<ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref><sp/>*bp)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>bp)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a99471c737ab85afce6872c78e155820b" kindref="member" tooltip="The provider type.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fa74ac7b20c301315f9374dafeebae3c61" kindref="member" tooltip="This buffer provider wraps a generic page provider.">EaglePlanBufferProviderTypeProvider</ref>:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/>bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.freeProvider)<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_provider_8c_1a28ab9a84c6a2c8cc78757b95d24af9a4" kindref="member" tooltip="Delete a provider.">EaglePageProvider_Delete</ref>(bp-&gt;<ref refid="struct_eagle_plan_buffer_provider_1a1de5a120c7d1694b49d18f0bb8ef6398" kindref="member" tooltip="Fixed single value.">value</ref>.provider.provider);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_buffer_provider_8h_1a9d96dd5bdb12bab6b65e3ff65821c53fae222719d19331498831c9dea0c496adc" kindref="member" tooltip="This buffer provider wraps a EagleDbSqlValue.">EaglePlanBufferProviderTypeValue</ref>:</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(bp);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanBufferProvider.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_insert" kind="struct" prot="public">
+    <compoundname>EagleDbSqlInsert</compoundname>
+    <includes refid="_eagle_db_sql_insert_8h" local="no">EagleDbSqlInsert.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* names</definition>
+        <argsstring></argsstring>
+        <name>names</name>
+        <briefdescription>
+<para>A linked list of C strings for columns names. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* table</definition>
+        <argsstring></argsstring>
+        <name>table</name>
+        <briefdescription>
+<para>The name of the table to insert into. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* values</definition>
+        <argsstring></argsstring>
+        <name>values</name>
+        <briefdescription>
+<para>A linked list of EagleDbSqlExpression&apos;s for VALUES. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="25" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents an INSERT statement. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="71">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="72" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="73" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="69">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="70" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="71" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="74" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="68">
+        <label>char *</label>
+      </node>
+      <node id="74">
+        <label>int</label>
+      </node>
+      <node id="72">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="73">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="70">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="67">
+        <label>EagleDbSqlInsert</label>
+        <link refid="struct_eagle_db_sql_insert"/>
+        <childnode refid="68" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+        <childnode refid="69" relation="usage">
+          <edgelabel>names</edgelabel>
+          <edgelabel>values</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlInsert.h" bodystart="10" bodyend="27"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_insert_1aec4b84c4a11f63634d25c753c491d8cb" prot="public" virt="non-virtual"><scope>EagleDbSqlInsert</scope><name>names</name></member>
+      <member refid="struct_eagle_db_sql_insert_1abc4810aa7718733bfc48b1973f4c92f8" prot="public" virt="non-virtual"><scope>EagleDbSqlInsert</scope><name>table</name></member>
+      <member refid="struct_eagle_db_sql_insert_1a59b1652070d514a5a38a58f3f6a67442" prot="public" virt="non-virtual"><scope>EagleDbSqlInsert</scope><name>values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

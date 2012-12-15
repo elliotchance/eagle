@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_tuple" kind="struct" prot="public">
+    <compoundname>EagleDbTuple</compoundname>
+    <includes refid="_eagle_db_tuple_8h" local="no">EagleDbTuple.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_tuple_1af00cdd742d205932a8309628d39efd5e" prot="public" static="no" mutable="no">
+        <type>void **</type>
+        <definition>void** data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>The data contained in the tuple. </para>        </briefdescription>
+        <detaileddescription>
+<para>Do not access this directy, use appopriate methods. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" line="17" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_tuple_1a33d9bdee5210ec9c8efef6ee8e14027c" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+        <definition>EagleDbTable* table</definition>
+        <argsstring></argsstring>
+        <name>table</name>
+        <briefdescription>
+<para>A reference to the table structure that the tuple is based on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A tuple represents a row in a table. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="127">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="128" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="129" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="125">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="126" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="127" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="130" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="124">
+        <label>char *</label>
+      </node>
+      <node id="130">
+        <label>int</label>
+      </node>
+      <node id="123">
+        <label>EagleDbTable</label>
+        <link refid="struct_eagle_db_table"/>
+        <childnode refid="124" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="125" relation="usage">
+          <edgelabel>columns</edgelabel>
+        </childnode>
+      </node>
+      <node id="128">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="129">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="121">
+        <label>EagleDbTuple</label>
+        <link refid="struct_eagle_db_tuple"/>
+        <childnode refid="122" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+        <childnode refid="123" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+      <node id="126">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="122">
+        <label>void **</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTuple.h" bodystart="12" bodyend="24"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_tuple_1af00cdd742d205932a8309628d39efd5e" prot="public" virt="non-virtual"><scope>EagleDbTuple</scope><name>data</name></member>
+      <member refid="struct_eagle_db_tuple_1a33d9bdee5210ec9c8efef6ee8e14027c" prot="public" virt="non-virtual"><scope>EagleDbTuple</scope><name>table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

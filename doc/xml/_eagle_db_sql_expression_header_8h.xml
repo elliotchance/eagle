@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_expression_header_8h" kind="file">
+    <compoundname>EagleDbSqlExpressionHeader.h</compoundname>
+    <includes refid="_eagle_db_sql_expression_type_8h" local="yes">EagleDbSqlExpressionType.h</includes>
+    <includedby refid="_eagle_db_console_8c" local="yes">eagle/eagledb/EagleDbConsole.c</includedby>
+    <includedby refid="_eagle_db_sql_expression_8h" local="yes">eagle/eagledb/EagleDbSqlExpression.h</includedby>
+    <includedby refid="_eagle_db_sql_value_8h" local="yes">eagle/eagledb/EagleDbSqlValue.h</includedby>
+    <incdepgraph>
+      <node id="2344">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="2343">
+        <label>eagle/eagledb/EagleDbSqlExpressionHeader.h</label>
+        <link refid="EagleDbSqlExpressionHeader.h"/>
+        <childnode refid="2344" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2384">
+        <label>eagle/eagledb/EagleDbTuple.c</label>
+        <link refid="_eagle_db_tuple_8c"/>
+      </node>
+      <node id="2385">
+        <label>eagle/eagledb/EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2386" relation="include">
+        </childnode>
+        <childnode refid="2384" relation="include">
+        </childnode>
+      </node>
+      <node id="2351">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+        <childnode refid="2351" relation="include">
+        </childnode>
+      </node>
+      <node id="2347">
+        <label>eagle/eagledb/EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2348" relation="include">
+        </childnode>
+        <childnode refid="2349" relation="include">
+        </childnode>
+        <childnode refid="2350" relation="include">
+        </childnode>
+        <childnode refid="2352" relation="include">
+        </childnode>
+        <childnode refid="2353" relation="include">
+        </childnode>
+        <childnode refid="2351" relation="include">
+        </childnode>
+        <childnode refid="2354" relation="include">
+        </childnode>
+        <childnode refid="2356" relation="include">
+        </childnode>
+        <childnode refid="2362" relation="include">
+        </childnode>
+      </node>
+      <node id="2372">
+        <label>eagle/eagle/EagleWorker.c</label>
+        <link refid="_eagle_worker_8c"/>
+      </node>
+      <node id="2374">
+        <label>eagle/eagle/EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="2375" relation="include">
+        </childnode>
+        <childnode refid="2376" relation="include">
+        </childnode>
+        <childnode refid="2377" relation="include">
+        </childnode>
+        <childnode refid="2378" relation="include">
+        </childnode>
+        <childnode refid="2372" relation="include">
+        </childnode>
+        <childnode refid="2379" relation="include">
+        </childnode>
+      </node>
+      <node id="2363">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpression.c</label>
+        <link refid="_eagle_db_sql_unary_expression_8c"/>
+      </node>
+      <node id="2362">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpression.h</label>
+        <link refid="_eagle_db_sql_unary_expression_8h"/>
+        <childnode refid="2363" relation="include">
+        </childnode>
+      </node>
+      <node id="2389">
+        <label>eagle/eagledb/EagleDbTableData.c</label>
+        <link refid="_eagle_db_table_data_8c"/>
+      </node>
+      <node id="2386">
+        <label>eagle/eagledb/EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="2359" relation="include">
+        </childnode>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2387" relation="include">
+        </childnode>
+        <childnode refid="2361" relation="include">
+        </childnode>
+        <childnode refid="2389" relation="include">
+        </childnode>
+      </node>
+      <node id="2361">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="2356">
+        <label>eagle/eagledb/EagleDbSqlSelect.h</label>
+        <link refid="_eagle_db_sql_select_8h"/>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2358" relation="include">
+        </childnode>
+        <childnode refid="2351" relation="include">
+        </childnode>
+        <childnode refid="2361" relation="include">
+        </childnode>
+      </node>
+      <node id="2349">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.c</label>
+        <link refid="_eagle_db_sql_binary_expression_8c"/>
+        <childnode refid="2349" relation="include">
+        </childnode>
+      </node>
+      <node id="2350">
+        <label>eagle/eagledb/EagleDbSqlBinaryExpression.h</label>
+        <link refid="_eagle_db_sql_binary_expression_8h"/>
+        <childnode refid="2351" relation="include">
+        </childnode>
+      </node>
+      <node id="2376">
+        <label>eagle/eagle/EagleLogger.c</label>
+        <link refid="_eagle_logger_8c"/>
+      </node>
+      <node id="2365">
+        <label>eagle/eagle/EagleInstance.c</label>
+        <link refid="_eagle_instance_8c"/>
+        <childnode refid="2365" relation="include">
+        </childnode>
+      </node>
+      <node id="2371">
+        <label>eagle/eagle/EagleInstance.h</label>
+        <link refid="_eagle_instance_8h"/>
+        <childnode refid="2372" relation="include">
+        </childnode>
+        <childnode refid="2357" relation="include">
+        </childnode>
+      </node>
+      <node id="2352">
+        <label>eagle/eagledb/EagleDbSqlCastExpression.c</label>
+        <link refid="_eagle_db_sql_cast_expression_8c"/>
+        <childnode refid="2352" relation="include">
+        </childnode>
+      </node>
+      <node id="2353">
+        <label>eagle/eagledb/EagleDbSqlCastExpression.h</label>
+        <link refid="_eagle_db_sql_cast_expression_8h"/>
+        <childnode refid="2351" relation="include">
+        </childnode>
+      </node>
+      <node id="2348">
+        <label>eagle/eagledb/EagleDbParser.c</label>
+        <link refid="_eagle_db_parser_8c"/>
+      </node>
+      <node id="2388">
+        <label>eagle/eagledb/EagleDbSchema.c</label>
+        <link refid="_eagle_db_schema_8c"/>
+      </node>
+      <node id="2387">
+        <label>eagle/eagledb/EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="2359" relation="include">
+        </childnode>
+        <childnode refid="2360" relation="include">
+        </childnode>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2358" relation="include">
+        </childnode>
+        <childnode refid="2388" relation="include">
+        </childnode>
+      </node>
+      <node id="2357">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="2357" relation="include">
+        </childnode>
+      </node>
+      <node id="2358">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="2359" relation="include">
+        </childnode>
+        <childnode refid="2360" relation="include">
+        </childnode>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2361" relation="include">
+        </childnode>
+      </node>
+      <node id="2359">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="2359" relation="include">
+        </childnode>
+      </node>
+      <node id="2360">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="2357" relation="include">
+        </childnode>
+      </node>
+      <node id="2375">
+        <label>eagle/eagle/EagleLinkedList.c</label>
+        <link refid="_eagle_linked_list_8c"/>
+      </node>
+      <node id="2382">
+        <label>eagle/eagle/EaglePlanOperation.c</label>
+        <link refid="_eagle_plan_operation_8c"/>
+      </node>
+      <node id="2381">
+        <label>eagle/eagle/EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2368" relation="include">
+        </childnode>
+        <childnode refid="2382" relation="include">
+        </childnode>
+      </node>
+      <node id="2346">
+        <label>eagle/eagledb/EagleDbConsole.c</label>
+        <link refid="_eagle_db_console_8c"/>
+        <childnode refid="2346" relation="include">
+        </childnode>
+      </node>
+      <node id="2355">
+        <label>eagle/eagledb/EagleDbSqlFunctionExpression.c</label>
+        <link refid="_eagle_db_sql_function_expression_8c"/>
+      </node>
+      <node id="2378">
+        <label>eagle/eagle/EaglePageProviderStream.c</label>
+        <link refid="_eagle_page_provider_stream_8c"/>
+      </node>
+      <node id="2354">
+        <label>eagle/eagledb/EagleDbSqlFunctionExpression.h</label>
+        <link refid="_eagle_db_sql_function_expression_8h"/>
+        <childnode refid="2355" relation="include">
+        </childnode>
+      </node>
+      <node id="2366">
+        <label>eagle/eagle/EaglePlanBufferProvider.c</label>
+        <link refid="_eagle_plan_buffer_provider_8c"/>
+      </node>
+      <node id="2367">
+        <label>eagle/eagle/EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2368" relation="include">
+        </childnode>
+        <childnode refid="2366" relation="include">
+        </childnode>
+      </node>
+      <node id="2345">
+        <label>eagle/eagledb/EagleDbSqlExpressionHeader.h</label>
+        <link refid="EagleDbSqlExpressionHeader.h"/>
+        <childnode refid="2346" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+        <childnode refid="2364" relation="include">
+        </childnode>
+      </node>
+      <node id="2380">
+        <label>eagle/eagle/EagleWorkers.c</label>
+        <link refid="_eagle_workers_8c"/>
+      </node>
+      <node id="2379">
+        <label>eagle/eagle/EagleWorkers.h</label>
+        <link refid="_eagle_workers_8h"/>
+        <childnode refid="2371" relation="include">
+        </childnode>
+        <childnode refid="2380" relation="include">
+        </childnode>
+      </node>
+      <node id="2383">
+        <label>eagle/eagledb/EagleDbSqlValue.c</label>
+        <link refid="_eagle_db_sql_value_8c"/>
+      </node>
+      <node id="2364">
+        <label>eagle/eagledb/EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2365" relation="include">
+        </childnode>
+        <childnode refid="2366" relation="include">
+        </childnode>
+        <childnode refid="2367" relation="include">
+        </childnode>
+        <childnode refid="2381" relation="include">
+        </childnode>
+        <childnode refid="2346" relation="include">
+        </childnode>
+        <childnode refid="2351" relation="include">
+        </childnode>
+        <childnode refid="2356" relation="include">
+        </childnode>
+        <childnode refid="2383" relation="include">
+        </childnode>
+        <childnode refid="2384" relation="include">
+        </childnode>
+        <childnode refid="2385" relation="include">
+        </childnode>
+      </node>
+      <node id="2369">
+        <label>eagle/eagle/EaglePlan.c</label>
+        <link refid="_eagle_plan_8c"/>
+      </node>
+      <node id="2368">
+        <label>eagle/eagle/EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2369" relation="include">
+        </childnode>
+        <childnode refid="2370" relation="include">
+        </childnode>
+        <childnode refid="2346" relation="include">
+        </childnode>
+        <childnode refid="2358" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+      </node>
+      <node id="2373">
+        <label>eagle/eagle/EaglePlanJob.c</label>
+        <link refid="_eagle_plan_job_8c"/>
+      </node>
+      <node id="2370">
+        <label>eagle/eagle/EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="2365" relation="include">
+        </childnode>
+        <childnode refid="2371" relation="include">
+        </childnode>
+        <childnode refid="2373" relation="include">
+        </childnode>
+        <childnode refid="2372" relation="include">
+        </childnode>
+        <childnode refid="2374" relation="include">
+        </childnode>
+      </node>
+      <node id="2377">
+        <label>eagle/eagle/EaglePageProviderArray.c</label>
+        <link refid="_eagle_page_provider_array_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_eagle_db_sql_expression_header_8h_1a633261e6154fbc5ddb4db61baed3e828" prot="public" static="no">
+        <name>EagleDbSqlExpressionHeader</name>
+        <initializer><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7d" kindref="member">EagleDbSqlExpressionType</ref> expressionType</initializer>
+        <briefdescription>
+<para>This header must exists in all structs that &quot;extend&quot; <ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionHeader.h" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionHeader.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbSqlExpressionHeader_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbSqlExpressionHeader_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_expression_type_8h" kindref="compound">EagleDbSqlExpressionType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="_eagle_db_sql_expression_header_8h_1a633261e6154fbc5ddb4db61baed3e828" refkind="member"><highlight class="preprocessor">#define<sp/>EagleDbSqlExpressionHeader<sp/>EagleDbSqlExpressionType<sp/>expressionType</highlight></codeline>
+<codeline lineno="11"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlExpressionHeader.h"/>
+  </compounddef>
+</doxygen>

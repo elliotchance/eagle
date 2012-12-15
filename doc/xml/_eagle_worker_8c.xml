@@ -1,0 +1,811 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_worker_8c" kind="file">
+    <compoundname>EagleWorker.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_worker_8h" local="yes">EagleWorker.h</includes>
+    <includes refid="_eagle_plan_job_8h" local="yes">EaglePlanJob.h</includes>
+    <includes refid="_eagle_instance_8h" local="yes">EagleInstance.h</includes>
+    <includes refid="_eagle_utils_8h" local="yes">EagleUtils.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_logger_8h" local="yes">EagleLogger.h</includes>
+    <incdepgraph>
+      <node id="1673">
+        <label>eagle/eagle/EagleWorker.c</label>
+        <link refid="EagleWorker.c"/>
+        <childnode refid="1674" relation="include">
+        </childnode>
+        <childnode refid="1675" relation="include">
+        </childnode>
+        <childnode refid="1676" relation="include">
+        </childnode>
+        <childnode refid="1679" relation="include">
+        </childnode>
+        <childnode refid="1700" relation="include">
+        </childnode>
+        <childnode refid="1702" relation="include">
+        </childnode>
+        <childnode refid="1703" relation="include">
+        </childnode>
+        <childnode refid="1704" relation="include">
+        </childnode>
+      </node>
+      <node id="1676">
+        <label>EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="1677" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1679" relation="include">
+        </childnode>
+      </node>
+      <node id="1674">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1704">
+        <label>EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="1675" relation="include">
+        </childnode>
+        <childnode refid="1681" relation="include">
+        </childnode>
+        <childnode refid="1688" relation="include">
+        </childnode>
+        <childnode refid="1690" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1705" relation="include">
+        </childnode>
+      </node>
+      <node id="1696">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1700">
+        <label>EagleInstance.h</label>
+        <link refid="_eagle_instance_8h"/>
+        <childnode refid="1677" relation="include">
+        </childnode>
+        <childnode refid="1701" relation="include">
+        </childnode>
+        <childnode refid="1687" relation="include">
+        </childnode>
+        <childnode refid="1679" relation="include">
+        </childnode>
+        <childnode refid="1688" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+      </node>
+      <node id="1702">
+        <label>EagleUtils.h</label>
+        <link refid="_eagle_utils_8h"/>
+        <childnode refid="1681" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+      </node>
+      <node id="1690">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1688" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1691" relation="include">
+        </childnode>
+      </node>
+      <node id="1693">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="1682" relation="include">
+        </childnode>
+        <childnode refid="1687" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1694" relation="include">
+        </childnode>
+      </node>
+      <node id="1682">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="1683" relation="include">
+        </childnode>
+        <childnode refid="1687" relation="include">
+        </childnode>
+      </node>
+      <node id="1681">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1697">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1688">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1681" relation="include">
+        </childnode>
+        <childnode refid="1689" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+      </node>
+      <node id="1677">
+        <label>pthread.h</label>
+      </node>
+      <node id="1692">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1685">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1686" relation="include">
+        </childnode>
+      </node>
+      <node id="1698">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="1687" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1694" relation="include">
+        </childnode>
+      </node>
+      <node id="1686">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1684">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1705">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="1706" relation="include">
+        </childnode>
+        <childnode refid="1707" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+      </node>
+      <node id="1678">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1706">
+        <label>time.h</label>
+      </node>
+      <node id="1695">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1696" relation="include">
+        </childnode>
+      </node>
+      <node id="1699">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="1703">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1701">
+        <label>EagleWorkers.h</label>
+        <link refid="_eagle_workers_8h"/>
+        <childnode refid="1676" relation="include">
+        </childnode>
+      </node>
+      <node id="1683">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1684" relation="include">
+        </childnode>
+        <childnode refid="1685" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1686" relation="include">
+        </childnode>
+      </node>
+      <node id="1694">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1695" relation="include">
+        </childnode>
+        <childnode refid="1697" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1686" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+      </node>
+      <node id="1680">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="1681" relation="include">
+        </childnode>
+        <childnode refid="1682" relation="include">
+        </childnode>
+        <childnode refid="1693" relation="include">
+        </childnode>
+        <childnode refid="1698" relation="include">
+        </childnode>
+        <childnode refid="1699" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1686" relation="include">
+        </childnode>
+        <childnode refid="1690" relation="include">
+        </childnode>
+      </node>
+      <node id="1675">
+        <label>stdio.h</label>
+      </node>
+      <node id="1707">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="1687">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1677" relation="include">
+        </childnode>
+        <childnode refid="1683" relation="include">
+        </childnode>
+        <childnode refid="1688" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+        <childnode refid="1690" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1686" relation="include">
+        </childnode>
+        <childnode refid="1692" relation="include">
+        </childnode>
+      </node>
+      <node id="1689">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1677" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+      </node>
+      <node id="1679">
+        <label>EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="1680" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+      </node>
+      <node id="1691">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_eagle_worker_8c_1a2bf0ff8f5102489ccc6b9ae29e8458e6" prot="public" static="no" mutable="no">
+        <type>__thread <ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+        <definition>__thread EagleWorker* EagleWorker_ThisWorker</definition>
+        <argsstring></argsstring>
+        <name>EagleWorker_ThisWorker</name>
+        <initializer> NULL</initializer>
+        <briefdescription>
+<para>Used by <ref refid="_eagle_worker_8c_1ab7f907a2e71950075707884c1c88aa57" kindref="member">EagleWorker_GetForCurrentThread()</ref> and <ref refid="_eagle_worker_8c_1a73d358eab6e359a40fd05c3268262f5e" kindref="member">EagleWorker_SetForCurrentThread()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="13" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_worker_8c_1aff7051ad0f0ab6cff14d8e7d34101474" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* EagleWorker_begin</definition>
+        <argsstring>(void *obj)</argsstring>
+        <name>EagleWorker_begin</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Begin a worker. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is a EagleWorker* but it must have void* to fit the definition for the pthread. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ignored. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="136" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="135" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a714713eb91e6f2d8000890f72911f666" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_Delete</definition>
+        <argsstring>(EagleWorker *worker)</argsstring>
+        <name>EagleWorker_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+          <declname>worker</declname>
+        </param>
+        <briefdescription>
+<para>Delete a worker. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">worker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The worker. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="187" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="186" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1ab7f907a2e71950075707884c1c88aa57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+        <definition>EagleWorker* EagleWorker_GetForCurrentThread</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleWorker_GetForCurrentThread</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the worker instance for this thread. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>NULL on threads that are not workers. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="196" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a8fc8e06b39f78e5d4e40c586e4f06c81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_join</definition>
+        <argsstring>(EagleWorker *worker)</argsstring>
+        <name>EagleWorker_join</name>
+        <param>
+          <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+          <declname>worker</declname>
+        </param>
+        <briefdescription>
+<para>Wait for a worker to complete and shutdown. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">worker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The worker. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="182" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1aef7a63ffea66cc75cfd5aa95257f8136" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+        <definition>EagleWorker* EagleWorker_New</definition>
+        <argsstring>(int workerId, struct EagleInstance *instance)</argsstring>
+        <name>EagleWorker_New</name>
+        <param>
+          <type>int</type>
+          <declname>workerId</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref> *</type>
+          <declname>instance</declname>
+        </param>
+        <briefdescription>
+<para>Create a new worker (thread). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">workerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The worker ID is just an arbitrary number that should be unique to the worker for logging purposes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance the workers belong to. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new worker. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="15" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a68cea798e503002ebc7d30e66864e57f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_runJob</definition>
+        <argsstring>(EaglePlanJob *job)</argsstring>
+        <name>EagleWorker_runJob</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref> *</type>
+          <declname>job</declname>
+        </param>
+        <briefdescription>
+<para>Execute a job. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">job</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The job to execute. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="116" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="115" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a6797b2debdc173ad12bc50ad55e88e5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_runJobLiteral_</definition>
+        <argsstring>(EaglePlanJob *job, EaglePlanOperation *epo)</argsstring>
+        <name>EagleWorker_runJobLiteral_</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref> *</type>
+          <declname>job</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+          <declname>epo</declname>
+        </param>
+        <briefdescription>
+<para>Internal function used by <ref refid="_eagle_worker_8c_1a68cea798e503002ebc7d30e66864e57f" kindref="member">EagleWorker_runJob()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">job</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The job to execute. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">epo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The job plan operation. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="30" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="29" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1aa3fa1af9d7bdbd59e2ff7ee02fbc9f40" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_runJobPage_</definition>
+        <argsstring>(EaglePlanJob *job, EaglePlanOperation *epo)</argsstring>
+        <name>EagleWorker_runJobPage_</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_job" kindref="compound">EaglePlanJob</ref> *</type>
+          <declname>job</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+          <declname>epo</declname>
+        </param>
+        <briefdescription>
+<para>Internal function used by <ref refid="_eagle_worker_8c_1a68cea798e503002ebc7d30e66864e57f" kindref="member">EagleWorker_runJob()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">job</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The job to execute. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">epo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The job plan operation. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="79" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="78" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a73d358eab6e359a40fd05c3268262f5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_SetForCurrentThread</definition>
+        <argsstring>(EagleWorker *worker)</argsstring>
+        <name>EagleWorker_SetForCurrentThread</name>
+        <param>
+          <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+          <declname>worker</declname>
+        </param>
+        <briefdescription>
+<para>Set the worker instance for this thread. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">worker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The worker instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="201" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_worker_8c_1a64b80345a8d1c3469f64bed26b621b53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleWorker_start</definition>
+        <argsstring>(EagleWorker *worker)</argsstring>
+        <name>EagleWorker_start</name>
+        <param>
+          <type><ref refid="struct_eagle_worker" kindref="compound">EagleWorker</ref> *</type>
+          <declname>worker</declname>
+        </param>
+        <briefdescription>
+<para>Start a worker. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">worker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The worker. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" line="177" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c" bodystart="176" bodyend="179"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_worker_8h" kindref="compound">EagleWorker.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_plan_job_8h" kindref="compound">EaglePlanJob.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_instance_8h" kindref="compound">EagleInstance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_utils_8h" kindref="compound">EagleUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_8h" kindref="compound">EagleLogger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="_eagle_worker_8c_1a2bf0ff8f5102489ccc6b9ae29e8458e6" refkind="member"><highlight class="normal">__thread<sp/><ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*<ref refid="_eagle_worker_8c_1a2bf0ff8f5102489ccc6b9ae29e8458e6" kindref="member" tooltip="Used by EagleWorker_GetForCurrentThread() and EagleWorker_SetForCurrentThread().">EagleWorker_ThisWorker</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="_eagle_worker_8h_1aef7a63ffea66cc75cfd5aa95257f8136" refkind="member"><highlight class="normal"><ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>*<sp/><ref refid="_eagle_worker_8c_1aef7a63ffea66cc75cfd5aa95257f8136" kindref="member" tooltip="Create a new worker (thread).">EagleWorker_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>workerId,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_instance" kindref="compound" tooltip="An eagle instance (a database).">EagleInstance</ref><sp/>*instance)</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker<sp/>=<sp/>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleWorker_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>));</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>worker)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>worker-&gt;<ref refid="struct_eagle_worker_1a5e984899447bb71370fa0cbf7507d34f" kindref="member" tooltip="A unique ID for the worker thread.">workerId</ref><sp/>=<sp/>workerId;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>worker-&gt;<ref refid="struct_eagle_worker_1afb84931073ff883ba0a1b910c286be38" kindref="member" tooltip="The instance this worker belongs to.">instance</ref><sp/>=<sp/>instance;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>worker-&gt;<ref refid="struct_eagle_worker_1aee29540f2207acb089ec1033e6156e36" kindref="member" tooltip="Total lock time.">lockTime</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>worker;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="_eagle_worker_8h_1a6797b2debdc173ad12bc50ad55e88e5f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a6797b2debdc173ad12bc50ad55e88e5f" kindref="member" tooltip="Internal function used by EagleWorker_runJob().">EagleWorker_runJobLiteral_</ref>(<ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref><sp/>*job,<sp/><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*destination<sp/>=<sp/>NULL,<sp/>*source1<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref><sp/>*value;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>prepare<sp/>arguments<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>&gt;=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;destination<sp/>%d<sp/>is<sp/>greater<sp/>than<sp/>allowed<sp/>%d<sp/>buffers!&quot;</highlight><highlight class="normal">,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref>,<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>destination<sp/>=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" kindref="member" tooltip="The buffers.">buffers</ref>[epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref>];</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>&gt;=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;source1<sp/>%d<sp/>is<sp/>greater<sp/>than<sp/>allowed<sp/>%d<sp/>buffers!&quot;</highlight><highlight class="normal">,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref>,<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>source1<sp/>=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" kindref="member" tooltip="The buffers.">buffers</ref>[epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref>];</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>execute<sp/>page<sp/>operation<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>value<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref>*)<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="An optional attachment object.">obj</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(value-&gt;<ref refid="struct_eagle_db_sql_value_1ad77ce651fe9b80a9eaae740340be2082" kindref="member" tooltip="Value type.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25ab15c25b9291c87cc06e389aeb5b3ceb5" kindref="member" tooltip="Asterisk expression for selecting multiple columns.">EagleDbSqlValueTypeAsterisk</ref>:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a5f0bf7d20910a8563b25447671fe0cfc" kindref="member" tooltip="The name of a column.">EagleDbSqlValueTypeIdentifier</ref>:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>these<sp/>are<sp/>bogus<sp/>and<sp/>should<sp/>never<sp/>occur<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a1c2e09ed37350b5fdfa2ec539eb2eb75" kindref="member" tooltip="A floating point number.">EagleDbSqlValueTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epo-&gt;function(destination,<sp/>source1,<sp/>NULL,<sp/>&amp;value-&gt;<ref refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" kindref="member" tooltip="Contains the actual value, depending on the type.">value</ref>.<ref refid="struct_eagle_db_sql_value_1a4d566c1fceb610a562ff221cba447f16" kindref="member" tooltip="Floating point number.">floatValue</ref>);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a45a5b1dc7f1b44c879e18afe76d70c47" kindref="member" tooltip="Use intValue.">EagleDbSqlValueTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epo-&gt;function(destination,<sp/>source1,<sp/>NULL,<sp/>&amp;value-&gt;<ref refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" kindref="member" tooltip="Contains the actual value, depending on the type.">value</ref>.<ref refid="struct_eagle_db_sql_value_1a34aa1b9d94871f740efabef1b6d52b2f" kindref="member" tooltip="Integer.">intValue</ref>);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25ac3cd29c912f78a7ff5c7b0a615735ff3" kindref="member" tooltip="A string literal.">EagleDbSqlValueTypeString</ref>:</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>epo-&gt;function(destination,<sp/>source1,<sp/>NULL,<sp/>&amp;value-&gt;<ref refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" kindref="member" tooltip="Contains the actual value, depending on the type.">value</ref>.<ref refid="struct_eagle_db_sql_value_1af5351a0143adaf16c64b881aee01d893" kindref="member" tooltip="When using identifier token.">identifier</ref>);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="_eagle_worker_8h_1aa3fa1af9d7bdbd59e2ff7ee02fbc9f40" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1aa3fa1af9d7bdbd59e2ff7ee02fbc9f40" kindref="member" tooltip="Internal function used by EagleWorker_runJob().">EagleWorker_runJobPage_</ref>(<ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref><sp/>*job,<sp/><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*destination<sp/>=<sp/>NULL,<sp/>*source1<sp/>=<sp/>NULL,<sp/>*source2<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>prepare<sp/>arguments<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>&gt;=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;destination<sp/>%d<sp/>is<sp/>greater<sp/>than<sp/>allowed<sp/>%d<sp/>buffers!&quot;</highlight><highlight class="normal">,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref>,<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>destination<sp/>=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" kindref="member" tooltip="The buffers.">buffers</ref>[epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref>];</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>&gt;=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;source1<sp/>%d<sp/>is<sp/>greater<sp/>than<sp/>allowed<sp/>%d<sp/>buffers!&quot;</highlight><highlight class="normal">,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref>,<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>source1<sp/>=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" kindref="member" tooltip="The buffers.">buffers</ref>[epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref>];</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" kindref="member" tooltip="Second buffer argument ID.">source2</ref><sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(epo-&gt;<ref refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" kindref="member" tooltip="Second buffer argument ID.">source2</ref><sp/>&gt;=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>msg[1024];</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(msg,<sp/></highlight><highlight class="stringliteral">&quot;source2<sp/>%d<sp/>is<sp/>greater<sp/>than<sp/>allowed<sp/>%d<sp/>buffers!&quot;</highlight><highlight class="normal">,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" kindref="member" tooltip="Second buffer argument ID.">source2</ref>,<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a9021062c2280f08138aabe013bfa3746" kindref="member" tooltip="The number of buffers needed for the execution.">buffersNeeded</ref>);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/>msg);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>source2<sp/>=<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a7a59ef221cdbb2e4dca970dd00103bbc" kindref="member" tooltip="The buffers.">buffers</ref>[epo-&gt;<ref refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" kindref="member" tooltip="Second buffer argument ID.">source2</ref>];</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>execute<sp/>page<sp/>operation<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;function(destination,<sp/>source1,<sp/>source2,<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="An optional attachment object.">obj</ref>);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="_eagle_worker_8h_1a68cea798e503002ebc7d30e66864e57f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a68cea798e503002ebc7d30e66864e57f" kindref="member" tooltip="Execute a job.">EagleWorker_runJob</ref>(<ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref><sp/>*job)</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a165d50b85dcb8a5e1f68878845eb2db0" kindref="member" tooltip="The operations.">operations</ref>,<sp/><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>*,<sp/>epo)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(epo-&gt;type)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_operation_8h_1afb5605fd8b35da9e3b90946b2a4840dfad04f51f3c4ccba062c798ee40b2de889" kindref="member" tooltip="Page operation.">EaglePlanOperationTypePage</ref>:</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1aa3fa1af9d7bdbd59e2ff7ee02fbc9f40" kindref="member" tooltip="Internal function used by EagleWorker_runJob().">EagleWorker_runJobPage_</ref>(job,<sp/>epo);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_operation_8h_1afb5605fd8b35da9e3b90946b2a4840dfa3c90bc81c9b11e0a476ccc667e6e5caa" kindref="member" tooltip="Literal operation.">EaglePlanOperationTypeLiteral</ref>:</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a6797b2debdc173ad12bc50ad55e88e5f" kindref="member" tooltip="Internal function used by EagleWorker_runJob().">EagleWorker_runJobLiteral_</ref>(job,<sp/>epo);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="133"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="_eagle_worker_8h_1aff7051ad0f0ab6cff14d8e7d34101474" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="_eagle_worker_8c_1aff7051ad0f0ab6cff14d8e7d34101474" kindref="member" tooltip="Begin a worker.">EagleWorker_begin</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj)</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker<sp/>=<sp/>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>*)<sp/>obj;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a73d358eab6e359a40fd05c3268262f5e" kindref="member" tooltip="Set the worker instance for this thread.">EagleWorker_SetForCurrentThread</ref>(worker);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(1)<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_job" kindref="compound" tooltip="A plan is divided up into single jobs that are run simultaneously.">EaglePlanJob</ref><sp/>*job<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>start;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>start<sp/>the<sp/>timers<sp/>at<sp/>zero<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start<sp/>=<sp/><ref refid="_eagle_utils_8c_1a075158bf12c9edf71f02c152ce771199" kindref="member" tooltip="Get the absolute time.">EagleUtils_GetAbsoluteTime</ref>();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>worker-&gt;<ref refid="struct_eagle_worker_1aee29540f2207acb089ec1033e6156e36" kindref="member" tooltip="Total lock time.">lockTime</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>ask<sp/>the<sp/>instance<sp/>for<sp/>the<sp/>next<sp/>job<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>job<sp/>=<sp/><ref refid="_eagle_instance_8c_1a32eec2a01e622ad90ff8b679e7e292be" kindref="member" tooltip="Get the next finite job from the stack.">EagleInstance_nextJob</ref>(worker-&gt;<ref refid="struct_eagle_worker_1afb84931073ff883ba0a1b910c286be38" kindref="member" tooltip="The instance this worker belongs to.">instance</ref>,<sp/>worker-&gt;<ref refid="struct_eagle_worker_1a5e984899447bb71370fa0cbf7507d34f" kindref="member" tooltip="A unique ID for the worker thread.">workerId</ref>);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>run<sp/>the<sp/>job<sp/>is<sp/>one<sp/>is<sp/>returned<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>job)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>is<sp/>this<sp/>the<sp/>start<sp/>of<sp/>the<sp/>plan<sp/>itself?<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" kindref="member" tooltip="The absolute start time.">startTime</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" kindref="member" tooltip="The absolute start time.">startTime</ref><sp/>=<sp/>start;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>run<sp/>operations<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a68cea798e503002ebc7d30e66864e57f" kindref="member" tooltip="Execute a job.">EagleWorker_runJob</ref>(job);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>add<sp/>time<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1ac2a54e490b7f5500768c6bf11d2d57e4" kindref="member" tooltip="The total time the query took to execute.">executionTime</ref>[worker-&gt;<ref refid="struct_eagle_worker_1a5e984899447bb71370fa0cbf7507d34f" kindref="member" tooltip="A unique ID for the worker thread.">workerId</ref>]<sp/>+=<sp/><ref refid="_eagle_utils_8c_1a075158bf12c9edf71f02c152ce771199" kindref="member" tooltip="Get the absolute time.">EagleUtils_GetAbsoluteTime</ref>()<sp/>-<sp/>start;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>job-&gt;<ref refid="struct_eagle_plan_job_1a83534f7da738950a4c67225645099239" kindref="member" tooltip="A reference to the plan.">plan</ref>-&gt;<ref refid="struct_eagle_plan_1a2e37519c175daf57b714863ffb54d0df" kindref="member" tooltip="The total time the thread was left waiting for a mutex lock to be release.">lockTime</ref>[worker-&gt;<ref refid="struct_eagle_worker_1a5e984899447bb71370fa0cbf7507d34f" kindref="member" tooltip="A unique ID for the worker thread.">workerId</ref>]<sp/>+=<sp/>worker-&gt;<ref refid="struct_eagle_worker_1aee29540f2207acb089ec1033e6156e36" kindref="member" tooltip="Total lock time.">lockTime</ref>;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>free<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_plan_job_8c_1acb8ec253ecb74dc0603daf5902175473" kindref="member" tooltip="Delete a job.">EaglePlanJob_Delete</ref>(job);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176" refid="_eagle_worker_8h_1a64b80345a8d1c3469f64bed26b621b53" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a64b80345a8d1c3469f64bed26b621b53" kindref="member" tooltip="Start a worker.">EagleWorker_start</ref>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker)</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>pthread_create(&amp;worker-&gt;<ref refid="struct_eagle_worker_1a01f75a9ad916f63a94e06a27635ba278" kindref="member" tooltip="The actual thread this worker represents.">thread</ref>,<sp/>NULL,<sp/><ref refid="_eagle_worker_8c_1aff7051ad0f0ab6cff14d8e7d34101474" kindref="member" tooltip="Begin a worker.">EagleWorker_begin</ref>,<sp/>worker);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181" refid="_eagle_worker_8h_1a8fc8e06b39f78e5d4e40c586e4f06c81" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a8fc8e06b39f78e5d4e40c586e4f06c81" kindref="member" tooltip="Wait for a worker to complete and shutdown.">EagleWorker_join</ref>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker)</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>pthread_join(worker-&gt;<ref refid="struct_eagle_worker_1a01f75a9ad916f63a94e06a27635ba278" kindref="member" tooltip="The actual thread this worker represents.">thread</ref>,<sp/>NULL);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186" refid="_eagle_worker_8h_1a714713eb91e6f2d8000890f72911f666" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a714713eb91e6f2d8000890f72911f666" kindref="member" tooltip="Delete a worker.">EagleWorker_Delete</ref>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker)</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>worker)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(worker);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195" refid="_eagle_worker_8h_1ab7f907a2e71950075707884c1c88aa57" refkind="member"><highlight class="normal"><ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref>*<sp/><ref refid="_eagle_worker_8c_1ab7f907a2e71950075707884c1c88aa57" kindref="member" tooltip="Get the worker instance for this thread.">EagleWorker_GetForCurrentThread</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="196"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a2bf0ff8f5102489ccc6b9ae29e8458e6" kindref="member" tooltip="Used by EagleWorker_GetForCurrentThread() and EagleWorker_SetForCurrentThread().">EagleWorker_ThisWorker</ref>;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="_eagle_worker_8h_1a73d358eab6e359a40fd05c3268262f5e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_worker_8c_1a73d358eab6e359a40fd05c3268262f5e" kindref="member" tooltip="Set the worker instance for this thread.">EagleWorker_SetForCurrentThread</ref>(<ref refid="struct_eagle_worker" kindref="compound" tooltip="A worker is a thread.">EagleWorker</ref><sp/>*worker)</highlight></codeline>
+<codeline lineno="201"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_worker_8c_1a2bf0ff8f5102489ccc6b9ae29e8458e6" kindref="member" tooltip="Used by EagleWorker_GetForCurrentThread() and EagleWorker_SetForCurrentThread().">EagleWorker_ThisWorker</ref><sp/>=<sp/>worker;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleWorker.c"/>
+  </compounddef>
+</doxygen>

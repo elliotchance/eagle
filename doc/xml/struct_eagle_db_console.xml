@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_console" kind="struct" prot="public">
+    <compoundname>EagleDbConsole</compoundname>
+    <includes refid="_eagle_db_console_8h" local="no">EagleDbConsole.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_console_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t startTime</definition>
+        <argsstring></argsstring>
+        <name>startTime</name>
+        <briefdescription>
+<para>The absolute time when the console was started. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="15" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Console instance. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>EagleDbConsole</label>
+        <link refid="struct_eagle_db_console"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>startTime</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>uint64_t</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" line="10" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbConsole.h" bodystart="10" bodyend="17"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_console_1ac10ecee7f82c1bbe01ce5a56ceaa55e8" prot="public" virt="non-virtual"><scope>EagleDbConsole</scope><name>startTime</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

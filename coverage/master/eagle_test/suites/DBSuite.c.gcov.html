@@ -1,0 +1,1187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle_test/suites/DBSuite.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle_test/suites</a> - DBSuite.c<span style="font-size: 80%;"> (source / <a href="DBSuite.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">601</td>
+            <td class="headerCovTableEntry">654</td>
+            <td class="headerCovTableEntryHi">91.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-02-23</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">73</td>
+            <td class="headerCovTableEntry">76</td>
+            <td class="headerCovTableEntryHi">96.1 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;DBSuite.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleDbSqlSelect.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleDbSqlValue.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleInstance.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleData.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleDbColumn.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleDbTable.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;EagleDbTableData.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;EagleDbTuple.h&quot;
+<span class="lineNum">      13 </span>            : #include &quot;EagleDbConsole.h&quot;
+<span class="lineNum">      14 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">      15 </span>            : #include &quot;EagleDbParser.h&quot;
+<span class="lineNum">      16 </span>            : #include &quot;EagleLogger.h&quot;
+<span class="lineNum">      17 </span>            : #include &quot;EagleDbInstance.h&quot;
+<a name="18"><span class="lineNum">      18 </span>            : #include &quot;EagleDbSqlUnaryExpression.h&quot;</a>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">         28 : EagleDbParser* _testSqlSelect(const char *sql)</span>
+<span class="lineNum">      21 </span>            : {
+<span class="lineNum">      22 </span>            :     // add ;
+<span class="lineNum">      23 </span><span class="lineCov">         28 :     char *newsql = (char*) malloc(strlen(sql) + 2);</span>
+<span class="lineNum">      24 </span><span class="lineCov">         28 :     sprintf(newsql, &quot;%s;&quot;, sql);</span>
+<span class="lineNum">      25 </span>            :     
+<span class="lineNum">      26 </span><span class="lineCov">         28 :     EagleDbParser *parser = EagleDbParser_ParseWithString(newsql);</span>
+<span class="lineNum">      27 </span><span class="lineCov">         28 :     EagleMemory_Free(newsql);</span>
+<span class="lineNum">      28 </span><span class="lineCov">         28 :     return parser;</span>
+<a name="29"><span class="lineNum">      29 </span>            : }</a>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
+<span class="lineNum">      32 </span>            : {
+<span class="lineNum">      33 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">      34 </span>            :     
+<span class="lineNum">      35 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(select);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :     if(select != NULL) {</span>
+<span class="lineNum">      37 </span><span class="lineCov">          2 :         CUNIT_ASSERT_EQUAL_INT(select-&gt;expressionType, EagleDbSqlExpressionTypeSelect);</span>
+<span class="lineNum">      38 </span>            :         
+<span class="lineNum">      39 </span><span class="lineCov">          2 :         CUNIT_ASSERT_NULL(select-&gt;tableName);</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :         CUNIT_ASSERT_NULL(select-&gt;whereExpression);</span>
+<span class="lineNum">      41 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      42 </span>            :     
+<span class="lineNum">      43 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
+<span class="lineNum">      47 </span>            : {
+<span class="lineNum">      48 </span><span class="lineCov">          1 :     EagleDbSqlExpression *left = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);</span>
+<span class="lineNum">      49 </span><span class="lineCov">          1 :     EagleDbSqlExpression *right = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">          1 :     EagleDbSqlBinaryExpression *binary = EagleDbSqlBinaryExpression_New(left, EagleDbSqlBinaryExpressionOperatorPlus, right);</span>
+<span class="lineNum">      52 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(binary);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          1 :     if(NULL != binary) {</span>
+<span class="lineNum">      54 </span><span class="lineCov">          2 :         CUNIT_ASSERT_EQUAL_INT(binary-&gt;expressionType, EagleDbSqlExpressionTypeBinaryExpression);</span>
+<span class="lineNum">      55 </span>            :         
+<span class="lineNum">      56 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_PTR(binary-&gt;left, left);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_INT(binary-&gt;op, EagleDbSqlBinaryExpressionOperatorPlus);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_PTR(binary-&gt;right, right);</span>
+<span class="lineNum">      59 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      60 </span>            :     
+<span class="lineNum">      61 </span><span class="lineCov">          1 :     EagleDbSqlBinaryExpression_DeleteRecursive(binary);</span>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
+<span class="lineNum">      65 </span>            : {
+<span class="lineNum">      66 </span><span class="lineCov">          1 :     EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(123);</span>
+<span class="lineNum">      67 </span>            :     
+<span class="lineNum">      68 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(value);</span>
+<span class="lineNum">      69 </span><span class="lineCov">          1 :     if(NULL != value) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">          2 :         CUNIT_ASSERT_EQUAL_INT(value-&gt;expressionType, EagleDbSqlExpressionTypeValue);</span>
+<span class="lineNum">      71 </span>            :         
+<span class="lineNum">      72 </span><span class="lineCov">          2 :         CUNIT_ASSERT_EQUAL_INT(value-&gt;type, EagleDbSqlValueTypeInteger);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          2 :         CUNIT_ASSERT_EQUAL_INT(value-&gt;value.intValue, 123);</span>
+<span class="lineNum">      74 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">      75 </span>            :     
+<span class="lineNum">      76 </span><span class="lineCov">          1 :     EagleDbSqlValue_Delete(value);</span>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      78 </span>            : 
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 : EagleDbSqlExpression* _getExpression(const char *sql)</span>
+<span class="lineNum">      80 </span>            : {
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :     EagleDbParser *p = _testSqlSelect(sql);</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :     if(EagleDbParser_hasError(p)) {</span>
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(EagleDbParser_lastError(p), NULL);</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">      85 </span>            :     
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :     EagleDbSqlSelect *select = (EagleDbSqlSelect*) p-&gt;yyparse_ast;</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_NOT_NULL(EagleLinkedList_get(select-&gt;selectExpressions, 0));</span>
+<span class="lineNum">      88 </span>            :     
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     return EagleLinkedList_get(select-&gt;selectExpressions, 0);</span>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 : void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOperations, int *answers)</span>
+<span class="lineNum">      93 </span>            : {
+<span class="lineNum">      94 </span>            :     // compile plan
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :     int pageSize = 10;</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :     EaglePageProvider *receiver = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, NULL);</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :     EaglePlan *plan = EaglePlan_New(pageSize);</span>
+<span class="lineNum">      98 </span>            :     
+<span class="lineNum">      99 </span>            :     // setup the table
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));</span>
+<span class="lineNum">     101 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :         col1Data[i] = i;</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :     EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, &quot;col1&quot;);</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(plan-&gt;usedProviders, 1);</span>
+<span class="lineNum">     107 </span>            :     
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :     EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);</span>
+<span class="lineNum">     109 </span>            :     //printf(&quot;\n%s\n&quot;, EaglePlan_toString(plan));
+<span class="lineNum">     110 </span>            :     
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(plan-&gt;usedProviders, usedProviders);</span>
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(plan-&gt;usedOperations, usedOperations);</span>
+<span class="lineNum">     113 </span>            :     
+<span class="lineNum">     114 </span>            :     // execute
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 :     EagleInstance *eagle = EagleInstance_New(1);</span>
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :     EagleInstance_addPlan(eagle, plan);</span>
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :     EagleInstance_run(eagle);</span>
+<span class="lineNum">     118 </span>            :     
+<span class="lineNum">     119 </span>            :     // validate result
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :     EaglePage *page = EaglePageProvider_nextPage(receiver);</span>
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(receiver-&gt;totalRecords, pageSize);</span>
+<span class="lineNum">     122 </span><span class="lineNoCov">          0 :     int valid = 1;</span>
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     124 </span>            :         //printf(&quot;\n%d != %d&quot;, page-&gt;data[i], answers[i]);
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :         if(((int*) page-&gt;data)[i] != answers[i]) {</span>
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :             valid = 0;</span>
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :             break;</span>
+<span class="lineNum">     128 </span>            :         }
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     130 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     131 </span>            :     
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :     EaglePageProvider_Delete(receiver);</span>
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :     EagleInstance_Delete(eagle);</span>
+<a name="134"><span class="lineNum">     134 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            : CUNIT_TEST(DBSuite, EagleDbColumn_New)
+<span class="lineNum">     137 </span>            : {
+<span class="lineNum">     138 </span><span class="lineCov">          1 :     EagleDbColumn *col = EagleDbColumn_New(&quot;mycol&quot;, EagleDataTypeInteger);</span>
+<span class="lineNum">     139 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(col-&gt;name, &quot;mycol&quot;);</span>
+<span class="lineNum">     140 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(col-&gt;type, EagleDataTypeInteger);</span>
+<span class="lineNum">     141 </span><span class="lineCov">          1 :     EagleDbColumn_Delete(col);</span>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
+<span class="lineNum">     145 </span>            : {
+<span class="lineNum">     146 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(NULL);</span>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span>            : CUNIT_TEST(DBSuite, EagleDbTable_New)
+<span class="lineNum">     150 </span>            : {
+<span class="lineNum">     151 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     152 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col1&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     153 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col2&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     154 </span>            :     
+<span class="lineNum">     155 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(table-&gt;name, &quot;mytable&quot;);</span>
+<span class="lineNum">     156 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbTable_countColumns(table), 2);</span>
+<span class="lineNum">     157 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(EagleDbTable_getColumn(table, 0)-&gt;name, &quot;col1&quot;);</span>
+<span class="lineNum">     158 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbTable_getColumn(table, 0)-&gt;type, EagleDataTypeInteger);</span>
+<span class="lineNum">     159 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(EagleDbTable_getColumn(table, 1)-&gt;name, &quot;col2&quot;);</span>
+<span class="lineNum">     160 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbTable_getColumn(table, 1)-&gt;type, EagleDataTypeInteger);</span>
+<span class="lineNum">     161 </span>            :     
+<span class="lineNum">     162 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     164 </span>            : 
+<span class="lineNum">     165 </span>            : EagleDbTable* _getTable()
+<span class="lineNum">     166 </span>            : {
+<span class="lineNum">     167 </span>            :     /*
+<span class="lineNum">     168 </span>            :      CREATE TABLE mytable (
+<span class="lineNum">     169 </span>            :         col1 INT,
+<span class="lineNum">     170 </span>            :         col2 INT
+<span class="lineNum">     171 </span>            :      );
+<span class="lineNum">     172 </span>            :      */
+<span class="lineNum">     173 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     174 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col1&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     175 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col2&quot;, EagleDataTypeText));</span>
+<span class="lineNum">     176 </span>            :     
+<span class="lineNum">     177 </span><span class="lineCov">          1 :     return table;</span>
+<a name="178"><span class="lineNum">     178 </span>            : }</a>
+<span class="lineNum">     179 </span>            : 
+<span class="lineNum">     180 </span><span class="lineNoCov">          0 : EagleDbTableData* _getTableWithData(int records, int recordsPerPage)</span>
+<span class="lineNum">     181 </span>            : {
+<span class="lineNum">     182 </span>            :     // define the table
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :     EagleDbTable *table = _getTable();</span>
+<span class="lineNum">     184 </span>            :     
+<span class="lineNum">     185 </span>            :     // create the data provider
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :     EagleDbTableData *td = EagleDbTableData_New(table, recordsPerPage);</span>
+<span class="lineNum">     187 </span>            :     
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; records; ++i) {</span>
+<span class="lineNum">     189 </span>            :         // create a record
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :         EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :         EagleDbTuple_setInt(tuple, 0, i);</span>
+<span class="lineNum">     192 </span><span class="lineNoCov">          0 :         EagleDbTuple_setInt(tuple, 1, i * 2);</span>
+<span class="lineNum">     193 </span>            :         
+<span class="lineNum">     194 </span>            :         // put record in
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :         EagleDbTableData_insert(td, tuple);</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     197 </span>            :     
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(td-&gt;providers[0]-&gt;totalRecords, records);</span>
+<span class="lineNum">     199 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_EQUAL_INT(td-&gt;providers[1]-&gt;totalRecords, records);</span>
+<span class="lineNum">     200 </span>            :     
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :     return td;</span>
+<a name="202"><span class="lineNum">     202 </span>            : }</a>
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span>            : CUNIT_TEST(DBSuite, EagleDbTuple_New)
+<span class="lineNum">     205 </span>            : {
+<span class="lineNum">     206 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbTuple_New(NULL));</span>
+<span class="lineNum">     207 </span>            :     
+<span class="lineNum">     208 </span><span class="lineCov">          1 :     EagleDbTable *table = _getTable();</span>
+<span class="lineNum">     209 </span>            :     
+<span class="lineNum">     210 </span><span class="lineCov">          1 :     EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     211 </span><span class="lineCov">          1 :     EagleDbTuple_setInt(tuple, 0, 123);</span>
+<span class="lineNum">     212 </span><span class="lineCov">          1 :     EagleDbTuple_setText(tuple, 1, &quot;hello&quot;);</span>
+<span class="lineNum">     213 </span><span class="lineCov">          1 :     char *desc = EagleDbTuple_toString(tuple);</span>
+<span class="lineNum">     214 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(desc, &quot;(col1=123,col2=\&quot;hello\&quot;)&quot;);</span>
+<span class="lineNum">     215 </span><span class="lineCov">          1 :     EagleMemory_Free(desc);</span>
+<span class="lineNum">     216 </span>            :     
+<span class="lineNum">     217 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     218 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
+<span class="lineNum">     222 </span>            : {
+<span class="lineNum">     223 </span><span class="lineCov">          1 :     int pageSize = 10;</span>
+<span class="lineNum">     224 </span><span class="lineCov">          1 :     int exprs = 3;</span>
+<span class="lineNum">     225 </span><span class="lineCov">          1 :     int totalResults = 5;</span>
+<span class="lineNum">     226 </span><span class="lineCov">          1 :     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));</span>
+<span class="lineNum">     227 </span>            :     
+<span class="lineNum">     228 </span>            :     // SELECT col1, col2 + 8 FROM mytable WHERE col1 % 2 = 1
+<span class="lineNum">     229 </span><span class="lineCov">          1 :     expr[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier(&quot;col1&quot;);</span>
+<span class="lineNum">     230 </span>            :     expr[1] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+<span class="lineNum">     231 </span><span class="lineCov">          1 :         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier(&quot;col2&quot;),</span>
+<span class="lineNum">     232 </span>            :         EagleDbSqlBinaryExpressionOperatorPlus,
+<span class="lineNum">     233 </span><span class="lineCov">          1 :         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(8)</span>
+<span class="lineNum">     234 </span>            :     );
+<span class="lineNum">     235 </span>            :     expr[2] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+<span class="lineNum">     236 </span>            :         (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+<span class="lineNum">     237 </span><span class="lineCov">          1 :             (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier(&quot;col1&quot;),</span>
+<span class="lineNum">     238 </span>            :             EagleDbSqlBinaryExpressionOperatorModulus,
+<span class="lineNum">     239 </span><span class="lineCov">          1 :             (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(2)</span>
+<span class="lineNum">     240 </span>            :         ),
+<span class="lineNum">     241 </span>            :         EagleDbSqlBinaryExpressionOperatorEquals,
+<span class="lineNum">     242 </span><span class="lineCov">          1 :         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(1)</span>
+<span class="lineNum">     243 </span>            :     );
+<span class="lineNum">     244 </span>            :     
+<span class="lineNum">     245 </span>            :     // create the plan skeleton
+<span class="lineNum">     246 </span><span class="lineCov">          1 :     EaglePlan *plan = EaglePlan_New(pageSize);</span>
+<span class="lineNum">     247 </span>            :     
+<span class="lineNum">     248 </span>            :     // create a virtual table that consists of 2 columns; col1 and col2
+<span class="lineNum">     249 </span><span class="lineCov">          1 :     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));</span>
+<span class="lineNum">     250 </span><span class="lineCov">          1 :     int *col2Data = (int*) calloc((size_t) pageSize, sizeof(int));</span>
+<span class="lineNum">     251 </span><span class="lineCov">         22 :     for(int i = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     252 </span><span class="lineCov">         10 :         col1Data[i] = i;</span>
+<span class="lineNum">     253 </span><span class="lineCov">         10 :         col2Data[i] = i * 2;</span>
+<span class="lineNum">     254 </span><span class="lineCov">         10 :     }</span>
+<span class="lineNum">     255 </span><span class="lineCov">          1 :     EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, &quot;col1&quot;);</span>
+<span class="lineNum">     256 </span><span class="lineCov">          1 :     EaglePageProvider *col2 = EaglePageProvider_CreateFromIntArray(col2Data, pageSize, pageSize, &quot;col2&quot;);</span>
+<span class="lineNum">     257 </span><span class="lineCov">          1 :     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);</span>
+<span class="lineNum">     258 </span><span class="lineCov">          1 :     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2, EagleTrue), EagleTrue);</span>
+<span class="lineNum">     259 </span>            :     
+<span class="lineNum">     260 </span>            :     // compile plan
+<span class="lineNum">     261 </span><span class="lineCov">          1 :     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);</span>
+<span class="lineNum">     262 </span>            :     //printf(&quot;\n%s\n&quot;, EaglePlan_toString(plan));
+<span class="lineNum">     263 </span>            :     
+<span class="lineNum">     264 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(plan-&gt;usedProviders, 5);</span>
+<span class="lineNum">     265 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(plan-&gt;usedOperations, 5);</span>
+<span class="lineNum">     266 </span>            :     
+<span class="lineNum">     267 </span>            :     // execute
+<span class="lineNum">     268 </span><span class="lineCov">          1 :     EagleInstance *eagle = EagleInstance_New(1);</span>
+<span class="lineNum">     269 </span><span class="lineCov">          1 :     EagleInstance_addPlan(eagle, plan);</span>
+<span class="lineNum">     270 </span><span class="lineCov">          1 :     EagleInstance_run(eagle);</span>
+<span class="lineNum">     271 </span>            :     
+<span class="lineNum">     272 </span>            :     // validate result
+<span class="lineNum">     273 </span><span class="lineCov">         32 :     CREATE_EXPRESSION_ARRAY(answers_0, pageSize, col1Data[i]);          // col1</span>
+<span class="lineNum">     274 </span><span class="lineCov">         32 :     CREATE_EXPRESSION_ARRAY(answers_1, pageSize, col2Data[i] + 8);      // col2 + 8</span>
+<span class="lineNum">     275 </span>            :     
+<span class="lineNum">     276 </span><span class="lineCov">          1 :     int **answers = (int**) calloc(exprs, sizeof(int*));</span>
+<span class="lineNum">     277 </span><span class="lineCov">          1 :     answers[0] = (int*) calloc(totalResults, sizeof(int));</span>
+<span class="lineNum">     278 </span><span class="lineCov">          1 :     answers[1] = (int*) calloc(totalResults, sizeof(int));</span>
+<span class="lineNum">     279 </span>            :     
+<span class="lineNum">     280 </span><span class="lineCov">         22 :     for(int i = 0, j = 0; i &lt; pageSize; ++i) {</span>
+<span class="lineNum">     281 </span><span class="lineCov">         10 :         if(col1Data[i] % 2 == 1) {</span>
+<span class="lineNum">     282 </span><span class="lineCov">          5 :             answers[0][j] = answers_0[i];</span>
+<span class="lineNum">     283 </span><span class="lineCov">          5 :             answers[1][j] = answers_1[i];</span>
+<span class="lineNum">     284 </span><span class="lineCov">          5 :             ++j;</span>
+<span class="lineNum">     285 </span><span class="lineCov">          5 :         }</span>
+<span class="lineNum">     286 </span><span class="lineCov">         10 :     }</span>
+<span class="lineNum">     287 </span>            :     
+<span class="lineNum">     288 </span>            :     // suvtract 1 becuase the WHERE clause does not get emitted
+<span class="lineNum">     289 </span><span class="lineCov">          6 :     for(int i = 0; i &lt; plan-&gt;resultFields - 1; ++i) {</span>
+<span class="lineNum">     290 </span><span class="lineCov">          2 :         EaglePage *page = EaglePageProvider_nextPage(plan-&gt;result[i]);</span>
+<span class="lineNum">     291 </span><span class="lineCov">          4 :         CUNIT_ASSERT_NOT_NULL(page);</span>
+<span class="lineNum">     292 </span>            :         
+<span class="lineNum">     293 </span>            :         // there should only be 5 records in each page because of the modulus
+<span class="lineNum">     294 </span><span class="lineCov">          4 :         CUNIT_VERIFY_EQUAL_INT(page-&gt;count, totalResults);</span>
+<span class="lineNum">     295 </span>            :         
+<span class="lineNum">     296 </span><span class="lineCov">          2 :         int valid = 1;</span>
+<span class="lineNum">     297 </span><span class="lineCov">         24 :         for(int j = 0; j &lt; page-&gt;count; ++j) {</span>
+<span class="lineNum">     298 </span><span class="lineCov">         10 :             if(((int*) page-&gt;data)[j] != answers[i][j]) {</span>
+<span class="lineNum">     299 </span><span class="lineNoCov">          0 :                 valid = 0;</span>
+<span class="lineNum">     300 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     301 </span>            :             }
+<span class="lineNum">     302 </span><span class="lineCov">         10 :         }</span>
+<span class="lineNum">     303 </span><span class="lineCov">          4 :         CUNIT_VERIFY_EQUAL_INT(valid, 1);</span>
+<span class="lineNum">     304 </span>            :         
+<span class="lineNum">     305 </span><span class="lineCov">          2 :         EaglePage_Delete(page);</span>
+<span class="lineNum">     306 </span><span class="lineCov">          2 :     }</span>
+<span class="lineNum">     307 </span>            :     
+<span class="lineNum">     308 </span><span class="lineCov">          1 :     free(col1Data);</span>
+<span class="lineNum">     309 </span><span class="lineCov">          1 :     free(col2Data);</span>
+<span class="lineNum">     310 </span><span class="lineCov">          8 :     for(int i = 0; i &lt; exprs; ++i) {</span>
+<span class="lineNum">     311 </span><span class="lineCov">          3 :         EagleDbSqlExpression_DeleteRecursive(expr[i]);</span>
+<span class="lineNum">     312 </span><span class="lineCov">          3 :     }</span>
+<span class="lineNum">     313 </span><span class="lineCov">          8 :     for(int i = 0; i &lt; plan-&gt;resultFields; ++i) {</span>
+<span class="lineNum">     314 </span><span class="lineCov">          3 :         EagleMemory_Free(answers[i]);</span>
+<span class="lineNum">     315 </span><span class="lineCov">          3 :     }</span>
+<span class="lineNum">     316 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     317 </span><span class="lineCov">          1 :     EagleMemory_Free(answers_0);</span>
+<span class="lineNum">     318 </span><span class="lineCov">          1 :     EagleMemory_Free(answers_1);</span>
+<span class="lineNum">     319 </span><span class="lineCov">          1 :     EagleMemory_Free(answers);</span>
+<span class="lineNum">     320 </span><span class="lineCov">          1 :     EagleMemory_Free(expr);</span>
+<span class="lineNum">     321 </span><span class="lineCov">          1 :     EagleInstance_Delete(eagle);</span>
+<a name="322"><span class="lineNum">     322 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     323 </span>            : 
+<span class="lineNum">     324 </span>            : CUNIT_TEST(DBSuite, EagleDbConsole_New)
+<span class="lineNum">     325 </span>            : {
+<span class="lineNum">     326 </span><span class="lineCov">          1 :     EagleDbConsole *console = EagleDbConsole_New();</span>
+<span class="lineNum">     327 </span><span class="lineCov">          1 :     EagleDbConsole_Delete(console);</span>
+<a name="328"><span class="lineNum">     328 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     329 </span>            : 
+<span class="lineNum">     330 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_New)
+<span class="lineNum">     331 </span>            : {
+<span class="lineNum">     332 </span><span class="lineCov">          1 :     EagleDbInstance *instance = EagleDbInstance_New(1000);</span>
+<span class="lineNum">     333 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(instance);</span>
+<a name="334"><span class="lineNum">     334 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     335 </span>            : 
+<span class="lineNum">     336 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
+<span class="lineNum">     337 </span>            : {
+<span class="lineNum">     338 </span><span class="lineCov">          1 :     EagleDbSqlValue *v = EagleDbSqlValue_NewWithAsterisk();</span>
+<span class="lineNum">     339 </span><span class="lineCov">          1 :     char *desc = EagleDbSqlValue_toString(v);</span>
+<span class="lineNum">     340 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_STRING(desc, &quot;*&quot;);</span>
+<span class="lineNum">     341 </span><span class="lineCov">          1 :     free(desc);</span>
+<span class="lineNum">     342 </span><span class="lineCov">          1 :     EagleDbSqlValue_Delete(v);</span>
+<a name="343"><span class="lineNum">     343 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     344 </span>            : 
+<span class="lineNum">     345 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
+<span class="lineNum">     346 </span>            : {
+<span class="lineNum">     347 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     348 </span><span class="lineCov">          1 :     EaglePlan *plan = EaglePlan_New(1);</span>
+<span class="lineNum">     349 </span>            :     
+<span class="lineNum">     350 </span><span class="lineCov">          1 :     int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);</span>
+<span class="lineNum">     351 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_INT(result, 0);</span>
+<span class="lineNum">     352 </span>            :     
+<span class="lineNum">     353 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<span class="lineNum">     354 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<a name="355"><span class="lineNum">     355 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     356 </span>            : 
+<span class="lineNum">     357 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlExpression_toString)
+<span class="lineNum">     358 </span>            : {
+<span class="lineNum">     359 </span><span class="lineCov">          1 :     char *desc = EagleDbSqlExpression_toString(NULL);</span>
+<span class="lineNum">     360 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_STRING(desc, &quot;&quot;);</span>
+<span class="lineNum">     361 </span><span class="lineCov">          1 :     free(desc);</span>
+<span class="lineNum">     362 </span>            :     
+<span class="lineNum">     363 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     364 </span><span class="lineCov">          1 :     desc = EagleDbSqlExpression_toString((EagleDbSqlExpression*) select);</span>
+<span class="lineNum">     365 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_STRING(desc, &quot;SELECT  FROM &quot;);</span>
+<span class="lineNum">     366 </span><span class="lineCov">          1 :     free(desc);</span>
+<span class="lineNum">     367 </span><span class="lineCov">          1 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);</span>
+<a name="368"><span class="lineNum">     368 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     369 </span>            : 
+<span class="lineNum">     370 </span>            : CUNIT_TEST(DBSuite, EagleDbTuple_setInt)
+<span class="lineNum">     371 </span>            : {
+<span class="lineNum">     372 </span><span class="lineCov">          1 :     EagleLogger_Get()-&gt;out = NULL;</span>
+<span class="lineNum">     373 </span>            :     
+<span class="lineNum">     374 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     375 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeText));</span>
+<span class="lineNum">     376 </span>            :     
+<span class="lineNum">     377 </span><span class="lineCov">          1 :     EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     378 </span><span class="lineCov">          1 :     EagleDbTuple_setInt(tuple, 0, 123);</span>
+<span class="lineNum">     379 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Wrong type.&quot;);</span>
+<span class="lineNum">     380 </span>            :     
+<span class="lineNum">     381 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     382 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="383"><span class="lineNum">     383 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     384 </span>            : 
+<span class="lineNum">     385 </span>            : CUNIT_TEST(DBSuite, EagleDbTuple_setText)
+<span class="lineNum">     386 </span>            : {
+<span class="lineNum">     387 </span><span class="lineCov">          1 :     EagleLogger_Get()-&gt;out = NULL;</span>
+<span class="lineNum">     388 </span>            :     
+<span class="lineNum">     389 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     390 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     391 </span>            :     
+<span class="lineNum">     392 </span><span class="lineCov">          1 :     EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     393 </span><span class="lineCov">          1 :     EagleDbTuple_setText(tuple, 0, &quot;123&quot;);</span>
+<span class="lineNum">     394 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Wrong type.&quot;);</span>
+<span class="lineNum">     395 </span>            :     
+<span class="lineNum">     396 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     397 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="398"><span class="lineNum">     398 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     399 </span>            : 
+<span class="lineNum">     400 </span>            : CUNIT_TEST(DBSuite, EagleDbTuple_toString)
+<span class="lineNum">     401 </span>            : {
+<span class="lineNum">     402 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     403 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeUnknown));</span>
+<span class="lineNum">     404 </span>            :     
+<span class="lineNum">     405 </span><span class="lineCov">          1 :     EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     406 </span><span class="lineCov">          1 :     char *desc = EagleDbTuple_toString(tuple);</span>
+<span class="lineNum">     407 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_STRING(desc, &quot;(a=?)&quot;);</span>
+<span class="lineNum">     408 </span><span class="lineCov">          1 :     free(desc);</span>
+<span class="lineNum">     409 </span>            :     
+<span class="lineNum">     410 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     411 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="412"><span class="lineNum">     412 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     413 </span>            : 
+<span class="lineNum">     414 </span>            : CUNIT_TEST(DBSuite, EagleDbTableData_New)
+<span class="lineNum">     415 </span>            : {
+<span class="lineNum">     416 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbTableData_New(NULL, 0));</span>
+<a name="417"><span class="lineNum">     417 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     418 </span>            : 
+<span class="lineNum">     419 </span>            : CUNIT_TEST(DBSuite, EagleDbTableData_Delete)
+<span class="lineNum">     420 </span>            : {
+<span class="lineNum">     421 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(NULL);</span>
+<span class="lineNum">     422 </span>            :     
+<span class="lineNum">     423 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     424 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     425 </span>            :     
+<span class="lineNum">     426 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbTableData_New(table, 1);</span>
+<span class="lineNum">     427 </span>            :     
+<span class="lineNum">     428 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     429 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="430"><span class="lineNum">     430 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     431 </span>            : 
+<span class="lineNum">     432 </span>            : CUNIT_TEST(DBSuite, EagleDbTableData_insert)
+<span class="lineNum">     433 </span>            : {
+<span class="lineNum">     434 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     435 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     436 </span>            :     
+<span class="lineNum">     437 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbTableData_New(table, 1);</span>
+<span class="lineNum">     438 </span>            :     
+<span class="lineNum">     439 </span><span class="lineCov">          1 :     EagleDbTuple *tuple = EagleDbTuple_New(table);</span>
+<span class="lineNum">     440 </span><span class="lineCov">          1 :     EagleDbTuple_setInt(tuple, 0, 123);</span>
+<span class="lineNum">     441 </span>            :     
+<span class="lineNum">     442 </span><span class="lineCov">          1 :     td-&gt;providers[0]-&gt;type = EagleDataTypeUnknown;</span>
+<span class="lineNum">     443 </span><span class="lineCov">          1 :     EagleDbTableData_insert(td, tuple);</span>
+<span class="lineNum">     444 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     445 </span>            :     
+<span class="lineNum">     446 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     447 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="448"><span class="lineNum">     448 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     449 </span>            : 
+<span class="lineNum">     450 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse1)
+<span class="lineNum">     451 </span>            : {
+<span class="lineNum">     452 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     453 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(NULL, NULL));</span>
+<span class="lineNum">     454 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(select, NULL));</span>
+<span class="lineNum">     455 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<a name="456"><span class="lineNum">     456 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     457 </span>            : 
+<span class="lineNum">     458 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
+<span class="lineNum">     459 </span>            : {
+<span class="lineNum">     460 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     461 </span><span class="lineCov">          1 :     char *tableName = &quot;mytable&quot;;</span>
+<span class="lineNum">     462 </span><span class="lineCov">          1 :     EagleDbInstance *instance = EagleDbInstance_New(pageSize);</span>
+<span class="lineNum">     463 </span>            :     
+<span class="lineNum">     464 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(tableName);</span>
+<span class="lineNum">     465 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     466 </span>            :     
+<span class="lineNum">     467 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     468 </span><span class="lineCov">          1 :     select-&gt;tableName = strdup(tableName);</span>
+<span class="lineNum">     469 </span><span class="lineCov">          1 :     select-&gt;selectExpressions = EagleLinkedList_New();</span>
+<span class="lineNum">     470 </span><span class="lineCov">          1 :     EagleLinkedList_add(select-&gt;selectExpressions, EagleLinkedListItem_New(EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*))EagleDbSqlValue_Delete));</span>
+<span class="lineNum">     471 </span><span class="lineCov">          1 :     select-&gt;whereExpression = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);</span>
+<span class="lineNum">     472 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);</span>
+<span class="lineNum">     473 </span>            :     
+<span class="lineNum">     474 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbInstance_getSchema(instance, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     475 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);</span>
+<span class="lineNum">     476 </span><span class="lineCov">          1 :     EagleDbSchema_addTable(schema, td);</span>
+<span class="lineNum">     477 </span>            :     
+<span class="lineNum">     478 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(EagleDbInstance_getTable(instance, tableName));</span>
+<span class="lineNum">     479 </span>            :     
+<span class="lineNum">     480 </span><span class="lineCov">          1 :     EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);</span>
+<span class="lineNum">     481 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NOT_NULL(plan);</span>
+<span class="lineNum">     482 </span>            :     
+<span class="lineNum">     483 </span><span class="lineCov">          1 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);</span>
+<span class="lineNum">     484 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<span class="lineNum">     485 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     486 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(instance);</span>
+<span class="lineNum">     487 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<a name="488"><span class="lineNum">     488 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     489 </span>            : 
+<span class="lineNum">     490 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
+<span class="lineNum">     491 </span>            : {
+<span class="lineNum">     492 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     493 </span><span class="lineCov">          1 :     char *tableName = &quot;mytable&quot;;</span>
+<span class="lineNum">     494 </span><span class="lineCov">          1 :     EagleDbInstance *instance = EagleDbInstance_New(pageSize);</span>
+<span class="lineNum">     495 </span>            :     
+<span class="lineNum">     496 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     497 </span><span class="lineCov">          1 :     select-&gt;tableName = strdup(tableName);</span>
+<span class="lineNum">     498 </span><span class="lineCov">          1 :     select-&gt;selectExpressions = EagleLinkedList_New();</span>
+<span class="lineNum">     499 </span><span class="lineCov">          1 :     EagleLinkedList_addObject(select-&gt;selectExpressions, EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*)) EagleDbSqlValue_Delete);</span>
+<span class="lineNum">     500 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);</span>
+<span class="lineNum">     501 </span>            :     
+<span class="lineNum">     502 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NULL(EagleDbInstance_getTable(instance, tableName));</span>
+<span class="lineNum">     503 </span>            :     
+<span class="lineNum">     504 </span><span class="lineCov">          1 :     EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);</span>
+<span class="lineNum">     505 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NOT_NULL(plan);</span>
+<span class="lineNum">     506 </span><span class="lineCov">          1 :     if(NULL != plan) {</span>
+<span class="lineNum">     507 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_INT(plan-&gt;errorCode, EaglePlanErrorNoSuchTable);</span>
+<span class="lineNum">     508 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_STRING(plan-&gt;errorMessage, tableName);</span>
+<span class="lineNum">     509 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     510 </span>            :     
+<span class="lineNum">     511 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<span class="lineNum">     512 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(instance);</span>
+<span class="lineNum">     513 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<a name="514"><span class="lineNum">     514 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     515 </span>            : 
+<span class="lineNum">     516 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
+<span class="lineNum">     517 </span>            : {
+<span class="lineNum">     518 </span><span class="lineCov">          1 :     EagleDbInstance_PrintResults(NULL);</span>
+<span class="lineNum">     519 </span>            :     
+<span class="lineNum">     520 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     521 </span><span class="lineCov">          1 :     EaglePlan *plan = EaglePlan_New(pageSize);</span>
+<span class="lineNum">     522 </span>            :     
+<span class="lineNum">     523 </span><span class="lineCov">          1 :     plan-&gt;resultFields = 1;</span>
+<span class="lineNum">     524 </span><span class="lineCov">          1 :     plan-&gt;result = (EaglePageProvider**) calloc(plan-&gt;resultFields, sizeof(EaglePageProvider*));</span>
+<span class="lineNum">     525 </span><span class="lineCov">          1 :     plan-&gt;result[0] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, &quot;name&quot;);</span>
+<span class="lineNum">     526 </span>            :     
+<span class="lineNum">     527 </span>            :     // some data
+<span class="lineNum">     528 </span><span class="lineCov">          1 :     int *data = EagleData_Int(123);</span>
+<span class="lineNum">     529 </span><span class="lineCov">          1 :     EaglePageProvider_add(plan-&gt;result[0], data);</span>
+<span class="lineNum">     530 </span><span class="lineCov">          1 :     free(data);</span>
+<span class="lineNum">     531 </span>            :     
+<span class="lineNum">     532 </span><span class="lineCov">          1 :     EagleDbInstance_PrintResults(plan);</span>
+<span class="lineNum">     533 </span><span class="lineCov">          1 :     EaglePageProvider_Delete(plan-&gt;result[0]);</span>
+<span class="lineNum">     534 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<a name="535"><span class="lineNum">     535 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     536 </span>            : 
+<span class="lineNum">     537 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
+<span class="lineNum">     538 </span>            : {
+<span class="lineNum">     539 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     540 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     541 </span>            :     
+<span class="lineNum">     542 </span><span class="lineCov">          1 :     EagleDbInstance_executeSelect(db, select);</span>
+<span class="lineNum">     543 </span>            :     
+<span class="lineNum">     544 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     545 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<a name="546"><span class="lineNum">     546 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     547 </span>            : 
+<span class="lineNum">     548 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
+<span class="lineNum">     549 </span>            : {
+<span class="lineNum">     550 </span><span class="lineCov">          1 :     const char *tableName = &quot;mytable&quot;;</span>
+<span class="lineNum">     551 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     552 </span>            :     
+<span class="lineNum">     553 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     554 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     555 </span><span class="lineCov">          1 :     select-&gt;tableName = strdup(tableName);</span>
+<span class="lineNum">     556 </span><span class="lineCov">          1 :     select-&gt;selectExpressions = EagleLinkedList_New();</span>
+<span class="lineNum">     557 </span><span class="lineCov">          1 :     EagleLinkedList_addObject(select-&gt;selectExpressions, EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*)) EagleDbSqlValue_Delete);</span>
+<span class="lineNum">     558 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);</span>
+<span class="lineNum">     559 </span>            :     
+<span class="lineNum">     560 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New((char*) tableName);</span>
+<span class="lineNum">     561 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     562 </span>            :     
+<span class="lineNum">     563 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     564 </span>            :     
+<span class="lineNum">     565 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);</span>
+<span class="lineNum">     566 </span><span class="lineCov">          1 :     EagleDbSchema_addTable(schema, td);</span>
+<span class="lineNum">     567 </span>            :     
+<span class="lineNum">     568 </span><span class="lineCov">          1 :     EagleDbInstance_executeSelect(db, select);</span>
+<span class="lineNum">     569 </span>            :     
+<span class="lineNum">     570 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     571 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<span class="lineNum">     572 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<span class="lineNum">     573 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td);</span>
+<a name="574"><span class="lineNum">     574 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     575 </span>            : 
+<span class="lineNum">     576 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
+<span class="lineNum">     577 </span>            : {
+<span class="lineNum">     578 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     579 </span>            :     
+<span class="lineNum">     580 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     581 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;a&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     582 </span>            :     
+<span class="lineNum">     583 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table));</span>
+<span class="lineNum">     584 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Table \&quot;default.mytable\&quot; created.&quot;);</span>
+<span class="lineNum">     585 </span>            :     
+<span class="lineNum">     586 </span><span class="lineCov">          1 :     EagleDbInstance_DeleteAll(db);</span>
+<a name="587"><span class="lineNum">     587 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     588 </span>            : 
+<span class="lineNum">     589 </span>            : CUNIT_TEST(DBSuite, _DuplicateTable)
+<span class="lineNum">     590 </span>            : {
+<span class="lineNum">     591 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     592 </span>            :     
+<span class="lineNum">     593 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, &quot;CREATE TABLE sometable (id INT);&quot;));</span>
+<span class="lineNum">     594 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Table \&quot;default.sometable\&quot; created.&quot;);</span>
+<span class="lineNum">     595 </span>            :     
+<span class="lineNum">     596 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, &quot;CREATE TABLE sometable (id INT);&quot;));</span>
+<span class="lineNum">     597 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Error: Table \&quot;default.sometable\&quot; already exists.&quot;);</span>
+<span class="lineNum">     598 </span>            :     
+<span class="lineNum">     599 </span><span class="lineCov">          1 :     EagleDbInstance_DeleteAll(db);</span>
+<a name="600"><span class="lineNum">     600 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     601 </span>            : 
+<span class="lineNum">     602 </span>            : CUNIT_TEST(DBSuite, _DuplicateSchema)
+<span class="lineNum">     603 </span>            : {
+<span class="lineNum">     604 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     605 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     606 </span>            :     
+<span class="lineNum">     607 </span><span class="lineCov">          2 :     CUNIT_VERIFY_FALSE(EagleDbInstance_addSchema(db, schema));</span>
+<span class="lineNum">     608 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Error: Schema \&quot;default\&quot; already exists.&quot;);</span>
+<span class="lineNum">     609 </span>            :     
+<span class="lineNum">     610 </span><span class="lineCov">          1 :     EagleDbSchema_Delete(schema);</span>
+<span class="lineNum">     611 </span><span class="lineCov">          1 :     EagleDbInstance_DeleteAll(db);</span>
+<a name="612"><span class="lineNum">     612 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     613 </span>            : 
+<span class="lineNum">     614 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
+<span class="lineNum">     615 </span>            : {
+<span class="lineNum">     616 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     617 </span>            :     
+<span class="lineNum">     618 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, &quot;CREATE TABLE sometable (id INT);&quot;));</span>
+<span class="lineNum">     619 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Table \&quot;default.sometable\&quot; created.&quot;);</span>
+<span class="lineNum">     620 </span>            :     
+<span class="lineNum">     621 </span><span class="lineCov">          1 :     EagleDbInstance_DeleteAll(db);</span>
+<a name="622"><span class="lineNum">     622 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     623 </span>            : 
+<span class="lineNum">     624 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
+<span class="lineNum">     625 </span>            : {
+<span class="lineNum">     626 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     627 </span>            :     
+<span class="lineNum">     628 </span><span class="lineCov">          2 :     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, &quot;CREATE TABL sometable (id INT);&quot;));</span>
+<span class="lineNum">     629 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Error: syntax error, unexpected identifier, expecting TABLE&quot;);</span>
+<span class="lineNum">     630 </span>            :     
+<span class="lineNum">     631 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<a name="632"><span class="lineNum">     632 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     633 </span>            : 
+<span class="lineNum">     634 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
+<span class="lineNum">     635 </span>            : {
+<span class="lineNum">     636 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     637 </span>            :     
+<span class="lineNum">     638 </span><span class="lineCov">          2 :     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, &quot;SELECT * FROM mytable;&quot;));</span>
+<span class="lineNum">     639 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;mytable&quot;);</span>
+<span class="lineNum">     640 </span>            :     
+<span class="lineNum">     641 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<a name="642"><span class="lineNum">     642 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
+<span class="lineNum">     645 </span>            : {
+<span class="lineNum">     646 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     647 </span>            :     
+<span class="lineNum">     648 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbInstance_getTable(db, &quot;no_such_table&quot;);</span>
+<span class="lineNum">     649 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(td);</span>
+<span class="lineNum">     650 </span>            :     
+<span class="lineNum">     651 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<a name="652"><span class="lineNum">     652 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     653 </span>            : 
+<span class="lineNum">     654 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
+<span class="lineNum">     655 </span>            : {
+<span class="lineNum">     656 </span><span class="lineCov">          1 :     int pageSize = 1;</span>
+<span class="lineNum">     657 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(pageSize);</span>
+<span class="lineNum">     658 </span>            :     
+<span class="lineNum">     659 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     660 </span>            :     
+<span class="lineNum">     661 </span><span class="lineCov">          1 :     EagleDbTable *table1 = EagleDbTable_New(&quot;table1&quot;);</span>
+<span class="lineNum">     662 </span><span class="lineCov">          1 :     EagleDbTableData *td1 = EagleDbTableData_New(table1, pageSize);</span>
+<span class="lineNum">     663 </span><span class="lineCov">          1 :     EagleDbSchema_addTable(schema, td1);</span>
+<span class="lineNum">     664 </span>            :     
+<span class="lineNum">     665 </span><span class="lineCov">          1 :     EagleDbTable *table2 = EagleDbTable_New(&quot;table2&quot;);</span>
+<span class="lineNum">     666 </span><span class="lineCov">          1 :     EagleDbTableData *td2 = EagleDbTableData_New(table2, pageSize);</span>
+<span class="lineNum">     667 </span><span class="lineCov">          1 :     EagleDbSchema_addTable(schema, td2);</span>
+<span class="lineNum">     668 </span>            :     
+<span class="lineNum">     669 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbInstance_getTable(db, &quot;table2&quot;);</span>
+<span class="lineNum">     670 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(td);</span>
+<span class="lineNum">     671 </span><span class="lineCov">          1 :     if(NULL != td) {</span>
+<span class="lineNum">     672 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_STRING(td-&gt;table-&gt;name, &quot;table2&quot;);</span>
+<span class="lineNum">     673 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     674 </span>            :     
+<span class="lineNum">     675 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     676 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td1);</span>
+<span class="lineNum">     677 </span><span class="lineCov">          1 :     EagleDbTableData_Delete(td2);</span>
+<span class="lineNum">     678 </span><span class="lineCov">          1 :     EagleDbTable_Delete(table1);</span>
+<span class="lineNum">     679 </span><span class="lineCov">          1 :     EagleDbTable_Delete(table2);</span>
+<a name="680"><span class="lineNum">     680 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     681 </span>            : 
+<span class="lineNum">     682 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
+<span class="lineNum">     683 </span>            : {
+<span class="lineNum">     684 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleDbInstance_New(1);</span>
+<span class="lineNum">     685 </span>            :     
+<span class="lineNum">     686 </span><span class="lineCov">          1 :     EagleDbSchema *schema1 = EagleDbSchema_New(&quot;schema1&quot;);</span>
+<span class="lineNum">     687 </span><span class="lineCov">          1 :     EagleDbInstance_addSchema(db, schema1);</span>
+<span class="lineNum">     688 </span>            :     
+<span class="lineNum">     689 </span><span class="lineCov">          1 :     EagleDbSchema *schema2 = EagleDbSchema_New(&quot;schema2&quot;);</span>
+<span class="lineNum">     690 </span><span class="lineCov">          1 :     EagleDbInstance_addSchema(db, schema2);</span>
+<span class="lineNum">     691 </span>            :     
+<span class="lineNum">     692 </span><span class="lineCov">          1 :     EagleDbSchema *schema = EagleDbInstance_getSchema(db, &quot;schema2&quot;);</span>
+<span class="lineNum">     693 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(schema);</span>
+<span class="lineNum">     694 </span><span class="lineCov">          1 :     if(NULL != schema) {</span>
+<span class="lineNum">     695 </span><span class="lineCov">          2 :         CUNIT_VERIFY_EQUAL_STRING(schema-&gt;name, &quot;schema2&quot;);</span>
+<span class="lineNum">     696 </span><span class="lineCov">          1 :     }</span>
+<span class="lineNum">     697 </span>            :     
+<span class="lineNum">     698 </span><span class="lineCov">          1 :     schema = EagleDbInstance_getSchema(db, &quot;schema3&quot;);</span>
+<span class="lineNum">     699 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(schema);</span>
+<span class="lineNum">     700 </span>            :     
+<span class="lineNum">     701 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     702 </span><span class="lineCov">          1 :     EagleDbSchema_Delete(schema1);</span>
+<span class="lineNum">     703 </span><span class="lineCov">          1 :     EagleDbSchema_Delete(schema2);</span>
+<a name="704"><span class="lineNum">     704 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     705 </span>            : 
+<span class="lineNum">     706 </span>            : CUNIT_TEST(DBSuite, EagleDbConsole_GetLine)
+<span class="lineNum">     707 </span>            : {
+<span class="lineNum">     708 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NULL(EagleDbConsole_GetLine());</span>
+<a name="709"><span class="lineNum">     709 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     710 </span>            : 
+<span class="lineNum">     711 </span>            : CUNIT_TEST(DBSuite, EagleDbConsole_run)
+<span class="lineNum">     712 </span>            : {
+<span class="lineNum">     713 </span><span class="lineCov">          1 :     EagleDbConsole_run(NULL);</span>
+<a name="714"><span class="lineNum">     714 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     715 </span>            : 
+<span class="lineNum">     716 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete2)
+<span class="lineNum">     717 </span>            : {
+<span class="lineNum">     718 </span><span class="lineCov">          1 :     EagleDbSqlSelect_Delete(NULL);</span>
+<a name="719"><span class="lineNum">     719 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     720 </span>            : 
+<span class="lineNum">     721 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
+<span class="lineNum">     722 </span>            : {
+<span class="lineNum">     723 </span><span class="lineCov">          1 :     EagleDbSqlExpression_Delete(NULL);</span>
+<span class="lineNum">     724 </span>            :     
+<span class="lineNum">     725 </span>            :     {
+<span class="lineNum">     726 </span><span class="lineCov">          1 :         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);</span>
+<span class="lineNum">     727 </span><span class="lineCov">          2 :         CUNIT_VERIFY_NOT_NULL(expr);</span>
+<span class="lineNum">     728 </span><span class="lineCov">          1 :         EagleDbSqlExpression_Delete(expr);</span>
+<span class="lineNum">     729 </span>            :     }
+<span class="lineNum">     730 </span>            :     
+<span class="lineNum">     731 </span>            :     {
+<span class="lineNum">     732 </span><span class="lineCov">          1 :         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlBinaryExpressionOperatorEquals, NULL);</span>
+<span class="lineNum">     733 </span><span class="lineCov">          2 :         CUNIT_VERIFY_NOT_NULL(expr);</span>
+<span class="lineNum">     734 </span><span class="lineCov">          1 :         EagleDbSqlExpression_Delete(expr);</span>
+<span class="lineNum">     735 </span>            :     }
+<span class="lineNum">     736 </span>            :     
+<span class="lineNum">     737 </span>            :     {
+<span class="lineNum">     738 </span><span class="lineCov">          1 :         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlSelect_New();</span>
+<span class="lineNum">     739 </span><span class="lineCov">          2 :         CUNIT_VERIFY_NOT_NULL(expr);</span>
+<span class="lineNum">     740 </span><span class="lineCov">          1 :         EagleDbSqlExpression_Delete(expr);</span>
+<span class="lineNum">     741 </span>            :     }
+<span class="lineNum">     742 </span>            :     
+<span class="lineNum">     743 </span>            :     {
+<span class="lineNum">     744 </span><span class="lineCov">          1 :         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);</span>
+<span class="lineNum">     745 </span><span class="lineCov">          2 :         CUNIT_VERIFY_NOT_NULL(expr);</span>
+<span class="lineNum">     746 </span><span class="lineCov">          1 :         EagleDbSqlExpression_Delete(expr);</span>
+<span class="lineNum">     747 </span>            :     }
+<a name="748"><span class="lineNum">     748 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     749 </span>            : 
+<span class="lineNum">     750 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_Delete)
+<span class="lineNum">     751 </span>            : {
+<span class="lineNum">     752 </span><span class="lineCov">          1 :     EagleDbInstance_Delete(NULL);</span>
+<a name="753"><span class="lineNum">     753 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     754 </span>            : 
+<span class="lineNum">     755 </span>            : CUNIT_TEST(DBSuite, EagleDbInstance_DeleteAll)
+<span class="lineNum">     756 </span>            : {
+<span class="lineNum">     757 </span><span class="lineCov">          1 :     EagleDbInstance_DeleteAll(NULL);</span>
+<a name="758"><span class="lineNum">     758 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     759 </span>            : 
+<span class="lineNum">     760 </span>            : CUNIT_TEST(DBSuite, EagleDbTuple_Delete)
+<span class="lineNum">     761 </span>            : {
+<span class="lineNum">     762 </span><span class="lineCov">          1 :     EagleDbTuple_Delete(NULL);</span>
+<a name="763"><span class="lineNum">     763 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     764 </span>            : 
+<span class="lineNum">     765 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlValue_Delete)
+<span class="lineNum">     766 </span>            : {
+<span class="lineNum">     767 </span><span class="lineCov">          1 :     EagleDbSqlValue_Delete(NULL);</span>
+<a name="768"><span class="lineNum">     768 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     769 </span>            : 
+<span class="lineNum">     770 </span>            : CUNIT_TEST(DBSuite, EagleDbConsole_Delete)
+<span class="lineNum">     771 </span>            : {
+<span class="lineNum">     772 </span><span class="lineCov">          1 :     EagleDbConsole_Delete(NULL);</span>
+<a name="773"><span class="lineNum">     773 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     774 </span>            : 
+<span class="lineNum">     775 </span>            : CUNIT_TEST(DBSuite, EagleDbTable_Delete)
+<span class="lineNum">     776 </span>            : {
+<span class="lineNum">     777 </span><span class="lineCov">          1 :     EagleDbTable_Delete(NULL);</span>
+<a name="778"><span class="lineNum">     778 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     779 </span>            : 
+<span class="lineNum">     780 </span>            : CUNIT_TEST(DBSuite, EagleDbTable_DeleteWithColumns)
+<span class="lineNum">     781 </span>            : {
+<span class="lineNum">     782 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(NULL);</span>
+<a name="783"><span class="lineNum">     783 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     784 </span>            : 
+<span class="lineNum">     785 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_Delete)
+<span class="lineNum">     786 </span>            : {
+<span class="lineNum">     787 </span><span class="lineCov">          1 :     EagleDbSqlBinaryExpression_Delete(NULL);</span>
+<a name="788"><span class="lineNum">     788 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     789 </span>            : 
+<span class="lineNum">     790 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_DeleteRecursive)
+<span class="lineNum">     791 </span>            : {
+<span class="lineNum">     792 </span><span class="lineCov">          1 :     EagleDbSqlBinaryExpression_DeleteRecursive(NULL);</span>
+<a name="793"><span class="lineNum">     793 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     794 </span>            : 
+<span class="lineNum">     795 </span>            : CUNIT_TEST(DBSuite, EagleDbColumn_Delete)
+<span class="lineNum">     796 </span>            : {
+<span class="lineNum">     797 </span><span class="lineCov">          1 :     EagleDbColumn_Delete(NULL);</span>
+<a name="798"><span class="lineNum">     798 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     799 </span>            : 
+<span class="lineNum">     800 </span><span class="lineCov">          9 : EagleDbInstance* EagleInstanceTest(int pageSize)</span>
+<span class="lineNum">     801 </span>            : {
+<span class="lineNum">     802 </span><span class="lineCov">          9 :     EagleDbInstance *db = EagleDbInstance_New(pageSize);</span>
+<span class="lineNum">     803 </span>            :     
+<span class="lineNum">     804 </span><span class="lineCov">          9 :     EagleDbSchema *schema =  EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     805 </span>            :     
+<span class="lineNum">     806 </span><span class="lineCov">          9 :     EagleDbTable *table = EagleDbTable_New(&quot;mytable&quot;);</span>
+<span class="lineNum">     807 </span><span class="lineCov">          9 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;col1&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     808 </span>            :     
+<span class="lineNum">     809 </span><span class="lineCov">          9 :     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);</span>
+<span class="lineNum">     810 </span><span class="lineCov">          9 :     EagleDbSchema_addTable(schema, td);</span>
+<span class="lineNum">     811 </span>            :     
+<span class="lineNum">     812 </span><span class="lineCov">          9 :     return db;</span>
+<a name="813"><span class="lineNum">     813 </span>            : }</a>
+<span class="lineNum">     814 </span>            : 
+<span class="lineNum">     815 </span><span class="lineCov">          9 : void EagleInstanceTest_Cleanup(EagleDbInstance* db)</span>
+<span class="lineNum">     816 </span>            : {
+<span class="lineNum">     817 </span><span class="lineCov">          9 :     EagleDbTable_DeleteWithColumns(db-&gt;schemas[0]-&gt;tables[0]-&gt;table);</span>
+<span class="lineNum">     818 </span><span class="lineCov">          9 :     EagleDbTableData_Delete(db-&gt;schemas[0]-&gt;tables[0]);</span>
+<span class="lineNum">     819 </span><span class="lineCov">          9 :     EagleDbInstance_Delete(db);</span>
+<a name="820"><span class="lineNum">     820 </span><span class="lineCov">          9 : }</span></a>
+<span class="lineNum">     821 </span>            : 
+<span class="lineNum">     822 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadTableName)
+<span class="lineNum">     823 </span>            : {
+<span class="lineNum">     824 </span><span class="lineCov">          1 :     EagleLogger_Get()-&gt;out = NULL;</span>
+<span class="lineNum">     825 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     826 </span>            :     
+<span class="lineNum">     827 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable2 (col1) VALUES (123);&quot;);</span>
+<span class="lineNum">     828 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     829 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;No such table 'mytable2'&quot;);</span>
+<span class="lineNum">     830 </span>            :     
+<span class="lineNum">     831 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="832"><span class="lineNum">     832 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     833 </span>            : 
+<span class="lineNum">     834 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
+<span class="lineNum">     835 </span>            : {
+<span class="lineNum">     836 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     837 </span>            :     
+<span class="lineNum">     838 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (col2) VALUES (123);&quot;);</span>
+<span class="lineNum">     839 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     840 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;No such column 'col2' in table 'mytable'&quot;);</span>
+<span class="lineNum">     841 </span>            :     
+<span class="lineNum">     842 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="843"><span class="lineNum">     843 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     844 </span>            : 
+<span class="lineNum">     845 </span>            : CUNIT_TEST(DBSuite, _INSERT_Good)
+<span class="lineNum">     846 </span>            : {
+<span class="lineNum">     847 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     848 </span>            :     
+<span class="lineNum">     849 </span>            :     // make sure there are no rows in the table
+<span class="lineNum">     850 </span><span class="lineCov">          1 :     EagleDbTableData *td = EagleDbInstance_getTable(db, &quot;mytable&quot;);</span>
+<span class="lineNum">     851 </span><span class="lineCov">          1 :     EaglePage *p = EaglePageProvider_nextPage(td-&gt;providers[0]);</span>
+<span class="lineNum">     852 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NULL(p);</span>
+<span class="lineNum">     853 </span>            :     
+<span class="lineNum">     854 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (col1) VALUES (123);&quot;);</span>
+<span class="lineNum">     855 </span><span class="lineCov">          1 :     if(EagleFalse == success) {</span>
+<span class="lineNum">     856 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(&quot;%s&quot;, EagleLogger_LastEvent()-&gt;message);</span>
+<span class="lineNum">     857 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     858 </span>            :     
+<span class="lineNum">     859 </span><span class="lineCov">          1 :     p = EaglePageProvider_nextPage(td-&gt;providers[0]);</span>
+<span class="lineNum">     860 </span><span class="lineCov">          2 :     CUNIT_ASSERT_NOT_NULL(p);</span>
+<span class="lineNum">     861 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_INT(p-&gt;count, 1);</span>
+<span class="lineNum">     862 </span>            :     
+<span class="lineNum">     863 </span><span class="lineCov">          1 :     EaglePage_Delete(p);</span>
+<span class="lineNum">     864 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="865"><span class="lineNum">     865 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     866 </span>            : 
+<span class="lineNum">     867 </span>            : CUNIT_TEST(DBSuite, EagleDbTable_getColumnIndex)
+<span class="lineNum">     868 </span>            : {
+<span class="lineNum">     869 </span><span class="lineCov">          1 :     EagleDbTable *table = EagleDbTable_New(&quot;bla&quot;);</span>
+<span class="lineNum">     870 </span><span class="lineCov">          1 :     EagleDbTable_addColumn(table, EagleDbColumn_New(&quot;bla&quot;, EagleDataTypeInteger));</span>
+<span class="lineNum">     871 </span>            :     
+<span class="lineNum">     872 </span><span class="lineCov">          2 :     CUNIT_ASSERT_EQUAL_INT(-1, EagleDbTable_getColumnIndex(table, &quot;nope&quot;));</span>
+<span class="lineNum">     873 </span>            :     
+<span class="lineNum">     874 </span><span class="lineCov">          1 :     EagleDbTable_DeleteWithColumns(table);</span>
+<a name="875"><span class="lineNum">     875 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     876 </span>            : 
+<span class="lineNum">     877 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlInsert_Delete)
+<span class="lineNum">     878 </span>            : {
+<span class="lineNum">     879 </span><span class="lineCov">          1 :     EagleDbSqlInsert_Delete(NULL);</span>
+<a name="880"><span class="lineNum">     880 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     881 </span>            : 
+<span class="lineNum">     882 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadMatch)
+<span class="lineNum">     883 </span>            : {
+<span class="lineNum">     884 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     885 </span>            :     
+<span class="lineNum">     886 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (col1, col2) VALUES (123);&quot;);</span>
+<span class="lineNum">     887 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     888 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;There are 2 columns and 1 values&quot;);</span>
+<span class="lineNum">     889 </span>            :     
+<span class="lineNum">     890 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="891"><span class="lineNum">     891 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     892 </span>            : 
+<span class="lineNum">     893 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadColumn1)
+<span class="lineNum">     894 </span>            : {
+<span class="lineNum">     895 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     896 </span>            :     
+<span class="lineNum">     897 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (123) VALUES (123);&quot;);</span>
+<span class="lineNum">     898 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     899 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;You cannot use expressions for column names&quot;);</span>
+<span class="lineNum">     900 </span>            :     
+<span class="lineNum">     901 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="902"><span class="lineNum">     902 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     903 </span>            : 
+<span class="lineNum">     904 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadColumn2)
+<span class="lineNum">     905 </span>            : {
+<span class="lineNum">     906 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     907 </span>            :     
+<span class="lineNum">     908 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (123 + 456) VALUES (123);&quot;);</span>
+<span class="lineNum">     909 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     910 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;You cannot use expressions for column names&quot;);</span>
+<span class="lineNum">     911 </span>            :     
+<span class="lineNum">     912 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="913"><span class="lineNum">     913 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     914 </span>            : 
+<span class="lineNum">     915 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadValue1)
+<span class="lineNum">     916 </span>            : {
+<span class="lineNum">     917 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     918 </span>            :     
+<span class="lineNum">     919 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (col1) VALUES (123 + 456);&quot;);</span>
+<span class="lineNum">     920 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     921 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Expressions in VALUES are not yet supported for column 'col1'&quot;);</span>
+<span class="lineNum">     922 </span>            :     
+<span class="lineNum">     923 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="924"><span class="lineNum">     924 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     925 </span>            : 
+<span class="lineNum">     926 </span>            : CUNIT_TEST(DBSuite, _INSERT_BadValue2)
+<span class="lineNum">     927 </span>            : {
+<span class="lineNum">     928 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">     929 </span>            :     
+<span class="lineNum">     930 </span><span class="lineCov">          1 :     EagleBoolean success = EagleDbInstance_execute(db, &quot;INSERT INTO mytable (col1) VALUES (col1);&quot;);</span>
+<span class="lineNum">     931 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">     932 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Only integers are supported for values&quot;);</span>
+<span class="lineNum">     933 </span>            :     
+<span class="lineNum">     934 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="935"><span class="lineNum">     935 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     936 </span>            : 
+<span class="lineNum">     937 </span>            : CUNIT_TEST(MainSuite, EagleDbSqlSelect_toString)
+<span class="lineNum">     938 </span>            : {
+<span class="lineNum">     939 </span><span class="lineCov">          1 :     EagleDbSqlSelect *select = EagleDbSqlSelect_New();</span>
+<span class="lineNum">     940 </span><span class="lineCov">          1 :     select-&gt;selectExpressions = EagleLinkedList_New();</span>
+<span class="lineNum">     941 </span><span class="lineCov">          1 :     EagleLinkedList_addObject(select-&gt;selectExpressions, EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*))EagleDbSqlExpression_DeleteRecursive);</span>
+<span class="lineNum">     942 </span><span class="lineCov">          1 :     EagleLinkedList_addObject(select-&gt;selectExpressions, EagleDbSqlValue_NewWithInteger(456), EagleTrue, (void(*)(void*))EagleDbSqlExpression_DeleteRecursive);</span>
+<span class="lineNum">     943 </span><span class="lineCov">          1 :     select-&gt;whereExpression = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(789);</span>
+<span class="lineNum">     944 </span>            :     
+<span class="lineNum">     945 </span><span class="lineCov">          1 :     char *desc = EagleDbSqlSelect_toString(select);</span>
+<span class="lineNum">     946 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_STRING(desc, &quot;SELECT 123, 456 FROM  WHERE 789&quot;);</span>
+<span class="lineNum">     947 </span><span class="lineCov">          1 :     free(desc);</span>
+<span class="lineNum">     948 </span>            :     
+<span class="lineNum">     949 </span><span class="lineCov">          1 :     EagleDbSqlSelect_DeleteRecursive(select);</span>
+<a name="950"><span class="lineNum">     950 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     951 </span>            : 
+<span class="lineNum">     952 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
+<span class="lineNum">     953 </span>            : {
+<span class="lineNum">     954 </span><span class="lineCov">          1 :     EagleDbSqlExpression *op = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);</span>
+<span class="lineNum">     955 </span><span class="lineCov">          1 :     EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, op);</span>
+<span class="lineNum">     956 </span><span class="lineCov">          1 :     EaglePlan *plan = EaglePlan_New(1);</span>
+<span class="lineNum">     957 </span>            :     
+<span class="lineNum">     958 </span><span class="lineCov">          1 :     EaglePlan_prepareBuffers(plan, 10);</span>
+<span class="lineNum">     959 </span><span class="lineCov">          1 :     int destinationBuffer = 0;</span>
+<span class="lineNum">     960 </span><span class="lineCov">          1 :     int result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &amp;destinationBuffer, plan);</span>
+<span class="lineNum">     961 </span><span class="lineCov">          2 :     CUNIT_VERIFY_EQUAL_INT(result, EagleDbSqlExpression_ERROR);</span>
+<span class="lineNum">     962 </span>            :     
+<span class="lineNum">     963 </span><span class="lineCov">          1 :     EagleDbSqlExpression_DeleteRecursive(expr);</span>
+<span class="lineNum">     964 </span><span class="lineCov">          1 :     EaglePlan_Delete(plan);</span>
+<a name="965"><span class="lineNum">     965 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     966 </span>            : 
+<span class="lineNum">     967 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_Delete)
+<span class="lineNum">     968 </span>            : {
+<span class="lineNum">     969 </span><span class="lineCov">          1 :     EagleDbSqlUnaryExpression_Delete(NULL);</span>
+<a name="970"><span class="lineNum">     970 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     971 </span>            : 
+<span class="lineNum">     972 </span>            : CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive)
+<span class="lineNum">     973 </span>            : {
+<span class="lineNum">     974 </span><span class="lineCov">          1 :     EagleDbSqlUnaryExpression_DeleteRecursive(NULL);</span>
+<a name="975"><span class="lineNum">     975 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     976 </span>            : 
+<span class="lineNum">     977 </span>            : CUNIT_TEST(DBSuite, EagleDbParser_lastError)
+<span class="lineNum">     978 </span>            : {
+<span class="lineNum">     979 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbParser_lastError(NULL));</span>
+<span class="lineNum">     980 </span>            :     
+<span class="lineNum">     981 </span><span class="lineCov">          1 :     EagleDbParser *parser = EagleDbParser_New();</span>
+<span class="lineNum">     982 </span><span class="lineCov">          2 :     CUNIT_VERIFY_NULL(EagleDbParser_lastError(parser));</span>
+<span class="lineNum">     983 </span><span class="lineCov">          1 :     EagleDbParser_Delete(parser);</span>
+<a name="984"><span class="lineNum">     984 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     985 </span>            : 
+<span class="lineNum">     986 </span>            : CUNIT_TEST(DBSuite, EagleDbParser_Delete)
+<span class="lineNum">     987 </span>            : {
+<span class="lineNum">     988 </span><span class="lineCov">          1 :     EagleDbParser_Delete(NULL);</span>
+<a name="989"><span class="lineNum">     989 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     990 </span>            : 
+<span class="lineNum">     991 </span>            : CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
+<span class="lineNum">     992 </span>            : {
+<span class="lineNum">     993 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword(&quot;CREATE&quot;));</span>
+<span class="lineNum">     994 </span><span class="lineCov">          2 :     CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword(&quot;table&quot;));</span>
+<span class="lineNum">     995 </span><span class="lineCov">          2 :     CUNIT_VERIFY_FALSE(EagleDbParser_IsKeyword(&quot;notakeyword&quot;));</span>
+<a name="996"><span class="lineNum">     996 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     997 </span>            : 
+<span class="lineNum">     998 </span>            : CUNIT_TEST(DBSuite, _BadEntityName)
+<span class="lineNum">     999 </span>            : {
+<span class="lineNum">    1000 </span><span class="lineCov">          1 :     EagleDbInstance *db = EagleInstanceTest(10);</span>
+<span class="lineNum">    1001 </span><span class="lineCov">          1 :     EagleBoolean success;</span>
+<span class="lineNum">    1002 </span>            :     
+<span class="lineNum">    1003 </span><span class="lineCov">          1 :     success = EagleDbInstance_execute(db, &quot;CREATE TABLE insert (col1 int);&quot;);</span>
+<span class="lineNum">    1004 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">    1005 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Error: You cannot use the keyword 'INSERT' for an table name.&quot;);</span>
+<span class="lineNum">    1006 </span>            :     
+<span class="lineNum">    1007 </span><span class="lineCov">          1 :     success = EagleDbInstance_execute(db, &quot;CREATE TABLE mytable (TABLE int);&quot;);</span>
+<span class="lineNum">    1008 </span><span class="lineCov">          2 :     CUNIT_ASSERT_FALSE(success);</span>
+<span class="lineNum">    1009 </span><span class="lineCov">          6 :     CUNIT_ASSERT_LAST_ERROR(&quot;Error: You cannot use the keyword 'TABLE' for a column name.&quot;);</span>
+<span class="lineNum">    1010 </span>            :     
+<span class="lineNum">    1011 </span><span class="lineCov">          1 :     EagleInstanceTest_Cleanup(db);</span>
+<a name="1012"><span class="lineNum">    1012 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">    1013 </span>            : 
+<span class="lineNum">    1014 </span>            : CUnitTests* DBSuite_tests()
+<span class="lineNum">    1015 </span>            : {
+<span class="lineNum">    1016 </span><span class="lineCov">          1 :     CUnitTests *tests = CUnitTests_New(1000);</span>
+<span class="lineNum">    1017 </span>            :     
+<span class="lineNum">    1018 </span>            :     // method tests
+<span class="lineNum">    1019 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));</span>
+<span class="lineNum">    1020 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));</span>
+<span class="lineNum">    1021 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));</span>
+<span class="lineNum">    1022 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));</span>
+<span class="lineNum">    1023 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));</span>
+<span class="lineNum">    1024 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));</span>
+<span class="lineNum">    1025 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));</span>
+<span class="lineNum">    1026 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_Delete));</span>
+<span class="lineNum">    1027 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));</span>
+<span class="lineNum">    1028 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDbSqlSelect_toString));</span>
+<span class="lineNum">    1029 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue2));</span>
+<span class="lineNum">    1030 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue1));</span>
+<span class="lineNum">    1031 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn2));</span>
+<span class="lineNum">    1032 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn1));</span>
+<span class="lineNum">    1033 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadMatch));</span>
+<span class="lineNum">    1034 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlInsert_Delete));</span>
+<span class="lineNum">    1035 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_getColumnIndex));</span>
+<span class="lineNum">    1036 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_Good));</span>
+<span class="lineNum">    1037 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumnName));</span>
+<span class="lineNum">    1038 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadTableName));</span>
+<span class="lineNum">    1039 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_Delete));</span>
+<span class="lineNum">    1040 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_DeleteRecursive));</span>
+<span class="lineNum">    1041 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_Delete));</span>
+<span class="lineNum">    1042 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_DeleteWithColumns));</span>
+<span class="lineNum">    1043 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_Delete));</span>
+<span class="lineNum">    1044 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_Delete));</span>
+<span class="lineNum">    1045 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_Delete));</span>
+<span class="lineNum">    1046 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_Delete));</span>
+<span class="lineNum">    1047 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_Delete));</span>
+<span class="lineNum">    1048 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_DeleteAll));</span>
+<span class="lineNum">    1049 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_Delete));</span>
+<span class="lineNum">    1050 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete2));</span>
+<span class="lineNum">    1051 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));</span>
+<span class="lineNum">    1052 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_GetLine));</span>
+<span class="lineNum">    1053 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));</span>
+<span class="lineNum">    1054 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable2));</span>
+<span class="lineNum">    1055 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable1));</span>
+<span class="lineNum">    1056 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute3));</span>
+<span class="lineNum">    1057 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute2));</span>
+<span class="lineNum">    1058 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute1));</span>
+<span class="lineNum">    1059 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeCreateTable));</span>
+<span class="lineNum">    1060 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect2));</span>
+<span class="lineNum">    1061 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect1));</span>
+<span class="lineNum">    1062 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_PrintResults));</span>
+<span class="lineNum">    1063 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse3));</span>
+<span class="lineNum">    1064 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse2));</span>
+<span class="lineNum">    1065 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse1));</span>
+<span class="lineNum">    1066 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_insert));</span>
+<span class="lineNum">    1067 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_Delete));</span>
+<span class="lineNum">    1068 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_New));</span>
+<span class="lineNum">    1069 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_toString));</span>
+<span class="lineNum">    1070 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setText));</span>
+<span class="lineNum">    1071 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));</span>
+<span class="lineNum">    1072 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));</span>
+<span class="lineNum">    1073 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));</span>
+<span class="lineNum">    1074 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString));</span>
+<span class="lineNum">    1075 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));</span>
+<span class="lineNum">    1076 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));</span>
+<span class="lineNum">    1077 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));</span>
+<span class="lineNum">    1078 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));</span>
+<span class="lineNum">    1079 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlan));</span>
+<span class="lineNum">    1080 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));</span>
+<span class="lineNum">    1081 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));</span>
+<span class="lineNum">    1082 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));</span>
+<span class="lineNum">    1083 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));</span>
+<span class="lineNum">    1084 </span><span class="lineCov">          1 :     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));</span>
+<span class="lineNum">    1085 </span>            :     
+<span class="lineNum">    1086 </span><span class="lineCov">          1 :     return tests;</span>
+<span class="lineNum">    1087 </span>            : }
+<span class="lineNum">    1088 </span>            : 
+<span class="lineNum">    1089 </span>            : /**
+<a name="1090"><span class="lineNum">    1090 </span>            :  * The suite init function.</a>
+<span class="lineNum">    1091 </span>            :  */
+<span class="lineNum">    1092 </span>            : int DBSuite_init()
+<span class="lineNum">    1093 </span>            : {
+<span class="lineNum">    1094 </span><span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">    1095 </span>            : }
+<span class="lineNum">    1096 </span>            : 
+<span class="lineNum">    1097 </span>            : /**
+<a name="1098"><span class="lineNum">    1098 </span>            :  * The suite cleanup function.</a>
+<span class="lineNum">    1099 </span>            :  */
+<span class="lineNum">    1100 </span>            : int DBSuite_clean()
+<span class="lineNum">    1101 </span>            : {
+<span class="lineNum">    1102 </span><span class="lineCov">          1 :     return 0;</span>
+<span class="lineNum">    1103 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle_test/suites/BenchSuite.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle_test/suites</a> - BenchSuite.c<span style="font-size: 80%;"> (source / <a href="BenchSuite.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;BenchSuite.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;stdlib.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleDbInstance.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleDbSqlSelect.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleInstance.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleDbSchema.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleDbColumn.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleDbParser.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleUtils.h&quot;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : static uint64_t BenchSuite_CalibrateAddition = 0;
+<a name="13"><span class="lineNum">      13 </span>            : int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;</a>
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 : void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan, int cores)</span>
+<span class="lineNum">      16 </span>            : {
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 :     double executionTime = EaglePlan_getExecutionSeconds(plan);</span>
+<span class="lineNum">      18 </span><span class="lineNoCov">          0 :     double lockTime = EaglePlan_getLockSeconds(plan);</span>
+<span class="lineNum">      19 </span><span class="lineNoCov">          0 :     double realTime = EaglePlan_getRealExecutionSeconds(plan);</span>
+<span class="lineNum">      20 </span><span class="lineNoCov">          0 :     printf(&quot;\n real time: %f; CPU time: %f; lock time: %f; &quot;, realTime, executionTime, lockTime);</span>
+<span class="lineNum">      21 </span>            :     //printf(&quot; exec multiplier: %f; &quot;, execMultiplier);
+<span class="lineNum">      22 </span>            :     
+<span class="lineNum">      23 </span>            :     // make sure the wait time is very small in preportion to the execution time
+<span class="lineNum">      24 </span>            :     //CUNIT_VERIFY_LESS_THAN_DOUBLE(waitTime / executionTime, 0.1);
+<span class="lineNum">      25 </span>            :     
+<span class="lineNum">      26 </span>            :     // make sure the execution multiplier is less than 50 - this means that a single record processed should not take
+<span class="lineNum">      27 </span>            :     // any longer than 50x the amount of CPU required to add two numbers
+<span class="lineNum">      28 </span>            :     //CUNIT_VERIFY_LESS_THAN_DOUBLE(execMultiplier, 50.0);
+<a name="29"><span class="lineNum">      29 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            : CUNIT_TEST(BenchSuite, calibrate)
+<span class="lineNum">      32 </span>            : {
+<span class="lineNum">      33 </span>            :     // calculate how long it takes to do a bunch of calculations
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     uint64_t start = EagleUtils_GetAbsoluteTime();</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     int a;</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; BenchSuite_TotalPages * BenchSuite_RecordsPerPage; ++i) {</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :         a = i;</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">      39 </span><span class="lineNoCov">          0 :     CUNIT_ASSERT_NOT_NULL(&amp;a);</span>
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :     uint64_t end = EagleUtils_GetAbsoluteTime();</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :     BenchSuite_CalibrateAddition = end - start;</span>
+<span class="lineNum">      42 </span>            :     
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :     printf(&quot; %lld nano seconds; &quot;, BenchSuite_CalibrateAddition);</span>
+<a name="44"><span class="lineNum">      44 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 : double frand(double max)</span>
+<span class="lineNum">      47 </span>            : {
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :     return ((double) rand() / (double) RAND_MAX) * max;</span>
+<a name="49"><span class="lineNum">      49 </span>            : }</a>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 : EagleDbParser* _BenchSuite_distance(EagleDbInstance *db, int rows)</span>
+<span class="lineNum">      52 </span>            : {
+<span class="lineNum">      53 </span>            :     /*
+<span class="lineNum">      54 </span>            :      SLOW INSERT
+<span class="lineNum">      55 </span>            :      for(int i = 0; i &lt; rows; ++i) {
+<span class="lineNum">      56 </span>            :      char sql[1024];
+<span class="lineNum">      57 </span>            :      sprintf(sql, &quot;INSERT INTO point (id, x, y) VALUES (%d, %g, %g);&quot;, i + 1, frand(1000.0), frand(1000.0));
+<span class="lineNum">      58 </span>            :      //printf(&quot;%s\n&quot;, sql);
+<span class="lineNum">      59 </span>            :      
+<span class="lineNum">      60 </span>            :      success = EagleDbInstance_execute(db, sql, &amp;error);
+<span class="lineNum">      61 </span>            :      if(EagleFalse == success) {
+<span class="lineNum">      62 </span>            :      CUNIT_FAIL(&quot;%s&quot;, error-&gt;message);
+<span class="lineNum">      63 </span>            :      }
+<span class="lineNum">      64 </span>            :      }
+<span class="lineNum">      65 </span>            :      */
+<span class="lineNum">      66 </span>            :     
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :     EagleDbTableData *td = EagleDbInstance_getTable(db, &quot;point&quot;);</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :     EagleDbTuple *tuple = EagleDbTuple_New(td-&gt;table);</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; rows; ++i) {</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :         EagleDbTuple_setInt(tuple, 0, i + 1);</span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :         EagleDbTuple_setFloat(tuple, 1, frand(1000.0));</span>
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :         EagleDbTuple_setFloat(tuple, 2, frand(1000.0));</span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :         EagleDbTableData_insert(td, tuple);</span>
+<span class="lineNum">      74 </span>            :         
+<span class="lineNum">      75 </span>            :         // this is a bit naughty, to save time on recreating the tuple for every row we are reusing it
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :         free(tuple-&gt;data[0]);</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :         free(tuple-&gt;data[1]);</span>
+<span class="lineNum">      78 </span><span class="lineNoCov">          0 :         free(tuple-&gt;data[2]);</span>
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :         tuple-&gt;data[0] = NULL;</span>
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :         tuple-&gt;data[1] = NULL;</span>
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :         tuple-&gt;data[2] = NULL;</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">      84 </span>            :     
+<span class="lineNum">      85 </span>            :     // do a distance search
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :     EagleDbParser *p = EagleDbParser_ParseWithString(&quot;SELECT id, x, y FROM point WHERE sqrt((500.0 - x) * (500.0 - x) + (500.0 - y) * (500.0 - y)) &lt; 1.0&quot;);</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :     if(EagleTrue == EagleDbParser_hasError(p)) {</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(&quot;%s&quot;, EagleDbParser_lastError(p));</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">      90 </span>            :     
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :     return p;</span>
+<a name="92"><span class="lineNum">      92 </span>            : }</a>
+<span class="lineNum">      93 </span>            : 
+<span class="lineNum">      94 </span>            : CUNIT_TEST(BenchSuite, distance)
+<span class="lineNum">      95 </span>            : {
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :     int pageSize = 1000, rows = 1000000, cores = 8;</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :     EagleDbInstance *db = EagleDbInstance_New(pageSize, cores);</span>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :     EagleLoggerEvent *error = NULL;</span>
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :     EagleBoolean success;</span>
+<span class="lineNum">     100 </span>            :     
+<span class="lineNum">     101 </span>            :     // create table
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :     success = EagleDbInstance_execute(db, &quot;CREATE TABLE point (id INT, x DOUBLE, y DOUBLE);&quot;, &amp;error);</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :     if(EagleFalse == success) {</span>
+<span class="lineNum">     104 </span><span class="lineNoCov">          0 :         CUNIT_FAIL(&quot;%s&quot;, error-&gt;message);</span>
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     106 </span>            :     
+<span class="lineNum">     107 </span>            :     // add data
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :     srand(0);</span>
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :     EagleDbParser *p = _BenchSuite_distance(db, rows);</span>
+<span class="lineNum">     110 </span>            :         
+<span class="lineNum">     111 </span>            :     // execute
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :     for(int i = 0; i &lt; 10; ++i) {</span>
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :         EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p-&gt;yyparse_ast, db);</span>
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 :             CUNIT_FAIL(&quot;%s&quot;, plan-&gt;errorMessage);</span>
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     117 </span>            :         //printf(&quot;%s\n&quot;, EaglePlan_toString(plan));
+<span class="lineNum">     118 </span>            :         
+<span class="lineNum">     119 </span><span class="lineNoCov">          0 :         EagleInstance *eagle = EagleInstance_New(cores);</span>
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :         EagleInstance_addPlan(eagle, plan);</span>
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :         EagleInstance_run(eagle);</span>
+<span class="lineNum">     122 </span>            :         
+<span class="lineNum">     123 </span>            :         // print results
+<span class="lineNum">     124 </span>            :         /*while(EaglePageProvider_pagesRemaining(plan-&gt;result[0]) &gt; 0) {
+<span class="lineNum">     125 </span>            :          EaglePage *id = EaglePageProvider_nextPage(plan-&gt;result[0]);
+<span class="lineNum">     126 </span>            :          EaglePage *x = EaglePageProvider_nextPage(plan-&gt;result[1]);
+<span class="lineNum">     127 </span>            :          EaglePage *y = EaglePageProvider_nextPage(plan-&gt;result[2]);
+<span class="lineNum">     128 </span>            :          
+<span class="lineNum">     129 </span>            :          for(int i = 0; i &lt; id-&gt;count; ++i) {
+<span class="lineNum">     130 </span>            :          EagleDataTypeFloatType _x = ((EagleDataTypeFloatType*) x-&gt;data)[i];
+<span class="lineNum">     131 </span>            :          EagleDataTypeFloatType _y = ((EagleDataTypeFloatType*) y-&gt;data)[i];
+<span class="lineNum">     132 </span>            :          
+<span class="lineNum">     133 </span>            :          printf(&quot;(id = %d, x = %g, y = %g) -&gt; %g\n&quot;, ((EagleDataTypeIntegerType*) id-&gt;data)[i], _x, _y,
+<span class="lineNum">     134 </span>            :          sqrt((500.0 - _x) * (500.0 - _x) + (500.0 - _y) * (500.0 - _y)));
+<span class="lineNum">     135 </span>            :          }
+<span class="lineNum">     136 </span>            :          }*/
+<span class="lineNum">     137 </span>            :         
+<span class="lineNum">     138 </span>            :         // check timing
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :         CUNIT_ASSERT_BENCH_RESULT(plan, cores);</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :         EaglePlan_Delete(plan);</span>
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     142 </span>            :     
+<span class="lineNum">     143 </span><span class="lineNoCov">          0 :     EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p-&gt;yyparse_ast);</span>
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :     EagleDbParser_Delete(p);</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :     EagleDbInstance_Delete(db);</span>
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 : }</span>
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            : /**
+<a name="149"><span class="lineNum">     149 </span>            :  * The suite init function.</a>
+<span class="lineNum">     150 </span>            :  */
+<span class="lineNum">     151 </span>            : int BenchSuite_init()
+<span class="lineNum">     152 </span>            : {
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :     return 0;</span>
+<span class="lineNum">     154 </span>            : }
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            : /**
+<a name="157"><span class="lineNum">     157 </span>            :  * The suite cleanup function.</a>
+<span class="lineNum">     158 </span>            :  */
+<span class="lineNum">     159 </span>            : int BenchSuite_clean()
+<span class="lineNum">     160 </span>            : {
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :     return 0;</span>
+<a name="162"><span class="lineNum">     162 </span>            : }</a>
+<span class="lineNum">     163 </span>            : 
+<span class="lineNum">     164 </span>            : CUnitTests* BenchSuite_tests()
+<span class="lineNum">     165 </span>            : {
+<span class="lineNum">     166 </span><span class="lineNoCov">          0 :     CUnitTests *tests = CUnitTests_New(100);</span>
+<span class="lineNum">     167 </span>            :     
+<span class="lineNum">     168 </span>            :     // method tests
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :     CUnitTests_addTest(tests, CUNIT_NEW(BenchSuite, calibrate));</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :     CUnitTests_addTest(tests, CUNIT_NEW(BenchSuite, distance));</span>
+<span class="lineNum">     171 </span>            :     
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :     return tests;</span>
+<span class="lineNum">     173 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_plan_operation_8c" kind="file">
+    <compoundname>EaglePlanOperation.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_plan_operation_8h" local="yes">EaglePlanOperation.h</includes>
+    <includes refid="_eagle_data_8h" local="yes">EagleData.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <incdepgraph>
+      <node id="1489">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1508">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1503">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1500" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+      <node id="1488">
+        <label>eagle/eagle/EaglePlanOperation.c</label>
+        <link refid="EaglePlanOperation.c"/>
+        <childnode refid="1489" relation="include">
+        </childnode>
+        <childnode refid="1490" relation="include">
+        </childnode>
+        <childnode refid="1491" relation="include">
+        </childnode>
+        <childnode refid="1495" relation="include">
+        </childnode>
+        <childnode refid="1510" relation="include">
+        </childnode>
+      </node>
+      <node id="1491">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="1492" relation="include">
+        </childnode>
+        <childnode refid="1498" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1506" relation="include">
+        </childnode>
+      </node>
+      <node id="1492">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="1493" relation="include">
+        </childnode>
+        <childnode refid="1498" relation="include">
+        </childnode>
+      </node>
+      <node id="1501">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1509">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1500">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1501" relation="include">
+        </childnode>
+        <childnode refid="1502" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+      </node>
+      <node id="1499">
+        <label>pthread.h</label>
+      </node>
+      <node id="1490">
+        <label>string.h</label>
+      </node>
+      <node id="1505">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1495">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1496" relation="include">
+        </childnode>
+      </node>
+      <node id="1496">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1494">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1497">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1507">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1508" relation="include">
+        </childnode>
+      </node>
+      <node id="1510">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1493">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1494" relation="include">
+        </childnode>
+        <childnode refid="1495" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1496" relation="include">
+        </childnode>
+      </node>
+      <node id="1506">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1507" relation="include">
+        </childnode>
+        <childnode refid="1509" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1496" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+      </node>
+      <node id="1498">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1499" relation="include">
+        </childnode>
+        <childnode refid="1493" relation="include">
+        </childnode>
+        <childnode refid="1500" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+        <childnode refid="1503" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1496" relation="include">
+        </childnode>
+        <childnode refid="1505" relation="include">
+        </childnode>
+      </node>
+      <node id="1502">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1499" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+      </node>
+      <node id="1504">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1497" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_plan_operation_8c_1a61bfef8d9a01cce64ac2b9231554109b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePlanOperation_Delete</definition>
+        <argsstring>(EaglePlanOperation *epo)</argsstring>
+        <name>EaglePlanOperation_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+          <declname>epo</declname>
+        </param>
+        <briefdescription>
+<para>Delete an operation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" line="61" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" bodystart="60" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_operation_8c_1a8615581ff92cc11c23cefff18194ce0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+        <definition>EaglePlanOperation* EaglePlanOperation_NewWithLiteral</definition>
+        <argsstring>(EaglePageOperationFunction(function), int destination, int source1, EagleDbSqlValue *literal, EagleBoolean freeLiteral, const char *description)</argsstring>
+        <name>EaglePlanOperation_NewWithLiteral</name>
+        <param>
+          <type>EaglePageOperationFunction(function)</type>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>destination</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>source1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_value" kindref="compound">EagleDbSqlValue</ref> *</type>
+          <declname>literal</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeLiteral</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <briefdescription>
+<para>Create a new plan operation with a literal. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">destination</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer ID for the destination, this can be less than zero for no buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">source1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer ID for the left operand, this can be less than zero for no buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">literal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeLiteral</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the <computeroutput>literal</computeroutput> when deleting the <ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A human readable description to be rendered into <ref refid="_eagle_plan_operation_8c_1ad8bacaf03b342fce55caa70264118495" kindref="member">EaglePlanOperation_toString()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new <ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" line="38" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" bodystart="32" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_operation_8c_1abfad5eeff63360d5c266943b4274d059" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+        <definition>EaglePlanOperation* EaglePlanOperation_NewWithPage</definition>
+        <argsstring>(EaglePageOperationFunction(function), int destination, int source1, int source2, void *obj, EagleBoolean freeObj, const char *description)</argsstring>
+        <name>EaglePlanOperation_NewWithPage</name>
+        <param>
+          <type>EaglePageOperationFunction(function)</type>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>destination</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>source1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>source2</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeObj</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <briefdescription>
+<para>Create a new plan operation with a page operation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">destination</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer ID for the destination, this can be less than zero for no buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">source1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer ID for the left operand, this can be less than zero for no buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">source2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer ID for the right operand, this can be less than zero for no buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An attached object, some page operations need this. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the <computeroutput>obj</computeroutput> when deleting the <ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A human readable description to be rendered into <ref refid="_eagle_plan_operation_8c_1ad8bacaf03b342fce55caa70264118495" kindref="member">EaglePlanOperation_toString()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new <ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" bodystart="7" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_plan_operation_8c_1ad8bacaf03b342fce55caa70264118495" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EaglePlanOperation_toString</definition>
+        <argsstring>(EaglePlanOperation *epo)</argsstring>
+        <name>EaglePlanOperation_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_plan_operation" kindref="compound">EaglePlanOperation</ref> *</type>
+          <declname>epo</declname>
+        </param>
+        <briefdescription>
+<para>Get the string representation of this operation. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is actually just a copy of the description that was passed in EaglePlanOperation_New(), you must free the description when your finished with it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A string copy of the description. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" line="56" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c" bodystart="55" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_plan_operation_8h" kindref="compound">EaglePlanOperation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_8h" kindref="compound">EagleData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="_eagle_plan_operation_8h_1abfad5eeff63360d5c266943b4274d059" refkind="member"><highlight class="normal"><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>*<sp/><ref refid="_eagle_plan_operation_8c_1abfad5eeff63360d5c266943b4274d059" kindref="member" tooltip="Create a new plan operation with a page operation.">EaglePlanOperation_NewWithPage</ref>(<ref refid="_eagle_page_operations_8h_1ac1767814a5191fb263d1d7678ba6917d" kindref="member" tooltip="Function pointer.">EaglePageOperationFunction</ref>(function),</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>destination,</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>source1,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>source2,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj,</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeObj,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*description)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo<sp/>=<sp/>(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePlanOperation_NewWithPage.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>));</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>epo)<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a8b792725c6256726e577ae22694a705f" kindref="member" tooltip="The plan operation type.">type</ref><sp/>=<sp/><ref refid="_eagle_plan_operation_8h_1afb5605fd8b35da9e3b90946b2a4840dfad04f51f3c4ccba062c798ee40b2de889" kindref="member" tooltip="Page operation.">EaglePlanOperationTypePage</ref>;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;function<sp/>=<sp/>function;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>=<sp/>destination;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>=<sp/>source1;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a14b7f938bcf8dcee7b631a84baf14e88" kindref="member" tooltip="Second buffer argument ID.">source2</ref><sp/>=<sp/>source2;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="An optional attachment object.">obj</ref><sp/>=<sp/>obj;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1ac96249cdfe6c8f377393768d52d70af6" kindref="member" tooltip="If EagleTrue the obj will be freed when the EaglePlanOperation is freed.">freeObj</ref><sp/>=<sp/>freeObj;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" kindref="member" tooltip="A description of this operation.">description</ref><sp/>=<sp/>(NULL<sp/>==<sp/>description<sp/>?<sp/>NULL<sp/>:<sp/>strdup(description));</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epo;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="_eagle_plan_operation_8h_1a8615581ff92cc11c23cefff18194ce0b" refkind="member"><highlight class="normal"><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>*<sp/><ref refid="_eagle_plan_operation_8c_1a8615581ff92cc11c23cefff18194ce0b" kindref="member" tooltip="Create a new plan operation with a literal.">EaglePlanOperation_NewWithLiteral</ref>(<ref refid="_eagle_page_operations_8h_1ac1767814a5191fb263d1d7678ba6917d" kindref="member" tooltip="Function pointer.">EaglePageOperationFunction</ref>(function),</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>destination,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>source1,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_value" kindref="compound" tooltip="Encapsulates a Value of any type.">EagleDbSqlValue</ref><sp/>*literal,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeLiteral,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*description)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo<sp/>=<sp/>(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePlanOperation_NewWithLiteral.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref>));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>epo)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a8b792725c6256726e577ae22694a705f" kindref="member" tooltip="The plan operation type.">type</ref><sp/>=<sp/><ref refid="_eagle_plan_operation_8h_1afb5605fd8b35da9e3b90946b2a4840dfa3c90bc81c9b11e0a476ccc667e6e5caa" kindref="member" tooltip="Literal operation.">EaglePlanOperationTypeLiteral</ref>;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;function<sp/>=<sp/>function;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a17744967a9eda456c21490b51b74917a" kindref="member" tooltip="Destination buffer ID.">destination</ref><sp/>=<sp/>destination;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a1e6ff34929a7551604e54efe5d56cde9" kindref="member" tooltip="First argument buffer ID.">source1</ref><sp/>=<sp/>source1;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="An optional attachment object.">obj</ref><sp/>=<sp/>literal;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1ac96249cdfe6c8f377393768d52d70af6" kindref="member" tooltip="If EagleTrue the obj will be freed when the EaglePlanOperation is freed.">freeObj</ref><sp/>=<sp/>freeLiteral;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" kindref="member" tooltip="A description of this operation.">description</ref><sp/>=<sp/>(NULL<sp/>==<sp/>description<sp/>?<sp/>NULL<sp/>:<sp/>strdup(description));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>epo;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="_eagle_plan_operation_8h_1ad8bacaf03b342fce55caa70264118495" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_plan_operation_8c_1ad8bacaf03b342fce55caa70264118495" kindref="member" tooltip="Get the string representation of this operation.">EaglePlanOperation_toString</ref>(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>strdup(epo-&gt;<ref refid="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" kindref="member" tooltip="A description of this operation.">description</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="_eagle_plan_operation_8h_1a61bfef8d9a01cce64ac2b9231554109b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_plan_operation_8c_1a61bfef8d9a01cce64ac2b9231554109b" kindref="member" tooltip="Delete an operation.">EaglePlanOperation_Delete</ref>(<ref refid="struct_eagle_plan_operation" kindref="compound" tooltip="Represents a plan operation, or a single step in the executation of an expression...">EaglePlanOperation</ref><sp/>*epo)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>epo)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1ac96249cdfe6c8f377393768d52d70af6" kindref="member" tooltip="If EagleTrue the obj will be freed when the EaglePlanOperation is freed.">freeObj</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(epo-&gt;<ref refid="struct_eagle_plan_operation_1aa919482768c0eac179575481f77e0fa3" kindref="member" tooltip="An optional attachment object.">obj</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>((</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>epo-&gt;<ref refid="struct_eagle_plan_operation_1a68344fa88cf4e86b5079fd69a5c22d57" kindref="member" tooltip="A description of this operation.">description</ref>);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(epo);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePlanOperation.c"/>
+  </compounddef>
+</doxygen>

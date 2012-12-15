@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_instance" kind="struct" prot="public">
+    <compoundname>EagleDbInstance</compoundname>
+    <includes refid="_eagle_db_instance_8h" local="no">EagleDbInstance.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int cores</definition>
+        <argsstring></argsstring>
+        <name>cores</name>
+        <briefdescription>
+<para>The number of CPU cores. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="33" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int pageSize</definition>
+        <argsstring></argsstring>
+        <name>pageSize</name>
+        <briefdescription>
+<para>The page size to be provided to <ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* schemas</definition>
+        <argsstring></argsstring>
+        <name>schemas</name>
+        <briefdescription>
+<para>Contains the pointers to the individual schemas. </para>        </briefdescription>
+        <detaileddescription>
+<para>The schema objects themselves are managed externally (i.e. deleteing an <ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref>) will not deleted the respective schemas. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="23" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The database instance is a wrapper for a <ref refid="struct_eagle_instance" kindref="compound">EagleInstance</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="22">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="23" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="24" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="20">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="21" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>int</label>
+      </node>
+      <node id="23">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="24">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="21">
+        <label>EagleLinkedListItem *</label>
+      </node>
+      <node id="18">
+        <label>EagleDbInstance</label>
+        <link refid="struct_eagle_db_instance"/>
+        <childnode refid="19" relation="usage">
+          <edgelabel>pageSize</edgelabel>
+          <edgelabel>cores</edgelabel>
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>schemas</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="17" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" bodystart="17" bodyend="35"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" prot="public" virt="non-virtual"><scope>EagleDbInstance</scope><name>cores</name></member>
+      <member refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" prot="public" virt="non-virtual"><scope>EagleDbInstance</scope><name>pageSize</name></member>
+      <member refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" prot="public" virt="non-virtual"><scope>EagleDbInstance</scope><name>schemas</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagledb/EagleDbSqlBinaryExpression.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">eagledb</a> - EagleDbSqlBinaryExpression.c<span style="font-size: 80%;"> (source / <a href="EagleDbSqlBinaryExpression.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-03-03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;EagleMemory.h&quot;</a>
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span><span class="lineCov">        272 : EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlExpression *right)</span>
+<span class="lineNum">       7 </span>            : {
+<span class="lineNum">       8 </span><span class="lineCov">        272 :     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate(&quot;EagleDbSqlBinaryExpression_New.1&quot;, sizeof(EagleDbSqlBinaryExpression));</span>
+<span class="lineNum">       9 </span><span class="lineCov">        272 :     if(NULL == expr) {</span>
+<span class="lineNum">      10 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">      11 </span>            :     }
+<span class="lineNum">      12 </span>            :     
+<span class="lineNum">      13 </span><span class="lineCov">        271 :     expr-&gt;expressionType = EagleDbSqlExpressionTypeBinaryExpression;</span>
+<span class="lineNum">      14 </span><span class="lineCov">        271 :     expr-&gt;left = left;</span>
+<span class="lineNum">      15 </span><span class="lineCov">        271 :     expr-&gt;op = op;</span>
+<span class="lineNum">      16 </span><span class="lineCov">        271 :     expr-&gt;right = right;</span>
+<span class="lineNum">      17 </span>            :     
+<span class="lineNum">      18 </span><span class="lineCov">        271 :     return expr;</span>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">        272 : }</span></a>
+<span class="lineNum">      20 </span>            : 
+<span class="lineNum">      21 </span><span class="lineCov">          2 : void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">      22 </span>            : {
+<span class="lineNum">      23 </span><span class="lineCov">          2 :     if(NULL == expr) {</span>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :         return;</span>
+<span class="lineNum">      25 </span>            :     }
+<span class="lineNum">      26 </span>            :     
+<span class="lineNum">      27 </span><span class="lineCov">          1 :     EagleMemory_Free(expr);</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          3 : }</span></a>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">        271 : void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">      31 </span>            : {
+<span class="lineNum">      32 </span><span class="lineCov">        271 :     if(NULL == expr) {</span>
+<span class="lineNum">      33 </span><span class="lineCov">          1 :         return;</span>
+<span class="lineNum">      34 </span>            :     }
+<span class="lineNum">      35 </span>            :     
+<span class="lineNum">      36 </span><span class="lineCov">        270 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr-&gt;left);</span>
+<span class="lineNum">      37 </span><span class="lineCov">        270 :     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr-&gt;right);</span>
+<span class="lineNum">      38 </span><span class="lineCov">        270 :     EagleMemory_Free(expr);</span>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">        541 : }</span></a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">        265 : char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">      42 </span>            : {
+<span class="lineNum">      43 </span><span class="lineCov">        265 :     char* s = (char*) EagleMemory_Allocate(&quot;EagleDbSqlBinaryExpression_toString.1&quot;, 1024), *left, *right, *op;</span>
+<span class="lineNum">      44 </span><span class="lineCov">        265 :     if(NULL == s) {</span>
+<span class="lineNum">      45 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">      46 </span>            :     }
+<span class="lineNum">      47 </span>            :     
+<span class="lineNum">      48 </span><span class="lineCov">        264 :     left = EagleDbSqlExpression_toString(expr-&gt;left);</span>
+<span class="lineNum">      49 </span><span class="lineCov">        264 :     op = EagleDbSqlBinaryExpressionOperator_toString(expr-&gt;op);</span>
+<span class="lineNum">      50 </span><span class="lineCov">        264 :     right = EagleDbSqlExpression_toString(expr-&gt;right);</span>
+<span class="lineNum">      51 </span>            :     
+<span class="lineNum">      52 </span><span class="lineCov">        264 :     sprintf(s, &quot;%s %s %s&quot;, left, op, right);</span>
+<span class="lineNum">      53 </span>            :     
+<span class="lineNum">      54 </span><span class="lineCov">        264 :     EagleMemory_Free(left);</span>
+<span class="lineNum">      55 </span><span class="lineCov">        264 :     EagleMemory_Free(op);</span>
+<span class="lineNum">      56 </span><span class="lineCov">        264 :     EagleMemory_Free(right);</span>
+<span class="lineNum">      57 </span><span class="lineCov">        264 :     return s;</span>
+<span class="lineNum">      58 </span><span class="lineCov">        265 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

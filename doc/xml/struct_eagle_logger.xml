@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_logger" kind="struct" prot="public">
+    <compoundname>EagleLogger</compoundname>
+    <includes refid="_eagle_logger_8h" local="no">EagleLogger.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_logger_1a361c77fdc9fc35a47339a5283916f88b" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> *</type>
+        <definition>EagleLoggerEvent* lastEvent</definition>
+        <argsstring></argsstring>
+        <name>lastEvent</name>
+        <briefdescription>
+<para>The most recent event. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="39" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_1a8b4ccb587e896a838f5eb947d6f234f8" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_lock" kindref="compound">EagleLock</ref> *</type>
+        <definition>EagleLock* logLock</definition>
+        <argsstring></argsstring>
+        <name>logLock</name>
+        <briefdescription>
+<para>This lock synchronizes the addition of messages reported by multiple threads. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_1a1277960b5f2b37137fe9b0b5a1ea0beb" prot="public" static="no" mutable="no">
+        <type>FILE *</type>
+        <definition>FILE* out</definition>
+        <argsstring></argsstring>
+        <name>out</name>
+        <briefdescription>
+<para>A file handle to output the messages to. </para>        </briefdescription>
+        <detaileddescription>
+<para>This may be an actual file or stdout, stderr etc. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="34" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_1a99f8f5915f58c8ba08ca666378366eb0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int totalMessages</definition>
+        <argsstring></argsstring>
+        <name>totalMessages</name>
+        <briefdescription>
+<para>The total messages that have been reported since this logged was initialised. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A logger instance. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="175">
+        <label>void *</label>
+      </node>
+      <node id="168">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="169" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="170" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="166">
+        <label>EagleLogger</label>
+        <link refid="struct_eagle_logger"/>
+        <childnode refid="167" relation="usage">
+          <edgelabel>out</edgelabel>
+        </childnode>
+        <childnode refid="168" relation="usage">
+          <edgelabel>logLock</edgelabel>
+        </childnode>
+        <childnode refid="171" relation="usage">
+          <edgelabel>totalMessages</edgelabel>
+        </childnode>
+        <childnode refid="172" relation="usage">
+          <edgelabel>lastEvent</edgelabel>
+        </childnode>
+      </node>
+      <node id="176">
+        <label>char *</label>
+      </node>
+      <node id="173">
+        <label>time_t</label>
+      </node>
+      <node id="171">
+        <label>int</label>
+      </node>
+      <node id="169">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="174">
+        <label>EagleLoggerSeverity</label>
+      </node>
+      <node id="170">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="167">
+        <label>FILE *</label>
+      </node>
+      <node id="172">
+        <label>EagleLoggerEvent</label>
+        <link refid="struct_eagle_logger_event"/>
+        <childnode refid="173" relation="usage">
+          <edgelabel>when</edgelabel>
+        </childnode>
+        <childnode refid="174" relation="usage">
+          <edgelabel>severity</edgelabel>
+        </childnode>
+        <childnode refid="175" relation="usage">
+          <edgelabel>obj</edgelabel>
+        </childnode>
+        <childnode refid="176" relation="usage">
+          <edgelabel>message</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" line="19" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLogger.h" bodystart="19" bodyend="41"/>
+    <listofallmembers>
+      <member refid="struct_eagle_logger_1a361c77fdc9fc35a47339a5283916f88b" prot="public" virt="non-virtual"><scope>EagleLogger</scope><name>lastEvent</name></member>
+      <member refid="struct_eagle_logger_1a8b4ccb587e896a838f5eb947d6f234f8" prot="public" virt="non-virtual"><scope>EagleLogger</scope><name>logLock</name></member>
+      <member refid="struct_eagle_logger_1a1277960b5f2b37137fe9b0b5a1ea0beb" prot="public" virt="non-virtual"><scope>EagleLogger</scope><name>out</name></member>
+      <member refid="struct_eagle_logger_1a99f8f5915f58c8ba08ca666378366eb0" prot="public" virt="non-virtual"><scope>EagleLogger</scope><name>totalMessages</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

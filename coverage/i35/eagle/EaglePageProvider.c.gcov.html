@@ -1,0 +1,384 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/EaglePageProvider.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">eagle</a> - EaglePageProvider.c<span style="font-size: 80%;"> (source / <a href="EaglePageProvider.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">173</td>
+            <td class="headerCovTableEntry">173</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-01-27</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;math.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       5 </span>            : #include &quot;EaglePageProvider.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EaglePageOperations.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleUtils.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleLinkedList.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleMemory.h&quot;
+<a name="10"><span class="lineNum">      10 </span>            : #include &quot;EagleLogger.h&quot;</a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">         34 : EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)</span>
+<span class="lineNum">      13 </span>            : {
+<span class="lineNum">      14 </span><span class="lineCov">         34 :     EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate(&quot;EaglePageProvider_CreateFromIntArray.1&quot;, sizeof(EaglePageProvider));</span>
+<span class="lineNum">      15 </span><span class="lineCov">         34 :     if(NULL == pageProvider) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          2 :         return NULL;</span>
+<span class="lineNum">      17 </span>            :     }
+<span class="lineNum">      18 </span>            :     
+<span class="lineNum">      19 </span><span class="lineCov">         32 :     pageProvider-&gt;recordsPerPage = recordsPerPage;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         32 :     pageProvider-&gt;offsetRecords = 0;</span>
+<span class="lineNum">      21 </span><span class="lineCov">         32 :     pageProvider-&gt;totalRecords = totalRecords;</span>
+<span class="lineNum">      22 </span><span class="lineCov">         32 :     pageProvider-&gt;records = records;</span>
+<span class="lineNum">      23 </span><span class="lineCov">         32 :     pageProvider-&gt;nextPage = EaglePageProvider_nextPageFromIntArray_;</span>
+<span class="lineNum">      24 </span><span class="lineCov">         32 :     pageProvider-&gt;pagesRemaining = EaglePageProvider_pagesRemainingFromIntArray_;</span>
+<span class="lineNum">      25 </span><span class="lineCov">         32 :     pageProvider-&gt;add = EaglePageProvider_addUnsupported_;</span>
+<span class="lineNum">      26 </span><span class="lineCov">         32 :     pageProvider-&gt;free = EaglePageProvider_DeleteIntArray_;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         32 :     pageProvider-&gt;nextPageLock = EagleSynchronizer_CreateLock();</span>
+<span class="lineNum">      28 </span><span class="lineCov">         96 :     pageProvider-&gt;name = (NULL == name ? NULL : strdup(name));</span>
+<span class="lineNum">      29 </span><span class="lineCov">         32 :     pageProvider-&gt;reset = EaglePageProvider_resetFromIntArray_;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         32 :     pageProvider-&gt;type = EagleDataTypeInteger;</span>
+<span class="lineNum">      31 </span>            :     
+<span class="lineNum">      32 </span><span class="lineCov">         32 :     return pageProvider;</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         34 : }</span></a>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">         16 : EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)</span>
+<span class="lineNum">      36 </span>            : {
+<span class="lineNum">      37 </span><span class="lineCov">         16 :     int *data = (int*) EagleMemory_MultiAllocate(&quot;EaglePageProvider_CreateFromInt.1&quot;, sizeof(int), recordsPerPage), i;</span>
+<span class="lineNum">      38 </span><span class="lineCov">         16 :     EaglePageProvider *pageProvider;</span>
+<span class="lineNum">      39 </span>            :     
+<span class="lineNum">      40 </span><span class="lineCov">         16 :     if(NULL == data) {</span>
+<span class="lineNum">      41 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">      42 </span>            :     }
+<span class="lineNum">      43 </span>            :     
+<span class="lineNum">      44 </span><span class="lineCov">         15 :     pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         15 :     if(NULL == pageProvider) {</span>
+<span class="lineNum">      46 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">      47 </span>            :     }
+<span class="lineNum">      48 </span><span class="lineCov">         14 :     pageProvider-&gt;nextPage = EaglePageProvider_nextPageFromInt_;</span>
+<span class="lineNum">      49 </span><span class="lineCov">         14 :     pageProvider-&gt;pagesRemaining = EaglePageProvider_pagesRemainingFromInt_;</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">        174 :     for(i = 0; i &lt; recordsPerPage; ++i) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">         73 :         data[i] = value;</span>
+<span class="lineNum">      53 </span><span class="lineCov">         73 :     }</span>
+<span class="lineNum">      54 </span>            :     
+<span class="lineNum">      55 </span><span class="lineCov">         14 :     return pageProvider;</span>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">         16 : }</span></a>
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span><span class="lineCov">        600 : int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)</span>
+<span class="lineNum">      59 </span>            : {
+<span class="lineNum">      60 </span><span class="lineCov">        600 :     int pagesRemaining;</span>
+<span class="lineNum">      61 </span>            :     
+<span class="lineNum">      62 </span>            :     /* synchronize this function */
+<span class="lineNum">      63 </span><span class="lineCov">        600 :     EagleSynchronizer_Lock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">      64 </span>            :     
+<span class="lineNum">      65 </span><span class="lineCov">        600 :     pagesRemaining = epp-&gt;pagesRemaining(epp);</span>
+<span class="lineNum">      66 </span>            :     
+<span class="lineNum">      67 </span><span class="lineCov">        600 :     EagleSynchronizer_Unlock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">      68 </span><span class="lineCov">        600 :     return pagesRemaining;</span>
+<a name="69"><span class="lineNum">      69 </span>            : }</a>
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span><span class="lineCov">        619 : int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage)</span>
+<span class="lineNum">      72 </span>            : {
+<span class="lineNum">      73 </span><span class="lineCov">        619 :     int pagesLeft;</span>
+<span class="lineNum">      74 </span>            :     
+<span class="lineNum">      75 </span><span class="lineCov">       1168 :     if(0 == totalRecords || 0 == recordsPerPage) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">         70 :         return 0;</span>
+<span class="lineNum">      77 </span>            :     }
+<span class="lineNum">      78 </span>            :     
+<span class="lineNum">      79 </span><span class="lineCov">        549 :     pagesLeft = totalRecords / recordsPerPage;</span>
+<span class="lineNum">      80 </span><span class="lineCov">        549 :     if(totalRecords % recordsPerPage &gt; 0) {</span>
+<span class="lineNum">      81 </span><span class="lineCov">         60 :         ++pagesLeft;</span>
+<span class="lineNum">      82 </span><span class="lineCov">         60 :     }</span>
+<span class="lineNum">      83 </span>            :     
+<span class="lineNum">      84 </span><span class="lineCov">        549 :     return pagesLeft;</span>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">        619 : }</span></a>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineCov">        535 : int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp)</span>
+<span class="lineNum">      88 </span>            : {
+<span class="lineNum">      89 </span><span class="lineCov">        535 :     return EaglePageProvider_TotalPages(epp-&gt;totalRecords - epp-&gt;offsetRecords, epp-&gt;recordsPerPage);</span>
+<a name="90"><span class="lineNum">      90 </span>            : }</a>
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span><span class="lineCov">         11 : int EaglePageProvider_pagesRemainingFromInt_(EaglePageProvider *epp)</span>
+<span class="lineNum">      93 </span>            : {
+<span class="lineNum">      94 </span>            :     /* unlimited supply of pages */
+<span class="lineNum">      95 </span><span class="lineCov">         11 :     return 1;</span>
+<a name="96"><span class="lineNum">      96 </span>            : }</a>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineCov">        542 : EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)</span>
+<span class="lineNum">      99 </span>            : {
+<span class="lineNum">     100 </span><span class="lineCov">        542 :     EaglePage *nextPage;</span>
+<span class="lineNum">     101 </span>            :     
+<span class="lineNum">     102 </span>            :     /* synchronize this function */
+<span class="lineNum">     103 </span><span class="lineCov">        542 :     EagleSynchronizer_Lock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     104 </span>            :     
+<span class="lineNum">     105 </span><span class="lineCov">        542 :     nextPage = epp-&gt;nextPage(epp);</span>
+<span class="lineNum">     106 </span>            :     
+<span class="lineNum">     107 </span><span class="lineCov">        542 :     EagleSynchronizer_Unlock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     108 </span><span class="lineCov">        542 :     return nextPage;</span>
+<a name="109"><span class="lineNum">     109 </span>            : }</a>
+<span class="lineNum">     110 </span>            : 
+<span class="lineNum">     111 </span><span class="lineCov">         11 : EaglePage* EaglePageProvider_nextPageFromInt_(EaglePageProvider *epp)</span>
+<span class="lineNum">     112 </span>            : {
+<span class="lineNum">     113 </span><span class="lineCov">         11 :     int *begin = (int*) epp-&gt;records;</span>
+<span class="lineNum">     114 </span><span class="lineCov">         11 :     EaglePage *page;</span>
+<span class="lineNum">     115 </span>            :     
+<span class="lineNum">     116 </span><span class="lineCov">         11 :     page = EaglePage_New(EagleDataTypeInteger, begin, epp-&gt;recordsPerPage, epp-&gt;recordsPerPage, epp-&gt;offsetRecords, EagleFalse);</span>
+<span class="lineNum">     117 </span><span class="lineCov">         11 :     epp-&gt;offsetRecords += epp-&gt;recordsPerPage;</span>
+<span class="lineNum">     118 </span>            :     
+<span class="lineNum">     119 </span><span class="lineCov">         11 :     return page;</span>
+<a name="120"><span class="lineNum">     120 </span>            : }</a>
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span><span class="lineCov">        451 : EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp)</span>
+<span class="lineNum">     123 </span>            : {
+<span class="lineNum">     124 </span><span class="lineCov">        451 :     int *begin = (int*) epp-&gt;records;</span>
+<span class="lineNum">     125 </span><span class="lineCov">       1353 :     int pageSize = MIN(epp-&gt;recordsPerPage, epp-&gt;totalRecords - epp-&gt;offsetRecords);</span>
+<span class="lineNum">     126 </span><span class="lineCov">        451 :     EaglePage *page;</span>
+<span class="lineNum">     127 </span>            :     
+<span class="lineNum">     128 </span><span class="lineCov">        451 :     page = EaglePage_New(EagleDataTypeInteger, begin + epp-&gt;offsetRecords, pageSize, pageSize, epp-&gt;offsetRecords, EagleFalse);</span>
+<span class="lineNum">     129 </span><span class="lineCov">        451 :     epp-&gt;offsetRecords += pageSize;</span>
+<span class="lineNum">     130 </span>            :     
+<span class="lineNum">     131 </span><span class="lineCov">        451 :     return page;</span>
+<a name="132"><span class="lineNum">     132 </span>            : }</a>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span><span class="lineCov">         79 : void EaglePageProvider_Delete(EaglePageProvider *epp)</span>
+<span class="lineNum">     135 </span>            : {
+<span class="lineNum">     136 </span><span class="lineCov">         79 :     if(NULL == epp) {</span>
+<span class="lineNum">     137 </span><span class="lineCov">          1 :         return;</span>
+<span class="lineNum">     138 </span>            :     }
+<span class="lineNum">     139 </span><span class="lineCov">         78 :     epp-&gt;free(epp);</span>
+<span class="lineNum">     140 </span><span class="lineCov">         78 :     epp = NULL;</span>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">        157 : }</span></a>
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span><span class="lineCov">         32 : void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)</span>
+<span class="lineNum">     144 </span>            : {
+<span class="lineNum">     145 </span><span class="lineCov">         32 :     EagleLock_Delete(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     146 </span><span class="lineCov">         32 :     EagleMemory_Free(epp-&gt;name);</span>
+<span class="lineNum">     147 </span><span class="lineCov">         32 :     EagleMemory_Free(epp);</span>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">         32 : }</span></a>
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span><span class="lineCov">         46 : void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)</span>
+<span class="lineNum">     151 </span>            : {
+<span class="lineNum">     152 </span><span class="lineCov">         46 :     EagleLock_Delete(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     153 </span><span class="lineCov">         46 :     EagleLinkedList_DeleteWithItems((EagleLinkedList*) epp-&gt;records);</span>
+<span class="lineNum">     154 </span><span class="lineCov">         46 :     EagleMemory_Free(epp-&gt;name);</span>
+<span class="lineNum">     155 </span><span class="lineCov">         46 :     EagleMemory_Free(epp);</span>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">         46 : }</span></a>
+<span class="lineNum">     157 </span>            : 
+<span class="lineNum">     158 </span><span class="lineCov">          2 : EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data)</span>
+<span class="lineNum">     159 </span>            : {
+<span class="lineNum">     160 </span><span class="lineCov">          2 :     return EagleFalse;</span>
+<a name="161"><span class="lineNum">     161 </span>            : }</a>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">        178 : EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)</span>
+<span class="lineNum">     164 </span>            : {
+<span class="lineNum">     165 </span><span class="lineCov">        178 :     EagleLinkedList *list = (EagleLinkedList*) epp-&gt;records;</span>
+<span class="lineNum">     166 </span><span class="lineCov">        178 :     EagleLinkedListItem *head = EagleLinkedList_end(list);</span>
+<span class="lineNum">     167 </span><span class="lineCov">        178 :     EaglePage *page = NULL;</span>
+<span class="lineNum">     168 </span>            :     
+<span class="lineNum">     169 </span><span class="lineCov">        321 :     if(NULL == head || ((EaglePage*) head-&gt;obj)-&gt;count &gt;= epp-&gt;recordsPerPage) {</span>
+<span class="lineNum">     170 </span>            :         /* the list is empty we need to create a new page */
+<span class="lineNum">     171 </span><span class="lineCov">         37 :         EagleLinkedListItem *item;</span>
+<span class="lineNum">     172 </span><span class="lineCov">         37 :         page = EaglePage_Alloc(epp-&gt;type, epp-&gt;recordsPerPage);</span>
+<span class="lineNum">     173 </span><span class="lineCov">         37 :         page-&gt;count = 0;</span>
+<span class="lineNum">     174 </span><span class="lineCov">         37 :         item = EagleLinkedListItem_New(page, EagleTrue, (void (*)(void *obj)) EaglePage_Delete);</span>
+<span class="lineNum">     175 </span><span class="lineCov">         37 :         EagleLinkedList_add(list, item);</span>
+<span class="lineNum">     176 </span><span class="lineCov">         37 :     }</span>
+<span class="lineNum">     177 </span>            :     else {
+<span class="lineNum">     178 </span><span class="lineCov">        141 :         page = (EaglePage*) head-&gt;obj;</span>
+<span class="lineNum">     179 </span>            :     }
+<span class="lineNum">     180 </span>            :     
+<span class="lineNum">     181 </span><span class="lineCov">        178 :     switch(epp-&gt;type) {</span>
+<span class="lineNum">     182 </span>            :             
+<span class="lineNum">     183 </span>            :         case EagleDataTypeUnknown:
+<span class="lineNum">     184 </span><span class="lineCov">          1 :             EagleLogger_Log(EagleLoggerSeverityError, &quot;Unknown type.&quot;);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          1 :             return EagleFalse;</span>
+<span class="lineNum">     186 </span>            :             
+<span class="lineNum">     187 </span>            :         case EagleDataTypeInteger:
+<span class="lineNum">     188 </span><span class="lineCov">        167 :             ((int*) page-&gt;data)[page-&gt;count++] = *((int*) data);</span>
+<span class="lineNum">     189 </span><span class="lineCov">        167 :             break;</span>
+<span class="lineNum">     190 </span>            :             
+<span class="lineNum">     191 </span>            :         case EagleDataTypeText:
+<span class="lineNum">     192 </span><span class="lineCov">         10 :             ((char**) page-&gt;data)[page-&gt;count++] = (char*) data;</span>
+<span class="lineNum">     193 </span><span class="lineCov">         10 :             break;</span>
+<span class="lineNum">     194 </span>            :         
+<span class="lineNum">     195 </span>            :     }
+<span class="lineNum">     196 </span>            :     
+<span class="lineNum">     197 </span><span class="lineCov">        177 :     ++epp-&gt;totalRecords;</span>
+<span class="lineNum">     198 </span><span class="lineCov">        177 :     return EagleTrue;</span>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">        178 : }</span></a>
+<span class="lineNum">     200 </span>            : 
+<span class="lineNum">     201 </span><span class="lineCov">         51 : EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name)</span>
+<span class="lineNum">     202 </span>            : {
+<span class="lineNum">     203 </span><span class="lineCov">         51 :     EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate(&quot;EaglePageProvider_CreateFromStream.1&quot;, sizeof(EaglePageProvider));</span>
+<span class="lineNum">     204 </span><span class="lineCov">         51 :     if(NULL == pageProvider) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">     206 </span>            :     }
+<span class="lineNum">     207 </span>            :     
+<span class="lineNum">     208 </span><span class="lineCov">         50 :     switch(type) {</span>
+<span class="lineNum">     209 </span>            :             
+<span class="lineNum">     210 </span>            :         case EagleDataTypeUnknown:
+<span class="lineNum">     211 </span><span class="lineCov">          1 :             EagleMemory_Free(pageProvider);</span>
+<span class="lineNum">     212 </span><span class="lineCov">          1 :             EagleLogger_Log(EagleLoggerSeverityError, &quot;Unknown type.&quot;);</span>
+<span class="lineNum">     213 </span><span class="lineCov">          1 :             return NULL;</span>
+<span class="lineNum">     214 </span>            :             
+<span class="lineNum">     215 </span>            :         case EagleDataTypeInteger:
+<span class="lineNum">     216 </span><span class="lineCov">         47 :             pageProvider-&gt;type = EagleDataTypeInteger;</span>
+<span class="lineNum">     217 </span><span class="lineCov">         47 :             break;</span>
+<span class="lineNum">     218 </span>            :             
+<span class="lineNum">     219 </span>            :         case EagleDataTypeText:
+<span class="lineNum">     220 </span><span class="lineCov">          2 :             pageProvider-&gt;type = EagleDataTypeText;</span>
+<span class="lineNum">     221 </span><span class="lineCov">          2 :             break;</span>
+<span class="lineNum">     222 </span>            :             
+<span class="lineNum">     223 </span>            :     }
+<span class="lineNum">     224 </span>            :     
+<span class="lineNum">     225 </span><span class="lineCov">         49 :     pageProvider-&gt;recordsPerPage = recordsPerPage;</span>
+<span class="lineNum">     226 </span><span class="lineCov">         49 :     pageProvider-&gt;offsetRecords = 0;</span>
+<span class="lineNum">     227 </span><span class="lineCov">         49 :     pageProvider-&gt;totalRecords = 0;</span>
+<span class="lineNum">     228 </span><span class="lineCov">         49 :     pageProvider-&gt;records = (void*) EagleLinkedList_New();</span>
+<span class="lineNum">     229 </span><span class="lineCov">         49 :     pageProvider-&gt;reset = EaglePageProvider_resetFromStream_;</span>
+<span class="lineNum">     230 </span><span class="lineCov">         49 :     pageProvider-&gt;free = EaglePageProvider_DeleteStream_;</span>
+<span class="lineNum">     231 </span><span class="lineCov">         49 :     pageProvider-&gt;nextPage = EaglePageProvider_nextPageFromStream_;</span>
+<span class="lineNum">     232 </span><span class="lineCov">         49 :     pageProvider-&gt;pagesRemaining = EaglePageProvider_pagesRemainingFromStream_;</span>
+<span class="lineNum">     233 </span><span class="lineCov">         49 :     pageProvider-&gt;add = EaglePageProvider_addStream_;</span>
+<span class="lineNum">     234 </span><span class="lineCov">         49 :     pageProvider-&gt;nextPageLock = EagleSynchronizer_CreateLock();</span>
+<span class="lineNum">     235 </span><span class="lineCov">        147 :     pageProvider-&gt;name = (NULL == name ? NULL : strdup(name));</span>
+<span class="lineNum">     236 </span><span class="lineCov">         49 :     pageProvider-&gt;cursor = NULL;</span>
+<span class="lineNum">     237 </span>            :     
+<span class="lineNum">     238 </span><span class="lineCov">         49 :     return pageProvider;</span>
+<a name="239"><span class="lineNum">     239 </span><span class="lineCov">         51 : }</span></a>
+<span class="lineNum">     240 </span>            : 
+<span class="lineNum">     241 </span><span class="lineCov">         54 : int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)</span>
+<span class="lineNum">     242 </span>            : {
+<span class="lineNum">     243 </span><span class="lineCov">         54 :     return EaglePageProvider_TotalPages(epp-&gt;totalRecords - epp-&gt;offsetRecords, epp-&gt;recordsPerPage);</span>
+<a name="244"><span class="lineNum">     244 </span>            : }</a>
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span><span class="lineCov">         80 : EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)</span>
+<span class="lineNum">     247 </span>            : {
+<span class="lineNum">     248 </span><span class="lineCov">         80 :     EagleLinkedList *list = (EagleLinkedList*) epp-&gt;records;</span>
+<span class="lineNum">     249 </span><span class="lineCov">         80 :     EaglePage *page;</span>
+<span class="lineNum">     250 </span>            :     
+<span class="lineNum">     251 </span><span class="lineCov">         80 :     if(NULL == epp-&gt;cursor) {</span>
+<span class="lineNum">     252 </span><span class="lineCov">         78 :         epp-&gt;cursor = EagleLinkedList_begin(list);</span>
+<span class="lineNum">     253 </span><span class="lineCov">         78 :     }</span>
+<span class="lineNum">     254 </span>            :     
+<span class="lineNum">     255 </span>            :     /* there is no more pages to give */
+<span class="lineNum">     256 </span><span class="lineCov">        143 :     if(epp-&gt;offsetRecords &gt;= epp-&gt;totalRecords || NULL == epp-&gt;cursor) {</span>
+<span class="lineNum">     257 </span><span class="lineCov">         17 :         return NULL;</span>
+<span class="lineNum">     258 </span>            :     }
+<span class="lineNum">     259 </span>            :     
+<span class="lineNum">     260 </span>            :     /* always give a duplicate page, so that the original page is not modified or freed */
+<span class="lineNum">     261 </span><span class="lineCov">         63 :     page = EaglePage_Copy((EaglePage*) epp-&gt;cursor-&gt;obj);</span>
+<span class="lineNum">     262 </span><span class="lineCov">         63 :     page-&gt;recordOffset = epp-&gt;offsetRecords;</span>
+<span class="lineNum">     263 </span><span class="lineCov">         63 :     epp-&gt;offsetRecords += page-&gt;count;</span>
+<span class="lineNum">     264 </span><span class="lineCov">         63 :     epp-&gt;cursor = epp-&gt;cursor-&gt;next;</span>
+<span class="lineNum">     265 </span><span class="lineCov">         63 :     return page;</span>
+<a name="266"><span class="lineNum">     266 </span><span class="lineCov">         80 : }</span></a>
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span><span class="lineCov">        178 : EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data)</span>
+<span class="lineNum">     269 </span>            : {
+<span class="lineNum">     270 </span><span class="lineCov">        178 :     EagleBoolean r;</span>
+<span class="lineNum">     271 </span>            :     
+<span class="lineNum">     272 </span>            :     /* synchronize this function */
+<span class="lineNum">     273 </span><span class="lineCov">        178 :     EagleSynchronizer_Lock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     274 </span>            :     
+<span class="lineNum">     275 </span><span class="lineCov">        178 :     r = epp-&gt;add(epp, data);</span>
+<span class="lineNum">     276 </span>            :     
+<span class="lineNum">     277 </span><span class="lineCov">        178 :     EagleSynchronizer_Unlock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     278 </span><span class="lineCov">        178 :     return r;</span>
+<a name="279"><span class="lineNum">     279 </span>            : }</a>
+<span class="lineNum">     280 </span>            : 
+<span class="lineNum">     281 </span><span class="lineCov">         46 : void EaglePageProvider_reset(EaglePageProvider *epp)</span>
+<span class="lineNum">     282 </span>            : {
+<span class="lineNum">     283 </span>            :     /* synchronize this function */
+<span class="lineNum">     284 </span><span class="lineCov">         46 :     EagleSynchronizer_Lock(epp-&gt;nextPageLock);</span>
+<span class="lineNum">     285 </span>            :     
+<span class="lineNum">     286 </span><span class="lineCov">         46 :     epp-&gt;reset(epp);</span>
+<span class="lineNum">     287 </span>            :     
+<span class="lineNum">     288 </span><span class="lineCov">         46 :     EagleSynchronizer_Unlock(epp-&gt;nextPageLock);</span>
+<a name="289"><span class="lineNum">     289 </span><span class="lineCov">         46 : }</span></a>
+<span class="lineNum">     290 </span>            : 
+<span class="lineNum">     291 </span><span class="lineCov">          1 : void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp)</span>
+<span class="lineNum">     292 </span>            : {
+<span class="lineNum">     293 </span><span class="lineCov">          1 :     epp-&gt;offsetRecords = 0;</span>
+<a name="294"><span class="lineNum">     294 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     295 </span>            : 
+<span class="lineNum">     296 </span><span class="lineCov">         45 : void EaglePageProvider_resetFromStream_(EaglePageProvider *epp)</span>
+<span class="lineNum">     297 </span>            : {
+<span class="lineNum">     298 </span><span class="lineCov">         45 :     epp-&gt;offsetRecords = 0;</span>
+<span class="lineNum">     299 </span><span class="lineCov">         45 :     epp-&gt;cursor = NULL;</span>
+<span class="lineNum">     300 </span><span class="lineCov">         45 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

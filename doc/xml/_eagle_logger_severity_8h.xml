@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_logger_severity_8h" kind="file">
+    <compoundname>EagleLoggerSeverity.h</compoundname>
+    <includedby refid="_eagle_logger_event_8h" local="yes">eagle/eagle/EagleLoggerEvent.h</includedby>
+    <includedby refid="_eagle_logger_severity_8c" local="yes">eagle/eagle/EagleLoggerSeverity.c</includedby>
+    <invincdepgraph>
+      <node id="702">
+        <label>eagle/eagledb/EagleDbTuple.c</label>
+        <link refid="_eagle_db_tuple_8c"/>
+      </node>
+      <node id="696">
+        <label>eagle/eagle/EagleWorker.c</label>
+        <link refid="_eagle_worker_8c"/>
+      </node>
+      <node id="701">
+        <label>eagle/eagledb/EagleDbTableData.c</label>
+        <link refid="_eagle_db_table_data_8c"/>
+      </node>
+      <node id="706">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="691">
+        <label>eagle/eagle/EagleLogger.c</label>
+        <link refid="_eagle_logger_8c"/>
+      </node>
+      <node id="690">
+        <label>eagle/eagle/EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="691" relation="include">
+        </childnode>
+        <childnode refid="692" relation="include">
+        </childnode>
+        <childnode refid="693" relation="include">
+        </childnode>
+        <childnode refid="694" relation="include">
+        </childnode>
+        <childnode refid="695" relation="include">
+        </childnode>
+        <childnode refid="696" relation="include">
+        </childnode>
+        <childnode refid="697" relation="include">
+        </childnode>
+        <childnode refid="698" relation="include">
+        </childnode>
+        <childnode refid="699" relation="include">
+        </childnode>
+        <childnode refid="700" relation="include">
+        </childnode>
+        <childnode refid="701" relation="include">
+        </childnode>
+        <childnode refid="702" relation="include">
+        </childnode>
+      </node>
+      <node id="700">
+        <label>eagle/eagledb/EagleDbSchema.c</label>
+        <link refid="_eagle_db_schema_8c"/>
+      </node>
+      <node id="699">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="699" relation="include">
+        </childnode>
+      </node>
+      <node id="704">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="698" relation="include">
+        </childnode>
+        <childnode refid="705" relation="include">
+        </childnode>
+        <childnode refid="699" relation="include">
+        </childnode>
+        <childnode refid="706" relation="include">
+        </childnode>
+      </node>
+      <node id="698">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="698" relation="include">
+        </childnode>
+      </node>
+      <node id="705">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="699" relation="include">
+        </childnode>
+      </node>
+      <node id="693">
+        <label>eagle/eagle/EaglePageOperations.c</label>
+        <link refid="_eagle_page_operations_8c"/>
+      </node>
+      <node id="697">
+        <label>eagle/eagledb/EagleDbConsole.c</label>
+        <link refid="_eagle_db_console_8c"/>
+        <childnode refid="697" relation="include">
+        </childnode>
+      </node>
+      <node id="694">
+        <label>eagle/eagle/EaglePageProviderStream.c</label>
+        <link refid="_eagle_page_provider_stream_8c"/>
+      </node>
+      <node id="703">
+        <label>eagle/eagle/EagleLoggerEvent.c</label>
+        <link refid="_eagle_logger_event_8c"/>
+      </node>
+      <node id="689">
+        <label>eagle/eagle/EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="690" relation="include">
+        </childnode>
+        <childnode refid="703" relation="include">
+        </childnode>
+        <childnode refid="697" relation="include">
+        </childnode>
+        <childnode refid="704" relation="include">
+        </childnode>
+      </node>
+      <node id="692">
+        <label>eagle/eagle/EaglePage.c</label>
+        <link refid="_eagle_page_8c"/>
+      </node>
+      <node id="695">
+        <label>eagle/eagle/EaglePageProviderVirtual.c</label>
+        <link refid="_eagle_page_provider_virtual_8c"/>
+      </node>
+      <node id="707">
+        <label>eagle/eagle/EagleLoggerSeverity.c</label>
+        <link refid="_eagle_logger_severity_8c"/>
+      </node>
+      <node id="688">
+        <label>eagle/eagle/EagleLoggerSeverity.h</label>
+        <link refid="EagleLoggerSeverity.h"/>
+        <childnode refid="689" relation="include">
+        </childnode>
+        <childnode refid="707" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" prot="public" static="no">
+        <name>EagleLoggerSeverity</name>
+        <enumvalue id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2aa78f43f80acd5891d37028fd7f47408a" prot="public">
+          <name>EagleLoggerSeverityFatal</name>
+          <initializer> 100</initializer>
+          <briefdescription>
+<para>A fatal error means that the program can not continue. </para>          </briefdescription>
+          <detaileddescription>
+<para>This is the most serious level. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" prot="public">
+          <name>EagleLoggerSeverityError</name>
+          <initializer> 50</initializer>
+          <briefdescription>
+<para>An error is a problem that has stopped a task from continuing but the state of the program is recoverable and it will continue. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" prot="public">
+          <name>EagleLoggerSeverityUserError</name>
+          <initializer> 25</initializer>
+          <briefdescription>
+<para>This is an error because it stopped the execution of a task, but the error is not within eagle. </para>          </briefdescription>
+          <detaileddescription>
+<para>A bad input has been provided. A good example would be a mistake in the SQL syntax of a query. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a9700ff46418c604971c5d000de92c1d9" prot="public">
+          <name>EagleLoggerSeverityInfo</name>
+          <initializer> 10</initializer>
+          <briefdescription>
+<para>This describes events in the system that have no effect on the flow of execution, such as start up and shutdown messages. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a14bb2977a2754e59e5a972d017c02db3" prot="public">
+          <name>EagleLoggerSeverityDebug</name>
+          <initializer> 1</initializer>
+          <briefdescription>
+<para>Debug messages can be very verbose and explain this that are happening that may have nothing to do with the actual execution. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Every logged event has a severity. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a value between 0 (the least severe) to 100 (the most severe). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.h" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.h" bodystart="7" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_logger_severity_8h_1a69b632103528f4f6a4db6649d5b2c0ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleLoggerSeverity_toString</definition>
+        <argsstring>(EagleLoggerSeverity severity)</argsstring>
+        <name>EagleLoggerSeverity_toString</name>
+        <param>
+          <type><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member">EagleLoggerSeverity</ref></type>
+          <declname>severity</declname>
+        </param>
+        <briefdescription>
+<para>Translate an EagleLoggerSeverity value into its string representation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">severity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The severity. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String representation of a severity. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.h" line="45" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.c" bodystart="3" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleLoggerSeverity_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleLoggerSeverity_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="7" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="12" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2aa78f43f80acd5891d37028fd7f47408a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2aa78f43f80acd5891d37028fd7f47408a" kindref="member" tooltip="A fatal error means that the program can not continue.">EagleLoggerSeverityFatal</ref><sp/>=<sp/>100,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref><sp/>=<sp/>50,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2ad1e83d3631664c11662f8b75a1f3814d" kindref="member" tooltip="This is an error because it stopped the execution of a task, but the error is not...">EagleLoggerSeverityUserError</ref><sp/>=<sp/>25,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a9700ff46418c604971c5d000de92c1d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a9700ff46418c604971c5d000de92c1d9" kindref="member" tooltip="This describes events in the system that have no effect on the flow of execution...">EagleLoggerSeverityInfo</ref><sp/><sp/>=<sp/>10,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a14bb2977a2754e59e5a972d017c02db3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a14bb2977a2754e59e5a972d017c02db3" kindref="member" tooltip="Debug messages can be very verbose and explain this that are happening that may have...">EagleLoggerSeverityDebug</ref><sp/>=<sp/>1</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}<sp/><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member" tooltip="Every logged event has a severity.">EagleLoggerSeverity</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_logger_severity_8c_1a69b632103528f4f6a4db6649d5b2c0ba" kindref="member" tooltip="Translate an EagleLoggerSeverity value into its string representation.">EagleLoggerSeverity_toString</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member" tooltip="Every logged event has a severity.">EagleLoggerSeverity</ref><sp/>severity);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerSeverity.h"/>
+  </compounddef>
+</doxygen>

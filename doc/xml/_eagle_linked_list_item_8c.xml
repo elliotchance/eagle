@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_linked_list_item_8c" kind="file">
+    <compoundname>EagleLinkedListItem.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="_eagle_linked_list_item_8h" local="yes">EagleLinkedListItem.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <incdepgraph>
+      <node id="448">
+        <label>stdlib.h</label>
+      </node>
+      <node id="451">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="450">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="452">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="447">
+        <label>eagle/eagle/EagleLinkedListItem.c</label>
+        <link refid="EagleLinkedListItem.c"/>
+        <childnode refid="448" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+        <childnode refid="452" relation="include">
+        </childnode>
+      </node>
+      <node id="449">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="450" relation="include">
+        </childnode>
+        <childnode refid="451" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedListItem_Delete</definition>
+        <argsstring>(EagleLinkedListItem *item)</argsstring>
+        <name>EagleLinkedListItem_Delete</name>
+        <param>
+          <type>EagleLinkedListItem *</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+<para>Free a linked list item. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The item. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" bodystart="26" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_item_8c_1a73d9a6a956b46e70d0f115c418b13bd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* EagleLinkedListItem_New</definition>
+        <argsstring>(void *obj, EagleBoolean freeObj, void(*free)(void *obj))</argsstring>
+        <name>EagleLinkedListItem_New</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeObj</declname>
+        </param>
+        <param>
+          <type>void(*)(void *obj)</type>
+          <declname>free</declname>
+        </param>
+        <briefdescription>
+<para>Initialise a new item to append to a linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the object when linked list item is freed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">free</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The free function. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new linked list item. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" line="6" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" bodystart="5" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_item_8c_1a8f2ad3f617658e35f283c32d589e18f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* EagleLinkedListItem_NewWithDescription</definition>
+        <argsstring>(void *obj, EagleBoolean freeObj, void(*free)(void *obj), char *description)</argsstring>
+        <name>EagleLinkedListItem_NewWithDescription</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeObj</declname>
+        </param>
+        <param>
+          <type>void(*)(void *obj)</type>
+          <declname>free</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>description</declname>
+        </param>
+        <briefdescription>
+<para>Create a new linked list item with an attached description. </para>        </briefdescription>
+        <detaileddescription>
+<para>The description is often useful for debugging. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the object when linked list item is freed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">free</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The free function. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A description. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new linked list item. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c" bodystart="10" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_item_8h" kindref="compound">EagleLinkedListItem.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="_eagle_linked_list_item_8h_1a73d9a6a956b46e70d0f115c418b13bd3" refkind="member"><highlight class="normal">EagleLinkedListItem*<sp/><ref refid="_eagle_linked_list_item_8c_1a73d9a6a956b46e70d0f115c418b13bd3" kindref="member" tooltip="Initialise a new item to append to a linked list.">EagleLinkedListItem_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeObj,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*free)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj))</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_item_8c_1a8f2ad3f617658e35f283c32d589e18f1" kindref="member" tooltip="Create a new linked list item with an attached description.">EagleLinkedListItem_NewWithDescription</ref>(obj,<sp/>freeObj,<sp/>free,<sp/>NULL);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="_eagle_linked_list_item_8h_1a8f2ad3f617658e35f283c32d589e18f1" refkind="member"><highlight class="normal">EagleLinkedListItem*<sp/><ref refid="_eagle_linked_list_item_8c_1a8f2ad3f617658e35f283c32d589e18f1" kindref="member" tooltip="Create a new linked list item with an attached description.">EagleLinkedListItem_NewWithDescription</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeObj,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*free)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj),<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*description)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*item<sp/>=<sp/>(EagleLinkedListItem*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleLinkedListItem_NewWithDescription.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(EagleLinkedListItem));</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>item)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;obj<sp/>=<sp/>obj;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;freeObj<sp/>=<sp/>freeObj;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;next<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;free<sp/>=<sp/>free;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;description<sp/>=<sp/>(NULL<sp/>==<sp/>description<sp/>?<sp/>NULL<sp/>:<sp/>description);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>item;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="_eagle_linked_list_item_8h_1a0f51f28a2707da0badfca5bf4ec36f0a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member" tooltip="Free a linked list item.">EagleLinkedListItem_Delete</ref>(EagleLinkedListItem<sp/>*item)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>item)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(item-&gt;freeObj)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>item-&gt;free)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(item-&gt;obj);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>item-&gt;free(item-&gt;obj);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(item-&gt;description);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(item);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedListItem.c"/>
+  </compounddef>
+</doxygen>

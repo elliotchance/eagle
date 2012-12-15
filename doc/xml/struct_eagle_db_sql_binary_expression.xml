@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_binary_expression" kind="struct" prot="public">
+    <compoundname>EagleDbSqlBinaryExpression</compoundname>
+    <includes refid="_eagle_db_sql_binary_expression_8h" local="no">EagleDbSqlBinaryExpression.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_binary_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Header. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_binary_expression_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_binary_expression_1a74eef2f22da663e6b6ec0f2f21041c8d" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* left</definition>
+        <argsstring></argsstring>
+        <name>left</name>
+        <briefdescription>
+<para>The left operand. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="31" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_binary_expression_1a43b006326afba0b0b991b2017f96b503" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_db_sql_binary_expression_operator_8h_1a02a30928db8c6392973798ee0e0eb030" kindref="member">EagleDbSqlBinaryExpressionOperator</ref></type>
+        <definition>EagleDbSqlBinaryExpressionOperator op</definition>
+        <argsstring></argsstring>
+        <name>op</name>
+        <briefdescription>
+<para>The operator between the <computeroutput>left</computeroutput> and <computeroutput>right</computeroutput> operands. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_binary_expression_1a36b61b0fdd7e949b38737abba2a3fc37" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* right</definition>
+        <argsstring></argsstring>
+        <name>right</name>
+        <briefdescription>
+<para>The right operand. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="41" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Expression type is EagleDbSqlExpressionTypeBinaryExpression. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7d" kindref="member">EagleDbSqlExpressionType</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="47">
+        <label>EagleDbSqlBinaryExpressionOperator</label>
+      </node>
+      <node id="48">
+        <label>EagleDbSqlExpression</label>
+        <link refid="struct_eagle_db_sql_expression"/>
+      </node>
+      <node id="46">
+        <label>EagleDbSqlBinaryExpression</label>
+        <link refid="struct_eagle_db_sql_binary_expression"/>
+        <childnode refid="47" relation="usage">
+          <edgelabel>op</edgelabel>
+        </childnode>
+        <childnode refid="48" relation="usage">
+          <edgelabel>right</edgelabel>
+          <edgelabel>left</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" line="20" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlBinaryExpression.h" bodystart="20" bodyend="43"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_binary_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlBinaryExpression</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_binary_expression_1a74eef2f22da663e6b6ec0f2f21041c8d" prot="public" virt="non-virtual"><scope>EagleDbSqlBinaryExpression</scope><name>left</name></member>
+      <member refid="struct_eagle_db_sql_binary_expression_1a43b006326afba0b0b991b2017f96b503" prot="public" virt="non-virtual"><scope>EagleDbSqlBinaryExpression</scope><name>op</name></member>
+      <member refid="struct_eagle_db_sql_binary_expression_1a36b61b0fdd7e949b38737abba2a3fc37" prot="public" virt="non-virtual"><scope>EagleDbSqlBinaryExpression</scope><name>right</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

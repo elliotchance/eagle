@@ -1,0 +1,1035 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_linked_list_8c" kind="file">
+    <compoundname>EagleLinkedList.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_worker_8h" local="yes">EagleWorker.h</includes>
+    <includes refid="_eagle_utils_8h" local="yes">EagleUtils.h</includes>
+    <incdepgraph>
+      <node id="361">
+        <label>EagleWorker.h</label>
+        <link refid="_eagle_worker_8h"/>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="362" relation="include">
+        </childnode>
+      </node>
+      <node id="350">
+        <label>stdlib.h</label>
+      </node>
+      <node id="373">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="377">
+        <label>EagleUtils.h</label>
+        <link refid="_eagle_utils_8h"/>
+        <childnode refid="354" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+      </node>
+      <node id="349">
+        <label>eagle/eagle/EagleLinkedList.c</label>
+        <link refid="EagleLinkedList.c"/>
+        <childnode refid="350" relation="include">
+        </childnode>
+        <childnode refid="351" relation="include">
+        </childnode>
+        <childnode refid="352" relation="include">
+        </childnode>
+        <childnode refid="360" relation="include">
+        </childnode>
+        <childnode refid="361" relation="include">
+        </childnode>
+        <childnode refid="377" relation="include">
+        </childnode>
+      </node>
+      <node id="352">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="353" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="359" relation="include">
+        </childnode>
+      </node>
+      <node id="370">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="364" relation="include">
+        </childnode>
+        <childnode refid="368" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="371" relation="include">
+        </childnode>
+      </node>
+      <node id="364">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="368" relation="include">
+        </childnode>
+      </node>
+      <node id="354">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="374">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="353">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="354" relation="include">
+        </childnode>
+        <childnode refid="355" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+      </node>
+      <node id="356">
+        <label>pthread.h</label>
+      </node>
+      <node id="369">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="366">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="367" relation="include">
+        </childnode>
+      </node>
+      <node id="375">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="368" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="371" relation="include">
+        </childnode>
+      </node>
+      <node id="367">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="358">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="357">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="372">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="373" relation="include">
+        </childnode>
+      </node>
+      <node id="376">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="360">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="365">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="366" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="367" relation="include">
+        </childnode>
+      </node>
+      <node id="371">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="372" relation="include">
+        </childnode>
+        <childnode refid="374" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="367" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+      </node>
+      <node id="363">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="354" relation="include">
+        </childnode>
+        <childnode refid="364" relation="include">
+        </childnode>
+        <childnode refid="370" relation="include">
+        </childnode>
+        <childnode refid="375" relation="include">
+        </childnode>
+        <childnode refid="376" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="367" relation="include">
+        </childnode>
+        <childnode refid="352" relation="include">
+        </childnode>
+      </node>
+      <node id="351">
+        <label>stdio.h</label>
+      </node>
+      <node id="368">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="353" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+        <childnode refid="352" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="367" relation="include">
+        </childnode>
+        <childnode refid="369" relation="include">
+        </childnode>
+      </node>
+      <node id="355">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="356" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+      </node>
+      <node id="362">
+        <label>EaglePlanJob.h</label>
+        <link refid="_eagle_plan_job_8h"/>
+        <childnode refid="363" relation="include">
+        </childnode>
+        <childnode refid="357" relation="include">
+        </childnode>
+      </node>
+      <node id="359">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="357" relation="include">
+        </childnode>
+        <childnode refid="358" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a8cda83bcac99a97ff8b010475188aa2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedList_add</definition>
+        <argsstring>(EagleLinkedList *list, EagleLinkedListItem *item)</argsstring>
+        <name>EagleLinkedList_add</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>EagleLinkedListItem *</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+<para>Append an item to a linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The item. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="23" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1afd0bf44a5933e8d4f06872286fb3607f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedList_addObject</definition>
+        <argsstring>(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void(*free)(void *obj))</argsstring>
+        <name>EagleLinkedList_addObject</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeObj</declname>
+        </param>
+        <param>
+          <type>void(*)(void *obj)</type>
+          <declname>free</declname>
+        </param>
+        <briefdescription>
+<para>Add an object to the list. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is an easier method then creating the linked list item first, but it means you have to free the items with the list. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeObj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free the object when the item is freed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">free</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function responsible for freeing the objec. This may be NULL if you want to use <ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member">EagleMemory_Free()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="237" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="236" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* EagleLinkedList_begin</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_begin</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Return a pointer to the first item on the list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pointer to the first element in the list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="129" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="128" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1accd0e923a426dfa8ece22c4b065497c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedList_Delete</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Delete a linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This will only remove the list, not the items contained in the list.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list object to free. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_eagle_linked_list_8h_1af1c0fba45fb3112e7687a4c1a3f537bb" kindref="member">EagleLinkedList_DeleteWithItems</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="63" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="62" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a2011ae8624f48a23a9dca0e2ce6ed950" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedList_DeleteItems</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_DeleteItems</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Delete the items (but not the list itself). </para>        </briefdescription>
+        <detaileddescription>
+<para>This is useful for clearing out a list and reusing it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="73" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="72" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1ae605a44f7a0362819572af7d1bae2a95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleLinkedList_deleteObject</definition>
+        <argsstring>(EagleLinkedList *list, void *obj)</argsstring>
+        <name>EagleLinkedList_deleteObject</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Delete an object from a linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will also remove the EagleLinkedListItem that encapsulates in. If the same pointer exists in multiple items only the first will be removed. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The object to remove. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the item was found and removed. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="242" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="241" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1af1c0fba45fb3112e7687a4c1a3f537bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleLinkedList_DeleteWithItems</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_DeleteWithItems</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Delete a linked list and all the items contained in it. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list object to free. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_eagle_linked_list_8h_1accd0e923a426dfa8ece22c4b065497c3" kindref="member">EagleLinkedList_Delete</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="97" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="96" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a0e1a9e425d1c852d37f47ffa456597cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* EagleLinkedList_end</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_end</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Return a pointer to the last item on the list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pointer to the last item in the list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="143" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="142" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a562585e278ce66ab7ba04d567e12d4f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* EagleLinkedList_first</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_first</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Get the first object on the linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is not the same as <ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member">EagleLinkedList_begin()</ref> which returns the EagleLinkedListItem rather than the object it is wrapping. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL or an object. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="107" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="106" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1ab8955131cc2a2087ca90ee6c225db837" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* EagleLinkedList_get</definition>
+        <argsstring>(EagleLinkedList *list, int index)</argsstring>
+        <name>EagleLinkedList_get</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get an item by index. </para>        </briefdescription>
+        <detaileddescription>
+<para>The first item will have the index of 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The object is returned (not the linked list item). If the index is out of bounds then NULL will be returned. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="219" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="218" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1aaea6e0f81e80eabb7a165efb39cb195f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleLinkedList_isEmpty</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_isEmpty</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Check if the list is empty. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue is there are no items on the list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="187" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="186" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1ad871f9320b516cd5a381f8f98d9647d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* EagleLinkedList_last</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_last</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Get the last object on the linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is not the same as <ref refid="_eagle_linked_list_8c_1a0e1a9e425d1c852d37f47ffa456597cc" kindref="member">EagleLinkedList_end()</ref> which returns the EagleLinkedListItem rather than the object it is wrapping. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL or an object. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="118" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="117" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleLinkedList_length</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_length</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>The number of items in the list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of items in the list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="48" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="47" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1ae9bcde0ae223ae3b8220c4967fbce417" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* EagleLinkedList_New</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleLinkedList_New</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new linked list. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A new linked list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="8" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1ad1a1fb29e4ffb6ad9b1c10360789a0e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>EagleLinkedListItem *</type>
+        <definition>EagleLinkedListItem* EagleLinkedList_pop</definition>
+        <argsstring>(EagleLinkedList *list)</argsstring>
+        <name>EagleLinkedList_pop</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>Remove the last item on the list and return it. </para>        </briefdescription>
+        <detaileddescription>
+<para>Since this does not free the item you will have to free it yourself. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list to pop from. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member">EagleLinkedListItem_Delete()</ref> </para></simplesect>
+<simplesect kind="return"><para>The linked list item on the end of the list. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="157" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="156" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_linked_list_8c_1a02d15c41bcb99ff720581ba8e674585b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void **</type>
+        <definition>void** EagleLinkedList_toArray</definition>
+        <argsstring>(EagleLinkedList *list, int *size)</argsstring>
+        <name>EagleLinkedList_toArray</name>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Convert a linked list to an array. </para>        </briefdescription>
+        <detaileddescription>
+<para>No data is duplicated so if the items are freed in the linked list they will disappear from your array as well. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The linked list. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the array. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of objects (no the linked list items, the actual objects) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" line="198" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c" bodystart="197" bodyend="216"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_8h" kindref="compound">EagleLinkedList.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_worker_8h" kindref="compound">EagleWorker.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_utils_8h" kindref="compound">EagleUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="_eagle_linked_list_8h_1ae9bcde0ae223ae3b8220c4967fbce417" refkind="member"><highlight class="normal"><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref>*<sp/><ref refid="_eagle_linked_list_8c_1ae9bcde0ae223ae3b8220c4967fbce417" kindref="member" tooltip="Create a new linked list.">EagleLinkedList_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list<sp/>=<sp/>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleLinkedList_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref>));</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref><sp/>=<sp/><ref refid="_eagle_synchronizer_8c_1a98913d5b1b10058b0e839dabdbcaed12" kindref="member" tooltip="Create a new EagleLock.">EagleSynchronizer_CreateLock</ref>();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>list;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="_eagle_linked_list_8h_1a8cda83bcac99a97ff8b010475188aa2e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1a8cda83bcac99a97ff8b010475188aa2e" kindref="member" tooltip="Append an item to a linked list.">EagleLinkedList_add</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list,<sp/>EagleLinkedListItem<sp/>*item)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>item)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8h_1a0f54c3edc40e4477acd9f503e51bf299" kindref="member" tooltip="Lock an EagleLock.">EagleSynchronizer_Lock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>item-&gt;next<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>item;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*current<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current-&gt;next<sp/>=<sp/>item;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current<sp/>=<sp/>current-&gt;next;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>current;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>++list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8c_1a6a41ea4ba599f003f8671993660464d6" kindref="member" tooltip="Unlock an EagleLock.">EagleSynchronizer_Unlock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="_eagle_linked_list_8h_1a4ab41e3b8b0143afca919b824799f119" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>length;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8h_1a0f54c3edc40e4477acd9f503e51bf299" kindref="member" tooltip="Lock an EagleLock.">EagleSynchronizer_Lock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>length<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8c_1a6a41ea4ba599f003f8671993660464d6" kindref="member" tooltip="Unlock an EagleLock.">EagleSynchronizer_Unlock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>length;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_eagle_linked_list_8h_1accd0e923a426dfa8ece22c4b065497c3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1accd0e923a426dfa8ece22c4b065497c3" kindref="member" tooltip="Delete a linked list.">EagleLinkedList_Delete</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_lock_8c_1a87e2254b1b165636debfd228f13bd4d6" kindref="member" tooltip="Free a lock.">EagleLock_Delete</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(list);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="_eagle_linked_list_8h_1a2011ae8624f48a23a9dca0e2ce6ed950" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1a2011ae8624f48a23a9dca0e2ce6ed950" kindref="member" tooltip="Delete the items (but not the list itself).">EagleLinkedList_DeleteItems</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_linked_list_8c_1aaea6e0f81e80eabb7a165efb39cb195f" kindref="member" tooltip="Check if the list is empty.">EagleLinkedList_isEmpty</ref>(list))<sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*p,<sp/>*next;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8h_1a0f54c3edc40e4477acd9f503e51bf299" kindref="member" tooltip="Lock an EagleLock.">EagleSynchronizer_Lock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(p<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>;<sp/>NULL<sp/>!=<sp/>p;<sp/>p<sp/>=<sp/>next)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>=<sp/>p-&gt;next;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member" tooltip="Free a linked list item.">EagleLinkedListItem_Delete</ref>(p);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8c_1a6a41ea4ba599f003f8671993660464d6" kindref="member" tooltip="Unlock an EagleLock.">EagleSynchronizer_Unlock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="_eagle_linked_list_8h_1af1c0fba45fb3112e7687a4c1a3f537bb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1af1c0fba45fb3112e7687a4c1a3f537bb" kindref="member" tooltip="Delete a linked list and all the items contained in it.">EagleLinkedList_DeleteWithItems</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1a2011ae8624f48a23a9dca0e2ce6ed950" kindref="member" tooltip="Delete the items (but not the list itself).">EagleLinkedList_DeleteItems</ref>(list);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1accd0e923a426dfa8ece22c4b065497c3" kindref="member" tooltip="Delete a linked list.">EagleLinkedList_Delete</ref>(list);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="_eagle_linked_list_8h_1a562585e278ce66ab7ba04d567e12d4f2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="_eagle_linked_list_8c_1a562585e278ce66ab7ba04d567e12d4f2" kindref="member" tooltip="Get the first object on the linked list.">EagleLinkedList_first</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*first<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(list);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>first)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>first-&gt;obj;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="_eagle_linked_list_8h_1ad871f9320b516cd5a381f8f98d9647d4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="_eagle_linked_list_8c_1ad871f9320b516cd5a381f8f98d9647d4" kindref="member" tooltip="Get the last object on the linked list.">EagleLinkedList_last</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*last<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a0e1a9e425d1c852d37f47ffa456597cc" kindref="member" tooltip="Return a pointer to the last item on the list.">EagleLinkedList_end</ref>(list);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>last)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>last-&gt;obj;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="_eagle_linked_list_8h_1a06a08197b5ee39e5567d8d8ea4f3803a" refkind="member"><highlight class="normal">EagleLinkedListItem*<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*first<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8h_1a0f54c3edc40e4477acd9f503e51bf299" kindref="member" tooltip="Lock an EagleLock.">EagleSynchronizer_Lock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>first<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8c_1a6a41ea4ba599f003f8671993660464d6" kindref="member" tooltip="Unlock an EagleLock.">EagleSynchronizer_Unlock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>first;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="_eagle_linked_list_8h_1a0e1a9e425d1c852d37f47ffa456597cc" refkind="member"><highlight class="normal">EagleLinkedListItem*<sp/><ref refid="_eagle_linked_list_8c_1a0e1a9e425d1c852d37f47ffa456597cc" kindref="member" tooltip="Return a pointer to the last item on the list.">EagleLinkedList_end</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*head<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8h_1a0f54c3edc40e4477acd9f503e51bf299" kindref="member" tooltip="Lock an EagleLock.">EagleSynchronizer_Lock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>head<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref>;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_synchronizer_8c_1a6a41ea4ba599f003f8671993660464d6" kindref="member" tooltip="Unlock an EagleLock.">EagleSynchronizer_Unlock</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1a141e63e5259290f4aab012d020226e6c" kindref="member" tooltip="Lock to synchronize list modifications.">modifyLock</ref>);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>head;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="_eagle_linked_list_8h_1ad1a1fb29e4ffb6ad9b1c10360789a0e6" refkind="member"><highlight class="normal">EagleLinkedListItem*<sp/><ref refid="_eagle_linked_list_8c_1ad1a1fb29e4ffb6ad9b1c10360789a0e6" kindref="member" tooltip="Remove the last item on the list and return it.">EagleLinkedList_pop</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*next,<sp/>*r;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(list)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(list)<sp/>==<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*item<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>item-&gt;next<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>item;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>find<sp/>the<sp/>second<sp/>last<sp/>item<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>next<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref><sp/>-<sp/>2;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>=<sp/>next-&gt;next;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>--list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>next;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>next-&gt;next-&gt;next<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>r<sp/>=<sp/>next-&gt;next;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref>-&gt;next<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186" refid="_eagle_linked_list_8h_1aaea6e0f81e80eabb7a165efb39cb195f" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_linked_list_8c_1aaea6e0f81e80eabb7a165efb39cb195f" kindref="member" tooltip="Check if the list is empty.">EagleLinkedList_isEmpty</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list)</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197" refid="_eagle_linked_list_8h_1a02d15c41bcb99ff720581ba8e674585b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">**<sp/><ref refid="_eagle_linked_list_8c_1a02d15c41bcb99ff720581ba8e674585b" kindref="member" tooltip="Convert a linked list to an array.">EagleLinkedList_toArray</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*size)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>**array;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*p,<sp/>*next;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>list)<sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>*size<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(list);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>array<sp/>=<sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">**)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleLinkedList_toArray.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*),<sp/>*size);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(p<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>,<sp/>i<sp/>=<sp/>0;<sp/>NULL<sp/>!=<sp/>p;<sp/>p<sp/>=<sp/>next,<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>array[i]<sp/>=<sp/>p-&gt;obj;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>=<sp/>p-&gt;next;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>array;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="_eagle_linked_list_8h_1ab8955131cc2a2087ca90ee6c225db837" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="_eagle_linked_list_8c_1ab8955131cc2a2087ca90ee6c225db837" kindref="member" tooltip="Get an item by index.">EagleLinkedList_get</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index)</highlight></codeline>
+<codeline lineno="219"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*next;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>out<sp/>of<sp/>bounds<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(index<sp/>&lt;<sp/>0<sp/>||<sp/>index<sp/>&gt;=<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(list))<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>next<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>index;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>next<sp/>=<sp/>next-&gt;next;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>next-&gt;obj;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236" refid="_eagle_linked_list_8h_1afd0bf44a5933e8d4f06872286fb3607f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1afd0bf44a5933e8d4f06872286fb3607f" kindref="member" tooltip="Add an object to the list.">EagleLinkedList_addObject</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeObj,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*free)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj))</highlight></codeline>
+<codeline lineno="237"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1a8cda83bcac99a97ff8b010475188aa2e" kindref="member" tooltip="Append an item to a linked list.">EagleLinkedList_add</ref>(list,<sp/><ref refid="_eagle_linked_list_item_8c_1a73d9a6a956b46e70d0f115c418b13bd3" kindref="member" tooltip="Initialise a new item to append to a linked list.">EagleLinkedListItem_New</ref>(obj,<sp/>freeObj,<sp/>free));</highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241" refid="_eagle_linked_list_8h_1ae605a44f7a0362819572af7d1bae2a95" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_linked_list_8c_1ae605a44f7a0362819572af7d1bae2a95" kindref="member" tooltip="Delete an object from a linked list.">EagleLinkedList_deleteObject</ref>(<ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*list,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*obj)</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*last,<sp/>*cursor;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>problems<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_linked_list_8c_1aaea6e0f81e80eabb7a165efb39cb195f" kindref="member" tooltip="Check if the list is empty.">EagleLinkedList_isEmpty</ref>(list))<sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>one<sp/>item<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(list)<sp/>==<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>-&gt;obj<sp/>==<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member" tooltip="Free a linked list item.">EagleLinkedListItem_Delete</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>begin<sp/>item<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(list)-&gt;obj<sp/>==<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*second<sp/>=<sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>-&gt;next;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member" tooltip="Free a linked list item.">EagleLinkedListItem_Delete</ref>(list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref>);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1ad1e41fc3909b2fc775c8c33a6fdd99c8" kindref="member" tooltip="A pointer to the first item.">first</ref><sp/>=<sp/>second;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>some<sp/>item<sp/>after<sp/>the<sp/>first<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>last<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(list);</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(cursor<sp/>=<sp/>last-&gt;next;<sp/>NULL<sp/>!=<sp/>cursor;<sp/>cursor<sp/>=<sp/>cursor-&gt;next,<sp/>last<sp/>=<sp/>last-&gt;next)<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(obj<sp/>==<sp/>cursor-&gt;obj)<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>if<sp/>this<sp/>is<sp/>the<sp/>last<sp/>item<sp/>we<sp/>need<sp/>to<sp/>fix<sp/>the<sp/>last<sp/>pointer<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>==<sp/>cursor)<sp/>{</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>list-&gt;<ref refid="struct_eagle_linked_list_1aac61f73d529e017b4550783d73fce74a" kindref="member" tooltip="A pointer to the last item.">last</ref><sp/>=<sp/>last;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>last-&gt;next<sp/>=<sp/>cursor-&gt;next;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_item_8c_1a0f51f28a2707da0badfca5bf4ec36f0a" kindref="member" tooltip="Free a linked list item.">EagleLinkedListItem_Delete</ref>(cursor);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--list-&gt;<ref refid="struct_eagle_linked_list_1a9f59b34b1f25fe00023291b678246bcc" kindref="member" tooltip="The amount of items in this linked list.">length</ref>;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>object<sp/>not<sp/>found<sp/>on<sp/>list<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLinkedList.c"/>
+  </compounddef>
+</doxygen>

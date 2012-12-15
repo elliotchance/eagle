@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - eagle/eagledb/EagleDbSqlBinaryExpression.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../index.html">directory</a> - <a href="index.html">eagle/eagledb</a> - EagleDbSqlBinaryExpression.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-15</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">12</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">100.0 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">12</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<span class="lineNum">       3 </span>                : 
+<span class="lineNum">       4 </span>                : /**
+<span class="lineNum">       5 </span>                :  Create a new EagleDbSqlBinaryExpression.
+<span class="lineNum">       6 </span>                :  
+<span class="lineNum">       7 </span>                :  @param left Left operand.
+<span class="lineNum">       8 </span>                :  @param op Operator.
+<span class="lineNum">       9 </span>                :  @param right Right operand.
+<span class="lineNum">      10 </span>                :  */
+<span class="lineNum">      11 </span><span class="lineCov">              2 : EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)</span>
+<span class="lineNum">      12 </span>                : {
+<span class="lineNum">      13 </span><span class="lineCov">              2 :     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) malloc(sizeof(EagleDbSqlBinaryExpression));</span>
+<span class="lineNum">      14 </span>                :     
+<span class="lineNum">      15 </span><span class="lineCov">              2 :     expr-&gt;expressionType = EagleDbSqlExpressionTypeBinaryExpression;</span>
+<span class="lineNum">      16 </span><span class="lineCov">              2 :     expr-&gt;left = left;</span>
+<span class="lineNum">      17 </span><span class="lineCov">              2 :     expr-&gt;op = op;</span>
+<span class="lineNum">      18 </span><span class="lineCov">              2 :     expr-&gt;right = right;</span>
+<span class="lineNum">      19 </span>                :     
+<span class="lineNum">      20 </span><span class="lineCov">              2 :     return expr;</span>
+<span class="lineNum">      21 </span>                : }
+<span class="lineNum">      22 </span>                : 
+<span class="lineNum">      23 </span><span class="lineCov">              2 : void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)</span>
+<span class="lineNum">      24 </span>                : {
+<span class="lineNum">      25 </span><span class="lineCov">              2 :     EagleDbSqlExpression_Delete(expr-&gt;left);</span>
+<span class="lineNum">      26 </span><span class="lineCov">              2 :     EagleDbSqlExpression_Delete(expr-&gt;right);</span>
+<span class="lineNum">      27 </span><span class="lineCov">              2 :     free(expr);</span>
+<span class="lineNum">      28 </span><span class="lineCov">              2 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

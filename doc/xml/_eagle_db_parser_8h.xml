@@ -1,0 +1,435 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_parser_8h" kind="file">
+    <compoundname>EagleDbParser.h</compoundname>
+    <includes refid="_eagle_data_8h" local="yes">EagleData.h</includes>
+    <includes refid="_eagle_db_sql_statement_type_8h" local="yes">EagleDbSqlStatementType.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includedby refid="_eagle_db_parser_8c" local="yes">eagle/eagledb/EagleDbParser.c</includedby>
+    <incdepgraph>
+      <node id="2070">
+        <label>eagle/eagledb/EagleDbParser.h</label>
+        <link refid="EagleDbParser.h"/>
+        <childnode refid="2071" relation="include">
+        </childnode>
+        <childnode refid="2073" relation="include">
+        </childnode>
+        <childnode refid="2074" relation="include">
+        </childnode>
+      </node>
+      <node id="2074">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2075" relation="include">
+        </childnode>
+        <childnode refid="2080" relation="include">
+        </childnode>
+        <childnode refid="2079" relation="include">
+        </childnode>
+        <childnode refid="2081" relation="include">
+        </childnode>
+      </node>
+      <node id="2076">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2075">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2076" relation="include">
+        </childnode>
+        <childnode refid="2077" relation="include">
+        </childnode>
+        <childnode refid="2080" relation="include">
+        </childnode>
+      </node>
+      <node id="2078">
+        <label>pthread.h</label>
+      </node>
+      <node id="2071">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2072" relation="include">
+        </childnode>
+      </node>
+      <node id="2072">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2080">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2079">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2073">
+        <label>EagleDbSqlStatementType.h</label>
+        <link refid="_eagle_db_sql_statement_type_8h"/>
+      </node>
+      <node id="2077">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2078" relation="include">
+        </childnode>
+        <childnode refid="2079" relation="include">
+        </childnode>
+      </node>
+      <node id="2081">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2079" relation="include">
+        </childnode>
+        <childnode refid="2080" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2083">
+        <label>eagle/eagledb/EagleDbParser.c</label>
+        <link refid="_eagle_db_parser_8c"/>
+      </node>
+      <node id="2082">
+        <label>eagle/eagledb/EagleDbParser.h</label>
+        <link refid="EagleDbParser.h"/>
+        <childnode refid="2083" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_parser" prot="public">EagleDbParser</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_parser_8h_1affd6d72bb4f53e420271f0ba8bc30ad3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbParser_addError</definition>
+        <argsstring>(EagleDbParser *p, char *message)</argsstring>
+        <name>EagleDbParser_addError</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Push the error onto the stack. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The error message. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="91" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a50139d2484304b09db76c60f020515f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbParser_Delete</definition>
+        <argsstring>(EagleDbParser *p)</argsstring>
+        <name>EagleDbParser_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Delete the parser instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="77" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="86" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a717401522952d15907b9e0b5ba9a5688" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbParser_hasError</definition>
+        <argsstring>(EagleDbParser *p)</argsstring>
+        <name>EagleDbParser_hasError</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Did the parser encounter any errors? </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the parser encountered an error. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="98" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1aca698aa3d25538a9c81d7866f277026a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbParser_IsNonreservedKeyword</definition>
+        <argsstring>(const char *word)</argsstring>
+        <name>EagleDbParser_IsNonreservedKeyword</name>
+        <param>
+          <type>const char *</type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>Check if a word is a nonreserved keyword. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is not case-sensitive. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The keyword. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the word is a nonreserved keyword </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="112" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="99" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a624cb9d821bcfe43c717003a84d83c55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbParser_IsReservedKeyword</definition>
+        <argsstring>(const char *word)</argsstring>
+        <name>EagleDbParser_IsReservedKeyword</name>
+        <param>
+          <type>const char *</type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>Check if a word is a reserved keyword. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is not case-sensitive. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The keyword. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the word is a reserved keyword </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="105" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="364" bodyend="627"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a1dba7eb9bc127471b1b2f4e5477bbadd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbParser_lastError</definition>
+        <argsstring>(EagleDbParser *p)</argsstring>
+        <name>EagleDbParser_lastError</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Get the last error from the parser. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The last error message. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="84" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="69" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1ae10f72b31f2185a57171b1491c03b4b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbParser_lastToken</definition>
+        <argsstring>(EagleDbParser *p)</argsstring>
+        <name>EagleDbParser_lastToken</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>This can be used to get the most recent yytext token. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is not a data duplication of the token so you must copy it out if you intended to keep it. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The last token. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="61" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1afc96c840de89fb50166e5c9853d20fcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+        <definition>EagleDbParser* EagleDbParser_New</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleDbParser_New</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new parser. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is almost exclusivly for internal use only. <simplesect kind="return"><para>A new parser instance. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_db_parser_8c_1a2c41ab13c3c14fd3dcf4374b2e90e72f" kindref="member">EagleDbParser_ParseWithString()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="46" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="27" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a2c41ab13c3c14fd3dcf4374b2e90e72f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+        <definition>EagleDbParser* EagleDbParser_ParseWithString</definition>
+        <argsstring>(const char *sql)</argsstring>
+        <name>EagleDbParser_ParseWithString</name>
+        <param>
+          <type>const char *</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>Parse a SQL string now. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SQL </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A parser instance (on success or failure). </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="53" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="41" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_parser_8h_1a2678c592d0e0310e5ab173cb37099699" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int yyerror</definition>
+        <argsstring>(EagleDbParser *parser, void *scanner, char *s)</argsstring>
+        <name>yyerror</name>
+        <param>
+          <type><ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>parser</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>scanner</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>This function must be provided to give flex and bison somewhere to send the errors. </para>        </briefdescription>
+        <detaileddescription>
+<para>They will be put onto a proper stack once received. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">parser</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parser. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scanner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scanner. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ignored. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="71" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.c" bodystart="80" bodyend="84"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbParser_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbParser_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_8h" kindref="compound">EagleData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_statement_type_8h" kindref="compound">EagleDbSqlStatementType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_8h" kindref="compound">EagleLinkedList.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="struct_eagle_db_parser" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16" refid="struct_eagle_db_parser_1a6408a9521ba66ada94e4716aeb124a9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_eagle_db_parser_1a6408a9521ba66ada94e4716aeb124a9f" kindref="member" tooltip="Pointer to allow the reentrant parser to work.">yyparse</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21" refid="struct_eagle_db_parser_1a7fe33855e7e2360992d082708a38463a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5" kindref="member" tooltip="The SQL statement type.">EagleDbSqlStatementType</ref><sp/><ref refid="struct_eagle_db_parser_1a7fe33855e7e2360992d082708a38463a" kindref="member" tooltip="The type of statement.">yystatementtype</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26" refid="struct_eagle_db_parser_1a4df2ee59cf909d50b5a6270eac7042b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*<ref refid="struct_eagle_db_parser_1a4df2ee59cf909d50b5a6270eac7042b0" kindref="member" tooltip="Error stack.">errors</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31" refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" kindref="member" tooltip="This is the pointer to the final AST returned by the parser.">yyparse_ast</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="struct_eagle_db_parser_1aaefa481c2ead5d7cfc91e1093259dd6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="struct_eagle_db_parser_1aaefa481c2ead5d7cfc91e1093259dd6f" kindref="member" tooltip="A symbol provided by flex that contains the last token read.">yytext_last</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref>*<sp/><ref refid="_eagle_db_parser_8c_1afc96c840de89fb50166e5c9853d20fcd" kindref="member" tooltip="Create a new parser.">EagleDbParser_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref>*<sp/><ref refid="_eagle_db_parser_8c_1a2c41ab13c3c14fd3dcf4374b2e90e72f" kindref="member" tooltip="Parse a SQL string now.">EagleDbParser_ParseWithString</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*sql);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_parser_8c_1ae10f72b31f2185a57171b1491c03b4b0" kindref="member" tooltip="This can be used to get the most recent yytext token.">EagleDbParser_lastToken</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_parser_8c_1a2678c592d0e0310e5ab173cb37099699" kindref="member" tooltip="This function must be provided to give flex and bison somewhere to send the errors...">yyerror</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*parser,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*scanner,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*s);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_parser_8c_1a50139d2484304b09db76c60f020515f5" kindref="member" tooltip="Delete the parser instance.">EagleDbParser_Delete</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_parser_8c_1a1dba7eb9bc127471b1b2f4e5477bbadd" kindref="member" tooltip="Get the last error from the parser.">EagleDbParser_lastError</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_parser_8c_1affd6d72bb4f53e420271f0ba8bc30ad3" kindref="member" tooltip="Push the error onto the stack.">EagleDbParser_addError</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*message);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_parser_8c_1a717401522952d15907b9e0b5ba9a5688" kindref="member" tooltip="Did the parser encounter any errors?">EagleDbParser_hasError</ref>(<ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_parser_8c_1a624cb9d821bcfe43c717003a84d83c55" kindref="member" tooltip="Check if a word is a reserved keyword.">EagleDbParser_IsReservedKeyword</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*word);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_parser_8c_1aca698aa3d25538a9c81d7866f277026a" kindref="member" tooltip="Check if a word is a nonreserved keyword.">EagleDbParser_IsNonreservedKeyword</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*word);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h"/>
+  </compounddef>
+</doxygen>

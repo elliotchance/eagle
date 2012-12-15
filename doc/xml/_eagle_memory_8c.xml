@@ -1,0 +1,394 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_memory_8c" kind="file">
+    <compoundname>EagleMemory.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">strings.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <incdepgraph>
+      <node id="710">
+        <label>stdlib.h</label>
+      </node>
+      <node id="711">
+        <label>strings.h</label>
+      </node>
+      <node id="708">
+        <label>eagle/eagle/EagleMemory.c</label>
+        <link refid="EagleMemory.c"/>
+        <childnode refid="709" relation="include">
+        </childnode>
+        <childnode refid="710" relation="include">
+        </childnode>
+        <childnode refid="711" relation="include">
+        </childnode>
+        <childnode refid="712" relation="include">
+        </childnode>
+      </node>
+      <node id="712">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="709">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int EagleMemory_MockInvocations</definition>
+        <argsstring></argsstring>
+        <name>EagleMemory_MockInvocations</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+<para>The number of times a mocked malloc() has been invoked. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="19" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" prot="public" static="yes" mutable="no">
+        <type>char **</type>
+        <definition>char** EagleMemory_Mocks</definition>
+        <argsstring></argsstring>
+        <name>EagleMemory_Mocks</name>
+        <initializer> NULL</initializer>
+        <briefdescription>
+<para>The current mocks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="9" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int EagleMemory_MocksInUse</definition>
+        <argsstring></argsstring>
+        <name>EagleMemory_MocksInUse</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+<para>The number of mocks in use. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="14" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* EagleMemory_Allocate</definition>
+        <argsstring>(char *id, size_t size)</argsstring>
+        <name>EagleMemory_Allocate</name>
+        <param>
+          <type>char *</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a single block of memory. </para>        </briefdescription>
+        <detaileddescription>
+<para>Memory that is allocated will be zeroed out.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is a unique string used for mocking memory allocations. See <ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member">EagleMemory_Mock()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of memory to allocate. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pointer to the new memory or NULL upon failure. Failures must be handled in your code and may need to cascade up to recover from the failure. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="21" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleMemory_Free</definition>
+        <argsstring>(void *ptr)</argsstring>
+        <name>EagleMemory_Free</name>
+        <param>
+          <type>void *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>Free a pointer. </para>        </briefdescription>
+        <detaileddescription>
+<para>The pointer will be set to NULL. It is safe to call this function with NULL and hence to call it multiple times on the same pointer.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to free. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="48" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="47" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1aeb088ccc405464f0208300483da4b5da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleMemory_GetMockInvocations</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleMemory_GetMockInvocations</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Get the number of times a mocked malloc has returned NULL since <ref refid="_eagle_memory_8c_1a1e005f64d6b7e04a366013d1451f71db" kindref="member">EagleMemory_MockInit()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of mock invocations. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="90" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleMemory_Mock</definition>
+        <argsstring>(char *id)</argsstring>
+        <name>EagleMemory_Mock</name>
+        <param>
+          <type>char *</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Mocking memory allocations. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is used by the MemorySuite to mock malloc() returning NULL. Every <ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member">EagleMemory_Allocate()</ref> and <ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member">EagleMemory_MultiAllocate()</ref> requires a unique ID. This ID can be sent to <ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member">EagleMemory_Mock()</ref> to make sure that allocation returns NULL and the program handles the failure correctly.</para><para>You may have upto 32 mocks for a single test case.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the allocation handle to mock. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="81" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="80" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1a7792dd6a6606c2cdcdc55f0e95a6d298" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleMemory_MockFinish</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleMemory_MockFinish</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Finish the mocking session. </para>        </briefdescription>
+        <detaileddescription>
+<para>Run this method at the end of each test case, after invoking <ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member">EagleMemory_Mock()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="76" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1a1e005f64d6b7e04a366013d1451f71db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleMemory_MockInit</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleMemory_MockInit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Start the mocking session. </para>        </briefdescription>
+        <detaileddescription>
+<para>Run this method at the top of each test case, before invoking <ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member">EagleMemory_Mock()</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="70" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="69" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void **</type>
+        <definition>void** EagleMemory_MultiAllocate</definition>
+        <argsstring>(char *id, size_t size, int quantity)</argsstring>
+        <name>EagleMemory_MultiAllocate</name>
+        <param>
+          <type>char *</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>quantity</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a single block to support an array. </para>        </briefdescription>
+        <detaileddescription>
+<para>There is still only a single allocation, this is eqivilent to calloc().</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This is a unique string used for mocking memory allocations. See <ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member">EagleMemory_Mock()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of a single array element. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">quantity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of array items. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new single malloc block. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="54" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_memory_8c_1a55fcbc7c086980e66727c063b345e717" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleMemory_MultiFree</definition>
+        <argsstring>(void **ptr, int quantity)</argsstring>
+        <name>EagleMemory_MultiFree</name>
+        <param>
+          <type>void **</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>quantity</declname>
+        </param>
+        <briefdescription>
+<para>Free an array of elements. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This is not the eqivilent opposite of <ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member">EagleMemory_MultiAllocate()</ref>. This function will free each array element, then the whole array itself.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">quantity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of items in the array. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" line="59" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c" bodystart="58" bodyend="67"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;strings.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**<ref refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" kindref="member" tooltip="The current mocks.">EagleMemory_Mocks</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" kindref="member" tooltip="The number of times a mocked malloc() has been invoked.">EagleMemory_MockInvocations</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="_eagle_memory_8h_1a21ad14d6772cd800661d5f2a29d18d2b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*m;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>CUNIT</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>if<sp/>we<sp/>are<sp/>unit<sp/>testing,<sp/>check<sp/>for<sp/>mocking<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(<ref refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" kindref="member" tooltip="The current mocks.">EagleMemory_Mocks</ref>[i],<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++<ref refid="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" kindref="member" tooltip="The number of times a mocked malloc() has been invoked.">EagleMemory_MockInvocations</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>try<sp/>the<sp/>real<sp/>allocation<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>m<sp/>=<sp/>malloc(size);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>zero<sp/>out<sp/>memory<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>memset(m,<sp/>0,<sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal">)<sp/>size);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="_eagle_memory_8h_1aaa3b2daf6c57f2aa57de0ade732caeb5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*ptr)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>free(ptr);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="_eagle_memory_8h_1ae5491d67ddaa1386224a414a5e944a6a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">**<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>quantity)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">**)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<sp/>quantity<sp/>*<sp/>size);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="_eagle_memory_8h_1a55fcbc7c086980e66727c063b345e717" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1a55fcbc7c086980e66727c063b345e717" kindref="member" tooltip="Free an array of elements.">EagleMemory_MultiFree</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>**ptr,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>quantity)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>quantity;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free(ptr[i]);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr[i]<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>free(ptr);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="_eagle_memory_8h_1a1e005f64d6b7e04a366013d1451f71db" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1a1e005f64d6b7e04a366013d1451f71db" kindref="member" tooltip="Start the mocking session.">EagleMemory_MockInit</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" kindref="member" tooltip="The number of times a mocked malloc() has been invoked.">EagleMemory_MockInvocations</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="_eagle_memory_8h_1a7792dd6a6606c2cdcdc55f0e95a6d298" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1a7792dd6a6606c2cdcdc55f0e95a6d298" kindref="member" tooltip="Finish the mocking session.">EagleMemory_MockFinish</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="_eagle_memory_8h_1a3025570485681866405dbfdc3a3b6106" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1a3025570485681866405dbfdc3a3b6106" kindref="member" tooltip="Mocking memory allocations.">EagleMemory_Mock</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/><ref refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" kindref="member" tooltip="The current mocks.">EagleMemory_Mocks</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" kindref="member" tooltip="The current mocks.">EagleMemory_Mocks</ref><sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**)<sp/>calloc((</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<sp/>32,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*));</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1a6984ddde1b990ed2a06b78562dc5b741" kindref="member" tooltip="The current mocks.">EagleMemory_Mocks</ref>[<ref refid="_eagle_memory_8c_1af8021285d075c7beab730fe79d695c9f" kindref="member" tooltip="The number of mocks in use.">EagleMemory_MocksInUse</ref>++]<sp/>=<sp/>id;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="_eagle_memory_8h_1aeb088ccc405464f0208300483da4b5da" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1aeb088ccc405464f0208300483da4b5da" kindref="member" tooltip="Get the number of times a mocked malloc has returned NULL since EagleMemory_MockInit()...">EagleMemory_GetMockInvocations</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_memory_8c_1ae6603a9267982c5a2485868e1900cd41" kindref="member" tooltip="The number of times a mocked malloc() has been invoked.">EagleMemory_MockInvocations</ref>;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleMemory.c"/>
+  </compounddef>
+</doxygen>

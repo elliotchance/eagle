@@ -1,0 +1,708 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_select_8c" kind="file">
+    <compoundname>EagleDbSqlSelect.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_db_sql_select_8h" local="yes">EagleDbSqlSelect.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_utils_8h" local="yes">EagleUtils.h</includes>
+    <includes refid="_eagle_db_sql_expression_type_8h" local="yes">EagleDbSqlExpressionType.h</includes>
+    <includes refid="_eagle_db_table_data_8h" local="yes">EagleDbTableData.h</includes>
+    <includes refid="_eagle_db_instance_8h" local="yes">EagleDbInstance.h</includes>
+    <incdepgraph>
+      <node id="2554">
+        <label>EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="2553" relation="include">
+        </childnode>
+        <childnode refid="2552" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2543" relation="include">
+        </childnode>
+      </node>
+      <node id="2526">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2527" relation="include">
+        </childnode>
+        <childnode refid="2544" relation="include">
+        </childnode>
+      </node>
+      <node id="2558">
+        <label>EagleDbSqlInsert.h</label>
+        <link refid="_eagle_db_sql_insert_8h"/>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+      </node>
+      <node id="2551">
+        <label>EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="2552" relation="include">
+        </childnode>
+        <childnode refid="2535" relation="include">
+        </childnode>
+        <childnode refid="2554" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+      </node>
+      <node id="2521">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="EagleDbSqlSelect.c"/>
+        <childnode refid="2522" relation="include">
+        </childnode>
+        <childnode refid="2523" relation="include">
+        </childnode>
+        <childnode refid="2524" relation="include">
+        </childnode>
+        <childnode refid="2525" relation="include">
+        </childnode>
+        <childnode refid="2549" relation="include">
+        </childnode>
+        <childnode refid="2550" relation="include">
+        </childnode>
+        <childnode refid="2545" relation="include">
+        </childnode>
+        <childnode refid="2551" relation="include">
+        </childnode>
+        <childnode refid="2555" relation="include">
+        </childnode>
+      </node>
+      <node id="2525">
+        <label>EagleDbSqlSelect.h</label>
+        <link refid="_eagle_db_sql_select_8h"/>
+        <childnode refid="2526" relation="include">
+        </childnode>
+        <childnode refid="2543" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+      </node>
+      <node id="2522">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2545">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="2556">
+        <label>EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="2551" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+      </node>
+      <node id="2550">
+        <label>EagleUtils.h</label>
+        <link refid="_eagle_utils_8h"/>
+        <childnode refid="2528" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+      </node>
+      <node id="2555">
+        <label>EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="2556" relation="include">
+        </childnode>
+        <childnode refid="2527" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2557" relation="include">
+        </childnode>
+        <childnode refid="2525" relation="include">
+        </childnode>
+        <childnode refid="2558" relation="include">
+        </childnode>
+        <childnode refid="2559" relation="include">
+        </childnode>
+      </node>
+      <node id="2539">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2537" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2540" relation="include">
+        </childnode>
+      </node>
+      <node id="2542">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2529" relation="include">
+        </childnode>
+        <childnode refid="2535" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2543" relation="include">
+        </childnode>
+      </node>
+      <node id="2529">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="2530" relation="include">
+        </childnode>
+        <childnode refid="2535" relation="include">
+        </childnode>
+      </node>
+      <node id="2528">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2546">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2537">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2528" relation="include">
+        </childnode>
+        <childnode refid="2538" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+      </node>
+      <node id="2536">
+        <label>pthread.h</label>
+      </node>
+      <node id="2524">
+        <label>string.h</label>
+      </node>
+      <node id="2541">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="2532">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2533" relation="include">
+        </childnode>
+      </node>
+      <node id="2547">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2535" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2543" relation="include">
+        </childnode>
+      </node>
+      <node id="2533">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2531">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2559">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="2560" relation="include">
+        </childnode>
+        <childnode refid="2561" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+      </node>
+      <node id="2534">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2560">
+        <label>time.h</label>
+      </node>
+      <node id="2544">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="2545" relation="include">
+        </childnode>
+      </node>
+      <node id="2548">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="2553">
+        <label>EagleDbColumn.h</label>
+        <link refid="_eagle_db_column_8h"/>
+        <childnode refid="2532" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2533" relation="include">
+        </childnode>
+      </node>
+      <node id="2549">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="2530">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="2531" relation="include">
+        </childnode>
+        <childnode refid="2532" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2533" relation="include">
+        </childnode>
+      </node>
+      <node id="2557">
+        <label>EagleDbSqlStatementType.h</label>
+        <link refid="_eagle_db_sql_statement_type_8h"/>
+      </node>
+      <node id="2543">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2544" relation="include">
+        </childnode>
+        <childnode refid="2546" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2533" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+      </node>
+      <node id="2527">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2528" relation="include">
+        </childnode>
+        <childnode refid="2529" relation="include">
+        </childnode>
+        <childnode refid="2542" relation="include">
+        </childnode>
+        <childnode refid="2547" relation="include">
+        </childnode>
+        <childnode refid="2548" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2533" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+      </node>
+      <node id="2552">
+        <label>EagleDbTable.h</label>
+        <link refid="_eagle_db_table_8h"/>
+        <childnode refid="2553" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+      </node>
+      <node id="2523">
+        <label>stdio.h</label>
+      </node>
+      <node id="2561">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="2535">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="2536" relation="include">
+        </childnode>
+        <childnode refid="2530" relation="include">
+        </childnode>
+        <childnode refid="2537" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+        <childnode refid="2539" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2533" relation="include">
+        </childnode>
+        <childnode refid="2541" relation="include">
+        </childnode>
+      </node>
+      <node id="2538">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2536" relation="include">
+        </childnode>
+        <childnode refid="2534" relation="include">
+        </childnode>
+      </node>
+      <node id="2540">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2534" relation="include">
+        </childnode>
+        <childnode refid="2531" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1a917049359468e1df52062ddb20b6e7e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlSelect_Delete</definition>
+        <argsstring>(EagleDbSqlSelect *select)</argsstring>
+        <name>EagleDbSqlSelect_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <briefdescription>
+<para>Free a SELECT object. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="26" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1a1e0f9b008cc505d6178507f493a60e8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlSelect_DeleteRecursive</definition>
+        <argsstring>(EagleDbSqlSelect *select)</argsstring>
+        <name>EagleDbSqlSelect_DeleteRecursive</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <briefdescription>
+<para>Free a SELECT expression (recursively). </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>It is safer to use <ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive()</ref> since it will automatically use the correct Delete function. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="37" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="36" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1a02dad38ba7b2dfed45ceb7ede49dfe54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleDbSqlSelect_getExpressionsCount</definition>
+        <argsstring>(EagleDbSqlSelect *select)</argsstring>
+        <name>EagleDbSqlSelect_getExpressionsCount</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <briefdescription>
+<para>Returns the total amount of expressions for an entire SELECT statements (containing all its clauses). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>See description. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="54" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="53" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1aaf673f5079a72c58acdb2cf70f0210e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleDbSqlSelect_getFieldCount</definition>
+        <argsstring>(EagleDbSqlSelect *select)</argsstring>
+        <name>EagleDbSqlSelect_getFieldCount</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <briefdescription>
+<para>Return the number of expressions after the SELECT clause. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>See description. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="48" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1a822faf2a8b1e321c171352b9e7b342d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+        <definition>EagleDbSqlSelect* EagleDbSqlSelect_New</definition>
+        <argsstring>(void)</argsstring>
+        <name>EagleDbSqlSelect_New</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="11" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1aa484ab85018875ab938559b646cbbed8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+        <definition>EaglePlan* EagleDbSqlSelect_parse</definition>
+        <argsstring>(EagleDbSqlSelect *select, struct EagleDbInstance *db)</argsstring>
+        <name>EagleDbSqlSelect_parse</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Parse a SELECT and compile it into a plan. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SELECT statement. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Database instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new plan. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="63" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="62" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_sql_select_8c_1a3ea46b5c97bbc64eff9c41373854d458" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EagleDbSqlSelect_toString</definition>
+        <argsstring>(EagleDbSqlSelect *select)</argsstring>
+        <name>EagleDbSqlSelect_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <briefdescription>
+<para>Render the AST into a SELECT statement. </para>        </briefdescription>
+        <detaileddescription>
+<para>The SELECT generated will be neat and will not contain the same formatting as the original SELECT that was parsed - however it will be valid SQL and re-parsing the value returned from this function will generate the same AST tree. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String SQL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" line="118" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c" bodystart="117" bodyend="152"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_select_8h" kindref="compound">EagleDbSqlSelect.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_utils_8h" kindref="compound">EagleUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_expression_type_8h" kindref="compound">EagleDbSqlExpressionType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_table_data_8h" kindref="compound">EagleDbTableData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_instance_8h" kindref="compound">EagleDbInstance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="_eagle_db_sql_select_8h_1a822faf2a8b1e321c171352b9e7b342d2" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref>*<sp/><ref refid="_eagle_db_sql_select_8c_1a822faf2a8b1e321c171352b9e7b342d2" kindref="member" tooltip="Create a new EagleDbSqlSelect.">EagleDbSqlSelect_New</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbSqlSelect_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref>));</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>select)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>select-&gt;expressionType<sp/>=<sp/><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7daa848d53060c9cde10aa3b761b63d13bc" kindref="member" tooltip="Real type is EagleDbSqlSelect.">EagleDbSqlExpressionTypeSelect</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref><sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>select;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="_eagle_db_sql_select_8h_1a917049359468e1df52062ddb20b6e7e4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_select_8c_1a917049359468e1df52062ddb20b6e7e4" kindref="member" tooltip="Free a SELECT object.">EagleDbSqlSelect_Delete</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>select)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref>);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(select);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="_eagle_db_sql_select_8h_1a1e0f9b008cc505d6178507f493a60e8d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_select_8c_1a1e0f9b008cc505d6178507f493a60e8d" kindref="member" tooltip="Free a SELECT expression (recursively).">EagleDbSqlSelect_DeleteRecursive</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select)</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>select)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1af1c0fba45fb3112e7687a4c1a3f537bb" kindref="member" tooltip="Delete a linked list and all the items contained in it.">EagleLinkedList_DeleteWithItems</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref>);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_8c_1a60ada4a12271bc1d4cbaec239365ef8d" kindref="member">EagleDbSqlExpression_DeleteRecursive</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref>);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(select);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="_eagle_db_sql_select_8h_1aaf673f5079a72c58acdb2cf70f0210e3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_select_8c_1aaf673f5079a72c58acdb2cf70f0210e3" kindref="member" tooltip="Return the number of expressions after the SELECT clause.">EagleDbSqlSelect_getFieldCount</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select)</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref>);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="_eagle_db_sql_select_8h_1a02dad38ba7b2dfed45ceb7ede49dfe54" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_select_8c_1a02dad38ba7b2dfed45ceb7ede49dfe54" kindref="member" tooltip="Returns the total amount of expressions for an entire SELECT statements (containing...">EagleDbSqlSelect_getExpressionsCount</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>exprs<sp/>=<sp/><ref refid="_eagle_db_sql_select_8c_1aaf673f5079a72c58acdb2cf70f0210e3" kindref="member" tooltip="Return the number of expressions after the SELECT clause.">EagleDbSqlSelect_getFieldCount</ref>(select);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++exprs;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>exprs;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_eagle_db_sql_select_8h_1aa484ab85018875ab938559b646cbbed8" refkind="member"><highlight class="normal"><ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref>*<sp/><ref refid="_eagle_db_sql_select_8c_1aa484ab85018875ab938559b646cbbed8" kindref="member" tooltip="Parse a SELECT and compile it into a plan.">EagleDbSqlSelect_parse</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db)</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>exprCount,<sp/>whereExpressionId<sp/>=<sp/>-1,<sp/>expri<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref><sp/>**expr;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref><sp/>*td;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>select)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>db)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>create<sp/>the<sp/>plan<sp/>skeleton<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>plan<sp/>=<sp/><ref refid="_eagle_plan_8c_1a5955ae857e0fbad9a3f6019551ce01d6" kindref="member" tooltip="Create a new plan.">EaglePlan_New</ref>(db-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>,<sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" kindref="member" tooltip="The number of CPU cores.">cores</ref>);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>get<sp/>data<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>td<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a47d828d875d510e051bbc68de2f3a0ce" kindref="member" tooltip="Get a table by name.">EagleDbInstance_getTable</ref>(db,<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref>);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>td)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_plan_8c_1a18f01f09903344bcf03c9c22fa73fffa" kindref="member" tooltip="Set the error for the plan.">EaglePlan_setError</ref>(plan,<sp/><ref refid="_eagle_plan_error_8h_1a0caae9eb4d0a119af359eada34628befa0e60c728a8a490083fcc1c93ded89945" kindref="member" tooltip="The table name does not exist in the schema.">EaglePlanErrorNoSuchTable</ref>,<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref>);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>plan;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>-&gt;<ref refid="struct_eagle_db_table_1a8ba8130c87a8d24eaf2acb5f1d7be2de" kindref="member" tooltip="The table columns.">columns</ref>);<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_plan_buffer_provider" kindref="compound" tooltip="This structure acts as a link between a page providers data and the buffer for an...">EaglePlanBufferProvider</ref><sp/>*bp;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_provider_8c_1a90d7702a512bc366d8ebe2f505fbf263" kindref="member" tooltip="Reset the cursor of a provider.">EaglePageProvider_reset</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" kindref="member" tooltip="Providers for each column.">providers</ref>[i]);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bp<sp/>=<sp/><ref refid="_eagle_plan_buffer_provider_8c_1a1dcc9900282ed8df5c5d945c86feed8d" kindref="member" tooltip="Create a new plan buffer provider with a generic provider.">EaglePlanBufferProvider_NewWithProvider</ref>(i,<sp/>td-&gt;<ref refid="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" kindref="member" tooltip="Providers for each column.">providers</ref>[i],<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_plan_8c_1ad64ff9ab393377405e4a30043aad16d7" kindref="member" tooltip="Add a buffer provider to a plan.">EaglePlan_addBufferProvider</ref>(plan,<sp/>bp,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>merge<sp/>expressions<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>exprCount<sp/>=<sp/><ref refid="_eagle_db_sql_select_8c_1a02dad38ba7b2dfed45ceb7ede49dfe54" kindref="member" tooltip="Returns the total amount of expressions for an entire SELECT statements (containing...">EagleDbSqlSelect_getExpressionsCount</ref>(select);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>expr<sp/>=<sp/>(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>**)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbSqlSelect_parse.2&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>*),<sp/>exprCount);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>expr)<sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_plan_8c_1a446330890465751822500e308aa306a8" kindref="member" tooltip="Delete a plan.">EaglePlan_Delete</ref>(plan);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(expri<sp/>=<sp/>0;<sp/>expri<sp/>&lt;<sp/><ref refid="_eagle_db_sql_select_8c_1aaf673f5079a72c58acdb2cf70f0210e3" kindref="member" tooltip="Return the number of expressions after the SELECT clause.">EagleDbSqlSelect_getFieldCount</ref>(select);<sp/>++expri)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expr[expri]<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1ab8955131cc2a2087ca90ee6c225db837" kindref="member" tooltip="Get an item by index.">EagleLinkedList_get</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref>,<sp/>expri);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>whereExpressionId<sp/>=<sp/>expri;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expr[whereExpressionId]<sp/>=<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>compile<sp/>plan<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_sql_expression_8c_1afbad84baa231a43d079c56ac721bdca6" kindref="member" tooltip="Compile a plan from one or more expressions.">EagleDbSqlExpression_CompilePlan</ref>(expr,<sp/>exprCount,<sp/>whereExpressionId,<sp/>plan);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(expr);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>plan;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="_eagle_db_sql_select_8h_1a3ea46b5c97bbc64eff9c41373854d458" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_db_sql_select_8c_1a3ea46b5c97bbc64eff9c41373854d458" kindref="member" tooltip="Render the AST into a SELECT statement.">EagleDbSqlSelect_toString</ref>(<ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>EagleLinkedListItem<sp/>*item<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*str<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbSqlSelect_toString.1&quot;</highlight><highlight class="normal">,<sp/>1024);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>str)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>str[0]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/></highlight><highlight class="stringliteral">&quot;SELECT<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(item<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref>);<sp/>item;<sp/>item<sp/>=<sp/>item-&gt;next)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*s;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(item<sp/>!=<sp/><ref refid="_eagle_linked_list_8c_1a06a08197b5ee39e5567d8d8ea4f3803a" kindref="member" tooltip="Return a pointer to the first item on the list.">EagleLinkedList_begin</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1ad18a50294dd92079c4c47490cd64f483" kindref="member" tooltip="Represents the expressions for the columns.">selectExpressions</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/><ref refid="_eagle_db_sql_expression_8c_1a7951dc2d4ddeae124336eb9475ecb266" kindref="member" tooltip="Render an expression (of any type) to a string.">EagleDbSqlExpression_toString</ref>((<ref refid="struct_eagle_db_sql_expression" kindref="compound" tooltip="Dummy type for other expression structures.">EagleDbSqlExpression</ref>*)<sp/>item-&gt;obj);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/>s);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(s);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>FROM<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1af098d320eb92c0bcada5ad9666352c53" kindref="member" tooltip="The name of the table in the FROM clause.">tableName</ref>);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>!=<sp/>select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*s;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>WHERE<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s<sp/>=<sp/><ref refid="_eagle_db_sql_expression_8c_1a7951dc2d4ddeae124336eb9475ecb266" kindref="member" tooltip="Render an expression (of any type) to a string.">EagleDbSqlExpression_toString</ref>(select-&gt;<ref refid="struct_eagle_db_sql_select_1a4c4656a31a919b455e042a99de9dad06" kindref="member" tooltip="An optional WHERE clause.">whereExpression</ref>);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_utils_8h_1a585ec786801761b3121bd01315277500" kindref="member" tooltip="Safe string concatination.">strcat_safe</ref>(str,<sp/>s);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(s);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>str;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlSelect.c"/>
+  </compounddef>
+</doxygen>

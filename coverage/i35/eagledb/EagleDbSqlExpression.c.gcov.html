@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagledb/EagleDbSqlExpression.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">eagledb</a> - EagleDbSqlExpression.c<span style="font-size: 80%;"> (source / <a href="EagleDbSqlExpression.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">151</td>
+            <td class="headerCovTableEntry">151</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-01-27</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleDbSqlExpression.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleDbSqlValue.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EaglePageProvider.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleData.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EagleDbSqlBinaryExpression.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EaglePageOperations.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleDbSqlSelect.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;EagleDbSqlExpressionOperator.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">      13 </span>            : 
+<a name="14"><span class="lineNum">      14 </span>            : const int EagleDbSqlExpression_ERROR = -1;</a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">         61 : int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)</span>
+<span class="lineNum">      17 </span>            : {
+<span class="lineNum">      18 </span><span class="lineCov">         61 :     if(NULL == expression) {</span>
+<span class="lineNum">      19 </span><span class="lineCov">          6 :         return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">      20 </span>            :     }
+<span class="lineNum">      21 </span><span class="lineCov">         55 :     if(NULL == plan) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">          2 :         return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">      23 </span>            :     }
+<span class="lineNum">      24 </span>            :     
+<span class="lineNum">      25 </span><span class="lineCov">         53 :     switch(expression-&gt;expressionType) {</span>
+<span class="lineNum">      26 </span>            :             
+<span class="lineNum">      27 </span>            :         case EagleDbSqlExpressionTypeBinaryExpression:
+<span class="lineNum">      28 </span>            :         {
+<span class="lineNum">      29 </span><span class="lineCov">         13 :             EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         13 :             int destination, destinationLeft, destinationRight;</span>
+<span class="lineNum">      31 </span><span class="lineCov">         13 :             char *msg, *t1, *t2, *t3, *op;</span>
+<span class="lineNum">      32 </span><span class="lineCov">         13 :             EaglePlanOperation *epo;</span>
+<span class="lineNum">      33 </span><span class="lineCov">         13 :             EaglePageOperationFunction(pageOperation);</span>
+<span class="lineNum">      34 </span>            :             
+<span class="lineNum">      35 </span>            :             /* left */
+<span class="lineNum">      36 </span><span class="lineCov">         13 :             destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast-&gt;left, destinationBuffer, plan);</span>
+<span class="lineNum">      37 </span><span class="lineCov">         13 :             if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          1 :                 return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">      39 </span>            :             }
+<span class="lineNum">      40 </span>            :             
+<span class="lineNum">      41 </span>            :             /* right */
+<span class="lineNum">      42 </span><span class="lineCov">         12 :             destinationRight = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast-&gt;right, destinationBuffer, plan);</span>
+<span class="lineNum">      43 </span><span class="lineCov">         12 :             if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">      44 </span><span class="lineCov">          1 :                 return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">      45 </span>            :             }
+<span class="lineNum">      46 </span>            :             
+<span class="lineNum">      47 </span>            :             /* operator */
+<span class="lineNum">      48 </span><span class="lineCov">         11 :             msg = (char*) EagleMemory_Allocate(&quot;EagleDbSqlExpression_CompilePlanIntoBuffer_.1&quot;, 1024);</span>
+<span class="lineNum">      49 </span><span class="lineCov">         11 :             if(NULL == msg) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">          2 :                 return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">      51 </span>            :             }
+<span class="lineNum">      52 </span><span class="lineCov">          9 :             destination = *destinationBuffer;</span>
+<span class="lineNum">      53 </span>            :             
+<span class="lineNum">      54 </span><span class="lineCov">          9 :             switch(cast-&gt;op) {</span>
+<span class="lineNum">      55 </span>            :                     
+<span class="lineNum">      56 </span>            :                 case EagleDbSqlExpressionOperatorPlus:
+<span class="lineNum">      57 </span><span class="lineCov">          3 :                     pageOperation = EaglePageOperations_AdditionPage;</span>
+<span class="lineNum">      58 </span><span class="lineCov">          3 :                     break;</span>
+<span class="lineNum">      59 </span>            :                     
+<span class="lineNum">      60 </span>            :                 case EagleDbSqlExpressionOperatorEquals:
+<span class="lineNum">      61 </span><span class="lineCov">          5 :                     pageOperation = EaglePageOperations_EqualsPage;</span>
+<span class="lineNum">      62 </span><span class="lineCov">          5 :                     break;</span>
+<span class="lineNum">      63 </span>            :                     
+<span class="lineNum">      64 </span>            :                 case EagleDbSqlExpressionOperatorModulus:
+<span class="lineNum">      65 </span><span class="lineCov">          1 :                     pageOperation = EaglePageOperations_ModulusPage;</span>
+<span class="lineNum">      66 </span><span class="lineCov">          1 :                     break;</span>
+<span class="lineNum">      67 </span>            :                 
+<span class="lineNum">      68 </span>            :             }
+<span class="lineNum">      69 </span>            :             
+<span class="lineNum">      70 </span><span class="lineCov">          9 :             t1 = EagleDataType_typeToName(plan-&gt;bufferTypes[destinationLeft]);</span>
+<span class="lineNum">      71 </span><span class="lineCov">          9 :             t2 = EagleDataType_typeToName(plan-&gt;bufferTypes[destinationRight]);</span>
+<span class="lineNum">      72 </span><span class="lineCov">          9 :             t3 = EagleDataType_typeToName(plan-&gt;bufferTypes[destination]);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          9 :             op = EagleDbSqlExpressionOperator_toString(cast-&gt;op);</span>
+<span class="lineNum">      74 </span>            :             
+<span class="lineNum">      75 </span><span class="lineCov">          9 :             sprintf(msg, &quot;{ &lt;%d&gt; (%s) %s &lt;%d&gt; (%s) } into &lt;%d&gt; (%s)&quot;, destinationLeft, t1, op, destinationRight, t2, destination, t3);</span>
+<span class="lineNum">      76 </span>            :             
+<span class="lineNum">      77 </span><span class="lineCov">          9 :             EagleMemory_Free(t1);</span>
+<span class="lineNum">      78 </span><span class="lineCov">          9 :             EagleMemory_Free(t2);</span>
+<span class="lineNum">      79 </span><span class="lineCov">          9 :             EagleMemory_Free(t3);</span>
+<span class="lineNum">      80 </span><span class="lineCov">          9 :             EagleMemory_Free(op);</span>
+<span class="lineNum">      81 </span>            :             
+<span class="lineNum">      82 </span><span class="lineCov">          9 :             plan-&gt;bufferTypes[destination] = EagleDataTypeInteger;</span>
+<span class="lineNum">      83 </span><span class="lineCov">          9 :             epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,</span>
+<span class="lineNum">      84 </span>            :                                          EagleFalse, msg);
+<span class="lineNum">      85 </span><span class="lineCov">          9 :             EagleMemory_Free(msg);</span>
+<span class="lineNum">      86 </span><span class="lineCov">          9 :             EaglePlan_addOperation(plan, epo);</span>
+<span class="lineNum">      87 </span><span class="lineCov">          9 :             EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);</span>
+<span class="lineNum">      88 </span><span class="lineCov">          9 :             ++*destinationBuffer;</span>
+<span class="lineNum">      89 </span>            :             
+<span class="lineNum">      90 </span><span class="lineCov">          9 :             return destination;</span>
+<span class="lineNum">      91 </span>            :         }
+<span class="lineNum">      92 </span>            :             
+<span class="lineNum">      93 </span>            :         case EagleDbSqlExpressionTypeValue:
+<span class="lineNum">      94 </span>            :         {
+<span class="lineNum">      95 </span><span class="lineCov">         39 :             EagleDbSqlValue *value = (EagleDbSqlValue*) expression;</span>
+<span class="lineNum">      96 </span><span class="lineCov">         39 :             int destination;</span>
+<span class="lineNum">      97 </span>            :             
+<span class="lineNum">      98 </span><span class="lineCov">         39 :             switch(value-&gt;type) {</span>
+<span class="lineNum">      99 </span>            :                 case EagleDbSqlValueTypeInteger:
+<span class="lineNum">     100 </span>            :                 {
+<span class="lineNum">     101 </span><span class="lineCov">         14 :                     EaglePageProvider *provider;</span>
+<span class="lineNum">     102 </span><span class="lineCov">         14 :                     EaglePlanBufferProvider *bp;</span>
+<span class="lineNum">     103 </span>            :                     
+<span class="lineNum">     104 </span><span class="lineCov">         14 :                     destination = *destinationBuffer;</span>
+<span class="lineNum">     105 </span><span class="lineCov">         14 :                     provider = EaglePageProvider_CreateFromInt(value-&gt;value.intValue, plan-&gt;pageSize, &quot;(integer)&quot;);</span>
+<span class="lineNum">     106 </span><span class="lineCov">         14 :                     bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);</span>
+<span class="lineNum">     107 </span><span class="lineCov">         14 :                     EaglePlan_addBufferProvider(plan, bp, EagleTrue);</span>
+<span class="lineNum">     108 </span><span class="lineCov">         14 :                     EaglePlan_addFreeObject(plan, provider-&gt;records, NULL);</span>
+<span class="lineNum">     109 </span><span class="lineCov">         14 :                     ++*destinationBuffer;</span>
+<span class="lineNum">     110 </span>            :                     
+<span class="lineNum">     111 </span><span class="lineCov">         14 :                     plan-&gt;bufferTypes[destination] = EagleDataTypeInteger;</span>
+<span class="lineNum">     112 </span><span class="lineCov">         14 :                     break;</span>
+<span class="lineNum">     113 </span>            :                 }
+<span class="lineNum">     114 </span>            :                     
+<span class="lineNum">     115 </span>            :                 case EagleDbSqlValueTypeIdentifier:
+<span class="lineNum">     116 </span>            :                 {
+<span class="lineNum">     117 </span>            :                     /* find the provider for this column */
+<span class="lineNum">     118 </span><span class="lineCov">         24 :                     EaglePlanBufferProvider *provider = EaglePlan_getBufferProviderByName(plan, value-&gt;value.identifier);</span>
+<span class="lineNum">     119 </span><span class="lineCov">         24 :                     if(NULL == provider) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">          3 :                         char msg[128];</span>
+<span class="lineNum">     121 </span><span class="lineCov">          3 :                         sprintf(msg, &quot;Unknown column '%s'&quot;, value-&gt;value.identifier);</span>
+<span class="lineNum">     122 </span><span class="lineCov">          3 :                         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);</span>
+<span class="lineNum">     123 </span><span class="lineCov">          3 :                         return EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">     124 </span>            :                     }
+<span class="lineNum">     125 </span>            :                     
+<span class="lineNum">     126 </span><span class="lineCov">         21 :                     plan-&gt;bufferTypes[provider-&gt;destinationBuffer] = provider-&gt;provider-&gt;type;</span>
+<span class="lineNum">     127 </span><span class="lineCov">         21 :                     destination = provider-&gt;destinationBuffer;</span>
+<span class="lineNum">     128 </span><span class="lineCov">         21 :                     break;</span>
+<span class="lineNum">     129 </span>            :                 }
+<span class="lineNum">     130 </span>            :                     
+<span class="lineNum">     131 </span>            :                 case EagleDbSqlValueTypeAsterisk:
+<span class="lineNum">     132 </span>            :                 {
+<span class="lineNum">     133 </span><span class="lineCov">          1 :                     char msg[128];</span>
+<span class="lineNum">     134 </span><span class="lineCov">          1 :                     sprintf(msg, &quot;You can not use the star operator like this.&quot;);</span>
+<span class="lineNum">     135 </span><span class="lineCov">          1 :                     EaglePlan_setError(plan, EaglePlanErrorCompile, msg);</span>
+<span class="lineNum">     136 </span><span class="lineCov">          1 :                     destination = EagleDbSqlExpression_ERROR;</span>
+<span class="lineNum">     137 </span><span class="lineCov">          1 :                     break;</span>
+<span class="lineNum">     138 </span>            :                 }
+<span class="lineNum">     139 </span>            :             }
+<span class="lineNum">     140 </span>            :             
+<span class="lineNum">     141 </span><span class="lineCov">         36 :             return destination;</span>
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span>            :             
+<span class="lineNum">     144 </span>            :         case EagleDbSqlExpressionTypeSelect:
+<span class="lineNum">     145 </span><span class="lineCov">          1 :             return 0;</span>
+<span class="lineNum">     146 </span>            :     }
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">         61 : }</span></a>
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span><span class="lineCov">         20 : void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan)</span>
+<span class="lineNum">     150 </span>            : {
+<span class="lineNum">     151 </span><span class="lineCov">         20 :     int i, *results, destinationBuffer;</span>
+<span class="lineNum">     152 </span>            :     
+<span class="lineNum">     153 </span><span class="lineCov">         20 :     if(NULL == plan) {</span>
+<span class="lineNum">     154 </span><span class="lineCov">          1 :         return;</span>
+<span class="lineNum">     155 </span>            :     }
+<span class="lineNum">     156 </span>            :     
+<span class="lineNum">     157 </span>            :     /* for now we will just assume we don't need more than 10 buffers */
+<span class="lineNum">     158 </span><span class="lineCov">         19 :     EaglePlan_prepareBuffers(plan, 10);</span>
+<span class="lineNum">     159 </span>            :     
+<span class="lineNum">     160 </span>            :     /* make sure we don't override buffers that are already assigned by providers */
+<span class="lineNum">     161 </span><span class="lineCov">         19 :     destinationBuffer = 0;</span>
+<span class="lineNum">     162 </span><span class="lineCov">        130 :     for(i = 0; i &lt; plan-&gt;usedProviders; ++i) {</span>
+<span class="lineNum">     163 </span><span class="lineCov">         46 :         if(plan-&gt;providers[i]-&gt;destinationBuffer &gt;= destinationBuffer) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">         46 :             destinationBuffer = plan-&gt;providers[i]-&gt;destinationBuffer + 1;</span>
+<span class="lineNum">     165 </span><span class="lineCov">         46 :         }</span>
+<span class="lineNum">     166 </span>            :         
+<span class="lineNum">     167 </span>            :         /* each provider will go into a page, sync their types */
+<span class="lineNum">     168 </span><span class="lineCov">         46 :         plan-&gt;bufferTypes[plan-&gt;providers[i]-&gt;destinationBuffer] = plan-&gt;providers[i]-&gt;provider-&gt;type;</span>
+<span class="lineNum">     169 </span><span class="lineCov">         46 :     }</span>
+<span class="lineNum">     170 </span>            :     
+<span class="lineNum">     171 </span>            :     /* prepare result providers */
+<span class="lineNum">     172 </span><span class="lineCov">         19 :     plan-&gt;resultFields = totalExpressions;</span>
+<span class="lineNum">     173 </span><span class="lineCov">         19 :     plan-&gt;result = (EaglePageProvider**) EagleMemory_MultiAllocate(&quot;EagleDbSqlExpression_CompilePlan.1&quot;, sizeof(EaglePageProvider*), plan-&gt;resultFields);</span>
+<span class="lineNum">     174 </span>            :     
+<span class="lineNum">     175 </span>            :     /* compile expressions */
+<span class="lineNum">     176 </span><span class="lineCov">         19 :     results = (int*) EagleMemory_MultiAllocate(&quot;EagleDbSqlExpression_CompilePlan.2&quot;, sizeof(int), totalExpressions);</span>
+<span class="lineNum">     177 </span><span class="lineCov">         88 :     for(i = 0; i &lt; totalExpressions; ++i) {</span>
+<span class="lineNum">     178 </span><span class="lineCov">         29 :         char *desc;</span>
+<span class="lineNum">     179 </span><span class="lineCov">         29 :         EaglePageProvider *provider;</span>
+<span class="lineNum">     180 </span>            :         
+<span class="lineNum">     181 </span><span class="lineCov">         29 :         results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &amp;destinationBuffer, plan);</span>
+<span class="lineNum">     182 </span>            :         
+<span class="lineNum">     183 </span><span class="lineCov">         29 :         if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">     184 </span><span class="lineCov">          4 :             EagleMemory_Free(results);</span>
+<span class="lineNum">     185 </span><span class="lineCov">          4 :             return;</span>
+<span class="lineNum">     186 </span>            :         }
+<span class="lineNum">     187 </span>            :         
+<span class="lineNum">     188 </span>            :         /*
+<span class="lineNum">     189 </span>            :          since we don't know the type of result providers until after we evaluate the expression we can now setup the
+<span class="lineNum">     190 </span>            :          result provider now
+<span class="lineNum">     191 </span>            :          */
+<span class="lineNum">     192 </span><span class="lineCov">         25 :         desc = EagleDbSqlExpression_toString(expressions[i]);</span>
+<span class="lineNum">     193 </span><span class="lineCov">         25 :         provider = EaglePageProvider_CreateFromStream(plan-&gt;bufferTypes[results[i]], plan-&gt;pageSize, desc);</span>
+<span class="lineNum">     194 </span><span class="lineCov">         25 :         plan-&gt;result[i] = provider;</span>
+<span class="lineNum">     195 </span><span class="lineCov">         25 :         EaglePlan_addFreeObject(plan, provider, (void(*)(void*)) EaglePageProvider_Delete);</span>
+<span class="lineNum">     196 </span><span class="lineCov">         25 :         EagleMemory_Free(desc);</span>
+<span class="lineNum">     197 </span><span class="lineCov">         25 :     }</span>
+<span class="lineNum">     198 </span>            :     
+<span class="lineNum">     199 </span>            :     /* if there is a WHERE clause expression only send those records */
+<span class="lineNum">     200 </span><span class="lineCov">         80 :     for(i = 0; i &lt; totalExpressions; ++i) {</span>
+<span class="lineNum">     201 </span><span class="lineCov">         25 :         EaglePlanOperation *epo;</span>
+<span class="lineNum">     202 </span><span class="lineCov">         25 :         char msg[1024];</span>
+<span class="lineNum">     203 </span>            :         
+<span class="lineNum">     204 </span><span class="lineCov">         25 :         if(i != whereClause) {</span>
+<span class="lineNum">     205 </span><span class="lineCov">         20 :             if(whereClause &gt;= 0) {</span>
+<span class="lineNum">     206 </span>            :                 /* send some result data to the provider */
+<span class="lineNum">     207 </span><span class="lineCov">          8 :                 char *t1, *t2, *t3;</span>
+<span class="lineNum">     208 </span>            :                 
+<span class="lineNum">     209 </span><span class="lineCov">          8 :                 t1 = EagleDataType_typeToName(plan-&gt;bufferTypes[results[whereClause]]);</span>
+<span class="lineNum">     210 </span><span class="lineCov">          8 :                 t2 = EagleDataType_typeToName(plan-&gt;bufferTypes[results[i]]);</span>
+<span class="lineNum">     211 </span><span class="lineCov">          8 :                 t3 = EagleDataType_typeToName(plan-&gt;result[i]-&gt;type);</span>
+<span class="lineNum">     212 </span>            :                 
+<span class="lineNum">     213 </span><span class="lineCov">          8 :                 sprintf(msg, &quot;WHERE &lt;%d&gt; (%s), send &lt;%d&gt; (%s) to provider &lt;%d&gt; (%s)&quot;, results[whereClause], t1, results[i], t2, i, t3);</span>
+<span class="lineNum">     214 </span><span class="lineCov">          8 :                 epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, results[whereClause], results[i], plan-&gt;result[i], EagleFalse, msg);</span>
+<span class="lineNum">     215 </span><span class="lineCov">          8 :                 EaglePlan_addOperation(plan, epo);</span>
+<span class="lineNum">     216 </span><span class="lineCov">          8 :                 EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);</span>
+<span class="lineNum">     217 </span>            :                 
+<span class="lineNum">     218 </span><span class="lineCov">          8 :                 EagleMemory_Free(t1);</span>
+<span class="lineNum">     219 </span><span class="lineCov">          8 :                 EagleMemory_Free(t2);</span>
+<span class="lineNum">     220 </span><span class="lineCov">          8 :                 EagleMemory_Free(t3);</span>
+<span class="lineNum">     221 </span><span class="lineCov">          8 :             }</span>
+<span class="lineNum">     222 </span>            :             else {
+<span class="lineNum">     223 </span><span class="lineCov">         12 :                 char *t1, *t2;</span>
+<span class="lineNum">     224 </span>            :                 
+<span class="lineNum">     225 </span><span class="lineCov">         12 :                 t1 = EagleDataType_typeToName(plan-&gt;bufferTypes[results[i]]);</span>
+<span class="lineNum">     226 </span><span class="lineCov">         12 :                 t2 = EagleDataType_typeToName(plan-&gt;result[i]-&gt;type);</span>
+<span class="lineNum">     227 </span>            :                 
+<span class="lineNum">     228 </span>            :                 /* send all the result data to the provider */
+<span class="lineNum">     229 </span><span class="lineCov">         12 :                 sprintf(msg, &quot;ALL &lt;%d&gt; (%s) to provider &lt;%d&gt; (%s)&quot;, results[i], t1, i, t2);</span>
+<span class="lineNum">     230 </span><span class="lineCov">         12 :                 epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, -1, results[i], plan-&gt;result[i], EagleFalse, msg);</span>
+<span class="lineNum">     231 </span><span class="lineCov">         12 :                 EaglePlan_addOperation(plan, epo);</span>
+<span class="lineNum">     232 </span><span class="lineCov">         12 :                 EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);</span>
+<span class="lineNum">     233 </span>            :                 
+<span class="lineNum">     234 </span><span class="lineCov">         12 :                 EagleMemory_Free(t1);</span>
+<span class="lineNum">     235 </span><span class="lineCov">         12 :                 EagleMemory_Free(t2);</span>
+<span class="lineNum">     236 </span>            :             }
+<span class="lineNum">     237 </span><span class="lineCov">         20 :         }</span>
+<span class="lineNum">     238 </span><span class="lineCov">         25 :     }</span>
+<span class="lineNum">     239 </span>            :     
+<span class="lineNum">     240 </span><span class="lineCov">         15 :     EagleMemory_Free(results);</span>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">         35 : }</span></a>
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span><span class="lineCov">         81 : void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recursive)</span>
+<span class="lineNum">     244 </span>            : {
+<span class="lineNum">     245 </span><span class="lineCov">         81 :     if(NULL == expr) {</span>
+<span class="lineNum">     246 </span><span class="lineCov">         21 :         return;</span>
+<span class="lineNum">     247 </span>            :     }
+<span class="lineNum">     248 </span>            :     
+<span class="lineNum">     249 </span><span class="lineCov">         60 :     switch(expr-&gt;expressionType) {</span>
+<span class="lineNum">     250 </span>            :             
+<span class="lineNum">     251 </span>            :         case EagleDbSqlExpressionTypeBinaryExpression:
+<span class="lineNum">     252 </span><span class="lineCov">         12 :             EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr, recursive);</span>
+<span class="lineNum">     253 </span><span class="lineCov">         12 :             break;</span>
+<span class="lineNum">     254 </span>            :             
+<span class="lineNum">     255 </span>            :         case EagleDbSqlExpressionTypeSelect:
+<span class="lineNum">     256 </span><span class="lineCov">          1 :             EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr, recursive);</span>
+<span class="lineNum">     257 </span><span class="lineCov">          1 :             break;</span>
+<span class="lineNum">     258 </span>            :             
+<span class="lineNum">     259 </span>            :         case EagleDbSqlExpressionTypeValue:
+<span class="lineNum">     260 </span><span class="lineCov">         47 :             EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);</span>
+<span class="lineNum">     261 </span><span class="lineCov">         47 :             break;</span>
+<span class="lineNum">     262 </span>            :             
+<span class="lineNum">     263 </span>            :     }
+<a name="264"><span class="lineNum">     264 </span><span class="lineCov">         81 : }</span></a>
+<span class="lineNum">     265 </span>            : 
+<span class="lineNum">     266 </span><span class="lineCov">         45 : char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr)</span>
+<span class="lineNum">     267 </span>            : {
+<span class="lineNum">     268 </span><span class="lineCov">         45 :     if(NULL == expr) {</span>
+<span class="lineNum">     269 </span><span class="lineCov">          1 :         return strdup(&quot;&quot;);</span>
+<span class="lineNum">     270 </span>            :     }
+<span class="lineNum">     271 </span>            :     
+<span class="lineNum">     272 </span><span class="lineCov">         44 :     switch(expr-&gt;expressionType) {</span>
+<span class="lineNum">     273 </span>            :             
+<span class="lineNum">     274 </span>            :         case EagleDbSqlExpressionTypeBinaryExpression:
+<span class="lineNum">     275 </span><span class="lineCov">          9 :             return EagleDbSqlBinaryExpression_toString((EagleDbSqlBinaryExpression*) expr);</span>
+<span class="lineNum">     276 </span>            :             
+<span class="lineNum">     277 </span>            :         case EagleDbSqlExpressionTypeSelect:
+<span class="lineNum">     278 </span><span class="lineCov">          1 :             return EagleDbSqlSelect_toString((EagleDbSqlSelect*) expr);</span>
+<span class="lineNum">     279 </span>            :             
+<span class="lineNum">     280 </span>            :         case EagleDbSqlExpressionTypeValue:
+<span class="lineNum">     281 </span><span class="lineCov">         34 :             return EagleDbSqlValue_toString((EagleDbSqlValue*) expr);</span>
+<span class="lineNum">     282 </span>            :             
+<span class="lineNum">     283 </span>            :     }
+<span class="lineNum">     284 </span><span class="lineCov">         45 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

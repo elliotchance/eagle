@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_cast_expression" kind="struct" prot="public">
+    <compoundname>EagleDbSqlCastExpression</compoundname>
+    <includes refid="_eagle_db_sql_cast_expression_8h" local="no">EagleDbSqlCastExpression.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_cast_expression_1aa344b33a041d4ebb99726f5ca2c217be" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+        <definition>EagleDataType castAs</definition>
+        <argsstring></argsstring>
+        <name>castAs</name>
+        <briefdescription>
+<para>The type to cast to. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="28" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_cast_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Header. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_cast_expression_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="18" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_cast_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* expr</definition>
+        <argsstring></argsstring>
+        <name>expr</name>
+        <briefdescription>
+<para>The operand. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="23" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Expression type is EagleDbSqlExpressionTypeCastExpression. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7d" kindref="member">EagleDbSqlExpressionType</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="54">
+        <label>EagleDbSqlCastExpression</label>
+        <link refid="struct_eagle_db_sql_cast_expression"/>
+        <childnode refid="55" relation="usage">
+          <edgelabel>expr</edgelabel>
+        </childnode>
+        <childnode refid="56" relation="usage">
+          <edgelabel>castAs</edgelabel>
+        </childnode>
+      </node>
+      <node id="56">
+        <label>EagleDataType</label>
+      </node>
+      <node id="55">
+        <label>EagleDbSqlExpression</label>
+        <link refid="struct_eagle_db_sql_expression"/>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlCastExpression.h" bodystart="12" bodyend="30"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_cast_expression_1aa344b33a041d4ebb99726f5ca2c217be" prot="public" virt="non-virtual"><scope>EagleDbSqlCastExpression</scope><name>castAs</name></member>
+      <member refid="struct_eagle_db_sql_cast_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlCastExpression</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_cast_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" virt="non-virtual"><scope>EagleDbSqlCastExpression</scope><name>expr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

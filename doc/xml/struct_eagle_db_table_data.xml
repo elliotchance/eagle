@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_table_data" kind="struct" prot="public">
+    <compoundname>EagleDbTableData</compoundname>
+    <includes refid="_eagle_db_table_data_8h" local="no">EagleDbTableData.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> **</type>
+        <definition>EaglePageProvider** providers</definition>
+        <argsstring></argsstring>
+        <name>providers</name>
+        <briefdescription>
+<para>Providers for each column. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" line="22" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+        <definition>EagleDbTable* table</definition>
+        <argsstring></argsstring>
+        <name>table</name>
+        <briefdescription>
+<para>Table definition. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" line="17" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_table_data_1a1b8a85e4ccd7e5ddcd33d360031c7f1d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int usedProviders</definition>
+        <argsstring></argsstring>
+        <name>usedProviders</name>
+        <briefdescription>
+<para>The number of used <computeroutput>providers</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" line="27" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides data for a table. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="110">
+        <label>EagleDbTableData</label>
+        <link refid="struct_eagle_db_table_data"/>
+        <childnode refid="111" relation="usage">
+          <edgelabel>providers</edgelabel>
+        </childnode>
+        <childnode refid="112" relation="usage">
+          <edgelabel>usedProviders</edgelabel>
+        </childnode>
+        <childnode refid="113" relation="usage">
+          <edgelabel>table</edgelabel>
+        </childnode>
+      </node>
+      <node id="117">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="118" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="119" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="115">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="116" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="117" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="112" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="114">
+        <label>char *</label>
+      </node>
+      <node id="112">
+        <label>int</label>
+      </node>
+      <node id="113">
+        <label>EagleDbTable</label>
+        <link refid="struct_eagle_db_table"/>
+        <childnode refid="114" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="115" relation="usage">
+          <edgelabel>columns</edgelabel>
+        </childnode>
+      </node>
+      <node id="118">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="119">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="111">
+        <label>EaglePageProvider</label>
+        <link refid="struct_eagle_page_provider"/>
+      </node>
+      <node id="116">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" line="12" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTableData.h" bodystart="12" bodyend="29"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" prot="public" virt="non-virtual"><scope>EagleDbTableData</scope><name>providers</name></member>
+      <member refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" prot="public" virt="non-virtual"><scope>EagleDbTableData</scope><name>table</name></member>
+      <member refid="struct_eagle_db_table_data_1a1b8a85e4ccd7e5ddcd33d360031c7f1d" prot="public" virt="non-virtual"><scope>EagleDbTableData</scope><name>usedProviders</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

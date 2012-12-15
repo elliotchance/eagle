@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>LCOV - eagle - eagle/eagle/EaglePageOperations.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LTP GCOV extension - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+        <tr>
+          <td class="headerItem" width="20%">Current&nbsp;view:</td>
+          <td class="headerValue" width="80%" colspan=4><a href="../../index.html">directory</a> - <a href="index.html">eagle/eagle</a> - EaglePageOperations.c</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Test:</td>
+          <td class="headerValue" width="80%" colspan=4>eagle</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Date:</td>
+          <td class="headerValue" width="20%">2012-12-15</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Instrumented&nbsp;lines:</td>
+          <td class="headerValue" width="20%">42</td>
+        </tr>
+        <tr>
+          <td class="headerItem" width="20%">Code&nbsp;covered:</td>
+          <td class="headerValue" width="20%">100.0 %</td>
+          <td width="20%"></td>
+          <td class="headerItem" width="20%">Executed&nbsp;lines:</td>
+          <td class="headerValue" width="20%">42</td>
+        </tr>
+        <tr>
+          <td class="legendItem" width="20%">Legend:</td>
+          <td class="legendValue" width="80%" colspan=4>
+            <span class="legendNoCov">
+              not executed
+            </span>
+            <span class="legendCov">
+              executed
+            </span>
+
+
+	  </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="source">
+<span class="lineNum">       1 </span>                : #include &lt;stdlib.h&gt;
+<span class="lineNum">       2 </span>                : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>                : #include &quot;EaglePageOperations.h&quot;
+<span class="lineNum">       4 </span>                : #include &quot;EaglePageProvider.h&quot;
+<span class="lineNum">       5 </span>                : 
+<span class="lineNum">       6 </span>                : #include &lt;unistd.h&gt;
+<span class="lineNum">       7 </span>                : 
+<span class="lineNum">       8 </span>                : /**
+<span class="lineNum">       9 </span>                :  Calculate values in a page that are less than an integer.
+<span class="lineNum">      10 </span>                :  
+<span class="lineNum">      11 </span>                :  This function does not allocate memory.
+<span class="lineNum">      12 </span>                :  
+<span class="lineNum">      13 </span>                :  @param page The page to scan, can be any size.
+<span class="lineNum">      14 </span>                :  @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
+<span class="lineNum">      15 </span>                :         based on the result of the comparison.
+<span class="lineNum">      16 </span>                :  @param obj Must be int* which is dereferenced to the integer value for comparison.
+<span class="lineNum">      17 </span>                :  
+<span class="lineNum">      18 </span>                :  @see EagleData_Int()
+<span class="lineNum">      19 </span>                :  */
+<span class="lineNum">      20 </span><span class="lineCov">            447 : void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)</span>
+<span class="lineNum">      21 </span>                : {
+<span class="lineNum">      22 </span><span class="lineCov">            447 :     int value = *((int*) obj), i;</span>
+<span class="lineNum">      23 </span><span class="lineCov">            447 :     out-&gt;recordOffset = page-&gt;recordOffset;</span>
+<span class="lineNum">      24 </span><span class="lineCov">            447 :     out-&gt;count = page-&gt;count;</span>
+<span class="lineNum">      25 </span>                :     
+<span class="lineNum">      26 </span><span class="lineCov">          50769 :     for(i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">      27 </span><span class="lineCov">          24967 :         out-&gt;data[i] = (page-&gt;data[i] &lt; value);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          24967 :     }</span>
+<span class="lineNum">      29 </span><span class="lineCov">            447 : }</span>
+<span class="lineNum">      30 </span>                : 
+<span class="lineNum">      31 </span>                : /**
+<span class="lineNum">      32 </span>                :  Calculate values in a page that are greater than an integer.
+<span class="lineNum">      33 </span>                :  
+<span class="lineNum">      34 </span>                :  This function does not allocate memory.
+<span class="lineNum">      35 </span>                :  
+<span class="lineNum">      36 </span>                :  @param page The page to scan, can be any size.
+<span class="lineNum">      37 </span>                :  @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
+<span class="lineNum">      38 </span>                :         based on the result of the comparison.
+<span class="lineNum">      39 </span>                :  @param obj Must be int* which is dereferenced to the integer value for comparison.
+<span class="lineNum">      40 </span>                :  
+<span class="lineNum">      41 </span>                :  @see EagleData_Int()
+<span class="lineNum">      42 </span>                :  */
+<span class="lineNum">      43 </span><span class="lineCov">            447 : void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *obj)</span>
+<span class="lineNum">      44 </span>                : {
+<span class="lineNum">      45 </span><span class="lineCov">            447 :     int value = *((int*) obj), i;</span>
+<span class="lineNum">      46 </span><span class="lineCov">            447 :     out-&gt;recordOffset = page-&gt;recordOffset;</span>
+<span class="lineNum">      47 </span><span class="lineCov">            447 :     out-&gt;count = page-&gt;count;</span>
+<span class="lineNum">      48 </span>                :     
+<span class="lineNum">      49 </span><span class="lineCov">          52926 :     for(i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">      50 </span><span class="lineCov">          25987 :         out-&gt;data[i] = (page-&gt;data[i] &gt; value);</span>
+<span class="lineNum">      51 </span><span class="lineCov">          25987 :     }</span>
+<span class="lineNum">      52 </span><span class="lineCov">            447 : }</span>
+<span class="lineNum">      53 </span>                : 
+<span class="lineNum">      54 </span>                : /**
+<span class="lineNum">      55 </span>                :  Calculate logical AND between two pages.
+<span class="lineNum">      56 </span>                :  
+<span class="lineNum">      57 </span>                :  @param page The page to scan, can be any size.
+<span class="lineNum">      58 </span>                :  @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
+<span class="lineNum">      59 </span>                :         based on the result of the comparison.
+<span class="lineNum">      60 </span>                :  @param obj Must be EaglePage* which becomes the right operand for \p page to calculate logical AND against. This page
+<span class="lineNum">      61 </span>                :         must also be the same size (or greater) of \p page and \p out
+<span class="lineNum">      62 </span>                :  */
+<span class="lineNum">      63 </span><span class="lineCov">            447 : void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj)</span>
+<span class="lineNum">      64 </span>                : {
+<span class="lineNum">      65 </span><span class="lineCov">            447 :     EaglePage *page2 = (EaglePage*) obj;</span>
+<span class="lineNum">      66 </span><span class="lineCov">            447 :     int i;</span>
+<span class="lineNum">      67 </span>                :     
+<span class="lineNum">      68 </span><span class="lineCov">            447 :     out-&gt;recordOffset = page-&gt;recordOffset;</span>
+<span class="lineNum">      69 </span><span class="lineCov">            447 :     out-&gt;count = page-&gt;count;</span>
+<span class="lineNum">      70 </span>                :     
+<span class="lineNum">      71 </span><span class="lineCov">          50889 :     for(i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">      72 </span><span class="lineCov">          49534 :         out-&gt;data[i] = page-&gt;data[i] &amp;&amp; page2-&gt;data[i];</span>
+<span class="lineNum">      73 </span><span class="lineCov">          25026 :     }</span>
+<span class="lineNum">      74 </span><span class="lineCov">            447 : }</span>
+<span class="lineNum">      75 </span>                : 
+<span class="lineNum">      76 </span><span class="lineCov">              1 : void EaglePageOperations_AdditionPage(EaglePage *page, EaglePage *out, void *obj)</span>
+<span class="lineNum">      77 </span>                : {
+<span class="lineNum">      78 </span><span class="lineCov">              1 :     EaglePage *page2 = (EaglePage*) obj;</span>
+<span class="lineNum">      79 </span><span class="lineCov">              1 :     int i;</span>
+<span class="lineNum">      80 </span>                :     
+<span class="lineNum">      81 </span><span class="lineCov">              1 :     out-&gt;recordOffset = page-&gt;recordOffset;</span>
+<span class="lineNum">      82 </span><span class="lineCov">              1 :     out-&gt;count = page-&gt;count;</span>
+<span class="lineNum">      83 </span>                :     
+<span class="lineNum">      84 </span><span class="lineCov">             22 :     for(i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">             10 :         out-&gt;data[i] = page-&gt;data[i] + page2-&gt;data[i];</span>
+<span class="lineNum">      86 </span><span class="lineCov">             10 :     }</span>
+<span class="lineNum">      87 </span><span class="lineCov">              1 : }</span>
+<span class="lineNum">      88 </span>                : 
+<span class="lineNum">      89 </span><span class="lineCov">              2 : void EaglePageOperations_CastIntPageToBoolean(EaglePage *page, EaglePage *out, void *obj)</span>
+<span class="lineNum">      90 </span>                : {
+<span class="lineNum">      91 </span><span class="lineCov">              2 :     int i;</span>
+<span class="lineNum">      92 </span>                :     
+<span class="lineNum">      93 </span><span class="lineCov">              2 :     out-&gt;recordOffset = page-&gt;recordOffset;</span>
+<span class="lineNum">      94 </span><span class="lineCov">              2 :     out-&gt;count = page-&gt;count;</span>
+<span class="lineNum">      95 </span>                :     
+<span class="lineNum">      96 </span><span class="lineCov">             44 :     for(i = 0; i &lt; page-&gt;count; ++i) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">             20 :         out-&gt;data[i] = (page-&gt;data[i] != 0);</span>
+<span class="lineNum">      98 </span><span class="lineCov">             20 :     }</span>
+<span class="lineNum">      99 </span><span class="lineCov">              2 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+  <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LTP GCOV extension version 1.6</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_sql_unary_expression_operator_8c" kind="file">
+    <compoundname>EagleDbSqlUnaryExpressionOperator.c</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="_eagle_db_sql_unary_expression_operator_8h" local="yes">EagleDbSqlUnaryExpressionOperator.h</includes>
+    <incdepgraph>
+      <node id="2660">
+        <label>eagle/eagledb/EagleDbSqlUnaryExpressionOperator.c</label>
+        <link refid="EagleDbSqlUnaryExpressionOperator.c"/>
+        <childnode refid="2661" relation="include">
+        </childnode>
+        <childnode refid="2662" relation="include">
+        </childnode>
+        <childnode refid="2663" relation="include">
+        </childnode>
+        <childnode refid="2664" relation="include">
+        </childnode>
+      </node>
+      <node id="2664">
+        <label>EagleDbSqlUnaryExpressionOperator.h</label>
+        <link refid="_eagle_db_sql_unary_expression_operator_8h"/>
+      </node>
+      <node id="2662">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2663">
+        <label>string.h</label>
+      </node>
+      <node id="2661">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_sql_unary_expression_operator_8c_1a390cc12eaab31062ade807bef76b6395" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbSqlUnaryExpressionOperator_toString</definition>
+        <argsstring>(EagleDbSqlUnaryExpressionOperator op, char **before, char **after)</argsstring>
+        <name>EagleDbSqlUnaryExpressionOperator_toString</name>
+        <param>
+          <type><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member">EagleDbSqlUnaryExpressionOperator</ref></type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>before</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>after</declname>
+        </param>
+        <briefdescription>
+<para>Get the string representation of the operator. </para>        </briefdescription>
+        <detaileddescription>
+<para>The <computeroutput>before</computeroutput> and <computeroutput>after</computeroutput> will be allocated automatically but you must free both of them (even if the value is blank) <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operator. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">before</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to put before the expression. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">after</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to put before the expression. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpressionOperator.c" line="7" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpressionOperator.c" bodystart="6" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_unary_expression_operator_8h" kindref="compound">EagleDbSqlUnaryExpressionOperator.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="_eagle_db_sql_unary_expression_operator_8h_1a390cc12eaab31062ade807bef76b6395" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8c_1a390cc12eaab31062ade807bef76b6395" kindref="member" tooltip="Get the string representation of the operator.">EagleDbSqlUnaryExpressionOperator_toString</ref>(<ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member" tooltip="Unary expression operators.">EagleDbSqlUnaryExpressionOperator</ref><sp/>op,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**before,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**after)</highlight></codeline>
+<codeline lineno="7"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(op)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8a1479eaddb6ac58f09547306d143376c8" kindref="member" tooltip="Negate operator.">EagleDbSqlUnaryExpressionOperatorNegate</ref>:</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*before<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*after<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8a22ba4a7b3103856b625fe1f199102141" kindref="member" tooltip="Logical NOT operator.">EagleDbSqlUnaryExpressionOperatorNot</ref>:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*before<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;NOT<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*after<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8a8a785cf89a97759ab64c492f2bdddb6b" kindref="member" tooltip="Grouping () operator.">EagleDbSqlUnaryExpressionOperatorGrouping</ref>:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*before<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*after<sp/>=<sp/>strdup(</highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpressionOperator.c"/>
+  </compounddef>
+</doxygen>

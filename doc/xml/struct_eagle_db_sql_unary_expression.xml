@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_unary_expression" kind="struct" prot="public">
+    <compoundname>EagleDbSqlUnaryExpression</compoundname>
+    <includes refid="_eagle_db_sql_unary_expression_8h" local="no">EagleDbSqlUnaryExpression.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_unary_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Header. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_unary_expression_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_unary_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_db_sql_expression" kindref="compound">EagleDbSqlExpression</ref> *</type>
+        <definition>EagleDbSqlExpression* expr</definition>
+        <argsstring></argsstring>
+        <name>expr</name>
+        <briefdescription>
+<para>The operand. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="34" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_unary_expression_1a0bb91c4e7ee869591aa0b6d4810d5102" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_db_sql_unary_expression_operator_8h_1a8d984ea85eca693c86972ff18ef55fd8" kindref="member">EagleDbSqlUnaryExpressionOperator</ref></type>
+        <definition>EagleDbSqlUnaryExpressionOperator op</definition>
+        <argsstring></argsstring>
+        <name>op</name>
+        <briefdescription>
+<para>The operator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Expression type is EagleDbSqlExpressionTypeUnaryExpression. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_expression_type_8h_1a9f9ea3b12922dfc8fc26e2463ce34f7d" kindref="member">EagleDbSqlExpressionType</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="86">
+        <label>EagleDbSqlUnaryExpression</label>
+        <link refid="struct_eagle_db_sql_unary_expression"/>
+        <childnode refid="87" relation="usage">
+          <edgelabel>expr</edgelabel>
+        </childnode>
+        <childnode refid="88" relation="usage">
+          <edgelabel>op</edgelabel>
+        </childnode>
+      </node>
+      <node id="87">
+        <label>EagleDbSqlExpression</label>
+        <link refid="struct_eagle_db_sql_expression"/>
+      </node>
+      <node id="88">
+        <label>EagleDbSqlUnaryExpressionOperator</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" line="18" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlUnaryExpression.h" bodystart="18" bodyend="36"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_unary_expression_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlUnaryExpression</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_unary_expression_1a1929121f9116e94f8a2b45cee4787686" prot="public" virt="non-virtual"><scope>EagleDbSqlUnaryExpression</scope><name>expr</name></member>
+      <member refid="struct_eagle_db_sql_unary_expression_1a0bb91c4e7ee869591aa0b6d4810d5102" prot="public" virt="non-virtual"><scope>EagleDbSqlUnaryExpression</scope><name>op</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

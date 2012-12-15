@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_page_provider" kind="struct" prot="public">
+    <compoundname>EaglePageProvider</compoundname>
+    <includes refid="_eagle_page_provider_8h" local="no">EaglePageProvider.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_page_provider_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EaglePageProviderHeader</definition>
+        <argsstring></argsstring>
+        <name>EaglePageProviderHeader</name>
+        <briefdescription>
+<para>All &quot;subtypes&quot; of <ref refid="struct_eagle_page_provider" kindref="compound">EaglePageProvider</ref> will have this header. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A page provider. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProvider.h" bodystart="21" bodyend="28"/>
+    <listofallmembers>
+      <member refid="struct_eagle_page_provider_1a823322f3f10b2fd3df8f9a377af077c2" prot="public" virt="non-virtual"><scope>EaglePageProvider</scope><name>EaglePageProviderHeader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

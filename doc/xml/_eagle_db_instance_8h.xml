@@ -1,0 +1,876 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_instance_8h" kind="file">
+    <compoundname>EagleDbInstance.h</compoundname>
+    <includes refid="_eagle_db_schema_8h" local="yes">EagleDbSchema.h</includes>
+    <includes refid="_eagle_plan_8h" local="yes">EaglePlan.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_db_sql_statement_type_8h" local="yes">EagleDbSqlStatementType.h</includes>
+    <includes refid="_eagle_db_sql_select_8h" local="yes">EagleDbSqlSelect.h</includes>
+    <includes refid="_eagle_db_sql_insert_8h" local="yes">EagleDbSqlInsert.h</includes>
+    <includes refid="_eagle_logger_event_8h" local="yes">EagleLoggerEvent.h</includes>
+    <includedby refid="_eagle_db_information_schema_8c" local="yes">eagle/eagledb/EagleDbInformationSchema.c</includedby>
+    <includedby refid="_eagle_db_information_schema_8h" local="yes">eagle/eagledb/EagleDbInformationSchema.h</includedby>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <includedby refid="_eagle_db_sql_select_8c" local="yes">eagle/eagledb/EagleDbSqlSelect.c</includedby>
+    <incdepgraph>
+      <node id="2016">
+        <label>EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="2002" relation="include">
+        </childnode>
+        <childnode refid="2001" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+      </node>
+      <node id="2028">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="2021" relation="include">
+        </childnode>
+        <childnode refid="2018" relation="include">
+        </childnode>
+      </node>
+      <node id="2029">
+        <label>EagleDbSqlInsert.h</label>
+        <link refid="_eagle_db_sql_insert_8h"/>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+      <node id="2000">
+        <label>EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="2001" relation="include">
+        </childnode>
+        <childnode refid="2013" relation="include">
+        </childnode>
+        <childnode refid="2016" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+      </node>
+      <node id="2027">
+        <label>EagleDbSqlSelect.h</label>
+        <link refid="_eagle_db_sql_select_8h"/>
+        <childnode refid="2028" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+      <node id="2019">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1999">
+        <label>EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="2000" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+      <node id="1998">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="EagleDbInstance.h"/>
+        <childnode refid="1999" relation="include">
+        </childnode>
+        <childnode refid="2021" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2026" relation="include">
+        </childnode>
+        <childnode refid="2027" relation="include">
+        </childnode>
+        <childnode refid="2029" relation="include">
+        </childnode>
+        <childnode refid="2030" relation="include">
+        </childnode>
+      </node>
+      <node id="2006">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2007" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2012" relation="include">
+        </childnode>
+      </node>
+      <node id="2023">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="2022" relation="include">
+        </childnode>
+        <childnode refid="2013" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+      </node>
+      <node id="2022">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2013" relation="include">
+        </childnode>
+      </node>
+      <node id="2008">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2020">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="2007">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2008" relation="include">
+        </childnode>
+        <childnode refid="2009" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+      </node>
+      <node id="2010">
+        <label>pthread.h</label>
+      </node>
+      <node id="2015">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="2003">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2004" relation="include">
+        </childnode>
+      </node>
+      <node id="2024">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="2013" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+      </node>
+      <node id="2004">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2011">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2030">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="2031" relation="include">
+        </childnode>
+        <childnode refid="2032" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+      </node>
+      <node id="2005">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2031">
+        <label>time.h</label>
+      </node>
+      <node id="2018">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="2019" relation="include">
+        </childnode>
+      </node>
+      <node id="2025">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="2002">
+        <label>EagleDbColumn.h</label>
+        <link refid="_eagle_db_column_8h"/>
+        <childnode refid="2003" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2004" relation="include">
+        </childnode>
+      </node>
+      <node id="2014">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="2011" relation="include">
+        </childnode>
+        <childnode refid="2003" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2004" relation="include">
+        </childnode>
+      </node>
+      <node id="2026">
+        <label>EagleDbSqlStatementType.h</label>
+        <link refid="_eagle_db_sql_statement_type_8h"/>
+      </node>
+      <node id="2017">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="2018" relation="include">
+        </childnode>
+        <childnode refid="2020" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2004" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+      </node>
+      <node id="2021">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="2008" relation="include">
+        </childnode>
+        <childnode refid="2022" relation="include">
+        </childnode>
+        <childnode refid="2023" relation="include">
+        </childnode>
+        <childnode refid="2024" relation="include">
+        </childnode>
+        <childnode refid="2025" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2004" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+      <node id="2001">
+        <label>EagleDbTable.h</label>
+        <link refid="_eagle_db_table_8h"/>
+        <childnode refid="2002" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+      <node id="2032">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="2013">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2007" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2004" relation="include">
+        </childnode>
+        <childnode refid="2015" relation="include">
+        </childnode>
+      </node>
+      <node id="2009">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+      </node>
+      <node id="2012">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2037">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="2036">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2033">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="EagleDbInstance.h"/>
+        <childnode refid="2034" relation="include">
+        </childnode>
+        <childnode refid="2035" relation="include">
+        </childnode>
+        <childnode refid="2036" relation="include">
+        </childnode>
+        <childnode refid="2037" relation="include">
+        </childnode>
+      </node>
+      <node id="2034">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="2034" relation="include">
+        </childnode>
+      </node>
+      <node id="2035">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_instance" prot="public">EagleDbInstance</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_instance_8h_1add8762c04bef098dce4b034c0a3a8597" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_addSchema</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSchema *schema)</argsstring>
+        <name>EagleDbInstance_addSchema</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> *</type>
+          <declname>schema</declname>
+        </param>
+        <briefdescription>
+<para>Add a schema to the instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">schema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if it is successful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="119" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="544" bodyend="557"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a38146e6883ba5579dca8ffa7297a2947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_Delete</definition>
+        <argsstring>(EagleDbInstance *db)</argsstring>
+        <name>EagleDbInstance_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Free an instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="49" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="451" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a83d0e34ee0a71c8a3a54682622186d4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_DeleteAll</definition>
+        <argsstring>(EagleDbInstance *db)</argsstring>
+        <name>EagleDbInstance_DeleteAll</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Free an instance and ALL of the schemas and tables. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="55" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="478" bodyend="507"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a8a4be2e96111059cd3fa71cb36fd8823" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_execute</definition>
+        <argsstring>(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_execute</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>sql</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute an arbitrary SQL statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SQL statement. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="63" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="426" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1adbaa47551abe62bb775bdd24dcb56f2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeCreateTable</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbTable *table, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeCreateTable</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute a CREATE TABLE statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The table definition to create. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="88" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="364" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a82ede5483d3e553aa77414643f8a865a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeInsert</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSqlInsert *insert, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeInsert</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_insert" kindref="compound">EagleDbSqlInsert</ref> *</type>
+          <declname>insert</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute an INSERT statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">insert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>INSERT statement. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue on success. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="128" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="261" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a50c986867f7d80634d0f24259e29f26c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeParser</definition>
+        <argsstring>(EagleDbInstance *db, struct EagleDbParser *p, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeParser</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="struct_eagle_db_parser" kindref="compound">EagleDbParser</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Mostly for internal use. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="_eagle_db_instance_8c_1a8a4be2e96111059cd3fa71cb36fd8823" kindref="member">EagleDbInstance_execute()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parser instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Success status. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="72" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="397" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a843dbb73da6a3758396873cf7cdfda23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EagleDbInstance_executeSelect</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSqlSelect *select, EagleLoggerEvent **error)</argsstring>
+        <name>EagleDbInstance_executeSelect</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_sql_select" kindref="compound">EagleDbSqlSelect</ref> *</type>
+          <declname>select</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_logger_event" kindref="compound">EagleLoggerEvent</ref> **</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Execute a SELECT statement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SELECT statement (compiled). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If an error occurs it will be sent back through this parameter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="80" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="233" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a2fd8ec2b0a60f678e0c2e562f881cf0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> *</type>
+        <definition>EagleDbSchema* EagleDbInstance_getSchema</definition>
+        <argsstring>(EagleDbInstance *db, const char *schemaName)</argsstring>
+        <name>EagleDbInstance_getSchema</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>schemaName</declname>
+        </param>
+        <briefdescription>
+<para>Get a schema by name. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">schemaName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the schema can not be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="111" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="531" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a47d828d875d510e051bbc68de2f3a0ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_table_data" kindref="compound">EagleDbTableData</ref> *</type>
+        <definition>EagleDbTableData* EagleDbInstance_getTable</definition>
+        <argsstring>(EagleDbInstance *db, char *tableName)</argsstring>
+        <name>EagleDbInstance_getTable</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>tableName</declname>
+        </param>
+        <briefdescription>
+<para>Get a table by name. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will only search the EagleDbSchema_DefaultSchemaName schema. It does not support schema name with a dot, yet. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The database instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tableName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The raw table name. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the table can not be found. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="103" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="509" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1ae4c73f4a21a02fc1f3eb9a3bc0031ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+        <definition>EagleDbInstance* EagleDbInstance_New</definition>
+        <argsstring>(int pageSize, int cores)</argsstring>
+        <name>EagleDbInstance_New</name>
+        <param>
+          <type>int</type>
+          <declname>pageSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cores</declname>
+        </param>
+        <briefdescription>
+<para>Create a new database instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pageSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The default page size to use for <ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cores</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of CPU cores. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="43" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="19" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_instance_8h_1a3caa1842c5ff5bcb28c65e40f2f6750b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInstance_PrintResults</definition>
+        <argsstring>(EaglePlan *plan)</argsstring>
+        <name>EagleDbInstance_PrintResults</name>
+        <param>
+          <type><ref refid="struct_eagle_plan" kindref="compound">EaglePlan</ref> *</type>
+          <declname>plan</declname>
+        </param>
+        <briefdescription>
+<para>Print a result set (fancy). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">plan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The plan contains a pointer to the result set once it is executed. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h" line="94" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.c" bodystart="45" bodyend="231"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbInstance_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbInstance_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_schema_8h" kindref="compound">EagleDbSchema.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_plan_8h" kindref="compound">EaglePlan.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_statement_type_8h" kindref="compound">EagleDbSqlStatementType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_select_8h" kindref="compound">EagleDbSqlSelect.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_sql_insert_8h" kindref="compound">EagleDbSqlInsert.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_event_8h" kindref="compound">EagleLoggerEvent.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="struct_eagle_db_instance" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="23" refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1abbf13e8ccd8267eae6f8134bdedb96b7" kindref="member" tooltip="This struct instance variable may be freed internally or externally.">EAGLE_ATTR_SEMI_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28" refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33" refid="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_instance_1a02463760ed5bc5ebcc0101fa9489a622" kindref="member" tooltip="The number of CPU cores.">cores</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref>*<sp/><ref refid="_eagle_db_instance_8c_1ae4c73f4a21a02fc1f3eb9a3bc0031ae4" kindref="member" tooltip="Create a new database instance.">EagleDbInstance_New</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pageSize,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>cores);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a38146e6883ba5579dca8ffa7297a2947" kindref="member" tooltip="Free an instance.">EagleDbInstance_Delete</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a83d0e34ee0a71c8a3a54682622186d4b" kindref="member" tooltip="Free an instance and ALL of the schemas and tables.">EagleDbInstance_DeleteAll</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a8a4be2e96111059cd3fa71cb36fd8823" kindref="member" tooltip="Execute an arbitrary SQL statement.">EagleDbInstance_execute</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*sql,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a50c986867f7d80634d0f24259e29f26c" kindref="member" tooltip="Mostly for internal use.">EagleDbInstance_executeParser</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_db_parser" kindref="compound" tooltip="A instance to handle the parser.">EagleDbParser</ref><sp/>*p,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a843dbb73da6a3758396873cf7cdfda23" kindref="member" tooltip="Execute a SELECT statement.">EagleDbInstance_executeSelect</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_sql_select" kindref="compound" tooltip="SQL SELECT expression.">EagleDbSqlSelect</ref><sp/>*select,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1adbaa47551abe62bb775bdd24dcb56f2f" kindref="member" tooltip="Execute a CREATE TABLE statement.">EagleDbInstance_executeCreateTable</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_instance_8c_1a3caa1842c5ff5bcb28c65e40f2f6750b" kindref="member" tooltip="Print a result set (fancy).">EagleDbInstance_PrintResults</ref>(<ref refid="struct_eagle_plan" kindref="compound" tooltip="An execution plan.">EaglePlan</ref><sp/>*plan);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref>*<sp/><ref refid="_eagle_db_instance_8c_1a47d828d875d510e051bbc68de2f3a0ce" kindref="member" tooltip="Get a table by name.">EagleDbInstance_getTable</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*tableName);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*schemaName);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1add8762c04bef098dce4b034c0a3a8597" kindref="member" tooltip="Add a schema to the instance.">EagleDbInstance_addSchema</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_db_instance_8c_1a82ede5483d3e553aa77414643f8a865a" kindref="member" tooltip="Execute an INSERT statement.">EagleDbInstance_executeInsert</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_sql_insert" kindref="compound" tooltip="Represents an INSERT statement.">EagleDbSqlInsert</ref><sp/>*insert,<sp/><ref refid="struct_eagle_logger_event" kindref="compound" tooltip="A single logged event.">EagleLoggerEvent</ref><sp/>**error);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInstance.h"/>
+  </compounddef>
+</doxygen>

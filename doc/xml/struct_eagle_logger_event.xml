@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_logger_event" kind="struct" prot="public">
+    <compoundname>EagleLoggerEvent</compoundname>
+    <includes refid="_eagle_logger_event_8h" local="no">EagleLoggerEvent.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_logger_event_1a0b2e8c7f76df48129f994ecc46d5c66c" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* message</definition>
+        <argsstring></argsstring>
+        <name>message</name>
+        <briefdescription>
+<para>A message describing the event. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_event_1aa919482768c0eac179575481f77e0fa3" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* obj</definition>
+        <argsstring></argsstring>
+        <name>obj</name>
+        <briefdescription>
+<para>An optional attached object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" line="31" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_event_1a5c340a9ce53bed5fff2a563b594f8156" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2" kindref="member">EagleLoggerSeverity</ref></type>
+        <definition>EagleLoggerSeverity severity</definition>
+        <argsstring></argsstring>
+        <name>severity</name>
+        <briefdescription>
+<para>How severe the event was. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_logger_event_1a55ba3be52880a5466b58bb8dde6df777" prot="public" static="no" mutable="no">
+        <type>time_t</type>
+        <definition>time_t when</definition>
+        <argsstring></argsstring>
+        <name>when</name>
+        <briefdescription>
+<para>When the event was raised. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A single logged event. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="181">
+        <label>void *</label>
+      </node>
+      <node id="182">
+        <label>char *</label>
+      </node>
+      <node id="179">
+        <label>time_t</label>
+      </node>
+      <node id="180">
+        <label>EagleLoggerSeverity</label>
+      </node>
+      <node id="178">
+        <label>EagleLoggerEvent</label>
+        <link refid="struct_eagle_logger_event"/>
+        <childnode refid="179" relation="usage">
+          <edgelabel>when</edgelabel>
+        </childnode>
+        <childnode refid="180" relation="usage">
+          <edgelabel>severity</edgelabel>
+        </childnode>
+        <childnode refid="181" relation="usage">
+          <edgelabel>obj</edgelabel>
+        </childnode>
+        <childnode refid="182" relation="usage">
+          <edgelabel>message</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EagleLoggerEvent.h" bodystart="11" bodyend="33"/>
+    <listofallmembers>
+      <member refid="struct_eagle_logger_event_1a0b2e8c7f76df48129f994ecc46d5c66c" prot="public" virt="non-virtual"><scope>EagleLoggerEvent</scope><name>message</name></member>
+      <member refid="struct_eagle_logger_event_1aa919482768c0eac179575481f77e0fa3" prot="public" virt="non-virtual"><scope>EagleLoggerEvent</scope><name>obj</name></member>
+      <member refid="struct_eagle_logger_event_1a5c340a9ce53bed5fff2a563b594f8156" prot="public" virt="non-virtual"><scope>EagleLoggerEvent</scope><name>severity</name></member>
+      <member refid="struct_eagle_logger_event_1a55ba3be52880a5466b58bb8dde6df777" prot="public" virt="non-virtual"><scope>EagleLoggerEvent</scope><name>when</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

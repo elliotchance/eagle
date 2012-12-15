@@ -1,0 +1,877 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_page_8c" kind="file">
+    <compoundname>EaglePage.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_page_8h" local="yes">EaglePage.h</includes>
+    <includes refid="_eagle_utils_8h" local="yes">EagleUtils.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_logger_8h" local="yes">EagleLogger.h</includes>
+    <includes refid="_eagle_object_8h" local="yes">EagleObject.h</includes>
+    <incdepgraph>
+      <node id="786">
+        <label>EagleObject.h</label>
+        <link refid="_eagle_object_8h"/>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="770" relation="include">
+        </childnode>
+      </node>
+      <node id="766">
+        <label>stdlib.h</label>
+      </node>
+      <node id="777">
+        <label>EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="768" relation="include">
+        </childnode>
+        <childnode refid="775" relation="include">
+        </childnode>
+        <childnode refid="778" relation="include">
+        </childnode>
+        <childnode refid="781" relation="include">
+        </childnode>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="783" relation="include">
+        </childnode>
+      </node>
+      <node id="774">
+        <label>EagleUtils.h</label>
+        <link refid="_eagle_utils_8h"/>
+        <childnode refid="775" relation="include">
+        </childnode>
+        <childnode refid="770" relation="include">
+        </childnode>
+      </node>
+      <node id="781">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="778" relation="include">
+        </childnode>
+        <childnode refid="770" relation="include">
+        </childnode>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="782" relation="include">
+        </childnode>
+      </node>
+      <node id="775">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="778">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="775" relation="include">
+        </childnode>
+        <childnode refid="779" relation="include">
+        </childnode>
+        <childnode refid="770" relation="include">
+        </childnode>
+      </node>
+      <node id="780">
+        <label>pthread.h</label>
+      </node>
+      <node id="767">
+        <label>string.h</label>
+      </node>
+      <node id="771">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="772" relation="include">
+        </childnode>
+      </node>
+      <node id="772">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="770">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="783">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="784" relation="include">
+        </childnode>
+        <childnode refid="785" relation="include">
+        </childnode>
+        <childnode refid="773" relation="include">
+        </childnode>
+      </node>
+      <node id="773">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="784">
+        <label>time.h</label>
+      </node>
+      <node id="776">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="765">
+        <label>eagle/eagle/EaglePage.c</label>
+        <link refid="EaglePage.c"/>
+        <childnode refid="766" relation="include">
+        </childnode>
+        <childnode refid="767" relation="include">
+        </childnode>
+        <childnode refid="768" relation="include">
+        </childnode>
+        <childnode refid="769" relation="include">
+        </childnode>
+        <childnode refid="774" relation="include">
+        </childnode>
+        <childnode refid="776" relation="include">
+        </childnode>
+        <childnode refid="777" relation="include">
+        </childnode>
+        <childnode refid="786" relation="include">
+        </childnode>
+      </node>
+      <node id="769">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="770" relation="include">
+        </childnode>
+        <childnode refid="771" relation="include">
+        </childnode>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="772" relation="include">
+        </childnode>
+      </node>
+      <node id="768">
+        <label>stdio.h</label>
+      </node>
+      <node id="785">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="779">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="780" relation="include">
+        </childnode>
+        <childnode refid="773" relation="include">
+        </childnode>
+      </node>
+      <node id="782">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="770" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_page_8c_1ac4184928f404850a2a899fd6c446a284" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_Alloc</definition>
+        <argsstring>(EagleDataType type, int count)</argsstring>
+        <name>EaglePage_Alloc</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a new page. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The size of the page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="246" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="245" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a94b332da6e5167e05c9b9fe9d4717b20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_AllocFloat</definition>
+        <argsstring>(int count)</argsstring>
+        <name>EaglePage_AllocFloat</name>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a new page of given size. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function differs from <ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member">EaglePage_New()</ref> because it will allocate the data block for you. <simplesect kind="note"><para>The page allocated will not be filled with any data, make sure you sanitize the page if you intend to read from it. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records of the page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="96" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="95" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1aec75251a9ef48ae0134ab067fbdfa18b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_AllocInt</definition>
+        <argsstring>(int count)</argsstring>
+        <name>EaglePage_AllocInt</name>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a new page of given size. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function differs from <ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member">EaglePage_New()</ref> because it will allocate the data block for you. <simplesect kind="note"><para>The page allocated will not be filled with any data, make sure you sanitize the page if you intend to read from it. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records of the page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="86" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="85" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a9d93fc7a9afaabac6faf20556f3c07a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_AllocVarchar</definition>
+        <argsstring>(int count)</argsstring>
+        <name>EaglePage_AllocVarchar</name>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a new page of given size. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function differs from <ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member">EaglePage_New()</ref> because it will allocate the data block for you. <simplesect kind="note"><para>The page allocated will not be filled with any data, make sure you sanitize the page if you intend to read from it. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records of the page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="106" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="105" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_Copy</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_Copy</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Copy a page. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page to copy. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A duplicate page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="158" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="157" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a1335c4aeab6d307f25a8e06f90240d12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePage_Delete</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Free a page. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="116" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="115" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1af2483e44461c638b24f1852f6ebeb524" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePage_equals</definition>
+        <argsstring>(EaglePage *page1, EaglePage *page2)</argsstring>
+        <name>EaglePage_equals</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page1</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page2</declname>
+        </param>
+        <briefdescription>
+<para>Compare the content two pages. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">page2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue if the contents of the pages are equal. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="29" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="28" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_New</definition>
+        <argsstring>(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData)</argsstring>
+        <name>EaglePage_New</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>totalSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>recordOffset</declname>
+        </param>
+        <param>
+          <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+          <declname>freeData</declname>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_page" kindref="compound">EaglePage</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>You will be required to provide a data block with the number of records in that data block.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data for this page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The preallocated data block. This may be NULL, but the <computeroutput>count</computeroutput> must be 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">totalSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records in the data block. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of used records (must be less than <computeroutput>totalSize</computeroutput>) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">recordOffset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An arbitrary number stored in the page. This number is used as an offset when calculating the record ID of a given record inside a page. If you are unsure as to what this value should be then you can use 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeData</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If EagleTrue the <computeroutput>data</computeroutput> will be freed with the page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="10" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a5523b294a890ac56ea46911a638f73f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_RealCopy</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_RealCopy</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Copy a page. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will do a true deep copy which is different from <ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member">EaglePage_Copy()</ref> which simply registered a new reference to a real only page. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page to copy. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new copy of the page, or NULL on error. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="165" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="164" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1ab1c0c92c8191f9025f025fc03c47ccf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_RealCopyFloat_</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_RealCopyFloat_</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Private function. </para>        </briefdescription>
+        <detaileddescription>
+<para>Copy an FLOAT page. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A duplicate page. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member">EaglePage_Copy()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="204" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="203" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a56ecd1caacdcc05ea4591e2a51e7fe67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_RealCopyInt_</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_RealCopyInt_</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Private function. </para>        </briefdescription>
+        <detaileddescription>
+<para>Copy an INTEGER page. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A duplicate page. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member">EaglePage_Copy()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="185" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="184" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1a3c87703e3b13fd7316663cb385b9243d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePage_RealCopyVarchar_</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_RealCopyVarchar_</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Private function. </para>        </briefdescription>
+        <detaileddescription>
+<para>Copy a VARCHAR page. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A duplicate page. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member">EaglePage_Copy()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="223" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="222" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_8c_1ac0ee9cd38dc946bde7313a5e9d3d05de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* EaglePage_toString</definition>
+        <argsstring>(EaglePage *page)</argsstring>
+        <name>EaglePage_toString</name>
+        <param>
+          <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+          <declname>page</declname>
+        </param>
+        <briefdescription>
+<para>Render information about the page as a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">page</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The page. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new string (you must free this yourself) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" line="265" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c" bodystart="264" bodyend="276"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_8h" kindref="compound">EaglePage.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_utils_8h" kindref="compound">EagleUtils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_8h" kindref="compound">EagleLogger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_object_8h" kindref="compound">EagleObject.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="_eagle_page_8h_1a46dfbf616a96645c9617bbc12312f94a" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalSize,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordOffset,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/>freeData)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page<sp/>=<sp/>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>));</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref><sp/>=<sp/>type;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref><sp/>=<sp/>data;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref><sp/>=<sp/>totalSize;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref><sp/>=<sp/>count;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="An arbitrary counter for the row ID offset.">recordOffset</ref><sp/>=<sp/>recordOffset;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" kindref="member" tooltip="Free data when freeing the page.">freeData</ref><sp/>=<sp/>freeData;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" kindref="member" tooltip="This value starts at 1 and is incremented with EaglePage_Copy() and decremented with...">usageCount</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>page;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="_eagle_page_8h_1af2483e44461c638b24f1852f6ebeb524" refkind="member"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_8c_1af2483e44461c638b24f1852f6ebeb524" kindref="member" tooltip="Compare the content two pages.">EaglePage_equals</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page1,<sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page2)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/><ref refid="_eagle_object_8c_1a263140d51404fab7c64a4f61398e9bfe" kindref="member" tooltip="Check if two objects are equal.">EagleObject_equals</ref>(page1,<sp/>page2))<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>check<sp/>the<sp/>individual<sp/>properties<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(page1-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref><sp/>!=<sp/>page2-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(page1-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref><sp/>!=<sp/>page2-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(page1-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref><sp/>!=<sp/>page2-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>and<sp/>finally,<sp/>deep<sp/>check<sp/>data<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(page1-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref><sp/>!=<sp/>page2-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(page1-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>!=<sp/>memcmp(page1-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/>page2-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>)<sp/>*<sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<sp/>page1-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>!=<sp/>memcmp(page1-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/>page2-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>)<sp/>*<sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<sp/>page1-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*p1data<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>page1-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*p2data<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>page2-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>page1-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>!=<sp/>strcmp(p1data[i],<sp/>p2data[i]))<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa5c22bab5fe5699bcf03606cb6905d72c" kindref="member" tooltip="FALSE.">EagleFalse</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>page<sp/>contents<sp/>are<sp/>equal<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="_eagle_page_8h_1aec75251a9ef48ae0134ab067fbdfa18b" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1aec75251a9ef48ae0134ab067fbdfa18b" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocInt</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data<sp/>=<sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_AllocInt.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>),<sp/>count);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>,<sp/>data,<sp/>count,<sp/>count,<sp/>0,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="_eagle_page_8h_1a94b332da6e5167e05c9b9fe9d4717b20" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a94b332da6e5167e05c9b9fe9d4717b20" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocFloat</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data<sp/>=<sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_AllocFloat.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>),<sp/>count);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>,<sp/>data,<sp/>count,<sp/>count,<sp/>0,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="_eagle_page_8h_1a9d93fc7a9afaabac6faf20556f3c07a2" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a9d93fc7a9afaabac6faf20556f3c07a2" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocVarchar</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data<sp/>=<sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_AllocVarchar.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>),<sp/>count);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>,<sp/>data,<sp/>count,<sp/>0,<sp/>0,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="_eagle_page_8h_1a1335c4aeab6d307f25a8e06f90240d12" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a1335c4aeab6d307f25a8e06f90240d12" kindref="member" tooltip="Free a page.">EaglePage_Delete</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>decrement<sp/>the<sp/>usage<sp/>count<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>--page-&gt;<ref refid="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" kindref="member" tooltip="This value starts at 1 and is incremented with EaglePage_Copy() and decremented with...">usageCount</ref>;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>if<sp/>this<sp/>object<sp/>is<sp/>still<sp/>in<sp/>use<sp/>then<sp/>we<sp/>can&apos;t<sp/>free<sp/>it<sp/>yet<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(page-&gt;<ref refid="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" kindref="member" tooltip="This value starts at 1 and is incremented with EaglePage_Copy() and decremented with...">usageCount</ref><sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref><sp/>==<sp/>page-&gt;<ref refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" kindref="member" tooltip="Free data when freeing the page.">freeData</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>free<sp/>all<sp/>strings<sp/>first<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*d<sp/>=<sp/>((<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(d[i]);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>((</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>((</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>page);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="_eagle_page_8h_1a1979d041e501015ecd5d99aa62c3e6ff" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a1979d041e501015ecd5d99aa62c3e6ff" kindref="member" tooltip="Copy a page.">EaglePage_Copy</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>increment<sp/>the<sp/>usage<sp/>count<sp/>but<sp/>return<sp/>the<sp/>same<sp/>page<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>++page-&gt;<ref refid="struct_eagle_page_1abe7bc872b2b5a008aa4a0ddafc4934cd" kindref="member" tooltip="This value starts at 1 and is incremented with EaglePage_Copy() and decremented with...">usageCount</ref>;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>page;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164" refid="_eagle_page_8h_1a5523b294a890ac56ea46911a638f73f9" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a5523b294a890ac56ea46911a638f73f9" kindref="member" tooltip="Copy a page.">EaglePage_RealCopy</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="165"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_logger_8c_1a2b11ce5acff2e74749d6ad9e181e67e8" kindref="member" tooltip="Log an event.">EagleLogger_Log</ref>(<ref refid="_eagle_logger_severity_8h_1a7316d55576378a753facf17fa36597e2a76a93f9f51daaaaf8a119a878fa74988" kindref="member" tooltip="An error is a problem that has stopped a task from continuing but the state of the...">EagleLoggerSeverityError</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Cannot<sp/>page<sp/>of<sp/>Unknown<sp/>type.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a56ecd1caacdcc05ea4591e2a51e7fe67" kindref="member" tooltip="Private function.">EaglePage_RealCopyInt_</ref>(page);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a3c87703e3b13fd7316663cb385b9243d" kindref="member" tooltip="Private function.">EaglePage_RealCopyVarchar_</ref>(page);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1ab1c0c92c8191f9025f025fc03c47ccf9" kindref="member" tooltip="Private function.">EaglePage_RealCopyFloat_</ref>(page);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184" refid="_eagle_page_8h_1a56ecd1caacdcc05ea4591e2a51e7fe67" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a56ecd1caacdcc05ea4591e2a51e7fe67" kindref="member" tooltip="Private function.">EaglePage_RealCopyInt_</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="185"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>memorySize;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>*newData;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>memorySize<sp/>=<sp/>(size_t)<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref><sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>newData<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_CopyInt_.1&quot;</highlight><highlight class="normal">,<sp/>memorySize);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>newData)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>memmove(newData,<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/>memorySize);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>,<sp/>newData,<sp/>page-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="An arbitrary counter for the row ID offset.">recordOffset</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" kindref="member" tooltip="Free data when freeing the page.">freeData</ref>);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203" refid="_eagle_page_8h_1ab1c0c92c8191f9025f025fc03c47ccf9" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1ab1c0c92c8191f9025f025fc03c47ccf9" kindref="member" tooltip="Private function.">EaglePage_RealCopyFloat_</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="204"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>memorySize;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>*newData;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>memorySize<sp/>=<sp/>(size_t)<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref><sp/>*<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>newData<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_CopyFloat_.1&quot;</highlight><highlight class="normal">,<sp/>memorySize);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>newData)<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>memmove(newData,<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>,<sp/>memorySize);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>,<sp/>newData,<sp/>page-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="An arbitrary counter for the row ID offset.">recordOffset</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" kindref="member" tooltip="Free data when freeing the page.">freeData</ref>);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222" refid="_eagle_page_8h_1a3c87703e3b13fd7316663cb385b9243d" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1a3c87703e3b13fd7316663cb385b9243d" kindref="member" tooltip="Private function.">EaglePage_RealCopyVarchar_</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*newData;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>*d;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>page)<sp/>{</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>newData<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_CopyVarchar_.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>),<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>newData)<sp/>{</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>d<sp/>=<sp/>(<ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref>*)<sp/>page-&gt;<ref refid="struct_eagle_page_1a735984d41155bc1032e09bece8f8d66d" kindref="member" tooltip="The actual data for this page.">data</ref>;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>page-&gt;count;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newData[i]<sp/>=<sp/>strdup(d[i]);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>,<sp/>newData,<sp/>page-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="An arbitrary counter for the row ID offset.">recordOffset</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad768045f91a0067c1413fac7c8d1f7d1" kindref="member" tooltip="Free data when freeing the page.">freeData</ref>);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245" refid="_eagle_page_8h_1ac4184928f404850a2a899fd6c446a284" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_8c_1ac4184928f404850a2a899fd6c446a284" kindref="member" tooltip="Allocate a new page.">EaglePage_Alloc</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>count)</highlight></codeline>
+<codeline lineno="246"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(type)<sp/>{</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a898857f5829f028ef6f1b94c0ba1b2d5" kindref="member" tooltip="Unknown/invalid data type.">EagleDataTypeUnknown</ref>:</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a036473b82a3370995203efc068bfd977" kindref="member" tooltip="INT or INTEGER: 32bit integer.">EagleDataTypeInteger</ref>:</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1aec75251a9ef48ae0134ab067fbdfa18b" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocInt</ref>(count);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>:</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a9d93fc7a9afaabac6faf20556f3c07a2" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocVarchar</ref>(count);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2ae23dff1ffd05859c8d1d0b291a6d4693" kindref="member" tooltip="FLOAT: 64bit floating point.">EagleDataTypeFloat</ref>:</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_8c_1a94b332da6e5167e05c9b9fe9d4717b20" kindref="member" tooltip="Allocate a new page of given size.">EaglePage_AllocFloat</ref>(count);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264" refid="_eagle_page_8h_1ac0ee9cd38dc946bde7313a5e9d3d05de" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="_eagle_page_8c_1ac0ee9cd38dc946bde7313a5e9d3d05de" kindref="member" tooltip="Render information about the page as a string.">EaglePage_toString</ref>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page)</highlight></codeline>
+<codeline lineno="265"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>buf<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EaglePage_toString.1&quot;</highlight><highlight class="normal">,<sp/>8192),<sp/>*type;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>buf)<sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>type<sp/>=<sp/><ref refid="_eagle_data_type_8c_1a85eab167ee14bb2c94221f627a9879fe" kindref="member" tooltip="Convert a type to a string.">EagleDataType_typeToName</ref>(page-&gt;<ref refid="struct_eagle_page_1a1098a844c26196961003dc0ebc21a1c0" kindref="member" tooltip="The data type for this page.">type</ref>);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>sprintf(buf,<sp/></highlight><highlight class="stringliteral">&quot;EaglePage<sp/>{<sp/>type<sp/>=<sp/>%s,<sp/>size<sp/>=<sp/>%d,<sp/>count<sp/>=<sp/>%d,<sp/>offset<sp/>=<sp/>%d<sp/>}&quot;</highlight><highlight class="normal">,<sp/>type,<sp/>page-&gt;<ref refid="struct_eagle_page_1a645e08725d4990fa97be7b032784866c" kindref="member" tooltip="The allocated records for this page.">totalSize</ref>,<sp/>page-&gt;<ref refid="struct_eagle_page_1ad43c3812e6d13e0518d9f8b8f463ffcf" kindref="member" tooltip="The amount of used records in this page.">count</ref>,</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>page-&gt;<ref refid="struct_eagle_page_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="An arbitrary counter for the row ID offset.">recordOffset</ref>);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(type);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePage.c"/>
+  </compounddef>
+</doxygen>

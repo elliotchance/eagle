@@ -1,0 +1,641 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/eagledb/EagleDbInstance.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">eagle/eagledb</a> - EagleDbInstance.c<span style="font-size: 80%;"> (source / <a href="EagleDbInstance.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">214</td>
+            <td class="headerCovTableEntry">214</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-06-02</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;stdlib.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       3 </span>            : #include &lt;string.h&gt;
+<span class="lineNum">       4 </span>            : #include &quot;EagleDbInstance.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;EagleDbTable.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;EagleDbTuple.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;EagleDbSqlSelect.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;EaglePageProvider.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;EagleInstance.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;EagleDbTableData.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;EagleMemory.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;EagleDbInstance.h&quot;
+<span class="lineNum">      13 </span>            : #include &quot;EagleDbParser.h&quot;
+<span class="lineNum">      14 </span>            : #include &quot;EagleLogger.h&quot;
+<span class="lineNum">      15 </span>            : #include &quot;EagleDbSchema.h&quot;
+<span class="lineNum">      16 </span>            : #include &quot;EagleDbInformationSchema.h&quot;
+<a name="17"><span class="lineNum">      17 </span>            : #include &quot;EagleDataType.h&quot;</a>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">        256 : EagleDbInstance* EagleDbInstance_New(int pageSize, int cores)</span>
+<span class="lineNum">      20 </span>            : {
+<span class="lineNum">      21 </span><span class="lineCov">        256 :     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate(&quot;EagleDbInstance_New.1&quot;, sizeof(EagleDbInstance));</span>
+<span class="lineNum">      22 </span><span class="lineCov">        256 :     EagleDbSchema *defaultSchema, *infoSchema;</span>
+<span class="lineNum">      23 </span>            :     
+<span class="lineNum">      24 </span><span class="lineCov">        256 :     if(NULL == db) {</span>
+<span class="lineNum">      25 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">      26 </span>            :     }
+<span class="lineNum">      27 </span>            :     
+<span class="lineNum">      28 </span><span class="lineCov">        248 :     db-&gt;pageSize = pageSize;</span>
+<span class="lineNum">      29 </span><span class="lineCov">        248 :     db-&gt;cores = cores;</span>
+<span class="lineNum">      30 </span>            :     
+<span class="lineNum">      31 </span>            :     /* schemas */
+<span class="lineNum">      32 </span><span class="lineCov">        248 :     db-&gt;schemas = EagleLinkedList_New();</span>
+<span class="lineNum">      33 </span>            :     
+<span class="lineNum">      34 </span><span class="lineCov">        248 :     defaultSchema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">      35 </span><span class="lineCov">        248 :     infoSchema = EagleDbSchema_New((char*) EagleDbSchema_InformationSchemaName);</span>
+<span class="lineNum">      36 </span><span class="lineCov">        248 :     EagleDbInstance_addSchema(db, defaultSchema);</span>
+<span class="lineNum">      37 </span><span class="lineCov">        248 :     EagleDbInstance_addSchema(db, infoSchema);</span>
+<span class="lineNum">      38 </span>            :     
+<span class="lineNum">      39 </span>            :     /* setup information schema */
+<span class="lineNum">      40 </span><span class="lineCov">        248 :     EagleDbInformationSchema_Init(db, defaultSchema);</span>
+<span class="lineNum">      41 </span>            :     
+<span class="lineNum">      42 </span><span class="lineCov">        248 :     return db;</span>
+<a name="43"><span class="lineNum">      43 </span><span class="lineCov">        256 : }</span></a>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span><span class="lineCov">         40 : void EagleDbInstance_PrintResults(EaglePlan *plan)</span>
+<span class="lineNum">      46 </span>            : {
+<span class="lineNum">      47 </span><span class="lineCov">         40 :     EaglePage **pages;</span>
+<span class="lineNum">      48 </span><span class="lineCov">         40 :     int i, totalRecords = 0, j;</span>
+<span class="lineNum">      49 </span><span class="lineCov">         40 :     unsigned long *widths;</span>
+<span class="lineNum">      50 </span>            :     
+<span class="lineNum">      51 </span><span class="lineCov">         40 :     if(NULL == plan) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">      53 </span>            :     }
+<span class="lineNum">      54 </span>            :     
+<span class="lineNum">      55 </span><span class="lineCov">         64 :     if(plan-&gt;resultFields &gt; 0 &amp;&amp; EaglePageProvider_pagesRemaining(plan-&gt;result[0]) &gt; 0) {</span>
+<span class="lineNum">      56 </span>            :         /* calculate the widths of the fields */
+<span class="lineNum">      57 </span><span class="lineCov">         24 :         widths = (unsigned long*) EagleMemory_MultiAllocate(&quot;EagleDbInstance_PrintResults.1&quot;, sizeof(unsigned long), plan-&gt;resultFields);</span>
+<span class="lineNum">      58 </span><span class="lineCov">         24 :         if(NULL == widths) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">          8 :             return;</span>
+<span class="lineNum">      60 </span>            :         }
+<span class="lineNum">      61 </span><span class="lineCov">         64 :         for(i = 0; i &lt; plan-&gt;resultFields; ++i) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">         16 :             widths[i] = strlen(plan-&gt;result[i]-&gt;name);</span>
+<span class="lineNum">      63 </span><span class="lineCov">         16 :         }</span>
+<span class="lineNum">      64 </span>            :         
+<span class="lineNum">      65 </span>            : #ifndef CUNIT
+<span class="lineNum">      66 </span>            :         for(i = 0; i &lt; plan-&gt;resultFields; ++i) {
+<span class="lineNum">      67 </span>            :             EaglePage *page;
+<span class="lineNum">      68 </span>            :             
+<span class="lineNum">      69 </span>            :             while(NULL != (page = EaglePageProvider_nextPage(plan-&gt;result[i]))) {
+<span class="lineNum">      70 </span>            :                 for(j = 0; j &lt; page-&gt;count; ++j) {
+<span class="lineNum">      71 </span>            :                     switch(page-&gt;type) {
+<span class="lineNum">      72 </span>            :                             
+<span class="lineNum">      73 </span>            :                         case EagleDataTypeInteger:
+<span class="lineNum">      74 </span>            :                         {
+<span class="lineNum">      75 </span>            :                             char buf[30];
+<span class="lineNum">      76 </span>            :                             unsigned long len;
+<span class="lineNum">      77 </span>            :                             sprintf(buf, &quot;%d&quot;, ((EagleDataTypeIntegerType*) page-&gt;data)[j]);
+<span class="lineNum">      78 </span>            :                             len = strlen(buf);
+<span class="lineNum">      79 </span>            :                             
+<span class="lineNum">      80 </span>            :                             if(len &gt; widths[i]) {
+<span class="lineNum">      81 </span>            :                                 widths[i] = len;
+<span class="lineNum">      82 </span>            :                             }
+<span class="lineNum">      83 </span>            :                             
+<span class="lineNum">      84 </span>            :                             break;
+<span class="lineNum">      85 </span>            :                         }
+<span class="lineNum">      86 </span>            :                             
+<span class="lineNum">      87 </span>            :                         case EagleDataTypeVarchar:
+<span class="lineNum">      88 </span>            :                         {
+<span class="lineNum">      89 </span>            :                             unsigned long len = strlen(((EagleDataTypeVarcharType*) page-&gt;data)[j]);
+<span class="lineNum">      90 </span>            :                             
+<span class="lineNum">      91 </span>            :                             if(len &gt; widths[i]) {
+<span class="lineNum">      92 </span>            :                                 widths[i] = len;
+<span class="lineNum">      93 </span>            :                             }
+<span class="lineNum">      94 </span>            :                             
+<span class="lineNum">      95 </span>            :                             break;
+<span class="lineNum">      96 </span>            :                         }
+<span class="lineNum">      97 </span>            :                             
+<span class="lineNum">      98 </span>            :                         case EagleDataTypeFloat:
+<span class="lineNum">      99 </span>            :                         {
+<span class="lineNum">     100 </span>            :                             char buf[30];
+<span class="lineNum">     101 </span>            :                             unsigned long len;
+<span class="lineNum">     102 </span>            :                             sprintf(buf, &quot;%g&quot;, ((EagleDataTypeFloatType*) page-&gt;data)[j]);
+<span class="lineNum">     103 </span>            :                             len = strlen(buf);
+<span class="lineNum">     104 </span>            :                             
+<span class="lineNum">     105 </span>            :                             if(len &gt; widths[i]) {
+<span class="lineNum">     106 </span>            :                                 widths[i] = len;
+<span class="lineNum">     107 </span>            :                             }
+<span class="lineNum">     108 </span>            :                             
+<span class="lineNum">     109 </span>            :                             break;
+<span class="lineNum">     110 </span>            :                         }
+<span class="lineNum">     111 </span>            :                             
+<span class="lineNum">     112 </span>            :                         case EagleDataTypeUnknown:
+<span class="lineNum">     113 </span>            :                             break;
+<span class="lineNum">     114 </span>            :                             
+<span class="lineNum">     115 </span>            :                     }
+<span class="lineNum">     116 </span>            :                 }
+<span class="lineNum">     117 </span>            :             }
+<span class="lineNum">     118 </span>            :             
+<span class="lineNum">     119 </span>            :             EaglePage_Delete(page);
+<span class="lineNum">     120 </span>            :         }
+<span class="lineNum">     121 </span>            :         for(i = 0; i &lt; plan-&gt;resultFields; ++i) {
+<span class="lineNum">     122 </span>            :             EaglePageProvider_reset(plan-&gt;result[i]);
+<span class="lineNum">     123 </span>            :         }
+<span class="lineNum">     124 </span>            :         
+<span class="lineNum">     125 </span>            :         /* heading */
+<span class="lineNum">     126 </span>            :         printf(&quot;\n&quot;);
+<span class="lineNum">     127 </span>            :         for(i = 0; i &lt; plan-&gt;resultFields; ++i) {
+<span class="lineNum">     128 </span>            :             if(i &gt; 0) {
+<span class="lineNum">     129 </span>            :                 printf(&quot;|&quot;);
+<span class="lineNum">     130 </span>            :             }
+<span class="lineNum">     131 </span>            :             printf(&quot; %s &quot;, plan-&gt;result[i]-&gt;name);
+<span class="lineNum">     132 </span>            :         }
+<span class="lineNum">     133 </span>            :         printf(&quot;\n&quot;);
+<span class="lineNum">     134 </span>            :         
+<span class="lineNum">     135 </span>            :         for(i = 0; i &lt; plan-&gt;resultFields; ++i) {
+<span class="lineNum">     136 </span>            :             if(i &gt; 0) {
+<span class="lineNum">     137 </span>            :                 printf(&quot;+&quot;);
+<span class="lineNum">     138 </span>            :             }
+<span class="lineNum">     139 </span>            :             for(j = 0; j &lt; (int) widths[i] + 2; ++j) {
+<span class="lineNum">     140 </span>            :                 printf(&quot;-&quot;);
+<span class="lineNum">     141 </span>            :             }
+<span class="lineNum">     142 </span>            :         }
+<span class="lineNum">     143 </span>            :         printf(&quot;\n&quot;);
+<span class="lineNum">     144 </span>            : #else
+<span class="lineNum">     145 </span>            :         /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
+<span class="lineNum">     146 </span><span class="lineCov">         16 :         j = 0;</span>
+<span class="lineNum">     147 </span>            : #endif
+<span class="lineNum">     148 </span>            :     
+<span class="lineNum">     149 </span>            :         /* render out */
+<span class="lineNum">     150 </span><span class="lineCov">         16 :         pages = (EaglePage**) EagleMemory_MultiAllocate(&quot;EagleDbInstance_PrintResults.2&quot;, sizeof(EaglePage*), plan-&gt;resultFields);</span>
+<span class="lineNum">     151 </span><span class="lineCov">         16 :         if(NULL == pages) {</span>
+<span class="lineNum">     152 </span><span class="lineCov">          8 :             EagleMemory_Free(widths);</span>
+<span class="lineNum">     153 </span><span class="lineCov">          8 :             return;</span>
+<span class="lineNum">     154 </span>            :         }
+<span class="lineNum">     155 </span>            :         
+<span class="lineNum">     156 </span>            : #ifndef CUNIT
+<span class="lineNum">     157 </span>            :         while(1) {
+<span class="lineNum">     158 </span>            :             int k;
+<span class="lineNum">     159 </span>            :             int finished = 0;
+<span class="lineNum">     160 </span>            :             
+<span class="lineNum">     161 </span>            :             for(i = 0; i &lt; plan-&gt;resultFields; ++i) {
+<span class="lineNum">     162 </span>            :                 EaglePage *page = EaglePageProvider_nextPage(plan-&gt;result[i]);
+<span class="lineNum">     163 </span>            :                 if(NULL == page) {
+<span class="lineNum">     164 </span>            :                     finished = 1;
+<span class="lineNum">     165 </span>            :                     break;
+<span class="lineNum">     166 </span>            :                 }
+<span class="lineNum">     167 </span>            :                 pages[i] = page;
+<span class="lineNum">     168 </span>            :             }
+<span class="lineNum">     169 </span>            :             
+<span class="lineNum">     170 </span>            :             if(finished == 0) {
+<span class="lineNum">     171 </span>            :                 for(j = 0; j &lt; pages[0]-&gt;count; ++j) {
+<span class="lineNum">     172 </span>            :                     for(k = 0; k &lt; plan-&gt;resultFields; ++k) {
+<span class="lineNum">     173 </span>            :                         if(k &gt; 0) {
+<span class="lineNum">     174 </span>            :                             printf(&quot;|&quot;);
+<span class="lineNum">     175 </span>            :                         }
+<span class="lineNum">     176 </span>            :                         
+<span class="lineNum">     177 </span>            :                         switch(pages[k]-&gt;type) {
+<span class="lineNum">     178 </span>            :                                 
+<span class="lineNum">     179 </span>            :                             case EagleDataTypeUnknown:
+<span class="lineNum">     180 </span>            :                                 printf(&quot; %*s &quot;, (int) widths[k], &quot;?&quot;);
+<span class="lineNum">     181 </span>            :                                 break;
+<span class="lineNum">     182 </span>            :                                 
+<span class="lineNum">     183 </span>            :                             case EagleDataTypeInteger:
+<span class="lineNum">     184 </span>            :                             {
+<span class="lineNum">     185 </span>            :                                 EagleDataTypeIntegerType *d = (EagleDataTypeIntegerType*) pages[k]-&gt;data;
+<span class="lineNum">     186 </span>            :                                 printf(&quot; %*d &quot;, (int) widths[k], d[j]);
+<span class="lineNum">     187 </span>            :                                 break;
+<span class="lineNum">     188 </span>            :                             }
+<span class="lineNum">     189 </span>            :                                 
+<span class="lineNum">     190 </span>            :                             case EagleDataTypeVarchar:
+<span class="lineNum">     191 </span>            :                             {
+<span class="lineNum">     192 </span>            :                                 EagleDataTypeVarcharType *d = (EagleDataTypeVarcharType*) pages[k]-&gt;data;
+<span class="lineNum">     193 </span>            :                                 printf(&quot; %-*s &quot;, (int) widths[k], d[j]);
+<span class="lineNum">     194 </span>            :                                 break;
+<span class="lineNum">     195 </span>            :                             }
+<span class="lineNum">     196 </span>            :                                 
+<span class="lineNum">     197 </span>            :                             case EagleDataTypeFloat:
+<span class="lineNum">     198 </span>            :                             {
+<span class="lineNum">     199 </span>            :                                 EagleDataTypeFloatType *d = (EagleDataTypeFloatType*) pages[k]-&gt;data;
+<span class="lineNum">     200 </span>            :                                 printf(&quot; %*g &quot;, (int) widths[k], d[j]);
+<span class="lineNum">     201 </span>            :                                 break;
+<span class="lineNum">     202 </span>            :                             }
+<span class="lineNum">     203 </span>            :                                 
+<span class="lineNum">     204 </span>            :                         }
+<span class="lineNum">     205 </span>            :                     }
+<span class="lineNum">     206 </span>            :                     printf(&quot;\n&quot;);
+<span class="lineNum">     207 </span>            :                     ++totalRecords;
+<span class="lineNum">     208 </span>            :                 }
+<span class="lineNum">     209 </span>            :                 
+<span class="lineNum">     210 </span>            :                 for(k = 0; k &lt; plan-&gt;resultFields; ++k) {
+<span class="lineNum">     211 </span>            :                     EaglePage_Delete(pages[k]);
+<span class="lineNum">     212 </span>            :                 }
+<span class="lineNum">     213 </span>            :             }
+<span class="lineNum">     214 </span>            :             else {
+<span class="lineNum">     215 </span>            :                 break;
+<span class="lineNum">     216 </span>            :             }
+<span class="lineNum">     217 </span>            :         }
+<span class="lineNum">     218 </span>            :         
+<span class="lineNum">     219 </span>            :         printf(&quot;\n&quot;);
+<span class="lineNum">     220 </span>            : #endif
+<span class="lineNum">     221 </span><span class="lineCov">          8 :         EagleMemory_Free(widths);</span>
+<span class="lineNum">     222 </span><span class="lineCov">          8 :         EagleMemory_Free(pages);</span>
+<span class="lineNum">     223 </span><span class="lineCov">          8 :     }</span>
+<span class="lineNum">     224 </span>            :     
+<span class="lineNum">     225 </span>            : #ifndef CUNIT
+<span class="lineNum">     226 </span>            :     printf(&quot;%d record%s, %.3f seconds\n\n&quot;, totalRecords, (totalRecords == 1 ? &quot;&quot; : &quot;s&quot;), EaglePlan_getExecutionSeconds(plan));
+<span class="lineNum">     227 </span>            : #else
+<span class="lineNum">     228 </span>            :     /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
+<span class="lineNum">     229 </span><span class="lineCov">         16 :     totalRecords = 0;</span>
+<span class="lineNum">     230 </span>            : #endif
+<a name="231"><span class="lineNum">     231 </span><span class="lineCov">         56 : }</span></a>
+<span class="lineNum">     232 </span>            : 
+<span class="lineNum">     233 </span><span class="lineCov">         24 : EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select, EagleLoggerEvent **error)</span>
+<span class="lineNum">     234 </span>            : {
+<span class="lineNum">     235 </span><span class="lineCov">         24 :     EaglePlan *plan;</span>
+<span class="lineNum">     236 </span><span class="lineCov">         24 :     EagleBoolean success = EagleTrue;</span>
+<span class="lineNum">     237 </span>            :     
+<span class="lineNum">     238 </span><span class="lineCov">         24 :     plan = EagleDbSqlSelect_parse(select, db);</span>
+<span class="lineNum">     239 </span>            :     /*printf(&quot;%s\n&quot;, EaglePlan_toString(plan));*/
+<span class="lineNum">     240 </span>            :     
+<span class="lineNum">     241 </span>            :     /* catch compilation error */
+<span class="lineNum">     242 </span><span class="lineCov">         24 :     if(EagleTrue == EaglePlan_isError(plan)) {</span>
+<span class="lineNum">     243 </span><span class="lineCov">         16 :         *error = EagleLogger_Log(EagleLoggerSeverityUserError, plan-&gt;errorMessage);</span>
+<span class="lineNum">     244 </span><span class="lineCov">         16 :         success = EagleFalse;</span>
+<span class="lineNum">     245 </span><span class="lineCov">         16 :     }</span>
+<span class="lineNum">     246 </span>            :     else {
+<span class="lineNum">     247 </span>            :         /* execute */
+<span class="lineNum">     248 </span><span class="lineCov">          8 :         EagleInstance *eagle = EagleInstance_New(1);</span>
+<span class="lineNum">     249 </span><span class="lineCov">          8 :         EagleInstance_addPlan(eagle, plan);</span>
+<span class="lineNum">     250 </span><span class="lineCov">          8 :         EagleInstance_run(eagle);</span>
+<span class="lineNum">     251 </span>            :         
+<span class="lineNum">     252 </span>            :         /* print results */
+<span class="lineNum">     253 </span><span class="lineCov">          8 :         EagleDbInstance_PrintResults(plan);</span>
+<span class="lineNum">     254 </span><span class="lineCov">          8 :         EagleInstance_Delete(eagle);</span>
+<span class="lineNum">     255 </span>            :     }
+<span class="lineNum">     256 </span>            :     
+<span class="lineNum">     257 </span><span class="lineCov">         24 :     EaglePlan_Delete(plan);</span>
+<span class="lineNum">     258 </span><span class="lineCov">         24 :     return success;</span>
+<a name="259"><span class="lineNum">     259 </span>            : }</a>
+<span class="lineNum">     260 </span>            : 
+<span class="lineNum">     261 </span><span class="lineCov">         72 : EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert, EagleLoggerEvent **error)</span>
+<span class="lineNum">     262 </span>            : {
+<span class="lineNum">     263 </span><span class="lineCov">         72 :     char msg[1024];</span>
+<span class="lineNum">     264 </span><span class="lineCov">         72 :     EagleLinkedListItem *cursor;</span>
+<span class="lineNum">     265 </span><span class="lineCov">         72 :     int i, rowsInserted = 1;</span>
+<span class="lineNum">     266 </span><span class="lineCov">         72 :     EagleDbTuple *tuple;</span>
+<span class="lineNum">     267 </span>            :     
+<span class="lineNum">     268 </span>            :     /* make the table exists */
+<span class="lineNum">     269 </span><span class="lineCov">         72 :     EagleDbTableData *td = EagleDbInstance_getTable(db, insert-&gt;table);</span>
+<span class="lineNum">     270 </span><span class="lineCov">         72 :     if(NULL == td) {</span>
+<span class="lineNum">     271 </span><span class="lineCov">          8 :         sprintf(msg, &quot;No such table '%s'&quot;, insert-&gt;table);</span>
+<span class="lineNum">     272 </span><span class="lineCov">          8 :         *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     273 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     274 </span>            :     }
+<span class="lineNum">     275 </span>            :     
+<span class="lineNum">     276 </span>            :     /* make sure the number of columns match the number of values */
+<span class="lineNum">     277 </span><span class="lineCov">         64 :     if(EagleLinkedList_length(insert-&gt;names) != EagleLinkedList_length(insert-&gt;values)) {</span>
+<span class="lineNum">     278 </span><span class="lineCov">          8 :         sprintf(msg, &quot;There are %d columns and %d values&quot;, EagleLinkedList_length(insert-&gt;names),</span>
+<span class="lineNum">     279 </span>            :                 EagleLinkedList_length(insert-&gt;values));
+<span class="lineNum">     280 </span><span class="lineCov">          8 :         *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     281 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     282 </span>            :     }
+<span class="lineNum">     283 </span>            :     
+<span class="lineNum">     284 </span>            :     /* make sure all the columns exist */
+<span class="lineNum">     285 </span><span class="lineCov">        176 :     for(cursor = EagleLinkedList_begin(insert-&gt;names), i = 0; NULL != cursor; cursor = cursor-&gt;next, ++i) {</span>
+<span class="lineNum">     286 </span><span class="lineCov">         72 :         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) cursor-&gt;obj, *valueExpr;</span>
+<span class="lineNum">     287 </span><span class="lineCov">         72 :         EagleDbSqlValue *value;</span>
+<span class="lineNum">     288 </span><span class="lineCov">         72 :         EagleDbColumn *col;</span>
+<span class="lineNum">     289 </span>            :         
+<span class="lineNum">     290 </span>            :         /* they must be column names, expressions are not acceptable */
+<span class="lineNum">     291 </span><span class="lineCov">         72 :         if(EagleDbSqlExpressionTypeValue != expr-&gt;expressionType) {</span>
+<span class="lineNum">     292 </span><span class="lineCov">          8 :             *error = EagleLogger_Log(EagleLoggerSeverityUserError, &quot;You cannot use expressions for column names&quot;);</span>
+<span class="lineNum">     293 </span><span class="lineCov">          8 :             return EagleFalse;</span>
+<span class="lineNum">     294 </span>            :         }
+<span class="lineNum">     295 </span>            :         
+<span class="lineNum">     296 </span><span class="lineCov">         64 :         value = (EagleDbSqlValue*) expr;</span>
+<span class="lineNum">     297 </span><span class="lineCov">         64 :         if(EagleDbSqlValueTypeIdentifier != value-&gt;type) {</span>
+<span class="lineNum">     298 </span><span class="lineCov">          8 :             *error = EagleLogger_Log(EagleLoggerSeverityUserError, &quot;You cannot use expressions for column names&quot;);</span>
+<span class="lineNum">     299 </span><span class="lineCov">          8 :             return EagleFalse;</span>
+<span class="lineNum">     300 </span>            :         }
+<span class="lineNum">     301 </span>            :         
+<span class="lineNum">     302 </span>            :         /* column name exists in the table? */
+<span class="lineNum">     303 </span><span class="lineCov">         56 :         col = EagleDbTable_getColumnByName(td-&gt;table, value-&gt;value.identifier);</span>
+<span class="lineNum">     304 </span><span class="lineCov">         56 :         if(NULL == col) {</span>
+<span class="lineNum">     305 </span><span class="lineCov">          8 :             sprintf(msg, &quot;No such column '%s' in table '%s'&quot;, value-&gt;value.identifier, insert-&gt;table);</span>
+<span class="lineNum">     306 </span><span class="lineCov">          8 :             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     307 </span><span class="lineCov">          8 :             return EagleFalse;</span>
+<span class="lineNum">     308 </span>            :         }
+<span class="lineNum">     309 </span>            :         
+<span class="lineNum">     310 </span>            :         /* make sure the types are correct */
+<span class="lineNum">     311 </span><span class="lineCov">         48 :         valueExpr = (EagleDbSqlExpression*) EagleLinkedList_get(insert-&gt;values, i);</span>
+<span class="lineNum">     312 </span><span class="lineCov">         48 :         if(EagleDbSqlExpressionTypeValue != valueExpr-&gt;expressionType) {</span>
+<span class="lineNum">     313 </span><span class="lineCov">          8 :             sprintf(msg, &quot;Expressions in VALUES are not yet supported for column '%s'&quot;, col-&gt;name);</span>
+<span class="lineNum">     314 </span><span class="lineCov">          8 :             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     315 </span><span class="lineCov">          8 :             return EagleFalse;</span>
+<span class="lineNum">     316 </span>            :         }
+<span class="lineNum">     317 </span>            :         
+<span class="lineNum">     318 </span>            :         /* match data type */
+<span class="lineNum">     319 </span><span class="lineCov">         40 :         if(EagleFalse == EagleDbSqlValue_castable((EagleDbSqlValue*) valueExpr, col-&gt;type)) {</span>
+<span class="lineNum">     320 </span><span class="lineCov">          8 :             char *type1 = EagleDataType_typeToName(col-&gt;type);</span>
+<span class="lineNum">     321 </span><span class="lineCov">          8 :             char *type2 = EagleDbSqlValueType_toString(((EagleDbSqlValue*) valueExpr)-&gt;type);</span>
+<span class="lineNum">     322 </span>            :             
+<span class="lineNum">     323 </span><span class="lineCov">          8 :             sprintf(msg, &quot;Type for column %s is %s, but %s given.&quot;, col-&gt;name, type1, type2);</span>
+<span class="lineNum">     324 </span>            :             
+<span class="lineNum">     325 </span><span class="lineCov">          8 :             EagleMemory_Free(type1);</span>
+<span class="lineNum">     326 </span><span class="lineCov">          8 :             EagleMemory_Free(type2);</span>
+<span class="lineNum">     327 </span><span class="lineCov">          8 :             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     328 </span><span class="lineCov">          8 :             return EagleFalse;</span>
+<span class="lineNum">     329 </span>            :         }
+<span class="lineNum">     330 </span><span class="lineCov">         32 :     }</span>
+<span class="lineNum">     331 </span>            :     
+<span class="lineNum">     332 </span>            :     /* everything looks good, we can create the tuple now */
+<span class="lineNum">     333 </span><span class="lineCov">         16 :     tuple = EagleDbTuple_New(td-&gt;table);</span>
+<span class="lineNum">     334 </span>            :     
+<span class="lineNum">     335 </span><span class="lineCov">         96 :     for(cursor = EagleLinkedList_begin(insert-&gt;names), i = 0; NULL != cursor; cursor = cursor-&gt;next, ++i) {</span>
+<span class="lineNum">     336 </span><span class="lineCov">         32 :         char *colName = ((EagleDbSqlValue*) cursor-&gt;obj)-&gt;value.identifier;</span>
+<span class="lineNum">     337 </span><span class="lineCov">         32 :         EagleDbColumn *col;</span>
+<span class="lineNum">     338 </span><span class="lineCov">         32 :         int colIndex;</span>
+<span class="lineNum">     339 </span><span class="lineCov">         32 :         EagleDbSqlValue *v;</span>
+<span class="lineNum">     340 </span>            :         
+<span class="lineNum">     341 </span><span class="lineCov">         32 :         colIndex = EagleDbTable_getColumnIndex(td-&gt;table, colName);</span>
+<span class="lineNum">     342 </span><span class="lineCov">         32 :         col = EagleDbTable_getColumnByName(td-&gt;table, colName);</span>
+<span class="lineNum">     343 </span><span class="lineCov">         32 :         v = ((EagleDbSqlValue*) EagleLinkedList_get(insert-&gt;values, i));</span>
+<span class="lineNum">     344 </span>            :         
+<span class="lineNum">     345 </span><span class="lineCov">         32 :         EagleDbTuple_set(tuple, colIndex, v, col-&gt;type);</span>
+<span class="lineNum">     346 </span><span class="lineCov">         32 :     }</span>
+<span class="lineNum">     347 </span>            :     
+<span class="lineNum">     348 </span>            :     /* do the INSERT */
+<span class="lineNum">     349 </span><span class="lineCov">         16 :     EagleDbTableData_insert(td, tuple);</span>
+<span class="lineNum">     350 </span>            :     
+<span class="lineNum">     351 </span>            :     /* cleanup */
+<span class="lineNum">     352 </span><span class="lineCov">         16 :     EagleDbTuple_Delete(tuple);</span>
+<span class="lineNum">     353 </span>            :     
+<span class="lineNum">     354 </span>            : #ifndef CUNIT
+<span class="lineNum">     355 </span>            :     printf(&quot;%d row%s inserted\n\n&quot;, rowsInserted, (rowsInserted == 1 ? &quot;&quot; : &quot;s&quot;));
+<span class="lineNum">     356 </span>            : #else
+<span class="lineNum">     357 </span>            :     /* this is so the compiler does not complain about unused variable while in CUNIT */
+<span class="lineNum">     358 </span><span class="lineCov">         16 :     rowsInserted = 0;</span>
+<span class="lineNum">     359 </span>            : #endif
+<span class="lineNum">     360 </span>            :     
+<span class="lineNum">     361 </span><span class="lineCov">         16 :     return EagleTrue;</span>
+<a name="362"><span class="lineNum">     362 </span><span class="lineCov">         72 : }</span></a>
+<span class="lineNum">     363 </span>            : 
+<span class="lineNum">     364 </span><span class="lineCov">         72 : EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table, EagleLoggerEvent **error)</span>
+<span class="lineNum">     365 </span>            : {
+<span class="lineNum">     366 </span><span class="lineCov">         72 :     EagleBoolean success = EagleTrue;</span>
+<span class="lineNum">     367 </span><span class="lineCov">         72 :     char msg[1024];</span>
+<span class="lineNum">     368 </span><span class="lineCov">         72 :     EagleDbTableData *td;</span>
+<span class="lineNum">     369 </span><span class="lineCov">         72 :     EagleDbSchema *schema;</span>
+<span class="lineNum">     370 </span>            :     
+<span class="lineNum">     371 </span>            :     /* create the table data */
+<span class="lineNum">     372 </span><span class="lineCov">         72 :     td = EagleDbTableData_New(table, db-&gt;pageSize);</span>
+<span class="lineNum">     373 </span>            :     
+<span class="lineNum">     374 </span>            :     /* add table to default schema */
+<span class="lineNum">     375 </span><span class="lineCov">         72 :     schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     376 </span><span class="lineCov">         72 :     if(EagleTrue == EagleDbSchema_addTable(schema, td)) {</span>
+<span class="lineNum">     377 </span><span class="lineCov">         64 :         sprintf(msg, &quot;Table \&quot;%s.%s\&quot; created.&quot;, schema-&gt;name, table-&gt;name);</span>
+<span class="lineNum">     378 </span><span class="lineCov">         64 :         *error = EagleLogger_Log(EagleLoggerSeverityInfo, msg);</span>
+<span class="lineNum">     379 </span><span class="lineCov">         64 :     }</span>
+<span class="lineNum">     380 </span>            :     else {
+<span class="lineNum">     381 </span><span class="lineCov">          8 :         success = EagleFalse;</span>
+<span class="lineNum">     382 </span><span class="lineCov">          8 :         sprintf(msg, &quot;Table \&quot;%s.%s\&quot; already exists.&quot;, schema-&gt;name, table-&gt;name);</span>
+<span class="lineNum">     383 </span><span class="lineCov">          8 :         *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     384 </span>            :         
+<span class="lineNum">     385 </span>            :         /* clean up resources */
+<span class="lineNum">     386 </span><span class="lineCov">          8 :         EagleDbTable_DeleteWithColumns(table);</span>
+<span class="lineNum">     387 </span><span class="lineCov">          8 :         EagleDbTableData_Delete(td);</span>
+<span class="lineNum">     388 </span>            :     }
+<span class="lineNum">     389 </span>            :     
+<span class="lineNum">     390 </span>            : #ifndef CUNIT
+<span class="lineNum">     391 </span>            :     printf(&quot;%s\n\n&quot;, msg);
+<span class="lineNum">     392 </span>            : #endif
+<span class="lineNum">     393 </span>            :     
+<span class="lineNum">     394 </span><span class="lineCov">         72 :     return success;</span>
+<a name="395"><span class="lineNum">     395 </span>            : }</a>
+<span class="lineNum">     396 </span>            : 
+<span class="lineNum">     397 </span><span class="lineCov">        304 : EagleBoolean EagleDbInstance_executeParser(EagleDbInstance *db, struct EagleDbParser *p, EagleLoggerEvent **error)</span>
+<span class="lineNum">     398 </span>            : {
+<span class="lineNum">     399 </span><span class="lineCov">        304 :     EagleBoolean success = EagleTrue;</span>
+<span class="lineNum">     400 </span>            :     
+<span class="lineNum">     401 </span><span class="lineCov">        304 :     switch(p-&gt;yystatementtype) {</span>
+<span class="lineNum">     402 </span>            :             
+<span class="lineNum">     403 </span>            :         case EagleDbSqlStatementTypeNone:
+<span class="lineNum">     404 </span>            :             /* lets not consider this an error and ignore it */
+<span class="lineNum">     405 </span><span class="lineCov">          8 :             break;</span>
+<span class="lineNum">     406 </span>            :             
+<span class="lineNum">     407 </span>            :         case EagleDbSqlStatementTypeSelect:
+<span class="lineNum">     408 </span><span class="lineCov">          8 :             success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p-&gt;yyparse_ast, error);</span>
+<span class="lineNum">     409 </span><span class="lineCov">          8 :             EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p-&gt;yyparse_ast);</span>
+<span class="lineNum">     410 </span><span class="lineCov">          8 :             break;</span>
+<span class="lineNum">     411 </span>            :             
+<span class="lineNum">     412 </span>            :         case EagleDbSqlStatementTypeCreateTable:
+<span class="lineNum">     413 </span><span class="lineCov">         64 :             success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p-&gt;yyparse_ast, error);</span>
+<span class="lineNum">     414 </span><span class="lineCov">         64 :             break;</span>
+<span class="lineNum">     415 </span>            :             
+<span class="lineNum">     416 </span>            :         case EagleDbSqlStatementTypeInsert:
+<span class="lineNum">     417 </span><span class="lineCov">         72 :             success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p-&gt;yyparse_ast, error);</span>
+<span class="lineNum">     418 </span><span class="lineCov">         72 :             EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p-&gt;yyparse_ast);</span>
+<span class="lineNum">     419 </span><span class="lineCov">         72 :             break;</span>
+<span class="lineNum">     420 </span>            :             
+<span class="lineNum">     421 </span>            :     }
+<span class="lineNum">     422 </span>            :     
+<span class="lineNum">     423 </span><span class="lineCov">        152 :     return success;</span>
+<a name="424"><span class="lineNum">     424 </span>            : }</a>
+<span class="lineNum">     425 </span>            : 
+<span class="lineNum">     426 </span><span class="lineCov">        192 : EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error)</span>
+<span class="lineNum">     427 </span>            : {
+<span class="lineNum">     428 </span><span class="lineCov">        192 :     EagleDbParser *p;</span>
+<span class="lineNum">     429 </span><span class="lineCov">        192 :     EagleBoolean success = EagleTrue;</span>
+<span class="lineNum">     430 </span>            :     
+<span class="lineNum">     431 </span>            :     /* parse sql */
+<span class="lineNum">     432 </span><span class="lineCov">        192 :     p = EagleDbParser_ParseWithString(sql);</span>
+<span class="lineNum">     433 </span>            :     
+<span class="lineNum">     434 </span>            :     /* check for errors */
+<span class="lineNum">     435 </span><span class="lineCov">        192 :     if(EagleTrue == EagleDbParser_hasError(p)) {</span>
+<span class="lineNum">     436 </span><span class="lineCov">         48 :         char msg[1024];</span>
+<span class="lineNum">     437 </span><span class="lineCov">         48 :         sprintf(msg, &quot;Error: %s&quot;, EagleDbParser_lastError(p));</span>
+<span class="lineNum">     438 </span><span class="lineCov">         48 :         *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     439 </span><span class="lineCov">         48 :         success = EagleFalse;</span>
+<span class="lineNum">     440 </span><span class="lineCov">         48 :     }</span>
+<span class="lineNum">     441 </span>            :     else {
+<span class="lineNum">     442 </span><span class="lineCov">        144 :         success = EagleDbInstance_executeParser(db, p, error);</span>
+<span class="lineNum">     443 </span>            :     }
+<span class="lineNum">     444 </span>            :     
+<span class="lineNum">     445 </span>            :     /* clean up */
+<span class="lineNum">     446 </span><span class="lineCov">        192 :     EagleDbParser_Delete(p);</span>
+<span class="lineNum">     447 </span>            :     
+<span class="lineNum">     448 </span><span class="lineCov">        192 :     return success;</span>
+<a name="449"><span class="lineNum">     449 </span>            : }</a>
+<span class="lineNum">     450 </span>            : 
+<span class="lineNum">     451 </span><span class="lineCov">        224 : void EagleDbInstance_Delete(EagleDbInstance *db)</span>
+<span class="lineNum">     452 </span>            : {
+<span class="lineNum">     453 </span><span class="lineCov">        224 :     if(NULL == db) {</span>
+<span class="lineNum">     454 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">     455 </span>            :     }
+<span class="lineNum">     456 </span>            :     
+<span class="lineNum">     457 </span>            :     {
+<span class="lineNum">     458 </span>            :         /* always clean up the information schema */
+<span class="lineNum">     459 </span><span class="lineCov">        216 :         EagleDbInformationSchema_Cleanup(db);</span>
+<span class="lineNum">     460 </span>            :         
+<span class="lineNum">     461 </span><span class="lineCov">       1776 :         EagleLinkedList_Foreach(db-&gt;schemas, EagleDbSchema*, schema)</span>
+<span class="lineNum">     462 </span>            :         {
+<span class="lineNum">     463 </span><span class="lineCov">        448 :             if(0 == strcmp(schema-&gt;name, EagleDbSchema_DefaultSchemaName) ||</span>
+<span class="lineNum">     464 </span><span class="lineCov">        232 :                0 == strcmp(schema-&gt;name, EagleDbSchema_InformationSchemaName)) {</span>
+<span class="lineNum">     465 </span><span class="lineCov">        432 :                 EagleDbSchema_Delete(schema);</span>
+<span class="lineNum">     466 </span><span class="lineCov">        432 :             }</span>
+<span class="lineNum">     467 </span>            :         }
+<span class="lineNum">     468 </span><span class="lineCov">        448 :         EagleLinkedList_ForeachEnd</span>
+<span class="lineNum">     469 </span>            :         
+<span class="lineNum">     470 </span><span class="lineCov">        216 :         EagleLinkedList_DeleteWithItems(db-&gt;schemas);</span>
+<span class="lineNum">     471 </span><span class="lineCov">        216 :         EagleMemory_Free(db);</span>
+<span class="lineNum">     472 </span>            :         
+<span class="lineNum">     473 </span>            :         /* clean up logger */
+<span class="lineNum">     474 </span><span class="lineCov">        216 :         EagleLogger_reset(EagleLogger_Get());</span>
+<span class="lineNum">     475 </span>            :     }
+<a name="476"><span class="lineNum">     476 </span><span class="lineCov">        440 : }</span></a>
+<span class="lineNum">     477 </span>            : 
+<span class="lineNum">     478 </span><span class="lineCov">         40 : void EagleDbInstance_DeleteAll(EagleDbInstance *db)</span>
+<span class="lineNum">     479 </span>            : {
+<span class="lineNum">     480 </span><span class="lineCov">         40 :     if(NULL == db) {</span>
+<span class="lineNum">     481 </span><span class="lineCov">          8 :         return;</span>
+<span class="lineNum">     482 </span>            :     }
+<span class="lineNum">     483 </span>            :     
+<span class="lineNum">     484 </span>            :     {
+<span class="lineNum">     485 </span>            :         /* always clean up the information schema */
+<span class="lineNum">     486 </span><span class="lineCov">         32 :         EagleDbInformationSchema_Cleanup(db);</span>
+<span class="lineNum">     487 </span>            :         
+<span class="lineNum">     488 </span><span class="lineCov">        256 :         EagleLinkedList_Foreach(db-&gt;schemas, EagleDbSchema*, schema)</span>
+<span class="lineNum">     489 </span>            :         {
+<span class="lineNum">     490 </span><span class="lineCov">        200 :             EagleLinkedList_Foreach(schema-&gt;tables, EagleDbTableData*, table)</span>
+<span class="lineNum">     491 </span>            :             {
+<span class="lineNum">     492 </span><span class="lineCov">         24 :                 EagleDbTable_DeleteWithColumns(table-&gt;table);</span>
+<span class="lineNum">     493 </span><span class="lineCov">         24 :                 EagleDbTableData_Delete(table);</span>
+<span class="lineNum">     494 </span>            :             }
+<span class="lineNum">     495 </span><span class="lineCov">         24 :             EagleLinkedList_ForeachEnd</span>
+<span class="lineNum">     496 </span>            :             
+<span class="lineNum">     497 </span><span class="lineCov">         64 :             EagleDbSchema_Delete(schema);</span>
+<span class="lineNum">     498 </span>            :         }
+<span class="lineNum">     499 </span><span class="lineCov">         64 :         EagleLinkedList_ForeachEnd</span>
+<span class="lineNum">     500 </span>            :         
+<span class="lineNum">     501 </span><span class="lineCov">         32 :         EagleLinkedList_DeleteWithItems(db-&gt;schemas);</span>
+<span class="lineNum">     502 </span><span class="lineCov">         32 :         EagleMemory_Free(db);</span>
+<span class="lineNum">     503 </span>            :         
+<span class="lineNum">     504 </span>            :         /* clean up logger */
+<span class="lineNum">     505 </span><span class="lineCov">         32 :         EagleLogger_reset(EagleLogger_Get());</span>
+<span class="lineNum">     506 </span>            :     }
+<a name="507"><span class="lineNum">     507 </span><span class="lineCov">         72 : }</span></a>
+<span class="lineNum">     508 </span>            : 
+<span class="lineNum">     509 </span><span class="lineCov">       1144 : EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)</span>
+<span class="lineNum">     510 </span>            : {
+<span class="lineNum">     511 </span><span class="lineCov">       1144 :     EagleDbSchema *schema;</span>
+<span class="lineNum">     512 </span>            :     
+<span class="lineNum">     513 </span><span class="lineCov">       1144 :     if(NULL == tableName) {</span>
+<span class="lineNum">     514 </span><span class="lineCov">          8 :         return NULL;</span>
+<span class="lineNum">     515 </span>            :     }
+<span class="lineNum">     516 </span>            :     
+<span class="lineNum">     517 </span><span class="lineCov">       1136 :     schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);</span>
+<span class="lineNum">     518 </span><span class="lineCov">       1136 :     if(NULL != schema) {</span>
+<span class="lineNum">     519 </span><span class="lineCov">       6848 :         EagleLinkedList_Foreach(schema-&gt;tables, EagleDbTableData*, table)</span>
+<span class="lineNum">     520 </span>            :         {
+<span class="lineNum">     521 </span><span class="lineCov">       2256 :             if(0 == strcmp(tableName, table-&gt;table-&gt;name)) {</span>
+<span class="lineNum">     522 </span><span class="lineCov">       1096 :                 return table;</span>
+<span class="lineNum">     523 </span>            :             }
+<span class="lineNum">     524 </span>            :         }
+<span class="lineNum">     525 </span><span class="lineCov">       1160 :         EagleLinkedList_ForeachEnd</span>
+<span class="lineNum">     526 </span><span class="lineCov">         40 :     }</span>
+<span class="lineNum">     527 </span>            :     
+<span class="lineNum">     528 </span><span class="lineCov">         40 :     return NULL;</span>
+<a name="529"><span class="lineNum">     529 </span><span class="lineCov">       1144 : }</span></a>
+<span class="lineNum">     530 </span>            : 
+<span class="lineNum">     531 </span><span class="lineCov">       2264 : EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schemaName)</span>
+<span class="lineNum">     532 </span>            : {
+<span class="lineNum">     533 </span><span class="lineCov">       7304 :     EagleLinkedList_Foreach(db-&gt;schemas, EagleDbSchema*, schema)</span>
+<span class="lineNum">     534 </span>            :     {
+<span class="lineNum">     535 </span><span class="lineCov">       2088 :         if(0 == strcmp(schemaName, schema-&gt;name)) {</span>
+<span class="lineNum">     536 </span><span class="lineCov">       1744 :             return schema;</span>
+<span class="lineNum">     537 </span>            :         }
+<span class="lineNum">     538 </span>            :     }
+<span class="lineNum">     539 </span><span class="lineCov">        344 :     EagleLinkedList_ForeachEnd</span>
+<span class="lineNum">     540 </span>            :     
+<span class="lineNum">     541 </span><span class="lineCov">        520 :     return NULL;</span>
+<a name="542"><span class="lineNum">     542 </span><span class="lineCov">       2264 : }</span></a>
+<span class="lineNum">     543 </span>            : 
+<span class="lineNum">     544 </span><span class="lineCov">        520 : EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema)</span>
+<span class="lineNum">     545 </span>            : {
+<span class="lineNum">     546 </span>            :     /* check if the schema exists */
+<span class="lineNum">     547 </span><span class="lineCov">        520 :     if(NULL != EagleDbInstance_getSchema(db, schema-&gt;name)) {</span>
+<span class="lineNum">     548 </span><span class="lineCov">          8 :         char msg[1024];</span>
+<span class="lineNum">     549 </span><span class="lineCov">          8 :         sprintf(msg, &quot;Error: Schema \&quot;%s\&quot; already exists.&quot;, schema-&gt;name);</span>
+<span class="lineNum">     550 </span><span class="lineCov">          8 :         EagleLogger_Log(EagleLoggerSeverityUserError, msg);</span>
+<span class="lineNum">     551 </span><span class="lineCov">          8 :         return EagleFalse;</span>
+<span class="lineNum">     552 </span>            :     }
+<span class="lineNum">     553 </span>            :     
+<span class="lineNum">     554 </span><span class="lineCov">        512 :     EagleLinkedList_addObject(db-&gt;schemas, schema, EagleFalse, NULL);</span>
+<span class="lineNum">     555 </span>            :     
+<span class="lineNum">     556 </span><span class="lineCov">        512 :     return EagleTrue;</span>
+<span class="lineNum">     557 </span><span class="lineCov">        520 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

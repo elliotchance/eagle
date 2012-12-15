@@ -1,0 +1,767 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_information_schema_8c" kind="file">
+    <compoundname>EagleDbInformationSchema.c</compoundname>
+    <includes local="no">string.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes refid="_eagle_db_information_schema_8c" local="yes">EagleDbInformationSchema.h</includes>
+    <includes refid="_eagle_page_provider_virtual_8h" local="yes">EaglePageProviderVirtual.h</includes>
+    <includes refid="_eagle_boolean_8h" local="yes">EagleBoolean.h</includes>
+    <includes refid="_eagle_db_schema_8h" local="yes">EagleDbSchema.h</includes>
+    <includes refid="_eagle_db_instance_8h" local="yes">EagleDbInstance.h</includes>
+    <includes refid="_eagle_db_table_8h" local="yes">EagleDbTable.h</includes>
+    <includes refid="_eagle_db_table_data_8h" local="yes">EagleDbTableData.h</includes>
+    <includes refid="_eagle_memory_8h" local="yes">EagleMemory.h</includes>
+    <includes refid="_eagle_logger_8h" local="yes">EagleLogger.h</includes>
+    <includedby refid="_eagle_db_information_schema_8c" local="yes">eagle/eagledb/EagleDbInformationSchema.c</includedby>
+    <incdepgraph>
+      <node id="1890">
+        <label>EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="1889" relation="include">
+        </childnode>
+        <childnode refid="1888" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1891" relation="include">
+        </childnode>
+      </node>
+      <node id="1903">
+        <label>EagleDbSqlExpression.h</label>
+        <link refid="_eagle_db_sql_expression_8h"/>
+        <childnode refid="1896" relation="include">
+        </childnode>
+        <childnode refid="1892" relation="include">
+        </childnode>
+      </node>
+      <node id="1904">
+        <label>EagleDbSqlInsert.h</label>
+        <link refid="_eagle_db_sql_insert_8h"/>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+      </node>
+      <node id="1887">
+        <label>EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="1888" relation="include">
+        </childnode>
+        <childnode refid="1878" relation="include">
+        </childnode>
+        <childnode refid="1890" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+      </node>
+      <node id="1902">
+        <label>EagleDbSqlSelect.h</label>
+        <link refid="_eagle_db_sql_select_8h"/>
+        <childnode refid="1903" relation="include">
+        </childnode>
+        <childnode refid="1891" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+      </node>
+      <node id="1909">
+        <label>EagleLogger.h</label>
+        <link refid="_eagle_logger_8h"/>
+        <childnode refid="1871" relation="include">
+        </childnode>
+        <childnode refid="1881" relation="include">
+        </childnode>
+        <childnode refid="1880" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1905" relation="include">
+        </childnode>
+      </node>
+      <node id="1893">
+        <label>EagleDbSqlExpressionType.h</label>
+        <link refid="_eagle_db_sql_expression_type_8h"/>
+      </node>
+      <node id="1886">
+        <label>EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="1887" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+      </node>
+      <node id="1895">
+        <label>EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="1886" relation="include">
+        </childnode>
+        <childnode refid="1896" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1901" relation="include">
+        </childnode>
+        <childnode refid="1902" relation="include">
+        </childnode>
+        <childnode refid="1904" relation="include">
+        </childnode>
+        <childnode refid="1905" relation="include">
+        </childnode>
+      </node>
+      <node id="1869">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="EagleDbInformationSchema.c"/>
+        <childnode refid="1870" relation="include">
+        </childnode>
+        <childnode refid="1871" relation="include">
+        </childnode>
+        <childnode refid="1869" relation="include">
+        </childnode>
+        <childnode refid="1872" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1886" relation="include">
+        </childnode>
+        <childnode refid="1895" relation="include">
+        </childnode>
+        <childnode refid="1888" relation="include">
+        </childnode>
+        <childnode refid="1887" relation="include">
+        </childnode>
+        <childnode refid="1908" relation="include">
+        </childnode>
+        <childnode refid="1909" relation="include">
+        </childnode>
+      </node>
+      <node id="1883">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1880" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1884" relation="include">
+        </childnode>
+      </node>
+      <node id="1898">
+        <label>EaglePlanOperation.h</label>
+        <link refid="_eagle_plan_operation_8h"/>
+        <childnode refid="1897" relation="include">
+        </childnode>
+        <childnode refid="1878" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1891" relation="include">
+        </childnode>
+      </node>
+      <node id="1897">
+        <label>EaglePageOperations.h</label>
+        <link refid="_eagle_page_operations_8h"/>
+        <childnode refid="1875" relation="include">
+        </childnode>
+        <childnode refid="1878" relation="include">
+        </childnode>
+      </node>
+      <node id="1881">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1894">
+        <label>EagleDbSqlValueType.h</label>
+        <link refid="_eagle_db_sql_value_type_8h"/>
+      </node>
+      <node id="1880">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1881" relation="include">
+        </childnode>
+        <childnode refid="1882" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+      </node>
+      <node id="1879">
+        <label>pthread.h</label>
+      </node>
+      <node id="1870">
+        <label>string.h</label>
+      </node>
+      <node id="1885">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1876">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1873" relation="include">
+        </childnode>
+      </node>
+      <node id="1899">
+        <label>EaglePlanBufferProvider.h</label>
+        <link refid="_eagle_plan_buffer_provider_8h"/>
+        <childnode refid="1878" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1891" relation="include">
+        </childnode>
+      </node>
+      <node id="1873">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1874">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1905">
+        <label>EagleLoggerEvent.h</label>
+        <link refid="_eagle_logger_event_8h"/>
+        <childnode refid="1906" relation="include">
+        </childnode>
+        <childnode refid="1907" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+      </node>
+      <node id="1877">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1906">
+        <label>time.h</label>
+      </node>
+      <node id="1892">
+        <label>EagleDbSqlExpressionHeader.h</label>
+        <link refid="_eagle_db_sql_expression_header_8h"/>
+        <childnode refid="1893" relation="include">
+        </childnode>
+      </node>
+      <node id="1900">
+        <label>EaglePlanError.h</label>
+        <link refid="_eagle_plan_error_8h"/>
+      </node>
+      <node id="1889">
+        <label>EagleDbColumn.h</label>
+        <link refid="_eagle_db_column_8h"/>
+        <childnode refid="1876" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+      </node>
+      <node id="1908">
+        <label>EagleMemory.h</label>
+        <link refid="_eagle_memory_8h"/>
+      </node>
+      <node id="1875">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1876" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+      </node>
+      <node id="1872">
+        <label>EaglePageProviderVirtual.h</label>
+        <link refid="_eagle_page_provider_virtual_8h"/>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1875" relation="include">
+        </childnode>
+        <childnode refid="1878" relation="include">
+        </childnode>
+      </node>
+      <node id="1901">
+        <label>EagleDbSqlStatementType.h</label>
+        <link refid="_eagle_db_sql_statement_type_8h"/>
+      </node>
+      <node id="1891">
+        <label>EagleDbSqlValue.h</label>
+        <link refid="_eagle_db_sql_value_8h"/>
+        <childnode refid="1892" relation="include">
+        </childnode>
+        <childnode refid="1894" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+      </node>
+      <node id="1896">
+        <label>EaglePlan.h</label>
+        <link refid="_eagle_plan_8h"/>
+        <childnode refid="1881" relation="include">
+        </childnode>
+        <childnode refid="1897" relation="include">
+        </childnode>
+        <childnode refid="1898" relation="include">
+        </childnode>
+        <childnode refid="1899" relation="include">
+        </childnode>
+        <childnode refid="1900" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+      </node>
+      <node id="1888">
+        <label>EagleDbTable.h</label>
+        <link refid="_eagle_db_table_8h"/>
+        <childnode refid="1889" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+      </node>
+      <node id="1871">
+        <label>stdio.h</label>
+      </node>
+      <node id="1907">
+        <label>EagleLoggerSeverity.h</label>
+        <link refid="_eagle_logger_severity_8h"/>
+      </node>
+      <node id="1878">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1879" relation="include">
+        </childnode>
+        <childnode refid="1875" relation="include">
+        </childnode>
+        <childnode refid="1880" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+        <childnode refid="1883" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1873" relation="include">
+        </childnode>
+        <childnode refid="1885" relation="include">
+        </childnode>
+      </node>
+      <node id="1882">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1879" relation="include">
+        </childnode>
+        <childnode refid="1877" relation="include">
+        </childnode>
+      </node>
+      <node id="1884">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1877" relation="include">
+        </childnode>
+        <childnode refid="1874" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1910">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="EagleDbInformationSchema.c"/>
+        <childnode refid="1910" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1ab6f163e3a5b32f5b0b360ab0022163ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInformationSchema_Cleanup</definition>
+        <argsstring>(EagleDbInstance *db)</argsstring>
+        <name>EagleDbInformationSchema_Cleanup</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <briefdescription>
+<para>Remove/free the virtual tables. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="131" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="130" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1ab1e5ee099c2b354cd267619572f2c6c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInformationSchema_Delete</definition>
+        <argsstring>(EagleDbInformationSchema *infoSchema)</argsstring>
+        <name>EagleDbInformationSchema_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+          <declname>infoSchema</declname>
+        </param>
+        <briefdescription>
+<para>Free a <ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">infoSchema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="121" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="120" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1ab0cbfd0be6522fd875a758f08d0fd5e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInformationSchema_Init</definition>
+        <argsstring>(EagleDbInstance *db, EagleDbSchema *schema)</argsstring>
+        <name>EagleDbInformationSchema_Init</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_schema" kindref="compound">EagleDbSchema</ref> *</type>
+          <declname>schema</declname>
+        </param>
+        <briefdescription>
+<para>Initialise the virtual tables for the information_schema. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">schema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Schema to load virtual tables into. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="24" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="23" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1a28b03d059bfbdde93f2ebf20665f794f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+        <definition>EagleDbInformationSchema* EagleDbInformationSchema_New</definition>
+        <argsstring>(EagleDbInstance *db, char *columnName)</argsstring>
+        <name>EagleDbInformationSchema_New</name>
+        <param>
+          <type><ref refid="struct_eagle_db_instance" kindref="compound">EagleDbInstance</ref> *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>columnName</declname>
+        </param>
+        <briefdescription>
+<para>Create a new <ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">columnName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The column name. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new object. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="10" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1a4471aa574e46f4de6ba723c28f04df66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInformationSchema_tables_free</definition>
+        <argsstring>(EagleDbInformationSchema *infoSchema)</argsstring>
+        <name>EagleDbInformationSchema_tables_free</name>
+        <param>
+          <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+          <declname>infoSchema</declname>
+        </param>
+        <briefdescription>
+<para>Free. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">infoSchema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="63" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1a995a519d31787861e2a8eb8a42604a88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EagleDbInformationSchema_tables_nextPage</definition>
+        <argsstring>(EagleDbInformationSchema *infoSchema)</argsstring>
+        <name>EagleDbInformationSchema_tables_nextPage</name>
+        <param>
+          <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+          <declname>infoSchema</declname>
+        </param>
+        <briefdescription>
+<para>Return the next page. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">infoSchema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The next page. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="75" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="74" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1ad2c58ff3f00889da6123a5b4bca7fc45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleDbInformationSchema_tables_pagesRemaining</definition>
+        <argsstring>(EagleDbInformationSchema *infoSchema)</argsstring>
+        <name>EagleDbInformationSchema_tables_pagesRemaining</name>
+        <param>
+          <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+          <declname>infoSchema</declname>
+        </param>
+        <briefdescription>
+<para>The number of pages remaining. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">infoSchema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of pages remaining. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="68" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="67" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_information_schema_8c_1a80cce2f072a1ff94dbf85779021af3f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbInformationSchema_tables_reset</definition>
+        <argsstring>(EagleDbInformationSchema *infoSchema)</argsstring>
+        <name>EagleDbInformationSchema_tables_reset</name>
+        <param>
+          <type><ref refid="struct_eagle_db_information_schema" kindref="compound">EagleDbInformationSchema</ref> *</type>
+          <declname>infoSchema</declname>
+        </param>
+        <briefdescription>
+<para>Reset the cursor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">infoSchema</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information schema. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" line="116" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c" bodystart="115" bodyend="118"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_information_schema_8h" kindref="compound">EagleDbInformationSchema.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_table_8h" kindref="compound">EagleDbTable.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_table_data_8h" kindref="compound">EagleDbTableData.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_virtual_8h" kindref="compound">EaglePageProviderVirtual.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_memory_8h" kindref="compound">EagleMemory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_logger_8h" kindref="compound">EagleLogger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="_eagle_db_information_schema_8h_1a28b03d059bfbdde93f2ebf20665f794f" refkind="member"><highlight class="normal"><ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref>*<sp/><ref refid="_eagle_db_information_schema_8c_1a28b03d059bfbdde93f2ebf20665f794f" kindref="member" tooltip="Create a new EagleDbInformationSchema object.">EagleDbInformationSchema_New</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*columnName)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema<sp/>=<sp/>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref>*)<sp/><ref refid="_eagle_memory_8c_1a21ad14d6772cd800661d5f2a29d18d2b" kindref="member" tooltip="Allocate a single block of memory.">EagleMemory_Allocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbInformationSchema_New.1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref>));</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>infoSchema)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a5addcb892ed34af21cd464297c62b624" kindref="member" tooltip="The DB instance.">db</ref><sp/>=<sp/>db;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a81ba855aed396a13a8b7c26b0afe1c88" kindref="member" tooltip="The column (field) name.">columnName</ref><sp/>=<sp/>(NULL<sp/>==<sp/>columnName<sp/>?<sp/>NULL<sp/>:<sp/>strdup(columnName));</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>infoSchema;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="_eagle_db_information_schema_8h_1ab0cbfd0be6522fd875a758f08d0fd5e0" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1ab0cbfd0be6522fd875a758f08d0fd5e0" kindref="member" tooltip="Initialise the virtual tables for the information_schema.">EagleDbInformationSchema_Init</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*obj;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref><sp/>*td;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>table<sp/>definition<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>table<sp/>=<sp/><ref refid="_eagle_db_table_8c_1adb2808cc5f8774012ca1195ac2b51c6f" kindref="member" tooltip="Create a new table definition.">EagleDbTable_New</ref>(</highlight><highlight class="stringliteral">&quot;information_schema_tables&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_8c_1abb4a43bac4773450c1777953a2544d9d" kindref="member" tooltip="Add a column to the definition of a table.">EagleDbTable_addColumn</ref>(table,<sp/><ref refid="_eagle_db_column_8c_1ab28cf830be834c634747a83410a9d852" kindref="member" tooltip="Create a new table column.">EagleDbColumn_New</ref>(</highlight><highlight class="stringliteral">&quot;table_schema&quot;</highlight><highlight class="normal">,<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>));</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_8c_1abb4a43bac4773450c1777953a2544d9d" kindref="member" tooltip="Add a column to the definition of a table.">EagleDbTable_addColumn</ref>(table,<sp/><ref refid="_eagle_db_column_8c_1ab28cf830be834c634747a83410a9d852" kindref="member" tooltip="Create a new table column.">EagleDbColumn_New</ref>(</highlight><highlight class="stringliteral">&quot;table_name&quot;</highlight><highlight class="normal">,<sp/><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>));</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>replace<sp/>the<sp/>stream<sp/>providers<sp/>with<sp/>virtual<sp/>providers<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>td<sp/>=<sp/><ref refid="_eagle_db_table_data_8c_1a6dfb3391f88afb02e8ecc6557b36e57f" kindref="member" tooltip="Create a new table data instance.">EagleDbTableData_New</ref>(table,<sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>td-&gt;<ref refid="struct_eagle_db_table_data_1a1b8a85e4ccd7e5ddcd33d360031c7f1d" kindref="member" tooltip="The number of used providers.">usedProviders</ref>;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page_provider" kindref="compound" tooltip="A page provider.">EaglePageProvider</ref><sp/>*temp<sp/>=<sp/>td-&gt;<ref refid="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" kindref="member" tooltip="Providers for each column.">providers</ref>[i];</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>information<sp/>schema<sp/>object<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>obj<sp/>=<sp/><ref refid="_eagle_db_information_schema_8c_1a28b03d059bfbdde93f2ebf20665f794f" kindref="member" tooltip="Create a new EagleDbInformationSchema object.">EagleDbInformationSchema_New</ref>(db,<sp/>temp-&gt;name);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>td-&gt;<ref refid="struct_eagle_db_table_data_1a47d213040a05a8cedeb1c4f7ca733556" kindref="member" tooltip="Providers for each column.">providers</ref>[i]<sp/>=<sp/>(<ref refid="struct_eagle_page_provider" kindref="compound" tooltip="A page provider.">EaglePageProvider</ref>*)<sp/><ref refid="_eagle_page_provider_virtual_8c_1a1eaae0d2cf9987a858ee6e39db296680" kindref="member" tooltip="Create a new writable page provider with zero records.">EaglePageProviderVirtual_New</ref>(</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>db-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp-&gt;name,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp-&gt;type,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>obj,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(void<sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*))<sp/><ref refid="_eagle_db_information_schema_8c_1a4471aa574e46f4de6ba723c28f04df66" kindref="member" tooltip="Free.">EagleDbInformationSchema_tables_free</ref>,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NULL,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(int<sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*))<sp/><ref refid="_eagle_db_information_schema_8c_1ad2c58ff3f00889da6123a5b4bca7fc45" kindref="member" tooltip="The number of pages remaining.">EagleDbInformationSchema_tables_pagesRemaining</ref>,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(<ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*))<sp/><ref refid="_eagle_db_information_schema_8c_1a995a519d31787861e2a8eb8a42604a88" kindref="member" tooltip="Return the next page.">EagleDbInformationSchema_tables_nextPage</ref>,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(void<sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*))<sp/><ref refid="_eagle_db_information_schema_8c_1a80cce2f072a1ff94dbf85779021af3f3" kindref="member" tooltip="Reset the cursor.">EagleDbInformationSchema_tables_reset</ref>,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NULL</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_page_provider_8c_1a28ab9a84c6a2c8cc78757b95d24af9a4" kindref="member" tooltip="Delete a provider.">EaglePageProvider_Delete</ref>(temp);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_schema_8c_1a62f7ae1445055123302f56f404b7b562" kindref="member">EagleDbSchema_addTable</ref>(schema,<sp/>td);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_eagle_db_information_schema_8h_1a4471aa574e46f4de6ba723c28f04df66" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1a4471aa574e46f4de6ba723c28f04df66" kindref="member" tooltip="Free.">EagleDbInformationSchema_tables_free</ref>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema)</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_information_schema_8c_1ab1e5ee099c2b354cd267619572f2c6c8" kindref="member" tooltip="Free a EagleDbInformationSchema.">EagleDbInformationSchema_Delete</ref>(infoSchema);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="_eagle_db_information_schema_8h_1ad2c58ff3f00889da6123a5b4bca7fc45" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1ad2c58ff3f00889da6123a5b4bca7fc45" kindref="member" tooltip="The number of pages remaining.">EagleDbInformationSchema_tables_pagesRemaining</ref>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*schema<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a5addcb892ed34af21cd464297c62b624" kindref="member" tooltip="The DB instance.">db</ref>,<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalTables<sp/>=<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(schema-&gt;<ref refid="struct_eagle_db_schema_1a8da53e8ff5dab8b7f11051627ba3e085" kindref="member" tooltip="This is semi managed because the linked list that contains the pointers to the tables...">tables</ref>);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_8c_1a4807f7e4df6b3ff566caa253a073a702" kindref="member" tooltip="Calculate the amount of pages required to serve a given amount of records.">EaglePageProvider_TotalPages</ref>(totalTables<sp/>-<sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="Record offset.">recordOffset</ref>,<sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a5addcb892ed34af21cd464297c62b624" kindref="member" tooltip="The DB instance.">db</ref>-&gt;<ref refid="struct_eagle_db_instance_1a0f8fcbb2d8136c7d33c2e72f3642d6f2" kindref="member" tooltip="The page size to be provided to EaglePlan.">pageSize</ref>);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="_eagle_db_information_schema_8h_1a995a519d31787861e2a8eb8a42604a88" refkind="member"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_db_information_schema_8c_1a995a519d31787861e2a8eb8a42604a88" kindref="member" tooltip="Return the next page.">EagleDbInformationSchema_tables_nextPage</ref>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref><sp/>*page;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**data;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>totalTables<sp/>=<sp/>0,<sp/>tableCount<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>count<sp/>all<sp/>tables<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a5addcb892ed34af21cd464297c62b624" kindref="member" tooltip="The DB instance.">db</ref>-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*,<sp/>schema)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>totalTables<sp/>+=<sp/><ref refid="_eagle_linked_list_8c_1a4ab41e3b8b0143afca919b824799f119" kindref="member" tooltip="The number of items in the list.">EagleLinkedList_length</ref>(schema-&gt;tables);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>data<sp/>=<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**)<sp/><ref refid="_eagle_memory_8c_1ae5491d67ddaa1386224a414a5e944a6a" kindref="member" tooltip="Allocate a single block to support an array.">EagleMemory_MultiAllocate</ref>(</highlight><highlight class="stringliteral">&quot;EagleDbInformationSchema_tables_nextPage.1&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">)<sp/>totalTables,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*));</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NULL;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a5addcb892ed34af21cd464297c62b624" kindref="member" tooltip="The DB instance.">db</ref>-&gt;<ref refid="struct_eagle_db_instance_1ac8251c7edd0a3d61ab783ca8eeca3b90" kindref="member" tooltip="Contains the pointers to the individual schemas.">schemas</ref>,<sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref>*,<sp/>schema)</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a3a810389ad0cc624dc492e57febee224" kindref="member" tooltip="Iterate through a linked list.">EagleLinkedList_Foreach</ref>(schema-&gt;tables,<sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref>*,<sp/>td)</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(</highlight><highlight class="stringliteral">&quot;table_schema&quot;</highlight><highlight class="normal">,<sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a81ba855aed396a13a8b7c26b0afe1c88" kindref="member" tooltip="The column (field) name.">columnName</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data[tableCount]<sp/>=<sp/>strdup(schema-&gt;name);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(0<sp/>==<sp/>strcmp(</highlight><highlight class="stringliteral">&quot;table_name&quot;</highlight><highlight class="normal">,<sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a81ba855aed396a13a8b7c26b0afe1c88" kindref="member" tooltip="The column (field) name.">columnName</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data[tableCount]<sp/>=<sp/>strdup(td-&gt;table-&gt;name);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++tableCount;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8h_1a44608d5ba3fc434424fa67e3bacbdd39" kindref="member" tooltip="This MUST always follow a EagleLinkedList_ForeachEnd.">EagleLinkedList_ForeachEnd</ref></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>page<sp/>=<sp/><ref refid="_eagle_page_8c_1a46dfbf616a96645c9617bbc12312f94a" kindref="member" tooltip="Create a new EaglePage.">EaglePage_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2a23c99b1b8cd114dcb4b0c2671767ac86" kindref="member" tooltip="VARCHAR: A NULL terminated string.">EagleDataTypeVarchar</ref>,<sp/>data,<sp/>totalTables,<sp/>totalTables,<sp/>0,<sp/><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7aa4ac7e7bebceb629a7a2eff6e695504f2" kindref="member" tooltip="TRUE.">EagleTrue</ref>);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="Record offset.">recordOffset</ref><sp/>+=<sp/>totalTables;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>page;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="_eagle_db_information_schema_8h_1a80cce2f072a1ff94dbf85779021af3f3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1a80cce2f072a1ff94dbf85779021af3f3" kindref="member" tooltip="Reset the cursor.">EagleDbInformationSchema_tables_reset</ref>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema)</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a3b6b231b096fcfd45be140a6d6aa4f8b" kindref="member" tooltip="Record offset.">recordOffset</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="_eagle_db_information_schema_8h_1ab1e5ee099c2b354cd267619572f2c6c8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1ab1e5ee099c2b354cd267619572f2c6c8" kindref="member" tooltip="Free a EagleDbInformationSchema.">EagleDbInformationSchema_Delete</ref>(<ref refid="struct_eagle_db_information_schema" kindref="compound" tooltip="This object is used for callback functions on virtual tables.">EagleDbInformationSchema</ref><sp/>*infoSchema)</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(NULL<sp/>==<sp/>infoSchema)<sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(infoSchema-&gt;<ref refid="struct_eagle_db_information_schema_1a81ba855aed396a13a8b7c26b0afe1c88" kindref="member" tooltip="The column (field) name.">columnName</ref>);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_memory_8c_1aaa3b2daf6c57f2aa57de0ade732caeb5" kindref="member" tooltip="Free a pointer.">EagleMemory_Free</ref>(infoSchema);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130" refid="_eagle_db_information_schema_8h_1ab6f163e3a5b32f5b0b360ab0022163ff" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_information_schema_8c_1ab6f163e3a5b32f5b0b360ab0022163ff" kindref="member" tooltip="Remove/free the virtual tables.">EagleDbInformationSchema_Cleanup</ref>(<ref refid="struct_eagle_db_instance" kindref="compound" tooltip="The database instance is a wrapper for a EagleInstance.">EagleDbInstance</ref><sp/>*db)</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_schema" kindref="compound" tooltip="A database schema definition.">EagleDbSchema</ref><sp/>*s<sp/>=<sp/><ref refid="_eagle_db_instance_8c_1a2fd8ec2b0a60f678e0c2e562f881cf0f" kindref="member" tooltip="Get a schema by name.">EagleDbInstance_getSchema</ref>(db,<sp/><ref refid="_eagle_db_schema_8c_1a30217ff503de80a0f06f39ce3f576da0" kindref="member" tooltip="The name of the default schema.">EagleDbSchema_DefaultSchemaName</ref>);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_db_table_data" kindref="compound" tooltip="Provides data for a table.">EagleDbTableData</ref><sp/>*td<sp/>=<sp/><ref refid="_eagle_db_schema_8c_1a23c6affa36fef885b01714ad4435967a" kindref="member">EagleDbSchema_getTable</ref>(s,<sp/></highlight><highlight class="stringliteral">&quot;information_schema_tables&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_linked_list_8c_1ae605a44f7a0362819572af7d1bae2a95" kindref="member" tooltip="Delete an object from a linked list.">EagleLinkedList_deleteObject</ref>(s-&gt;<ref refid="struct_eagle_db_schema_1a8da53e8ff5dab8b7f11051627ba3e085" kindref="member" tooltip="This is semi managed because the linked list that contains the pointers to the tables...">tables</ref>,<sp/>td);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_8c_1a4ebfc8bb4977c775377e366e2579f774" kindref="member" tooltip="Free a table with its column definitions.">EagleDbTable_DeleteWithColumns</ref>(td-&gt;<ref refid="struct_eagle_db_table_data_1a33d9bdee5210ec9c8efef6ee8e14027c" kindref="member" tooltip="Table definition.">table</ref>);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_db_table_data_8c_1ad581de5c335c11d9fcde1546740dc525" kindref="member" tooltip="Free a table data.">EagleDbTableData_Delete</ref>(td);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbInformationSchema.c"/>
+  </compounddef>
+</doxygen>

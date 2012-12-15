@@ -1,0 +1,451 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_page_provider_stream_8h" kind="file">
+    <compoundname>EaglePageProviderStream.h</compoundname>
+    <includes refid="_eagle_data_type_8h" local="yes">EagleDataType.h</includes>
+    <includes refid="_eagle_boolean_8h" local="yes">EagleBoolean.h</includes>
+    <includes refid="_eagle_page_8h" local="yes">EaglePage.h</includes>
+    <includes refid="_eagle_page_provider_8h" local="yes">EaglePageProvider.h</includes>
+    <includedby refid="_eagle_page_provider_stream_8c" local="yes">eagle/eagle/EaglePageProviderStream.c</includedby>
+    <includedby refid="_eagle_db_sql_expression_8c" local="yes">eagle/eagledb/EagleDbSqlExpression.c</includedby>
+    <includedby refid="_eagle_db_table_data_8c" local="yes">eagle/eagledb/EagleDbTableData.c</includedby>
+    <incdepgraph>
+      <node id="1132">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1129" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+        <childnode refid="1126" relation="include">
+        </childnode>
+        <childnode refid="1133" relation="include">
+        </childnode>
+      </node>
+      <node id="1130">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1129">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1130" relation="include">
+        </childnode>
+        <childnode refid="1131" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+      </node>
+      <node id="1128">
+        <label>pthread.h</label>
+      </node>
+      <node id="1134">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1121">
+        <label>eagle/eagle/EaglePageProviderStream.h</label>
+        <link refid="EaglePageProviderStream.h"/>
+        <childnode refid="1122" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+        <childnode refid="1124" relation="include">
+        </childnode>
+        <childnode refid="1127" relation="include">
+        </childnode>
+      </node>
+      <node id="1125">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1122" relation="include">
+        </childnode>
+      </node>
+      <node id="1122">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1123">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1126">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1124">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1123" relation="include">
+        </childnode>
+        <childnode refid="1125" relation="include">
+        </childnode>
+        <childnode refid="1126" relation="include">
+        </childnode>
+        <childnode refid="1122" relation="include">
+        </childnode>
+      </node>
+      <node id="1127">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1128" relation="include">
+        </childnode>
+        <childnode refid="1124" relation="include">
+        </childnode>
+        <childnode refid="1129" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+        <childnode refid="1132" relation="include">
+        </childnode>
+        <childnode refid="1126" relation="include">
+        </childnode>
+        <childnode refid="1122" relation="include">
+        </childnode>
+        <childnode refid="1134" relation="include">
+        </childnode>
+      </node>
+      <node id="1131">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1128" relation="include">
+        </childnode>
+        <childnode refid="1126" relation="include">
+        </childnode>
+      </node>
+      <node id="1133">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1126" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1137">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+        <childnode refid="1137" relation="include">
+        </childnode>
+      </node>
+      <node id="1138">
+        <label>eagle/eagledb/EagleDbTableData.c</label>
+        <link refid="_eagle_db_table_data_8c"/>
+      </node>
+      <node id="1136">
+        <label>eagle/eagle/EaglePageProviderStream.c</label>
+        <link refid="_eagle_page_provider_stream_8c"/>
+      </node>
+      <node id="1135">
+        <label>eagle/eagle/EaglePageProviderStream.h</label>
+        <link refid="EaglePageProviderStream.h"/>
+        <childnode refid="1136" relation="include">
+        </childnode>
+        <childnode refid="1137" relation="include">
+        </childnode>
+        <childnode refid="1138" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_page_provider_stream" prot="public">EaglePageProviderStream</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1a7025b6f29d691c4820cce699f53e569b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePageProviderStream_add</definition>
+        <argsstring>(EaglePageProviderStream *epp, void *data)</argsstring>
+        <name>EaglePageProviderStream_add</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Add a record to a writable provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data to add to the stream. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>EagleTrue on success. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="66" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="60" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1a8792ef92bd56b39e4738d41639e88133" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderStream_Delete</definition>
+        <argsstring>(EaglePageProviderStream *epp)</argsstring>
+        <name>EaglePageProviderStream_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Free a page provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Page provider instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="58" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="48" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1afd6523b6ebb0f0c496f96f23240eaa00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderStream_getPage</definition>
+        <argsstring>(EaglePageProviderStream *epp, int pageNumber)</argsstring>
+        <name>EaglePageProviderStream_getPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pageNumber</declname>
+        </param>
+        <briefdescription>
+<para>Get a random page from a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para>You may only use this if <ref refid="_eagle_page_provider_8c_1a8c7f6eaf3a9132a15b2020473a7b69fa" kindref="member">EaglePageProvider_isRandomAccess()</ref> returns EagleTrue. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pageNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of the page where the first page will be 0. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="100" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="156" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1a8f7d508914607cfa09e0daec3170c365" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePageProviderStream_isRandomAccess</definition>
+        <argsstring>(EaglePageProviderStream *epp)</argsstring>
+        <name>EaglePageProviderStream_isRandomAccess</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Check is a providers pages can be access in any order with <ref refid="_eagle_page_provider_8c_1addcb8c0174aa93f30996b7ed0c5183dc" kindref="member">EaglePageProvider_getPage()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="92" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="151" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1a9e76beb6f24ae6599da01706d0704bff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+        <definition>EaglePageProviderStream* EaglePageProviderStream_New</definition>
+        <argsstring>(EagleDataType type, int recordsPerPage, char *name)</argsstring>
+        <name>EaglePageProviderStream_New</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member">EagleDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>recordsPerPage</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Create a new writable page provider with zero records. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type for the provider (and its pages). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">recordsPerPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of records per page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new read/write provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="52" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="8" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1ad384802e24a69a6ffd061f5755c4837a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderStream_nextPage</definition>
+        <argsstring>(EaglePageProviderStream *epp)</argsstring>
+        <name>EaglePageProviderStream_nextPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Get the next page from a stream provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The next page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="80" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="118" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1a9c8383d83c016c60a209d0b1b7655969" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EaglePageProviderStream_pagesRemaining</definition>
+        <argsstring>(EaglePageProviderStream *epp)</argsstring>
+        <name>EaglePageProviderStream_pagesRemaining</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Return the amount of pages remaining at the moment for a read/write provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of pages available for reading. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="73" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="107" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_stream_8h_1aa64143fd3c610189581a7a8c317edf12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderStream_reset</definition>
+        <argsstring>(EaglePageProviderStream *epp)</argsstring>
+        <name>EaglePageProviderStream_reset</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Reset the cursor of a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h" line="86" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.c" bodystart="145" bodyend="149"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EaglePageProviderStream_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EaglePageProviderStream_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_data_type_8h" kindref="compound">EagleDataType.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_boolean_8h" kindref="compound">EagleBoolean.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_8h" kindref="compound">EaglePage.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_8h" kindref="compound">EaglePageProvider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="struct_eagle_page_provider_stream" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="14" refid="struct_eagle_page_provider_stream_1a823322f3f10b2fd3df8f9a377af077c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_eagle_page_provider_stream_1a823322f3f10b2fd3df8f9a377af077c2" kindref="member" tooltip="All &amp;quot;subtypes&amp;quot; of EaglePageProvider will have this header.">EaglePageProviderHeader</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19" refid="struct_eagle_page_provider_stream_1a64d700c2e2b025ec902c833466d7fb49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a7e259482575242c5ba87845cb6695afc" kindref="member" tooltip="This struct instance variable is provided by an external source.">EAGLE_ATTR_PROVIDED</ref><sp/>EagleLinkedListItem<sp/>*<ref refid="struct_eagle_page_provider_stream_1a64d700c2e2b025ec902c833466d7fb49" kindref="member" tooltip="This is used by streams.">cursor</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24" refid="struct_eagle_page_provider_stream_1a27732bb136aef4663677329eced0c99c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*<ref refid="struct_eagle_page_provider_stream_1a27732bb136aef4663677329eced0c99c" kindref="member" tooltip="A list containing EaglePage&amp;#39;s with the records.">list</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30" refid="struct_eagle_page_provider_stream_1a43afd3c921ea1cf1b530ec6ebfed3ebe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_page_provider_stream_1a43afd3c921ea1cf1b530ec6ebfed3ebe" kindref="member" tooltip="The cursor position.">offsetRecords</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="struct_eagle_page_provider_stream_1a6d229dced099552a8e8b7708f636e0d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_eagle_page_provider_stream_1a6d229dced099552a8e8b7708f636e0d9" kindref="member" tooltip="The total amount of records.">totalRecords</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41" refid="struct_eagle_page_provider_stream_1a35af3476dcf04b4a47c3ff89c5177ccc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="struct_eagle_lock" kindref="compound" tooltip="A lock is used to synchronize code blocks between threads.">EagleLock</ref><sp/>*<ref refid="struct_eagle_page_provider_stream_1a35af3476dcf04b4a47c3ff89c5177ccc" kindref="member" tooltip="Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining().">nextPageLock</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}<sp/><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref>*<sp/><ref refid="_eagle_page_provider_stream_8c_1a9e76beb6f24ae6599da01706d0704bff" kindref="member" tooltip="Create a new writable page provider with zero records.">EaglePageProviderStream_New</ref>(<ref refid="_eagle_data_type_8h_1ac484ab15f125f81b0437f7aed65fbbb2" kindref="member" tooltip="Data types for pages.">EagleDataType</ref><sp/>type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordsPerPage,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_stream_8c_1a8792ef92bd56b39e4738d41639e88133" kindref="member" tooltip="Free a page provider.">EaglePageProviderStream_Delete</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_provider_stream_8c_1a7025b6f29d691c4820cce699f53e569b" kindref="member" tooltip="Add a record to a writable provider.">EaglePageProviderStream_add</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*data);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_stream_8c_1a9c8383d83c016c60a209d0b1b7655969" kindref="member" tooltip="Return the amount of pages remaining at the moment for a read/write provider.">EaglePageProviderStream_pagesRemaining</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_stream_8c_1ad384802e24a69a6ffd061f5755c4837a" kindref="member" tooltip="Get the next page from a stream provider.">EaglePageProviderStream_nextPage</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_stream_8c_1aa64143fd3c610189581a7a8c317edf12" kindref="member" tooltip="Reset the cursor of a provider.">EaglePageProviderStream_reset</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_provider_stream_8c_1a8f7d508914607cfa09e0daec3170c365" kindref="member" tooltip="Check is a providers pages can be access in any order with EaglePageProvider_getPage()...">EaglePageProviderStream_isRandomAccess</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_stream_8c_1afd6523b6ebb0f0c496f96f23240eaa00" kindref="member" tooltip="Get a random page from a provider.">EaglePageProviderStream_getPage</ref>(<ref refid="struct_eagle_page_provider_stream" kindref="compound">EaglePageProviderStream</ref><sp/>*epp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pageNumber);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderStream.h"/>
+  </compounddef>
+</doxygen>

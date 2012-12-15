@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_parser" kind="struct" prot="public">
+    <compoundname>EagleDbParser</compoundname>
+    <includes refid="_eagle_db_parser_8h" local="no">EagleDbParser.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_parser_1a4df2ee59cf909d50b5a6270eac7042b0" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+        <definition>EagleLinkedList* errors</definition>
+        <argsstring></argsstring>
+        <name>errors</name>
+        <briefdescription>
+<para>Error stack. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="26" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_parser_1a6408a9521ba66ada94e4716aeb124a9f" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* yyparse</definition>
+        <argsstring></argsstring>
+        <name>yyparse</name>
+        <briefdescription>
+<para>Pointer to allow the reentrant parser to work. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="16" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* yyparse_ast</definition>
+        <argsstring></argsstring>
+        <name>yyparse_ast</name>
+        <briefdescription>
+<para>This is the pointer to the final AST returned by the parser. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="31" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_parser_1a7fe33855e7e2360992d082708a38463a" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_db_sql_statement_type_8h_1a5e82b40ba378b9ec3025c9b713a2f6a5" kindref="member">EagleDbSqlStatementType</ref></type>
+        <definition>EagleDbSqlStatementType yystatementtype</definition>
+        <argsstring></argsstring>
+        <name>yystatementtype</name>
+        <briefdescription>
+<para>The type of statement. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="21" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_parser_1aaefa481c2ead5d7cfc91e1093259dd6f" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* yytext_last</definition>
+        <argsstring></argsstring>
+        <name>yytext_last</name>
+        <briefdescription>
+<para>A symbol provided by flex that contains the last token read. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A instance to handle the parser. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="27">
+        <label>EagleDbSqlStatementType</label>
+      </node>
+      <node id="29">
+        <label>void *</label>
+      </node>
+      <node id="32">
+        <label>EagleLock</label>
+        <link refid="struct_eagle_lock"/>
+        <childnode refid="33" relation="usage">
+          <edgelabel>mutex</edgelabel>
+        </childnode>
+        <childnode refid="34" relation="usage">
+          <edgelabel>attr</edgelabel>
+        </childnode>
+      </node>
+      <node id="30">
+        <label>EagleLinkedList</label>
+        <link refid="struct_eagle_linked_list"/>
+        <childnode refid="31" relation="usage">
+          <edgelabel>last</edgelabel>
+          <edgelabel>first</edgelabel>
+        </childnode>
+        <childnode refid="32" relation="usage">
+          <edgelabel>modifyLock</edgelabel>
+        </childnode>
+        <childnode refid="35" relation="usage">
+          <edgelabel>length</edgelabel>
+        </childnode>
+      </node>
+      <node id="28">
+        <label>char *</label>
+      </node>
+      <node id="26">
+        <label>EagleDbParser</label>
+        <link refid="struct_eagle_db_parser"/>
+        <childnode refid="27" relation="usage">
+          <edgelabel>yystatementtype</edgelabel>
+        </childnode>
+        <childnode refid="28" relation="usage">
+          <edgelabel>yytext_last</edgelabel>
+        </childnode>
+        <childnode refid="29" relation="usage">
+          <edgelabel>yyparse</edgelabel>
+          <edgelabel>yyparse_ast</edgelabel>
+        </childnode>
+        <childnode refid="30" relation="usage">
+          <edgelabel>errors</edgelabel>
+        </childnode>
+      </node>
+      <node id="35">
+        <label>int</label>
+      </node>
+      <node id="33">
+        <label>pthread_mutex_t</label>
+      </node>
+      <node id="34">
+        <label>pthread_mutexattr_t</label>
+      </node>
+      <node id="31">
+        <label>EagleLinkedListItem *</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" line="11" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbParser.h" bodystart="11" bodyend="38"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_parser_1a4df2ee59cf909d50b5a6270eac7042b0" prot="public" virt="non-virtual"><scope>EagleDbParser</scope><name>errors</name></member>
+      <member refid="struct_eagle_db_parser_1a6408a9521ba66ada94e4716aeb124a9f" prot="public" virt="non-virtual"><scope>EagleDbParser</scope><name>yyparse</name></member>
+      <member refid="struct_eagle_db_parser_1a3067ba38902dc7190ada01b56185003b" prot="public" virt="non-virtual"><scope>EagleDbParser</scope><name>yyparse_ast</name></member>
+      <member refid="struct_eagle_db_parser_1a7fe33855e7e2360992d082708a38463a" prot="public" virt="non-virtual"><scope>EagleDbParser</scope><name>yystatementtype</name></member>
+      <member refid="struct_eagle_db_parser_1aaefa481c2ead5d7cfc91e1093259dd6f" prot="public" virt="non-virtual"><scope>EagleDbParser</scope><name>yytext_last</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

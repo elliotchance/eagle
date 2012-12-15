@@ -1,0 +1,544 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_db_table_8h" kind="file">
+    <compoundname>EagleDbTable.h</compoundname>
+    <includes refid="_eagle_db_column_8h" local="yes">EagleDbColumn.h</includes>
+    <includes refid="_eagle_8h" local="yes">Eagle.h</includes>
+    <includes refid="_eagle_linked_list_8h" local="yes">EagleLinkedList.h</includes>
+    <includedby refid="_eagle_db_console_8c" local="yes">eagle/eagledb/EagleDbConsole.c</includedby>
+    <includedby refid="_eagle_db_information_schema_8c" local="yes">eagle/eagledb/EagleDbInformationSchema.c</includedby>
+    <includedby refid="_eagle_db_instance_8c" local="yes">eagle/eagledb/EagleDbInstance.c</includedby>
+    <includedby refid="_eagle_db_table_8c" local="yes">eagle/eagledb/EagleDbTable.c</includedby>
+    <includedby refid="_eagle_db_table_data_8h" local="yes">eagle/eagledb/EagleDbTableData.h</includedby>
+    <includedby refid="_eagle_db_tuple_8h" local="yes">eagle/eagledb/EagleDbTuple.h</includedby>
+    <incdepgraph>
+      <node id="2809">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="2810" relation="include">
+        </childnode>
+        <childnode refid="2814" relation="include">
+        </childnode>
+        <childnode refid="2808" relation="include">
+        </childnode>
+        <childnode refid="2815" relation="include">
+        </childnode>
+      </node>
+      <node id="2811">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="2810">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="2811" relation="include">
+        </childnode>
+        <childnode refid="2812" relation="include">
+        </childnode>
+        <childnode refid="2814" relation="include">
+        </childnode>
+      </node>
+      <node id="2813">
+        <label>pthread.h</label>
+      </node>
+      <node id="2806">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="2807" relation="include">
+        </childnode>
+      </node>
+      <node id="2807">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="2814">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="2808">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="2805">
+        <label>EagleDbColumn.h</label>
+        <link refid="_eagle_db_column_8h"/>
+        <childnode refid="2806" relation="include">
+        </childnode>
+        <childnode refid="2808" relation="include">
+        </childnode>
+        <childnode refid="2807" relation="include">
+        </childnode>
+      </node>
+      <node id="2804">
+        <label>eagle/eagledb/EagleDbTable.h</label>
+        <link refid="EagleDbTable.h"/>
+        <childnode refid="2805" relation="include">
+        </childnode>
+        <childnode refid="2808" relation="include">
+        </childnode>
+        <childnode refid="2809" relation="include">
+        </childnode>
+      </node>
+      <node id="2812">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="2813" relation="include">
+        </childnode>
+        <childnode refid="2808" relation="include">
+        </childnode>
+      </node>
+      <node id="2815">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="2808" relation="include">
+        </childnode>
+        <childnode refid="2814" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2829">
+        <label>eagle/eagledb/EagleDbTuple.c</label>
+        <link refid="_eagle_db_tuple_8c"/>
+      </node>
+      <node id="2828">
+        <label>eagle/eagledb/EagleDbTuple.h</label>
+        <link refid="_eagle_db_tuple_8h"/>
+        <childnode refid="2819" relation="include">
+        </childnode>
+        <childnode refid="2821" relation="include">
+        </childnode>
+        <childnode refid="2829" relation="include">
+        </childnode>
+      </node>
+      <node id="2827">
+        <label>eagle/eagledb/EagleDbTableData.c</label>
+        <link refid="_eagle_db_table_data_8c"/>
+      </node>
+      <node id="2821">
+        <label>eagle/eagledb/EagleDbTableData.h</label>
+        <link refid="_eagle_db_table_data_8h"/>
+        <childnode refid="2818" relation="include">
+        </childnode>
+        <childnode refid="2819" relation="include">
+        </childnode>
+        <childnode refid="2822" relation="include">
+        </childnode>
+        <childnode refid="2825" relation="include">
+        </childnode>
+        <childnode refid="2827" relation="include">
+        </childnode>
+      </node>
+      <node id="2825">
+        <label>eagle/eagledb/EagleDbSqlSelect.c</label>
+        <link refid="_eagle_db_sql_select_8c"/>
+      </node>
+      <node id="2826">
+        <label>eagle/eagledb/EagleDbSchema.c</label>
+        <link refid="_eagle_db_schema_8c"/>
+      </node>
+      <node id="2822">
+        <label>eagle/eagledb/EagleDbSchema.h</label>
+        <link refid="_eagle_db_schema_8h"/>
+        <childnode refid="2818" relation="include">
+        </childnode>
+        <childnode refid="2823" relation="include">
+        </childnode>
+        <childnode refid="2819" relation="include">
+        </childnode>
+        <childnode refid="2824" relation="include">
+        </childnode>
+        <childnode refid="2826" relation="include">
+        </childnode>
+      </node>
+      <node id="2819">
+        <label>eagle/eagledb/EagleDbInstance.c</label>
+        <link refid="_eagle_db_instance_8c"/>
+        <childnode refid="2819" relation="include">
+        </childnode>
+      </node>
+      <node id="2824">
+        <label>eagle/eagledb/EagleDbInstance.h</label>
+        <link refid="_eagle_db_instance_8h"/>
+        <childnode refid="2818" relation="include">
+        </childnode>
+        <childnode refid="2823" relation="include">
+        </childnode>
+        <childnode refid="2819" relation="include">
+        </childnode>
+        <childnode refid="2825" relation="include">
+        </childnode>
+      </node>
+      <node id="2818">
+        <label>eagle/eagledb/EagleDbInformationSchema.c</label>
+        <link refid="_eagle_db_information_schema_8c"/>
+        <childnode refid="2818" relation="include">
+        </childnode>
+      </node>
+      <node id="2823">
+        <label>eagle/eagledb/EagleDbInformationSchema.h</label>
+        <link refid="_eagle_db_information_schema_8h"/>
+        <childnode refid="2819" relation="include">
+        </childnode>
+      </node>
+      <node id="2817">
+        <label>eagle/eagledb/EagleDbConsole.c</label>
+        <link refid="_eagle_db_console_8c"/>
+        <childnode refid="2817" relation="include">
+        </childnode>
+      </node>
+      <node id="2820">
+        <label>eagle/eagledb/EagleDbTable.c</label>
+        <link refid="_eagle_db_table_8c"/>
+      </node>
+      <node id="2816">
+        <label>eagle/eagledb/EagleDbTable.h</label>
+        <link refid="EagleDbTable.h"/>
+        <childnode refid="2817" relation="include">
+        </childnode>
+        <childnode refid="2818" relation="include">
+        </childnode>
+        <childnode refid="2819" relation="include">
+        </childnode>
+        <childnode refid="2820" relation="include">
+        </childnode>
+        <childnode refid="2821" relation="include">
+        </childnode>
+        <childnode refid="2828" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_db_table" prot="public">EagleDbTable</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_db_table_8h_1abb4a43bac4773450c1777953a2544d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbTable_addColumn</definition>
+        <argsstring>(EagleDbTable *table, EagleDbColumn *column)</argsstring>
+        <name>EagleDbTable_addColumn</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_db_column" kindref="compound">EagleDbColumn</ref> *</type>
+          <declname>column</declname>
+        </param>
+        <briefdescription>
+<para>Add a column to the definition of a table. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The table instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The column definition. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="46" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="47" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a73617952e53d0842ae8f9453b971a13b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleDbTable_countColumns</definition>
+        <argsstring>(EagleDbTable *table)</argsstring>
+        <name>EagleDbTable_countColumns</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Count the columns in a table definition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table definition. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of columns in the table. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="67" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1aed601d8f18c6d32dc93530671daa7a99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbTable_Delete</definition>
+        <argsstring>(EagleDbTable *table)</argsstring>
+        <name>EagleDbTable_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Free a table definition. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will not free the column instances. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_eagle_db_table_8c_1a4ebfc8bb4977c775377e366e2579f774" kindref="member">EagleDbTable_DeleteWithColumns()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="39" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="25" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a4ebfc8bb4977c775377e366e2579f774" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbTable_DeleteWithColumns</definition>
+        <argsstring>(EagleDbTable *table)</argsstring>
+        <name>EagleDbTable_DeleteWithColumns</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>Free a table with its column definitions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The table instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_eagle_db_table_8c_1aed601d8f18c6d32dc93530671daa7a99" kindref="member">EagleDbTable_Delete()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="60" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="36" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a7472d026c15bac8bd063d4ac79563cd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_column" kindref="compound">EagleDbColumn</ref> *</type>
+        <definition>EagleDbColumn* EagleDbTable_getColumn</definition>
+        <argsstring>(EagleDbTable *table, int index)</argsstring>
+        <name>EagleDbTable_getColumn</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get a column of a table by its index. </para>        </briefdescription>
+        <detaileddescription>
+<para>The first column will have the index of 0. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table definition. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column index. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the column does not exist. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_db_table_8c_1a41fbf672f4b048f1ee3c7c1251cb6465" kindref="member">EagleDbTable_getColumnIndex()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="76" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a741948d5e651fda1e91510c1a718cae5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_column" kindref="compound">EagleDbColumn</ref> *</type>
+        <definition>EagleDbColumn* EagleDbTable_getColumnByName</definition>
+        <argsstring>(EagleDbTable *table, char *name)</argsstring>
+        <name>EagleDbTable_getColumnByName</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get a column of a table by its name. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table definition. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column name. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>NULL if the column does not exist. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="84" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="68" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a41fbf672f4b048f1ee3c7c1251cb6465" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EagleDbTable_getColumnIndex</definition>
+        <argsstring>(EagleDbTable *table, char *name)</argsstring>
+        <name>EagleDbTable_getColumnIndex</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Find the column index by its name. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table definition. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Column name. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>-1 if the column does not exist. </para></simplesect>
+<simplesect kind="see"><para><ref refid="_eagle_db_table_8c_1a741948d5e651fda1e91510c1a718cae5" kindref="member">EagleDbTable_getColumnByName()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="93" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="82" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1adb2808cc5f8774012ca1195ac2b51c6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+        <definition>EagleDbTable* EagleDbTable_New</definition>
+        <argsstring>(char *name)</argsstring>
+        <name>EagleDbTable_New</name>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Create a new table definition. </para>        </briefdescription>
+        <detaileddescription>
+<para>You will also need to create a <ref refid="struct_eagle_db_table_data" kindref="compound">EagleDbTableData</ref> if you intended the table to hold data. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the table. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new instance. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="32" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="6" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_db_table_8h_1a38bcb4ff502cc84364a304a83866da84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EagleDbTable_setColumns</definition>
+        <argsstring>(EagleDbTable *table, EagleLinkedList *columns)</argsstring>
+        <name>EagleDbTable_setColumns</name>
+        <param>
+          <type><ref refid="struct_eagle_db_table" kindref="compound">EagleDbTable</ref> *</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_eagle_linked_list" kindref="compound">EagleLinkedList</ref> *</type>
+          <declname>columns</declname>
+        </param>
+        <briefdescription>
+<para>Set all of the column definitions of a table. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The table instance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">columns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New columns. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h" line="53" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.c" bodystart="19" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EagleDbTable_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EagleDbTable_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_db_column_8h" kindref="compound">EagleDbColumn.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_8h" kindref="compound">Eagle.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_linked_list_8h" kindref="compound">EagleLinkedList.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="struct_eagle_db_table" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16" refid="struct_eagle_db_table_1a5ac083a645d964373f022d03df4849c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22" refid="struct_eagle_db_table_1a8ba8130c87a8d24eaf2acb5f1d7be2de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1abbf13e8ccd8267eae6f8134bdedb96b7" kindref="member" tooltip="This struct instance variable may be freed internally or externally.">EAGLE_ATTR_SEMI_MANAGED</ref><sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*columns;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}<sp/><ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref>*<sp/><ref refid="_eagle_db_table_8c_1adb2808cc5f8774012ca1195ac2b51c6f" kindref="member" tooltip="Create a new table definition.">EagleDbTable_New</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1aed601d8f18c6d32dc93530671daa7a99" kindref="member" tooltip="Free a table definition.">EagleDbTable_Delete</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1abb4a43bac4773450c1777953a2544d9d" kindref="member" tooltip="Add a column to the definition of a table.">EagleDbTable_addColumn</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref><sp/>*column);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1a38bcb4ff502cc84364a304a83866da84" kindref="member" tooltip="Set all of the column definitions of a table.">EagleDbTable_setColumns</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/><ref refid="struct_eagle_linked_list" kindref="compound" tooltip="A linked list (FIFO).">EagleLinkedList</ref><sp/>*columns);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1a4ebfc8bb4977c775377e366e2579f774" kindref="member" tooltip="Free a table with its column definitions.">EagleDbTable_DeleteWithColumns</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1a73617952e53d0842ae8f9453b971a13b" kindref="member" tooltip="Count the columns in a table definition.">EagleDbTable_countColumns</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref>*<sp/><ref refid="_eagle_db_table_8c_1a7472d026c15bac8bd063d4ac79563cd5" kindref="member" tooltip="Get a column of a table by its index.">EagleDbTable_getColumn</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><ref refid="struct_eagle_db_column" kindref="compound" tooltip="The definition for a table column.">EagleDbColumn</ref>*<sp/><ref refid="_eagle_db_table_8c_1a741948d5e651fda1e91510c1a718cae5" kindref="member" tooltip="Get a column of a table by its name.">EagleDbTable_getColumnByName</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_db_table_8c_1a41fbf672f4b048f1ee3c7c1251cb6465" kindref="member" tooltip="Find the column index by its name.">EagleDbTable_getColumnIndex</ref>(<ref refid="struct_eagle_db_table" kindref="compound" tooltip="A table definition.">EagleDbTable</ref><sp/>*table,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbTable.h"/>
+  </compounddef>
+</doxygen>

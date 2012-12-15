@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_eagle_db_sql_value" kind="struct" prot="public">
+    <compoundname>EagleDbSqlValue</compoundname>
+    <includes refid="_eagle_db_sql_value_8h" local="no">EagleDbSqlValue.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1a3faf42a90228121a56f69674cdfd1b23" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>EagleDbSqlExpressionHeader</definition>
+        <argsstring></argsstring>
+        <name>EagleDbSqlExpressionHeader</name>
+        <briefdescription>
+<para>Header. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="struct_eagle_db_sql_value_1a3faf42a90228121a56f69674cdfd1b23" kindref="member">EagleDbSqlExpressionHeader</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="19" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1a4d566c1fceb610a562ff221cba447f16" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member">EagleDataTypeFloatType</ref></type>
+        <definition>EagleDataTypeFloatType floatValue</definition>
+        <argsstring></argsstring>
+        <name>floatValue</name>
+        <briefdescription>
+<para>Floating point number. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a1c2e09ed37350b5fdfa2ec539eb2eb75" kindref="member">EagleDbSqlValueTypeFloat</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="47" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1af5351a0143adaf16c64b881aee01d893" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* identifier</definition>
+        <argsstring></argsstring>
+        <name>identifier</name>
+        <briefdescription>
+<para>When using identifier token. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is the name of the identifier. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="41" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1a34aa1b9d94871f740efabef1b6d52b2f" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member">EagleDataTypeIntegerType</ref></type>
+        <definition>EagleDataTypeIntegerType intValue</definition>
+        <argsstring></argsstring>
+        <name>intValue</name>
+        <briefdescription>
+<para>Integer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25a45a5b1dc7f1b44c879e18afe76d70c47" kindref="member">EagleDbSqlValueTypeInteger</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="36" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1ad77ce651fe9b80a9eaae740340be2082" prot="public" static="no" mutable="no">
+        <type><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25" kindref="member">EagleDbSqlValueType</ref></type>
+        <definition>EagleDbSqlValueType type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Value type. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_eagle_db_sql_value_type_8h_1a8f57a8843866a9491eebb90fdd9c4d25" kindref="member">EagleDbSqlValueType</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="25" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" prot="public" static="no" mutable="no">
+        <type>union EagleDbSqlValue::@3</type>
+        <definition>union EagleDbSqlValue::@3  value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+<para>Contains the actual value, depending on the type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Encapsulates a Value of any type. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="97">
+        <label>@3</label>
+      </node>
+      <node id="98">
+        <label>char *</label>
+      </node>
+      <node id="96">
+        <label>int</label>
+      </node>
+      <node id="95">
+        <label>double</label>
+      </node>
+      <node id="94">
+        <label>EagleDbSqlValue</label>
+        <link refid="struct_eagle_db_sql_value"/>
+        <childnode refid="95" relation="usage">
+          <edgelabel>floatValue</edgelabel>
+        </childnode>
+        <childnode refid="96" relation="usage">
+          <edgelabel>intValue</edgelabel>
+        </childnode>
+        <childnode refid="97" relation="usage">
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="98" relation="usage">
+          <edgelabel>identifier</edgelabel>
+        </childnode>
+        <childnode refid="99" relation="usage">
+          <edgelabel>type</edgelabel>
+        </childnode>
+      </node>
+      <node id="99">
+        <label>EagleDbSqlValueType</label>
+      </node>
+    </collaborationgraph>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" line="13" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagledb/EagleDbSqlValue.h" bodystart="13" bodyend="51"/>
+    <listofallmembers>
+      <member refid="struct_eagle_db_sql_value_1a3faf42a90228121a56f69674cdfd1b23" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>EagleDbSqlExpressionHeader</name></member>
+      <member refid="struct_eagle_db_sql_value_1a4d566c1fceb610a562ff221cba447f16" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>floatValue</name></member>
+      <member refid="struct_eagle_db_sql_value_1af5351a0143adaf16c64b881aee01d893" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>identifier</name></member>
+      <member refid="struct_eagle_db_sql_value_1a34aa1b9d94871f740efabef1b6d52b2f" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>intValue</name></member>
+      <member refid="struct_eagle_db_sql_value_1ad77ce651fe9b80a9eaae740340be2082" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>type</name></member>
+      <member refid="struct_eagle_db_sql_value_1ae0fcdfcb154f1db2626e6df241ccb6ea" prot="public" virt="non-virtual"><scope>EagleDbSqlValue</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - eagle - eagle/EaglePageProviderVirtual.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">eagle</a> - EaglePageProviderVirtual.c<span style="font-size: 80%;"> (source / <a href="EaglePageProviderVirtual.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">eagle</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">42</td>
+            <td class="headerCovTableEntry">42</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2013-03-03</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;string.h&gt;</a>
+<span class="lineNum">       2 </span>            : #include &quot;EaglePageProviderVirtual.h&quot;
+<span class="lineNum">       3 </span>            : #include &quot;EagleMemory.h&quot;
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;EagleLogger.h&quot;</a>
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span><span class="lineCov">         56 : EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,</span>
+<span class="lineNum">       7 </span><span class="lineCov">         56 :                                                        char *name,</span>
+<span class="lineNum">       8 </span><span class="lineCov">         56 :                                                        EagleDataType type,</span>
+<span class="lineNum">       9 </span><span class="lineCov">         56 :                                                        void *obj,</span>
+<span class="lineNum">      10 </span><span class="lineCov">         56 :                                                        void (*free)(void*),</span>
+<span class="lineNum">      11 </span><span class="lineCov">         56 :                                                        EagleBoolean (*add)(void*, void*),</span>
+<span class="lineNum">      12 </span><span class="lineCov">         56 :                                                        int (*pagesRemaining)(void*),</span>
+<span class="lineNum">      13 </span><span class="lineCov">         56 :                                                        EaglePage* (*nextPage)(void*),</span>
+<span class="lineNum">      14 </span><span class="lineCov">         56 :                                                        void (*reset)(void*))</span>
+<span class="lineNum">      15 </span>            : {
+<span class="lineNum">      16 </span><span class="lineCov">         56 :     EaglePageProviderVirtual *pageProvider = (EaglePageProviderVirtual*) EagleMemory_Allocate(&quot;EaglePageProviderVirtual_New.1&quot;, sizeof(EaglePageProviderVirtual));</span>
+<span class="lineNum">      17 </span><span class="lineCov">         56 :     if(NULL == pageProvider) {</span>
+<span class="lineNum">      18 </span><span class="lineCov">          1 :         return NULL;</span>
+<span class="lineNum">      19 </span>            :     }
+<span class="lineNum">      20 </span>            :     
+<span class="lineNum">      21 </span><span class="lineCov">         55 :     pageProvider-&gt;providerType = EaglePageProviderTypeVirtual;</span>
+<span class="lineNum">      22 </span><span class="lineCov">         55 :     pageProvider-&gt;recordsPerPage = recordsPerPage;</span>
+<span class="lineNum">      23 </span><span class="lineCov">        165 :     pageProvider-&gt;name = (NULL == name ? NULL : strdup(name));</span>
+<span class="lineNum">      24 </span><span class="lineCov">         55 :     pageProvider-&gt;type = type;</span>
+<span class="lineNum">      25 </span><span class="lineCov">         55 :     pageProvider-&gt;obj = obj;</span>
+<span class="lineNum">      26 </span><span class="lineCov">         55 :     pageProvider-&gt;add = add;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         55 :     pageProvider-&gt;free = free;</span>
+<span class="lineNum">      28 </span><span class="lineCov">         55 :     pageProvider-&gt;nextPage = nextPage;</span>
+<span class="lineNum">      29 </span><span class="lineCov">         55 :     pageProvider-&gt;pagesRemaining = pagesRemaining;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         55 :     pageProvider-&gt;reset = reset;</span>
+<span class="lineNum">      31 </span>            :     
+<span class="lineNum">      32 </span><span class="lineCov">         55 :     return pageProvider;</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         56 : }</span></a>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">         56 : void EaglePageProviderVirtual_Delete(EaglePageProviderVirtual *epp)</span>
+<span class="lineNum">      36 </span>            : {
+<span class="lineNum">      37 </span><span class="lineCov">         56 :     if(NULL == epp) {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          1 :         return;</span>
+<span class="lineNum">      39 </span>            :     }
+<span class="lineNum">      40 </span>            :     
+<span class="lineNum">      41 </span><span class="lineCov">         55 :     if(NULL != epp-&gt;free) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">         55 :         epp-&gt;free(epp-&gt;obj);</span>
+<span class="lineNum">      43 </span><span class="lineCov">         55 :     }</span>
+<span class="lineNum">      44 </span><span class="lineCov">         55 :     EagleMemory_Free(epp-&gt;name);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         55 :     EagleMemory_Free(epp);</span>
+<a name="46"><span class="lineNum">      46 </span><span class="lineCov">        111 : }</span></a>
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span><span class="lineCov">          2 : EagleBoolean EaglePageProviderVirtual_add(EaglePageProviderVirtual *epp, void *data)</span>
+<span class="lineNum">      49 </span>            : {
+<span class="lineNum">      50 </span><span class="lineCov">          2 :     return epp-&gt;add(epp-&gt;obj, data);</span>
+<a name="51"><span class="lineNum">      51 </span>            : }</a>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineCov">          5 : int EaglePageProviderVirtual_pagesRemaining(EaglePageProviderVirtual *epp)</span>
+<span class="lineNum">      54 </span>            : {
+<span class="lineNum">      55 </span><span class="lineCov">          5 :     return epp-&gt;pagesRemaining(epp-&gt;obj);</span>
+<a name="56"><span class="lineNum">      56 </span>            : }</a>
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span><span class="lineCov">          3 : EaglePage* EaglePageProviderVirtual_nextPage(EaglePageProviderVirtual *epp)</span>
+<span class="lineNum">      59 </span>            : {
+<span class="lineNum">      60 </span><span class="lineCov">          3 :     return epp-&gt;nextPage(epp-&gt;obj);</span>
+<a name="61"><span class="lineNum">      61 </span>            : }</a>
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span><span class="lineCov">          3 : void EaglePageProviderVirtual_reset(EaglePageProviderVirtual *epp)</span>
+<span class="lineNum">      64 </span>            : {
+<span class="lineNum">      65 </span><span class="lineCov">          3 :     epp-&gt;reset(epp-&gt;obj);</span>
+<span class="lineNum">      66 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

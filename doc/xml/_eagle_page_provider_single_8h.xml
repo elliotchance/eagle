@@ -1,0 +1,493 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_eagle_page_provider_single_8h" kind="file">
+    <compoundname>EaglePageProviderSingle.h</compoundname>
+    <includes refid="_eagle_page_provider_8h" local="yes">EaglePageProvider.h</includes>
+    <includedby refid="_eagle_page_provider_single_8c" local="yes">eagle/eagle/EaglePageProviderSingle.c</includedby>
+    <includedby refid="_eagle_db_sql_expression_8c" local="yes">eagle/eagledb/EagleDbSqlExpression.c</includedby>
+    <incdepgraph>
+      <node id="1080">
+        <label>EagleLinkedList.h</label>
+        <link refid="_eagle_linked_list_8h"/>
+        <childnode refid="1077" relation="include">
+        </childnode>
+        <childnode refid="1073" relation="include">
+        </childnode>
+        <childnode refid="1076" relation="include">
+        </childnode>
+        <childnode refid="1081" relation="include">
+        </childnode>
+      </node>
+      <node id="1078">
+        <label>mach/mach_time.h</label>
+      </node>
+      <node id="1077">
+        <label>EagleSynchronizer.h</label>
+        <link refid="_eagle_synchronizer_8h"/>
+        <childnode refid="1078" relation="include">
+        </childnode>
+        <childnode refid="1079" relation="include">
+        </childnode>
+        <childnode refid="1073" relation="include">
+        </childnode>
+      </node>
+      <node id="1071">
+        <label>pthread.h</label>
+      </node>
+      <node id="1082">
+        <label>EaglePageProviderType.h</label>
+        <link refid="_eagle_page_provider_type_8h"/>
+      </node>
+      <node id="1074">
+        <label>EagleData.h</label>
+        <link refid="_eagle_data_8h"/>
+        <childnode refid="1075" relation="include">
+        </childnode>
+      </node>
+      <node id="1075">
+        <label>EagleDataType.h</label>
+        <link refid="_eagle_data_type_8h"/>
+      </node>
+      <node id="1069">
+        <label>eagle/eagle/EaglePageProviderSingle.h</label>
+        <link refid="EaglePageProviderSingle.h"/>
+        <childnode refid="1070" relation="include">
+        </childnode>
+      </node>
+      <node id="1073">
+        <label>EagleBoolean.h</label>
+        <link refid="_eagle_boolean_8h"/>
+      </node>
+      <node id="1076">
+        <label>Eagle.h</label>
+        <link refid="_eagle_8h"/>
+      </node>
+      <node id="1072">
+        <label>EaglePage.h</label>
+        <link refid="_eagle_page_8h"/>
+        <childnode refid="1073" relation="include">
+        </childnode>
+        <childnode refid="1074" relation="include">
+        </childnode>
+        <childnode refid="1076" relation="include">
+        </childnode>
+        <childnode refid="1075" relation="include">
+        </childnode>
+      </node>
+      <node id="1070">
+        <label>EaglePageProvider.h</label>
+        <link refid="_eagle_page_provider_8h"/>
+        <childnode refid="1071" relation="include">
+        </childnode>
+        <childnode refid="1072" relation="include">
+        </childnode>
+        <childnode refid="1077" relation="include">
+        </childnode>
+        <childnode refid="1073" relation="include">
+        </childnode>
+        <childnode refid="1080" relation="include">
+        </childnode>
+        <childnode refid="1076" relation="include">
+        </childnode>
+        <childnode refid="1075" relation="include">
+        </childnode>
+        <childnode refid="1082" relation="include">
+        </childnode>
+      </node>
+      <node id="1079">
+        <label>EagleLock.h</label>
+        <link refid="_eagle_lock_8h"/>
+        <childnode refid="1071" relation="include">
+        </childnode>
+        <childnode refid="1076" relation="include">
+        </childnode>
+      </node>
+      <node id="1081">
+        <label>EagleLinkedListItem.h</label>
+        <link refid="_eagle_linked_list_item_8h"/>
+        <childnode refid="1076" relation="include">
+        </childnode>
+        <childnode refid="1073" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1085">
+        <label>eagle/eagledb/EagleDbSqlExpression.c</label>
+        <link refid="_eagle_db_sql_expression_8c"/>
+        <childnode refid="1085" relation="include">
+        </childnode>
+      </node>
+      <node id="1084">
+        <label>eagle/eagle/EaglePageProviderSingle.c</label>
+        <link refid="_eagle_page_provider_single_8c"/>
+      </node>
+      <node id="1083">
+        <label>eagle/eagle/EaglePageProviderSingle.h</label>
+        <link refid="EaglePageProviderSingle.h"/>
+        <childnode refid="1084" relation="include">
+        </childnode>
+        <childnode refid="1085" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_eagle_page_provider_single" prot="public">EaglePageProviderSingle</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a487d87fcf03f80757b4ae08ebcfdc218" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderSingle_Delete</definition>
+        <argsstring>(EaglePageProviderSingle *epp)</argsstring>
+        <name>EaglePageProviderSingle_Delete</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Free a page provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Page provider instance. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="68" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="54" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1ad34b753359f3649ee26bfaf0f4109d04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderSingle_getPage</definition>
+        <argsstring>(EaglePageProviderSingle *epp, int pageNumber)</argsstring>
+        <name>EaglePageProviderSingle_getPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pageNumber</declname>
+        </param>
+        <briefdescription>
+<para>Get a random page from a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para>You may only use this if <ref refid="_eagle_page_provider_8c_1a8c7f6eaf3a9132a15b2020473a7b69fa" kindref="member">EaglePageProvider_isRandomAccess()</ref> returns EagleTrue. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pageNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of the page where the first page will be 0. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="102" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="167" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a6ef4671505a45447e6b990e6676408c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member">EagleBoolean</ref></type>
+        <definition>EagleBoolean EaglePageProviderSingle_isRandomAccess</definition>
+        <argsstring>(EaglePageProviderSingle *epp)</argsstring>
+        <name>EaglePageProviderSingle_isRandomAccess</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Check is a providers pages can be access in any order with <ref refid="_eagle_page_provider_8c_1addcb8c0174aa93f30996b7ed0c5183dc" kindref="member">EaglePageProvider_getPage()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="94" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="162" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a3fc4d39f13ee4cbc5647402599c854d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+        <definition>EaglePageProviderSingle* EaglePageProviderSingle_NewFloat</definition>
+        <argsstring>(EagleDataTypeFloatType value, int recordsPerPage, char *name)</argsstring>
+        <name>EaglePageProviderSingle_NewFloat</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member">EagleDataTypeFloatType</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>recordsPerPage</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>This creates a page provider that provides a single page filled with a fixed floating point number. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to fill the pages with. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">recordsPerPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records to return with each page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the provider. Can contain any string, this may be a column name, an expression, etc. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="53" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="22" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a6e1e036be74444534b0a7184e36400a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+        <definition>EaglePageProviderSingle* EaglePageProviderSingle_NewInt</definition>
+        <argsstring>(EagleDataTypeIntegerType value, int recordsPerPage, char *name)</argsstring>
+        <name>EaglePageProviderSingle_NewInt</name>
+        <param>
+          <type><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member">EagleDataTypeIntegerType</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>recordsPerPage</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>This creates a page provider that provides a single page filled with a fixed int. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to fill the pages with. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">recordsPerPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records to return with each page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the provider. Can contain any string, this may be a column name, an expression, etc. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="44" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="6" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1ae974e1d4ef699de4f259a8d6d1f6a94c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+        <definition>EaglePageProviderSingle* EaglePageProviderSingle_NewVarchar</definition>
+        <argsstring>(const char *value, int recordsPerPage, char *name)</argsstring>
+        <name>EaglePageProviderSingle_NewVarchar</name>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>recordsPerPage</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>This creates a page provider that provides a single page filled with a fixed string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value to fill the pages with. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">recordsPerPage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of records to return with each page. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the provider. Can contain any string, this may be a column name, an expression, etc. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new provider. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="62" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="38" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a492b383550a116b27451f296d98270d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_eagle_page" kindref="compound">EaglePage</ref> *</type>
+        <definition>EaglePage* EaglePageProviderSingle_nextPage</definition>
+        <argsstring>(EaglePageProviderSingle *epp)</argsstring>
+        <name>EaglePageProviderSingle_nextPage</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Get the next page from a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The next page, or NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="82" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="77" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1a56bb3a08344b564978b0224a67c6d30b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int EaglePageProviderSingle_pagesRemaining</definition>
+        <argsstring>(EaglePageProviderSingle *epp)</argsstring>
+        <name>EaglePageProviderSingle_pagesRemaining</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Return the amount of pages remaining. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of pages available for reading. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="75" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="156" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="_eagle_page_provider_single_8h_1aa68b8d54ad58c127366022f6c3327412" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EaglePageProviderSingle_reset</definition>
+        <argsstring>(EaglePageProviderSingle *epp)</argsstring>
+        <name>EaglePageProviderSingle_reset</name>
+        <param>
+          <type><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref> *</type>
+          <declname>epp</declname>
+        </param>
+        <briefdescription>
+<para>Reset the cursor of a provider. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">epp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The provider. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h" line="88" bodyfile="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.c" bodystart="151" bodyend="154"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>eagle_EaglePageProviderSingle_h</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>eagle_EaglePageProviderSingle_h</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_eagle_page_provider_8h" kindref="compound">EaglePageProvider.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="struct_eagle_page_provider_single" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="11" refid="struct_eagle_page_provider_single_1a823322f3f10b2fd3df8f9a377af077c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_eagle_page_provider_8h_1a1742475040e6c681df7d828121b76519" kindref="member" tooltip="All &amp;quot;subtypes&amp;quot; of EaglePageProvider will have this header.">EaglePageProviderHeader</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21" refid="struct_eagle_page_provider_single_1a34aa1b9d94871f740efabef1b6d52b2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/><ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>intValue;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26" refid="struct_eagle_page_provider_single_1aecaa5d05e98d29c71798d558e07cf419" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a36dbf56fa988abbaff74a82249eb6ea4" kindref="member" tooltip="This struct instance variable&amp;#39;s memory is fully managed internally.">EAGLE_ATTR_MANAGED</ref><sp/><ref refid="_eagle_data_type_8h_1adca1890444ae43d449a6df07beb9c313" kindref="member" tooltip="The global data type for handling EagleDataTypeVarchar.">EagleDataTypeVarcharType</ref><sp/>strValue;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31" refid="struct_eagle_page_provider_single_1a4d566c1fceb610a562ff221cba447f16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_eagle_8h_1a92e6a76bef8c68fa1b940a5c4520f262" kindref="member" tooltip="This struct instance variable is not dynamically allocated so it&amp;#39;s memory does...">EAGLE_ATTR_NA</ref><sp/><ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>floatValue;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/>value;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}<sp/><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref>*<sp/><ref refid="_eagle_page_provider_single_8c_1a6e1e036be74444534b0a7184e36400a0" kindref="member" tooltip="This creates a page provider that provides a single page filled with a fixed int...">EaglePageProviderSingle_NewInt</ref>(<ref refid="_eagle_data_type_8h_1ad854e0f9ec43c88053abc1d5f171e669" kindref="member" tooltip="The global data type for handling EagleDataTypeInteger.">EagleDataTypeIntegerType</ref><sp/>value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordsPerPage,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref>*<sp/><ref refid="_eagle_page_provider_single_8c_1a3fc4d39f13ee4cbc5647402599c854d5" kindref="member" tooltip="This creates a page provider that provides a single page filled with a fixed floating...">EaglePageProviderSingle_NewFloat</ref>(<ref refid="_eagle_data_type_8h_1aeb78b7fd9c011d917c4f52ee2e9c0f10" kindref="member" tooltip="The global data type for handling EagleDataTypeFloat.">EagleDataTypeFloatType</ref><sp/>value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordsPerPage,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref>*<sp/><ref refid="_eagle_page_provider_single_8c_1ae974e1d4ef699de4f259a8d6d1f6a94c" kindref="member" tooltip="This creates a page provider that provides a single page filled with a fixed string...">EaglePageProviderSingle_NewVarchar</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>recordsPerPage,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_single_8c_1a487d87fcf03f80757b4ae08ebcfdc218" kindref="member" tooltip="Free a page provider.">EaglePageProviderSingle_Delete</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_single_8c_1a56bb3a08344b564978b0224a67c6d30b" kindref="member" tooltip="Return the amount of pages remaining.">EaglePageProviderSingle_pagesRemaining</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_single_8c_1a492b383550a116b27451f296d98270d1" kindref="member" tooltip="Get the next page from a provider.">EaglePageProviderSingle_nextPage</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_eagle_page_provider_single_8c_1aa68b8d54ad58c127366022f6c3327412" kindref="member" tooltip="Reset the cursor of a provider.">EaglePageProviderSingle_reset</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><ref refid="_eagle_boolean_8h_1aa01305945a9ba427016fd971ed17ec7a" kindref="member" tooltip="Enum for representing boolean values.">EagleBoolean</ref><sp/><ref refid="_eagle_page_provider_single_8c_1a6ef4671505a45447e6b990e6676408c7" kindref="member" tooltip="Check is a providers pages can be access in any order with EaglePageProvider_getPage()...">EaglePageProviderSingle_isRandomAccess</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><ref refid="struct_eagle_page" kindref="compound" tooltip="Represents a single page of data.">EaglePage</ref>*<sp/><ref refid="_eagle_page_provider_single_8c_1ad34b753359f3649ee26bfaf0f4109d04" kindref="member" tooltip="Get a random page from a provider.">EaglePageProviderSingle_getPage</ref>(<ref refid="struct_eagle_page_provider_single" kindref="compound">EaglePageProviderSingle</ref><sp/>*epp,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pageNumber);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/Users/elliot/Xcode/eagle/eagle/eagle/EaglePageProviderSingle.h"/>
+  </compounddef>
+</doxygen>
