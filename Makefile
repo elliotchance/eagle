@@ -22,9 +22,11 @@ build_eagle_test:
 	
 # test for leaks
 leaks: build_eagle_test
-	build/Debug/eagle_test wait &
+	- killall eagle_test
+	MallocStackLogging=1 build/Debug/eagle_test wait &
 	sleep 2
-	leaks eagle_test | grep leaks
+	#malloc_history eagle_test -callTree -invert -collapseRecursion -chargeSystemLibraries
+	leaks eagle_test
 	killall eagle_test
 
 test: build_eagle_test
