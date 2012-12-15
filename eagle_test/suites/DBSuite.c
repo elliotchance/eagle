@@ -6,6 +6,8 @@
 #include "EagleDbSqlValue.h"
 #include "EagleInstance.h"
 #include "EagleData.h"
+#include "EagleDbColumn.h"
+#include "EagleDbTable.h"
 
 extern void *yyparse_ast;
 extern int yyerrors_length;
@@ -110,7 +112,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
     CUNIT_ASSERT_NULL(select->tableName);
     CUNIT_ASSERT_NULL(select->whereExpression);
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlExpression_Delete((EagleDbSqlExpression*) select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
@@ -227,6 +229,35 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     yylex_free();
 }
 
+CUNIT_TEST(DBSuite, EagleDbColumn_New)
+{
+    EagleDbColumn *col = EagleDbColumn_New("mycol", EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_STRING(col->name, "mycol");
+    CUNIT_ASSERT_EQUAL_INT(col->type, EagleDbColumnTypeInteger);
+    EagleDbColumn_Delete(col);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
+{
+    EagleDbSqlSelect_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTable_New)
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    
+    CUNIT_ASSERT_EQUAL_STRING(table->name, "mytable");
+    CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
+    CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
+    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
+    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDbColumnTypeInteger);
+    
+    EagleDbTable_Delete(table);
+}
+
 /**
  * The suite init function.
  */
@@ -248,9 +279,16 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
+    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
+    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));
+    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));

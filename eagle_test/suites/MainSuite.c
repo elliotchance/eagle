@@ -225,6 +225,11 @@ CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
     EaglePlanOperation_Delete(op);
 }
 
+CUNIT_TEST(MainSuite, EaglePlan_Delete)
+{
+    EaglePlan_Delete(NULL);
+}
+
 CUNIT_TEST(MainSuite, EaglePlan_toString)
 {
     EaglePlan *plan = EaglePlan_New(0, NULL);
@@ -232,13 +237,18 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n");
     free(msg);
     
+    // add some buffer providers
+    EaglePageProvider *provider = EaglePageProvider_New(10);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
+    EaglePlan_addBufferProvider(plan, bp);
+    
     // add some steps
     EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, NULL, EagleFalse, "Step 1"));
     EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, NULL, EagleFalse, "Step 2"));
     EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,    "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Step 1\n  Step 2\n  Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  destination = 123\n  Step 1\n  Step 2\n  Step 3\n");
     free(msg);
     
     EaglePlan_Delete(plan);
@@ -259,6 +269,20 @@ CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
     CUNIT_ASSERT_EQUAL_INT(receiver->allocated, receiver->used);
     
     EaglePageReceiver_Delete(receiver);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
+{
+    EaglePageProvider *provider = EaglePageProvider_New(10);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
+    char *description = EaglePlanBufferProvider_toString(bp);
+    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123");
+    free(description);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanJob_Delete)
+{
+    EaglePlanJob_Delete(NULL);
 }
 
 /**
@@ -291,7 +315,12 @@ CUnitTests* MainSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageReceiver_pushRecordId));
     
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_toString));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
     

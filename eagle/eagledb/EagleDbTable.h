@@ -28,5 +28,8 @@ typedef struct {
 } EagleDbTable;
 
 EagleDbTable* EagleDbTable_New(char *name);
+void EagleDbTable_Delete(EagleDbTable *table);
+
+void EagleDbTable_addColumn(EagleDbTable *table, EagleDbColumn *column);
 
 #endif

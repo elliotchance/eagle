@@ -265,19 +265,19 @@
 		8BD9E3F416756FF4005C3BDE /* eagledb */ = {
 			isa = PBXGroup;
 			children = (
+				8B1BF80C167A9EB0007C11E6 /* EagleDbColumn.c */,
+				8B1BF80B167A9B35007C11E6 /* EagleDbColumn.h */,
 				8B1BF7F316770297007C11E6 /* EagleDbSqlBinaryExpression.c */,
 				8B1BF7E91675F633007C11E6 /* EagleDbSqlBinaryExpression.h */,
 				8B1BF7FE16777633007C11E6 /* EagleDbSqlExpression.c */,
 				8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */,
 				8B1BF7F216770173007C11E6 /* EagleDbSqlExpressionOperator.h */,
-				8B1BF806167A999D007C11E6 /* EagleDbTable.h */,
-				8B1BF808167A9A6C007C11E6 /* EagleDbTable.c */,
-				8B1BF80B167A9B35007C11E6 /* EagleDbColumn.h */,
-				8B1BF80C167A9EB0007C11E6 /* EagleDbColumn.c */,
 				8B1BF7E61675DD09007C11E6 /* EagleDbSqlSelect.c */,
 				8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */,
 				8B1BF7EB1675F7AA007C11E6 /* EagleDbSqlValue.c */,
 				8B1BF7EA1675F727007C11E6 /* EagleDbSqlValue.h */,
+				8B1BF808167A9A6C007C11E6 /* EagleDbTable.c */,
+				8B1BF806167A999D007C11E6 /* EagleDbTable.h */,
 			);
 			path = eagledb;
 			sourceTree = "<group>";

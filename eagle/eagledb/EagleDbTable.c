@@ -13,3 +13,21 @@ EagleDbTable* EagleDbTable_New(char *name)
     
     return table;
 }
+
+void EagleDbTable_Delete(EagleDbTable *table)
+{
+    int i;
+    
+    for(i = 0; i < table->usedColumns; ++i) {
+        EagleDbColumn_Delete(table->columns[i]);
+    }
+    free(table->columns);
+    
+    free(table->name);
+    free(table);
+}
+
+void EagleDbTable_addColumn(EagleDbTable *table, EagleDbColumn *column)
+{
+    table->columns[table->usedColumns++] = column;
+}

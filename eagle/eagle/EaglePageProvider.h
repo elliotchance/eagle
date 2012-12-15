@@ -29,10 +29,6 @@ int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 
 int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
-int EaglePageProvider_pagesRemainingFromReceiver_(EaglePageProvider *epp);
-int EaglePageProvider_pagesRemainingFromFixed_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);
-EaglePage* EaglePageProvider_nextPageFromReceiver_(EaglePageProvider *epp);
-EaglePage* EaglePageProvider_nextPageFromFixed_(EaglePageProvider *epp);
 
 #endif

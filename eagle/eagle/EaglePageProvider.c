@@ -74,14 +74,6 @@ int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)
     return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
 }
 
-int EaglePageProvider_pagesRemainingFromFixed_(EaglePageProvider *epp)
-{
-    if(epp->offsetRecords > 0) {
-        return 0;
-    }
-    return 1;
-}
-
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 {
     EaglePage *nextPage;
@@ -107,14 +99,6 @@ EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)
     page = EaglePage_New(data, pageSize, epp->offsetRecords);
     epp->offsetRecords += pageSize;
     
-    return page;
-}
-
-EaglePage* EaglePageProvider_nextPageFromFixed_(EaglePageProvider *epp)
-{
-    int *begin = (int*) epp->records;
-    EaglePage *page = EaglePage_New(begin, epp->recordsPerPage, epp->offsetRecords);
-    epp->offsetRecords += epp->offsetRecords;
     return page;
 }
 

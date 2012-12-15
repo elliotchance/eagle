@@ -11,3 +11,9 @@ EagleDbColumn* EagleDbColumn_New(char *name, EagleDbColumnType type)
     
     return column;
 }
+
+void EagleDbColumn_Delete(EagleDbColumn *column)
+{
+    free(column->name);
+    free(column);
+}
