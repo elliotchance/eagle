@@ -34,6 +34,7 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
             msg = (char*) malloc(256);
             sprintf(msg, "dest = %d, source1 = %d, source2 = %d", destinationBuffer, destinationLeft, destinationRight);
             epo = EaglePlanOperation_NewPage(destinationBuffer, EaglePageOperations_AdditionPage, destinationLeft, destinationRight, msg);
+            free(msg);
             EaglePlan_addOperation(plan, epo);
             
             finalDestination = destinationBuffer;
@@ -62,6 +63,7 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
         
         sprintf(msg, "CastIntToBool: dest = %d, source1 = %d", 0, finalDestination);
         epo = EaglePlanOperation_NewPage(0, EaglePageOperations_CastIntPageToBoolean, finalDestination, 0, msg);
+        free(msg);
         EaglePlan_addOperation(plan, epo);
     }
     

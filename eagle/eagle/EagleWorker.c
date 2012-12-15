@@ -8,7 +8,6 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
     EagleWorker *worker = (EagleWorker*) malloc(sizeof(EagleWorker));
     worker->workerId = workerId;
-    worker->thread = NULL;
     worker->instance = instance;
     return worker;
 }
@@ -18,7 +17,7 @@ void* EagleWorker_begin(void *obj)
     EagleWorker *worker = (EagleWorker*) obj;
     
     while(1) {
-        EaglePlanJob *job;
+        EaglePlanJob *job = NULL;
         
         /* ask the instance for the next job */
         job = EagleInstance_nextJob(worker->instance);
@@ -63,13 +62,12 @@ void* EagleWorker_begin(void *obj)
 
 void EagleWorker_start(EagleWorker *worker)
 {
-    worker->thread = (pthread_t*) malloc(sizeof(pthread_t));
-    pthread_create(worker->thread, NULL, EagleWorker_begin, worker);
+    pthread_create(&worker->thread, NULL, EagleWorker_begin, worker);
 }
 
 void EagleWorker_join(EagleWorker *worker)
 {
-    pthread_join(*worker->thread, NULL);
+    pthread_join(worker->thread, NULL);
 }
 
 /**
@@ -77,6 +75,5 @@ void EagleWorker_join(EagleWorker *worker)
  */
 void EagleWorker_Delete(EagleWorker *worker)
 {
-    free(worker->thread);
     free(worker);
 }

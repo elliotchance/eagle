@@ -15,7 +15,9 @@
 #define CUNIT_VERIFY_EQUAL_INT(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_VERIFY_EQUAL_INT: Expected %d from expression \"%s\", but received %d from expression \"%s\"", expected, #expected, actual, #actual); \
-CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -24,7 +26,9 @@ CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, ""
 #define CUNIT_ASSERT_EQUAL_INT(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_ASSERT_EQUAL_INT: Expected %d from expression \"%s\", but received %d from expression \"%s\"", expected, #expected, actual, #actual); \
-CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -33,7 +37,9 @@ CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, ""
 #define CUNIT_VERIFY_EQUAL_STRING(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_VERIFY_EQUAL_STRING: Expected \"%s\", but received \"%s\"", expected, actual); \
-CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE); \
+if(CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -42,7 +48,9 @@ CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE_
 #define CUNIT_ASSERT_EQUAL_STRING(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_ASSERT_EQUAL_STRING: Expected \"%s\", but received \"%s\"", expected, actual); \
-CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -51,7 +59,9 @@ CU_assertImplementation(!strcmp((actual), (expected)), __LINE__, cu_msg, __FILE_
 #define CUNIT_FAIL(msg) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_FAIL: %s", msg); \
-CU_assertImplementation(CU_FALSE, __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation(CU_FALSE, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -60,7 +70,9 @@ CU_assertImplementation(CU_FALSE, __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
 #define CUNIT_ASSERT_NOT_NULL(actual) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_ASSERT_NOT_NULL: Expression \"%s\" was NULL", #actual); \
-CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -69,7 +81,9 @@ CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_TRU
 #define CUNIT_VERIFY_NOT_NULL(actual) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_VERIFY_NOT_NULL: Expression \"%s\" was NULL", #actual); \
-CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_FALSE); \
+if(CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -78,7 +92,9 @@ CU_assertImplementation((actual) != NULL, __LINE__, cu_msg, __FILE__, "", CU_FAL
 #define CUNIT_ASSERT_NULL(actual) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_ASSERT_NULL: Expression \"%s\" was not NULL", #actual); \
-CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -87,7 +103,9 @@ CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_TRU
 #define CUNIT_VERIFY_NULL(actual) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_VERIFY_NULL: Expression \"%s\" was not NULL", #actual); \
-CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_FALSE); \
+if(CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -96,7 +114,9 @@ CU_assertImplementation((actual) == NULL, __LINE__, cu_msg, __FILE__, "", CU_FAL
 #define CUNIT_ASSERT_EQUAL_PTR(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_ASSERT_EQUAL_PTR: Expected pointer from expression \"%s\" does not match pointer from expression \"%s\"", #expected, #actual); \
-CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
 }
 
 /**
@@ -105,12 +125,14 @@ CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, ""
 #define CUNIT_VERIFY_EQUAL_PTR(actual, expected) { \
 char *cu_msg = (char*) malloc(1024); \
 sprintf(cu_msg, "CUNIT_VERIFY_EQUAL_PTR: Expected pointer from expression \"%s\" does not match pointer from expression \"%s\"", #expected, #actual); \
-CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
 }
 
 
 typedef struct {
-    const char* strName;
+    const char *strName;
     CU_TestFunc pTestFunc;
 } CUnitTest;
 

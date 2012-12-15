@@ -46,6 +46,8 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
             job = NULL;
             break;
         }
+        
+        EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
     }
     
@@ -58,4 +60,5 @@ void EagleInstance_Delete(EagleInstance *eagle)
     EagleWorkers_Delete(eagle->workers);
     EagleLock_Delete(eagle->nextJobLock);
     EaglePlan_Delete(eagle->plan);
+    free(eagle);
 }

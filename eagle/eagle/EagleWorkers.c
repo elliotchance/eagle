@@ -39,6 +39,7 @@ void EagleWorkers_Delete(EagleWorkers *workers)
     for(i = 0; i < workers->totalWorkers; ++i) {
         EagleWorker_Delete(workers->workers[i]);
     }
+    free((void*) workers->workers);
     
     free((void*) workers);
 }

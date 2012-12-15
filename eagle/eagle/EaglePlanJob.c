@@ -10,7 +10,7 @@ EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)
     
     /* initialize all buffers now */
     job->allocatedBuffers = allocatedBuffers;
-    job->buffers = (EaglePage**) calloc((size_t) job->allocatedBuffers, sizeof(EaglePage));
+    job->buffers = (EaglePage**) calloc((size_t) job->allocatedBuffers, sizeof(EaglePage*));
     for(i = 0; i < job->allocatedBuffers; ++i) {
         job->buffers[i] = EaglePage_Alloc(plan->pageSize);
     }
@@ -22,8 +22,12 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
 {
     int i;
     
+    if(!job) {
+        return;
+    }
+    
     for(i = 0; i < job->allocatedBuffers; ++i) {
-        EaglePage_Delete(job->buffers[i]); 
+        EaglePage_Delete(job->buffers[i]);
     }
     free((void*) job->buffers);
     

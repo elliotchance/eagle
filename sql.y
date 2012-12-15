@@ -1,76 +1,90 @@
 %{
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+    #include <math.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
 
-#include "EagleDbSqlSelect.h"
-#include "EagleDbSqlBinaryExpression.h"
+    #include "EagleDbSqlSelect.h"
+    #include "EagleDbSqlBinaryExpression.h"
 
-int yyerror(char *s);
-int yylex();
+    int yyerror(char *s);
+    int yylex();
+    int yylex_destroy();
 
-/**
- Contains the last error message. A dusplicate copy of the error message will always be taken so this actually leaks.
- It would be nice to add it to an error stack that can be free'd in bulk.
- */
-char *yyerror_last = NULL;
-
-/**
- This is the pointer to the final AST returned by the parser.
- */
-void *yyparse_ast = NULL;
-
-/**
- A return stack. Maximum depth is 256.
- */
-void **yyreturn = NULL;
-int yyreturn_length = 0;
-
-/**
- Initialise the yyreturn stack.
- */
-void** yyreturn_init()
-{
-    if(NULL == yyreturn) {
-        yyreturn = (void**) calloc((size_t) 256, sizeof(void*));
+    /**
+     Contains the first 100 error messages.
+     */
+    char **yyerrors = NULL;
+    int yyerrors_length = 0;
+    
+    /**
+     Push the error onto the stack.
+     */
+    char* yyerrors_push(void *ptr)
+    {
+        return yyerrors[yyerrors_length++] = ptr;
     }
-    return yyreturn;
-}
+    
+    /**
+     Returns the most recent error message.
+     */
+    char* yyerrors_last()
+    {
+        return yyerrors[yyerrors_length - 1];
+    }
 
-/**
- Push the return value onto the stack.
- */
-void* yyreturn_push(void *ptr)
-{
-    yyreturn_init();
-    return yyreturn[yyreturn_length++] = ptr;
-}
+    /**
+     This is the pointer to the final AST returned by the parser.
+     */
+    void *yyparse_ast = NULL;
+    
+    void **yyobj = NULL;
+    int yyobj_length = 0;
+    
+    /**
+     Anything that is allocated during the parsing must call yyobj_push(), if the parsing fails this stack will do the cleanup.
+     */
+    void* yyobj_push(void *ptr)
+    {
+        return yyobj[yyobj_length++] = ptr;
+    }
 
-/**
- Return the last yyreturn and decrement back the stack.
- */
-void* yyreturn_pop()
-{
-    yyreturn_init();
-    return yyreturn[--yyreturn_length];
-}
+    /**
+     A return stack. Maximum depth is 256.
+     */
+    void **yyreturn = NULL;
+    int yyreturn_length = 0;
 
-/**
- Return the most recent yyreturn.
- */
-void* yyreturn_current()
-{
-    yyreturn_init();
-    return yyreturn[yyreturn_length - 1];
-}
+    /**
+     Push the return value onto the stack.
+     */
+    void* yyreturn_push(void *ptr)
+    {
+        return yyreturn[yyreturn_length++] = ptr;
+    }
 
-/**
- This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
- out if you intended to keep it. Since you cannot access the yytext direct from here?
- */
-extern char *yytext_last;
+    /**
+     Return the last yyreturn and decrement back the stack.
+     */
+    void* yyreturn_pop()
+    {
+        return yyreturn[--yyreturn_length];
+    }
+
+    /**
+     Return the most recent yyreturn.
+     */
+    void* yyreturn_current()
+    {
+        return yyreturn[yyreturn_length - 1];
+    }
+
+    /**
+     This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
+     out if you intended to keep it. Since you cannot access the yytext direct from here?
+     */
+    extern char *yytext_last;
 
 %}
 
@@ -111,11 +125,11 @@ statement:
 
 select_statement:
     K_SELECT {
-        yyreturn_push((void*) EagleDbSqlSelect_New());
+        yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
     }
     T_ASTERISK
     K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) yyreturn_current())->tableName = strdup(yytext_last);
+        ((EagleDbSqlSelect*) yyreturn_current())->tableName = yyobj_push(strdup(yytext_last));
     }
     where_expression {
         void *last = yyreturn_pop();
@@ -141,7 +155,7 @@ expression:
     |
         value {
             void *last = yyreturn_pop();
-            yyreturn_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL));
+            yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
         }
         T_PLUS {
             ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorPlus;
@@ -153,13 +167,52 @@ expression:
     
 value:
     INTEGER {
-        yyreturn_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last)));
+        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last))));
     }
 
 %%
 
 int yyerror(char *s)
 {
-    yyerror_last = strdup(s);
+    yyerrors_push(strdup(s));
     return 0;
+}
+
+void yylex_init()
+{
+    yyobj = (void**) calloc((size_t) 256, sizeof(void*));
+    yyobj_length = 0;
+    
+    yyerrors = (char**) calloc((size_t) 100, sizeof(char*));
+    yyerrors_length = 0;
+    
+    yyreturn = (void**) calloc((size_t) 256, sizeof(void*));
+    yyreturn_length = 0;
+}
+
+void yylex_free()
+{
+    int i;
+    
+    /* yyobj */
+    if(yyerrors_length > 0) {
+        for(i = 0; i < yyerrors_length; ++i) {
+            free(yyobj[i]);
+        }
+    }
+    free(yyobj);
+    yyobj = NULL;
+    
+    /* yyreturn */
+    free(yyreturn);
+    yyreturn = NULL;
+    
+    /* yyerrors */
+    for(i = 0; i < yyerrors_length; ++i) {
+        free(yyerrors[i]);
+    }
+    free(yyerrors);
+    yyerrors = NULL;
+    
+    yylex_destroy();
 }

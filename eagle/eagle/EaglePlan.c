@@ -55,6 +55,10 @@ void EaglePlan_Delete(EaglePlan *plan)
 {
     int i;
     
+    if(!plan) {
+        return;
+    }
+    
     EaglePageReceiver_Delete(plan->receiver);
     
     for(i = 0; i < plan->usedOperations; ++i) {

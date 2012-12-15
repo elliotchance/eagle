@@ -17,7 +17,12 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 
 void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
 {
-    free(select->tableName);
+    if(!select) {
+        return;
+    }
+    if(select->tableName) {
+        free(select->tableName);
+    }
     EagleDbSqlExpression_Delete(select->whereExpression);
     free(select);
 }

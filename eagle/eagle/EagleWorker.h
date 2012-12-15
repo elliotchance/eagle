@@ -7,7 +7,7 @@ struct EagleInstance_;
 
 typedef struct {
     int workerId;
-    pthread_t *thread;
+    pthread_t thread;
     struct EagleInstance_ *instance;
 } EagleWorker;
 
