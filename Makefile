@@ -64,4 +64,5 @@ gh-pages: master-only coverage doxygen
 	git checkout gh-pages
 	git reset HEAD *
 	git commit --amend -m "Auto generated"
-	git push origin gh-pages
+	git push --force origin gh-pages
+	git checkout master
