@@ -54,11 +54,14 @@ master-only:
 		echo "Run from 'master' branch. Exiting."; \
     	exit 1; \
 	fi
-	
-checkout-gh-pages:
-	git checkout --force gh-pages
 
-gh-pages: master-only checkout-gh-pages coverage doxygen
+gh-pages: master-only coverage doxygen
+	# move some stuff to allow us to change branches
+	- rm -rf /tmp/eagle_doc /tmp/eagle_coverage
+	mv doc /tmp/eagle_doc
+	mv coverage /tmp/eagle_coverage
+	
+	git checkout gh-pages
 	git reset HEAD *
 	git commit --amend -m "Auto generated"
 	git push origin gh-pages
