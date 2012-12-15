@@ -52,5 +52,6 @@ typedef struct {
 } EagleDbSqlExpression;
 
 int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan, int depth);
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
 
 #endif

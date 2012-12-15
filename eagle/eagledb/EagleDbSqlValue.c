@@ -16,3 +16,8 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
     
     return v;
 }
+
+void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
+{
+    free((void*) value);
+}

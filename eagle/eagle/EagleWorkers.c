@@ -31,3 +31,15 @@ void EagleWorkers_joinAll(EagleWorkers *workers)
         EagleWorker_join(workers->workers[i]);
     }
 }
+
+void EagleWorkers_Delete(EagleWorkers *workers)
+{
+    int i;
+    
+    for(i = 0; i < workers->totalWorkers; ++i) {
+        EagleWorker_Delete(workers->workers[i]);
+    }
+    free((void*) workers->workers);
+    
+    free((void*) workers);
+}

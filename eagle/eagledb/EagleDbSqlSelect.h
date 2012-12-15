@@ -26,5 +26,6 @@ typedef struct {
 } EagleDbSqlSelect;
 
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
 
 #endif

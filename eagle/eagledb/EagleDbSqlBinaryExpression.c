@@ -19,3 +19,10 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
     
     return expr;
 }
+
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
+{
+    EagleDbSqlExpression_Delete(expr->left);
+    EagleDbSqlExpression_Delete(expr->right);
+    free(expr);
+}

@@ -10,5 +10,6 @@ typedef struct {
 } EaglePlanJob;
 
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers);
+void EaglePlanJob_Delete(EaglePlanJob *job);
 
 #endif

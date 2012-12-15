@@ -12,6 +12,8 @@ typedef struct {
 } EaglePageReceiver;
 
 EaglePageReceiver* EaglePageReceiver_New(void);
+void EaglePageReceiver_Delete(EaglePageReceiver *receiver);
+
 void EaglePageReceiver_pushRecordId(EaglePageReceiver *pr, int recordId);
 
 #endif

@@ -1,4 +1,6 @@
 #include <CUnit/Basic.h>
+#include <stdio.h>
+#include <unistd.h>
 #include "TestSuite.h"
 #include "MainSuite.h"
 #include "DBSuite.h"
@@ -9,6 +11,12 @@
  */
 int main(int argc, char **argv)
 {
+    // if we are checking for leaks then this may need to wait
+    int wait = 0;
+    if(argc > 1 && !strcmp(argv[1], "wait")) {
+        wait = 1;
+    }
+    
     // initialize the CUnit test registry
     if (CUE_SUCCESS != CU_initialize_registry()) {
         return CU_get_error();
@@ -31,6 +39,9 @@ int main(int argc, char **argv)
                 return CU_get_error();
             }
         }
+        
+        // clean up
+        CUnitTests_Delete(tests);
     }
     
     {
@@ -50,11 +61,21 @@ int main(int argc, char **argv)
                 return CU_get_error();
             }
         }
+        
+        // clean up
+        CUnitTests_Delete(tests);
     }
     
     // Run all tests using the CUnit Basic interface
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
     CU_cleanup_registry();
-    return CU_get_error();
+    int exitCode = CU_get_error();
+    
+    // may need to wait
+    if(wait) {
+        sleep(3600);
+    }
+    
+    return exitCode;
 }

@@ -15,6 +15,7 @@ struct EagleInstance_ {
 typedef struct EagleInstance_ EagleInstance;
 
 EagleInstance* EagleInstance_New(int totalWorkers);
+void EagleInstance_Delete(EagleInstance *eagle);
 
 void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan);
 void EagleInstance_run(EagleInstance *eagle);

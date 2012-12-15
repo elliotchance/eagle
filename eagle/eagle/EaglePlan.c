@@ -50,3 +50,26 @@ const char* EaglePlan_toString(EaglePlan *plan)
     
     return str;
 }
+
+void EaglePlan_Delete(EaglePlan *plan)
+{
+    int i;
+    
+    if(!plan) {
+        return;
+    }
+    
+    EaglePageReceiver_Delete(plan->receiver);
+    
+    for(i = 0; i < plan->usedOperations; ++i) {
+        EaglePlanOperation_Delete(plan->operations[i]);
+    }
+    free(plan->operations);
+    
+    for(i = 0; i < plan->usedProviders; ++i) {
+        EaglePlanBufferProvider_Delete(plan->providers[i]);
+    }
+    free(plan->providers);
+    
+    free(plan);
+}

@@ -18,10 +18,19 @@ build_eagle:
 	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
 
 build_eagle_test:
-	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle_test build
+	xcodebuild -project eagle.xcodeproj -configuration Debug -target eagle_test build
+	
+# test for leaks
+leaks: build_eagle_test
+	- killall eagle_test
+	MallocStackLogging=1 build/Debug/eagle_test wait &
+	sleep 2
+	#malloc_history eagle_test -callTree -invert -collapseRecursion -chargeSystemLibraries
+	leaks eagle_test
+	killall eagle_test
 
 test: build_eagle_test
-	build/Release/eagle_test
+	build/Debug/eagle_test
 	
 coverage: test
 	geninfo --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)

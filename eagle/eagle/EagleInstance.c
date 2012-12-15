@@ -29,8 +29,8 @@ void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)
 
 EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
 {
-    EaglePlan *plan;
-    EaglePlanJob *job;
+    EaglePlan *plan = NULL;
+    EaglePlanJob *job = NULL;
     int i;
     
     /* synchronize this function */
@@ -42,12 +42,23 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
-            EagleSynchronizer_Unlock(eagle->nextJobLock);
-            return NULL;
+            EaglePlanJob_Delete(job);
+            job = NULL;
+            break;
         }
+        
+        EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
     }
     
     EagleSynchronizer_Unlock(eagle->nextJobLock);
     return job;
+}
+
+void EagleInstance_Delete(EagleInstance *eagle)
+{
+    EagleWorkers_Delete(eagle->workers);
+    EagleLock_Delete(eagle->nextJobLock);
+    EaglePlan_Delete(eagle->plan);
+    free(eagle);
 }

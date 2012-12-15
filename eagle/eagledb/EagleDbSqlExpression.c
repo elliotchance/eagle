@@ -6,6 +6,7 @@
 #include "EagleData.h"
 #include "EagleDbSqlBinaryExpression.h"
 #include "EaglePageOperations.h"
+#include "EagleDbSqlSelect.h"
 
 int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan, int depth)
 {
@@ -33,6 +34,7 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
             msg = (char*) malloc(256);
             sprintf(msg, "dest = %d, source1 = %d, source2 = %d", destinationBuffer, destinationLeft, destinationRight);
             epo = EaglePlanOperation_NewPage(destinationBuffer, EaglePageOperations_AdditionPage, destinationLeft, destinationRight, msg);
+            free(msg);
             EaglePlan_addOperation(plan, epo);
             
             finalDestination = destinationBuffer;
@@ -61,8 +63,30 @@ int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int desti
         
         sprintf(msg, "CastIntToBool: dest = %d, source1 = %d", 0, finalDestination);
         epo = EaglePlanOperation_NewPage(0, EaglePageOperations_CastIntPageToBoolean, finalDestination, 0, msg);
+        free(msg);
         EaglePlan_addOperation(plan, epo);
     }
     
     return finalDestination;
+}
+
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
+{
+    if(NULL == expr) {
+        return;
+    }
+    
+    switch(expr->expressionType) {
+        case EagleDbSqlExpressionTypeBinaryExpression:
+            EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeSelect:
+            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeValue:
+            EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
+            break;
+    }
 }

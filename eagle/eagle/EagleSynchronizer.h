@@ -24,4 +24,6 @@ EagleLock* EagleSynchronizer_CreateLock(void);
 void EagleSynchronizer_Lock(EagleLock *lock);
 void EagleSynchronizer_Unlock(EagleLock *lock);
 
+void EagleLock_Delete(EagleLock *lock);
+
 #endif

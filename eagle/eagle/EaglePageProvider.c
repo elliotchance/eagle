@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "EaglePageProvider.h"
 #include "EaglePageOperations.h"
 #include "EagleUtils.h"
@@ -96,10 +97,14 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)
 {
-    int *begin = (int*) epp->records;
+    int *begin = (int*) epp->records, *data = NULL;
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
+    EaglePage *page;
     
-    EaglePage *page = EaglePage_New(begin + epp->offsetRecords, pageSize, epp->offsetRecords);
+    data = (int*) calloc((size_t) pageSize, sizeof(int));
+    memmove((void*) data, (const void *) (begin + epp->offsetRecords), (unsigned long) (sizeof(int) * (size_t) pageSize));
+    
+    page = EaglePage_New(data, pageSize, epp->offsetRecords);
     epp->offsetRecords += pageSize;
     
     return page;
@@ -111,4 +116,12 @@ EaglePage* EaglePageProvider_nextPageFromFixed_(EaglePageProvider *epp)
     EaglePage *page = EaglePage_New(begin, epp->recordsPerPage, epp->offsetRecords);
     epp->offsetRecords += epp->offsetRecords;
     return page;
+}
+
+void EaglePageProvider_Delete(EaglePageProvider *epp)
+{
+    EagleLock_Delete(epp->nextPageLock);
+    free(epp->obj);
+    free(epp->records);
+    free(epp);
 }
