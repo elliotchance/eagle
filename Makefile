@@ -54,9 +54,11 @@ master-only:
 		echo "Run from 'master' branch. Exiting."; \
     	exit 1; \
 	fi
+	
+checkout-gh-pages:
+	git checkout --force gh-pages
 
-gh-pages: master-only coverage doxygen
-	git checkout gh-pages
+gh-pages: master-only checkout-gh-pages coverage doxygen
 	git reset HEAD *
 	git commit --amend -m "Auto generated"
 	git push origin gh-pages
