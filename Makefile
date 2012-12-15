@@ -1,4 +1,5 @@
 OBJROOT = `xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-`
+GIT_BRANCH = `git branch | grep \* | cut -c3-`
 
 all: clean build
 
@@ -29,12 +30,33 @@ leaks: build_eagle_test
 	leaks eagle_test
 	killall eagle_test
 
-test: build_eagle_test
+test: clean_eagle_test build_eagle_test
+	- rm coverage.info
 	build/Debug/eagle_test
 	
 coverage: test
-	geninfo --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
-	genhtml -o coverage coverage.info
+	- rm -rf coverage/html
+	- rm -rf coverage/$(GIT_BRANCH)
+	- mkdir -p coverage/html
+	- mkdir -p coverage/$(GIT_BRANCH)
+	geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
+	genhtml -q -s -t eagle --legend -o coverage/html coverage.info
+	mv coverage/html coverage/$(GIT_BRANCH)
 
 doxygen:
+	- rm -rf doc/html
+	- rm -rf doc/$(GIT_BRANCH)
 	doxygen
+	mv doc/html doc/$(GIT_BRANCH)
+
+master-only:
+	if [ $(GIT_BRANCH) -neq "master" ]; then \
+		echo "Run from 'master' branch. Exiting."; \
+    	exit 1; \
+	fi
+
+gh-pages: master-only coverage doxygen
+	git checkout gh-pages
+	git reset HEAD *
+	git commit --amend -m "Auto generated"
+	git push origin gh-pages
