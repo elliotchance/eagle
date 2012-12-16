@@ -10,21 +10,22 @@
  
  This function does not allocate memory.
  
- @param page The page to scan, can be any size.
- @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
-        based on the result of the comparison.
+ @param destination Must be preallocated to the same size as \p page. All records in this page will be given a value or
+        0 or 1 based on the result of the comparison.
+ @param source1 The page to scan, can be any size.
+ @param source2 Ignored.
  @param obj Must be int* which is dereferenced to the integer value for comparison.
  
  @see EagleData_Int()
  */
-void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)
+void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int value = *((int*) obj), i;
-    out->recordOffset = page->recordOffset;
-    out->count = page->count;
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
     
-    for(i = 0; i < page->count; ++i) {
-        out->data[i] = (page->data[i] < value);
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = (source1->data[i] < value);
     }
 }
 
@@ -33,67 +34,76 @@ void EaglePageOperations_LessThanInt(EaglePage *page, EaglePage *out, void *obj)
  
  This function does not allocate memory.
  
- @param page The page to scan, can be any size.
- @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
-        based on the result of the comparison.
+ @param destination Must be preallocated to the same size as \p page. All records in this page will be given a value or
+        0 or 1 based on the result of the comparison.
+ @param source1 The page to scan, can be any size.
+ @param source2 Ignored.
  @param obj Must be int* which is dereferenced to the integer value for comparison.
  
  @see EagleData_Int()
  */
-void EaglePageOperations_GreaterThanInt(EaglePage *page, EaglePage *out, void *obj)
+void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int value = *((int*) obj), i;
-    out->recordOffset = page->recordOffset;
-    out->count = page->count;
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
     
-    for(i = 0; i < page->count; ++i) {
-        out->data[i] = (page->data[i] > value);
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = (source1->data[i] > value);
     }
 }
 
 /**
  Calculate logical AND between two pages.
  
- @param page The page to scan, can be any size.
- @param out Must be preallocated to the same size as \p page. All records in this page will be given a value or 0 or 1
-        based on the result of the comparison.
- @param obj Must be EaglePage* which becomes the right operand for \p page to calculate logical AND against. This page
-        must also be the same size (or greater) of \p page and \p out
+ @param destination Must be preallocated to the same size as \p page. All records in this page will be given a value or
+        0 or 1 based on the result of the comparison.
+ @param source1 Left operand.
+ @param source2 Right operand.
+ @param obj Ignored.
  */
-void EaglePageOperations_AndPage(EaglePage *page, EaglePage *out, void *obj)
+void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    EaglePage *page2 = (EaglePage*) obj;
     int i;
     
-    out->recordOffset = page->recordOffset;
-    out->count = page->count;
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
     
-    for(i = 0; i < page->count; ++i) {
-        out->data[i] = page->data[i] && page2->data[i];
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = source1->data[i] && source2->data[i];
     }
 }
 
-void EaglePageOperations_AdditionPage(EaglePage *page, EaglePage *out, void *obj)
+void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    EaglePage *page2 = (EaglePage*) obj;
     int i;
     
-    out->recordOffset = page->recordOffset;
-    out->count = page->count;
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
     
-    for(i = 0; i < page->count; ++i) {
-        out->data[i] = page->data[i] + page2->data[i];
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = source1->data[i] + source2->data[i];
     }
 }
 
-void EaglePageOperations_CastIntPageToBoolean(EaglePage *page, EaglePage *out, void *obj)
+void EaglePageOperations_CastIntPageToBoolean(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     
-    out->recordOffset = page->recordOffset;
-    out->count = page->count;
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
     
-    for(i = 0; i < page->count; ++i) {
-        out->data[i] = (page->data[i] != 0);
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = (source1->data[i] != 0);
+    }
+}
+
+void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EaglePageProvider *provider = (EaglePageProvider*) obj;
+    
+    for(i = 0; i < source1->count; ++i) {
+        EaglePageProvider_add(provider, (void*) source1->data[i]);
     }
 }

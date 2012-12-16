@@ -42,9 +42,9 @@ int main(int argc, const char * argv[])
         EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, dataSize, recordsPerPage);
         EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
         
-        EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(10000000), EagleTrue, "<2> > 5000000 -> <1>"));
-        EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, EagleData_Int(20000000), EagleTrue, "<3> < 10000000 -> <1>"));
-        EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,                       "<2> && <3> -> DEST"));
+        EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt, 2, 1, -1, EagleData_Int(10000000), EagleTrue, "<2> > 5000000 -> <1>"));
+        EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,    3, 1, -1, EagleData_Int(20000000), EagleTrue, "<3> < 10000000 -> <1>"));
+        EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "<2> && <3> -> DEST"));
         
         printf("%s", EaglePlan_toString(plan));
         

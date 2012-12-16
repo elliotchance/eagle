@@ -29,17 +29,21 @@ void* EagleWorker_begin(void *obj)
             /* run operations */
             for(i = 0; i < job->plan->usedOperations; ++i) {
                 EaglePlanOperation *epo = job->plan->operations[i];
+                EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
                 
-                /* execute normal */
-                if(epo->type == EaglePlanOperation_NORMAL) {
-                    epo->function(job->buffers[epo->source], job->buffers[epo->destination], epo->obj);
+                /* prepare arguments */
+                if(epo->destination >= 0) {
+                    destination = job->buffers[epo->destination];
+                }
+                if(epo->source1 >= 0) {
+                    source1 = job->buffers[epo->source1];
+                }
+                if(epo->source2 >= 0) {
+                    source2 = job->buffers[epo->source2];
                 }
                 
-                /* execute page */
-                else if(epo->type == EaglePlanOperation_PAGE) {
-                    EaglePage *page = job->buffers[*((int*) epo->obj)];
-                    epo->function(job->buffers[epo->source], job->buffers[epo->destination], (void*) page);
-                }
+                /* execute page operation */
+                epo->function(destination, source1, source2, epo->obj);
             }
             
             /* extract records */

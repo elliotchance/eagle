@@ -164,7 +164,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOpe
     int pageSize = 10;
     EaglePageReceiver *receiver = EaglePageReceiver_New();
     EaglePlan *plan = EaglePlan_New(pageSize, receiver);
-    EagleDbSqlExpression_CompilePlan(where, 1, plan, 0);
+    EagleDbSqlExpression_CompilePlanIntoBoolean(where, 1, plan);
     //printf("%s\n", EaglePlan_toString(plan));
     
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, usedProviders);

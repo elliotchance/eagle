@@ -26,7 +26,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
     EaglePage *out = EaglePage_Alloc(pageSize);
     
     int *int1 = EagleData_Int(testValue);
-    EaglePageOperations_GreaterThanInt(page, out, int1);
+    EaglePageOperations_GreaterThanInt(out, page, NULL, int1);
     
     // verify
     int valid = 1;
@@ -52,7 +52,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
     EaglePage *out = EaglePage_Alloc(pageSize);
     
     int *int1 = EagleData_Int(testValue);
-    EaglePageOperations_LessThanInt(page, out, int1);
+    EaglePageOperations_LessThanInt(out, page, NULL, int1);
     
     // verify
     int valid = 1;
@@ -82,7 +82,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
         page2->data[i] = rand() % 2;
     }
     
-    EaglePageOperations_AndPage(page1, out, (void*) page2);
+    EaglePageOperations_AndPage(out, page1, page2, NULL);
     
     // verify
     int valid = 1;
@@ -121,9 +121,9 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
     
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(min), EagleTrue, "1"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, EagleData_Int(max), EagleTrue, "2"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,                  "3"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt, 2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,    3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL,               EagleFalse, "3"));
     
     EagleInstance_addPlan(eagle, plan);
     
@@ -219,7 +219,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
 
 CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
 {
-    EaglePlanOperation *op = EaglePlanOperation_New(0, NULL, 0, NULL, EagleFalse, "some description");
+    EaglePlanOperation *op = EaglePlanOperation_New(NULL, -1, -1, -1, NULL, EagleFalse, "some description");
     char *msg = (char*) EaglePlanOperation_toString(op);
     CUNIT_ASSERT_EQUAL_STRING(msg, "some description");
     EaglePlanOperation_Delete(op);
@@ -243,9 +243,9 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addBufferProvider(plan, bp);
     
     // add some steps
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, NULL, EagleFalse, "Step 1"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(3, EaglePageOperations_LessThanInt,    1, NULL, EagleFalse, "Step 2"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_NewPage(0, EaglePageOperations_AndPage,    2, 3,    "Step 3"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt, 2, 1, -1, NULL, EagleFalse, "Step 1"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,    3, 1, -1, NULL, EagleFalse, "Step 2"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  destination = 123\n  Step 1\n  Step 2\n  Step 3\n");

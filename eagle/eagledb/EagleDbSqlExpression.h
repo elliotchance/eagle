@@ -51,7 +51,11 @@ typedef struct {
     
 } EagleDbSqlExpression;
 
-int EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan, int depth);
+void EagleDbSqlExpression_CompilePlanIntoBoolean(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan);
+void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expression, EaglePageProvider *destination, EaglePlan *plan);
 void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
+
+/* private functions */
+int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan);
 
 #endif
