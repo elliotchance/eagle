@@ -32,14 +32,16 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
 
 const char* EaglePlan_toString(EaglePlan *plan)
 {
-    char *str = (char*) malloc(1024);
+    char *str = (char*) malloc(1024), *temp;
     int i;
     
     str[0] = 0;
     strcat(str, "EaglePlan:\n");
     for(i = 0; i < plan->usedProviders; ++i) {
         strcat(str, "  ");
-        strcat(str, EaglePlanBufferProvider_toString(plan->providers[i]));
+        temp = EaglePlanBufferProvider_toString(plan->providers[i]);
+        strcat(str, temp);
+        free(temp);
         strcat(str, "\n");
     }
     for(i = 0; i < plan->usedOperations; ++i) {

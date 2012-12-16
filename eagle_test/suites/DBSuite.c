@@ -8,6 +8,8 @@
 #include "EagleData.h"
 #include "EagleDbColumn.h"
 #include "EagleDbTable.h"
+#include "EagleDbTableData.h"
+#include "EagleDbTuple.h"
 
 extern void *yyparse_ast;
 extern int yyerrors_length;
@@ -258,6 +260,69 @@ CUNIT_TEST(DBSuite, EagleDbTable_New)
     EagleDbTable_Delete(table);
 }
 
+EagleDbTable* _getTable()
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    return table;
+}
+
+CUNIT_TEST(DBSuite, _, TableTest)
+{
+    // define the table
+    EagleDbTable *table = _getTable();
+    
+    // create the data provider
+    EagleDbTableData *td = EagleDbTableData_New(table);
+    
+    // create a record
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setInt(tuple, 0, 123);
+    EagleDbTuple_setInt(tuple, 1, 456);
+    
+    // put some data in
+    EagleDbTableData_insert(td, tuple);
+    CUNIT_ASSERT_EQUAL_INT(td->providers[0]->totalRecords, 1);
+    CUNIT_ASSERT_EQUAL_INT(td->providers[1]->totalRecords, 1);
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[0]), 1);
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[1]), 1);
+    
+    // read the data out
+    EaglePage *page1 = EaglePageProvider_nextPage(td->providers[0]);
+    EaglePage *page2 = EaglePageProvider_nextPage(td->providers[1]);
+    
+    CUNIT_ASSERT_NOT_NULL(page1);
+    CUNIT_ASSERT_NOT_NULL(page2);
+    CUNIT_ASSERT_EQUAL_INT(page1->count, 1);
+    CUNIT_ASSERT_EQUAL_INT(page2->count, 1);
+    
+    CUNIT_ASSERT_EQUAL_INT(page1->data[0], 123);
+    CUNIT_ASSERT_EQUAL_INT(page2->data[0], 456);
+    
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTableData_Delete(td);
+    EagleDbTable_Delete(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_New)
+{
+    EagleDbTable *table = _getTable();
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setInt(tuple, 0, 123);
+    EagleDbTuple_setInt(tuple, 1, 456);
+    char *desc = EagleDbTuple_toString(tuple);
+    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=456)");
+    free(desc);
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_Delete(table);
+}
+
 /**
  * The suite init function.
  */
@@ -290,6 +355,8 @@ CUnitTests* DBSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
     
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));
+    
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
     
@@ -301,6 +368,8 @@ CUnitTests* DBSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_ValueInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Addition));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     
     return tests;
 }

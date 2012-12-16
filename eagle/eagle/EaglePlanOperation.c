@@ -28,9 +28,9 @@ EaglePlanOperation* EaglePlanOperation_NewPage(int destination, EaglePageOperati
     return EaglePlanOperation_NewType(EaglePlanOperation_PAGE, destination, function, source1, EagleData_Int(source2), EagleTrue, description);
 }
 
-const char* EaglePlanOperation_toString(EaglePlanOperation *epo)
+char* EaglePlanOperation_toString(EaglePlanOperation *epo)
 {
-    return epo->description;
+    return (char*) epo->description;
 }
 
 void EaglePlanOperation_Delete(EaglePlanOperation *epo)

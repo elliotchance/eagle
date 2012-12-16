@@ -116,7 +116,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePageReceiver *receiver = EaglePageReceiver_New();
     EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, totalRecords, recordsPerPage);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, totalRecords, recordsPerPage);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
     
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
@@ -192,7 +192,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     testData[1] = 456;
     testData[2] = 789;
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(testData, testDataSize, recordsPerPage);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(testData, testDataSize, recordsPerPage);
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, testDataSize);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
@@ -238,7 +238,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     free(msg);
     
     // add some buffer providers
-    EaglePageProvider *provider = EaglePageProvider_New(10);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
     EaglePlan_addBufferProvider(plan, bp);
     
@@ -273,16 +273,29 @@ CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
 
 CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
 {
-    EaglePageProvider *provider = EaglePageProvider_New(10);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
     char *description = EaglePlanBufferProvider_toString(bp);
     CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123");
     free(description);
+    EaglePlanBufferProvider_Delete(bp);
 }
 
 CUNIT_TEST(MainSuite, EaglePlanJob_Delete)
 {
     EaglePlanJob_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_Delete)
+{
+    EaglePageProvider_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_add)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 1);
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_add(provider, NULL), EagleFalse);
+    EaglePageProvider_Delete(provider);
 }
 
 /**
@@ -312,6 +325,8 @@ CUnitTests* MainSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_TotalPages));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntStream));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_add));
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageReceiver_pushRecordId));
     

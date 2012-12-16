@@ -4,31 +4,76 @@
 #include <pthread.h>
 #include "EaglePage.h"
 #include "EagleSynchronizer.h"
+#include "EagleBoolean.h"
 
 struct EaglePageProvider_ {
-    int offsetRecords;
-    int totalRecords;
-    int recordsPerPage;
-    void *records;
-    EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
-    int (*pagesRemaining)(struct EaglePageProvider_ *epp);
-    void *obj;
     
-    /** synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining() */
+    /**
+     The cursor position. An internal counter of the position of the stream. If the stream has more pages this will be
+     incremented with each nextPage().
+     */
+    int offsetRecords;
+    
+    /**
+     The total amount of records. You should never access this directly since its value may be virtual or invalid -
+     instead use EaglePageProvider_pagesRemaining()
+     */
+    int totalRecords;
+    
+    /**
+     For convenience the page provider has a default page size.
+     */
+    int recordsPerPage;
+    
+    /**
+     A pointer to the actual data that will be fed into pages. You should not rely on accessing this directly because
+     its type and implementation will be different depending on the type of page provider. Use the appropriate methods
+     nextPage() and pagesRemaining().
+     */
+    void *records;
+    
+    /**
+     Fetch the next page from the provider. If no more data is available this will return NULL.
+     */
+    EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
+    
+    /**
+     Ask the provider if there is more data available. This must be invoked before every nextPage() - since the stream
+     might be variable and more data may be added to the stream while your reading from it.
+     */
+    int (*pagesRemaining)(struct EaglePageProvider_ *epp);
+    
+    /**
+     Some data provider types allow the addition of data.
+     @return EagleTrue if the data was added on, EagleFalse otherwise.
+     */
+    EagleBoolean (*add)(struct EaglePageProvider_ *epp, void *data);
+    
+    /**
+     Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining()
+     */
     EagleLock *nextPageLock;
+    
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 
-EaglePageProvider* EaglePageProvider_New(int recordsPerPage);
-EaglePageProvider* EaglePageProvider_CreateFromIntStream(int *records, int totalRecords, int recordsPerPage);
+EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage);
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage);
+EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage);
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
+EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 
-int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
-EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);
+/* private functions */
+EaglePageProvider* EaglePageProvider_New_(int recordsPerPage);
+int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);
+EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp);
+EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data);
+EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
+int EaglePageProvider_pagesRemainingFromIntStream_(EaglePageProvider *epp);
+EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp);
 
 #endif

@@ -39,7 +39,7 @@ int main(int argc, const char * argv[])
         int recordsPerPage = 10000;
         EaglePageReceiver *receiver = EaglePageReceiver_New();
         EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
-        EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(data, dataSize, recordsPerPage);
+        EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, dataSize, recordsPerPage);
         EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
         
         EaglePlan_addOperation(plan, EaglePlanOperation_New(2, EaglePageOperations_GreaterThanInt, 1, EagleData_Int(10000000), EagleTrue, "<2> > 5000000 -> <1>"));
