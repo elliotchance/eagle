@@ -81,6 +81,7 @@ void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expressi
     
     /* send all the result data to the provider */
     epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, result, -1, destination, EagleFalse, "Send to provider");
+    EaglePlan_addOperation(plan, epo);
 }
 
 /**
@@ -99,7 +100,7 @@ void EagleDbSqlExpression_CompilePlanIntoBoolean(EagleDbSqlExpression *expressio
         char *msg = (char*) malloc(256);
         EaglePlanOperation *epo;
         
-        sprintf(msg, "CastIntToBool: dest = %d, source1 = %d", 0, finalDestination);
+        sprintf(msg, "CastIntPageToBoolean: dest = %d, source1 = %d", 0, finalDestination);
         epo = EaglePlanOperation_New(EaglePageOperations_CastIntPageToBoolean, 0, finalDestination, -1, NULL, EagleFalse, msg);
         free(msg);
         EaglePlan_addOperation(plan, epo);

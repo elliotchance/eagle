@@ -158,17 +158,18 @@ EagleDbSqlExpression* _getExpression(const char *sql)
     return select->selectExpression;
 }
 
-void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOperations)
+void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOperations, int *answers)
 {
     // compile plan
     int pageSize = 10;
-    EaglePageReceiver *receiver = EaglePageReceiver_New();
-    EaglePlan *plan = EaglePlan_New(pageSize, receiver);
-    EagleDbSqlExpression_CompilePlanIntoBoolean(where, 1, plan);
-    //printf("%s\n", EaglePlan_toString(plan));
+    EaglePageReceiver *dummy = EaglePageReceiver_New();
+    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize);
+    EaglePlan *plan = EaglePlan_New(pageSize, dummy);
+    EagleDbSqlExpression_CompilePlanIntoProvider(where, receiver, plan);
+    //printf("\n%s\n", EaglePlan_toString(plan));
     
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, usedProviders);
-    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, userOperations);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, usedOperations);
     
     // execute
     EagleInstance *eagle = EagleInstance_New(1);
@@ -176,16 +177,17 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOpe
     EagleInstance_run(eagle);
     
     // validate result
-    CUNIT_ASSERT_EQUAL_INT(receiver->used, pageSize);
+    CUNIT_ASSERT_EQUAL_INT(receiver->totalRecords, pageSize);
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(receiver->buffer[i] != i) {
+        if(((int*) receiver->records)[i] != answers[i]) {
             valid = 0;
             break;
         }
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
+    EaglePageProvider_Delete(receiver);
     EagleInstance_Delete(eagle);
 }
 
@@ -199,7 +201,9 @@ CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
     EagleDbSqlValue *value = (EagleDbSqlValue*) where;
     CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
     
-    _testExpression(where, 1, 1);
+    CREATE_EXPRESSION_ARRAY(answers, 10, 123);
+    _testExpression(where, 1, 1, answers);
+    free(answers);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();
@@ -225,7 +229,9 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     CUNIT_ASSERT_EQUAL_INT(123, ((EagleDbSqlValue*) left)->value.intValue);
     CUNIT_ASSERT_EQUAL_INT(456, ((EagleDbSqlValue*) right)->value.intValue);
     
-    _testExpression(where, 2, 2);
+    CREATE_EXPRESSION_ARRAY(answers, 10, 123 + 456);
+    _testExpression(where, 2, 2, answers);
+    free(answers);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();

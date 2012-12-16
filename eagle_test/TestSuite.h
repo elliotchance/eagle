@@ -4,6 +4,12 @@
 #include <CUnit/Basic.h>
 #include "stdarg.h"
 
+#define CREATE_EXPRESSION_ARRAY(answers, pageSize, expr) \
+int *answers = (int*) calloc((size_t) pageSize, sizeof(int)); \
+for(int i = 0; i < pageSize; ++i) { \
+answers[i] = expr; \
+}
+
 #define CUNIT_TESTNAME(suite, method, ...) suite##_test##method##__VA_ARGS__
 #define CUNIT_TEST(suite, method, ...) void CUNIT_TESTNAME(suite, method, __VA_ARGS__)()
 #define QUOTE(str) #str

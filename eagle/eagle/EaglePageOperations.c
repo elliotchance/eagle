@@ -104,6 +104,6 @@ void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage
     EaglePageProvider *provider = (EaglePageProvider*) obj;
     
     for(i = 0; i < source1->count; ++i) {
-        EaglePageProvider_add(provider, (void*) source1->data[i]);
+        EaglePageProvider_add(provider, &source1->data[i]);
     }
 }

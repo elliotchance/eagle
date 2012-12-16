@@ -37,15 +37,23 @@ const char* EaglePlan_toString(EaglePlan *plan)
     
     str[0] = 0;
     strcat(str, "EaglePlan:\n");
+    
+    if(plan->usedProviders > 0) {
+        strcat(str, "  Providers:\n");
+    }
     for(i = 0; i < plan->usedProviders; ++i) {
-        strcat(str, "  ");
+        strcat(str, "    ");
         temp = EaglePlanBufferProvider_toString(plan->providers[i]);
         strcat(str, temp);
         free(temp);
         strcat(str, "\n");
     }
+    
+    if(plan->usedOperations > 0) {
+        strcat(str, "  Operations:\n");
+    }
     for(i = 0; i < plan->usedOperations; ++i) {
-        strcat(str, "  ");
+        strcat(str, "    ");
         strcat(str, EaglePlanOperation_toString(plan->operations[i]));
         strcat(str, "\n");
     }
