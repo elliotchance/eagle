@@ -79,14 +79,11 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 
 EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp)
 {
-    int *begin = (int*) epp->records, *data = NULL;
+    int *begin = (int*) epp->records;
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
     EaglePage *page;
     
-    data = (int*) calloc((size_t) pageSize, sizeof(int));
-    memmove((void*) data, (const void *) (begin + epp->offsetRecords), (unsigned long) (sizeof(int) * (size_t) pageSize));
-    
-    page = EaglePage_New(data, pageSize, epp->offsetRecords);
+    page = EaglePage_New(begin + epp->offsetRecords, pageSize, epp->offsetRecords, EagleFalse);
     epp->offsetRecords += pageSize;
     
     return page;
@@ -143,7 +140,7 @@ EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp)
     data = (int*) calloc((size_t) pageSize, sizeof(int));
     memmove((void*) data, (const void *) (begin + epp->offsetRecords), (unsigned long) (sizeof(int) * (size_t) pageSize));
     
-    page = EaglePage_New(data, pageSize, epp->offsetRecords);
+    page = EaglePage_New(data, pageSize, epp->offsetRecords, EagleTrue);
     epp->offsetRecords += pageSize;
     
     return page;
