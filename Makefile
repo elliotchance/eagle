@@ -3,7 +3,7 @@ GIT_BRANCH = `git branch | grep \* | cut -c3-`
 
 all: clean build
 
-release: clean build coverage doxygen
+release: clean build leaks coverage doxygen
 
 clean: clean_eagle clean_eagle_test
 	
