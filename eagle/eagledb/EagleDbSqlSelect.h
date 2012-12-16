@@ -23,6 +23,8 @@ typedef struct {
      */
     EagleDbSqlExpression *whereExpression;
     
+    EagleDbSqlExpression *selectExpression;
+    
 } EagleDbSqlSelect;
 
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);

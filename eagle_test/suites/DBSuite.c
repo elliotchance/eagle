@@ -82,7 +82,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
     if(!_testSqlSelect("SELECT")) {
         CUNIT_FAIL("should have failed!");
     }
-    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting T_ASTERISK");
+    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting INTEGER or T_ASTERISK");
     yylex_free();
 }
 
@@ -153,9 +153,9 @@ EagleDbSqlExpression* _getExpression(const char *sql)
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
+    CUNIT_ASSERT_NOT_NULL(select->selectExpression);
     
-    return select->whereExpression;
+    return select->selectExpression;
 }
 
 void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOperations)
@@ -192,7 +192,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int userOpe
 CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
 {
     // SQL
-    EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123");
+    EagleDbSqlExpression *where = _getExpression("SELECT 123 FROM mytable");
     CUNIT_ASSERT_EQUAL_INT(where->expressionType, EagleDbSqlExpressionTypeValue);
     
     // AST
@@ -208,7 +208,7 @@ CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
 CUNIT_TEST(DBSuite, _, Expression_Addition)
 {
     // SQL
-    EagleDbSqlExpression *where = _getExpression("SELECT * FROM mytable WHERE 123 + 456");
+    EagleDbSqlExpression *where = _getExpression("SELECT 123 + 456 FROM mytable");
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
     
     // AST
@@ -262,10 +262,41 @@ CUNIT_TEST(DBSuite, EagleDbTable_New)
 
 EagleDbTable* _getTable()
 {
+    /*
+     CREATE TABLE mytable (
+        col1 INT,
+        col2 INT
+     );
+     */
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
     EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    
     return table;
+}
+
+EagleDbTableData* _getTableWithData(int records, int recordsPerPage)
+{
+    // define the table
+    EagleDbTable *table = _getTable();
+    
+    // create the data provider
+    EagleDbTableData *td = EagleDbTableData_New(table);
+    
+    for(int i = 0; i < records; ++i) {
+        // create a record
+        EagleDbTuple *tuple = EagleDbTuple_New(table);
+        EagleDbTuple_setInt(tuple, 0, i);
+        EagleDbTuple_setInt(tuple, 1, i * 2);
+        
+        // put record in
+        EagleDbTableData_insert(td, tuple);
+    }
+    
+    CUNIT_ASSERT_EQUAL_INT(td->providers[0]->totalRecords, records);
+    CUNIT_ASSERT_EQUAL_INT(td->providers[1]->totalRecords, records);
+    
+    return td;
 }
 
 CUNIT_TEST(DBSuite, _, TableTest)
@@ -275,6 +306,10 @@ CUNIT_TEST(DBSuite, _, TableTest)
     
     // create the data provider
     EagleDbTableData *td = EagleDbTableData_New(table);
+    
+    /*
+     INSERT INTO mytable (col1, col2) VALUES (123, 456);
+     */
     
     // create a record
     EagleDbTuple *tuple = EagleDbTuple_New(table);
@@ -287,6 +322,10 @@ CUNIT_TEST(DBSuite, _, TableTest)
     CUNIT_ASSERT_EQUAL_INT(td->providers[1]->totalRecords, 1);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[0]), 1);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[1]), 1);
+    
+    /*
+     SELECT col1, col2 FROM mytable;
+     */
     
     // read the data out
     EaglePage *page1 = EaglePageProvider_nextPage(td->providers[0]);

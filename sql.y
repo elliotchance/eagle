@@ -127,7 +127,10 @@ select_statement:
     K_SELECT {
         yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
     }
-    T_ASTERISK
+    column_expression {
+        void *last = yyreturn_pop();
+        ((EagleDbSqlSelect*) yyreturn_current())->selectExpression = last;
+    }
     K_FROM IDENTIFIER {
         ((EagleDbSqlSelect*) yyreturn_current())->tableName = yyobj_push(strdup(yytext_last));
     }
@@ -147,6 +150,15 @@ where_expression:
             /* bubble up expression */
         }
 ;
+
+column_expression:
+    T_ASTERISK {
+        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
+    }
+    |
+    expression {
+        /* bubble up yyreturn */
+    }
 
 expression:
     value {
@@ -196,7 +208,7 @@ void yylex_free()
     
     /* yyobj */
     if(yyerrors_length > 0) {
-        for(i = 0; i < yyerrors_length; ++i) {
+        for(i = 0; i < yyobj_length; ++i) {
             free(yyobj[i]);
         }
     }

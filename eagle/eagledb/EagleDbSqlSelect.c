@@ -11,6 +11,7 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
     select->expressionType = EagleDbSqlExpressionTypeSelect;
     select->tableName = NULL;
     select->whereExpression = NULL;
+    select->selectExpression = NULL;
     
     return select;
 }
@@ -24,5 +25,6 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
         free(select->tableName);
     }
     EagleDbSqlExpression_Delete(select->whereExpression);
+    EagleDbSqlExpression_Delete(select->selectExpression);
     free(select);
 }

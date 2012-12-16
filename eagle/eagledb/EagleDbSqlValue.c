@@ -17,6 +17,16 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
     return v;
 }
 
+EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
+{
+    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    
+    v->expressionType = EagleDbSqlExpressionTypeValue;
+    v->type = EagleDbSqlValueTypeAsterisk;
+    
+    return v;
+}
+
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
     free((void*) value);

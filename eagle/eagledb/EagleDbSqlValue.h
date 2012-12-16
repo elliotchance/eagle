@@ -13,7 +13,12 @@ typedef enum {
     /**
      Use \p intValue
      */
-    EagleDbSqlValueTypeInteger = 1
+    EagleDbSqlValueTypeInteger = 1,
+    
+    /**
+     Asterisk expression for selecting multiple columns.
+     */
+    EagleDbSqlValueTypeAsterisk = 2
     
 } EagleDbSqlValueType;
 
@@ -41,6 +46,7 @@ typedef struct {
 } EagleDbSqlValue;
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
+EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void);
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
 
 #endif
