@@ -368,6 +368,41 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     EagleDbTable_Delete(table);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean)
+{
+    EagleDbSqlExpression *where = _getExpression("SELECT 123 FROM mytable");
+    
+    // compile plan
+    int pageSize = 10;
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    EaglePlan *plan = EaglePlan_New(pageSize, receiver);
+    EagleDbSqlExpression_CompilePlanIntoBoolean(where, 1, plan);
+    //printf("\n%s\n", EaglePlan_toString(plan));
+    
+    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 1);
+    
+    // execute
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    // validate result
+    CUNIT_ASSERT_EQUAL_INT(receiver->used, pageSize);
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(receiver->buffer[i] != i) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleInstance_Delete(eagle);
+    EagleDbSqlSelect_Delete(yyparse_ast);
+    yylex_free();
+}
+
 /**
  * The suite init function.
  */
@@ -392,6 +427,8 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));
