@@ -5,6 +5,7 @@
 #include "EaglePageOperations.h"
 #include "EagleInstance.h"
 #include "EaglePageReceiver.h"
+#include "EagleLinkedList.h"
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
@@ -298,6 +299,35 @@ CUNIT_TEST(MainSuite, EaglePageProvider_add)
     EaglePageProvider_Delete(provider);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_New)
+{
+    EagleLinkedList *list = EagleLinkedList_New();
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 0);
+    
+    // try to add a NULL item
+    EagleLinkedList_add(list, NULL);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 0);
+    
+    // add some items
+    for(int i = 0; i < 10; ++i) {
+        EagleLinkedListItem *item = EagleLinkedListItem_New(EagleData_Int(i * 2), EagleTrue);
+        EagleLinkedList_add(list, item);
+    }
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 10);
+    
+    // validate list (must be FIFO)
+    int count = 0;
+    for(EagleLinkedListItem *i = EagleLinkedList_begin(list); NULL != i; i = i->next) {
+        if(*((int*) i->obj) != count * 2) {
+            CUNIT_FAIL("Linked list in bad order (count = %d, i->obj = %d).", count, *((int*) i->obj));
+        }
+        ++count;
+    }
+    CUNIT_ASSERT_EQUAL_INT(count, 10);
+           
+    EagleLinkedList_Delete(list);
+}
+
 /**
  * The suite init function.
  */
@@ -319,6 +349,8 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
+    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_GreaterThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_LessThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_AndPage));

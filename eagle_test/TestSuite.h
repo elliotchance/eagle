@@ -62,9 +62,9 @@ free(cu_msg); \
 /**
  Mark the test as failed.
  */
-#define CUNIT_FAIL(msg) { \
+#define CUNIT_FAIL(msg, ...) { \
 char *cu_msg = (char*) malloc(1024); \
-sprintf(cu_msg, "CUNIT_FAIL: %s", msg); \
+sprintf(cu_msg, msg, __VA_ARGS__); \
 if(CU_assertImplementation(CU_FALSE, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
 free(cu_msg); \
 }\

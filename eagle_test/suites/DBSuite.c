@@ -27,7 +27,7 @@ int _testSqlSelect(const char *sql)
 CUNIT_TEST(DBSuite, _, BLANK)
 {
     if(_testSqlSelect("")) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     yylex_free();
 }
@@ -37,7 +37,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
     // table name 1
     {
         if(_testSqlSelect("SELECT * FROM mytable1")) {
-            CUNIT_FAIL(yyerrors_last());
+            CUNIT_FAIL(yyerrors_last(), NULL);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable1", select->tableName);
@@ -49,7 +49,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
     // table name 2
     {
         if(_testSqlSelect("SELECT * FROM mytable2")) {
-            CUNIT_FAIL(yyerrors_last());
+            CUNIT_FAIL(yyerrors_last(), NULL);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable2", select->tableName);
@@ -62,7 +62,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
 CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
 {
     if(!_testSqlSelect("SELECT * FROM")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting IDENTIFIER");
     yylex_free();
@@ -71,7 +71,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
 CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
 {
     if(!_testSqlSelect("SELECT *")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting K_FROM");
     yylex_free();
@@ -80,7 +80,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
 CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
 {
     if(!_testSqlSelect("SELECT")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting INTEGER or T_ASTERISK");
     yylex_free();
@@ -89,7 +89,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
 CUNIT_TEST(DBSuite, _, SELECT_WHERE)
 {
     if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
@@ -149,7 +149,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 EagleDbSqlExpression* _getExpression(const char *sql)
 {
     if(_testSqlSelect(sql)) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
