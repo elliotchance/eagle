@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "EagleDbSqlValue.h"
 
 /**
@@ -27,7 +28,21 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
     return v;
 }
 
+EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
+{
+    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    
+    v->expressionType = EagleDbSqlExpressionTypeValue;
+    v->type = EagleDbSqlValueTypeIdentifier;
+    v->value.identifier = strdup(identifier);
+    
+    return v;
+}
+
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
+    if(EagleDbSqlValueTypeIdentifier == value->type) {
+        free(value->value.identifier);
+    }
     free((void*) value);
 }

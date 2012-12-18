@@ -59,12 +59,17 @@ struct EaglePageProvider_ {
      */
     EagleLock *nextPageLock;
     
+    /**
+     An optional name. For example, a column name. This is so named columns can be identified.
+     */
+    char *name;
+    
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 
-EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage);
-EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage);
-EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage);
+EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name);
+EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name);
+EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage, char *name);
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 

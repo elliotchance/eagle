@@ -82,7 +82,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
     if(!_testSqlSelect("SELECT")) {
         CUNIT_FAIL("should have failed!", NULL);
     }
-    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting INTEGER or T_ASTERISK");
+    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting IDENTIFIER or INTEGER or T_ASTERISK");
     yylex_free();
 }
 
@@ -163,8 +163,18 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     // compile plan
     int pageSize = 10;
     EaglePageReceiver *dummy = EaglePageReceiver_New();
-    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize);
+    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize, NULL);
     EaglePlan *plan = EaglePlan_New(pageSize, dummy);
+    
+    // setup the table
+    int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
+    for(int i = 0; i < pageSize; ++i) {
+        col1Data[i] = i;
+    }
+    EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1));
+    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
+    
     EagleDbSqlExpression_CompilePlanIntoProvider(where, receiver, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
@@ -181,6 +191,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     CUNIT_ASSERT_EQUAL_INT(receiver->totalRecords, pageSize);
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
+        //printf("\n%d != %d", page->data[i], answers[i]);
         if(page->data[i] != answers[i]) {
             valid = 0;
             break;
@@ -203,7 +214,7 @@ CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
     CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
     
     CREATE_EXPRESSION_ARRAY(answers, 10, 123);
-    _testExpression(where, 1, 1, answers);
+    _testExpression(where, 2, 1, answers);
     free(answers);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
@@ -220,6 +231,7 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionOperatorPlus, expr->op);
     
     EagleDbSqlValue *left = (EagleDbSqlValue*) expr->left;
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, left->type);
@@ -231,7 +243,7 @@ CUNIT_TEST(DBSuite, _, Expression_Addition)
     CUNIT_ASSERT_EQUAL_INT(456, ((EagleDbSqlValue*) right)->value.intValue);
     
     CREATE_EXPRESSION_ARRAY(answers, 10, 123 + 456);
-    _testExpression(where, 2, 2, answers);
+    _testExpression(where, 3, 2, answers);
     free(answers);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
@@ -374,7 +386,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean)
     int pageSize = 10;
     EaglePageReceiver *receiver = EaglePageReceiver_New();
     EaglePlan *plan = EaglePlan_New(pageSize, receiver);
-    EagleDbSqlExpression_CompilePlanIntoBoolean(where, 1, plan);
+    int *dest = EagleData_Int(1);
+    EagleDbSqlExpression_CompilePlanIntoBoolean(where, dest, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
@@ -396,7 +409,37 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean)
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
+    free(dest);
     EagleInstance_Delete(eagle);
+    EagleDbSqlSelect_Delete(yyparse_ast);
+    yylex_free();
+}
+
+CUNIT_TEST(DBSuite, _, Expression_Equals)
+{
+    // SQL
+    EagleDbSqlExpression *where = _getExpression("SELECT col1 = 5 FROM mytable");
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
+    
+    // AST
+    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionOperatorEquals, expr->op);
+    
+    EagleDbSqlValue *left = (EagleDbSqlValue*) expr->left;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeIdentifier, left->type);
+    
+    EagleDbSqlValue *right = (EagleDbSqlValue*) expr->right;
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, right->type);
+    
+    CUNIT_ASSERT_EQUAL_STRING("col1", ((EagleDbSqlValue*) left)->value.identifier);
+    CUNIT_ASSERT_EQUAL_INT(5, ((EagleDbSqlValue*) right)->value.intValue);
+    
+    CREATE_EXPRESSION_ARRAY(answers, 10, i == 5);
+    _testExpression(where, 2, 2, answers);
+    free(answers);
+    
     EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();
 }
@@ -448,6 +491,7 @@ CUnitTests* DBSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_ValueInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Addition));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Equals));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     

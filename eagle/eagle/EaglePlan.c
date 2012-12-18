@@ -83,3 +83,16 @@ void EaglePlan_Delete(EaglePlan *plan)
     
     free(plan);
 }
+
+EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name)
+{
+    int i;
+    
+    for(i = 0; i < plan->allocatedProviders; ++i) {
+        if(strcmp(name, plan->providers[i]->provider->name) == 0) {
+            return plan->providers[i];
+        }
+    }
+    
+    return NULL;
+}

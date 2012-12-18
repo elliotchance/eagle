@@ -7,7 +7,7 @@
 #include "EagleUtils.h"
 #include "EagleLinkedList.h"
 
-EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage)
+EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)
 {
     EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
     
@@ -20,6 +20,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
     pageProvider->add = EaglePageProvider_addUnsupported_;
     pageProvider->free = EaglePageProvider_DeleteIntArray_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
+    pageProvider->name = name;
     
     return pageProvider;
 }
@@ -30,13 +31,15 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
  @param value The value to fill the pages with.
  @param recordsPerPage The number of records to return with each page.
  */
-EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage)
+EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {
     int *data = (int*) calloc((size_t) recordsPerPage, sizeof(int)), i;
-    EaglePageProvider *pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage);
+    EaglePageProvider *pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
+    
     for(i = 0; i < recordsPerPage; ++i) {
         data[i] = value;
     }
+    
     return pageProvider;
 }
 
@@ -143,7 +146,7 @@ EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)
     return EagleTrue;
 }
 
-EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage)
+EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage, char *name)
 {
     EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
     
@@ -156,6 +159,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage)
     pageProvider->add = EaglePageProvider_addStream_;
     pageProvider->free = EaglePageProvider_DeleteIntStream_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
+    pageProvider->name = name;
     
     return pageProvider;
 }

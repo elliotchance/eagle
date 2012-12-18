@@ -11,7 +11,12 @@ typedef enum {
     /**
      Addition operator.
      */
-    EagleDbSqlExpressionOperatorPlus = 1
+    EagleDbSqlExpressionOperatorPlus = 1,
+    
+    /**
+     Equals operator.
+     */
+    EagleDbSqlExpressionOperatorEquals = 2
     
 } EagleDbSqlExpressionOperator;
 

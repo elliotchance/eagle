@@ -103,6 +103,7 @@
 /* fixed tokens */
 %token T_ASTERISK
 %token T_PLUS
+%token T_EQUALS
 %token T_END
 
 %%
@@ -176,10 +177,26 @@ expression:
             void *last = yyreturn_pop();
             ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
         }
+    |
+        value {
+            void *last = yyreturn_pop();
+            yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
+        }
+        T_EQUALS {
+            ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorEquals;
+        }
+        value {
+            void *last = yyreturn_pop();
+            ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
+        }
     
 value:
     INTEGER {
         yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last))));
+    }
+    |
+    IDENTIFIER {
+        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithIdentifier(yytext_last)));
     }
 
 %%

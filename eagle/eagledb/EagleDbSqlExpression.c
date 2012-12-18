@@ -19,68 +19,109 @@
         ID with the real result. You may need to copy that buffer into buffer 0.
  @return The buffer ID that contains the real result.
  */
-int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan)
+int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
 {
-    int finalDestination = destinationBuffer;
-    
     switch(expression->expressionType) {
         case EagleDbSqlExpressionTypeBinaryExpression:
         {
             EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
-            int destinationLeft, destinationRight;
+            int destination, destinationLeft, destinationRight;
             char *msg;
             EaglePlanOperation *epo;
+            EaglePageOperationFunction(pageOperation);
             
             /* left */
-            destinationLeft = destinationBuffer;
-            EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan);
-            ++destinationBuffer;
+            destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan);
             
             /* right */
-            destinationRight = destinationBuffer;
-            EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->right, destinationBuffer, plan);
-            ++destinationBuffer;
+            destinationRight = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->right, destinationBuffer, plan);
             
             /* operator */
             msg = (char*) malloc(256);
-            sprintf(msg, "dest = %d, source1 = %d, source2 = %d", destinationBuffer, destinationLeft, destinationRight);
-            epo = EaglePlanOperation_New(EaglePageOperations_AdditionPage, destinationBuffer, destinationLeft,
-                                         destinationRight, NULL, EagleFalse, msg);
+            destination = *destinationBuffer;
+            
+            switch(cast->op) {
+                    
+                case EagleDbSqlExpressionOperatorPlus:
+                    sprintf(msg, "<%d> + <%d> -> <%d>", destinationLeft, destinationRight, destination);
+                    pageOperation = EaglePageOperations_AdditionPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorEquals:
+                    sprintf(msg, "<%d> = <%d> -> <%d>", destinationLeft, destinationRight, destination);
+                    pageOperation = EaglePageOperations_EqualsPage;
+                    break;
+                
+            }
+            
+            epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
+                                         EagleFalse, msg);
             free(msg);
             EaglePlan_addOperation(plan, epo);
+            ++*destinationBuffer;
             
-            finalDestination = destinationBuffer;
-            break;
+            return destination;
         }
             
         case EagleDbSqlExpressionTypeValue:
         {
             EagleDbSqlValue *value = (EagleDbSqlValue*) expression;
-            EaglePageProvider *provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize);
-            EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(destinationBuffer, provider);
-            EaglePlan_addBufferProvider(plan, bp);
             
-            finalDestination = destinationBuffer;
-            break;
+            switch(value->type) {
+                case EagleDbSqlValueTypeInteger:
+                {
+                    int destination = *destinationBuffer;
+                    EaglePageProvider *provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize, "(integer)");
+                    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(destination, provider);
+                    EaglePlan_addBufferProvider(plan, bp);
+                    ++*destinationBuffer;
+                    return destination;
+                }
+                    
+                case EagleDbSqlValueTypeIdentifier:
+                {
+                    /* find the provider for this column */
+                    EaglePlanBufferProvider *provider = EaglePlan_getBufferProviderByName(plan, value->value.identifier);
+                    if(NULL == provider) {
+                        printf("CANNOT FIND '%s'", value->value.identifier);
+                        return 0;
+                    }
+                    else {
+                        return provider->destinationBuffer;
+                    }
+                }
+                    
+                case EagleDbSqlValueTypeAsterisk:
+                    printf("COMPILATION ERROR, fix me");
+                    return 0;
+            }
         }
             
         case EagleDbSqlExpressionTypeSelect:
-            break;
+            return 0;
     }
-    
-    return finalDestination;
 }
 
 void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expression, EaglePageProvider *destination, EaglePlan *plan)
 {
-    int result;
+    int result, i;
     EaglePlanOperation *epo;
+    char msg[64];
+    
+    /* make sure we don't override buffers that are already assigned by providers */
+    int destinationBuffer = 0;
+    for(i = 0; i < plan->usedProviders; ++i) {
+        if(plan->providers[i]->destinationBuffer >= destinationBuffer) {
+            destinationBuffer = plan->providers[i]->destinationBuffer + 1;
+        }
+    }
     
     /* evaluate the expression as usual */
-    result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expression, 0, plan);
+    result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expression, &destinationBuffer, plan);
     
     /* send all the result data to the provider */
-    epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, result, -1, destination, EagleFalse, "Send to provider");
+    sprintf(msg, "<%d> to provider", result);
+    epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, result, -1, destination, EagleFalse, msg);
     EaglePlan_addOperation(plan, epo);
 }
 
@@ -91,7 +132,7 @@ void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expressi
  @param destinationBuffer Which buffer should the boolean result go into?
  @param plan This must be an initialised EaglePlan, execution steps will be appended onto this.
  */
-void EagleDbSqlExpression_CompilePlanIntoBoolean(EagleDbSqlExpression *expression, int destinationBuffer, EaglePlan *plan)
+void EagleDbSqlExpression_CompilePlanIntoBoolean(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
 {
     int finalDestination = EagleDbSqlExpression_CompilePlanIntoBuffer_(expression, destinationBuffer, plan);
     

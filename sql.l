@@ -19,6 +19,7 @@ integer [0-9]+
 
 "*" return T_ASTERISK;
 "+" return T_PLUS;
+"=" return T_EQUALS;
 ";" return T_END;
 
 {white} {
