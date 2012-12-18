@@ -117,7 +117,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePageReceiver *receiver = EaglePageReceiver_New();
     EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, totalRecords, recordsPerPage);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, totalRecords, recordsPerPage, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
     
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
@@ -193,7 +193,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntArray)
     testData[1] = 456;
     testData[2] = 789;
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(testData, testDataSize, recordsPerPage);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(testData, testDataSize, recordsPerPage, NULL);
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, testDataSize);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
@@ -239,7 +239,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     free(msg);
     
     // add some buffer providers
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, NULL);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
     EaglePlan_addBufferProvider(plan, bp);
     
@@ -249,7 +249,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null)\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
     free(msg);
     
     EaglePlan_Delete(plan);
@@ -274,10 +274,10 @@ CUNIT_TEST(MainSuite, EaglePageReceiver_pushRecordId)
 
 CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
 {
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, "something");
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider);
     char *description = EaglePlanBufferProvider_toString(bp);
-    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123");
+    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something");
     free(description);
     EaglePlanBufferProvider_Delete(bp);
 }
@@ -294,7 +294,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_Delete)
 
 CUNIT_TEST(MainSuite, EaglePageProvider_add)
 {
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 1);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 1, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_add(provider, NULL), EagleFalse);
     EaglePageProvider_Delete(provider);
 }
@@ -365,7 +365,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     testData[3] = 234;
     testData[4] = 567;
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(recordsPerPage);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(recordsPerPage, NULL);
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, 0);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     

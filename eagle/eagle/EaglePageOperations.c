@@ -107,3 +107,15 @@ void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage
         EaglePageProvider_add(provider, &source1->data[i]);
     }
 }
+
+void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destination->data[i] = source1->data[i] == source2->data[i];
+    }
+}

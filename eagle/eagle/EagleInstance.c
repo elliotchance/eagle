@@ -37,7 +37,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     EagleSynchronizer_Lock(eagle->nextJobLock);
     
     plan = eagle->plan;
-    job = EaglePlanJob_New(plan, 4);
+    job = EaglePlanJob_New(plan, 10);
     
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];

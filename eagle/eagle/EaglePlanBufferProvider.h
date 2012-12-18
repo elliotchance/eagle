@@ -3,9 +3,21 @@
 
 #include "EaglePageProvider.h"
 
+/**
+ This structure acts as a link between a page providers data and the buffer for an expression it will be loaded into.
+ */
 typedef struct {
+    
+    /**
+     The buffer ID where the next page will be loaded into.
+     */
     int destinationBuffer;
+    
+    /**
+     The provider that contains the actual data for the buffer.
+     */
     EaglePageProvider *provider;
+    
 } EaglePlanBufferProvider;
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider);

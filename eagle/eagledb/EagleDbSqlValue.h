@@ -18,7 +18,12 @@ typedef enum {
     /**
      Asterisk expression for selecting multiple columns.
      */
-    EagleDbSqlValueTypeAsterisk = 2
+    EagleDbSqlValueTypeAsterisk = 2,
+    
+    /**
+     The name of a column.
+     */
+    EagleDbSqlValueTypeIdentifier = 3
     
 } EagleDbSqlValueType;
 
@@ -41,12 +46,18 @@ typedef struct {
          */
         int intValue;
         
+        /**
+         When using identifier token. This is the name of the identifier.
+         */
+        char *identifier;
+        
     } value;
     
 } EagleDbSqlValue;
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
 EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void);
+EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *name);
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
 
 #endif
