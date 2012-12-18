@@ -5,6 +5,7 @@
 #include "EaglePageOperations.h"
 #include "EagleInstance.h"
 #include "EaglePageReceiver.h"
+#include "EagleLinkedList.h"
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
@@ -184,7 +185,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_TotalPages)
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_TotalPages(1000, 10), 100);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntArray)
 {
     int testDataSize = 3, recordsPerPage = 2;
     int *testData = (int*) calloc(testDataSize, sizeof(int));
@@ -298,6 +299,111 @@ CUNIT_TEST(MainSuite, EaglePageProvider_add)
     EaglePageProvider_Delete(provider);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_New)
+{
+    EagleLinkedList *list = EagleLinkedList_New();
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 0);
+    
+    // try to add a NULL item
+    EagleLinkedList_add(list, NULL);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 0);
+    
+    // add some items
+    for(int i = 0; i < 10; ++i) {
+        EagleLinkedListItem *item = EagleLinkedListItem_New(EagleData_Int(i * 2), EagleTrue, NULL);
+        EagleLinkedList_add(list, item);
+    }
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(list), 10);
+    
+    // validate list (must be FIFO)
+    int count = 0;
+    for(EagleLinkedListItem *i = EagleLinkedList_begin(list); NULL != i; i = i->next) {
+        if(*((int*) i->obj) != count * 2) {
+            CUNIT_FAIL("Linked list in bad order (count = %d, i->obj = %d).", count, *((int*) i->obj));
+        }
+        ++count;
+    }
+    CUNIT_ASSERT_EQUAL_INT(count, 10);
+           
+    EagleLinkedList_Delete(list);
+}
+
+CUNIT_TEST(MainSuite, EaglePageOperations_CastIntPageToBoolean)
+{
+    int pageSize = 1000;
+    EaglePage *page = EaglePage_Alloc(pageSize);
+    EaglePage *out = EaglePage_Alloc(pageSize);
+    
+    for(int i = 0; i < pageSize; ++i) {
+        page->data[i] = rand() % 2;
+    }
+    
+    EaglePageOperations_CastIntPageToBoolean(out, page, NULL, NULL);
+    
+    // verify
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(out->data[i] != (page->data[i] != 0)) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    // clean up
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
+{
+    int testDataSize = 5, recordsPerPage = 2;
+    int *testData = (int*) calloc(testDataSize, sizeof(int));
+    testData[0] = 123;
+    testData[1] = 456;
+    testData[2] = 789;
+    testData[3] = 234;
+    testData[4] = 567;
+    
+    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, 0);
+    CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
+    
+    // add data
+    for(int i = 0; i < testDataSize; ++i) {
+        int *ptr = EagleData_Int(testData[i]);
+        EaglePageProvider_add(provider, ptr);
+        free(ptr);
+    }
+    
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 3);
+    EaglePage *page1 = EaglePageProvider_nextPage(provider);
+    CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
+    
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
+    EaglePage *page2 = EaglePageProvider_nextPage(provider);
+    CUNIT_VERIFY_EQUAL_INT(page2->count, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page2->data[0], testData[2]);
+    CUNIT_VERIFY_EQUAL_INT(page2->data[1], testData[3]);
+    CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, 2);
+    
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
+    EaglePage *page3 = EaglePageProvider_nextPage(provider);
+    CUNIT_VERIFY_EQUAL_INT(page3->count, 1);
+    CUNIT_VERIFY_EQUAL_INT(page3->data[0], testData[4]);
+    CUNIT_VERIFY_EQUAL_INT(page3->recordOffset, 4);
+    
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 0);
+    CUNIT_VERIFY_NULL(EaglePageProvider_nextPage(provider));
+    
+    // clean up
+    free(testData);
+    EaglePageProvider_Delete(provider);
+}
+
 /**
  * The suite init function.
  */
@@ -319,11 +425,15 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
+    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_GreaterThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_LessThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_AndPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_CastIntPageToBoolean));
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_TotalPages));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntStream));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_add));

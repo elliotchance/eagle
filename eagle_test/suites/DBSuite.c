@@ -27,7 +27,7 @@ int _testSqlSelect(const char *sql)
 CUNIT_TEST(DBSuite, _, BLANK)
 {
     if(_testSqlSelect("")) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     yylex_free();
 }
@@ -37,7 +37,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
     // table name 1
     {
         if(_testSqlSelect("SELECT * FROM mytable1")) {
-            CUNIT_FAIL(yyerrors_last());
+            CUNIT_FAIL(yyerrors_last(), NULL);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable1", select->tableName);
@@ -49,7 +49,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
     // table name 2
     {
         if(_testSqlSelect("SELECT * FROM mytable2")) {
-            CUNIT_FAIL(yyerrors_last());
+            CUNIT_FAIL(yyerrors_last(), NULL);
         }
         EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
         CUNIT_ASSERT_EQUAL_STRING("mytable2", select->tableName);
@@ -62,7 +62,7 @@ CUNIT_TEST(DBSuite, _, SELECT_Simple)
 CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
 {
     if(!_testSqlSelect("SELECT * FROM")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting IDENTIFIER");
     yylex_free();
@@ -71,7 +71,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
 CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
 {
     if(!_testSqlSelect("SELECT *")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting K_FROM");
     yylex_free();
@@ -80,7 +80,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
 CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
 {
     if(!_testSqlSelect("SELECT")) {
-        CUNIT_FAIL("should have failed!");
+        CUNIT_FAIL("should have failed!", NULL);
     }
     CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting INTEGER or T_ASTERISK");
     yylex_free();
@@ -89,7 +89,7 @@ CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
 CUNIT_TEST(DBSuite, _, SELECT_WHERE)
 {
     if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
@@ -149,7 +149,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 EagleDbSqlExpression* _getExpression(const char *sql)
 {
     if(_testSqlSelect(sql)) {
-        CUNIT_FAIL(yyerrors_last());
+        CUNIT_FAIL(yyerrors_last(), NULL);
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
@@ -177,10 +177,11 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     EagleInstance_run(eagle);
     
     // validate result
+    EaglePage *page = EaglePageProvider_nextPage(receiver);
     CUNIT_ASSERT_EQUAL_INT(receiver->totalRecords, pageSize);
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(((int*) receiver->records)[i] != answers[i]) {
+        if(page->data[i] != answers[i]) {
             valid = 0;
             break;
         }
@@ -345,9 +346,6 @@ CUNIT_TEST(DBSuite, _, TableTest)
     CUNIT_ASSERT_EQUAL_INT(page1->data[0], 123);
     CUNIT_ASSERT_EQUAL_INT(page2->data[0], 456);
     
-    EaglePage_Delete(page1);
-    EaglePage_Delete(page2);
-    
     EagleDbTuple_Delete(tuple);
     EagleDbTableData_Delete(td);
     EagleDbTable_Delete(table);
@@ -366,6 +364,41 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     
     EagleDbTuple_Delete(tuple);
     EagleDbTable_Delete(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean)
+{
+    EagleDbSqlExpression *where = _getExpression("SELECT 123 FROM mytable");
+    
+    // compile plan
+    int pageSize = 10;
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    EaglePlan *plan = EaglePlan_New(pageSize, receiver);
+    EagleDbSqlExpression_CompilePlanIntoBoolean(where, 1, plan);
+    //printf("\n%s\n", EaglePlan_toString(plan));
+    
+    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 1);
+    
+    // execute
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    // validate result
+    CUNIT_ASSERT_EQUAL_INT(receiver->used, pageSize);
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(receiver->buffer[i] != i) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleInstance_Delete(eagle);
+    EagleDbSqlSelect_Delete(yyparse_ast);
+    yylex_free();
 }
 
 /**
@@ -392,6 +425,8 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
+    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));

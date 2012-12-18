@@ -50,6 +50,11 @@ struct EaglePageProvider_ {
     EagleBoolean (*add)(struct EaglePageProvider_ *epp, void *data);
     
     /**
+     Virtual method for freeing this structure.
+     */
+    void (*free)(struct EaglePageProvider_ *epp);
+    
+    /**
      Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining()
      */
     EagleLock *nextPageLock;
@@ -75,5 +80,7 @@ EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *dat
 EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
 int EaglePageProvider_pagesRemainingFromIntStream_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp);
+void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp);
+void EaglePageProvider_DeleteIntStream_(EaglePageProvider *epp);
 
 #endif
