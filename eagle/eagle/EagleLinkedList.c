@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include "EagleLinkedList.h"
 
-EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj)
+EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj))
 {
     EagleLinkedListItem *item = (EagleLinkedListItem*) malloc(sizeof(EagleLinkedListItem));
     
     item->obj = obj;
     item->freeObj = freeObj;
     item->next = NULL;
+    item->free = free;
     
     return item;
 }
@@ -72,7 +73,12 @@ void EagleLinkedList_Delete(EagleLinkedList *list)
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
 {
     if(item->freeObj) {
-        free(item->obj);
+        if(NULL == item->free) {
+            free(item->obj);
+        }
+        else {
+            item->free(item->obj);
+        }
     }
     free(item);
 }
@@ -82,9 +88,18 @@ void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
  */
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)
 {
+    EagleLinkedListItem *first = NULL;
+    EagleSynchronizer_Lock(list->modifyLock);
+    first = list->first;
+    EagleSynchronizer_Unlock(list->modifyLock);
+    return first;
+}
+
+EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
+{
     EagleLinkedListItem *head = NULL;
     EagleSynchronizer_Lock(list->modifyLock);
-    head = list->first;
+    head = list->last;
     EagleSynchronizer_Unlock(list->modifyLock);
     return head;
 }

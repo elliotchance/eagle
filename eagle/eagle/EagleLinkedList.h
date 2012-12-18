@@ -21,6 +21,11 @@ struct EagleLinkedListItem_ {
      */
     struct EagleLinkedListItem_ *next;
     
+    /**
+     A pointer to the function that will free \c obj. If this is NULL then the normal free() function will be used.
+     */
+    void (*free)(void *obj);
+    
 };
 typedef struct EagleLinkedListItem_ EagleLinkedListItem;
 
@@ -49,7 +54,7 @@ typedef struct {
     
 } EagleLinkedList;
 
-EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj);
+EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
 EagleLinkedList* EagleLinkedList_New(void);
@@ -57,6 +62,7 @@ void EagleLinkedList_Delete(EagleLinkedList *list);
 
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list);
+EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
 int EagleLinkedList_length(EagleLinkedList *list);
 
 #endif

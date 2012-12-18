@@ -177,10 +177,11 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     EagleInstance_run(eagle);
     
     // validate result
+    EaglePage *page = EaglePageProvider_nextPage(receiver);
     CUNIT_ASSERT_EQUAL_INT(receiver->totalRecords, pageSize);
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(((int*) receiver->records)[i] != answers[i]) {
+        if(page->data[i] != answers[i]) {
             valid = 0;
             break;
         }
@@ -344,9 +345,6 @@ CUNIT_TEST(DBSuite, _, TableTest)
     
     CUNIT_ASSERT_EQUAL_INT(page1->data[0], 123);
     CUNIT_ASSERT_EQUAL_INT(page2->data[0], 456);
-    
-    EaglePage_Delete(page1);
-    EaglePage_Delete(page2);
     
     EagleDbTuple_Delete(tuple);
     EagleDbTableData_Delete(td);
