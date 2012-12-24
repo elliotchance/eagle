@@ -25,6 +25,7 @@ EagleDbTable* createTable()
      */
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
+    
     return table;
 }
 
@@ -52,75 +53,12 @@ int query(const char *sql)
     return yyparse();
 }
 
-void _instanceTest(int cores, int recordsPerPage, int totalRecords)
-{
-    // initialise workers
-    EagleInstance *eagle = EagleInstance_New(cores);
-    
-    // prepare data
-    int *data = (int*) calloc(sizeof(int), totalRecords);
-    for(int i = 0; i < totalRecords; ++i) {
-        data[i] = rand();
-    }
-    
-    // plan: ? BETWEEN ? AND 20000000
-    uint64_t start = mach_absolute_time();
-    int min = 10000000, max = 20000000;
-    EaglePageReceiver *receiver = EaglePageReceiver_New();
-    EaglePlan *plan = EaglePlan_New(recordsPerPage, receiver);
-    
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, totalRecords, recordsPerPage);
-    
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, provider));
-    
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt, 2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,    3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL,               EagleFalse, "3"));
-    
-    EagleInstance_addPlan(eagle, plan);
-    
-    // run
-    EagleInstance_run(eagle);
-    
-    // make sure all the values back match the expression
-    int matches = 0;
-    for(int i = 0; i < receiver->used; ++i) {
-        int value = data[receiver->buffer[i]];
-        if(value > min && value < max) {
-            ++matches;
-        }
-    }
-    
-    int misses = 0;
-    matches = 0;
-    for(int i = 0; i < totalRecords; ++i) {
-        if(data[i] > min && data[i] < max) {
-            ++matches;
-        }
-        else {
-            ++misses;
-        }
-    }
-    
-    // clean up
-    EagleInstance_Delete(eagle);
-    uint64_t duration = mach_absolute_time() - start;
-    printf("Done (%.2f seconds)\n", duration / 1000000000.0);
-}
-
 int main(int argc, const char * argv[])
 {
-    int rows = 100000000;
-    for(int pageSize = 1000; pageSize <= 100000; pageSize *= 10) {
-        printf("%d million rows (%d per page) rows\n", rows / 1000000, pageSize);
-        for(int threads = 1; threads < 16; threads *= 2) {
-            printf("  %d threads... ", threads);
-            
-            _instanceTest(threads, pageSize, rows);
-        }
-    }
+    int rows = 1000000, pageSize = 1000;
+    size_t start, end;
     
-    /*printf("Creating table with %d (%d per page) rows... ", rows, pageSize);
+    printf("Creating table with %d (%d per page) rows... ", rows, pageSize);
     start = clock();
     EagleDbTable *table = createTable();
     fillTable(table, rows);
@@ -130,7 +68,7 @@ int main(int argc, const char * argv[])
     printf("Searching... ");
     start = clock();
     
-    if(query("SELECT * FROM mytable WHERE 0")) {
+    if(query("SELECT * FROM mytable WHERE col1 = 1234")) {
         printf("ERROR: %s\n", yyerrors_last());
         exit(1);
     }
@@ -139,10 +77,19 @@ int main(int argc, const char * argv[])
     
     // compile plan
     EaglePageReceiver *dummy = EaglePageReceiver_New();
-    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize);
+    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize, NULL);
     EaglePlan *plan = EaglePlan_New(pageSize, dummy);
-    EagleDbSqlExpression_CompilePlanIntoProvider(select->whereExpression, receiver, plan);
-    //printf("\n%s\n", EaglePlan_toString(plan));
+    
+    // setup the table
+    int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
+    for(int i = 0; i < pageSize; ++i) {
+        col1Data[i] = i;
+    }
+    EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1));
+    
+    EagleDbSqlExpression_CompilePlanIntoBoolean(select->whereExpression, receiver, plan);
+    printf("\n%s\n", EaglePlan_toString(plan));
     
     // execute
     EagleInstance *eagle = EagleInstance_New(1);
@@ -150,13 +97,14 @@ int main(int argc, const char * argv[])
     EagleInstance_run(eagle);
     
     // validate result
-    printf("Found %d records", receiver->totalRecords);
+    EaglePage *result = EaglePageProvider_nextPage(receiver);
+    printf("Found %d records", result->count);
     
     EaglePageProvider_Delete(receiver);
     EagleInstance_Delete(eagle);
     
     end = clock();
-    printf("Done (%.2f seconds)\n", (float) (end - start) / 1000000.0);*/
+    printf("Done (%.2f seconds)\n", (float) (end - start) / 1000000.0);
     
     return 0;
 }
