@@ -415,6 +415,116 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean)
     yylex_free();
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
+{
+    int pageSize = 10;
+    int exprs = 3;
+    int totalResults = 5;
+    EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
+    
+    // SELECT col1, col2 + 8 FROM mytable WHERE col1 % 2 = 1
+    expr[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col1");
+    expr[1] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+        (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col2"),
+        EagleDbSqlExpressionOperatorPlus,
+        (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(8)
+    );
+    expr[2] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+        (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
+            (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col1"),
+            EagleDbSqlExpressionOperatorModulus,
+            (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(2)
+        ),
+        EagleDbSqlExpressionOperatorEquals,
+        (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(1)
+    );
+    
+    // the providers will contain the result
+    EaglePageProvider **providers = (EaglePageProvider**) calloc(exprs, sizeof(EaglePageProvider*));
+    providers[0] = EaglePageProvider_CreateFromIntStream(pageSize, "col1");
+    providers[1] = EaglePageProvider_CreateFromIntStream(pageSize, "col2 + 8");
+    providers[2] = EaglePageProvider_CreateFromIntStream(pageSize, "col1 % 2 = 1");
+    
+    // the receiver is basically deprecated, it will be removed soon
+    EaglePageReceiver *receiver = EaglePageReceiver_New();
+    
+    // create the plan skeleton
+    EaglePlan *plan = EaglePlan_New(pageSize, receiver);
+    
+    // create a virtual table that consists of 2 columns; col1 and col2
+    int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
+    int *col2Data = (int*) calloc((size_t) pageSize, sizeof(int));
+    for(int i = 0; i < pageSize; ++i) {
+        col1Data[i] = i;
+        col2Data[i] = i * 2;
+    }
+    EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
+    EaglePageProvider *col2 = EaglePageProvider_CreateFromIntArray(col2Data, pageSize, pageSize, "col2");
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1));
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2));
+    
+    // compile plan
+    EagleDbSqlExpression_CompilePlan(expr, exprs, 2, providers, plan);
+    //printf("\n%s\n", EaglePlan_toString(plan));
+    
+    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 5);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 6);
+    
+    // execute
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    // validate result
+    CREATE_EXPRESSION_ARRAY(answers_0, pageSize, col1Data[i]);          // col1
+    CREATE_EXPRESSION_ARRAY(answers_1, pageSize, col2Data[i] + 8);      // col2 + 8
+    CREATE_EXPRESSION_ARRAY(answers_2, pageSize, col1Data[i] % 2 == 1); // col1 % 2 = 1
+    
+    int **answers = (int**) calloc(exprs, sizeof(int*));
+    answers[0] = (int*) calloc(totalResults, sizeof(int));
+    answers[1] = (int*) calloc(totalResults, sizeof(int));
+    answers[2] = (int*) calloc(totalResults, sizeof(int));
+    
+    for(int i = 0, j = 0; i < pageSize; ++i) {
+        if(col1Data[i] % 2 == 1) {
+            answers[0][j] = answers_0[i];
+            answers[1][j] = answers_1[i];
+            answers[2][j] = answers_2[i];
+            ++j;
+        }
+    }
+    
+    for(int i = 0; i < exprs; ++i) {
+        EaglePage *page = EaglePageProvider_nextPage(providers[i]);
+        
+        // there should only be 5 records in each page because of the modulus
+        CUNIT_VERIFY_EQUAL_INT(page->count, totalResults);
+        
+        int valid = 1;
+        for(int j = 0; j < page->count; ++j) {
+            if(page->data[j] != answers[i][j]) {
+                valid = 0;
+                break;
+            }
+        }
+        CUNIT_VERIFY_EQUAL_INT(valid, 1);
+    }
+    
+    for(int i = 0; i < exprs; ++i) {
+        EagleDbSqlExpression_Delete(expr[i]);
+        EaglePageProvider_Delete(providers[i]);
+        free(answers[i]);
+    }
+    free(answers_0);
+    free(answers_1);
+    free(answers_2);
+    free(answers);
+    free(expr);
+    free(providers);
+    EagleInstance_Delete(eagle);
+    yylex_free();
+}
+
 CUNIT_TEST(DBSuite, _, Expression_Equals)
 {
     // SQL
@@ -470,6 +580,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBoolean));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlan));
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));

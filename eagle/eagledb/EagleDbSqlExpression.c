@@ -51,6 +51,11 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     sprintf(msg, "<%d> = <%d> -> <%d>", destinationLeft, destinationRight, destination);
                     pageOperation = EaglePageOperations_EqualsPage;
                     break;
+                    
+                case EagleDbSqlExpressionOperatorModulus:
+                    sprintf(msg, "<%d> %% <%d> -> <%d>", destinationLeft, destinationRight, destination);
+                    pageOperation = EaglePageOperations_ModulusPage;
+                    break;
                 
             }
             
@@ -102,6 +107,46 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
     }
 }
 
+void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePageProvider **destinations, EaglePlan *plan)
+{
+    int i, *results;
+    
+    /* make sure we don't override buffers that are already assigned by providers */
+    int destinationBuffer = 0;
+    for(i = 0; i < plan->usedProviders; ++i) {
+        if(plan->providers[i]->destinationBuffer >= destinationBuffer) {
+            destinationBuffer = plan->providers[i]->destinationBuffer + 1;
+        }
+    }
+    
+    /* compile expressions */
+    results = (int*) calloc((size_t) totalExpressions, sizeof(int));
+    for(i = 0; i < totalExpressions; ++i) {
+        results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &destinationBuffer, plan);
+    }
+    
+    /* if there is a WHERE clause expression only send those records */
+    for(i = 0; i < totalExpressions; ++i) {
+        EaglePlanOperation *epo;
+        char msg[64];
+        
+        if(whereClause >= 0) {
+            /* send some result data to the provider */
+            sprintf(msg, "WHERE <%d>, send <%d> to provider %d", results[whereClause], results[i], i);
+            epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, results[whereClause], results[i], destinations[i], EagleFalse, msg);
+            EaglePlan_addOperation(plan, epo);
+        }
+        else {
+            /* send all the result data to the provider */
+            sprintf(msg, "ALL <%d> to provider %d", results[i], i);
+            epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, -1, results[i],  destinations[i], EagleFalse, msg);
+            EaglePlan_addOperation(plan, epo);
+        }
+    }
+    
+    free(results);
+}
+
 void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expression, EaglePageProvider *destination, EaglePlan *plan)
 {
     int result, i;
@@ -121,7 +166,7 @@ void EagleDbSqlExpression_CompilePlanIntoProvider(EagleDbSqlExpression *expressi
     
     /* send all the result data to the provider */
     sprintf(msg, "<%d> to provider", result);
-    epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, result, -1, destination, EagleFalse, msg);
+    epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, -1, result, destination, EagleFalse, msg);
     EaglePlan_addOperation(plan, epo);
 }
 

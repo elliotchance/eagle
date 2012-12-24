@@ -16,7 +16,12 @@ typedef enum {
     /**
      Equals operator.
      */
-    EagleDbSqlExpressionOperatorEquals = 2
+    EagleDbSqlExpressionOperatorEquals = 2,
+    
+    /**
+     Modulus (remainder) operator.
+     */
+    EagleDbSqlExpressionOperatorModulus = 3
     
 } EagleDbSqlExpressionOperator;
 
