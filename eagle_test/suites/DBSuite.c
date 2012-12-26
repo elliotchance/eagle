@@ -32,78 +32,6 @@ CUNIT_TEST(DBSuite, _, BLANK)
     yylex_free();
 }
 
-CUNIT_TEST(DBSuite, _, SELECT_Simple)
-{
-    // table name 1
-    {
-        if(_testSqlSelect("SELECT * FROM mytable1")) {
-            CUNIT_FAIL(yyerrors_last(), NULL);
-        }
-        EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-        CUNIT_ASSERT_EQUAL_STRING("mytable1", select->tableName);
-        
-        EagleDbSqlSelect_Delete(select);
-        yylex_free();
-    }
-    
-    // table name 2
-    {
-        if(_testSqlSelect("SELECT * FROM mytable2")) {
-            CUNIT_FAIL(yyerrors_last(), NULL);
-        }
-        EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-        CUNIT_ASSERT_EQUAL_STRING("mytable2", select->tableName);
-        
-        EagleDbSqlSelect_Delete(select);
-        yylex_free();
-    }
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_MissingTableName)
-{
-    if(!_testSqlSelect("SELECT * FROM")) {
-        CUNIT_FAIL("should have failed!", NULL);
-    }
-    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting IDENTIFIER");
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_MissingFROM)
-{
-    if(!_testSqlSelect("SELECT *")) {
-        CUNIT_FAIL("should have failed!", NULL);
-    }
-    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting K_FROM");
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_MissingFields)
-{
-    if(!_testSqlSelect("SELECT")) {
-        CUNIT_FAIL("should have failed!", NULL);
-    }
-    CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), "syntax error, unexpected $end, expecting IDENTIFIER or INTEGER or T_ASTERISK");
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_WHERE)
-{
-    if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
-    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
-    CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
-    
-    EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
-    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
-    
-    EagleDbSqlSelect_Delete(select);
-    yylex_free();
-}
-
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
@@ -479,13 +407,6 @@ CUnitTests* DBSuite_tests()
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
-    
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_Simple));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingTableName));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFROM));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFields));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     
     return tests;

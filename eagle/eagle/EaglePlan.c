@@ -17,6 +17,9 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->usedProviders = 0;
     plan->providers = (EaglePlanBufferProvider**) calloc((size_t) plan->allocatedProviders, sizeof(EaglePlanBufferProvider*));
     
+    plan->errorCode = EaglePlanErrorNone;
+    plan->errorMessage = NULL;
+    
     return plan;
 }
 
@@ -65,7 +68,7 @@ void EaglePlan_Delete(EaglePlan *plan)
 {
     int i;
     
-    if(!plan) {
+    if(NULL == plan) {
         return;
     }
     
@@ -79,7 +82,9 @@ void EaglePlan_Delete(EaglePlan *plan)
     }
     free(plan->providers);
     
+    free(plan->errorMessage);
     free(plan);
+    plan = NULL;
 }
 
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name)
@@ -94,4 +99,18 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
     }
     
     return NULL;
+}
+
+void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage)
+{
+    plan->errorCode = errorCode;
+    plan->errorMessage = strdup(errorMessage);
+}
+
+EagleBoolean EaglePlan_isError(EaglePlan *plan)
+{
+    if(plan->errorCode == EaglePlanErrorNone) {
+        return EagleFalse;
+    }
+    return EagleTrue;
 }

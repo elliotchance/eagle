@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B00C26A16881B2500BD9E54 /* ExpressionSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B00C26916881B2500BD9E54 /* ExpressionSuite.c */; };
-		8B00C26C16881EAA00BD9E54 /* ExpressionSuite.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B00C2671688174200BD9E54 /* ExpressionSuite.txt */; };
+		8B00C26A16881B2500BD9E54 /* SQLSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B00C26916881B2500BD9E54 /* SQLSuite.c */; };
+		8B00C26C16881EAA00BD9E54 /* SQLSuite.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B00C2671688174200BD9E54 /* SQLSuite.txt */; };
 		8B1BF7D81675D79A007C11E6 /* sql.l in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C21675852E007C11E6 /* sql.l */; };
 		8B1BF7D91675D79A007C11E6 /* sql.y in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF7C51675852E007C11E6 /* sql.y */; };
 		8B1BF7DC1675D7E0007C11E6 /* libsqlparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1BF7D31675D752007C11E6 /* libsqlparser.a */; };
@@ -105,7 +105,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				8B00C26C16881EAA00BD9E54 /* ExpressionSuite.txt in CopyFiles */,
+				8B00C26C16881EAA00BD9E54 /* SQLSuite.txt in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,9 +121,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B00C2671688174200BD9E54 /* ExpressionSuite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ExpressionSuite.txt; path = ../ExpressionSuite.txt; sourceTree = "<group>"; };
-		8B00C26916881B2500BD9E54 /* ExpressionSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ExpressionSuite.c; sourceTree = "<group>"; };
-		8B00C26B16881B3D00BD9E54 /* ExpressionSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressionSuite.h; sourceTree = "<group>"; };
+		8B00C2671688174200BD9E54 /* SQLSuite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SQLSuite.txt; path = ../SQLSuite.txt; sourceTree = "<group>"; };
+		8B00C26916881B2500BD9E54 /* SQLSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SQLSuite.c; sourceTree = "<group>"; };
+		8B00C26B16881B3D00BD9E54 /* SQLSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLSuite.h; sourceTree = "<group>"; };
 		8B1BF7C21675852E007C11E6 /* sql.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = sql.l; sourceTree = SOURCE_ROOT; };
 		8B1BF7C51675852E007C11E6 /* sql.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = sql.y; sourceTree = SOURCE_ROOT; };
 		8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlSelect.h; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				8BD9E4181675710B005C3BDE /* suites */,
 				8BD9E41D1675710B005C3BDE /* TestSuite.c */,
 				8BD9E41E1675710B005C3BDE /* TestSuite.h */,
-				8B00C2671688174200BD9E54 /* ExpressionSuite.txt */,
+				8B00C2671688174200BD9E54 /* SQLSuite.txt */,
 			);
 			path = eagle_test;
 			sourceTree = "<group>";
@@ -347,8 +347,8 @@
 			children = (
 				8BD9E4191675710B005C3BDE /* DBSuite.c */,
 				8BD9E41A1675710B005C3BDE /* DBSuite.h */,
-				8B00C26916881B2500BD9E54 /* ExpressionSuite.c */,
-				8B00C26B16881B3D00BD9E54 /* ExpressionSuite.h */,
+				8B00C26916881B2500BD9E54 /* SQLSuite.c */,
+				8B00C26B16881B3D00BD9E54 /* SQLSuite.h */,
 				8BD9E41B1675710B005C3BDE /* MainSuite.c */,
 				8BD9E41C1675710B005C3BDE /* MainSuite.h */,
 			);
@@ -538,7 +538,7 @@
 				8BCA5C2C167C995900FDB186 /* EagleDbTableData.c in Sources */,
 				8BCA5C30167C9CB800FDB186 /* EagleDbTuple.c in Sources */,
 				8B545249167E950000136437 /* EagleLinkedList.c in Sources */,
-				8B00C26A16881B2500BD9E54 /* ExpressionSuite.c in Sources */,
+				8B00C26A16881B2500BD9E54 /* SQLSuite.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

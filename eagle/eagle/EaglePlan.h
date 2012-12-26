@@ -5,6 +5,28 @@
 #include "EaglePlanOperation.h"
 #include "EaglePlanBufferProvider.h"
 
+/**
+ Repressents the types of errors (or successes) that can occur inside a plan.
+ */
+typedef enum {
+    
+    /**
+     Everything is fine.
+     */
+    EaglePlanErrorNone = 0,
+    
+    /**
+     If an expression cannot be compiled (i.e. syntax error)
+     */
+    EaglePlanErrorCompile = 1,
+    
+    /**
+     Unknown column / identifier.
+     */
+    EaglePlanErrorIdentifier = 2
+    
+} EaglePlanError;
+
 typedef struct {
     
     /**
@@ -42,6 +64,16 @@ typedef struct {
      */
     int pageSize;
     
+    /**
+     The error status.
+     */
+    EaglePlanError errorCode;
+    
+    /**
+     Further details about the error, this may be NULL.
+     */
+    char *errorMessage;
+    
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);
@@ -52,5 +84,7 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);
 EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer);
 const char* EaglePlan_toString(EaglePlan *plan);
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name);
+void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage);
+EagleBoolean EaglePlan_isError(EaglePlan *plan);
 
 #endif

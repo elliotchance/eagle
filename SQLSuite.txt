@@ -1,0 +1,87 @@
+#==================================================
+# TABLE DEFINITIONS & DATA
+#==================================================
+
+% table mytable
+col1,col2
+0,0
+1,2
+2,4
+5,10
+10,20
+
+#==================================================
+# Parser Errors
+#==================================================
+
+% test_error
+SELECT * FROM
+syntax error, unexpected $end, expecting IDENTIFIER
+
+% test_error
+SELECT *
+syntax error, unexpected $end, expecting K_FROM
+
+% test_error
+SELECT
+syntax error, unexpected $end, expecting IDENTIFIER or INTEGER or T_ASTERISK
+
+% test_error
+SELECT * FROM mytable WHERE 123
+You can not use the star operator like this.
+
+% test_error
+SELECT col3 FROM mytable
+Unknown column 'col3'
+
+% test_error
+SELECT col1 + col4 FROM mytable
+Unknown column 'col4'
+
+% test_error
+SELECT col7 + col1 FROM mytable
+Unknown column 'col7'
+
+#==================================================
+# SELECTs
+#==================================================
+
+% test
+SELECT 123 FROM mytable
+123
+123
+123
+123
+123
+
+% test
+SELECT col1 = 5 FROM mytable
+0
+0
+0
+1
+0
+
+% test
+SELECT 4 = col2 FROM mytable
+0
+0
+1
+0
+0
+
+% test
+SELECT 123 + 456 FROM mytable
+579
+579
+579
+579
+579
+
+% test
+SELECT col1 FROM mytable WHERE 123
+0
+1
+2
+5
+10

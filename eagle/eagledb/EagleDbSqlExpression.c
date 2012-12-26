@@ -9,6 +9,11 @@
 #include "EagleDbSqlSelect.h"
 
 /**
+ Return value when the expression can not be compiled.
+ */
+const int EagleDbSqlExpression_ERROR = -1;
+
+/**
  Recursive function to compile an expression into a plan.
  
  @param expression The expression to compile.
@@ -32,9 +37,15 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             
             /* left */
             destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan);
+            if(EagleTrue == EaglePlan_isError(plan)) {
+                return EagleDbSqlExpression_ERROR;
+            }
             
             /* right */
             destinationRight = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->right, destinationBuffer, plan);
+            if(EagleTrue == EaglePlan_isError(plan)) {
+                return EagleDbSqlExpression_ERROR;
+            }
             
             /* operator */
             msg = (char*) malloc(256);
@@ -88,17 +99,22 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     /* find the provider for this column */
                     EaglePlanBufferProvider *provider = EaglePlan_getBufferProviderByName(plan, value->value.identifier);
                     if(NULL == provider) {
-                        printf("CANNOT FIND '%s'", value->value.identifier);
-                        return 0;
+                        char msg[128];
+                        sprintf(msg, "Unknown column '%s'", value->value.identifier);
+                        EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+                        return EagleDbSqlExpression_ERROR;
                     }
-                    else {
-                        return provider->destinationBuffer;
-                    }
+                    
+                    return provider->destinationBuffer;
                 }
                     
                 case EagleDbSqlValueTypeAsterisk:
-                    printf("COMPILATION ERROR, fix me");
-                    return 0;
+                {
+                    char msg[128];
+                    sprintf(msg, "You can not use the star operator like this.");
+                    EaglePlan_setError(plan, EaglePlanErrorCompile, msg);
+                    return EagleDbSqlExpression_ERROR;
+                }
             }
         }
             
@@ -123,6 +139,11 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
     results = (int*) calloc((size_t) totalExpressions, sizeof(int));
     for(i = 0; i < totalExpressions; ++i) {
         results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &destinationBuffer, plan);
+        
+        if(EagleTrue == EaglePlan_isError(plan)) {
+            free(results);
+            return;
+        }
     }
     
     /* if there is a WHERE clause expression only send those records */

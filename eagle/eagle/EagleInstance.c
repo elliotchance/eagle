@@ -5,8 +5,11 @@
 EagleInstance* EagleInstance_New(int totalWorkers)
 {
     EagleInstance *instance = (EagleInstance*) malloc(sizeof(EagleInstance));
+    
     instance->workers = EagleWorkers_New(totalWorkers, instance);
     instance->nextJobLock = EagleSynchronizer_CreateLock();
+    instance->plan = NULL;
+    
     return instance;
 }
 
@@ -57,6 +60,10 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
 
 void EagleInstance_Delete(EagleInstance *eagle)
 {
+    if(NULL == eagle) {
+        return;
+    }
+    
     EagleWorkers_Delete(eagle->workers);
     EagleLock_Delete(eagle->nextJobLock);
     EaglePlan_Delete(eagle->plan);

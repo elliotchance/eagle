@@ -5,6 +5,8 @@
 
 #define EagleDbSqlExpressionHeader EagleDbSqlExpressionType expressionType
 
+extern const int EagleDbSqlExpression_ERROR;
+
 /**
  The type of expression.
  */

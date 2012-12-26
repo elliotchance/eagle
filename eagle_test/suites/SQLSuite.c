@@ -4,7 +4,7 @@
 #include <string.h>
 #include "TestSuite.h"
 #include "DbSuite.h"
-#include "ExpressionSuite.h"
+#include "SQLSuite.h"
 #include "EagleDbTable.h"
 #include "EagleDbTuple.h"
 #include "EagleDbTableData.h"
@@ -15,6 +15,8 @@
 
 extern void *yyparse_ast;
 void yylex_free();
+int _testSqlSelect(const char *sql);
+char* yyerrors_last();
 
 EagleDbTableData **tables;
 int allocatedTables = 0;
@@ -23,12 +25,13 @@ int usedTables = 0;
 typedef struct {
     CUnitTest *test;
     char *sql;
+    char *errorMessage;
     int *answers;
     int allocatedAnswers;
     int usedAnswers;
-} ExpressionTest;
+} SQLTest;
 
-ExpressionTest *expressionTests;
+SQLTest *sqlTests;
 int allocatedTests;
 int usedTests;
 int currentTest;
@@ -36,7 +39,7 @@ int currentTest;
 /**
  * The suite init function.
  */
-int ExpressionSuite_init()
+int SQLSuite_init()
 {
     return 0;
 }
@@ -44,15 +47,12 @@ int ExpressionSuite_init()
 /**
  * The suite cleanup function.
  */
-int ExpressionSuite_clean()
+int SQLSuite_clean()
 {
-    /*for(int i = 0; i < usedTests; ++i) {
-        EagleDbTableData_Delete(tables[i]);
-    }*/
     for(int i = 0; i < usedTables; ++i) {
         EagleDbTable_Delete(tables[i]->table);
+        EagleDbTableData_Delete(tables[i]);
     }
-    //free(tables);
     
     return 0;
 }
@@ -87,12 +87,31 @@ char **splitColumns(char *line, int *count)
     return r;
 }
 
-void ExpressionSuiteTest()
+void SQLSuiteTest()
 {
     int exprs = 1;
     int pageSize = 5;
     
-    ExpressionTest test = expressionTests[currentTest++];
+    SQLTest test = sqlTests[currentTest++];
+    
+    // check for parser errors
+    if(_testSqlSelect(test.sql)) {
+        // expected error
+        if(NULL != test.errorMessage) {
+            if(!strcmp(yyerrors_last(), test.errorMessage)) {
+                EagleDbSqlSelect_Delete(yyparse_ast);
+                yylex_free();
+                return;
+            }
+            CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), test.errorMessage);
+        }
+        // unexpected error
+        else {
+            CUNIT_FAIL("%s", yyerrors_last());
+        }
+    }
+    EagleDbSqlSelect_Delete(yyparse_ast);
+    yylex_free();
     
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
     expr[0] = _getExpression(test.sql);
@@ -116,43 +135,61 @@ void ExpressionSuiteTest()
     EagleDbSqlExpression_CompilePlan(expr, exprs, -1, providers, plan);
     //printf("%s\n", EaglePlan_toString(plan));
     
-    // execute
-    EagleInstance *eagle = EagleInstance_New(1);
-    EagleInstance_addPlan(eagle, plan);
-    EagleInstance_run(eagle);
-    
-    // validate results
-    EaglePage *page = EaglePageProvider_nextPage(providers[0]);
-    CUNIT_ASSERT_NOT_NULL(page);
-    CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
-    
-    int valid = 1;
-    for(int i = 0; i < test.usedAnswers; ++i) {
-        //printf("%d != %d\n", test.answers[i], page->data[i]);
-        if(test.answers[i] != page->data[i]) {
-            valid = 0;
-            break;
+    // catch compilation error
+    if(EagleTrue == EaglePlan_isError(plan)) {
+        // expected error
+        if(NULL != test.errorMessage) {
+            CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, test.errorMessage);
         }
+        // unexpected error
+        else {
+            CUNIT_FAIL("%s", plan->errorMessage);
+        }
+        EaglePlan_Delete(plan);
     }
-    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    else {
+        // execute
+        EagleInstance *eagle = EagleInstance_New(1);
+        EagleInstance_addPlan(eagle, plan);
+        EagleInstance_run(eagle);
+        
+        // validate results
+        EaglePage *page = EaglePageProvider_nextPage(providers[0]);
+        CUNIT_ASSERT_NOT_NULL(page);
+        CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
+        
+        int valid = 1;
+        for(int i = 0; i < test.usedAnswers; ++i) {
+            //printf("%d != %d\n", test.answers[i], page->data[i]);
+            if(test.answers[i] != page->data[i]) {
+                valid = 0;
+                break;
+            }
+        }
+        CUNIT_ASSERT_EQUAL_INT(valid, 1);
+        
+        // clean
+        EaglePage_Delete(page);
+        EagleInstance_Delete(eagle);
+    }
     
     // clean up
     for(int i = 0; i < exprs; ++i) {
         EaglePageProvider_Delete(providers[i]);
     }
-    free(expr);
     free(providers);
-    yylex_free();
+    free(expr);
+    
     EagleDbSqlSelect_Delete(yyparse_ast);
-    EagleInstance_Delete(eagle);
-    EaglePage_Delete(page);
+    yylex_free();
 }
 
 void controlTest(FILE *file, int *lineNumber)
 {
-    ExpressionTest test;
+    SQLTest test;
     test.sql = (char*) malloc(1024);
-    test.test = CUnitTest_New(test.sql, ExpressionSuiteTest);
+    test.errorMessage = NULL;
+    test.test = CUnitTest_New(test.sql, SQLSuiteTest);
     test.usedAnswers = 0;
     test.allocatedAnswers = 5;
     test.answers = (int*) calloc(test.allocatedAnswers, sizeof(int));
@@ -170,7 +207,28 @@ void controlTest(FILE *file, int *lineNumber)
         test.answers[test.usedAnswers++] = atoi(strtok(line, "\n"));
     }
     
-    expressionTests[usedTests++] = test;
+    sqlTests[usedTests++] = test;
+}
+
+void controlTestError(FILE *file, int *lineNumber)
+{
+    SQLTest test;
+    test.sql = (char*) malloc(1024);
+    test.errorMessage = (char*) malloc(1024);
+    test.test = CUnitTest_New(test.sql, SQLSuiteTest);
+    test.usedAnswers = 0;
+    test.allocatedAnswers = 0;
+    test.answers = NULL;
+    
+    // get the SQL
+    fgets(test.sql, 1024, file);
+    test.sql[strlen(test.sql) - 1] = 0;
+    
+    // get the expected error message
+    fgets(test.errorMessage, 1024, file);
+    test.errorMessage[strlen(test.errorMessage) - 1] = 0;
+    
+    sqlTests[usedTests++] = test;
 }
 
 void controlTable(FILE *file, char *firstLine, int *lineNumber)
@@ -227,16 +285,18 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         for(int i = 0; i < count; ++i) {
             free(data[i]);
         }
+        free(data);
     }
     
     // clean
     for(int i = 0; i < columnCount; ++i) {
         free(columnNames[i]);
     }
+    free(columnNames);
     free(tableName);
 }
 
-CUnitTests* ExpressionSuite_tests()
+CUnitTests* SQLSuite_tests()
 {
     // init
     allocatedTables = 10;
@@ -245,12 +305,12 @@ CUnitTests* ExpressionSuite_tests()
     
     allocatedTests = 100;
     usedTests = 0;
-    expressionTests = (ExpressionTest*) calloc(allocatedTests, sizeof(ExpressionTest));
+    sqlTests = (SQLTest*) calloc(allocatedTests, sizeof(SQLTest));
     
     CUnitTests *tests = CUnitTests_New(allocatedTests);
     
     // open test file
-    const char *fileName = "ExpressionSuite.txt";
+    const char *fileName = "SQLSuite.txt";
     FILE *file = fopen(fileName, "r");
     if(NULL == file) {
         char cwd[1024], msg[1024];
@@ -273,6 +333,9 @@ CUnitTests* ExpressionSuite_tests()
             if(!strncasecmp(line, "% table", strlen("% table"))) {
                 controlTable(file, line, &lineNumber);
             }
+            else if(!strncasecmp(line, "% test_error", strlen("% test_error"))) {
+                controlTestError(file, &lineNumber);
+            }
             else if(!strncasecmp(line, "% test", strlen("% test"))) {
                 controlTest(file, &lineNumber);
             }
@@ -285,7 +348,7 @@ CUnitTests* ExpressionSuite_tests()
     }
     
     for(int i = 0; i < usedTests; ++i) {
-        CUnitTests_addTest(tests, expressionTests[i].test);
+        CUnitTests_addTest(tests, sqlTests[i].test);
     }
     
     // clean
