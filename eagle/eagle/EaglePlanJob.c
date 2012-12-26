@@ -3,8 +3,8 @@
 
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)
 {
-    EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));
     int i;
+    EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));
     
     job->plan = plan;
     
@@ -22,7 +22,7 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
 {
     int i;
     
-    if(!job) {
+    if(NULL == job) {
         return;
     }
     

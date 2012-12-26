@@ -3,7 +3,6 @@
 
 #include "EaglePageOperations.h"
 #include "EaglePlanOperation.h"
-#include "EaglePageReceiver.h"
 #include "EaglePlanBufferProvider.h"
 
 typedef struct {
@@ -43,14 +42,9 @@ typedef struct {
      */
     int pageSize;
     
-    /**
-     The receiver takes record IDs for which the expression in the plan evaluates to true.
-     */
-    EaglePageReceiver *receiver;
-    
 } EaglePlan;
 
-EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver);
+EaglePlan* EaglePlan_New(int pageSize);
 void EaglePlan_Delete(EaglePlan *plan);
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo);
@@ -58,5 +52,6 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);
 EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer);
 const char* EaglePlan_toString(EaglePlan *plan);
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name);
+EaglePlanBufferProvider* EaglePlan_getBufferProviderByDestination(EaglePlan *plan, int destinationBuffer);
 
 #endif

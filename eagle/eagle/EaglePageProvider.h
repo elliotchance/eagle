@@ -55,6 +55,11 @@ struct EaglePageProvider_ {
     void (*free)(struct EaglePageProvider_ *epp);
     
     /**
+     Virtual method for resetting the page provider.
+     */
+    void (*reset)(struct EaglePageProvider_ *epp);
+    
+    /**
      Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining()
      */
     EagleLock *nextPageLock;
@@ -76,6 +81,7 @@ void EaglePageProvider_Delete(EaglePageProvider *epp);
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
+void EaglePageProvider_reset(EaglePageProvider *epp);
 
 /* private functions */
 EaglePageProvider* EaglePageProvider_New_(int recordsPerPage);
@@ -87,5 +93,7 @@ int EaglePageProvider_pagesRemainingFromIntStream_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp);
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp);
 void EaglePageProvider_DeleteIntStream_(EaglePageProvider *epp);
+void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp);
+void EaglePageProvider_resetFromIntStream_(EaglePageProvider *epp);
 
 #endif

@@ -4,8 +4,10 @@
 CUnitTest* CUnitTest_New(const char *strName, CU_TestFunc pTestFunc)
 {
     CUnitTest *test = (CUnitTest*) malloc(sizeof(CUnitTest));
+    
     test->strName = strName;
     test->pTestFunc = pTestFunc;
+    
     return test;
 }
 

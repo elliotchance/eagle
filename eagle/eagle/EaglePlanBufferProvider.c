@@ -2,12 +2,13 @@
 #include <stdio.h>
 #include "EaglePlanBufferProvider.h"
 
-EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider)
+EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider, EagleBoolean freeProvider)
 {
     EaglePlanBufferProvider *bp = (EaglePlanBufferProvider*) malloc(sizeof(EaglePlanBufferProvider));
     
     bp->destinationBuffer = destinationBuffer;
     bp->provider = provider;
+    bp->freeProvider = freeProvider;
     
     return bp;
 }
@@ -21,6 +22,8 @@ char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
 
 void EaglePlanBufferProvider_Delete(EaglePlanBufferProvider *bp)
 {
-    EaglePageProvider_Delete(bp->provider);
+    if(EagleTrue == bp->freeProvider) {
+        EaglePageProvider_Delete(bp->provider);
+    }
     free(bp);
 }

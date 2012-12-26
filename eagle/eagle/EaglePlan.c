@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "EaglePlan.h"
 
-EaglePlan* EaglePlan_New(int pageSize, EaglePageReceiver *receiver)
+EaglePlan* EaglePlan_New(int pageSize)
 {
     EaglePlan *plan = (EaglePlan*) malloc(sizeof(EaglePlan));
     
     plan->pageSize = pageSize;
-    plan->receiver = receiver;
     
     plan->allocatedOperations = 10;
     plan->usedOperations = 0;
@@ -69,8 +69,6 @@ void EaglePlan_Delete(EaglePlan *plan)
         return;
     }
     
-    EaglePageReceiver_Delete(plan->receiver);
-    
     for(i = 0; i < plan->usedOperations; ++i) {
         EaglePlanOperation_Delete(plan->operations[i]);
     }
@@ -88,8 +86,27 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
 {
     int i;
     
-    for(i = 0; i < plan->allocatedProviders; ++i) {
-        if(strcmp(name, plan->providers[i]->provider->name) == 0) {
+    if(NULL == name) {
+        return NULL;
+    }
+    
+    for(i = 0; i < plan->usedProviders; ++i) {
+        EaglePageProvider *provider = plan->providers[i]->provider;
+        if(NULL != provider->name && strcmp(name, provider->name) == 0) {
+            return plan->providers[i];
+        }
+    }
+    
+    return NULL;
+}
+
+EaglePlanBufferProvider* EaglePlan_getBufferProviderByDestination(EaglePlan *plan, int destinationBuffer)
+{
+    int i;
+    
+    for(i = 0; i < plan->usedProviders; ++i) {
+        EaglePlanBufferProvider *provider = plan->providers[i];
+        if(provider->destinationBuffer == destinationBuffer) {
             return plan->providers[i];
         }
     }

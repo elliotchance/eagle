@@ -21,6 +21,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
     pageProvider->free = EaglePageProvider_DeleteIntArray_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
     pageProvider->name = name;
+    pageProvider->reset = EaglePageProvider_resetFromIntArray_;
     
     return pageProvider;
 }
@@ -58,10 +59,17 @@ int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)
 
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage)
 {
-    int pagesLeft = totalRecords / recordsPerPage;
+    int pagesLeft;
+    
+    if(0 == totalRecords || 0 == recordsPerPage) {
+        return 0;
+    }
+    
+    pagesLeft = totalRecords / recordsPerPage;
     if(totalRecords % recordsPerPage > 0) {
         ++pagesLeft;
     }
+    
     return pagesLeft;
 }
 
@@ -97,7 +105,7 @@ EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp)
 
 void EaglePageProvider_Delete(EaglePageProvider *epp)
 {
-    if(!epp) {
+    if(NULL == epp) {
         return;
     }
     epp->free(epp);
@@ -160,6 +168,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage, cha
     pageProvider->free = EaglePageProvider_DeleteIntStream_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
     pageProvider->name = name;
+    pageProvider->reset = EaglePageProvider_resetFromIntStream_;
     
     return pageProvider;
 }
@@ -177,7 +186,8 @@ EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp)
     
     for(begin = EagleLinkedList_begin(list); begin != NULL; begin = begin->next) {
         if(i == epp->offsetRecords) {
-            EaglePage *page = (EaglePage*) begin->obj;
+            /* always give a duplicate page, so that the original page is not modified or freed */
+            EaglePage *page = EaglePage_Copy((EaglePage*) begin->obj);
             page->recordOffset = epp->offsetRecords;
             epp->offsetRecords += page->count;
             return page;
@@ -199,4 +209,24 @@ EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data)
     
     EagleSynchronizer_Unlock(epp->nextPageLock);
     return r;
+}
+
+void EaglePageProvider_reset(EaglePageProvider *epp)
+{
+    /* synchronize this function */
+    EagleSynchronizer_Lock(epp->nextPageLock);
+    
+    epp->reset(epp);
+    
+    EagleSynchronizer_Unlock(epp->nextPageLock);
+}
+
+void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp)
+{
+    epp->offsetRecords = 0;
+}
+
+void EaglePageProvider_resetFromIntStream_(EaglePageProvider *epp)
+{
+    epp->offsetRecords = 0;
 }

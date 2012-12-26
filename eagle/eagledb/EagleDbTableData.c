@@ -9,7 +9,7 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
     td->table = table;
     td->providers = (EaglePageProvider**) calloc((size_t) table->usedColumns, sizeof(EaglePageProvider*));
     for(i = 0; i < table->usedColumns; ++i) {
-        td->providers[i] = EaglePageProvider_CreateFromIntStream(1000, NULL);
+        td->providers[i] = EaglePageProvider_CreateFromIntStream(1000, table->columns[i]->name);
     }
     
     return td;

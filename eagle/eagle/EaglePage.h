@@ -28,11 +28,13 @@ struct EaglePage_ {
      Free \c data when freeing the page.
      */
     EagleBoolean freeData;
+    
 };
 typedef struct EaglePage_ EaglePage;
 
 EaglePage* EaglePage_New(int *data, int count, int recordOffset, EagleBoolean freeData);
 EaglePage* EaglePage_Alloc(int count);
+EaglePage* EaglePage_Copy(EaglePage *page);
 void EaglePage_Delete(EaglePage *page);
 
 #endif

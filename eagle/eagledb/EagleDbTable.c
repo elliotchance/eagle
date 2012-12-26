@@ -9,7 +9,7 @@ EagleDbTable* EagleDbTable_New(char *name)
     table->name = strdup(name);
     table->allocatedColumns = 16;
     table->usedColumns = 0;
-    table->columns = (EagleDbColumn**) calloc((size_t) table->allocatedColumns, sizeof(EagleDbColumn));
+    table->columns = (EagleDbColumn**) calloc((size_t) table->allocatedColumns, sizeof(EagleDbColumn*));
     
     return table;
 }

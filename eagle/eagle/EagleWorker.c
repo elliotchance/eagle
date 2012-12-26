@@ -46,13 +46,6 @@ void* EagleWorker_begin(void *obj)
                 epo->function(destination, source1, source2, epo->obj);
             }
             
-            /* extract records */
-            for(i = 0; i < job->plan->pageSize; ++i) {
-                if(job->buffers[0]->data[i]) {
-                    EaglePageReceiver_pushRecordId(job->plan->receiver, job->buffers[0]->recordOffset + i);
-                }
-            }
-            
             /* free */
             EaglePlanJob_Delete(job);
         }

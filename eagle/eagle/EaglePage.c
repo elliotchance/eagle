@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "EaglePage.h"
 
 /**
@@ -40,8 +41,20 @@ EaglePage* EaglePage_Alloc(int count)
 
 void EaglePage_Delete(EaglePage *page)
 {
+    if(NULL == page) {
+        return;
+    }
     if(EagleTrue == page->freeData) {
         free((void*) page->data);
     }
     free((void*) page);
+}
+
+EaglePage* EaglePage_Copy(EaglePage *page)
+{
+    size_t memorySize = (size_t) page->count * sizeof(int);
+    int *newData = (int*) malloc(memorySize);
+    
+    memmove(newData, page->data, memorySize);
+    return EaglePage_New(newData, page->count, page->recordOffset, page->freeData);
 }

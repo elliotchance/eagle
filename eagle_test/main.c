@@ -4,6 +4,7 @@
 #include "TestSuite.h"
 #include "MainSuite.h"
 #include "DBSuite.h"
+#include "ExpressionSuite.h"
 
 /**
  * The main() function for setting up and running the tests.
@@ -54,6 +55,28 @@ int main(int argc, char **argv)
         
         // add the tests to the suite
         CUnitTests *tests = DBSuite_tests();
+        for(int i = 0; i < tests->usedTests; ++i) {
+            CUnitTest *test = tests->tests[i];
+            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
+                CU_cleanup_registry();
+                return CU_get_error();
+            }
+        }
+        
+        // clean up
+        CUnitTests_Delete(tests);
+    }
+    
+    {
+        // add a suite to the registry
+        CU_pSuite pSuite = CU_add_suite("ExpressionSuite", ExpressionSuite_init, ExpressionSuite_clean);
+        if(NULL == pSuite) {
+            CU_cleanup_registry();
+            return CU_get_error();
+        }
+        
+        // add the tests to the suite
+        CUnitTests *tests = ExpressionSuite_tests();
         for(int i = 0; i < tests->usedTests; ++i) {
             CUnitTest *test = tests->tests[i];
             if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
