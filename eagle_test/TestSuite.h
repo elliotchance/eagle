@@ -13,7 +13,7 @@ answers[i] = expr; \
 #define CUNIT_TESTNAME(suite, method, ...) suite##_test##method##__VA_ARGS__
 #define CUNIT_TEST(suite, method, ...) void CUNIT_TESTNAME(suite, method, __VA_ARGS__)()
 #define QUOTE(str) #str
-#define CUNIT_NEW(suite, method, ...) CUnitTest_New(QUOTE(suite##_test##method##__VA_ARGS__), CUNIT_TESTNAME(suite, method, __VA_ARGS__))
+#define CUNIT_NEW(suite, method, ...) CUnitTest_New(QUOTE(method##__VA_ARGS__), CUNIT_TESTNAME(suite, method, __VA_ARGS__))
 
 /**
  Verify two integers are the same.

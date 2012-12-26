@@ -14,14 +14,21 @@ CUnitTest* CUnitTest_New(const char *strName, CU_TestFunc pTestFunc)
 CUnitTests* CUnitTests_New(int allocatedTests)
 {
     CUnitTests *tests = (CUnitTests*) malloc(sizeof(CUnitTests));
+    
     tests->allocatedTests = allocatedTests;
     tests->usedTests = 0;
-    tests->tests = (CUnitTest**) calloc(tests->allocatedTests, sizeof(CUnitTest*));
+    tests->tests = (CUnitTest**) calloc((size_t) tests->allocatedTests, sizeof(CUnitTest*));
+    
     return tests;
 }
 
 void CUnitTests_addTest(CUnitTests *tests, CUnitTest *test)
 {
+    if(tests->usedTests >= tests->allocatedTests) {
+        printf("Suite isn't big enough (suite has limit of %d)!\n", tests->allocatedTests);
+        exit(1);
+    }
+    
     tests->tests[tests->usedTests++] = test;
 }
 

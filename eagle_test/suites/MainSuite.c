@@ -209,25 +209,38 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntArray)
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, testDataSize);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
+    // read first page
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
     EaglePage *page1 = EaglePageProvider_nextPage(provider);
     CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
     CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
     CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
     CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
+    EaglePage_Delete(page1);
+    
+    // reset
+    EaglePageProvider_reset(provider);
+    
+    // reread the first page and beyond
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
+    page1 = EaglePageProvider_nextPage(provider);
+    CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
+    EaglePage_Delete(page1);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
     EaglePage *page2 = EaglePageProvider_nextPage(provider);
     CUNIT_VERIFY_EQUAL_INT(page2->count, 1);
     CUNIT_VERIFY_EQUAL_INT(page2->data[0], testData[2]);
     CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, recordsPerPage);
+    EaglePage_Delete(page2);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 0);
     
     // clean up
     EaglePageProvider_Delete(provider);
-    EaglePage_Delete(page1);
-    EaglePage_Delete(page2);
 }
 
 CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
@@ -418,6 +431,13 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     EaglePageProvider_Delete(provider);
 }
 
+CUNIT_TEST(MainSuite, EaglePlan_getBufferProviderByName)
+{
+    EaglePlan *plan = EaglePlan_New(1);
+    CUNIT_ASSERT_NULL(EaglePlan_getBufferProviderByName(plan, "abc"));
+    EaglePlan_Delete(plan);
+}
+
 /**
  * The suite init function.
  */
@@ -454,6 +474,7 @@ CUnitTests* MainSuite_tests()
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getBufferProviderByName));
     
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString));
     

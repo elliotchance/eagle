@@ -202,53 +202,6 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     EagleInstance_Delete(eagle);
 }
 
-CUNIT_TEST(DBSuite, _, Expression_ValueInteger)
-{
-    // SQL
-    EagleDbSqlExpression *where = _getExpression("SELECT 123 FROM mytable");
-    CUNIT_ASSERT_EQUAL_INT(where->expressionType, EagleDbSqlExpressionTypeValue);
-    
-    // AST
-    EagleDbSqlValue *value = (EagleDbSqlValue*) where;
-    CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
-    
-    CREATE_EXPRESSION_ARRAY(answers, 10, 123);
-    _testExpression(where, 2, 1, answers);
-    free(answers);
-    
-    EagleDbSqlSelect_Delete(yyparse_ast);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, Expression_Addition)
-{
-    // SQL
-    EagleDbSqlExpression *where = _getExpression("SELECT 123 + 456 FROM mytable");
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
-    
-    // AST
-    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionOperatorPlus, expr->op);
-    
-    EagleDbSqlValue *left = (EagleDbSqlValue*) expr->left;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, left->type);
-    
-    EagleDbSqlValue *right = (EagleDbSqlValue*) expr->right;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, right->type);
-    
-    CUNIT_ASSERT_EQUAL_INT(123, ((EagleDbSqlValue*) left)->value.intValue);
-    CUNIT_ASSERT_EQUAL_INT(456, ((EagleDbSqlValue*) right)->value.intValue);
-    
-    CREATE_EXPRESSION_ARRAY(answers, 10, 123 + 456);
-    _testExpression(where, 3, 2, answers);
-    free(answers);
-    
-    EagleDbSqlSelect_Delete(yyparse_ast);
-    yylex_free();
-}
-
 CUNIT_TEST(DBSuite, EagleDbColumn_New)
 {
     EagleDbColumn *col = EagleDbColumn_New("mycol", EagleDbColumnTypeInteger);
@@ -488,35 +441,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     yylex_free();
 }
 
-CUNIT_TEST(DBSuite, _, Expression_Equals)
-{
-    // SQL
-    EagleDbSqlExpression *where = _getExpression("SELECT col1 = 5 FROM mytable");
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeBinaryExpression, where->expressionType);
-    
-    // AST
-    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) where;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->left->expressionType);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionTypeValue, expr->right->expressionType);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpressionOperatorEquals, expr->op);
-    
-    EagleDbSqlValue *left = (EagleDbSqlValue*) expr->left;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeIdentifier, left->type);
-    
-    EagleDbSqlValue *right = (EagleDbSqlValue*) expr->right;
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlValueTypeInteger, right->type);
-    
-    CUNIT_ASSERT_EQUAL_STRING("col1", ((EagleDbSqlValue*) left)->value.identifier);
-    CUNIT_ASSERT_EQUAL_INT(5, ((EagleDbSqlValue*) right)->value.intValue);
-    
-    CREATE_EXPRESSION_ARRAY(answers, 10, i == 5);
-    _testExpression(where, 2, 2, answers);
-    free(answers);
-    
-    EagleDbSqlSelect_Delete(yyparse_ast);
-    yylex_free();
-}
-
 /**
  * The suite init function.
  */
@@ -561,10 +485,6 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFROM));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_MissingFields));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    
-    /*CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_ValueInteger));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Addition));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, Expression_Equals));*/
     
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     

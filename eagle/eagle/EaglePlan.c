@@ -86,27 +86,9 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
 {
     int i;
     
-    if(NULL == name) {
-        return NULL;
-    }
-    
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePageProvider *provider = plan->providers[i]->provider;
         if(NULL != provider->name && strcmp(name, provider->name) == 0) {
-            return plan->providers[i];
-        }
-    }
-    
-    return NULL;
-}
-
-EaglePlanBufferProvider* EaglePlan_getBufferProviderByDestination(EaglePlan *plan, int destinationBuffer)
-{
-    int i;
-    
-    for(i = 0; i < plan->usedProviders; ++i) {
-        EaglePlanBufferProvider *provider = plan->providers[i];
-        if(provider->destinationBuffer == destinationBuffer) {
             return plan->providers[i];
         }
     }

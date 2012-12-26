@@ -238,8 +238,6 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
 
 CUnitTests* ExpressionSuite_tests()
 {
-    CUnitTests *tests = CUnitTests_New(allocatedTests);
-    
     // init
     allocatedTables = 10;
     usedTables = 0;
@@ -248,6 +246,8 @@ CUnitTests* ExpressionSuite_tests()
     allocatedTests = 100;
     usedTests = 0;
     expressionTests = (ExpressionTest*) calloc(allocatedTests, sizeof(ExpressionTest));
+    
+    CUnitTests *tests = CUnitTests_New(allocatedTests);
     
     // open test file
     const char *fileName = "ExpressionSuite.txt";

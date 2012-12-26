@@ -52,6 +52,5 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);
 EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer);
 const char* EaglePlan_toString(EaglePlan *plan);
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name);
-EaglePlanBufferProvider* EaglePlan_getBufferProviderByDestination(EaglePlan *plan, int destinationBuffer);
 
 #endif
