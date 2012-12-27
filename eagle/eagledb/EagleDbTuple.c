@@ -3,6 +3,7 @@
 #include <string.h>
 #include "EagleDbTuple.h"
 #include "EagleData.h"
+#include "EagleUtils.h"
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
@@ -37,13 +38,13 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
     int i;
     
     desc[0] = 0;
-    strcat(desc, "(");
+    strcat_safe(desc, "(");
     for(i = 0; i < tuple->table->usedColumns; ++i) {
         if(i > 0) {
-            strcat(desc, ",");
+            strcat_safe(desc, ",");
         }
-        strcat(desc, tuple->table->columns[i]->name);
-        strcat(desc, "=");
+        strcat_safe(desc, tuple->table->columns[i]->name);
+        strcat_safe(desc, "=");
         
         switch(tuple->table->columns[i]->type) {
             case EagleDbColumnTypeInteger:
@@ -51,7 +52,7 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
                 break;
         }
     }
-    strcat(desc, ")");
+    strcat_safe(desc, ")");
     
     return desc;
 }
