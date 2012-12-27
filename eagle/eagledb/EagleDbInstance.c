@@ -66,7 +66,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     
     for(i = 0; i < plan->resultFields; ++i) {
         if(i > 0) {
-            printf("|");
+            printf("+");
         }
         for(j = 0; j < widths[i] + 2; ++j) {
             printf("-");
@@ -93,7 +93,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                     if(k > 0) {
                         printf("|");
                     }
-                    printf(" %*d ", widths[0], pages[k]->data[j]);
+                    printf(" %*d ", widths[k], pages[k]->data[j]);
                 }
                 printf("\n");
             }
