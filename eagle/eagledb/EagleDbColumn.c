@@ -6,7 +6,7 @@ EagleDbColumn* EagleDbColumn_New(char *name, EagleDbColumnType type)
 {
     EagleDbColumn *column = (EagleDbColumn*) malloc(sizeof(EagleDbColumn));
     
-    column->name = strdup(name);
+    column->name = (NULL == name ? NULL : strdup(name));
     column->type = type;
     
     return column;

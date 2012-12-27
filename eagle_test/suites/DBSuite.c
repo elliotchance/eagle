@@ -386,6 +386,29 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE)
     yylex_free();
 }
 
+CUNIT_TEST(DBSuite, _, CREATE_TABLE)
+{
+    if(_testSqlSelect("CREATE TABLE mytable ( col1 INT, col2 INTEGER )")) {
+        CUNIT_FAIL(yyerrors_last(), NULL);
+    }
+    
+    EagleDbTable *table = (EagleDbTable*) yyparse_ast;
+    CUNIT_VERIFY_EQUAL_STRING("mytable", table->name);
+    
+    CUNIT_ASSERT_EQUAL_INT(table->allocatedColumns, 2);
+    CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
+    CUNIT_ASSERT_NOT_NULL(table->columns);
+    
+    CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
+    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDbColumnTypeInteger);
+    
+    CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
+    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDbColumnTypeInteger);
+    
+    EagleDbTable_Delete(table);
+    yylex_free();
+}
+
 /**
  * The suite init function.
  */
@@ -425,6 +448,7 @@ CUnitTests* DBSuite_tests()
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     
     return tests;

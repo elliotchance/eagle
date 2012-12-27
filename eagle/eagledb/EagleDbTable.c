@@ -6,12 +6,28 @@ EagleDbTable* EagleDbTable_New(char *name)
 {
     EagleDbTable *table = (EagleDbTable*) malloc(sizeof(EagleDbTable));
     
-    table->name = strdup(name);
+    table->name = (NULL == name ? NULL : strdup(name));
     table->allocatedColumns = 16;
     table->usedColumns = 0;
     table->columns = (EagleDbColumn**) calloc((size_t) table->allocatedColumns, sizeof(EagleDbColumn*));
     
     return table;
+}
+
+void EagleDbTable_setColumns(EagleDbTable *table, EagleDbColumn** columns, int count)
+{
+    int i;
+    
+    /* free existing memory */
+    for(i = 0; i < table->usedColumns; ++i) {
+        EagleDbColumn_Delete(table->columns[i]);
+    }
+    free(table->columns);
+    
+    /* set new columns */
+    table->allocatedColumns = count;
+    table->usedColumns = count;
+    table->columns = columns;
 }
 
 void EagleDbTable_Delete(EagleDbTable *table)
