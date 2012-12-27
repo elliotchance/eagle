@@ -85,3 +85,11 @@ SELECT col1 FROM mytable WHERE 123
 2
 5
 10
+
+% test
+SELECT col1, col2 FROM mytable
+0,0
+1,2
+2,4
+5,10
+10,20

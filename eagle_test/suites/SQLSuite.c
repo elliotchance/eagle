@@ -92,6 +92,7 @@ void SQLSuiteTest()
     int exprs = 1;
     int pageSize = 5;
     int i;
+    int whereClauseId = -1;
     
     SQLTest test = sqlTests[currentTest++];
     
@@ -111,14 +112,20 @@ void SQLSuiteTest()
             CUNIT_FAIL("%s", yyerrors_last());
         }
     }
-    EagleDbSqlSelect_Delete(yyparse_ast);
-    yylex_free();
     
     // create the plan skeleton
     EaglePlan *plan = EaglePlan_New(pageSize);
     
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    exprs = EagleDbSqlSelect_getExpressionsCount(select);
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
-    expr[0] = _getExpression(test.sql);
+    for(i = 0; i < EagleDbSqlSelect_getFieldCount(select); ++i) {
+        expr[i] = select->selectExpressions[i];
+    }
+    if(NULL != select->whereExpression) {
+        whereClauseId = i;
+        expr[i] = select->whereExpression;
+    }
     
     // the providers will contain the result
     plan->resultFields = exprs;
