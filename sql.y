@@ -49,6 +49,24 @@
     {
         return yyobj[yyobj_length++] = ptr;
     }
+    
+    /**
+     When returning an array of something you can use this mechanism.
+     */
+    void **yylist = NULL;
+    int yylist_length = 0;
+    
+    void* yylist_push(void *ptr)
+    {
+        return yylist[yylist_length++] = ptr;
+    }
+    
+    void* yylist_new()
+    {
+        yylist = (void**) calloc((size_t) 256, sizeof(void*));
+        yylist_length = 0;
+        return yylist;
+    }
 
     /**
      A return stack. Maximum depth is 256.
@@ -105,6 +123,7 @@
 %token T_PLUS
 %token T_EQUALS
 %token T_END
+%token T_COMMA
 
 %%
 
@@ -128,9 +147,11 @@ select_statement:
     K_SELECT {
         yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
     }
-    column_expression {
+    column_expression_list {
         void *last = yyreturn_pop();
-        ((EagleDbSqlSelect*) yyreturn_current())->selectExpression = last;
+        ((EagleDbSqlSelect*) yyreturn_current())->selectExpressions = last;
+        ((EagleDbSqlSelect*) yyreturn_current())->allocatedSelectExpressions = yylist_length;
+        ((EagleDbSqlSelect*) yyreturn_current())->usedSelectExpressions = yylist_length;
     }
     K_FROM IDENTIFIER {
         ((EagleDbSqlSelect*) yyreturn_current())->tableName = yyobj_push(strdup(yytext_last));
@@ -140,6 +161,26 @@ select_statement:
         ((EagleDbSqlSelect*) yyreturn_current())->whereExpression = last;
     }
 ;
+
+column_expression_list:
+    {
+        yyobj_push(yylist_new());
+    }
+    column_expression {
+        void *last = yyreturn_pop();
+        yylist_push(last);
+    }
+    next_column_expression
+    {
+        yyreturn_push(yylist);
+    }
+
+next_column_expression:
+    |
+    T_COMMA column_expression {
+        void *last = yyreturn_pop();
+        yylist_push(last);
+    }
 
 where_expression:
     {

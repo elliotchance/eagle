@@ -21,6 +21,7 @@ integer [0-9]+
 "+" return T_PLUS;
 "=" return T_EQUALS;
 ";" return T_END;
+"," return T_COMMA;
 
 {white} {
     /* skip white space */

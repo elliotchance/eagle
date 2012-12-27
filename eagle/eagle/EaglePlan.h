@@ -74,6 +74,16 @@ typedef struct {
      */
     char *errorMessage;
     
+    /**
+     Result set after execution.
+     */
+    EaglePageProvider **result;
+    
+    /**
+     The number of providers in \c result
+     */
+    int resultFields;
+    
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);

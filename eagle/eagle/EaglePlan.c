@@ -19,6 +19,7 @@ EaglePlan* EaglePlan_New(int pageSize)
     
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
+    plan->resultFields = 0;
     
     return plan;
 }

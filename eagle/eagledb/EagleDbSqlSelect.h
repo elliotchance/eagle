@@ -3,6 +3,7 @@
 
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlValue.h"
+#include "EagleDbInstance.h"
 
 /**
  SQL SELECT expression.
@@ -23,11 +24,27 @@ typedef struct {
      */
     EagleDbSqlExpression *whereExpression;
     
-    EagleDbSqlExpression *selectExpression;
+    /**
+     Represents the expression for the first column.
+     */
+    EagleDbSqlExpression **selectExpressions;
+    
+    /**
+     The number of allocated \c selectExpressions
+     */
+    int allocatedSelectExpressions;
+    
+    /**
+     The number of used \c selectExpressions
+     */
+    int usedSelectExpressions;
     
 } EagleDbSqlSelect;
 
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);
 void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
+EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db);
+int EagleDbSqlSelect_getFieldCount(EagleDbSqlSelect *select);
+int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select);
 
 #endif

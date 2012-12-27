@@ -123,7 +123,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
     }
 }
 
-void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePageProvider **destinations, EaglePlan *plan)
+void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan)
 {
     int i, *results;
     
@@ -151,17 +151,19 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
         EaglePlanOperation *epo;
         char msg[64];
         
-        if(whereClause >= 0) {
-            /* send some result data to the provider */
-            sprintf(msg, "WHERE <%d>, send <%d> to provider %d", results[whereClause], results[i], i);
-            epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, results[whereClause], results[i], destinations[i], EagleFalse, msg);
-            EaglePlan_addOperation(plan, epo);
-        }
-        else {
-            /* send all the result data to the provider */
-            sprintf(msg, "ALL <%d> to provider %d", results[i], i);
-            epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, -1, results[i],  destinations[i], EagleFalse, msg);
-            EaglePlan_addOperation(plan, epo);
+        if(i != whereClause) {
+            if(whereClause >= 0) {
+                /* send some result data to the provider */
+                sprintf(msg, "WHERE <%d>, send <%d> to provider %d", results[whereClause], results[i], i);
+                epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, results[whereClause], results[i], plan->result[i], EagleFalse, msg);
+                EaglePlan_addOperation(plan, epo);
+            }
+            else {
+                /* send all the result data to the provider */
+                sprintf(msg, "ALL <%d> to provider %d", results[i], i);
+                epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, -1, results[i], plan->result[i], EagleFalse, msg);
+                EaglePlan_addOperation(plan, epo);
+            }
         }
     }
     

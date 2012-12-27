@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "EagleDbInstance.h"
 #include "EagleDbTable.h"
@@ -42,34 +43,79 @@ EagleDbInstance* EagleDbInstance_New(void)
     return db;
 }
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db)
+void EagleDbInstance_PrintResults(EaglePlan *plan)
 {
-    int exprs = 1;
-    int pageSize = 10;
-    int i;
-    EaglePlan *plan;
-    EagleDbSqlExpression **expr;
+    int i, j, k, *widths;
+    EaglePage **pages;
     
-    /* the providers will contain the result */
-    EaglePageProvider **providers = (EaglePageProvider**) calloc((size_t) exprs, sizeof(EaglePageProvider*));
-    providers[0] = EaglePageProvider_CreateFromIntStream(pageSize, "answer");
-    
-    /* create the plan skeleton */
-    plan = EaglePlan_New(pageSize);
-    
-    /* get data */
-    for(i = 0; i < db->td->table->usedColumns; ++i) {
-        EaglePlanBufferProvider *bp;
-        
-        EaglePageProvider_reset(db->td->providers[i]);
-        bp = EaglePlanBufferProvider_New(i, db->td->providers[i], EagleFalse);
-        EaglePlan_addBufferProvider(plan, bp);
+    /* calculate the widths of the fields */
+    widths = (int*) calloc((size_t) plan->resultFields, sizeof(int));
+    for(i = 0; i < plan->resultFields; ++i) {
+        widths[i] = (int) strlen(plan->result[i]->name);
     }
     
-    /* compile plan */
-    expr = (EagleDbSqlExpression**) calloc((size_t) 1, sizeof(EagleDbSqlExpression*));
-    expr[0] = yyparse_ast;
-    EagleDbSqlExpression_CompilePlan(expr, exprs, -1, providers, plan);
+    /* heading */
+    printf("\n");
+    for(i = 0; i < plan->resultFields; ++i) {
+        if(i > 0) {
+            printf("|");
+        }
+        printf(" %s ", plan->result[i]->name);
+    }
+    printf("\n");
+    
+    for(i = 0; i < plan->resultFields; ++i) {
+        if(i > 0) {
+            printf("|");
+        }
+        for(j = 0; j < widths[i] + 2; ++j) {
+            printf("-");
+        }
+    }
+    printf("\n");
+    
+    /* render out */
+    pages = (EaglePage**) calloc((size_t) plan->resultFields, sizeof(EaglePage*));
+    while(1) {
+        int finished = 0;
+        for(i = 0; i < plan->resultFields; ++i) {
+            EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
+            if(NULL == page) {
+                finished = 1;
+                break;
+            }
+            pages[i] = page;
+        }
+        
+        if(finished == 0) {
+            for(j = 0; j < pages[0]->count; ++j) {
+                for(k = 0; k < plan->resultFields; ++k) {
+                    if(k > 0) {
+                        printf("|");
+                    }
+                    printf(" %*d ", widths[0], pages[k]->data[j]);
+                }
+                printf("\n");
+            }
+            
+            for(k = 0; k < plan->resultFields; ++k) {
+                EaglePage_Delete(pages[k]);
+            }
+        }
+        else {
+            break;
+        }
+    }
+    
+    printf("\n");
+}
+
+void EagleDbInstance_executeSelect(EagleDbInstance *db)
+{
+    EaglePlan *plan;
+    
+    plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) yyparse_ast, db);
+    /*printf("%s\n", EaglePlan_toString(plan));*/
     
     /* catch compilation error */
     if(EagleTrue == EaglePlan_isError(plan)) {
@@ -78,20 +124,12 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
     }
     else {
         /* execute */
-        EaglePage *page = NULL;
         EagleInstance *eagle = EagleInstance_New(1);
         EagleInstance_addPlan(eagle, plan);
         EagleInstance_run(eagle);
         
         /* print results */
-        page = EaglePageProvider_nextPage(providers[0]);
-        
-        if(NULL != page) {
-            for(i = 0; i < page->count; ++i) {
-                printf("%d\n", page->data[i]);
-            }
-            EaglePage_Delete(page);
-        }
+        EagleDbInstance_PrintResults(plan);
         
         EagleInstance_Delete(eagle);
     }

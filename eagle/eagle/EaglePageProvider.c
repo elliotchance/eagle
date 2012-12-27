@@ -109,6 +109,7 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
         return;
     }
     epp->free(epp);
+    epp = NULL;
 }
 
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)

@@ -81,9 +81,9 @@ EagleDbSqlExpression* _getExpression(const char *sql)
     }
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_NOT_NULL(select->selectExpression);
+    CUNIT_ASSERT_NOT_NULL(select->selectExpressions[0]);
     
-    return select->selectExpression;
+    return select->selectExpressions[0];
 }
 
 void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOperations, int *answers)
@@ -102,7 +102,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue));
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
     
-    EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, (EaglePageProvider**) receiver, plan);
+    EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, usedProviders);
@@ -284,14 +284,14 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(1)
     );
     
-    // the providers will contain the result
-    EaglePageProvider **providers = (EaglePageProvider**) calloc(exprs, sizeof(EaglePageProvider*));
-    providers[0] = EaglePageProvider_CreateFromIntStream(pageSize, "col1");
-    providers[1] = EaglePageProvider_CreateFromIntStream(pageSize, "col2 + 8");
-    providers[2] = EaglePageProvider_CreateFromIntStream(pageSize, "col1 % 2 = 1");
-    
     // create the plan skeleton
     EaglePlan *plan = EaglePlan_New(pageSize);
+    
+    // the providers will contain the result
+    plan->resultFields = 2;
+    plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
+    plan->result[0] = EaglePageProvider_CreateFromIntStream(pageSize, "col1");
+    plan->result[1] = EaglePageProvider_CreateFromIntStream(pageSize, "col2 + 8");
     
     // create a virtual table that consists of 2 columns; col1 and col2
     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
@@ -306,11 +306,11 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2, EagleTrue));
     
     // compile plan
-    EagleDbSqlExpression_CompilePlan(expr, exprs, 2, providers, plan);
+    EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 5);
-    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 6);
+    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 5);
     
     // execute
     EagleInstance *eagle = EagleInstance_New(1);
@@ -320,24 +320,22 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     // validate result
     CREATE_EXPRESSION_ARRAY(answers_0, pageSize, col1Data[i]);          // col1
     CREATE_EXPRESSION_ARRAY(answers_1, pageSize, col2Data[i] + 8);      // col2 + 8
-    CREATE_EXPRESSION_ARRAY(answers_2, pageSize, col1Data[i] % 2 == 1); // col1 % 2 = 1
     
     int **answers = (int**) calloc(exprs, sizeof(int*));
     answers[0] = (int*) calloc(totalResults, sizeof(int));
     answers[1] = (int*) calloc(totalResults, sizeof(int));
-    answers[2] = (int*) calloc(totalResults, sizeof(int));
     
     for(int i = 0, j = 0; i < pageSize; ++i) {
         if(col1Data[i] % 2 == 1) {
             answers[0][j] = answers_0[i];
             answers[1][j] = answers_1[i];
-            answers[2][j] = answers_2[i];
             ++j;
         }
     }
     
-    for(int i = 0; i < exprs; ++i) {
-        EaglePage *page = EaglePageProvider_nextPage(providers[i]);
+    for(int i = 0; i < plan->resultFields; ++i) {
+        EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
+        CUNIT_ASSERT_NOT_NULL(page);
         
         // there should only be 5 records in each page because of the modulus
         CUNIT_VERIFY_EQUAL_INT(page->count, totalResults);
@@ -356,15 +354,16 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     
     for(int i = 0; i < exprs; ++i) {
         EagleDbSqlExpression_Delete(expr[i]);
-        EaglePageProvider_Delete(providers[i]);
+    }
+    for(int i = 0; i < plan->resultFields; ++i) {
+        EaglePageProvider_Delete(plan->result[i]);
         free(answers[i]);
     }
     free(answers_0);
     free(answers_1);
-    free(answers_2);
     free(answers);
     free(expr);
-    free(providers);
+    free(plan->result);
     EagleInstance_Delete(eagle);
     yylex_free();
 }

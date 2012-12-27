@@ -26,7 +26,7 @@ typedef struct {
     CUnitTest *test;
     char *sql;
     char *errorMessage;
-    int *answers;
+    EagleDbTuple **answers;
     int allocatedAnswers;
     int usedAnswers;
 } SQLTest;
@@ -91,6 +91,7 @@ void SQLSuiteTest()
 {
     int exprs = 1;
     int pageSize = 5;
+    int i;
     
     SQLTest test = sqlTests[currentTest++];
     
@@ -113,15 +114,18 @@ void SQLSuiteTest()
     EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();
     
+    // create the plan skeleton
+    EaglePlan *plan = EaglePlan_New(pageSize);
+    
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
     expr[0] = _getExpression(test.sql);
     
     // the providers will contain the result
-    EaglePageProvider **providers = (EaglePageProvider**) calloc(exprs, sizeof(EaglePageProvider*));
-    providers[0] = EaglePageProvider_CreateFromIntStream(pageSize, "answer");
-    
-    // create the plan skeleton
-    EaglePlan *plan = EaglePlan_New(pageSize);
+    plan->resultFields = exprs;
+    plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
+    for(i = 0; i < plan->resultFields; ++i) {
+        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, "answer");
+    }
     
     // get data
     EagleDbTableData *td = tables[0];
@@ -132,7 +136,7 @@ void SQLSuiteTest()
     }
     
     // compile plan
-    EagleDbSqlExpression_CompilePlan(expr, exprs, -1, providers, plan);
+    EagleDbSqlExpression_CompilePlan(expr, exprs, -1, plan);
     //printf("%s\n", EaglePlan_toString(plan));
     
     // catch compilation error
@@ -154,30 +158,33 @@ void SQLSuiteTest()
         EagleInstance_run(eagle);
         
         // validate results
-        EaglePage *page = EaglePageProvider_nextPage(providers[0]);
-        CUNIT_ASSERT_NOT_NULL(page);
-        CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
-        
         int valid = 1;
-        for(int i = 0; i < test.usedAnswers; ++i) {
-            //printf("%d != %d\n", test.answers[i], page->data[i]);
-            if(test.answers[i] != page->data[i]) {
-                valid = 0;
-                break;
+        for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
+            EaglePage *page = EaglePageProvider_nextPage(plan->result[j]);
+            CUNIT_ASSERT_NOT_NULL(page);
+            CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
+            
+            for(int i = 0; i < test.usedAnswers; ++i) {
+                //printf("%d != %d\n", *((int*) test.answers[i]->data[j]), page->data[i]);
+                if(*((int*) test.answers[i]->data[j]) != page->data[i]) {
+                    valid = 0;
+                    break;
+                }
             }
+            
+            EaglePage_Delete(page);
         }
         CUNIT_ASSERT_EQUAL_INT(valid, 1);
         
         // clean
-        EaglePage_Delete(page);
         EagleInstance_Delete(eagle);
     }
     
     // clean up
     for(int i = 0; i < exprs; ++i) {
-        EaglePageProvider_Delete(providers[i]);
+        EaglePageProvider_Delete(plan->result[i]);
     }
-    free(providers);
+    free(plan->result);
     free(expr);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
@@ -192,7 +199,7 @@ void controlTest(FILE *file, int *lineNumber)
     test.test = CUnitTest_New(test.sql, SQLSuiteTest);
     test.usedAnswers = 0;
     test.allocatedAnswers = 5;
-    test.answers = (int*) calloc(test.allocatedAnswers, sizeof(int));
+    test.answers = (EagleDbTuple**) calloc(test.allocatedAnswers, sizeof(EagleDbTuple*));
     
     // get the SQL
     fgets(test.sql, 1024, file);
@@ -200,11 +207,31 @@ void controlTest(FILE *file, int *lineNumber)
     
     // get the answers
     char line[1024];
-    while(fgets(line, sizeof(line), file) != NULL) {
+    EagleDbTable *table = NULL;
+    for(int i = 0; fgets(line, sizeof(line), file) != NULL; ++i) {
         if(!strcmp("\n", line)) {
             break;
         }
-        test.answers[test.usedAnswers++] = atoi(strtok(line, "\n"));
+        
+        // count the columns
+        int columns = 0;
+        char **data = splitColumns(strtok(line, "\n"), &columns);
+        
+        // create the table on the first tuple
+        if(i == 0) {
+            table = EagleDbTable_New("result");
+            for(int j = 0; j < columns; ++j) {
+                EagleDbTable_addColumn(table, EagleDbColumn_New("answer", EagleDbColumnTypeInteger));
+            }
+        }
+        
+        test.answers[test.usedAnswers] = EagleDbTuple_New(table);
+        for(int j = 0; j < columns; ++j) {
+            EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
+            free(data[j]);
+        }
+        free(data);
+        ++test.usedAnswers;
     }
     
     sqlTests[usedTests++] = test;

@@ -54,7 +54,7 @@ typedef struct {
 } EagleDbSqlExpression;
 
 void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
-void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePageProvider **destinations, EaglePlan *plan);
+void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan);
 
 /* private functions */
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
