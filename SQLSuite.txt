@@ -113,3 +113,8 @@ col1,col2,col1 + col2
 SELECT col1, col2 FROM mytable WHERE col1 = 1
 col1,col2
 1,2
+
+% test
+SeLeCt col1, col2 fRoM mytable WhErE col1 = 1
+col1,col2
+1,2
