@@ -12,7 +12,6 @@
 extern void *yyparse_ast;
 extern int yyparse();
 extern int yy_scan_string(const char *);
-extern EagleDbSqlStatementType yystatementtype;
 
 char* yyerrors_last();
 void yylex_init();
@@ -167,8 +166,8 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     }
     else {
         switch(yystatementtype) {
-            case EagleDbSqlStatementTypeUnknown:
-                printf("ERROR: can't understand SQL.");
+            case EagleDbSqlStatementTypeNone:
+                /* lets not consider this an error and ignore it */
                 break;
                 
             case EagleDbSqlStatementTypeSelect:

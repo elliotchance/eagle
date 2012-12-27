@@ -16,15 +16,15 @@ col1,col2
 
 % test_error
 SELECT * FROM
-syntax error, unexpected $end, expecting IDENTIFIER
+syntax error, unexpected T_END, expecting IDENTIFIER
 
 % test_error
 SELECT *
-syntax error, unexpected $end, expecting K_FROM
+syntax error, unexpected T_END, expecting K_FROM
 
 % test_error
 SELECT
-syntax error, unexpected $end, expecting IDENTIFIER or INTEGER or T_ASTERISK
+syntax error, unexpected T_END, expecting IDENTIFIER or INTEGER or T_ASTERISK
 
 % test_error
 SELECT * FROM mytable WHERE 123

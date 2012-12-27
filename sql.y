@@ -15,7 +15,7 @@
     int yylex();
     int yylex_destroy();
     
-    EagleDbSqlStatementType yystatementtype = EagleDbSqlStatementTypeUnknown;
+    EagleDbSqlStatementType yystatementtype = EagleDbSqlStatementTypeNone;
 
     /**
      Contains the first 100 error messages.
@@ -140,11 +140,18 @@
 input:
     {
         yyparse_ast = NULL;
+        yystatementtype = EagleDbSqlStatementTypeNone;
     }
     |
-        input statement {
-            yyparse_ast = yyreturn_pop();
-        }
+    T_END {
+        yyparse_ast = NULL;
+        yystatementtype = EagleDbSqlStatementTypeNone;
+    }
+    |
+    statement {
+        yyparse_ast = yyreturn_pop();
+    }
+    T_END
 ;
 
 statement:
