@@ -21,6 +21,7 @@ integer [0-9]+
 "INTEGER" return K_INTEGER;
 "SELECT" return K_SELECT;
 "TABLE" return K_TABLE;
+"TEXT" return K_TEXT;
 "WHERE" return K_WHERE;
 
 "*" return T_ASTERISK;

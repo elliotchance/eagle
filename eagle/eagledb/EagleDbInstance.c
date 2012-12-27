@@ -25,7 +25,7 @@ EagleDbInstance* EagleDbInstance_New(void)
     /* create a virtual table */
     EagleDbTable *table = EagleDbTable_New("t");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeText));
     
     /* put some data in it */
     db->td = EagleDbTableData_New(table);
@@ -34,7 +34,7 @@ EagleDbInstance* EagleDbInstance_New(void)
         /* create a record */
         EagleDbTuple *tuple = EagleDbTuple_New(table);
         EagleDbTuple_setInt(tuple, 0, i);
-        EagleDbTuple_setInt(tuple, 1, i * 2);
+        EagleDbTuple_setText(tuple, 1, "hello");
         
         /* put record in */
         EagleDbTableData_insert(db->td, tuple);

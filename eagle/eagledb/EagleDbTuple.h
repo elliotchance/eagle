@@ -16,6 +16,7 @@ EagleDbTuple* EagleDbTuple_New(EagleDbTable *table);
 void EagleDbTuple_Delete(EagleDbTuple *tuple);
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value);
+void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value);
 char* EagleDbTuple_toString(EagleDbTuple *tuple);
 
 #endif

@@ -9,7 +9,12 @@ typedef enum {
     /**
      32bit integer.
      */
-    EagleDbColumnTypeInteger = 1
+    EagleDbColumnTypeInteger = 1,
+    
+    /**
+     String.
+     */
+    EagleDbColumnTypeText = 2
     
 } EagleDbColumnType;
 

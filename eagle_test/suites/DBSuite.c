@@ -175,7 +175,7 @@ EagleDbTable* _getTable()
      */
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeText));
     
     return table;
 }
@@ -257,9 +257,9 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
     EagleDbTuple_setInt(tuple, 0, 123);
-    EagleDbTuple_setInt(tuple, 1, 456);
+    EagleDbTuple_setText(tuple, 1, "hello");
     char *desc = EagleDbTuple_toString(tuple);
-    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=456)");
+    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\")");
     free(desc);
     
     EagleDbTuple_Delete(tuple);

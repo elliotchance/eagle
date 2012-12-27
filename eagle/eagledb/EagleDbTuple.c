@@ -32,6 +32,11 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
     tuple->data[position] = EagleData_Int(value);
 }
 
+void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
+{
+    tuple->data[position] = strdup(value);
+}
+
 char* EagleDbTuple_toString(EagleDbTuple *tuple)
 {
     char *desc = (char*) malloc(1024);
@@ -47,9 +52,15 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
         strcat_safe(desc, "=");
         
         switch(tuple->table->columns[i]->type) {
+                
             case EagleDbColumnTypeInteger:
                 sprintf(desc, "%s%d", desc, *((int*) tuple->data[i]));
                 break;
+                
+            case EagleDbColumnTypeText:
+                sprintf(desc, "%s\"%s\"", desc, (char*) tuple->data[i]);
+                break;
+                
         }
     }
     strcat_safe(desc, ")");
