@@ -9,10 +9,13 @@
     #include "EagleDbSqlBinaryExpression.h"
     #include "EagleDbTable.h"
     #include "EagleDbColumn.h"
+    #include "EagleDbInstance.h"
 
     int yyerror(char *s);
     int yylex();
     int yylex_destroy();
+    
+    EagleDbSqlStatementType yystatementtype = EagleDbSqlStatementTypeUnknown;
 
     /**
      Contains the first 100 error messages.
@@ -147,10 +150,12 @@ input:
 statement:
     select_statement {
         /* bubble up yyreturn */
+        yystatementtype = EagleDbSqlStatementTypeSelect;
     }
     |
     create_table_statement {
         /* bubble up yyreturn */
+        yystatementtype = EagleDbSqlStatementTypeCreateTable;
     }
 ;
 

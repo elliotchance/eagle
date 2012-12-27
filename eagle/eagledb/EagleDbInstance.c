@@ -12,6 +12,7 @@
 extern void *yyparse_ast;
 extern int yyparse();
 extern int yy_scan_string(const char *);
+extern EagleDbSqlStatementType yystatementtype;
 
 char* yyerrors_last();
 void yylex_init();
@@ -141,6 +142,16 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
         
         EagleInstance_Delete(eagle);
     }
+    
+    EagleDbSqlSelect_Delete(select);
+}
+
+void EagleDbInstance_executeCreateTable(EagleDbInstance *db)
+{
+    EagleDbTable *table = (EagleDbTable*) yyparse_ast;
+    printf("Table '%s' created.\n\n", table->name);
+    
+    EagleDbTable_Delete(table);
 }
 
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
@@ -155,12 +166,22 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
         printf("Error: %s\n", yyerrors_last());
     }
     else {
-        /* select */
-        EagleDbInstance_executeSelect(db);
+        switch(yystatementtype) {
+            case EagleDbSqlStatementTypeUnknown:
+                printf("ERROR: can't understand SQL.");
+                break;
+                
+            case EagleDbSqlStatementTypeSelect:
+                EagleDbInstance_executeSelect(db);
+                break;
+                
+            case EagleDbSqlStatementTypeCreateTable:
+                EagleDbInstance_executeCreateTable(db);
+                break;
+        }
     }
     
     /* clean up */
-    EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();
 }
 
