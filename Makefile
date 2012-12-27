@@ -3,7 +3,7 @@ GIT_BRANCH = `git branch | grep \* | cut -c3-`
 
 all: clean build
 
-release: clean build leaks coverage doxygen
+release: clean build build_analyze leaks coverage doxygen
 
 clean: clean_eagle clean_eagle_test
 	
@@ -14,6 +14,13 @@ clean_eagle_test:
 	xcodebuild -project eagle.xcodeproj -target eagle_test clean
 	
 build: build_eagle build_eagle_test
+
+build_analyze:
+	rm -rf analyze
+	mkdir analyze
+	xcodebuild -project eagle.xcodeproj -configuration Release RUN_CLANG_STATIC_ANALYZER=YES CLANG_ANALYZER_OUTPUT=html -target eagle build
+	cp `ls -1 build/eagle.build/Release/eagle.build/StaticAnalyzer/normal/x86_64/*.plist/*.html` analyze
+	if [ `ls -1 analyze | wc -l` -gt 0 ]; then echo "There are analyzer errors!"; find `pwd`/analyze -name *.html; exit 1; fi
 
 build_eagle:
 	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
