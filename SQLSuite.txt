@@ -93,3 +93,11 @@ SELECT col1, col2 FROM mytable
 2,4
 5,10
 10,20
+
+% test
+SELECT col1, col2, col1 + col2 FROM mytable
+0,0,0
+1,2,3
+2,4,6
+5,10,15
+10,20,30

@@ -181,12 +181,13 @@ next_column_expression:
         void *last = yyreturn_pop();
         yylist_push(last);
     }
+    next_column_expression
 
 where_expression:
-    {
-        /* no where clause */
-        yyreturn_push(NULL);
-    }
+        {
+            /* no where clause */
+            yyreturn_push(NULL);
+        }
     |
         K_WHERE expression {
             /* bubble up expression */
@@ -194,18 +195,18 @@ where_expression:
 ;
 
 column_expression:
-    T_ASTERISK {
-        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
-    }
+        T_ASTERISK {
+            yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
+        }
     |
-    expression {
-        /* bubble up yyreturn */
-    }
+        expression {
+            /* bubble up yyreturn */
+        }
 
 expression:
-    value {
-        /* bubble up yyreturn */
-    }
+        value {
+            /* bubble up yyreturn */
+        }
     |
         value {
             void *last = yyreturn_pop();
@@ -230,7 +231,7 @@ expression:
             void *last = yyreturn_pop();
             ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
         }
-    
+
 value:
     INTEGER {
         yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last))));
