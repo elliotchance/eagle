@@ -22,4 +22,13 @@ if [ $CMD = "fix" ]; then
 	git commit -m "fixes #$ISSUE"
 	git branch -d "i$ISSUE"
 	git push
+	
+elif [ $CMD = "open" ]; then
+	git add .
+	git stash
+	git checkout master
+	git branch "i$2"
+	git checkout "i$2"
+	git stash apply
+	
 fi
