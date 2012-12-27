@@ -12,6 +12,7 @@
 #include "EaglePage.h"
 #include "EaglePageProvider.h"
 #include "EagleDbSqlSelect.h"
+#include "EagleDbInstance.h"
 
 extern void *yyparse_ast;
 void yylex_free();
@@ -101,7 +102,6 @@ void SQLSuiteTest()
         // expected error
         if(NULL != test.errorMessage) {
             if(!strcmp(yyerrors_last(), test.errorMessage)) {
-                EagleDbSqlSelect_Delete(yyparse_ast);
                 yylex_free();
                 return;
             }

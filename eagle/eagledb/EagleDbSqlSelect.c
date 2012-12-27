@@ -27,9 +27,8 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
     if(NULL == select) {
         return;
     }
-    if(select->tableName) {
-        free(select->tableName);
-    }
+    
+    free(select->tableName);
     EagleDbSqlExpression_Delete(select->whereExpression);
     
     for(i = 0; i < select->usedSelectExpressions; ++i) {

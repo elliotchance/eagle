@@ -19,9 +19,15 @@ void yylex_free();
 
 int _testSqlSelect(const char *sql)
 {
+    // add ;
+    char *newsql = (char*) malloc(strlen(sql) + 2);
+    sprintf(newsql, "%s;", sql);
+    
     yylex_init();
-    yy_scan_string(sql);
-    return yyparse();
+    yy_scan_string(newsql);
+    int r = yyparse();
+    free(newsql);
+    return r;
 }
 
 CUNIT_TEST(DBSuite, _, BLANK)
