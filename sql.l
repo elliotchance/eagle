@@ -7,6 +7,8 @@ char *yytext_last = NULL;
 
 %}
 
+%option case-insensitive
+
 white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
 integer [0-9]+
