@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "EagleDbSqlBinaryExpression.h"
 
 /**
@@ -25,4 +26,11 @@ void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
     EagleDbSqlExpression_Delete(expr->left);
     EagleDbSqlExpression_Delete(expr->right);
     free(expr);
+}
+
+char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)
+{
+    char* s = (char*) malloc(1024);
+    sprintf(s, "%s %s %s", EagleDbSqlExpression_toString(expr->left), EagleDbSqlExpressionOperator_toString(expr->op), EagleDbSqlExpression_toString(expr->right));
+    return s;
 }

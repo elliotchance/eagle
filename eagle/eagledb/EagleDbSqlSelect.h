@@ -46,5 +46,6 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
 EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db);
 int EagleDbSqlSelect_getFieldCount(EagleDbSqlSelect *select);
 int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select);
+char* EagleDbSqlSelect_toString(EagleDbSqlSelect *select);
 
 #endif

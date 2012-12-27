@@ -131,7 +131,7 @@ void SQLSuiteTest()
     plan->resultFields = exprs;
     plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
     for(i = 0; i < plan->resultFields; ++i) {
-        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, "answer");
+        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, EagleDbSqlExpression_toString(expr[i]));
     }
     
     // get data
@@ -163,6 +163,11 @@ void SQLSuiteTest()
         EagleInstance *eagle = EagleInstance_New(1);
         EagleInstance_addPlan(eagle, plan);
         EagleInstance_run(eagle);
+        
+        // validate column names
+        for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
+            CUNIT_ASSERT_EQUAL_STRING(test.answers[0]->table->columns[j]->name, plan->result[j]->name);
+        }
         
         // validate results
         int valid = 1;
@@ -212,25 +217,27 @@ void controlTest(FILE *file, int *lineNumber)
     fgets(test.sql, 1024, file);
     test.sql[strlen(test.sql) - 1] = 0;
     
-    // get the answers
+    // get the definition for the answers
     char line[1024];
     EagleDbTable *table = NULL;
-    for(int i = 0; fgets(line, sizeof(line), file) != NULL; ++i) {
+    fgets(line, sizeof(line), file);
+    
+    int columns = 0;
+    char **data = splitColumns(strtok(line, "\n"), &columns);
+    
+    table = EagleDbTable_New("result");
+    for(int j = 0; j < columns; ++j) {
+        EagleDbTable_addColumn(table, EagleDbColumn_New(data[j], EagleDbColumnTypeInteger));
+    }
+    
+    // get the answers
+    while(fgets(line, sizeof(line), file) != NULL) {
         if(!strcmp("\n", line)) {
             break;
         }
         
-        // count the columns
         int columns = 0;
         char **data = splitColumns(strtok(line, "\n"), &columns);
-        
-        // create the table on the first tuple
-        if(i == 0) {
-            table = EagleDbTable_New("result");
-            for(int j = 0; j < columns; ++j) {
-                EagleDbTable_addColumn(table, EagleDbColumn_New("answer", EagleDbColumnTypeInteger));
-            }
-        }
         
         test.answers[test.usedAnswers] = EagleDbTuple_New(table);
         for(int j = 0; j < columns; ++j) {

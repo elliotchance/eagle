@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "EagleDbSqlSelect.h"
 
 /**
@@ -101,4 +102,9 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     EagleDbSqlExpression_CompilePlan(expr, exprCount, whereExpressionId, plan);
     
     return plan;
+}
+
+char* EagleDbSqlSelect_toString(EagleDbSqlSelect *select)
+{
+    return strdup("SELECT");
 }

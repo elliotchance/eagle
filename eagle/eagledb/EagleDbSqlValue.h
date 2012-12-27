@@ -59,5 +59,6 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
 EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void);
 EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *name);
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
+char* EagleDbSqlValue_toString(EagleDbSqlValue *value);
 
 #endif

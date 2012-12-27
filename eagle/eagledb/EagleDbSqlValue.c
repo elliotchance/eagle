@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "EagleDbSqlValue.h"
 
@@ -45,4 +46,23 @@ void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
         free(value->value.identifier);
     }
     free((void*) value);
+}
+
+char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
+{
+    switch(value->type) {
+        case EagleDbSqlValueTypeInteger:
+        {
+            char buf[32];
+            sprintf(buf, "%d", value->value.intValue);
+            return strdup(buf);
+        }
+            
+        case EagleDbSqlValueTypeAsterisk:
+            return "*";
+            
+        case EagleDbSqlValueTypeIdentifier:
+            return strdup(value->value.identifier);
+
+    }
 }

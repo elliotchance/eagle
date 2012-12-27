@@ -190,3 +190,21 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
             break;
     }
 }
+
+char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr)
+{
+    if(NULL == expr) {
+        return "";
+    }
+    
+    switch(expr->expressionType) {
+        case EagleDbSqlExpressionTypeBinaryExpression:
+            return EagleDbSqlBinaryExpression_toString((EagleDbSqlBinaryExpression*) expr);
+            
+        case EagleDbSqlExpressionTypeSelect:
+            return EagleDbSqlSelect_toString((EagleDbSqlSelect*) expr);
+            
+        case EagleDbSqlExpressionTypeValue:
+            return EagleDbSqlValue_toString((EagleDbSqlValue*) expr);
+    }
+}

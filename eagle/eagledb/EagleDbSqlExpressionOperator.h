@@ -25,4 +25,6 @@ typedef enum {
     
 } EagleDbSqlExpressionOperator;
 
+char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op);
+
 #endif
