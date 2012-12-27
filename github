@@ -20,7 +20,12 @@ if [ $CMD = "fix" ]; then
 	git merge --no-ff --no-commit "i$ISSUE"
 	git add .
 	git commit -m "fixes #$ISSUE"
+	
+	# remove remote and local branch
+	git push origin ":i$ISSUE"
 	git branch -d "i$ISSUE"
+	
+	# push master
 	git push
 	
 elif [ $CMD = "open" ]; then
@@ -29,6 +34,7 @@ elif [ $CMD = "open" ]; then
 	git checkout master
 	git branch "i$2"
 	git checkout "i$2"
+	git push -u origin "i$2"
 	git stash apply
 	
 fi
