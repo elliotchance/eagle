@@ -116,7 +116,8 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
 {
     EaglePlan *plan;
     
-    plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) yyparse_ast, db);
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    plan = EagleDbSqlSelect_parse(select, db);
     /*printf("%s\n", EaglePlan_toString(plan));*/
     
     /* catch compilation error */

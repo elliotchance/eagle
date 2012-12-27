@@ -92,7 +92,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     /* merge expressions */
     exprCount = EagleDbSqlSelect_getExpressionsCount(select);
     expr = (EagleDbSqlExpression**) calloc((size_t) exprCount, sizeof(EagleDbSqlExpression*));
-    for(expri = 0; expri < exprCount; ++expri) {
+    for(expri = 0; expri < EagleDbSqlSelect_getFieldCount(select); ++expri) {
         expr[expri] = select->selectExpressions[expri];
     }
     if(NULL != select->whereExpression) {
