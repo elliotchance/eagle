@@ -17,9 +17,11 @@ build: build_eagle build_eagle_test
 
 build_analyze:
 	rm -rf analyze
+	rm -rf build/eagle.build/Release/eagle.build/StaticAnalyzer
 	mkdir analyze
 	xcodebuild -project eagle.xcodeproj -configuration Release RUN_CLANG_STATIC_ANALYZER=YES CLANG_ANALYZER_OUTPUT=html -target eagle build
-	cp `ls -1 build/eagle.build/Release/eagle.build/StaticAnalyzer/normal/x86_64/*.plist/*.html` analyze
+	if [ `find build/eagle.build/Release/eagle.build/StaticAnalyzer -name *.html | wc -l` -gt 0 ]; \
+		then cp `ls -1 build/eagle.build/Release/eagle.build/StaticAnalyzer/normal/x86_64/*.plist/*.html` analyze; fi
 	if [ `ls -1 analyze | wc -l` -gt 0 ]; then echo "There are analyzer errors!"; find `pwd`/analyze -name *.html; exit 1; fi
 
 build_eagle:
