@@ -145,7 +145,7 @@ void SQLSuiteTest()
     }
     
     // compile plan
-    EagleDbSqlExpression_CompilePlan(expr, exprs, -1, plan);
+    EagleDbSqlExpression_CompilePlan(expr, exprs, whereClauseId, plan);
     //printf("%s\n", EaglePlan_toString(plan));
     
     // catch compilation error

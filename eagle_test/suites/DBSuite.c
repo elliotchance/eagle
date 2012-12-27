@@ -368,6 +368,24 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     yylex_free();
 }
 
+CUNIT_TEST(DBSuite, _, SELECT_WHERE)
+{
+    if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
+        CUNIT_FAIL(yyerrors_last(), NULL);
+    }
+    
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
+    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
+    CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
+    
+    EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
+    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
+    
+    EagleDbSqlSelect_Delete(select);
+    yylex_free();
+}
+
 /**
  * The suite init function.
  */
@@ -406,6 +424,7 @@ CUnitTests* DBSuite_tests()
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     
     return tests;
