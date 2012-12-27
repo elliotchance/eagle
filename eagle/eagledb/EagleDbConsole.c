@@ -68,8 +68,9 @@ void EagleDbConsole_run(EagleDbConsole *console)
         cmd = EagleDbConsole_GetLine();
         
         /* check for quit */
-        if(strcmp(cmd, "\\q") == 0) {
+        if(NULL != cmd && strcmp(cmd, "\\q") == 0) {
             printf("Bye.\n");
+            free(cmd);
             break;
         }
         

@@ -21,7 +21,7 @@ EaglePage* MainSuite_GeneratePage(int pageSize)
 CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
 {
     int pageSize = 1000;
-    int testValue = rand();
+    int testValue = arc4random();
     EaglePage *page = MainSuite_GeneratePage(pageSize);
     EaglePage *out = EaglePage_Alloc(pageSize);
     
@@ -47,7 +47,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
 CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
 {
     int pageSize = 1000;
-    int testValue = rand();
+    int testValue = arc4random();
     EaglePage *page = MainSuite_GeneratePage(pageSize);
     EaglePage *out = EaglePage_Alloc(pageSize);
     
@@ -78,8 +78,8 @@ CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
     EaglePage *out = EaglePage_Alloc(pageSize);
     
     for(int i = 0; i < pageSize; ++i) {
-        page1->data[i] = rand() % 2;
-        page2->data[i] = rand() % 2;
+        page1->data[i] = arc4random() % 2;
+        page2->data[i] = arc4random() % 2;
     }
     
     EaglePageOperations_AndPage(out, page1, page2, NULL);
@@ -108,7 +108,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     // prepare data
     int *data = (int*) calloc(sizeof(int), totalRecords);
     for(int i = 0; i < totalRecords; ++i) {
-        data[i] = rand();
+        data[i] = arc4random();
     }
     
     // plan: ? BETWEEN ? AND 20000000
@@ -343,7 +343,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_CastIntPageToBoolean)
     EaglePage *out = EaglePage_Alloc(pageSize);
     
     for(int i = 0; i < pageSize; ++i) {
-        page->data[i] = rand() % 2;
+        page->data[i] = arc4random() % 2;
     }
     
     EaglePageOperations_CastIntPageToBoolean(out, page, NULL, NULL);

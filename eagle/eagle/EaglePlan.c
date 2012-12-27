@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "EaglePlan.h"
+#include "EagleUtils.h"
 
 EaglePlan* EaglePlan_New(int pageSize)
 {
@@ -41,26 +42,26 @@ const char* EaglePlan_toString(EaglePlan *plan)
     int i;
     
     str[0] = 0;
-    strcat(str, "EaglePlan:\n");
+    strcat_safe(str, "EaglePlan:\n");
     
     if(plan->usedProviders > 0) {
-        strcat(str, "  Providers:\n");
+        strcat_safe(str, "  Providers:\n");
     }
     for(i = 0; i < plan->usedProviders; ++i) {
-        strcat(str, "    ");
+        strcat_safe(str, "    ");
         temp = EaglePlanBufferProvider_toString(plan->providers[i]);
-        strcat(str, temp);
+        strcat_safe(str, temp);
         free(temp);
-        strcat(str, "\n");
+        strcat_safe(str, "\n");
     }
     
     if(plan->usedOperations > 0) {
-        strcat(str, "  Operations:\n");
+        strcat_safe(str, "  Operations:\n");
     }
     for(i = 0; i < plan->usedOperations; ++i) {
-        strcat(str, "    ");
-        strcat(str, EaglePlanOperation_toString(plan->operations[i]));
-        strcat(str, "\n");
+        strcat_safe(str, "    ");
+        strcat_safe(str, EaglePlanOperation_toString(plan->operations[i]));
+        strcat_safe(str, "\n");
     }
     
     return str;
