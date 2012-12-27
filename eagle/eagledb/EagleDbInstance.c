@@ -88,6 +88,9 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
         }
         
         if(finished == 0) {
+            if(NULL == pages || NULL == pages[0]) {
+                break;
+            }
             for(j = 0; j < pages[0]->count; ++j) {
                 for(k = 0; k < plan->resultFields; ++k) {
                     if(k > 0) {
@@ -108,6 +111,8 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     }
     
     printf("\n");
+    free(pages);
+    free(widths);
 }
 
 void EagleDbInstance_executeSelect(EagleDbInstance *db)
