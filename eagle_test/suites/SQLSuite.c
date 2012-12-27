@@ -131,7 +131,9 @@ void SQLSuiteTest()
     plan->resultFields = exprs;
     plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
     for(i = 0; i < plan->resultFields; ++i) {
-        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, EagleDbSqlExpression_toString(expr[i]));
+        char *desc = EagleDbSqlExpression_toString(expr[i]);
+        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, desc);
+        free(desc);
     }
     
     // get data
@@ -228,7 +230,9 @@ void controlTest(FILE *file, int *lineNumber)
     table = EagleDbTable_New("result");
     for(int j = 0; j < columns; ++j) {
         EagleDbTable_addColumn(table, EagleDbColumn_New(data[j], EagleDbColumnTypeInteger));
+        free(data[j]);
     }
+    free(data);
     
     // get the answers
     while(fgets(line, sizeof(line), file) != NULL) {

@@ -123,6 +123,7 @@ void EaglePageProvider_DeleteIntStream_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
     EagleLinkedList_Delete((EagleLinkedList*) epp->records);
+    free(epp->name);
     free(epp);
 }
 
@@ -168,7 +169,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage, cha
     pageProvider->add = EaglePageProvider_addStream_;
     pageProvider->free = EaglePageProvider_DeleteIntStream_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
-    pageProvider->name = name;
+    pageProvider->name = (NULL == name ? NULL : strdup(name));
     pageProvider->reset = EaglePageProvider_resetFromIntStream_;
     
     return pageProvider;

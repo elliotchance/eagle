@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "EagleDbSqlExpressionOperator.h"
 
 char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op)
 {
     switch(op) {
         case EagleDbSqlExpressionOperatorPlus:
-            return "+";
+            return strdup("+");
             
         case EagleDbSqlExpressionOperatorEquals:
-            return "=";
+            return strdup("=");
             
         case EagleDbSqlExpressionOperatorModulus:
-            return "%";
+            return strdup("%");
     }
 }

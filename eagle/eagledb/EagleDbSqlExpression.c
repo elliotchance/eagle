@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlValue.h"
 #include "EaglePageProvider.h"
@@ -194,7 +195,7 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
 char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr)
 {
     if(NULL == expr) {
-        return "";
+        return strdup("");
     }
     
     switch(expr->expressionType) {

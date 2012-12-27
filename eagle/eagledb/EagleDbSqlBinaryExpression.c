@@ -31,6 +31,14 @@ void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)
 {
     char* s = (char*) malloc(1024);
-    sprintf(s, "%s %s %s", EagleDbSqlExpression_toString(expr->left), EagleDbSqlExpressionOperator_toString(expr->op), EagleDbSqlExpression_toString(expr->right));
+    
+    char *left = EagleDbSqlExpression_toString(expr->left);
+    char *right = EagleDbSqlExpression_toString(expr->right);
+    char *op = EagleDbSqlExpressionOperator_toString(expr->op);
+    sprintf(s, "%s %s %s", left, op, right);
+    free(left);
+    free(right);
+    free(op);
+    
     return s;
 }

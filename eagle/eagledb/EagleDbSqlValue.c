@@ -59,7 +59,7 @@ char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
         }
             
         case EagleDbSqlValueTypeAsterisk:
-            return "*";
+            return strdup("*");
             
         case EagleDbSqlValueTypeIdentifier:
             return strdup(value->value.identifier);
