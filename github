@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CMD=$1
+
+if [ $CMD = "fix" ]; then
+	ISSUE=`git branch | grep "* " | cut -c4-`
+	if [ "`echo $ISSUE | egrep ^[[:digit:]]+$`" = "" ]; then
+		echo "You must run this from an issue branch with a name like 'i#'"
+		exit 1
+	fi
+	
+	# make sure we are synced up with master
+	git merge master
+	
+	# make sure release passes
+	make release
+	
+	# everything looks good
+	git checkout master
+	git merge --no-ff --no-commit "i$ISSUE"
+	git add .
+	git commit -m "fixes #$ISSUE"
+	git branch -d "i$ISSUE"
+	git push
+	
+elif [ $CMD = "open" ]; then
+	git add .
+	git stash
+	git checkout master
+	git branch "i$2"
+	git checkout "i$2"
+	git stash apply
+	
+fi
