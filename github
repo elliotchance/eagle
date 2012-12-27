@@ -35,6 +35,6 @@ elif [ $CMD = "open" ]; then
 	git branch "i$2"
 	git checkout "i$2"
 	git push -u origin "i$2"
-	git stash apply
+	git stash pop
 	
 fi
