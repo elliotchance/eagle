@@ -7,6 +7,8 @@
 
     #include "EagleDbSqlSelect.h"
     #include "EagleDbSqlBinaryExpression.h"
+    #include "EagleDbTable.h"
+    #include "EagleDbColumn.h"
 
     int yyerror(char *s);
     int yylex();
@@ -110,8 +112,11 @@
 %error-verbose
 
 /* keywords */
+%token K_CREATE
 %token K_FROM
+%token K_INTEGER
 %token K_SELECT
+%token K_TABLE
 %token K_WHERE
 
 /* variable tokens */
@@ -124,6 +129,8 @@
 %token T_EQUALS
 %token T_END
 %token T_COMMA
+%token T_BRACKET_OPEN
+%token T_BRACKET_CLOSE
 
 %%
 
@@ -141,6 +148,58 @@ statement:
     select_statement {
         /* bubble up yyreturn */
     }
+    |
+    create_table_statement {
+        /* bubble up yyreturn */
+    }
+;
+
+create_table_statement:
+    K_CREATE K_TABLE {
+        yyreturn_push(yyobj_push((void*) EagleDbTable_New(NULL)));
+    }
+    IDENTIFIER {
+        ((EagleDbTable*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
+    }
+    T_BRACKET_OPEN
+    column_definition_list {
+        void *last = yyreturn_pop();
+        EagleDbTable_setColumns((EagleDbTable*) yyreturn_current(), last, yylist_length);
+    }
+    T_BRACKET_CLOSE
+;
+
+column_definition_list:
+    {
+        yyobj_push(yylist_new());
+    }
+    column_definition {
+        void *last = yyreturn_pop();
+        yylist_push(last);
+    }
+    next_column_definition
+    {
+        yyreturn_push(yylist);
+    }
+;
+
+column_definition:
+    IDENTIFIER {
+        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDbColumnTypeInteger)));
+        ((EagleDbColumn*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
+    }
+    K_INTEGER {
+        ((EagleDbColumn*) yyreturn_current())->type = EagleDbColumnTypeInteger;
+    }
+;
+
+next_column_definition:
+    |
+    T_COMMA column_definition {
+        void *last = yyreturn_pop();
+        yylist_push(last);
+    }
+    next_column_definition
 ;
 
 select_statement:
@@ -174,6 +233,7 @@ column_expression_list:
     {
         yyreturn_push(yylist);
     }
+;
 
 next_column_expression:
     |
@@ -182,6 +242,7 @@ next_column_expression:
         yylist_push(last);
     }
     next_column_expression
+;
 
 where_expression:
         {
@@ -202,6 +263,7 @@ column_expression:
         expression {
             /* bubble up yyreturn */
         }
+;
 
 expression:
         value {
@@ -231,6 +293,7 @@ expression:
             void *last = yyreturn_pop();
             ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
         }
+;
 
 value:
     INTEGER {
@@ -240,6 +303,7 @@ value:
     IDENTIFIER {
         yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithIdentifier(yytext_last)));
     }
+;
 
 %%
 
