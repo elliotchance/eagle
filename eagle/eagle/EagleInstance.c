@@ -40,6 +40,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     EagleSynchronizer_Lock(eagle->nextJobLock);
     
     plan = eagle->plan;
+    EaglePlan_resumeTimer(plan);
     job = EaglePlanJob_New(plan, 10);
     
     for(i = 0; i < plan->usedProviders; ++i) {
@@ -55,6 +56,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     }
     
     EagleSynchronizer_Unlock(eagle->nextJobLock);
+    EaglePlan_stopTimer(plan);
     return job;
 }
 

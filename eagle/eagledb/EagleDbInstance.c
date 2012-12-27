@@ -47,6 +47,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
 {
     int i, j, k, *widths;
     EaglePage **pages;
+    int totalRecords = 0;
     
     /* calculate the widths of the fields */
     widths = (int*) calloc((size_t) plan->resultFields, sizeof(int));
@@ -96,6 +97,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                     printf(" %*d ", widths[k], pages[k]->data[j]);
                 }
                 printf("\n");
+                ++totalRecords;
             }
             
             for(k = 0; k < plan->resultFields; ++k) {
@@ -107,7 +109,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
         }
     }
     
-    printf("\n");
+    printf("\n%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
 }
 
 void EagleDbInstance_executeSelect(EagleDbInstance *db)

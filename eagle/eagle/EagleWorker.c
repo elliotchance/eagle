@@ -27,6 +27,7 @@ void* EagleWorker_begin(void *obj)
             int i;
             
             /* run operations */
+            EaglePlan_resumeTimer(job->plan);
             for(i = 0; i < job->plan->usedOperations; ++i) {
                 EaglePlanOperation *epo = job->plan->operations[i];
                 EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
@@ -48,6 +49,7 @@ void* EagleWorker_begin(void *obj)
             
             /* free */
             EaglePlanJob_Delete(job);
+            EaglePlan_stopTimer(job->plan);
         }
         else {
             return NULL;

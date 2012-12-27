@@ -75,7 +75,9 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
     plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
     for(i = 0; i < plan->resultFields; ++i) {
-        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, EagleDbSqlExpression_toString(select->selectExpressions[i]));
+        char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
+        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, desc);
+        free(desc);
     }
     
     /* get data */

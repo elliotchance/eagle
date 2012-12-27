@@ -1,6 +1,7 @@
 #ifndef eagle_EaglePlan_h
 #define eagle_EaglePlan_h
 
+#include <mach/mach_time.h>
 #include "EaglePageOperations.h"
 #include "EaglePlanOperation.h"
 #include "EaglePlanBufferProvider.h"
@@ -84,6 +85,16 @@ typedef struct {
      */
     int resultFields;
     
+    /**
+     The total time the query took to execute.
+     */
+    uint64_t executionTime;
+    
+    /**
+     Internal use for the timer.
+     */
+    uint64_t splitTime;
+    
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);
@@ -96,5 +107,8 @@ const char* EaglePlan_toString(EaglePlan *plan);
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name);
 void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage);
 EagleBoolean EaglePlan_isError(EaglePlan *plan);
+void EaglePlan_resumeTimer(EaglePlan *plan);
+void EaglePlan_stopTimer(EaglePlan *plan);
+double EaglePlan_getExecutionSeconds(EaglePlan *plan);
 
 #endif

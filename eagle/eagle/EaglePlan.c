@@ -20,6 +20,7 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
     plan->resultFields = 0;
+    plan->executionTime = 0;
     
     return plan;
 }
@@ -114,4 +115,23 @@ EagleBoolean EaglePlan_isError(EaglePlan *plan)
         return EagleFalse;
     }
     return EagleTrue;
+}
+
+void EaglePlan_resumeTimer(EaglePlan *plan)
+{
+    plan->splitTime = mach_absolute_time();
+}
+
+void EaglePlan_stopTimer(EaglePlan *plan)
+{
+    plan->executionTime += mach_absolute_time() - plan->splitTime;
+}
+
+double EaglePlan_getExecutionSeconds(EaglePlan *plan)
+{
+    if(0 == plan->executionTime) {
+        return 0.0;
+    }
+    
+    return (double) plan->executionTime * (double) 1.0e-9;
 }
