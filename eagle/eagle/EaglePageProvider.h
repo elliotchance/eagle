@@ -69,12 +69,17 @@ struct EaglePageProvider_ {
      */
     char *name;
     
+    /**
+     The data type for this provider.
+     */
+    EagleDataType type;
+    
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name);
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name);
-EaglePageProvider* EaglePageProvider_CreateFromIntStream(int recordsPerPage, char *name);
+EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name);
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
@@ -84,16 +89,16 @@ EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 void EaglePageProvider_reset(EaglePageProvider *epp);
 
 /* private functions */
-EaglePageProvider* EaglePageProvider_New_(int recordsPerPage);
+EaglePageProvider* EaglePageProvider_New_(EagleDataType type, int recordsPerPage);
 int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp);
 EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data);
 EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
-int EaglePageProvider_pagesRemainingFromIntStream_(EaglePageProvider *epp);
-EaglePage* EaglePageProvider_nextPageFromIntStream_(EaglePageProvider *epp);
+int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
+EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp);
-void EaglePageProvider_DeleteIntStream_(EaglePageProvider *epp);
+void EaglePageProvider_DeleteStream_(EaglePageProvider *epp);
 void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp);
-void EaglePageProvider_resetFromIntStream_(EaglePageProvider *epp);
+void EaglePageProvider_resetFromStream_(EaglePageProvider *epp);
 
 #endif

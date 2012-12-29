@@ -95,6 +95,16 @@ typedef struct {
      */
     uint64_t splitTime;
     
+    /**
+     The number of buffers needed for the execution.
+     */
+    int buffersNeeded;
+    
+    /**
+     The types for each buffer.
+     */
+    EagleDataType *bufferTypes;
+    
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);
@@ -110,5 +120,6 @@ EagleBoolean EaglePlan_isError(EaglePlan *plan);
 void EaglePlan_resumeTimer(EaglePlan *plan);
 void EaglePlan_stopTimer(EaglePlan *plan);
 double EaglePlan_getExecutionSeconds(EaglePlan *plan);
+void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers);
 
 #endif

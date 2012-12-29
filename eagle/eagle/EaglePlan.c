@@ -23,6 +23,9 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->resultFields = 0;
     plan->executionTime = 0;
     
+    plan->buffersNeeded = 0;
+    plan->bufferTypes = NULL;
+    
     return plan;
 }
 
@@ -62,6 +65,15 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "    ");
         strcat_safe(str, EaglePlanOperation_toString(plan->operations[i]));
         strcat_safe(str, "\n");
+    }
+    
+    if(plan->buffersNeeded > 0) {
+        strcat_safe(str, "  Buffers:\n");
+    }
+    for(i = 0; i < plan->buffersNeeded; ++i) {
+        char *msg = (char*) malloc(128);
+        sprintf(msg, "    %d type=%s\n", i, EagleDataType_typeToName(plan->bufferTypes[i]));
+        strcat_safe(str, msg);
     }
     
     return str;
@@ -135,4 +147,15 @@ double EaglePlan_getExecutionSeconds(EaglePlan *plan)
     }
     
     return (double) plan->executionTime * (double) 1.0e-9;
+}
+
+void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers)
+{
+    int i;
+    
+    plan->buffersNeeded = buffers;
+    plan->bufferTypes = (EagleDataType*) calloc((size_t) plan->buffersNeeded, sizeof(EagleDataType));
+    for(i = 0; i < plan->buffersNeeded; ++i) {
+        plan->bufferTypes[i] = EagleDataTypeUnknown;
+    }
 }

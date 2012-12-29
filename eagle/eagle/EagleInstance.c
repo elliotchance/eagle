@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 #include "EagleInstance.h"
+#include "EagleUtils.h"
 
 EagleInstance* EagleInstance_New(int totalWorkers)
 {
@@ -41,7 +43,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     
     plan = eagle->plan;
     EaglePlan_resumeTimer(plan);
-    job = EaglePlanJob_New(plan, 10);
+    job = EaglePlanJob_New(plan);
     
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider *provider = plan->providers[i];
@@ -51,6 +53,11 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
             break;
         }
         
+        if(provider->destinationBuffer >= plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "destination %d is greater than allowed %d buffers!\n", provider->destinationBuffer, plan->buffersNeeded);
+            EagleUtils_Fatal(msg);
+        }
         EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
     }

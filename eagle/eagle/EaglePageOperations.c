@@ -20,12 +20,12 @@
  */
 void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((int*) obj), i;
+    int value = *((int*) obj), i, *destdata = (int*) destination->data, *source1data = (int*) source1->data;
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = (source1->data[i] < value);
+        destdata[i] = (source1data[i] < value);
     }
 }
 
@@ -44,12 +44,12 @@ void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1,
  */
 void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((int*) obj), i;
+    int value = *((int*) obj), i, *destdata = (int*) destination->data, *source1data = (int*) source1->data;
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = (source1->data[i] > value);
+        destdata[i] = (source1data[i] > value);
     }
 }
 
@@ -64,72 +64,72 @@ void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *sourc
  */
 void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data, *source2data = (int*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = source1->data[i] && source2->data[i];
+        destdata[i] = source1data[i] && source2data[i];
     }
 }
 
 void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data, *source2data = (int*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = source1->data[i] + source2->data[i];
+        destdata[i] = source1data[i] + source2data[i];
     }
 }
 
 void EaglePageOperations_CastIntPageToBoolean(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = (source1->data[i] != 0);
+        destdata[i] = (source1data[i] != 0);
     }
 }
 
 void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *source2data = (int*) source2->data;
     EaglePageProvider *provider = (EaglePageProvider*) obj;
     
     for(i = 0; i < source2->count; ++i) {
-        if(source1 == NULL || source1->data[i]) {
-            EaglePageProvider_add(provider, &source2->data[i]);
+        if(source1 == NULL || ((int*) source1->data)[i]) {
+            EaglePageProvider_add(provider, &source2data[i]);
         }
     }
 }
 
 void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data, *source2data = (int*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = source1->data[i] == source2->data[i];
+        destdata[i] = source1data[i] == source2data[i];
     }
 }
 
 void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i;
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data, *source2data = (int*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destination->data[i] = source1->data[i] % source2->data[i];
+        destdata[i] = source1data[i] % source2data[i];
     }
 }

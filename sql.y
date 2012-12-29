@@ -112,7 +112,7 @@
     /**
      Used by "data_type"
      */
-    EagleDbColumnType yy_data_type;
+    EagleDataType yy_data_type;
 
 %}
 
@@ -203,7 +203,7 @@ column_definition_list:
 
 column_definition:
     IDENTIFIER {
-        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDbColumnTypeInteger)));
+        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger)));
         ((EagleDbColumn*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
     }
     data_type {
@@ -213,11 +213,11 @@ column_definition:
 
 data_type:
     K_INTEGER {
-        yy_data_type = EagleDbColumnTypeInteger;
+        yy_data_type = EagleDataTypeInteger;
     }
     |
     K_TEXT {
-        yy_data_type = EagleDbColumnTypeText;
+        yy_data_type = EagleDataTypeText;
     }
 ;
 

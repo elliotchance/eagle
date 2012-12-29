@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "EaglePlanJob.h"
 
-EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)
+EaglePlanJob* EaglePlanJob_New(EaglePlan *plan)
 {
     int i;
     EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));
@@ -9,10 +9,9 @@ EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers)
     job->plan = plan;
     
     /* initialize all buffers now */
-    job->allocatedBuffers = allocatedBuffers;
-    job->buffers = (EaglePage**) calloc((size_t) job->allocatedBuffers, sizeof(EaglePage*));
-    for(i = 0; i < job->allocatedBuffers; ++i) {
-        job->buffers[i] = EaglePage_Alloc(plan->pageSize);
+    job->buffers = (EaglePage**) calloc((size_t) plan->buffersNeeded, sizeof(EaglePage*));
+    for(i = 0; i < plan->buffersNeeded; ++i) {
+        job->buffers[i] = EaglePage_Alloc(plan->bufferTypes[i], plan->pageSize);
     }
     
     return job;
@@ -26,7 +25,7 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
         return;
     }
     
-    for(i = 0; i < job->allocatedBuffers; ++i) {
+    for(i = 0; i < job->plan->buffersNeeded; ++i) {
         EaglePage_Delete(job->buffers[i]);
     }
     free((void*) job->buffers);

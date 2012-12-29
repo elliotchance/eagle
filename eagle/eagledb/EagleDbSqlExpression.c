@@ -71,6 +71,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                 
             }
             
+            plan->bufferTypes[destination] = EagleDataTypeInteger;
             epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
                                          EagleFalse, msg);
             free(msg);
@@ -92,6 +93,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
                     EaglePlan_addBufferProvider(plan, bp);
                     ++*destinationBuffer;
+                    
+                    plan->bufferTypes[destination] = EagleDataTypeInteger;
                     return destination;
                 }
                     
@@ -106,6 +109,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                         return EagleDbSqlExpression_ERROR;
                     }
                     
+                    plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
                     return provider->destinationBuffer;
                 }
                     
@@ -126,14 +130,20 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
 
 void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan)
 {
-    int i, *results;
+    int i, *results, destinationBuffer;
+    
+    /* for now we will just assume we don't need more than 10 buffers */
+    EaglePlan_prepareBuffers(plan, 10);
     
     /* make sure we don't override buffers that are already assigned by providers */
-    int destinationBuffer = 0;
+    destinationBuffer = 0;
     for(i = 0; i < plan->usedProviders; ++i) {
         if(plan->providers[i]->destinationBuffer >= destinationBuffer) {
             destinationBuffer = plan->providers[i]->destinationBuffer + 1;
         }
+        
+        /* each provider will go into a page, sync their types */
+        plan->bufferTypes[plan->providers[i]->destinationBuffer] = plan->providers[i]->provider->type;
     }
     
     /* compile expressions */

@@ -57,17 +57,17 @@ int EagleLinkedList_length(EagleLinkedList *list)
 
 void EagleLinkedList_Delete(EagleLinkedList *list)
 {
-    EagleLinkedListItem *p, *next;
+    /*EagleLinkedListItem *p, *next;
     EagleSynchronizer_Lock(list->modifyLock);
     
     for(p = list->first; NULL != p; p = next) {
         next = p->next;
         EagleLinkedListItem_Delete(p);
     }
-    free(list);
     
     EagleSynchronizer_Unlock(list->modifyLock);
     EagleLock_Delete(list->modifyLock);
+    free(list);*/
 }
 
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item)

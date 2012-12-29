@@ -3,6 +3,7 @@
 #include "EagleWorker.h"
 #include "EaglePlanJob.h"
 #include "EagleInstance.h"
+#include "EagleUtils.h"
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
@@ -34,12 +35,27 @@ void* EagleWorker_begin(void *obj)
                 
                 /* prepare arguments */
                 if(epo->destination >= 0) {
+                    if(epo->destination >= job->plan->buffersNeeded) {
+                        char msg[1024];
+                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->destination, job->plan->buffersNeeded);
+                        EagleUtils_Fatal(msg);
+                    }
                     destination = job->buffers[epo->destination];
                 }
                 if(epo->source1 >= 0) {
+                    if(epo->source1 >= job->plan->buffersNeeded) {
+                        char msg[1024];
+                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source1, job->plan->buffersNeeded);
+                        EagleUtils_Fatal(msg);
+                    }
                     source1 = job->buffers[epo->source1];
                 }
                 if(epo->source2 >= 0) {
+                    if(epo->source2 >= job->plan->buffersNeeded) {
+                        char msg[1024];
+                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source2, job->plan->buffersNeeded);
+                        EagleUtils_Fatal(msg);
+                    }
                     source2 = job->buffers[epo->source2];
                 }
                 
@@ -48,8 +64,8 @@ void* EagleWorker_begin(void *obj)
             }
             
             /* free */
-            EaglePlanJob_Delete(job);
             EaglePlan_stopTimer(job->plan);
+            EaglePlanJob_Delete(job);
         }
         else {
             return NULL;
