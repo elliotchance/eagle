@@ -53,7 +53,7 @@ int SQLSuite_clean()
 {
     for(int i = 0; i < usedTables; ++i) {
         EagleDbTable_Delete(tables[i]->table);
-        EagleDbTableData_Delete(tables[i]);
+        //EagleDbTableData_Delete(tables[i]);
     }
     
     return 0;
@@ -217,10 +217,6 @@ void SQLSuiteTest()
     }
     
     // clean up
-    /*for(int i = 0; i < exprs; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
-    }
-    free(plan->result);*/
     free(expr);
     
     EagleDbSqlSelect_Delete(yyparse_ast);

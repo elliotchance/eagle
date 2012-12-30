@@ -367,14 +367,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         EagleDbSqlExpression_Delete(expr[i]);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
         free(answers[i]);
     }
     free(answers_0);
     free(answers_1);
     free(answers);
     free(expr);
-    free(plan->result);
     EagleInstance_Delete(eagle);
     yylex_free();
 }

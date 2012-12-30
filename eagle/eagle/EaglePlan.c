@@ -20,11 +20,13 @@ EaglePlan* EaglePlan_New(int pageSize)
     
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
-    plan->resultFields = 0;
     plan->executionTime = 0;
     
     plan->buffersNeeded = 0;
     plan->bufferTypes = NULL;
+    
+    plan->resultFields = 0;
+    plan->result = NULL;
     
     return plan;
 }
@@ -97,7 +99,13 @@ void EaglePlan_Delete(EaglePlan *plan)
     }
     free(plan->providers);
     
+    for(i = 0; i < plan->resultFields; ++i) {
+        EaglePageProvider_Delete(plan->result[i]);
+    }
+    free(plan->result);
+    
     free(plan->errorMessage);
+    free(plan->bufferTypes);
     free(plan);
     plan = NULL;
 }
