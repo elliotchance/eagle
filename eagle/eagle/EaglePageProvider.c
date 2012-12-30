@@ -32,6 +32,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
  
  @param value The value to fill the pages with.
  @param recordsPerPage The number of records to return with each page.
+ @param name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
  */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {

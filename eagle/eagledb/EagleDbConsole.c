@@ -15,7 +15,7 @@ EagleDbConsole* EagleDbConsole_New(void)
 }
 
 /**
- @url http://stackoverflow.com/a/314422/1470961
+ http://stackoverflow.com/a/314422/1470961
  */
 char* EagleDbConsole_GetLine(void)
 {
