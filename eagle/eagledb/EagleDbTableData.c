@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "EagleDbTableData.h"
+#include "EagleUtils.h"
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 {
@@ -30,6 +32,19 @@ void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)
 {
     int i;
     for(i = 0; i < td->table->usedColumns; ++i) {
-        EaglePageProvider_add(td->providers[i], tuple->data[i]);
+        switch(td->providers[i]->type) {
+                
+            case EagleDataTypeUnknown:
+                EagleUtils_Fatal("Unknown type.");
+                
+            case EagleDataTypeInteger:
+                EaglePageProvider_add(td->providers[i], tuple->data[i]);
+                break;
+                
+            case EagleDataTypeText:
+                EaglePageProvider_add(td->providers[i], strdup(tuple->data[i]));
+                break;
+                
+        }
     }
 }

@@ -128,15 +128,6 @@ void SQLSuiteTest()
         expr[i] = select->whereExpression;
     }
     
-    // the providers will contain the result
-    plan->resultFields = exprs;
-    plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
-    for(i = 0; i < plan->resultFields; ++i) {
-        char *desc = EagleDbSqlExpression_toString(expr[i]);
-        plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, desc);
-        free(desc);
-    }
-    
     // get data
     EagleDbTableData *td = tables[0];
     for(int i = 0; i < td->table->usedColumns; ++i) {
@@ -170,6 +161,7 @@ void SQLSuiteTest()
         // validate column names
         for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
             CUNIT_ASSERT_EQUAL_STRING(test.answers[0]->table->columns[j]->name, plan->result[j]->name);
+            CUNIT_ASSERT_EQUAL_INT(test.answers[0]->table->columns[j]->type, plan->result[j]->type);
         }
         
         // validate results
@@ -178,25 +170,26 @@ void SQLSuiteTest()
             EaglePage *page = EaglePageProvider_nextPage(plan->result[j]);
             CUNIT_ASSERT_NOT_NULL(page);
             CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
+            CUNIT_ASSERT_EQUAL_INT(page->type, plan->result[j]->type);
             
             for(int i = 0; i < test.usedAnswers; ++i) {
-                switch(test.answers[0]->table->columns[j]->type) {
+                switch(page->type) {
                         
                     case EagleDataTypeUnknown:
-                        printf("UNKNOWN type");
+                        CUNIT_FAIL("%s", "UNKNOWN type");
                         valid = 0;
                         break;
                         
                     case EagleDataTypeInteger:
                         if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
-                            printf("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
+                            CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
                             valid = 0;
                         }
                         break;
                         
                     case EagleDataTypeText:
                         if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
-                            printf("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
+                            CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
                             valid = 0;
                         }
                         break;
@@ -247,8 +240,15 @@ void controlTest(FILE *file, int *lineNumber)
     
     table = EagleDbTable_New("result");
     for(int j = 0; j < columns; ++j) {
-        EagleDbTable_addColumn(table, EagleDbColumn_New(data[j], EagleDataTypeInteger));
+        int count;
+        char **parts = split(data[j], &count, ":");
+        EagleDbTable_addColumn(table, EagleDbColumn_New(parts[0], EagleDataType_nameToType(parts[1])));
         free(data[j]);
+        
+        for(int k = 0; k < count; ++k) {
+            free(parts[k]);
+        }
+        free(parts);
     }
     free(data);
     
@@ -263,7 +263,21 @@ void controlTest(FILE *file, int *lineNumber)
         
         test.answers[test.usedAnswers] = EagleDbTuple_New(table);
         for(int j = 0; j < columns; ++j) {
-            EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
+            switch(table->columns[j]->type) {
+                    
+                case EagleDataTypeUnknown:
+                    CUNIT_FAIL("%s", "Unknown type");
+                    break;
+                    
+                case EagleDataTypeInteger:
+                    EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
+                    break;
+                    
+                case EagleDataTypeText:
+                    EagleDbTuple_setText(test.answers[test.usedAnswers], j, data[j]);
+                    break;
+                    
+            }
             free(data[j]);
         }
         free(data);
@@ -352,7 +366,7 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
             switch(table->columns[i]->type) {
                     
                 case EagleDataTypeUnknown:
-                    EagleUtils_Fatal("");
+                    CUNIT_FAIL("%s", "Unknown type.");
                     break;
                     
                 case EagleDataTypeInteger:

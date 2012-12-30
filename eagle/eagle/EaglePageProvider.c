@@ -154,21 +154,15 @@ EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)
     switch(epp->type) {
             
         case EagleDataTypeUnknown:
-            EagleUtils_Fatal("");
+            EagleUtils_Fatal("Unknown type.");
             
         case EagleDataTypeInteger:
-        {
-            int *cdata = (int*) page->data;
-            cdata[page->count++] = *((int*) data);
+            ((int*) page->data)[page->count++] = *((int*) data);
             break;
-        }
             
         case EagleDataTypeText:
-        {
-            char **cdata = (char**) page->data;
-            cdata[page->count++] = (char*) data;
+            ((char**) page->data)[page->count++] = (char*) data;
             break;
-        }
         
     }
     

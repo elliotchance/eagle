@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "EaglePageOperations.h"
 #include "EaglePageProvider.h"
+#include "EagleUtils.h"
 
 #include <unistd.h>
 
@@ -98,14 +99,33 @@ void EaglePageOperations_CastIntPageToBoolean(EaglePage *destination, EaglePage 
     }
 }
 
-void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int i, *source2data = (int*) source2->data;
+    int i;
     EaglePageProvider *provider = (EaglePageProvider*) obj;
     
     for(i = 0; i < source2->count; ++i) {
         if(source1 == NULL || ((int*) source1->data)[i]) {
-            EaglePageProvider_add(provider, &source2data[i]);
+            switch(provider->type) {
+                    
+                case EagleDataTypeUnknown:
+                    EagleUtils_Fatal("Unknown type");
+                    
+                case EagleDataTypeInteger:
+                {
+                    int *source2data = (int*) source2->data;
+                    EaglePageProvider_add(provider, &source2data[i]);
+                    break;
+                }
+                    
+                case EagleDataTypeText:
+                {
+                    char **source2data = (char**) source2->data;
+                    EaglePageProvider_add(provider, source2data[i]);
+                    break;
+                }
+                    
+            }
         }
     }
 }

@@ -64,9 +64,11 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "  Operations:\n");
     }
     for(i = 0; i < plan->usedOperations; ++i) {
+        char *s = EaglePlanOperation_toString(plan->operations[i]);
         strcat_safe(str, "    ");
-        strcat_safe(str, EaglePlanOperation_toString(plan->operations[i]));
+        strcat_safe(str, s);
         strcat_safe(str, "\n");
+        free(s);
     }
     
     if(plan->buffersNeeded > 0) {

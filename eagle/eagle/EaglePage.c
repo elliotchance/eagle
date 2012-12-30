@@ -63,7 +63,7 @@ EaglePage* EaglePage_Copy(EaglePage *page)
     switch(page->type) {
             
         case EagleDataTypeUnknown:
-            EagleUtils_Fatal("");
+            EagleUtils_Fatal("Cannot page of Unknown type.");
         
         case EagleDataTypeInteger:
             return EaglePage_CopyInt_(page);
@@ -85,10 +85,13 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
 
 EaglePage* EaglePage_CopyText_(EaglePage *page)
 {
-    size_t memorySize = (size_t) page->count * sizeof(char*);
-    void *newData = malloc(memorySize);
+    char **newData = (char**) calloc((size_t) page->count, sizeof(char*));
+    int i;
     
-    memmove(newData, page->data, memorySize);
+    for(i = 0; i < page->count; ++i) {
+        newData[i] = ((char**) page->data)[i];
+    }
+    
     return EaglePage_New(page->type, newData, page->count, page->recordOffset, page->freeData);
 }
 

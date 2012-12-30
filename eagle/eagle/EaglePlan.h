@@ -121,5 +121,6 @@ void EaglePlan_resumeTimer(EaglePlan *plan);
 void EaglePlan_stopTimer(EaglePlan *plan);
 double EaglePlan_getExecutionSeconds(EaglePlan *plan);
 void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers);
+int EaglePlan_getRealResultFields(EaglePlan *plan);
 
 #endif

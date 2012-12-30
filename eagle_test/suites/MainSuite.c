@@ -126,10 +126,10 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePageProvider *result = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, totalRecords, "answer");
     
     // plan
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt,         2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,            3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,                0, 2,  3, NULL,               EagleFalse, "3"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, 0,  1, result,             EagleFalse, "4"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt,      2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,         3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,             0, 2,  3, NULL,               EagleFalse, "3"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, 0,  1, result,             EagleFalse, "4"));
     
     // this will be enough buffers for the above operations
     plan->buffersNeeded = 10;
@@ -281,7 +281,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null)\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
     free(msg);
     
     EaglePlan_Delete(plan);
@@ -292,7 +292,7 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, "something");
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
     char *description = EaglePlanBufferProvider_toString(bp);
-    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something");
+    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something, type = INTEGER");
     free(description);
     EaglePlanBufferProvider_Delete(bp);
 }

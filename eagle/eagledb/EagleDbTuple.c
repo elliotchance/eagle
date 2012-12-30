@@ -42,7 +42,8 @@ void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
         printf("WRONG TYPE!\n");
         return;
     }
-    tuple->data[position] = strdup(value);
+    
+    ((char**) tuple->data)[position] = strdup(value);
 }
 
 char* EagleDbTuple_toString(EagleDbTuple *tuple)

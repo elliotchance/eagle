@@ -20,7 +20,7 @@ EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function),
 
 char* EaglePlanOperation_toString(EaglePlanOperation *epo)
 {
-    return (char*) epo->description;
+    return strdup(epo->description);
 }
 
 void EaglePlanOperation_Delete(EaglePlanOperation *epo)
