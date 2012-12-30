@@ -51,8 +51,8 @@ test: clean_eagle_test build_eagle_test
 coverage: test
 	- rm -rf coverage
 	mkdir -p coverage/$(GIT_BRANCH)
-	geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
-	genhtml -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	bin/geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
+	bin/genhtml --branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
 
 doxygen:
 	- rm -rf doc
