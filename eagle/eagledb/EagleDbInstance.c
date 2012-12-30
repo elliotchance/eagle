@@ -8,6 +8,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EaglePageProvider.h"
 #include "EagleInstance.h"
+#include "EagleDbTableData.h"
 
 extern void *yyparse_ast;
 extern int yyparse();
@@ -21,6 +22,18 @@ EagleDbInstance* EagleDbInstance_New(void)
 {
     int i;
     EagleDbInstance *db = (EagleDbInstance*) malloc(sizeof(EagleDbInstance));
+    EagleDbSchema *defaultSchema, *eagledbSchema;
+    EagleDbTableData *td;
+    
+    /* schemas */
+    db->allocatedSchemas = 10;
+    db->usedSchemas = 0;
+    db->schemas = (EagleDbSchema**) calloc((size_t) db->allocatedSchemas, sizeof(EagleDbSchema*));
+    
+    defaultSchema = EagleDbSchema_New("default");
+    eagledbSchema = EagleDbSchema_New("eagledb");
+    EagleDbInstance_addSchema(defaultSchema);
+    EagleDbInstance_addSchema(eagledbSchema);
     
     /* create a virtual table */
     EagleDbTable *table = EagleDbTable_New("t");
@@ -28,7 +41,8 @@ EagleDbInstance* EagleDbInstance_New(void)
     EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
     
     /* put some data in it */
-    db->td = EagleDbTableData_New(table);
+    td = EagleDbTableData_New(table);
+    EagleDbSchema_addTable(defaultSchema, td);
     
     for(i = 0; i < 10; ++i) {
         /* create a record */
@@ -37,7 +51,7 @@ EagleDbInstance* EagleDbInstance_New(void)
         EagleDbTuple_setText(tuple, 1, "hello");
         
         /* put record in */
-        EagleDbTableData_insert(db->td, tuple);
+        EagleDbTableData_insert(td, tuple);
     }
     
     return db;
