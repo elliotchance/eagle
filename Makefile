@@ -52,7 +52,10 @@ coverage: test
 	- rm -rf coverage
 	mkdir -p coverage/$(GIT_BRANCH)
 	bin/geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
-	bin/genhtml --branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	bin/genhtml --sort --branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	
+	# check percentage
+	perl -e 'open(DOC, "coverage/i24/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (90%).\n") if(($$m[10] + $$m[12]) < 180);'
 
 doxygen:
 	- rm -rf doc
