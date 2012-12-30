@@ -16,7 +16,8 @@ EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, Eagl
 char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
 {
     char *msg = (char*) malloc(1024);
-    sprintf(msg, "destination = %d, name = %s", bp->destinationBuffer, bp->provider->name);
+    sprintf(msg, "destination = %d, name = %s, type = %s", bp->destinationBuffer, bp->provider->name,
+            EagleDataType_typeToName(bp->provider->type));
     return msg;
 }
 

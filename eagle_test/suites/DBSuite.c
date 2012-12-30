@@ -96,7 +96,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
 {
     // compile plan
     int pageSize = 10;
-    EaglePageProvider *receiver = EaglePageProvider_CreateFromIntStream(pageSize, NULL);
+    EaglePageProvider *receiver = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, NULL);
     EaglePlan *plan = EaglePlan_New(pageSize);
     
     // setup the table
@@ -125,7 +125,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
         //printf("\n%d != %d", page->data[i], answers[i]);
-        if(page->data[i] != answers[i]) {
+        if(((int*) page->data)[i] != answers[i]) {
             valid = 0;
             break;
         }
@@ -138,9 +138,9 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
 
 CUNIT_TEST(DBSuite, EagleDbColumn_New)
 {
-    EagleDbColumn *col = EagleDbColumn_New("mycol", EagleDbColumnTypeInteger);
+    EagleDbColumn *col = EagleDbColumn_New("mycol", EagleDataTypeInteger);
     CUNIT_ASSERT_EQUAL_STRING(col->name, "mycol");
-    CUNIT_ASSERT_EQUAL_INT(col->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(col->type, EagleDataTypeInteger);
     EagleDbColumn_Delete(col);
 }
 
@@ -152,15 +152,15 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
 CUNIT_TEST(DBSuite, EagleDbTable_New)
 {
     EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeInteger));
     
     CUNIT_ASSERT_EQUAL_STRING(table->name, "mytable");
     CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
     CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
     CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     
     EagleDbTable_Delete(table);
 }
@@ -174,8 +174,8 @@ EagleDbTable* _getTable()
      );
      */
     EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
     
     return table;
 }
@@ -204,62 +204,15 @@ EagleDbTableData* _getTableWithData(int records, int recordsPerPage)
     return td;
 }
 
-CUNIT_TEST(DBSuite, _, TableTest)
-{
-    // define the table
-    EagleDbTable *table = _getTable();
-    
-    // create the data provider
-    EagleDbTableData *td = EagleDbTableData_New(table);
-    
-    /*
-     INSERT INTO mytable (col1, col2) VALUES (123, 456);
-     */
-    
-    // create a record
-    EagleDbTuple *tuple = EagleDbTuple_New(table);
-    EagleDbTuple_setInt(tuple, 0, 123);
-    EagleDbTuple_setInt(tuple, 1, 456);
-    
-    // put some data in
-    EagleDbTableData_insert(td, tuple);
-    CUNIT_ASSERT_EQUAL_INT(td->providers[0]->totalRecords, 1);
-    CUNIT_ASSERT_EQUAL_INT(td->providers[1]->totalRecords, 1);
-    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[0]), 1);
-    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[1]), 1);
-    
-    /*
-     SELECT col1, col2 FROM mytable;
-     */
-    
-    // read the data out
-    EaglePage *page1 = EaglePageProvider_nextPage(td->providers[0]);
-    EaglePage *page2 = EaglePageProvider_nextPage(td->providers[1]);
-    
-    CUNIT_ASSERT_NOT_NULL(page1);
-    CUNIT_ASSERT_NOT_NULL(page2);
-    CUNIT_ASSERT_EQUAL_INT(page1->count, 1);
-    CUNIT_ASSERT_EQUAL_INT(page2->count, 1);
-    
-    CUNIT_ASSERT_EQUAL_INT(page1->data[0], 123);
-    CUNIT_ASSERT_EQUAL_INT(page2->data[0], 456);
-    
-    EagleDbTuple_Delete(tuple);
-    EagleDbTableData_Delete(td);
-    EagleDbTable_Delete(table);
-    EaglePage_Delete(page1);
-    EaglePage_Delete(page2);
-}
-
 CUNIT_TEST(DBSuite, EagleDbTuple_New)
 {
     EagleDbTable *table = _getTable();
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
     EagleDbTuple_setInt(tuple, 0, 123);
-    EagleDbTuple_setInt(tuple, 1, 456);
+    EagleDbTuple_setText(tuple, 1, "hello");
     char *desc = EagleDbTuple_toString(tuple);
-    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=456)");
+    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\")");
     free(desc);
     
     EagleDbTuple_Delete(tuple);
@@ -292,12 +245,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     
     // create the plan skeleton
     EaglePlan *plan = EaglePlan_New(pageSize);
-    
-    // the providers will contain the result
-    plan->resultFields = 2;
-    plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
-    plan->result[0] = EaglePageProvider_CreateFromIntStream(pageSize, "col1");
-    plan->result[1] = EaglePageProvider_CreateFromIntStream(pageSize, "col2 + 8");
     
     // create a virtual table that consists of 2 columns; col1 and col2
     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
@@ -339,7 +286,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         }
     }
     
-    for(int i = 0; i < plan->resultFields; ++i) {
+    // suvtract 1 becuase the WHERE clause does not get emitted
+    for(int i = 0; i < plan->resultFields - 1; ++i) {
         EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
         CUNIT_ASSERT_NOT_NULL(page);
         
@@ -348,7 +296,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         
         int valid = 1;
         for(int j = 0; j < page->count; ++j) {
-            if(page->data[j] != answers[i][j]) {
+            if(((int*) page->data)[j] != answers[i][j]) {
                 valid = 0;
                 break;
             }
@@ -362,14 +310,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         EagleDbSqlExpression_Delete(expr[i]);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
         free(answers[i]);
     }
     free(answers_0);
     free(answers_1);
     free(answers);
     free(expr);
-    free(plan->result);
     EagleInstance_Delete(eagle);
     yylex_free();
 }
@@ -406,10 +352,10 @@ CUNIT_TEST(DBSuite, _, CREATE_TABLE)
     CUNIT_ASSERT_NOT_NULL(table->columns);
     
     CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
     
     CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDbColumnTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     
     EagleDbTable_Delete(table);
     yylex_free();
@@ -455,7 +401,6 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, TableTest));
     
     return tests;
 }

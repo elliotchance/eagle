@@ -29,7 +29,21 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
 {
+    if(tuple->table->columns[position]->type != EagleDataTypeInteger) {
+        printf("WRONG TYPE!\n");
+        return;
+    }
     tuple->data[position] = EagleData_Int(value);
+}
+
+void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
+{
+    if(tuple->table->columns[position]->type != EagleDataTypeText) {
+        printf("WRONG TYPE!\n");
+        return;
+    }
+    
+    ((char**) tuple->data)[position] = strdup(value);
 }
 
 char* EagleDbTuple_toString(EagleDbTuple *tuple)
@@ -47,9 +61,19 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
         strcat_safe(desc, "=");
         
         switch(tuple->table->columns[i]->type) {
-            case EagleDbColumnTypeInteger:
+                
+            case EagleDataTypeUnknown:
+                sprintf(desc, "%s?", desc);
+                break;
+                
+            case EagleDataTypeInteger:
                 sprintf(desc, "%s%d", desc, *((int*) tuple->data[i]));
                 break;
+                
+            case EagleDataTypeText:
+                sprintf(desc, "%s\"%s\"", desc, (char*) tuple->data[i]);
+                break;
+                
         }
     }
     strcat_safe(desc, ")");

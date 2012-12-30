@@ -13,7 +13,7 @@ void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, Eag
 void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 void EaglePageOperations_CastIntPageToBoolean(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
-void EaglePageOperations_SendIntPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 #endif

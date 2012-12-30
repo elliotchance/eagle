@@ -3,12 +3,12 @@
 #==================================================
 
 % table mytable
-col1,col2
-0,0
-1,2
-2,4
-5,10
-10,20
+col1 int,col2 int,col3 text
+0,0,hello
+1,2,world
+2,4,how
+5,10,are
+10,20,you doing?
 
 #==================================================
 # Parser Errors
@@ -31,8 +31,8 @@ SELECT * FROM mytable WHERE 123
 You can not use the star operator like this.
 
 % test_error
-SELECT col3 FROM mytable
-Unknown column 'col3'
+SELECT col4 FROM mytable
+Unknown column 'col4'
 
 % test_error
 SELECT col1 + col4 FROM mytable
@@ -48,7 +48,7 @@ Unknown column 'col7'
 
 % test
 SELECT 123 FROM mytable
-123
+123:integer
 123
 123
 123
@@ -57,7 +57,7 @@ SELECT 123 FROM mytable
 
 % test
 SELECT col1=5 FROM mytable
-col1 = 5
+col1 = 5:integer
 0
 0
 0
@@ -66,7 +66,7 @@ col1 = 5
 
 % test
 SELECT 4 = col2 FROM mytable
-4 = col2
+4 = col2:integer
 0
 0
 1
@@ -75,7 +75,7 @@ SELECT 4 = col2 FROM mytable
 
 % test
 SELECT 123 + 456 FROM mytable
-123 + 456
+123 + 456:integer
 579
 579
 579
@@ -84,7 +84,7 @@ SELECT 123 + 456 FROM mytable
 
 % test
 SELECT col1 FROM mytable WHERE 123
-col1
+col1:integer
 0
 1
 2
@@ -93,7 +93,7 @@ col1
 
 % test
 SELECT col1, col2 FROM mytable
-col1,col2
+col1:integer,col2:integer
 0,0
 1,2
 2,4
@@ -102,7 +102,7 @@ col1,col2
 
 % test
 SELECT col1, col2, col1 + col2 FROM mytable
-col1,col2,col1 + col2
+col1:integer,col2:integer,col1 + col2:integer
 0,0,0
 1,2,3
 2,4,6
@@ -111,10 +111,19 @@ col1,col2,col1 + col2
 
 % test
 SELECT col1, col2 FROM mytable WHERE col1 = 1
-col1,col2
+col1:integer,col2:integer
 1,2
 
 % test
 SeLeCt col1, col2 fRoM mytable WhErE col1 = 1
-col1,col2
+col1:integer,col2:integer
 1,2
+
+% test
+select col3, col1 from mytable
+col3:text,col1:integer
+hello,0
+world,1
+how,2
+are,5
+you doing?,10

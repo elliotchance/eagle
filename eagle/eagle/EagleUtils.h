@@ -11,4 +11,6 @@
  */
 #define strcat_safe(dest, src) { if(NULL != (dest) && NULL != (src)) { strncat(dest, src, strlen(src)); } }
 
+void EagleUtils_Fatal(char *msg);
+
 #endif

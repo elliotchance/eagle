@@ -13,6 +13,7 @@
 #include "EaglePageProvider.h"
 #include "EagleDbSqlSelect.h"
 #include "EagleDbInstance.h"
+#include "EagleUtils.h"
 
 extern void *yyparse_ast;
 void yylex_free();
@@ -52,7 +53,7 @@ int SQLSuite_clean()
 {
     for(int i = 0; i < usedTables; ++i) {
         EagleDbTable_Delete(tables[i]->table);
-        EagleDbTableData_Delete(tables[i]);
+        //EagleDbTableData_Delete(tables[i]);
     }
     
     return 0;
@@ -64,25 +65,25 @@ void die(char *msg)
     exit(1);
 }
 
-int countColumns(char *line)
+int countColumns(char *line, char ch)
 {
     int columnCount = 1;
     for(int i = 0; i < strlen(line); ++i) {
-        if(line[i] == ',') {
+        if(line[i] == ch) {
             ++columnCount;
         }
     }
     return columnCount;
 }
 
-char **splitColumns(char *line, int *count)
+char **split(char *line, int *count, char *chs)
 {
-    *count = countColumns(line);
+    *count = countColumns(line, chs[0]);
     
     char **r = (char**) calloc((size_t) *count, sizeof(char*));
-    r[0] = strdup(strtok(line, ",\n"));
+    r[0] = strdup(strtok(line, chs));
     for(int i = 1; i < *count; ++i) {
-        r[i] = strdup(strtok(NULL, ",\n"));
+        r[i] = strdup(strtok(NULL, chs));
     }
     
     return r;
@@ -127,15 +128,6 @@ void SQLSuiteTest()
         expr[i] = select->whereExpression;
     }
     
-    // the providers will contain the result
-    plan->resultFields = exprs;
-    plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
-    for(i = 0; i < plan->resultFields; ++i) {
-        char *desc = EagleDbSqlExpression_toString(expr[i]);
-        plan->result[i] = EaglePageProvider_CreateFromIntStream(pageSize, desc);
-        free(desc);
-    }
-    
     // get data
     EagleDbTableData *td = tables[0];
     for(int i = 0; i < td->table->usedColumns; ++i) {
@@ -169,6 +161,7 @@ void SQLSuiteTest()
         // validate column names
         for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
             CUNIT_ASSERT_EQUAL_STRING(test.answers[0]->table->columns[j]->name, plan->result[j]->name);
+            CUNIT_ASSERT_EQUAL_INT(test.answers[0]->table->columns[j]->type, plan->result[j]->type);
         }
         
         // validate results
@@ -177,11 +170,33 @@ void SQLSuiteTest()
             EaglePage *page = EaglePageProvider_nextPage(plan->result[j]);
             CUNIT_ASSERT_NOT_NULL(page);
             CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
+            CUNIT_ASSERT_EQUAL_INT(page->type, plan->result[j]->type);
             
             for(int i = 0; i < test.usedAnswers; ++i) {
-                //printf("%d != %d\n", *((int*) test.answers[i]->data[j]), page->data[i]);
-                if(*((int*) test.answers[i]->data[j]) != page->data[i]) {
-                    valid = 0;
+                switch(page->type) {
+                        
+                    case EagleDataTypeUnknown:
+                        CUNIT_FAIL("%s", "UNKNOWN type");
+                        valid = 0;
+                        break;
+                        
+                    case EagleDataTypeInteger:
+                        if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
+                            CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
+                            valid = 0;
+                        }
+                        break;
+                        
+                    case EagleDataTypeText:
+                        if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
+                            CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
+                            valid = 0;
+                        }
+                        break;
+                        
+                }
+                
+                if(valid == 0) {
                     break;
                 }
             }
@@ -195,10 +210,6 @@ void SQLSuiteTest()
     }
     
     // clean up
-    for(int i = 0; i < exprs; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
-    }
-    free(plan->result);
     free(expr);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
@@ -225,12 +236,19 @@ void controlTest(FILE *file, int *lineNumber)
     fgets(line, sizeof(line), file);
     
     int columns = 0;
-    char **data = splitColumns(strtok(line, "\n"), &columns);
+    char **data = split(strtok(line, "\n"), &columns, ",\n");
     
     table = EagleDbTable_New("result");
     for(int j = 0; j < columns; ++j) {
-        EagleDbTable_addColumn(table, EagleDbColumn_New(data[j], EagleDbColumnTypeInteger));
+        int count;
+        char **parts = split(data[j], &count, ":");
+        EagleDbTable_addColumn(table, EagleDbColumn_New(parts[0], EagleDataType_nameToType(parts[1])));
         free(data[j]);
+        
+        for(int k = 0; k < count; ++k) {
+            free(parts[k]);
+        }
+        free(parts);
     }
     free(data);
     
@@ -241,11 +259,25 @@ void controlTest(FILE *file, int *lineNumber)
         }
         
         int columns = 0;
-        char **data = splitColumns(strtok(line, "\n"), &columns);
+        char **data = split(strtok(line, "\n"), &columns, ",\n");
         
         test.answers[test.usedAnswers] = EagleDbTuple_New(table);
         for(int j = 0; j < columns; ++j) {
-            EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
+            switch(table->columns[j]->type) {
+                    
+                case EagleDataTypeUnknown:
+                    CUNIT_FAIL("%s", "Unknown type");
+                    break;
+                    
+                case EagleDataTypeInteger:
+                    EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
+                    break;
+                    
+                case EagleDataTypeText:
+                    EagleDbTuple_setText(test.answers[test.usedAnswers], j, data[j]);
+                    break;
+                    
+            }
             free(data[j]);
         }
         free(data);
@@ -287,13 +319,25 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
     fgets(line, sizeof(line), file);
     ++*lineNumber;
     int columnCount;
-    char **columnNames = splitColumns(line, &columnCount);
+    char **columnNames = split(line, &columnCount, ",\n");
     
     // construct the virtual table
     EagleDbTable *table = EagleDbTable_New(tableName);
     for(int i = 0; i < columnCount; ++i) {
-        EagleDbColumn *column = EagleDbColumn_New(columnNames[i], EagleDbColumnTypeInteger);
+        int partsCount;
+        char **parts = split(columnNames[i], &partsCount, " ");
+        if(partsCount != 2) {
+            printf("Wrong number of partsCount for '%s' (got %d)\n", columnNames[i], partsCount);
+            exit(1);
+        }
+        
+        EagleDbColumn *column = EagleDbColumn_New(parts[0], EagleDataType_nameToType(parts[1]));
         EagleDbTable_addColumn(table, column);
+        
+        for(int j = 0; j < partsCount; ++j) {
+            free(parts[j]);
+        }
+        free(parts);
     }
     EagleDbTableData *td = EagleDbTableData_New(table);
     tables[usedTables] = td;
@@ -308,18 +352,32 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         }
         
         // check we have the right amount of columns
-        if(countColumns(line) != columnCount) {
+        if(countColumns(line, ',') != columnCount) {
             char msg[1024];
-            sprintf(msg, "Expected %d columns on line %d, but found %d columns.", columnCount, *lineNumber, countColumns(line));
+            sprintf(msg, "Expected %d columns on line %d, but found %d columns.", columnCount, *lineNumber, countColumns(line, ','));
             die(msg);
         }
         
         // create the tuple
         int count;
-        char **data = splitColumns(line, &count);
+        char **data = split(line, &count, ",\n");
         EagleDbTuple *tuple = EagleDbTuple_New(table);
         for(int i = 0; i < count; ++i) {
-            EagleDbTuple_setInt(tuple, i, atoi(data[i]));
+            switch(table->columns[i]->type) {
+                    
+                case EagleDataTypeUnknown:
+                    CUNIT_FAIL("%s", "Unknown type.");
+                    break;
+                    
+                case EagleDataTypeInteger:
+                    EagleDbTuple_setInt(tuple, i, atoi(data[i]));
+                    break;
+                    
+                case EagleDataTypeText:
+                    EagleDbTuple_setText(tuple, i, data[i]);
+                    break;
+                    
+            }
         }
         
         // insert the data

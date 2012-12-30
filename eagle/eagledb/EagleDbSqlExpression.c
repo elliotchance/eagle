@@ -8,6 +8,7 @@
 #include "EagleDbSqlBinaryExpression.h"
 #include "EaglePageOperations.h"
 #include "EagleDbSqlSelect.h"
+#include "EagleDbSqlExpressionOperator.h"
 
 /**
  Return value when the expression can not be compiled.
@@ -28,11 +29,12 @@ const int EagleDbSqlExpression_ERROR = -1;
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
 {
     switch(expression->expressionType) {
+            
         case EagleDbSqlExpressionTypeBinaryExpression:
         {
             EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
             int destination, destinationLeft, destinationRight;
-            char *msg;
+            char *msg, *t1, *t2, *t3, *op;
             EaglePlanOperation *epo;
             EaglePageOperationFunction(pageOperation);
             
@@ -49,28 +51,38 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             }
             
             /* operator */
-            msg = (char*) malloc(256);
+            msg = (char*) malloc(1024);
             destination = *destinationBuffer;
             
             switch(cast->op) {
                     
                 case EagleDbSqlExpressionOperatorPlus:
-                    sprintf(msg, "<%d> + <%d> -> <%d>", destinationLeft, destinationRight, destination);
                     pageOperation = EaglePageOperations_AdditionPage;
                     break;
                     
                 case EagleDbSqlExpressionOperatorEquals:
-                    sprintf(msg, "<%d> = <%d> -> <%d>", destinationLeft, destinationRight, destination);
                     pageOperation = EaglePageOperations_EqualsPage;
                     break;
                     
                 case EagleDbSqlExpressionOperatorModulus:
-                    sprintf(msg, "<%d> %% <%d> -> <%d>", destinationLeft, destinationRight, destination);
                     pageOperation = EaglePageOperations_ModulusPage;
                     break;
                 
             }
             
+            t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
+            t2 = EagleDataType_typeToName(plan->bufferTypes[destinationRight]);
+            t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
+            op = EagleDbSqlExpressionOperator_toString(cast->op);
+            
+            sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2, destination, t3);
+            
+            free(t1);
+            free(t2);
+            free(t3);
+            free(op);
+            
+            plan->bufferTypes[destination] = EagleDataTypeInteger;
             epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
                                          EagleFalse, msg);
             free(msg);
@@ -92,6 +104,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
                     EaglePlan_addBufferProvider(plan, bp);
                     ++*destinationBuffer;
+                    
+                    plan->bufferTypes[destination] = EagleDataTypeInteger;
                     return destination;
                 }
                     
@@ -106,6 +120,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                         return EagleDbSqlExpression_ERROR;
                     }
                     
+                    plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
                     return provider->destinationBuffer;
                 }
                     
@@ -126,44 +141,82 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
 
 void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan)
 {
-    int i, *results;
+    int i, *results, destinationBuffer;
+    
+    /* for now we will just assume we don't need more than 10 buffers */
+    EaglePlan_prepareBuffers(plan, 10);
     
     /* make sure we don't override buffers that are already assigned by providers */
-    int destinationBuffer = 0;
+    destinationBuffer = 0;
     for(i = 0; i < plan->usedProviders; ++i) {
         if(plan->providers[i]->destinationBuffer >= destinationBuffer) {
             destinationBuffer = plan->providers[i]->destinationBuffer + 1;
         }
+        
+        /* each provider will go into a page, sync their types */
+        plan->bufferTypes[plan->providers[i]->destinationBuffer] = plan->providers[i]->provider->type;
     }
+    
+    /* prepare result providers */
+    plan->resultFields = totalExpressions;
+    plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
     
     /* compile expressions */
     results = (int*) calloc((size_t) totalExpressions, sizeof(int));
     for(i = 0; i < totalExpressions; ++i) {
+        char *desc;
+        
         results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &destinationBuffer, plan);
         
         if(EagleTrue == EaglePlan_isError(plan)) {
             free(results);
             return;
         }
+        
+        /*
+         since we don't know the type of result providers until after we evaluate the expression we can now setup the
+         result provider now
+         */
+        desc = EagleDbSqlExpression_toString(expressions[i]);
+        plan->result[i] = EaglePageProvider_CreateFromStream(plan->bufferTypes[results[i]], plan->pageSize, desc);
+        free(desc);
     }
     
     /* if there is a WHERE clause expression only send those records */
     for(i = 0; i < totalExpressions; ++i) {
         EaglePlanOperation *epo;
-        char msg[64];
+        char msg[1024];
         
         if(i != whereClause) {
             if(whereClause >= 0) {
                 /* send some result data to the provider */
-                sprintf(msg, "WHERE <%d>, send <%d> to provider %d", results[whereClause], results[i], i);
-                epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, results[whereClause], results[i], plan->result[i], EagleFalse, msg);
+                char *t1, *t2, *t3;
+                
+                t1 = EagleDataType_typeToName(plan->bufferTypes[results[whereClause]]);
+                t2 = EagleDataType_typeToName(plan->bufferTypes[results[i]]);
+                t3 = EagleDataType_typeToName(plan->result[i]->type);
+                
+                sprintf(msg, "WHERE <%d> (%s), send <%d> (%s) to provider <%d> (%s)", results[whereClause], t1, results[i], t2, i, t3);
+                epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, results[whereClause], results[i], plan->result[i], EagleFalse, msg);
                 EaglePlan_addOperation(plan, epo);
+                
+                free(t1);
+                free(t2);
+                free(t3);
             }
             else {
+                char *t1, *t2;
+                
+                t1 = EagleDataType_typeToName(plan->bufferTypes[results[i]]);
+                t2 = EagleDataType_typeToName(plan->result[i]->type);
+                
                 /* send all the result data to the provider */
-                sprintf(msg, "ALL <%d> to provider %d", results[i], i);
-                epo = EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, -1, results[i], plan->result[i], EagleFalse, msg);
+                sprintf(msg, "ALL <%d> (%s) to provider <%d> (%s)", results[i], t1, i, t2);
+                epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, -1, results[i], plan->result[i], EagleFalse, msg);
                 EaglePlan_addOperation(plan, epo);
+                
+                free(t1);
+                free(t2);
             }
         }
     }
@@ -178,6 +231,7 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
     }
     
     switch(expr->expressionType) {
+            
         case EagleDbSqlExpressionTypeBinaryExpression:
             EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr);
             break;
@@ -189,6 +243,7 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
         case EagleDbSqlExpressionTypeValue:
             EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
             break;
+            
     }
 }
 

@@ -2,7 +2,7 @@
 #include <string.h>
 #include "EagleDbColumn.h"
 
-EagleDbColumn* EagleDbColumn_New(char *name, EagleDbColumnType type)
+EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type)
 {
     EagleDbColumn *column = (EagleDbColumn*) malloc(sizeof(EagleDbColumn));
     
