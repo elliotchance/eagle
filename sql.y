@@ -108,6 +108,11 @@
      out if you intended to keep it. Since you cannot access the yytext direct from here?
      */
     extern char *yytext_last;
+    
+    /**
+     Used by "data_type"
+     */
+    EagleDataType yy_data_type;
 
 %}
 
@@ -120,6 +125,7 @@
 %token K_INTEGER
 %token K_SELECT
 %token K_TABLE
+%token K_TEXT
 %token K_WHERE
 
 /* variable tokens */
@@ -197,11 +203,21 @@ column_definition_list:
 
 column_definition:
     IDENTIFIER {
-        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDbColumnTypeInteger)));
+        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger)));
         ((EagleDbColumn*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
     }
+    data_type {
+        ((EagleDbColumn*) yyreturn_current())->type = yy_data_type;
+    }
+;
+
+data_type:
     K_INTEGER {
-        ((EagleDbColumn*) yyreturn_current())->type = EagleDbColumnTypeInteger;
+        yy_data_type = EagleDataTypeInteger;
+    }
+    |
+    K_TEXT {
+        yy_data_type = EagleDataTypeText;
     }
 ;
 

@@ -8,11 +8,11 @@
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
-    EaglePage *page = EaglePage_Alloc(pageSize);
+    EaglePage *page = EaglePage_AllocInt(pageSize);
     
     // prepare
     for(int i = 0; i < pageSize; ++i) {
-        page->data[i] = i;
+        ((int*) page->data)[i] = i;
     }
     
     return page;
@@ -23,7 +23,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
     int pageSize = 1000;
     int testValue = arc4random();
     EaglePage *page = MainSuite_GeneratePage(pageSize);
-    EaglePage *out = EaglePage_Alloc(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     int *int1 = EagleData_Int(testValue);
     EaglePageOperations_GreaterThanInt(out, page, NULL, int1);
@@ -31,7 +31,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
     // verify
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!(page->data[i] > testValue == out->data[i])) {
+        if(!(((int*) page->data)[i] > testValue == ((int*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -49,7 +49,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
     int pageSize = 1000;
     int testValue = arc4random();
     EaglePage *page = MainSuite_GeneratePage(pageSize);
-    EaglePage *out = EaglePage_Alloc(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     int *int1 = EagleData_Int(testValue);
     EaglePageOperations_LessThanInt(out, page, NULL, int1);
@@ -57,7 +57,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
     // verify
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!(page->data[i] < testValue == out->data[i])) {
+        if(!(((int*) page->data)[i] < testValue == ((int*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -73,13 +73,13 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
 CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
 {
     int pageSize = 1000;
-    EaglePage *page1 = EaglePage_Alloc(pageSize);
-    EaglePage *page2 = EaglePage_Alloc(pageSize);
-    EaglePage *out = EaglePage_Alloc(pageSize);
+    EaglePage *page1 = EaglePage_AllocInt(pageSize);
+    EaglePage *page2 = EaglePage_AllocInt(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     for(int i = 0; i < pageSize; ++i) {
-        page1->data[i] = arc4random() % 2;
-        page2->data[i] = arc4random() % 2;
+        ((int*) page1->data)[i] = arc4random() % 2;
+        ((int*) page2->data)[i] = arc4random() % 2;
     }
     
     EaglePageOperations_AndPage(out, page1, page2, NULL);
@@ -87,7 +87,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_AndPage)
     // verify
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(page1->data[i] && page2->data[i] != out->data[i]) {
+        if(((int*) page1->data)[i] && ((int*) page2->data)[i] != ((int*) out->data)[i]) {
             valid = 0;
             break;
         }
@@ -123,13 +123,20 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     // destination provider
     // We are being a bit naughty here to use totalRecords instead of recordsPerPage so that we can guarantee all the
     // results will fall into the first page.
-    EaglePageProvider *result = EaglePageProvider_CreateFromIntStream(totalRecords, "answer");
+    EaglePageProvider *result = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, totalRecords, "answer");
     
     // plan
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt,         2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,            3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,                0, 2,  3, NULL,               EagleFalse, "3"));
-    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_SendIntPageToProvider, -1, 0,  1, result,             EagleFalse, "4"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_GreaterThanInt,      2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_LessThanInt,         3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,             0, 2,  3, NULL,               EagleFalse, "3"));
+    EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, 0,  1, result,             EagleFalse, "4"));
+    
+    // this will be enough buffers for the above operations
+    plan->buffersNeeded = 10;
+    plan->bufferTypes = (EagleDataType*) calloc(plan->buffersNeeded, sizeof(EagleDataType));
+    for(int i = 0; i < plan->buffersNeeded; ++i) {
+        plan->bufferTypes[i] = EagleDataTypeInteger;
+    }
     
     EagleInstance_addPlan(eagle, plan);
     
@@ -143,7 +150,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     int matches = 0;
     if(NULL != resultPage) {
         for(int i = 0; i < resultPage->count; ++i) {
-            int value = resultPage->data[i];
+            int value = ((int*) resultPage->data)[i];
             if(value > min && value < max) {
                 ++matches;
             }
@@ -213,8 +220,8 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntArray)
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
     EaglePage *page1 = EaglePageProvider_nextPage(provider);
     CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[1], testData[1]);
     CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
     EaglePage_Delete(page1);
     
@@ -225,15 +232,15 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntArray)
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 2);
     page1 = EaglePageProvider_nextPage(provider);
     CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[1], testData[1]);
     CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
     EaglePage_Delete(page1);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
     EaglePage *page2 = EaglePageProvider_nextPage(provider);
     CUNIT_VERIFY_EQUAL_INT(page2->count, 1);
-    CUNIT_VERIFY_EQUAL_INT(page2->data[0], testData[2]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page2->data)[0], testData[2]);
     CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, recordsPerPage);
     EaglePage_Delete(page2);
     
@@ -274,7 +281,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null)\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
     free(msg);
     
     EaglePlan_Delete(plan);
@@ -285,7 +292,7 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, "something");
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
     char *description = EaglePlanBufferProvider_toString(bp);
-    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something");
+    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something, type = INTEGER");
     free(description);
     EaglePlanBufferProvider_Delete(bp);
 }
@@ -339,11 +346,11 @@ CUNIT_TEST(MainSuite, EagleLinkedList_New)
 CUNIT_TEST(MainSuite, EaglePageOperations_CastIntPageToBoolean)
 {
     int pageSize = 1000;
-    EaglePage *page = EaglePage_Alloc(pageSize);
-    EaglePage *out = EaglePage_Alloc(pageSize);
+    EaglePage *page = EaglePage_AllocInt(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     for(int i = 0; i < pageSize; ++i) {
-        page->data[i] = arc4random() % 2;
+        ((int*) page->data)[i] = arc4random() % 2;
     }
     
     EaglePageOperations_CastIntPageToBoolean(out, page, NULL, NULL);
@@ -351,7 +358,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_CastIntPageToBoolean)
     // verify
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(out->data[i] != (page->data[i] != 0)) {
+        if(((int*) out->data)[i] != (((int*) page->data)[i] != 0)) {
             valid = 0;
             break;
         }
@@ -373,7 +380,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     testData[3] = 234;
     testData[4] = 567;
     
-    EaglePageProvider *provider = EaglePageProvider_CreateFromIntStream(recordsPerPage, NULL);
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, recordsPerPage, NULL);
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, 0);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
@@ -389,8 +396,8 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     EaglePage *page1 = EaglePageProvider_nextPage(provider);
     CUNIT_ASSERT_NOT_NULL(page1);
     CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[1], testData[1]);
     CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
     EaglePage_Delete(page1);
     
@@ -401,8 +408,8 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     page1 = EaglePageProvider_nextPage(provider);
     CUNIT_ASSERT_NOT_NULL(page1);
     CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[0], testData[0]);
-    CUNIT_VERIFY_EQUAL_INT(page1->data[1], testData[1]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[0], testData[0]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page1->data)[1], testData[1]);
     CUNIT_VERIFY_EQUAL_INT(page1->recordOffset, 0);
     EaglePage_Delete(page1);
     
@@ -410,8 +417,8 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     EaglePage *page2 = EaglePageProvider_nextPage(provider);
     CUNIT_ASSERT_NOT_NULL(page1);
     CUNIT_VERIFY_EQUAL_INT(page2->count, recordsPerPage);
-    CUNIT_VERIFY_EQUAL_INT(page2->data[0], testData[2]);
-    CUNIT_VERIFY_EQUAL_INT(page2->data[1], testData[3]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page2->data)[0], testData[2]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page2->data)[1], testData[3]);
     CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, 2);
     EaglePage_Delete(page2);
     
@@ -419,7 +426,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     EaglePage *page3 = EaglePageProvider_nextPage(provider);
     CUNIT_ASSERT_NOT_NULL(page3);
     CUNIT_VERIFY_EQUAL_INT(page3->count, 1);
-    CUNIT_VERIFY_EQUAL_INT(page3->data[0], testData[4]);
+    CUNIT_VERIFY_EQUAL_INT(((int*) page3->data)[0], testData[4]);
     CUNIT_VERIFY_EQUAL_INT(page3->recordOffset, 4);
     EaglePage_Delete(page3);
     

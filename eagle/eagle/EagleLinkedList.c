@@ -64,10 +64,10 @@ void EagleLinkedList_Delete(EagleLinkedList *list)
         next = p->next;
         EagleLinkedListItem_Delete(p);
     }
-    free(list);
     
     EagleSynchronizer_Unlock(list->modifyLock);
     EagleLock_Delete(list->modifyLock);
+    free(list);
 }
 
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item)

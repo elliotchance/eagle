@@ -11,18 +11,13 @@ typedef struct {
     EaglePlan *plan;
     
     /**
-     The total number of allocated buffers.
-     */
-    int allocatedBuffers;
-    
-    /**
      The buffers.
      */
     EaglePage **buffers;
     
 } EaglePlanJob;
 
-EaglePlanJob* EaglePlanJob_New(EaglePlan *plan, int allocatedBuffers);
+EaglePlanJob* EaglePlanJob_New(EaglePlan *plan);
 void EaglePlanJob_Delete(EaglePlanJob *job);
 
 #endif

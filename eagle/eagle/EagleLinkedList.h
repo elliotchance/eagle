@@ -32,14 +32,14 @@ typedef struct EagleLinkedListItem_ EagleLinkedListItem;
 typedef struct {
     
     /**
-     A pointer to the first item.
-     */
-    EagleLinkedListItem *first;
-    
-    /**
      A pointer to the last item.
      */
     EagleLinkedListItem *last;
+    
+    /**
+     A pointer to the first item.
+     */
+    EagleLinkedListItem *first;
     
     /**
      The amount of items in this linked list.
