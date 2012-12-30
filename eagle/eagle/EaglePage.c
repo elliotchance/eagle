@@ -7,6 +7,7 @@
  Create a new EaglePage.
  You will be required to provide a data block with the number of records in that data block.
  
+ @param type The data for this page.
  @param data The preallocated data block. This may be NULL, but the \p count must be 0.
  @param count The number of records in the data block.
  @param recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the

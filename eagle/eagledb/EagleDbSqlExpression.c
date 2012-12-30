@@ -24,6 +24,7 @@ const int EagleDbSqlExpression_ERROR = -1;
         set this to 1 so that you keep buffer 0 available. Note that this is not where there final result will be put,
         it is only the start ID of which buffers can be written to - the function will return an int which is the buffer
         ID with the real result. You may need to copy that buffer into buffer 0.
+ @param plan The plan the operations will be compiled into.
  @return The buffer ID that contains the real result.
  */
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
