@@ -18,7 +18,12 @@ struct EaglePage_ {
     int recordOffset;
     
     /**
-     The total amount of records in this page.
+     The allocated records for this page.
+     */
+    int totalSize;
+    
+    /**
+     The amount of used records in this page.
      */
     int count;
     
@@ -35,7 +40,7 @@ struct EaglePage_ {
 };
 typedef struct EaglePage_ EaglePage;
 
-EaglePage* EaglePage_New(EagleDataType type, void *data, int count, int recordOffset, EagleBoolean freeData);
+EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData);
 EaglePage* EaglePage_Alloc(EagleDataType type, int count);
 EaglePage* EaglePage_AllocInt(int count);
 EaglePage* EaglePage_AllocText(int count);
@@ -43,5 +48,7 @@ EaglePage* EaglePage_Copy(EaglePage *page);
 EaglePage* EaglePage_CopyInt_(EaglePage *page);
 EaglePage* EaglePage_CopyText_(EaglePage *page);
 void EaglePage_Delete(EaglePage *page);
+
+char* EaglePage_toString(EaglePage *page);
 
 #endif

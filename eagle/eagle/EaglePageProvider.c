@@ -99,7 +99,7 @@ EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp)
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
     EaglePage *page;
     
-    page = EaglePage_New(EagleDataTypeInteger, begin + epp->offsetRecords, pageSize, epp->offsetRecords, EagleFalse);
+    page = EaglePage_New(EagleDataTypeInteger, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
     epp->offsetRecords += pageSize;
     
     return page;
