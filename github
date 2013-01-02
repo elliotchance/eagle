@@ -25,6 +25,9 @@ if [ $CMD = "fix" ]; then
 	git push origin ":i$ISSUE"
 	git branch -d "i$ISSUE"
 	
+	# gh-pages
+	make gh-pages
+
 	# push master
 	git push
 	
