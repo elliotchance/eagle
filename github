@@ -32,6 +32,10 @@ if [ $CMD = "fix" ]; then
 	git push
 	
 elif [ $CMD = "open" ]; then
+	# auto install git hook for issue number in commit message
+	cp -f hooks/commit-msg .git/hooks/commit-msg
+	
+	# switch branches
 	git add .
 	git stash
 	git checkout master

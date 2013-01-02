@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ISSUE=`git branch | grep "* " | cut -c4-`
+echo -n "[#$ISSUE] `cat $1`" > $1
