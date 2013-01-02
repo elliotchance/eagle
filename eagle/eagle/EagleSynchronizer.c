@@ -22,7 +22,7 @@ EagleLock* EagleSynchronizer_CreateLock(void)
  Only one thread may hold a lock at any given time so other threads trying to get access to this lock will wait until it
  is unlocked.
  
- @param lock The lock initialized with EagleSynchronizer_CreateLock()
+ @param [in] lock The lock initialized with EagleSynchronizer_CreateLock()
  
  @see EagleSynchronizer_Unlock()
  */
@@ -36,7 +36,7 @@ void EagleSynchronizer_Lock(EagleLock *lock)
  
  Only one thread may hold a lock at any given time so the next thread waiting for this lock will be able to continue.
  
- @param lock The lock initialized with EagleSynchronizer_CreateLock()
+ @param [in] lock The lock initialized with EagleSynchronizer_CreateLock()
  
  @see EagleSynchronizer_Lock()
  */

@@ -61,6 +61,7 @@ doxygen:
 	# validate @param
 	if [ `grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]" | wc -l` -gt 0 ]; then \
 		grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]"; \
+		exit 1; \
 	fi
 
 	# generate docs

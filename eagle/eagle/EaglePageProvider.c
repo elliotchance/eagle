@@ -30,9 +30,9 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
 /**
  This creates a page provider that provides a single page filled with a fixed int.
  
- @param value The value to fill the pages with.
- @param recordsPerPage The number of records to return with each page.
- @param name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
+ @param [in] value The value to fill the pages with.
+ @param [in] recordsPerPage The number of records to return with each page.
+ @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
  */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {
