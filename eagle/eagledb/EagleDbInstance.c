@@ -37,7 +37,8 @@ EagleDbInstance* EagleDbInstance_New(void)
         EagleDbTuple_setText(tuple, 1, "hello");
         
         /* put record in */
-        EagleDbTableData_insert(db->td, tuple);
+        /*EagleDbTableData_insert(db->td, tuple);*/
+        EagleDbTuple_Delete(tuple);
     }
     
     return db;
@@ -187,6 +188,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     }
     else {
         switch(yystatementtype) {
+                
             case EagleDbSqlStatementTypeNone:
                 /* lets not consider this an error and ignore it */
                 break;
@@ -198,6 +200,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
             case EagleDbSqlStatementTypeCreateTable:
                 EagleDbInstance_executeCreateTable(db);
                 break;
+                
         }
     }
     
@@ -207,5 +210,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
 
 void EagleDbInstance_Delete(EagleDbInstance *db)
 {
+    EagleDbTable_Delete(db->td->table);
+    EagleDbTableData_Delete(db->td);
     free(db);
 }

@@ -10,8 +10,9 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
     EagleDbTableData *td = (EagleDbTableData*) malloc(sizeof(EagleDbTableData));
     
     td->table = table;
-    td->providers = (EaglePageProvider**) calloc((size_t) table->usedColumns, sizeof(EaglePageProvider*));
-    for(i = 0; i < table->usedColumns; ++i) {
+    td->usedProviders = table->usedColumns;
+    td->providers = (EaglePageProvider**) calloc((size_t) td->usedProviders, sizeof(EaglePageProvider*));
+    for(i = 0; i < td->usedProviders; ++i) {
         td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, 1000, table->columns[i]->name);
     }
     
@@ -21,7 +22,7 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 void EagleDbTableData_Delete(EagleDbTableData *td)
 {
     int i;
-    for(i = 0; i < td->table->usedColumns; ++i) {
+    for(i = 0; i < td->usedProviders; ++i) {
         EaglePageProvider_Delete(td->providers[i]);
     }
     free(td->providers);

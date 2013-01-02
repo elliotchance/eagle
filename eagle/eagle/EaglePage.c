@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "EaglePage.h"
 #include "EagleUtils.h"
 
@@ -9,17 +10,19 @@
  
  @param type The data for this page.
  @param data The preallocated data block. This may be NULL, but the \p count must be 0.
- @param count The number of records in the data block.
+ @param totalSize The number of records in the data block.
+ @param count The number of used records (must be less than \p totalSize)
  @param recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the
         record ID of a given record inside a page. If you are unsure as to what this value should be then you can use 0.
  @param freeData If EagleTrue the \p data will be freed with the page.
  */
-EaglePage* EaglePage_New(EagleDataType type, void *data, int count, int recordOffset, EagleBoolean freeData)
+EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData)
 {
     EaglePage *page = (EaglePage*) malloc(sizeof(EaglePage));
     
     page->type = type;
     page->data = data;
+    page->totalSize = totalSize;
     page->count = count;
     page->recordOffset = recordOffset;
     page->freeData = freeData;
@@ -39,13 +42,13 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int count, int recordOf
 EaglePage* EaglePage_AllocInt(int count)
 {
     void *data = (void*) calloc((size_t) count, sizeof(int));
-    return EaglePage_New(EagleDataTypeInteger, data, count, 0, EagleTrue);
+    return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
 }
 
 EaglePage* EaglePage_AllocText(int count)
 {
     void *data = (void*) calloc((size_t) count, sizeof(char*));
-    return EaglePage_New(EagleDataTypeText, data, count, 0, EagleTrue);
+    return EaglePage_New(EagleDataTypeText, data, count, 0, 0, EagleTrue);
 }
 
 void EaglePage_Delete(EaglePage *page)
@@ -54,9 +57,25 @@ void EaglePage_Delete(EaglePage *page)
         return;
     }
     if(EagleTrue == page->freeData) {
+        int i;
+        switch(page->type) {
+                
+            case EagleDataTypeUnknown:
+            case EagleDataTypeInteger:
+                /* do nothing here */
+                break;
+                
+            case EagleDataTypeText:
+                for(i = 0; i < page->count; ++i) {
+                    /*free(((char**) page->data)[i]);*/
+                }
+                break;
+            
+        }
         free((void*) page->data);
     }
     free((void*) page);
+    page = NULL;
 }
 
 EaglePage* EaglePage_Copy(EaglePage *page)
@@ -81,7 +100,7 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
     int *newData = (int*) malloc(memorySize);
     
     memmove(newData, page->data, memorySize);
-    return EaglePage_New(page->type, newData, page->count, page->recordOffset, page->freeData);
+    return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
 }
 
 EaglePage* EaglePage_CopyText_(EaglePage *page)
@@ -93,7 +112,7 @@ EaglePage* EaglePage_CopyText_(EaglePage *page)
         newData[i] = ((char**) page->data)[i];
     }
     
-    return EaglePage_New(page->type, newData, page->count, page->recordOffset, page->freeData);
+    return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
 }
 
 EaglePage* EaglePage_Alloc(EagleDataType type, int count)
@@ -110,4 +129,12 @@ EaglePage* EaglePage_Alloc(EagleDataType type, int count)
             return EaglePage_AllocText(count);
             
     }
+}
+
+char* EaglePage_toString(EaglePage *page)
+{
+    char* buf = (char*) malloc(8192);
+    sprintf(buf, "EaglePage { type = %s, size = %d, count = %d, offset = %d }", EagleDataType_typeToName(page->type),
+            page->totalSize, page->count, page->recordOffset);
+    return buf;
 }

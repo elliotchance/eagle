@@ -1,5 +1,5 @@
-OBJROOT = `xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-`
-GIT_BRANCH = `git branch | grep \* | cut -c3-`
+OBJROOT = $(shell xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-)
+GIT_BRANCH = $(shell git branch | grep \* | cut -c3-)
 
 all: clean build
 
@@ -52,10 +52,10 @@ coverage: test
 	- rm -rf coverage
 	mkdir -p coverage/$(GIT_BRANCH)
 	bin/geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
-	bin/genhtml --sort --branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	bin/genhtml --sort --no-branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
 	
 	# check percentage
-	perl -e 'open(DOC, "coverage/i24/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (90%).\n") if(($$m[10] + $$m[12]) < 180);'
+	perl -e 'open(DOC, "coverage/$(GIT_BRANCH)/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (75%).\n") if(($$m[10] + $$m[12]) < 150);'
 
 doxygen:
 	- rm -rf doc

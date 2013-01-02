@@ -10,6 +10,7 @@
 #include "EagleDbTable.h"
 #include "EagleDbTableData.h"
 #include "EagleDbTuple.h"
+#include "EagleDbConsole.h"
 
 extern void *yyparse_ast;
 extern int yyerrors_length;
@@ -43,10 +44,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     
     CUNIT_ASSERT_NOT_NULL(select);
-    CUNIT_ASSERT_EQUAL_INT(select->expressionType, EagleDbSqlExpressionTypeSelect);
-    
-    CUNIT_ASSERT_NULL(select->tableName);
-    CUNIT_ASSERT_NULL(select->whereExpression);
+    if(select != NULL) {
+        CUNIT_ASSERT_EQUAL_INT(select->expressionType, EagleDbSqlExpressionTypeSelect);
+        
+        CUNIT_ASSERT_NULL(select->tableName);
+        CUNIT_ASSERT_NULL(select->whereExpression);
+    }
     
     EagleDbSqlExpression_Delete((EagleDbSqlExpression*) select);
 }
@@ -58,11 +61,13 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
     
     EagleDbSqlBinaryExpression *binary = EagleDbSqlBinaryExpression_New(left, EagleDbSqlExpressionOperatorPlus, right);
     CUNIT_ASSERT_NOT_NULL(binary);
-    CUNIT_ASSERT_EQUAL_INT(binary->expressionType, EagleDbSqlExpressionTypeBinaryExpression);
-    
-    CUNIT_VERIFY_EQUAL_PTR(binary->left, left);
-    CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlExpressionOperatorPlus);
-    CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
+    if(NULL != binary) {
+        CUNIT_ASSERT_EQUAL_INT(binary->expressionType, EagleDbSqlExpressionTypeBinaryExpression);
+        
+        CUNIT_VERIFY_EQUAL_PTR(binary->left, left);
+        CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlExpressionOperatorPlus);
+        CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
+    }
     
     EagleDbSqlBinaryExpression_Delete(binary);
 }
@@ -72,10 +77,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
     EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(123);
     
     CUNIT_ASSERT_NOT_NULL(value);
-    CUNIT_ASSERT_EQUAL_INT(value->expressionType, EagleDbSqlExpressionTypeValue);
-    
-    CUNIT_ASSERT_EQUAL_INT(value->type, EagleDbSqlValueTypeInteger);
-    CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
+    if(NULL != value) {
+        CUNIT_ASSERT_EQUAL_INT(value->expressionType, EagleDbSqlExpressionTypeValue);
+        
+        CUNIT_ASSERT_EQUAL_INT(value->type, EagleDbSqlValueTypeInteger);
+        CUNIT_ASSERT_EQUAL_INT(value->value.intValue, 123);
+    }
     
     EagleDbSqlValue_Delete(value);
 }
@@ -329,10 +336,15 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE)
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
     CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
     CUNIT_ASSERT_NOT_NULL(select->whereExpression);
-    CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
+    if(NULL != select->whereExpression) {
+        CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
+    }
     
     EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
-    CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
+    CUNIT_ASSERT_NOT_NULL(value);
+    if(NULL != value) {
+        CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
+    }
     
     EagleDbSqlSelect_Delete(select);
     yylex_free();
@@ -351,14 +363,28 @@ CUNIT_TEST(DBSuite, _, CREATE_TABLE)
     CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
     CUNIT_ASSERT_NOT_NULL(table->columns);
     
-    CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
-    
-    CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
+    if(NULL != table->columns) {
+        CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
+        CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
+        
+        CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
+        CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
+    }
     
     EagleDbTable_Delete(table);
     yylex_free();
+}
+
+CUNIT_TEST(DBSuite, EagleDbConsole_New)
+{
+    EagleDbConsole *console = EagleDbConsole_New();
+    EagleDbConsole_Delete(console);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_New)
+{
+    EagleDbInstance *instance = EagleDbInstance_New();
+    EagleDbInstance_Delete(instance);
 }
 
 /**
@@ -383,18 +409,14 @@ CUnitTests* DBSuite_tests()
     
     // method tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
-    
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlan));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));
     
     // complex / execution tests
