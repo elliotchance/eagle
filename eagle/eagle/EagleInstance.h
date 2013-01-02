@@ -7,10 +7,13 @@
 #include "EaglePlanJob.h"
 #include "EagleSynchronizer.h"
 
+/**
+ An eagle instance (a database).
+ */
 struct EagleInstance_ {
-    EagleWorkers *workers;
-    EaglePlan *plan;
-    EagleLock *nextJobLock;
+    EagleWorkers *workers;  /**< The workers. */
+    EaglePlan *plan;        /**< The plan that needs to be executed. */
+    EagleLock *nextJobLock; /**< To syncronise the EagleInstance_nextJob() method. */
 };
 typedef struct EagleInstance_ EagleInstance;
 

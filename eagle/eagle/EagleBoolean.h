@@ -6,15 +6,8 @@
  */
 typedef enum {
     
-    /**
-     TRUE
-     */
-    EagleTrue = 1,
-    
-    /**
-     FALSE
-     */
-    EagleFalse = 0
+    EagleTrue  = 1, /**< TRUE */
+    EagleFalse = 0  /**< FALSE */
     
 } EagleBoolean;
 
