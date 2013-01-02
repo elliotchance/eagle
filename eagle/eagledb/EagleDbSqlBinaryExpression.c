@@ -5,9 +5,9 @@
 /**
  Create a new EagleDbSqlBinaryExpression.
  
- @param left Left operand.
- @param op Operator.
- @param right Right operand.
+ @param [in] left Left operand.
+ @param [in] op Operator.
+ @param [in] right Right operand.
  */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)
 {

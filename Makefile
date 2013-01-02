@@ -58,6 +58,13 @@ coverage: test
 	perl -e 'open(DOC, "coverage/$(GIT_BRANCH)/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (75%).\n") if(($$m[10] + $$m[12]) < 150);'
 
 doxygen:
+	# validate @param
+	if [ `grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]" | wc -l` -gt 0 ]; then \
+		grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]"; \
+		exit 1; \
+	fi
+
+	# generate docs
 	- rm -rf doc
 	mkdir -p doc
 	if [ `doxygen 2>&1 | grep Warning | wc -l` -gt 0 ]; then \

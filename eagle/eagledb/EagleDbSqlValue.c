@@ -6,7 +6,7 @@
 /**
  Create a new Value with an integer.
  
- @param value Integer value.
+ @param [in] value Integer value.
  */
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 {

@@ -8,13 +8,13 @@
  Create a new EaglePage.
  You will be required to provide a data block with the number of records in that data block.
  
- @param type The data for this page.
- @param data The preallocated data block. This may be NULL, but the \p count must be 0.
- @param totalSize The number of records in the data block.
- @param count The number of used records (must be less than \p totalSize)
- @param recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the
+ @param [in] type The data for this page.
+ @param [in] data The preallocated data block. This may be NULL, but the \p count must be 0.
+ @param [in] totalSize The number of records in the data block.
+ @param [in] count The number of used records (must be less than \p totalSize)
+ @param [in] recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the
         record ID of a given record inside a page. If you are unsure as to what this value should be then you can use 0.
- @param freeData If EagleTrue the \p data will be freed with the page.
+ @param [in] freeData If EagleTrue the \p data will be freed with the page.
  */
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData)
 {
@@ -37,7 +37,7 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
  @note The page allocated will not be filled with any data, make sure you sanitise the page if you intend to read from
        it.
  
- @param count The number of records of the page.
+ @param [in] count The number of records of the page.
  */
 EaglePage* EaglePage_AllocInt(int count)
 {
