@@ -9,7 +9,10 @@
  */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 {
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) malloc(sizeof(EagleDbSqlSelect));
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) EagleMemory_Allocate("EagleDbSqlSelect_New.1", sizeof(EagleDbSqlSelect));
+    if(NULL == select) {
+        return NULL;
+    }
     
     select->expressionType = EagleDbSqlExpressionTypeSelect;
     select->tableName = NULL;

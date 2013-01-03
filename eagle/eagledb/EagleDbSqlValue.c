@@ -11,7 +11,10 @@
  */
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithInteger.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeInteger;
@@ -22,7 +25,10 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithAsterisk.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeAsterisk;
@@ -32,7 +38,10 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithIdentifier.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeIdentifier;

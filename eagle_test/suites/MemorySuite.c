@@ -6,6 +6,7 @@
 #include "EagleDbColumn.h"
 #include "EagleDbConsole.h"
 #include "EagleDbInstance.h"
+#include "EagleDbSqlBinaryExpression.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -62,7 +63,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlBinaryExpression_New.1");
     
-    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New());
+    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL));
     
     EagleMemory_MockFinish();
 }
@@ -72,7 +73,47 @@ CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_toString)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlBinaryExpression_toString.1");
     
-    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_toString());
+    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_toString(NULL));
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlSelect_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlSelect_New.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlSelect_New(NULL));
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithInteger)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithInteger.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithInteger(123));
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithAsterisk)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithAsterisk.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithAsterisk());
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithIdentifier)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithIdentifier.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithIdentifier());
     
     EagleMemory_MockFinish();
 }
@@ -105,6 +146,10 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithInteger));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithAsterisk));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithIdentifier));
     
     return tests;
 }
