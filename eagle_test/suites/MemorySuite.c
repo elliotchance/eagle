@@ -7,6 +7,8 @@
 #include "EagleDbConsole.h"
 #include "EagleDbInstance.h"
 #include "EagleDbSqlBinaryExpression.h"
+#include "EagleDbSqlValue.h"
+#include "EagleDbSqlSelect.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -15,6 +17,7 @@ CUNIT_TEST(MemorySuite, EagleData_Int)
     
     CUNIT_ASSERT_NULL(EagleData_Int(123));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -25,6 +28,7 @@ CUNIT_TEST(MemorySuite, EagleDbColumn_New)
     
     CUNIT_ASSERT_NULL(EagleDbColumn_New("abc", EagleDataTypeInteger));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -35,6 +39,7 @@ CUNIT_TEST(MemorySuite, EagleDbConsole_New)
     
     CUNIT_ASSERT_NULL(EagleDbConsole_New());
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -45,6 +50,7 @@ CUNIT_TEST(MemorySuite, EagleDbConsole_GetLine)
     
     CUNIT_ASSERT_NULL(EagleDbConsole_GetLine());
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -55,6 +61,7 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_New)
     
     CUNIT_ASSERT_NULL(EagleDbInstance_New());
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -65,6 +72,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_New)
     
     CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -75,6 +83,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_toString)
     
     CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_toString(NULL));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -83,8 +92,9 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlSelect_New.1");
     
-    CUNIT_ASSERT_NULL(EagleDbSqlSelect_New(NULL));
+    CUNIT_ASSERT_NULL(EagleDbSqlSelect_New());
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -95,6 +105,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithInteger)
     
     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithInteger(123));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -105,6 +116,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithAsterisk)
     
     CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithAsterisk());
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
@@ -113,8 +125,9 @@ CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithIdentifier)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlValue_NewWithIdentifier.1");
     
-    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithIdentifier());
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithIdentifier("something"));
     
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 

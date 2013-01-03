@@ -8,5 +8,6 @@ void EagleMemory_MultiFree(void **ptr, int quantity);
 void EagleMemory_MockInit(void);
 void EagleMemory_Mock(char *id);
 void EagleMemory_MockFinish(void);
+int EagleMemory_GetMockInvocations(void);
 
 #endif
