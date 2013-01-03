@@ -12,7 +12,10 @@
  */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)
 {
-    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) malloc(sizeof(EagleDbSqlBinaryExpression));
+    EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate("EagleDbSqlBinaryExpression_New.1", sizeof(EagleDbSqlBinaryExpression));
+    if(NULL == expr) {
+        return NULL;
+    }
     
     expr->expressionType = EagleDbSqlExpressionTypeBinaryExpression;
     expr->left = left;
@@ -31,11 +34,14 @@ void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
 
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)
 {
-    char* s = (char*) malloc(1024);
+    char* s = (char*) EagleMemory_Allocate("EagleDbSqlBinaryExpression_toString.1", 1024), *left, *right, *op;
+    if(NULL == s) {
+        return NULL;
+    }
     
-    char *left = EagleDbSqlExpression_toString(expr->left);
-    char *right = EagleDbSqlExpression_toString(expr->right);
-    char *op = EagleDbSqlExpressionOperator_toString(expr->op);
+    left = EagleDbSqlExpression_toString(expr->left);
+    right = EagleDbSqlExpression_toString(expr->right);
+    op = EagleDbSqlExpressionOperator_toString(expr->op);
     sprintf(s, "%s %s %s", left, op, right);
     EagleMemory_Free(left);
     EagleMemory_Free(right);

@@ -5,6 +5,7 @@
 #include "EagleData.h"
 #include "EagleDbColumn.h"
 #include "EagleDbConsole.h"
+#include "EagleDbInstance.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -46,6 +47,36 @@ CUNIT_TEST(MemorySuite, EagleDbConsole_GetLine)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleDbInstance_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbInstance_New.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbInstance_New());
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlBinaryExpression_New.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New());
+    
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_toString)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlBinaryExpression_toString.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_toString());
+    
+    EagleMemory_MockFinish();
+}
+
 /**
  * The suite init function.
  */
@@ -71,6 +102,9 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_GetLine));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_toString));
     
     return tests;
 }

@@ -21,10 +21,14 @@ void yylex_free();
 EagleDbInstance* EagleDbInstance_New(void)
 {
     int i;
-    EagleDbInstance *db = (EagleDbInstance*) malloc(sizeof(EagleDbInstance));
+    EagleDbTable *table;
+    EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
+    if(NULL == db) {
+        return NULL;
+    }
     
     /* create a virtual table */
-    EagleDbTable *table = EagleDbTable_New("t");
+    table = EagleDbTable_New("t");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
     EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
     
