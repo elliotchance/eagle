@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "EaglePlan.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EaglePlan* EaglePlan_New(int pageSize)
 {
@@ -56,7 +57,7 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "    ");
         temp = EaglePlanBufferProvider_toString(plan->providers[i]);
         strcat_safe(str, temp);
-        free(temp);
+        EagleMemory_Free(temp);
         strcat_safe(str, "\n");
     }
     
@@ -68,7 +69,7 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "    ");
         strcat_safe(str, s);
         strcat_safe(str, "\n");
-        free(s);
+        EagleMemory_Free(s);
     }
     
     if(plan->buffersNeeded > 0) {
@@ -94,21 +95,21 @@ void EaglePlan_Delete(EaglePlan *plan)
     for(i = 0; i < plan->usedOperations; ++i) {
         EaglePlanOperation_Delete(plan->operations[i]);
     }
-    free(plan->operations);
+    EagleMemory_Free(plan->operations);
     
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider_Delete(plan->providers[i]);
     }
-    free(plan->providers);
+    EagleMemory_Free(plan->providers);
     
     for(i = 0; i < plan->resultFields; ++i) {
         EaglePageProvider_Delete(plan->result[i]);
     }
-    free(plan->result);
+    EagleMemory_Free(plan->result);
     
-    free(plan->errorMessage);
-    free(plan->bufferTypes);
-    free(plan);
+    EagleMemory_Free(plan->errorMessage);
+    EagleMemory_Free(plan->bufferTypes);
+    EagleMemory_Free(plan);
     plan = NULL;
 }
 

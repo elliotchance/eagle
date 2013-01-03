@@ -9,6 +9,7 @@
 #include "EaglePageOperations.h"
 #include "EagleDbSqlSelect.h"
 #include "EagleDbSqlExpressionOperator.h"
+#include "EagleMemory.h"
 
 /**
  Return value when the expression can not be compiled.
@@ -78,15 +79,15 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             
             sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2, destination, t3);
             
-            free(t1);
-            free(t2);
-            free(t3);
-            free(op);
+            EagleMemory_Free(t1);
+            EagleMemory_Free(t2);
+            EagleMemory_Free(t3);
+            EagleMemory_Free(op);
             
             plan->bufferTypes[destination] = EagleDataTypeInteger;
             epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
                                          EagleFalse, msg);
-            free(msg);
+            EagleMemory_Free(msg);
             EaglePlan_addOperation(plan, epo);
             ++*destinationBuffer;
             
@@ -170,7 +171,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
         results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &destinationBuffer, plan);
         
         if(EagleTrue == EaglePlan_isError(plan)) {
-            free(results);
+            EagleMemory_Free(results);
             return;
         }
         
@@ -180,7 +181,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
          */
         desc = EagleDbSqlExpression_toString(expressions[i]);
         plan->result[i] = EaglePageProvider_CreateFromStream(plan->bufferTypes[results[i]], plan->pageSize, desc);
-        free(desc);
+        EagleMemory_Free(desc);
     }
     
     /* if there is a WHERE clause expression only send those records */
@@ -201,9 +202,9 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
                 epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, results[whereClause], results[i], plan->result[i], EagleFalse, msg);
                 EaglePlan_addOperation(plan, epo);
                 
-                free(t1);
-                free(t2);
-                free(t3);
+                EagleMemory_Free(t1);
+                EagleMemory_Free(t2);
+                EagleMemory_Free(t3);
             }
             else {
                 char *t1, *t2;
@@ -216,13 +217,13 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
                 epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, -1, results[i], plan->result[i], EagleFalse, msg);
                 EaglePlan_addOperation(plan, epo);
                 
-                free(t1);
-                free(t2);
+                EagleMemory_Free(t1);
+                EagleMemory_Free(t2);
             }
         }
     }
     
-    free(results);
+    EagleMemory_Free(results);
 }
 
 void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)

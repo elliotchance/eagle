@@ -4,6 +4,7 @@
 #include "EaglePlanJob.h"
 #include "EagleInstance.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
@@ -90,5 +91,5 @@ void EagleWorker_join(EagleWorker *worker)
  */
 void EagleWorker_Delete(EagleWorker *worker)
 {
-    free(worker);
+    EagleMemory_Free(worker);
 }

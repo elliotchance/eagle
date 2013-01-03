@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "EagleDbSqlSelect.h"
+#include "EagleMemory.h"
 
 /**
  Create a new EagleDbSqlSelect.
@@ -28,15 +29,15 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
         return;
     }
     
-    free(select->tableName);
+    EagleMemory_Free(select->tableName);
     EagleDbSqlExpression_Delete(select->whereExpression);
     
     for(i = 0; i < select->usedSelectExpressions; ++i) {
         EagleDbSqlExpression_Delete(select->selectExpressions[i]);
     }
-    free(select->selectExpressions);
+    EagleMemory_Free(select->selectExpressions);
     
-    free(select);
+    EagleMemory_Free(select);
 }
 
 /**
@@ -76,7 +77,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     for(i = 0; i < plan->resultFields; ++i) {
         char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
         plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, desc);
-        free(desc);
+        EagleMemory_Free(desc);
     }
     
     /* get data */

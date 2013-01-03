@@ -4,6 +4,7 @@
 
 #include "EagleDbConsole.h"
 #include "EagleDbInstance.h"
+#include "EagleMemory.h"
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
@@ -38,7 +39,7 @@ char* EagleDbConsole_GetLine(void)
             linen = realloc(linep, lenmax *= 2);
             
             if(linen == NULL) {
-                free(linep);
+                EagleMemory_Free(linep);
                 return NULL;
             }
             line = linen + (line - linep);
@@ -70,17 +71,17 @@ void EagleDbConsole_run(EagleDbConsole *console)
         /* check for quit */
         if(NULL != cmd && strcmp(cmd, "\\q") == 0) {
             printf("Bye.\n");
-            free(cmd);
+            EagleMemory_Free(cmd);
             break;
         }
         
         /* parse */
         EagleDbInstance_execute(db, cmd);
-        free(cmd);
+        EagleMemory_Free(cmd);
     }
 }
 
 void EagleDbConsole_Delete(EagleDbConsole *console)
 {
-    free(console);
+    EagleMemory_Free(console);
 }

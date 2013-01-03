@@ -3,6 +3,7 @@
 #include <string.h>
 #include "EagleDbTableData.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 {
@@ -25,8 +26,8 @@ void EagleDbTableData_Delete(EagleDbTableData *td)
     for(i = 0; i < td->usedProviders; ++i) {
         EaglePageProvider_Delete(td->providers[i]);
     }
-    free(td->providers);
-    free(td);
+    EagleMemory_Free(td->providers);
+    EagleMemory_Free(td);
 }
 
 void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)

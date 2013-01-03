@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "EagleWorkers.h"
+#include "EagleMemory.h"
 
 EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance)
 {
@@ -39,7 +40,7 @@ void EagleWorkers_Delete(EagleWorkers *workers)
     for(i = 0; i < workers->totalWorkers; ++i) {
         EagleWorker_Delete(workers->workers[i]);
     }
-    free((void*) workers->workers);
+    EagleMemory_Free((void*) workers->workers);
     
-    free((void*) workers);
+    EagleMemory_Free((void*) workers);
 }

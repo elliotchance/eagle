@@ -3,6 +3,7 @@
 #include <signal.h>
 #include "EagleInstance.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 /**
  Create a new eagle instance. The instance is effectivly a database, with a certain amount of workers (threads) that
@@ -99,5 +100,5 @@ void EagleInstance_Delete(EagleInstance *eagle)
     EagleWorkers_Delete(eagle->workers);
     EagleLock_Delete(eagle->nextJobLock);
     EaglePlan_Delete(eagle->plan);
-    free(eagle);
+    EagleMemory_Free(eagle);
 }

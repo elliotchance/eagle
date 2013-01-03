@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "EaglePlanJob.h"
+#include "EagleMemory.h"
 
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan)
 {
@@ -28,8 +29,7 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
     for(i = 0; i < job->plan->buffersNeeded; ++i) {
         EaglePage_Delete(job->buffers[i]);
     }
-    free((void*) job->buffers);
+    EagleMemory_Free((void*) job->buffers);
     
-    free((void*) job);
-    job = NULL;
+    EagleMemory_Free((void*) job);
 }

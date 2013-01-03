@@ -14,6 +14,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EagleDbInstance.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 extern void *yyparse_ast;
 void yylex_free();
@@ -213,7 +214,7 @@ void SQLSuiteTest()
     }
     
     // clean up
-    free(expr);
+    EagleMemory_Free(expr);
     
     EagleDbSqlSelect_Delete(yyparse_ast);
     yylex_free();
@@ -246,14 +247,14 @@ void controlTest(FILE *file, int *lineNumber)
         int count;
         char **parts = split(data[j], &count, ":");
         EagleDbTable_addColumn(table, EagleDbColumn_New(parts[0], EagleDataType_nameToType(parts[1])));
-        free(data[j]);
+        EagleMemory_Free(data[j]);
         
         for(int k = 0; k < count; ++k) {
-            free(parts[k]);
+            EagleMemory_Free(parts[k]);
         }
-        free(parts);
+        EagleMemory_Free(parts);
     }
-    free(data);
+    EagleMemory_Free(data);
     
     // get the answers
     while(fgets(line, sizeof(line), file) != NULL) {
@@ -281,9 +282,9 @@ void controlTest(FILE *file, int *lineNumber)
                     break;
                     
             }
-            free(data[j]);
+            EagleMemory_Free(data[j]);
         }
-        free(data);
+        EagleMemory_Free(data);
         ++test.usedAnswers;
     }
     
@@ -338,9 +339,9 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         EagleDbTable_addColumn(table, column);
         
         for(int j = 0; j < partsCount; ++j) {
-            free(parts[j]);
+            EagleMemory_Free(parts[j]);
         }
-        free(parts);
+        EagleMemory_Free(parts);
     }
     EagleDbTableData *td = EagleDbTableData_New(table);
     tables[usedTables] = td;
@@ -389,17 +390,17 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         
         // clean
         for(int i = 0; i < count; ++i) {
-            free(data[i]);
+            EagleMemory_Free(data[i]);
         }
-        free(data);
+        EagleMemory_Free(data);
     }
     
     // clean
     for(int i = 0; i < columnCount; ++i) {
-        free(columnNames[i]);
+        EagleMemory_Free(columnNames[i]);
     }
-    free(columnNames);
-    free(tableName);
+    EagleMemory_Free(columnNames);
+    EagleMemory_Free(tableName);
 }
 
 CUnitTests* SQLSuite_tests()

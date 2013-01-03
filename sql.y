@@ -10,6 +10,7 @@
     #include "EagleDbTable.h"
     #include "EagleDbColumn.h"
     #include "EagleDbInstance.h"
+    #include "EagleMemory.h"
 
     int yyerror(char *s);
     int yylex();
@@ -360,21 +361,21 @@ void yylex_free()
     /* yyobj */
     if(yyerrors_length > 0) {
         for(i = 0; i < yyobj_length; ++i) {
-            free(yyobj[i]);
+            EagleMemory_Free(yyobj[i]);
         }
     }
-    free(yyobj);
+    EagleMemory_Free(yyobj);
     yyobj = NULL;
     
     /* yyreturn */
-    free(yyreturn);
+    EagleMemory_Free(yyreturn);
     yyreturn = NULL;
     
     /* yyerrors */
     for(i = 0; i < yyerrors_length; ++i) {
-        free(yyerrors[i]);
+        EagleMemory_Free(yyerrors[i]);
     }
-    free(yyerrors);
+    EagleMemory_Free(yyerrors);
     yyerrors = NULL;
     
     yylex_destroy();

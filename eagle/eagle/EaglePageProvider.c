@@ -6,6 +6,7 @@
 #include "EaglePageOperations.h"
 #include "EagleUtils.h"
 #include "EagleLinkedList.h"
+#include "EagleMemory.h"
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)
 {
@@ -117,16 +118,16 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    free(epp->records);
-    free(epp);
+    EagleMemory_Free(epp->records);
+    EagleMemory_Free(epp);
 }
 
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
     EagleLinkedList_Delete((EagleLinkedList*) epp->records);
-    free(epp->name);
-    free(epp);
+    EagleMemory_Free(epp->name);
+    EagleMemory_Free(epp);
 }
 
 EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data)

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "EaglePage.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 /**
  Create a new EaglePage.
@@ -72,10 +73,9 @@ void EaglePage_Delete(EaglePage *page)
                 break;
             
         }
-        free((void*) page->data);
+        EagleMemory_Free((void*) page->data);
     }
-    free((void*) page);
-    page = NULL;
+    EagleMemory_Free((void*) page);
 }
 
 EaglePage* EaglePage_Copy(EaglePage *page)

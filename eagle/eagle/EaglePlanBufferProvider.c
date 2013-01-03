@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "EaglePlanBufferProvider.h"
+#include "EagleMemory.h"
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider, EagleBoolean freeProvider)
 {
@@ -26,5 +27,5 @@ void EaglePlanBufferProvider_Delete(EaglePlanBufferProvider *bp)
     if(EagleTrue == bp->freeProvider) {
         EaglePageProvider_Delete(bp->provider);
     }
-    free(bp);
+    EagleMemory_Free(bp);
 }

@@ -8,6 +8,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EaglePageProvider.h"
 #include "EagleInstance.h"
+#include "EagleMemory.h"
 
 extern void *yyparse_ast;
 extern int yyparse();
@@ -135,8 +136,8 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     }
     
     printf("\n%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
-    free(pages);
-    free(widths);
+    EagleMemory_Free(pages);
+    EagleMemory_Free(widths);
 }
 
 void EagleDbInstance_executeSelect(EagleDbInstance *db)
@@ -212,5 +213,5 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
 {
     EagleDbTable_Delete(db->td->table);
     EagleDbTableData_Delete(db->td);
-    free(db);
+    EagleMemory_Free(db);
 }

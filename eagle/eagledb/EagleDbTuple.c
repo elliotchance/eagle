@@ -4,6 +4,7 @@
 #include "EagleDbTuple.h"
 #include "EagleData.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
@@ -20,11 +21,11 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
     int i;
     
     for(i = 0; i < tuple->table->usedColumns; ++i) {
-        free(tuple->data[i]);
+        EagleMemory_Free(tuple->data[i]);
     }
-    free(tuple->data);
+    EagleMemory_Free(tuple->data);
     
-    free(tuple);
+    EagleMemory_Free(tuple);
 }
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "EagleDbColumn.h"
+#include "EagleMemory.h"
 
 EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type)
 {
@@ -14,6 +15,6 @@ EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type)
 
 void EagleDbColumn_Delete(EagleDbColumn *column)
 {
-    free(column->name);
-    free(column);
+    EagleMemory_Free(column->name);
+    EagleMemory_Free(column);
 }

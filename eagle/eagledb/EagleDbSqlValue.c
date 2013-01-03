@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "EagleDbSqlValue.h"
+#include "EagleMemory.h"
 
 /**
  Create a new Value with an integer.
@@ -43,9 +44,9 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
     if(EagleDbSqlValueTypeIdentifier == value->type) {
-        free(value->value.identifier);
+        EagleMemory_Free(value->value.identifier);
     }
-    free((void*) value);
+    EagleMemory_Free((void*) value);
 }
 
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
