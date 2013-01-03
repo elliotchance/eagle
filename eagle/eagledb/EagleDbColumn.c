@@ -5,7 +5,10 @@
 
 EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type)
 {
-    EagleDbColumn *column = (EagleDbColumn*) malloc(sizeof(EagleDbColumn));
+    EagleDbColumn *column = (EagleDbColumn*) EagleMemory_Allocate("EagleDbColumn_New.1", sizeof(EagleDbColumn));
+    if(NULL == column) {
+        return NULL;
+    }
     
     column->name = (NULL == name ? NULL : strdup(name));
     column->type = type;

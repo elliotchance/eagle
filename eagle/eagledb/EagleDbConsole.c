@@ -8,7 +8,10 @@
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
-    EagleDbConsole *console = (EagleDbConsole*) malloc(sizeof(EagleDbConsole));
+    EagleDbConsole *console = (EagleDbConsole*) EagleMemory_Allocate("EagleDbConsole_New.1", sizeof(EagleDbConsole));
+    if(NULL == console) {
+        return NULL;
+    }
     
     console->startTime = mach_absolute_time();
     
@@ -20,7 +23,7 @@ EagleDbConsole* EagleDbConsole_New(void)
  */
 char* EagleDbConsole_GetLine(void)
 {
-    char *line = malloc(100), *linep = line, *linen = NULL;
+    char *line = EagleMemory_Allocate("EagleDbConsole_GetLine.1", 100), *linep = line, *linen = NULL;
     size_t lenmax = 100, len = lenmax;
     int c;
     

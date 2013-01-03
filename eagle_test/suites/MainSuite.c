@@ -257,6 +257,7 @@ CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
     char *msg = (char*) EaglePlanOperation_toString(op);
     CUNIT_ASSERT_EQUAL_STRING(msg, "some description");
     EaglePlanOperation_Delete(op);
+    EagleMemory_Free(msg);
 }
 
 CUNIT_TEST(MainSuite, EaglePlan_Delete)
