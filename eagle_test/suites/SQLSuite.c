@@ -168,36 +168,39 @@ void SQLSuiteTest()
         int valid = 1;
         for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
             EaglePage *page = EaglePageProvider_nextPage(plan->result[j]);
-            CUNIT_ASSERT_NOT_NULL(page);
-            CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
-            CUNIT_ASSERT_EQUAL_INT(page->type, plan->result[j]->type);
             
-            for(int i = 0; i < test.usedAnswers; ++i) {
-                switch(page->type) {
-                        
-                    case EagleDataTypeUnknown:
-                        CUNIT_FAIL("%s", "UNKNOWN type");
-                        valid = 0;
-                        break;
-                        
-                    case EagleDataTypeInteger:
-                        if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
-                            CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
-                            valid = 0;
-                        }
-                        break;
-                        
-                    case EagleDataTypeText:
-                        if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
-                            CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
-                            valid = 0;
-                        }
-                        break;
-                        
-                }
+            CUNIT_ASSERT_NOT_NULL(page);
+            if(NULL != page) {
+                CUNIT_ASSERT_EQUAL_INT(page->count, test.usedAnswers);
+                CUNIT_ASSERT_EQUAL_INT(page->type, plan->result[j]->type);
                 
-                if(valid == 0) {
-                    break;
+                for(int i = 0; i < test.usedAnswers; ++i) {
+                    switch(page->type) {
+                            
+                        case EagleDataTypeUnknown:
+                            CUNIT_FAIL("%s", "UNKNOWN type");
+                            valid = 0;
+                            break;
+                            
+                        case EagleDataTypeInteger:
+                            if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
+                                CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
+                                valid = 0;
+                            }
+                            break;
+                            
+                        case EagleDataTypeText:
+                            if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
+                                CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
+                                valid = 0;
+                            }
+                            break;
+                            
+                    }
+                    
+                    if(valid == 0) {
+                        break;
+                    }
                 }
             }
             

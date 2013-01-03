@@ -445,6 +445,16 @@ CUNIT_TEST(MainSuite, EaglePlan_getBufferProviderByName)
     EaglePlan_Delete(plan);
 }
 
+CUNIT_TEST(MainSuite, EagleDataType_nameToType)
+{
+    CUNIT_VERIFY_EQUAL_INT(EagleDataType_nameToType("bla"), EagleDataTypeUnknown);
+}
+
+CUNIT_TEST(MainSuite, EagleInstance_Delete)
+{
+    EagleInstance_Delete(NULL);
+}
+
 /**
  * The suite init function.
  */
@@ -466,27 +476,23 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_GreaterThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_LessThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_AndPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_CastIntPageToBoolean));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_TotalPages));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntStream));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_add));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getBufferProviderByName));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
-    
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
     
     // complex / execution tests

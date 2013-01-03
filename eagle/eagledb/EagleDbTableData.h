@@ -20,6 +20,11 @@ typedef struct {
      */
     EaglePageProvider **providers;
     
+    /**
+     The number of used \c providers
+     */
+    int usedProviders;
+    
 } EagleDbTableData;
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table);

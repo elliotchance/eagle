@@ -1,5 +1,5 @@
-OBJROOT = `xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-`
-GIT_BRANCH = `git branch | grep \* | cut -c3-`
+OBJROOT = $(shell xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-)
+GIT_BRANCH = $(shell git branch | grep \* | cut -c3-)
 
 all: clean build
 
@@ -20,9 +20,14 @@ build_analyze:
 	rm -rf build/eagle.build/Release/eagle.build/StaticAnalyzer
 	mkdir analyze
 	xcodebuild -project eagle.xcodeproj -configuration Release RUN_CLANG_STATIC_ANALYZER=YES CLANG_ANALYZER_OUTPUT=html -target eagle build
-	if [ `find build/eagle.build/Release/eagle.build/StaticAnalyzer -name *.html | wc -l` -gt 0 ]; \
-		then cp `ls -1 build/eagle.build/Release/eagle.build/StaticAnalyzer/normal/x86_64/*.plist/*.html` analyze; fi
-	if [ `ls -1 analyze | wc -l` -gt 0 ]; then echo "There are analyzer errors!"; find `pwd`/analyze -name *.html; exit 1; fi
+	if [ `find build/eagle.build/Release/eagle.build/StaticAnalyzer -name *.html | wc -l` -gt 0 ]; then \
+		cp `ls -1 build/eagle.build/Release/eagle.build/StaticAnalyzer/normal/x86_64/*.plist/*.html` analyze; \
+	fi
+	if [ `ls -1 analyze | wc -l` -gt 0 ]; then \
+		echo "There are analyzer errors!"; \
+		find `pwd`/analyze -name *.html; \
+		exit 1; \
+	fi
 
 build_eagle:
 	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
@@ -46,13 +51,26 @@ test: clean_eagle_test build_eagle_test
 coverage: test
 	- rm -rf coverage
 	mkdir -p coverage/$(GIT_BRANCH)
-	geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
-	genhtml -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	bin/geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
+	bin/genhtml --sort --no-branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
+	
+	# check percentage
+	perl -e 'open(DOC, "coverage/$(GIT_BRANCH)/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (75%).\n") if(($$m[10] + $$m[12]) < 150);'
 
 doxygen:
+	# validate @param
+	if [ `grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]" | wc -l` -gt 0 ]; then \
+		grep -nr "@param" eagle | grep -v "@param \[in\]" | grep -v "@param \[out\]" | grep -v "@param \[in,out\]"; \
+		exit 1; \
+	fi
+
+	# generate docs
 	- rm -rf doc
 	mkdir -p doc
-	doxygen
+	if [ `doxygen 2>&1 | grep Warning | wc -l` -gt 0 ]; then \
+		doxygen; \
+		exit 1; \
+	fi
 	mv doc/html doc/$(GIT_BRANCH)
 
 master-only:

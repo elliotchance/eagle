@@ -6,20 +6,9 @@
  */
 typedef enum {
     
-    /**
-     Unknown/invalid data type.
-     */
-    EagleDataTypeUnknown = 0,
-    
-    /**
-     32bit integer.
-     */
-    EagleDataTypeInteger = 1,
-    
-    /**
-     String.
-     */
-    EagleDataTypeText = 2
+    EagleDataTypeUnknown = 0, /**< Unknown/invalid data type. */
+    EagleDataTypeInteger = 1, /**< \c INT or \c INTEGER: 32bit integer. */
+    EagleDataTypeText    = 2  /**< \c TEXT: A NULL terminated string. */
     
 } EagleDataType;
 
