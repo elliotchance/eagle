@@ -19,7 +19,10 @@
  */
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData)
 {
-    EaglePage *page = (EaglePage*) malloc(sizeof(EaglePage));
+    EaglePage *page = (EaglePage*) EagleMemory_Allocate("EaglePage_New.1", sizeof(EaglePage));
+    if(NULL == page) {
+        return NULL;
+    }
     
     page->type = type;
     page->data = data;
@@ -96,8 +99,18 @@ EaglePage* EaglePage_Copy(EaglePage *page)
 
 EaglePage* EaglePage_CopyInt_(EaglePage *page)
 {
-    size_t memorySize = (size_t) page->count * sizeof(int);
-    int *newData = (int*) malloc(memorySize);
+    size_t memorySize;
+    int *newData;
+    
+    if(NULL == page) {
+        return NULL;
+    }
+    
+    memorySize = (size_t) page->count * sizeof(int);
+    newData = (int*) EagleMemory_Allocate("EaglePage_CopyInt_.1", memorySize);
+    if(NULL == newData) {
+        return NULL;
+    }
     
     memmove(newData, page->data, memorySize);
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
@@ -133,7 +146,10 @@ EaglePage* EaglePage_Alloc(EagleDataType type, int count)
 
 char* EaglePage_toString(EaglePage *page)
 {
-    char* buf = (char*) malloc(8192);
+    char* buf = (char*) EagleMemory_Allocate("EaglePage_toString.1", 8192);
+    if(NULL == buf) {
+        return NULL;
+    }
     sprintf(buf, "EaglePage { type = %s, size = %d, count = %d, offset = %d }", EagleDataType_typeToName(page->type),
             page->totalSize, page->count, page->recordOffset);
     return buf;

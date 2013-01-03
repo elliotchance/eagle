@@ -5,7 +5,10 @@
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan)
 {
     int i;
-    EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));
+    EaglePlanJob *job = (EaglePlanJob*) EagleMemory_Allocate("EaglePlanJob_New.1", sizeof(EaglePlanJob));
+    if(NULL == job) {
+        return NULL;
+    }
     
     job->plan = plan;
     

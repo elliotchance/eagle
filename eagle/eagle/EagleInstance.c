@@ -13,7 +13,10 @@
  */
 EagleInstance* EagleInstance_New(int totalWorkers)
 {
-    EagleInstance *instance = (EagleInstance*) malloc(sizeof(EagleInstance));
+    EagleInstance *instance = (EagleInstance*) EagleMemory_Allocate("EagleInstance_New.1", sizeof(EagleInstance));
+    if(NULL == instance) {
+        return NULL;
+    }
     
     instance->workers = EagleWorkers_New(totalWorkers, instance);
     instance->nextJobLock = EagleSynchronizer_CreateLock();

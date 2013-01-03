@@ -5,7 +5,10 @@
 
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj))
 {
-    EagleLinkedListItem *item = (EagleLinkedListItem*) malloc(sizeof(EagleLinkedListItem));
+    EagleLinkedListItem *item = (EagleLinkedListItem*) EagleMemory_Allocate("EagleLinkedListItem_New.1", sizeof(EagleLinkedListItem));
+    if(NULL == item) {
+        return NULL;
+    }
     
     item->obj = obj;
     item->freeObj = freeObj;
@@ -17,7 +20,10 @@ EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, vo
 
 EagleLinkedList* EagleLinkedList_New(void)
 {
-    EagleLinkedList *list = (EagleLinkedList*) malloc(sizeof(EagleLinkedList));
+    EagleLinkedList *list = (EagleLinkedList*) EagleMemory_Allocate("EagleLinkedList_New.1", sizeof(EagleLinkedList));
+    if(NULL == list) {
+        return NULL;
+    }
     
     list->first = NULL;
     list->last = NULL;

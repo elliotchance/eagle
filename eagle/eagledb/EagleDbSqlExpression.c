@@ -30,6 +30,13 @@ const int EagleDbSqlExpression_ERROR = -1;
  */
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
 {
+    if(NULL == expression) {
+        return EagleDbSqlExpression_ERROR;
+    }
+    if(NULL == plan) {
+        return EagleDbSqlExpression_ERROR;
+    }
+    
     switch(expression->expressionType) {
             
         case EagleDbSqlExpressionTypeBinaryExpression:
@@ -53,7 +60,10 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             }
             
             /* operator */
-            msg = (char*) malloc(1024);
+            msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.1", 1024);
+            if(NULL == msg) {
+                return EagleDbSqlExpression_ERROR;
+            }
             destination = *destinationBuffer;
             
             switch(cast->op) {

@@ -6,7 +6,10 @@
 
 EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function), int destination, int source1, int source2, void *obj, EagleBoolean freeObj, const char *description)
 {
-    EaglePlanOperation *epo = (EaglePlanOperation*) malloc(sizeof(EaglePlanOperation));
+    EaglePlanOperation *epo = (EaglePlanOperation*) EagleMemory_Allocate("EaglePlanOperation_New.1", sizeof(EaglePlanOperation));
+    if(NULL == epo) {
+        return NULL;
+    }
     
     epo->function = function;
     epo->destination = destination;

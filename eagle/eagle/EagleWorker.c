@@ -8,9 +8,14 @@
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
-    EagleWorker *worker = (EagleWorker*) malloc(sizeof(EagleWorker));
+    EagleWorker *worker = (EagleWorker*) EagleMemory_Allocate("EagleWorker_New.1", sizeof(EagleWorker));
+    if(NULL == worker) {
+        return NULL;
+    }
+    
     worker->workerId = workerId;
     worker->instance = instance;
+    
     return worker;
 }
 

@@ -8,7 +8,10 @@
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
-    EagleDbTuple *tuple = (EagleDbTuple*) malloc(sizeof(EagleDbTuple));
+    EagleDbTuple *tuple = (EagleDbTuple*) EagleMemory_Allocate("EagleDbTuple_New.1", sizeof(EagleDbTuple));
+    if(NULL == tuple) {
+        return NULL;
+    }
     
     tuple->table = table;
     tuple->data = (void**) calloc((size_t) table->usedColumns, sizeof(void*));
@@ -47,8 +50,12 @@ void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
 
 char* EagleDbTuple_toString(EagleDbTuple *tuple)
 {
-    char *desc = (char*) malloc(1024);
+    char *desc = (char*) EagleMemory_Allocate("EagleDbTuple_toString.1", 1024);
     int i;
+    
+    if(NULL == desc) {
+        return NULL;
+    }
     
     desc[0] = 0;
     strcat_safe(desc, "(");

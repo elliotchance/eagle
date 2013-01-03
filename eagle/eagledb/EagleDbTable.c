@@ -5,7 +5,10 @@
 
 EagleDbTable* EagleDbTable_New(char *name)
 {
-    EagleDbTable *table = (EagleDbTable*) malloc(sizeof(EagleDbTable));
+    EagleDbTable *table = (EagleDbTable*) EagleMemory_Allocate("EagleDbTable_New.1", sizeof(EagleDbTable));
+    if(NULL == table) {
+        return NULL;
+    }
     
     table->name = (NULL == name ? NULL : strdup(name));
     table->allocatedColumns = 16;

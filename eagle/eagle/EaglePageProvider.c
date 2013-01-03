@@ -10,7 +10,10 @@
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)
 {
-    EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
+    EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate("EaglePageProvider_CreateFromIntArray.1", sizeof(EaglePageProvider));
+    if(NULL == pageProvider) {
+        return NULL;
+    }
     
     pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->offsetRecords = 0;
@@ -174,7 +177,10 @@ EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)
 
 EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name)
 {
-    EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
+    EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate("EaglePageProvider_CreateFromStream.1", sizeof(EaglePageProvider));
+    if(NULL == pageProvider) {
+        return NULL;
+    }
     
     pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->offsetRecords = 0;

@@ -4,8 +4,12 @@
 
 EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance)
 {
-    EagleWorkers *workers = (EagleWorkers*) malloc(sizeof(EagleWorkers));
+    EagleWorkers *workers = (EagleWorkers*) EagleMemory_Allocate("EagleWorkers_New.1", sizeof(EagleWorkers));
     int i;
+    
+    if(NULL == workers) {
+        return NULL;
+    }
     
     workers->workers = (EagleWorker**) calloc((size_t) totalWorkers, sizeof(EagleWorker*));
     for(i = 0; i < totalWorkers; ++i) {

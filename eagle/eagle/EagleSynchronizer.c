@@ -12,7 +12,10 @@
  */
 EagleLock* EagleSynchronizer_CreateLock(void)
 {
-    EagleLock *lock = (EagleLock*) malloc(sizeof(EagleLock));
+    EagleLock *lock = (EagleLock*) EagleMemory_Allocate("EagleSynchronizer_CreateLock.1", sizeof(EagleLock));
+    if(NULL == lock) {
+        return NULL;
+    }
     pthread_mutex_init(&lock->mutex, NULL);
     return lock;
 }

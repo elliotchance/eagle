@@ -5,7 +5,10 @@
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider, EagleBoolean freeProvider)
 {
-    EaglePlanBufferProvider *bp = (EaglePlanBufferProvider*) malloc(sizeof(EaglePlanBufferProvider));
+    EaglePlanBufferProvider *bp = (EaglePlanBufferProvider*) EagleMemory_Allocate("EaglePlanBufferProvider_New.1", sizeof(EaglePlanBufferProvider));
+    if(NULL == bp) {
+        return NULL;
+    }
     
     bp->destinationBuffer = destinationBuffer;
     bp->provider = provider;
@@ -16,7 +19,10 @@ EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, Eagl
 
 char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
 {
-    char *msg = (char*) malloc(1024);
+    char *msg = (char*) EagleMemory_Allocate("EaglePlanBufferProvider_toString.1", 1024);
+    if(NULL == msg) {
+        return NULL;
+    }
     sprintf(msg, "destination = %d, name = %s, type = %s", bp->destinationBuffer, bp->provider->name,
             EagleDataType_typeToName(bp->provider->type));
     return msg;

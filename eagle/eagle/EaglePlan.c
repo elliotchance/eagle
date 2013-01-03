@@ -7,7 +7,10 @@
 
 EaglePlan* EaglePlan_New(int pageSize)
 {
-    EaglePlan *plan = (EaglePlan*) malloc(sizeof(EaglePlan));
+    EaglePlan *plan = (EaglePlan*) EagleMemory_Allocate("EaglePlan_New.1", sizeof(EaglePlan));
+    if(NULL == plan) {
+        return NULL;
+    }
     
     plan->pageSize = pageSize;
     
@@ -44,8 +47,17 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
 
 const char* EaglePlan_toString(EaglePlan *plan)
 {
-    char *str = (char*) malloc(1024), *temp;
+    char *str, *temp = NULL;
     int i;
+    
+    if(NULL == plan) {
+        return NULL;
+    }
+    
+    str = (char*) EagleMemory_Allocate("EaglePlan_toString.1", 1024);
+    if(NULL == str) {
+        return NULL;
+    }
     
     str[0] = 0;
     strcat_safe(str, "EaglePlan:\n");
@@ -76,7 +88,11 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "  Buffers:\n");
     }
     for(i = 0; i < plan->buffersNeeded; ++i) {
-        char *msg = (char*) malloc(128);
+        char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128);
+        if(NULL == msg) {
+            EagleMemory_Free(str);
+            return NULL;
+        }
         sprintf(msg, "    %d type=%s\n", i, EagleDataType_typeToName(plan->bufferTypes[i]));
         strcat_safe(str, msg);
     }
