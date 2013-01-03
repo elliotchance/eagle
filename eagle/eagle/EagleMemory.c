@@ -18,10 +18,23 @@ static int EagleMemory_MocksInUse = 0;
  */
 void* EagleMemory_Allocate(char *id, size_t size)
 {
-    void *m = malloc(size);
-    if(NULL != m) {
+    void *m;
+    
+    /* if we are unit testing, check for mocking */
+    int i;
+    for(i = 0; i < EagleMemory_MocksInUse; ++i) {
+        if(0 == strcmp(EagleMemory_Mocks[i], id)) {
+            return NULL;
+        }
+    }
+    
+    /* try the real allocation */
+    m = malloc(size);
+    if(NULL == m) {
         return NULL;
     }
+    
+    /* zero out memory */
     memset(m, 0, (unsigned long) size);
     return m;
 }
@@ -74,11 +87,21 @@ void EagleMemory_MultiFree(void **ptr, int quantity)
 }
 
 /**
- Reset the mocking session.
+ Start the mocking session.
  
  Run this method at the top of each test case, before invoking EagleMemory_Mock()
  */
-void EagleMemory_MockReset(void)
+void EagleMemory_MockInit(void)
+{
+    EagleMemory_MocksInUse = 0;
+}
+
+/**
+ Finish the mocking session.
+ 
+ Run this method at the end of each test case, after invoking EagleMemory_Mock()
+ */
+void EagleMemory_MockFinish(void)
 {
     EagleMemory_MocksInUse = 0;
 }
