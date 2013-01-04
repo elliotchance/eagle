@@ -21,10 +21,15 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
     
     td->table = table;
     td->usedProviders = table->usedColumns;
-    td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
-    if(NULL == td->providers) {
-        EagleMemory_Free(td);
-        return NULL;
+    if(td->usedProviders > 0) {
+        td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
+        if(NULL == td->providers) {
+            EagleMemory_Free(td);
+            return NULL;
+        }
+    }
+    else {
+        td->providers = NULL;
     }
     
     for(i = 0; i < td->usedProviders; ++i) {

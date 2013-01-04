@@ -43,7 +43,8 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 void EagleDbInstance_executeSelect(EagleDbInstance *db);
 void EagleDbInstance_executeCreateTable(EagleDbInstance *db);
 void EagleDbInstance_PrintResults(EaglePlan *plan);
-EagleDbTable* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName);
+EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName);
 EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
+void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
 
 #endif

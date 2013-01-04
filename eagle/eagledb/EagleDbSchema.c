@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "EagleDbSchema.h"
+#include "EagleMemory.h"
 
 EagleDbSchema* EagleDbSchema_New(char *name)
 {
@@ -10,20 +11,19 @@ EagleDbSchema* EagleDbSchema_New(char *name)
     schema->name = strdup(name);
     schema->allocatedTables = 16;
     schema->usedTables = 0;
-    schema->tables = (EagleDbTable**) calloc((size_t) schema->allocatedTables, sizeof(EagleDbTable*));
+    schema->tables = (EagleDbTableData**) calloc((size_t) schema->allocatedTables, sizeof(EagleDbTableData*));
     
     return schema;
 }
 
 void EagleDbSchema_Delete(EagleDbSchema *schema)
 {
-    int i;
-    
-    for(i = 0; i < schema->usedTables; ++i) {
-        EagleDbTable_Delete(schema->tables[i]);
-    }
-    free(schema->tables);
-    
-    free(schema->name);
-    free(schema);
+    EagleMemory_Free(schema->tables);
+    EagleMemory_Free(schema->name);
+    EagleMemory_Free(schema);
+}
+
+void EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td)
+{
+    schema->tables[schema->usedTables++] = td;
 }

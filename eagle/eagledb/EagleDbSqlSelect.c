@@ -71,6 +71,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     int exprCount, whereExpressionId = -1, expri = 0;
     EaglePlan *plan;
     EagleDbSqlExpression **expr;
+    EagleDbTableData *td;
     
     if(NULL == select) {
         return NULL;
@@ -97,17 +98,17 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     }
     
     /* get data */
-    EagleDbTable *table = EagleDbInstance_getTable(db, select->tableName);
-    if(NULL == table) {
+    td = EagleDbInstance_getTable(db, select->tableName);
+    if(NULL == td) {
         plan->errorCode = EaglePlanErrorNoSuchTable;
         plan->errorMessage = "";
         return NULL;
     }
-    for(i = 0; i < table->usedColumns; ++i) {
+    for(i = 0; i < td->table->usedColumns; ++i) {
         EaglePlanBufferProvider *bp;
         
-        EaglePageProvider_reset(table->td->providers[i]);
-        bp = EaglePlanBufferProvider_New(i, table->td->providers[i], EagleFalse);
+        EaglePageProvider_reset(td->providers[i]);
+        bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp);
     }
     

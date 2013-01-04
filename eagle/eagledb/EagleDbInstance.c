@@ -24,9 +24,9 @@ EagleDbInstance* EagleDbInstance_New(void)
 {
     int i;
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
-    EagleDbSchema *defaultSchema, *eagledbSchema;
+    /*EagleDbSchema *defaultSchema, *eagledbSchema;
     EagleDbTableData *td;
-    EagleDbTable *table;
+    EagleDbTable *table;*/
     
     if(NULL == db) {
         return NULL;
@@ -37,29 +37,29 @@ EagleDbInstance* EagleDbInstance_New(void)
     db->usedSchemas = 0;
     db->schemas = (EagleDbSchema**) calloc((size_t) db->allocatedSchemas, sizeof(EagleDbSchema*));
     
-    defaultSchema = EagleDbSchema_New("default");
+    /*defaultSchema = EagleDbSchema_New("default");
     eagledbSchema = EagleDbSchema_New("eagledb");
-    /*EagleDbInstance_addSchema(defaultSchema);
+    EagleDbInstance_addSchema(defaultSchema);
     EagleDbInstance_addSchema(eagledbSchema);*/
     
     /* create a virtual table */
-    table = EagleDbTable_New("t");
+    /*table = EagleDbTable_New("t");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));*/
     
     /* put some data in it */
-    td = EagleDbTableData_New(table);
-    /*EagleDbSchema_addTable(defaultSchema, td);*/
+    /*td = EagleDbTableData_New(table);
+    EagleDbSchema_addTable(defaultSchema, td);*/
     
     for(i = 0; i < 10; ++i) {
         /* create a record */
-        EagleDbTuple *tuple = EagleDbTuple_New(table);
+        /*EagleDbTuple *tuple = EagleDbTuple_New(table);
         EagleDbTuple_setInt(tuple, 0, i);
-        EagleDbTuple_setText(tuple, 1, "hello");
+        EagleDbTuple_setText(tuple, 1, "hello");*/
         
         /* put record in */
         /*EagleDbTableData_insert(db->td, tuple);*/
-        EagleDbTuple_Delete(tuple);
+        /*EagleDbTuple_Delete(tuple);*/
     }
     
     return db;
@@ -244,10 +244,11 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
 
 void EagleDbInstance_Delete(EagleDbInstance *db)
 {
+    EagleMemory_Free(db->schemas);
     EagleMemory_Free(db);
 }
 
-EagleDbTable* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
+EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
     int i;
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, "default");
@@ -256,7 +257,7 @@ EagleDbTable* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
     }
     
     for(i = 0; i < schema->usedTables; ++i) {
-        if(0 == strcmp(tableName, schema->tables[i]->name)) {
+        if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
             return schema->tables[i];
         }
     }
@@ -275,4 +276,9 @@ EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName)
     }
     
     return NULL;
+}
+
+void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema)
+{
+    db->schemas[db->usedSchemas++] = schema;
 }

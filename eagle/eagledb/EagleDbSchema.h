@@ -1,7 +1,7 @@
 #ifndef eagle_EagleDbSchema_h
 #define eagle_EagleDbSchema_h
 
-#include "EagleDbTable.h"
+#include "EagleDbTableData.h"
 
 typedef struct {
     
@@ -9,7 +9,7 @@ typedef struct {
     
     int usedTables;
     
-    EagleDbTable **tables;
+    EagleDbTableData **tables;
     
     char *name;
     
@@ -17,5 +17,6 @@ typedef struct {
 
 EagleDbSchema* EagleDbSchema_New(char *name);
 void EagleDbSchema_Delete(EagleDbSchema *schema);
+void EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td);
 
 #endif
