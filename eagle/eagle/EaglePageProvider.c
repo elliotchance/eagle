@@ -40,8 +40,14 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
  */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {
-    int *data = (int*) calloc((size_t) recordsPerPage, sizeof(int)), i;
-    EaglePageProvider *pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
+    int *data = (int*) EagleMemory_MultiAllocate("EaglePageProvider_CreateFromInt.1", sizeof(int), recordsPerPage), i;
+    EaglePageProvider *pageProvider;
+    
+    if(NULL == data) {
+        return NULL;
+    }
+    
+    pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
     
     for(i = 0; i < recordsPerPage; ++i) {
         data[i] = value;

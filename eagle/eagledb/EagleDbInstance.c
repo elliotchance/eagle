@@ -55,8 +55,15 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     EaglePage **pages;
     int totalRecords = 0;
     
+    if(NULL == plan) {
+        return;
+    }
+    
     /* calculate the widths of the fields */
-    widths = (int*) calloc((size_t) plan->resultFields, sizeof(int));
+    widths = (int*) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.1", sizeof(int), plan->resultFields);
+    if(NULL == widths) {
+        return;
+    }
     for(i = 0; i < plan->resultFields; ++i) {
         widths[i] = (int) strlen(plan->result[i]->name);
     }
@@ -82,7 +89,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     printf("\n");
     
     /* render out */
-    pages = (EaglePage**) calloc((size_t) plan->resultFields, sizeof(EaglePage*));
+    pages = (EaglePage**) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.2", sizeof(EaglePage*), plan->resultFields);
     while(1) {
         int finished = 0;
         for(i = 0; i < plan->resultFields; ++i) {

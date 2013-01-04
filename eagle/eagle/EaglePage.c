@@ -45,13 +45,13 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
  */
 EaglePage* EaglePage_AllocInt(int count)
 {
-    void *data = (void*) calloc((size_t) count, sizeof(int));
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocInt.1", sizeof(int), count);
     return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
 }
 
 EaglePage* EaglePage_AllocText(int count)
 {
-    void *data = (void*) calloc((size_t) count, sizeof(char*));
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocText.1", sizeof(char*), count);
     return EaglePage_New(EagleDataTypeText, data, count, 0, 0, EagleTrue);
 }
 
@@ -118,8 +118,18 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
 
 EaglePage* EaglePage_CopyText_(EaglePage *page)
 {
-    char **newData = (char**) calloc((size_t) page->count, sizeof(char*));
+    char **newData;
     int i;
+    
+    if(NULL == page) {
+        return NULL;
+    }
+    
+    newData = (char**) EagleMemory_MultiAllocate("EaglePage_CopyText_.1", sizeof(char*), page->count);
+    
+    if(NULL == newData) {
+        return NULL;
+    }
     
     for(i = 0; i < page->count; ++i) {
         newData[i] = ((char**) page->data)[i];

@@ -8,14 +8,20 @@
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 {
     int i;
-    EagleDbTableData *td = (EagleDbTableData*) EagleMemory_Allocate("EagleDbTableData_New.1", sizeof(EagleDbTableData));
+    EagleDbTableData *td;
+    
+    if(NULL == table) {
+        return NULL;
+    }
+    
+    td = (EagleDbTableData*) EagleMemory_Allocate("EagleDbTableData_New.1", sizeof(EagleDbTableData));
     if(NULL == td) {
         return NULL;
     }
     
     td->table = table;
     td->usedProviders = table->usedColumns;
-    td->providers = (EaglePageProvider**) calloc((size_t) td->usedProviders, sizeof(EaglePageProvider*));
+    td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
     for(i = 0; i < td->usedProviders; ++i) {
         td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, 1000, table->columns[i]->name);
     }

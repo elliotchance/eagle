@@ -11,7 +11,11 @@ EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance
         return NULL;
     }
     
-    workers->workers = (EagleWorker**) calloc((size_t) totalWorkers, sizeof(EagleWorker*));
+    workers->workers = (EagleWorker**) EagleMemory_MultiAllocate("EagleWorkers_New.2", sizeof(EagleWorker*), totalWorkers);
+    if(NULL == workers->workers) {
+        EagleMemory_Free(workers);
+        return NULL;
+    }
     for(i = 0; i < totalWorkers; ++i) {
         workers->workers[i] = EagleWorker_New(i, instance);
     }

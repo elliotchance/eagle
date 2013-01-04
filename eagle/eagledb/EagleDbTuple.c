@@ -8,13 +8,23 @@
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
-    EagleDbTuple *tuple = (EagleDbTuple*) EagleMemory_Allocate("EagleDbTuple_New.1", sizeof(EagleDbTuple));
+    EagleDbTuple *tuple;
+    
+    if(NULL == table) {
+        return NULL;
+    }
+    
+    tuple = (EagleDbTuple*) EagleMemory_Allocate("EagleDbTuple_New.1", sizeof(EagleDbTuple));
     if(NULL == tuple) {
         return NULL;
     }
     
     tuple->table = table;
-    tuple->data = (void**) calloc((size_t) table->usedColumns, sizeof(void*));
+    tuple->data = (void**) EagleMemory_MultiAllocate("EagleDbTuple_New.2", sizeof(void*), table->usedColumns);
+    if(NULL == tuple->data) {
+        EagleDbTuple_Delete(tuple);
+        return NULL;
+    }
     
     return tuple;
 }

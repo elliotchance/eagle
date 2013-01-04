@@ -155,6 +155,10 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
 {
     int i, *results, destinationBuffer;
     
+    if(NULL == plan) {
+        return;
+    }
+    
     /* for now we will just assume we don't need more than 10 buffers */
     EaglePlan_prepareBuffers(plan, 10);
     
@@ -171,10 +175,10 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
     
     /* prepare result providers */
     plan->resultFields = totalExpressions;
-    plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
+    plan->result = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbSqlExpression_CompilePlan.1", sizeof(EaglePageProvider*), plan->resultFields);
     
     /* compile expressions */
-    results = (int*) calloc((size_t) totalExpressions, sizeof(int));
+    results = (int*) EagleMemory_MultiAllocate("EagleDbSqlExpression_CompilePlan.2", sizeof(int), totalExpressions);
     for(i = 0; i < totalExpressions; ++i) {
         char *desc;
         
