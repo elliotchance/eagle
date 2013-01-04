@@ -15,6 +15,7 @@ EagleDbTable* EagleDbTable_New(char *name)
     table->usedColumns = 0;
     table->columns = (EagleDbColumn**) EagleMemory_MultiAllocate("EagleDbTable_New.2", sizeof(EagleDbColumn*), table->allocatedColumns);
     if(NULL == table->columns) {
+        EagleMemory_Free(table->name);
         EagleMemory_Free(table);
         return NULL;
     }

@@ -1,6 +1,6 @@
+#include "MainSuite.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "MainSuite.h"
 #include "EagleData.h"
 #include "EaglePageOperations.h"
 #include "EagleInstance.h"

@@ -1,6 +1,6 @@
+#include "MemorySuite.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "MemorySuite.h"
 #include "EagleMemory.h"
 #include "EagleData.h"
 #include "EagleDbColumn.h"
@@ -18,6 +18,10 @@
 #include "EagleWorkers.h"
 #include "EaglePage.h"
 #include "EaglePlan.h"
+
+extern void **yyreturn;
+extern char **yyerrors;
+extern void **yyobj;
 
 void* yylist_new();
 void yylex_init();
@@ -323,7 +327,9 @@ CUNIT_TEST(MemorySuite, EaglePlan_New_1)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_New.1");
     
-    CUNIT_ASSERT_NULL(EaglePlan_New(1));
+    EaglePlan *plan = EaglePlan_New(1);
+    CUNIT_ASSERT_NULL(plan);
+    EaglePlan_Delete(plan);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -334,7 +340,9 @@ CUNIT_TEST(MemorySuite, EaglePlan_New_2)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_New.2");
     
-    CUNIT_ASSERT_NULL(EaglePlan_New(1));
+    EaglePlan *plan = EaglePlan_New(1);
+    CUNIT_ASSERT_NULL(plan);
+    EaglePlan_Delete(plan);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -345,7 +353,9 @@ CUNIT_TEST(MemorySuite, EaglePlan_New_3)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_New.3");
     
-    CUNIT_ASSERT_NULL(EaglePlan_New(1));
+    EaglePlan *plan = EaglePlan_New(1);
+    CUNIT_ASSERT_NULL(plan);
+    EaglePlan_Delete(plan);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -660,6 +670,9 @@ CUNIT_TEST(MemorySuite, yylex_init_1)
     EagleMemory_Mock("yylex_init.1");
     
     yylex_init();
+    free(yyreturn);
+    free(yyerrors);
+    free(yyobj);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -671,6 +684,9 @@ CUNIT_TEST(MemorySuite, yylex_init_2)
     EagleMemory_Mock("yylex_init.2");
     
     yylex_init();
+    free(yyreturn);
+    free(yyerrors);
+    free(yyobj);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -682,6 +698,9 @@ CUNIT_TEST(MemorySuite, yylex_init_3)
     EagleMemory_Mock("yylex_init.3");
     
     yylex_init();
+    free(yyreturn);
+    free(yyerrors);
+    free(yyobj);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();

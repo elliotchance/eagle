@@ -21,6 +21,7 @@ void* EagleMemory_Allocate(char *id, size_t size)
 {
     void *m;
     
+#ifdef CUNIT
     /* if we are unit testing, check for mocking */
     int i;
     for(i = 0; i < EagleMemory_MocksInUse; ++i) {
@@ -29,6 +30,7 @@ void* EagleMemory_Allocate(char *id, size_t size)
             return NULL;
         }
     }
+#endif
     
     /* try the real allocation */
     m = malloc(size);

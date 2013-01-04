@@ -1,8 +1,8 @@
 #ifndef eagle_DBSuite_h
 #define eagle_DBSuite_h
 
-#include <CUnit/Basic.h>
 #include "TestSuite.h"
+#include <CUnit/Basic.h>
 #include "EagleDbSqlExpression.h"
 
 extern int yyparse();

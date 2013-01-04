@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "TestSuite.h"
+#include <stdlib.h>
 #include "EagleMemory.h"
 
 CUnitTest* CUnitTest_New(const char *strName, CU_TestFunc pTestFunc)

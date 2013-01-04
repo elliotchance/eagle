@@ -1,6 +1,6 @@
+#include "DBSuite.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "DBSuite.h"
 #include "EagleDbSqlSelect.h"
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleDbSqlValue.h"

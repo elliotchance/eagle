@@ -1,7 +1,7 @@
+#include "TestSuite.h"
 #include <CUnit/Basic.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "TestSuite.h"
 #include "MainSuite.h"
 #include "DBSuite.h"
 #include "SQLSuite.h"

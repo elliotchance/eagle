@@ -85,6 +85,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
     plan->result = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.1", sizeof(EaglePageProvider*), plan->resultFields);
     if(NULL == plan->result) {
+        EaglePlan_Delete(plan);
         return NULL;
     }
     
@@ -107,7 +108,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     exprCount = EagleDbSqlSelect_getExpressionsCount(select);
     expr = (EagleDbSqlExpression**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.2", sizeof(EagleDbSqlExpression*), exprCount);
     if(NULL == expr) {
-        EagleMemory_Free(plan->result);
+        EaglePlan_Delete(plan);
         return NULL;
     }
     

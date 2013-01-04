@@ -1,10 +1,8 @@
+#include "SQLSuite.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "TestSuite.h"
-#include "DbSuite.h"
-#include "SQLSuite.h"
 #include "EagleDbTable.h"
 #include "EagleDbTuple.h"
 #include "EagleDbTableData.h"
