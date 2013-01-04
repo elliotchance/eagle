@@ -1,5 +1,6 @@
-#include <stdlib.h>
 #include "TestSuite.h"
+#include <stdlib.h>
+#include "EagleMemory.h"
 
 CUnitTest* CUnitTest_New(const char *strName, CU_TestFunc pTestFunc)
 {
@@ -34,7 +35,7 @@ void CUnitTests_addTest(CUnitTests *tests, CUnitTest *test)
 
 void CUnitTest_Delete(CUnitTest *obj)
 {
-    free((void*) obj);
+    EagleMemory_Free((void*) obj);
 }
 
 void CUnitTests_Delete(CUnitTests *obj)
@@ -42,6 +43,6 @@ void CUnitTests_Delete(CUnitTests *obj)
     for(int i = 0; i < obj->usedTests; ++i) {
         CUnitTest_Delete(obj->tests[i]);
     }
-    free((void*) obj->tests);
-    free((void*) obj);
+    EagleMemory_Free((void*) obj->tests);
+    EagleMemory_Free((void*) obj);
 }

@@ -6,10 +6,14 @@
 #include "EaglePageOperations.h"
 #include "EagleUtils.h"
 #include "EagleLinkedList.h"
+#include "EagleMemory.h"
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)
 {
-    EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
+    EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate("EaglePageProvider_CreateFromIntArray.1", sizeof(EaglePageProvider));
+    if(NULL == pageProvider) {
+        return NULL;
+    }
     
     pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->offsetRecords = 0;
@@ -36,8 +40,14 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
  */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {
-    int *data = (int*) calloc((size_t) recordsPerPage, sizeof(int)), i;
-    EaglePageProvider *pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
+    int *data = (int*) EagleMemory_MultiAllocate("EaglePageProvider_CreateFromInt.1", sizeof(int), recordsPerPage), i;
+    EaglePageProvider *pageProvider;
+    
+    if(NULL == data) {
+        return NULL;
+    }
+    
+    pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
     
     for(i = 0; i < recordsPerPage; ++i) {
         data[i] = value;
@@ -117,16 +127,16 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    free(epp->records);
-    free(epp);
+    EagleMemory_Free(epp->records);
+    EagleMemory_Free(epp);
 }
 
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
     EagleLinkedList_Delete((EagleLinkedList*) epp->records);
-    free(epp->name);
-    free(epp);
+    EagleMemory_Free(epp->name);
+    EagleMemory_Free(epp);
 }
 
 EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data)
@@ -173,7 +183,10 @@ EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)
 
 EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name)
 {
-    EaglePageProvider *pageProvider = (EaglePageProvider*) malloc(sizeof(EaglePageProvider));
+    EaglePageProvider *pageProvider = (EaglePageProvider*) EagleMemory_Allocate("EaglePageProvider_CreateFromStream.1", sizeof(EaglePageProvider));
+    if(NULL == pageProvider) {
+        return NULL;
+    }
     
     pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->offsetRecords = 0;

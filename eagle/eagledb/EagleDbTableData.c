@@ -3,15 +3,30 @@
 #include <string.h>
 #include "EagleDbTableData.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 {
     int i;
-    EagleDbTableData *td = (EagleDbTableData*) malloc(sizeof(EagleDbTableData));
+    EagleDbTableData *td;
+    
+    if(NULL == table) {
+        return NULL;
+    }
+    
+    td = (EagleDbTableData*) EagleMemory_Allocate("EagleDbTableData_New.1", sizeof(EagleDbTableData));
+    if(NULL == td) {
+        return NULL;
+    }
     
     td->table = table;
     td->usedProviders = table->usedColumns;
-    td->providers = (EaglePageProvider**) calloc((size_t) td->usedProviders, sizeof(EaglePageProvider*));
+    td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
+    if(NULL == td->providers) {
+        EagleMemory_Free(td);
+        return NULL;
+    }
+    
     for(i = 0; i < td->usedProviders; ++i) {
         td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, 1000, table->columns[i]->name);
     }
@@ -25,8 +40,8 @@ void EagleDbTableData_Delete(EagleDbTableData *td)
     for(i = 0; i < td->usedProviders; ++i) {
         EaglePageProvider_Delete(td->providers[i]);
     }
-    free(td->providers);
-    free(td);
+    EagleMemory_Free(td->providers);
+    EagleMemory_Free(td);
 }
 
 void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)

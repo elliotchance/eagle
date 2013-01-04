@@ -37,6 +37,9 @@ build_eagle_test:
 	
 # test for leaks
 leaks: build_eagle_test
+	# check that there are no free()
+	
+	
 	- killall eagle_test
 	MallocStackLogging=1 build/Debug/eagle_test wait &
 	sleep 2

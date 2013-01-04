@@ -1,6 +1,6 @@
+#include "DBSuite.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "DBSuite.h"
 #include "EagleDbSqlSelect.h"
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleDbSqlValue.h"
@@ -11,6 +11,7 @@
 #include "EagleDbTableData.h"
 #include "EagleDbTuple.h"
 #include "EagleDbConsole.h"
+#include "EagleMemory.h"
 
 extern void *yyparse_ast;
 extern int yyerrors_length;
@@ -27,7 +28,7 @@ int _testSqlSelect(const char *sql)
     yylex_init();
     yy_scan_string(newsql);
     int r = yyparse();
-    free(newsql);
+    EagleMemory_Free(newsql);
     return r;
 }
 
@@ -220,7 +221,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     EagleDbTuple_setText(tuple, 1, "hello");
     char *desc = EagleDbTuple_toString(tuple);
     CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\")");
-    free(desc);
+    EagleMemory_Free(desc);
     
     EagleDbTuple_Delete(tuple);
     EagleDbTable_Delete(table);
@@ -317,12 +318,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         EagleDbSqlExpression_Delete(expr[i]);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
-        free(answers[i]);
+        EagleMemory_Free(answers[i]);
     }
-    free(answers_0);
-    free(answers_1);
-    free(answers);
-    free(expr);
+    EagleMemory_Free(answers_0);
+    EagleMemory_Free(answers_1);
+    EagleMemory_Free(answers);
+    EagleMemory_Free(expr);
     EagleInstance_Delete(eagle);
     yylex_free();
 }

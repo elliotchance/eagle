@@ -3,20 +3,33 @@
 #include <stdio.h>
 #include "EaglePlan.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EaglePlan* EaglePlan_New(int pageSize)
 {
-    EaglePlan *plan = (EaglePlan*) malloc(sizeof(EaglePlan));
+    EaglePlan *plan = (EaglePlan*) EagleMemory_Allocate("EaglePlan_New.1", sizeof(EaglePlan));
+    if(NULL == plan) {
+        return NULL;
+    }
     
     plan->pageSize = pageSize;
     
     plan->allocatedOperations = 10;
     plan->usedOperations = 0;
-    plan->operations = (EaglePlanOperation**) calloc((size_t) plan->allocatedOperations, sizeof(EaglePlanOperation*));
+    plan->operations = (EaglePlanOperation**) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(EaglePlanOperation*), plan->allocatedOperations);
+    if(NULL == plan->operations) {
+        EagleMemory_Free(plan);
+        return NULL;
+    }
     
     plan->allocatedProviders = 10;
     plan->usedProviders = 0;
-    plan->providers = (EaglePlanBufferProvider**) calloc((size_t) plan->allocatedProviders, sizeof(EaglePlanBufferProvider*));
+    plan->providers = (EaglePlanBufferProvider**) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(EaglePlanBufferProvider*), plan->allocatedProviders);
+    if(NULL == plan->providers) {
+        EagleMemory_Free(plan);
+        EagleMemory_Free(plan->operations);
+        return NULL;
+    }
     
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
@@ -43,8 +56,17 @@ void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
 
 const char* EaglePlan_toString(EaglePlan *plan)
 {
-    char *str = (char*) malloc(1024), *temp;
+    char *str, *temp = NULL;
     int i;
+    
+    if(NULL == plan) {
+        return NULL;
+    }
+    
+    str = (char*) EagleMemory_Allocate("EaglePlan_toString.1", 1024);
+    if(NULL == str) {
+        return NULL;
+    }
     
     str[0] = 0;
     strcat_safe(str, "EaglePlan:\n");
@@ -56,7 +78,7 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "    ");
         temp = EaglePlanBufferProvider_toString(plan->providers[i]);
         strcat_safe(str, temp);
-        free(temp);
+        EagleMemory_Free(temp);
         strcat_safe(str, "\n");
     }
     
@@ -68,14 +90,18 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "    ");
         strcat_safe(str, s);
         strcat_safe(str, "\n");
-        free(s);
+        EagleMemory_Free(s);
     }
     
     if(plan->buffersNeeded > 0) {
         strcat_safe(str, "  Buffers:\n");
     }
     for(i = 0; i < plan->buffersNeeded; ++i) {
-        char *msg = (char*) malloc(128);
+        char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128);
+        if(NULL == msg) {
+            EagleMemory_Free(str);
+            return NULL;
+        }
         sprintf(msg, "    %d type=%s\n", i, EagleDataType_typeToName(plan->bufferTypes[i]));
         strcat_safe(str, msg);
     }
@@ -94,21 +120,21 @@ void EaglePlan_Delete(EaglePlan *plan)
     for(i = 0; i < plan->usedOperations; ++i) {
         EaglePlanOperation_Delete(plan->operations[i]);
     }
-    free(plan->operations);
+    EagleMemory_Free(plan->operations);
     
     for(i = 0; i < plan->usedProviders; ++i) {
         EaglePlanBufferProvider_Delete(plan->providers[i]);
     }
-    free(plan->providers);
+    EagleMemory_Free(plan->providers);
     
     for(i = 0; i < plan->resultFields; ++i) {
         EaglePageProvider_Delete(plan->result[i]);
     }
-    free(plan->result);
+    EagleMemory_Free(plan->result);
     
-    free(plan->errorMessage);
-    free(plan->bufferTypes);
-    free(plan);
+    EagleMemory_Free(plan->errorMessage);
+    EagleMemory_Free(plan->bufferTypes);
+    EagleMemory_Free(plan);
     plan = NULL;
 }
 
@@ -163,8 +189,15 @@ void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers)
 {
     int i;
     
+    if(NULL == plan) {
+        return;
+    }
+    
     plan->buffersNeeded = buffers;
-    plan->bufferTypes = (EagleDataType*) calloc((size_t) plan->buffersNeeded, sizeof(EagleDataType));
+    plan->bufferTypes = (EagleDataType*) EagleMemory_MultiAllocate("EaglePlan_prepareBuffers.1", sizeof(EagleDataType), plan->buffersNeeded);
+    if(NULL == plan->bufferTypes) {
+        return;
+    }
     for(i = 0; i < plan->buffersNeeded; ++i) {
         plan->bufferTypes[i] = EagleDataTypeUnknown;
     }

@@ -2,10 +2,14 @@
 #include <string.h>
 #include "EaglePlanOperation.h"
 #include "EagleData.h"
+#include "EagleMemory.h"
 
 EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function), int destination, int source1, int source2, void *obj, EagleBoolean freeObj, const char *description)
 {
-    EaglePlanOperation *epo = (EaglePlanOperation*) malloc(sizeof(EaglePlanOperation));
+    EaglePlanOperation *epo = (EaglePlanOperation*) EagleMemory_Allocate("EaglePlanOperation_New.1", sizeof(EaglePlanOperation));
+    if(NULL == epo) {
+        return NULL;
+    }
     
     epo->function = function;
     epo->destination = destination;
@@ -26,8 +30,8 @@ char* EaglePlanOperation_toString(EaglePlanOperation *epo)
 void EaglePlanOperation_Delete(EaglePlanOperation *epo)
 {
     if(EagleTrue == epo->freeObj) {
-        free(epo->obj);
+        EagleMemory_Free(epo->obj);
     }
-    free((void*) epo->description);
-    free(epo);
+    EagleMemory_Free((void*) epo->description);
+    EagleMemory_Free(epo);
 }

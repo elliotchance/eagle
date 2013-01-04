@@ -4,13 +4,27 @@
 #include "EagleDbTuple.h"
 #include "EagleData.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
-    EagleDbTuple *tuple = (EagleDbTuple*) malloc(sizeof(EagleDbTuple));
+    EagleDbTuple *tuple;
+    
+    if(NULL == table) {
+        return NULL;
+    }
+    
+    tuple = (EagleDbTuple*) EagleMemory_Allocate("EagleDbTuple_New.1", sizeof(EagleDbTuple));
+    if(NULL == tuple) {
+        return NULL;
+    }
     
     tuple->table = table;
-    tuple->data = (void**) calloc((size_t) table->usedColumns, sizeof(void*));
+    tuple->data = (void**) EagleMemory_MultiAllocate("EagleDbTuple_New.2", sizeof(void*), table->usedColumns);
+    if(NULL == tuple->data) {
+        EagleDbTuple_Delete(tuple);
+        return NULL;
+    }
     
     return tuple;
 }
@@ -20,11 +34,11 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
     int i;
     
     for(i = 0; i < tuple->table->usedColumns; ++i) {
-        free(tuple->data[i]);
+        EagleMemory_Free(tuple->data[i]);
     }
-    free(tuple->data);
+    EagleMemory_Free(tuple->data);
     
-    free(tuple);
+    EagleMemory_Free(tuple);
 }
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
@@ -46,8 +60,12 @@ void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
 
 char* EagleDbTuple_toString(EagleDbTuple *tuple)
 {
-    char *desc = (char*) malloc(1024);
+    char *desc = (char*) EagleMemory_Allocate("EagleDbTuple_toString.1", 1024);
     int i;
+    
+    if(NULL == desc) {
+        return NULL;
+    }
     
     desc[0] = 0;
     strcat_safe(desc, "(");
