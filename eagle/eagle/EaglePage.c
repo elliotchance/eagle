@@ -46,12 +46,18 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
 EaglePage* EaglePage_AllocInt(int count)
 {
     void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocInt.1", sizeof(int), count);
+    if(NULL == data) {
+        return NULL;
+    }
     return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
 }
 
 EaglePage* EaglePage_AllocText(int count)
 {
     void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocText.1", sizeof(char*), count);
+    if(NULL == data) {
+        return NULL;
+    }
     return EaglePage_New(EagleDataTypeText, data, count, 0, 0, EagleTrue);
 }
 

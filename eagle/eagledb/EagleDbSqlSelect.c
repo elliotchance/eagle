@@ -74,6 +74,9 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     if(NULL == select) {
         return NULL;
     }
+    if(NULL == db) {
+        return NULL;
+    }
     
     /* create the plan skeleton */
     plan = EaglePlan_New(pageSize);
@@ -81,6 +84,10 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     /* the providers will contain the result */
     plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
     plan->result = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.1", sizeof(EaglePageProvider*), plan->resultFields);
+    if(NULL == plan->result) {
+        return NULL;
+    }
+    
     for(i = 0; i < plan->resultFields; ++i) {
         char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
         plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, desc);
@@ -99,6 +106,11 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     /* merge expressions */
     exprCount = EagleDbSqlSelect_getExpressionsCount(select);
     expr = (EagleDbSqlExpression**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.2", sizeof(EagleDbSqlExpression*), exprCount);
+    if(NULL == expr) {
+        EagleMemory_Free(plan->result);
+        return NULL;
+    }
+    
     for(expri = 0; expri < EagleDbSqlSelect_getFieldCount(select); ++expri) {
         expr[expri] = select->selectExpressions[expri];
     }

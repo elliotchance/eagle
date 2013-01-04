@@ -22,6 +22,11 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
     td->table = table;
     td->usedProviders = table->usedColumns;
     td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
+    if(NULL == td->providers) {
+        EagleMemory_Free(td);
+        return NULL;
+    }
+    
     for(i = 0; i < td->usedProviders; ++i) {
         td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, 1000, table->columns[i]->name);
     }

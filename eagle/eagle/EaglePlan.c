@@ -17,10 +17,16 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->allocatedOperations = 10;
     plan->usedOperations = 0;
     plan->operations = (EaglePlanOperation**) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(EaglePlanOperation*), plan->allocatedOperations);
+    if(NULL == plan->operations) {
+        return NULL;
+    }
     
     plan->allocatedProviders = 10;
     plan->usedProviders = 0;
     plan->providers = (EaglePlanBufferProvider**) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(EaglePlanBufferProvider*), plan->allocatedProviders);
+    if(NULL == plan->providers) {
+        return NULL;
+    }
     
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
@@ -186,6 +192,9 @@ void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers)
     
     plan->buffersNeeded = buffers;
     plan->bufferTypes = (EagleDataType*) EagleMemory_MultiAllocate("EaglePlan_prepareBuffers.1", sizeof(EagleDataType), plan->buffersNeeded);
+    if(NULL == plan->bufferTypes) {
+        return;
+    }
     for(i = 0; i < plan->buffersNeeded; ++i) {
         plan->bufferTypes[i] = EagleDataTypeUnknown;
     }
