@@ -188,6 +188,8 @@ CUNIT_TEST(MemorySuite, EagleDbTableData_New_2)
     EagleMemory_Mock("EagleDbTableData_New.2");
     
     EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbColumn *column = EagleDbColumn_New("test", EagleDataTypeInteger);
+    EagleDbTable_addColumn(table, column);
     CUNIT_ASSERT_NULL(EagleDbTableData_New(table));
     EagleDbTable_Delete(table);
     
@@ -585,9 +587,22 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     EagleMemory_Mock("EagleDbSqlSelect_parse.2");
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    select->tableName = strdup("mytable");
     EagleDbInstance *instance = EagleDbInstance_New();
+    
+    EagleDbSchema *schema = EagleDbSchema_New("default");
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTableData *td = EagleDbTableData_New(table);
+    EagleDbSchema_addTable(schema, td);
+    
+    EagleDbInstance_addSchema(instance, schema);
+    
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
+    
     EagleDbSqlSelect_Delete(select);
+    EagleDbSchema_Delete(schema);
+    EagleDbTable_Delete(table);
+    EagleDbTableData_Delete(td);
     EagleDbInstance_Delete(instance);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);

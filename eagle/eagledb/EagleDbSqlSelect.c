@@ -3,6 +3,7 @@
 #include <string.h>
 #include "EagleDbSqlSelect.h"
 #include "EagleMemory.h"
+#include "EagleUtils.h"
 
 /**
  Create a new EagleDbSqlSelect.
@@ -70,6 +71,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     int exprCount, whereExpressionId = -1, expri = 0;
     EaglePlan *plan;
     EagleDbSqlExpression **expr;
+    EagleDbTableData *td;
     
     if(NULL == select) {
         return NULL;
@@ -96,11 +98,17 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     }
     
     /* get data */
-    for(i = 0; i < db->td->table->usedColumns; ++i) {
+    td = EagleDbInstance_getTable(db, select->tableName);
+    if(NULL == td) {
+        plan->errorCode = EaglePlanErrorNoSuchTable;
+        plan->errorMessage = "";
+        return NULL;
+    }
+    for(i = 0; i < td->table->usedColumns; ++i) {
         EaglePlanBufferProvider *bp;
         
-        EaglePageProvider_reset(db->td->providers[i]);
-        bp = EaglePlanBufferProvider_New(i, db->td->providers[i], EagleFalse);
+        EaglePageProvider_reset(td->providers[i]);
+        bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp);
     }
     

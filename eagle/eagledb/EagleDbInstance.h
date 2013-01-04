@@ -1,7 +1,7 @@
 #ifndef eagle_EagleDbInstance_h
 #define eagle_EagleDbInstance_h
 
-#include "EagleDbTableData.h"
+#include "EagleDbSchema.h"
 #include "EaglePlan.h"
 
 typedef enum {
@@ -29,7 +29,11 @@ extern EagleDbSqlStatementType yystatementtype;
 
 typedef struct {
     
-    EagleDbTableData *td;
+    EagleDbSchema **schemas;
+    
+    int allocatedSchemas;
+    
+    int usedSchemas;
     
 } EagleDbInstance;
 
@@ -39,5 +43,8 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 void EagleDbInstance_executeSelect(EagleDbInstance *db);
 void EagleDbInstance_executeCreateTable(EagleDbInstance *db);
 void EagleDbInstance_PrintResults(EaglePlan *plan);
+EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName);
+EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
+void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
 
 #endif

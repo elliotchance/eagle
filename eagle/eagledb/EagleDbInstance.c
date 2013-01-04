@@ -8,7 +8,9 @@
 #include "EagleDbSqlSelect.h"
 #include "EaglePageProvider.h"
 #include "EagleInstance.h"
+#include "EagleDbTableData.h"
 #include "EagleMemory.h"
+#include "EagleDbInstance.h"
 
 extern void *yyparse_ast;
 extern int yyparse();
@@ -21,29 +23,43 @@ void yylex_free();
 EagleDbInstance* EagleDbInstance_New(void)
 {
     int i;
-    EagleDbTable *table;
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
+    /*EagleDbSchema *defaultSchema, *eagledbSchema;
+    EagleDbTableData *td;
+    EagleDbTable *table;*/
+    
     if(NULL == db) {
         return NULL;
     }
     
+    /* schemas */
+    db->allocatedSchemas = 10;
+    db->usedSchemas = 0;
+    db->schemas = (EagleDbSchema**) calloc((size_t) db->allocatedSchemas, sizeof(EagleDbSchema*));
+    
+    /*defaultSchema = EagleDbSchema_New("default");
+    eagledbSchema = EagleDbSchema_New("eagledb");
+    EagleDbInstance_addSchema(defaultSchema);
+    EagleDbInstance_addSchema(eagledbSchema);*/
+    
     /* create a virtual table */
-    table = EagleDbTable_New("t");
+    /*table = EagleDbTable_New("t");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));*/
     
     /* put some data in it */
-    db->td = EagleDbTableData_New(table);
+    /*td = EagleDbTableData_New(table);
+    EagleDbSchema_addTable(defaultSchema, td);*/
     
     for(i = 0; i < 10; ++i) {
         /* create a record */
-        EagleDbTuple *tuple = EagleDbTuple_New(table);
+        /*EagleDbTuple *tuple = EagleDbTuple_New(table);
         EagleDbTuple_setInt(tuple, 0, i);
-        EagleDbTuple_setText(tuple, 1, "hello");
+        EagleDbTuple_setText(tuple, 1, "hello");*/
         
         /* put record in */
         /*EagleDbTableData_insert(db->td, tuple);*/
-        EagleDbTuple_Delete(tuple);
+        /*EagleDbTuple_Delete(tuple);*/
     }
     
     return db;
@@ -228,7 +244,41 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
 
 void EagleDbInstance_Delete(EagleDbInstance *db)
 {
-    EagleDbTable_Delete(db->td->table);
-    EagleDbTableData_Delete(db->td);
+    EagleMemory_Free(db->schemas);
     EagleMemory_Free(db);
+}
+
+EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
+{
+    int i;
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, "default");
+    if(NULL == schema) {
+        return NULL;
+    }
+    
+    for(i = 0; i < schema->usedTables; ++i) {
+        if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
+            return schema->tables[i];
+        }
+    }
+    
+    return NULL;
+}
+
+EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName)
+{
+    int i;
+    
+    for(i = 0; i < db->usedSchemas; ++i) {
+        if(0 == strcmp(schemaName, db->schemas[i]->name)) {
+            return db->schemas[i];
+        }
+    }
+    
+    return NULL;
+}
+
+void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema)
+{
+    db->schemas[db->usedSchemas++] = schema;
 }
