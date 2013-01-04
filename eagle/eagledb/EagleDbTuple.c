@@ -33,10 +33,12 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
 {
     int i;
     
-    for(i = 0; i < tuple->table->usedColumns; ++i) {
-        EagleMemory_Free(tuple->data[i]);
+    if(NULL != tuple->data) {
+        for(i = 0; i < tuple->table->usedColumns; ++i) {
+            EagleMemory_Free(tuple->data[i]);
+        }
+        EagleMemory_Free(tuple->data);
     }
-    EagleMemory_Free(tuple->data);
     
     EagleMemory_Free(tuple);
 }
