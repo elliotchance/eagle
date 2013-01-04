@@ -3,6 +3,7 @@
 #include <signal.h>
 #include "EagleInstance.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 /**
  Create a new eagle instance. The instance is effectivly a database, with a certain amount of workers (threads) that
@@ -12,7 +13,10 @@
  */
 EagleInstance* EagleInstance_New(int totalWorkers)
 {
-    EagleInstance *instance = (EagleInstance*) malloc(sizeof(EagleInstance));
+    EagleInstance *instance = (EagleInstance*) EagleMemory_Allocate("EagleInstance_New.1", sizeof(EagleInstance));
+    if(NULL == instance) {
+        return NULL;
+    }
     
     instance->workers = EagleWorkers_New(totalWorkers, instance);
     instance->nextJobLock = EagleSynchronizer_CreateLock();
@@ -99,5 +103,5 @@ void EagleInstance_Delete(EagleInstance *eagle)
     EagleWorkers_Delete(eagle->workers);
     EagleLock_Delete(eagle->nextJobLock);
     EaglePlan_Delete(eagle->plan);
-    free(eagle);
+    EagleMemory_Free(eagle);
 }

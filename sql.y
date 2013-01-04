@@ -10,6 +10,7 @@
     #include "EagleDbTable.h"
     #include "EagleDbColumn.h"
     #include "EagleDbInstance.h"
+    #include "EagleMemory.h"
 
     int yyerror(char *s);
     int yylex();
@@ -68,7 +69,7 @@
     
     void* yylist_new()
     {
-        yylist = (void**) calloc((size_t) 256, sizeof(void*));
+        yylist = (void**) EagleMemory_MultiAllocate("yylist_new.1", sizeof(void*), 256);
         yylist_length = 0;
         return yylist;
     }
@@ -343,13 +344,13 @@ int yyerror(char *s)
 
 void yylex_init()
 {
-    yyobj = (void**) calloc((size_t) 256, sizeof(void*));
+    yyobj = (void**) EagleMemory_MultiAllocate("yylex_init.1", sizeof(void*), 256);
     yyobj_length = 0;
     
-    yyerrors = (char**) calloc((size_t) 100, sizeof(char*));
+    yyerrors = (char**) EagleMemory_MultiAllocate("yylex_init.2", sizeof(char*), 100);
     yyerrors_length = 0;
     
-    yyreturn = (void**) calloc((size_t) 256, sizeof(void*));
+    yyreturn = (void**) EagleMemory_MultiAllocate("yylex_init.3", sizeof(void*), 256);
     yyreturn_length = 0;
 }
 
@@ -360,21 +361,21 @@ void yylex_free()
     /* yyobj */
     if(yyerrors_length > 0) {
         for(i = 0; i < yyobj_length; ++i) {
-            free(yyobj[i]);
+            EagleMemory_Free(yyobj[i]);
         }
     }
-    free(yyobj);
+    EagleMemory_Free(yyobj);
     yyobj = NULL;
     
     /* yyreturn */
-    free(yyreturn);
+    EagleMemory_Free(yyreturn);
     yyreturn = NULL;
     
     /* yyerrors */
     for(i = 0; i < yyerrors_length; ++i) {
-        free(yyerrors[i]);
+        EagleMemory_Free(yyerrors[i]);
     }
-    free(yyerrors);
+    EagleMemory_Free(yyerrors);
     yyerrors = NULL;
     
     yylex_destroy();

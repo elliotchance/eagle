@@ -1,12 +1,21 @@
 #include <stdlib.h>
 #include "EagleWorkers.h"
+#include "EagleMemory.h"
 
 EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance)
 {
-    EagleWorkers *workers = (EagleWorkers*) malloc(sizeof(EagleWorkers));
+    EagleWorkers *workers = (EagleWorkers*) EagleMemory_Allocate("EagleWorkers_New.1", sizeof(EagleWorkers));
     int i;
     
-    workers->workers = (EagleWorker**) calloc((size_t) totalWorkers, sizeof(EagleWorker*));
+    if(NULL == workers) {
+        return NULL;
+    }
+    
+    workers->workers = (EagleWorker**) EagleMemory_MultiAllocate("EagleWorkers_New.2", sizeof(EagleWorker*), totalWorkers);
+    if(NULL == workers->workers) {
+        EagleMemory_Free(workers);
+        return NULL;
+    }
     for(i = 0; i < totalWorkers; ++i) {
         workers->workers[i] = EagleWorker_New(i, instance);
     }
@@ -39,7 +48,7 @@ void EagleWorkers_Delete(EagleWorkers *workers)
     for(i = 0; i < workers->totalWorkers; ++i) {
         EagleWorker_Delete(workers->workers[i]);
     }
-    free((void*) workers->workers);
+    EagleMemory_Free((void*) workers->workers);
     
-    free((void*) workers);
+    EagleMemory_Free((void*) workers);
 }

@@ -4,10 +4,14 @@
 
 #include "EagleDbConsole.h"
 #include "EagleDbInstance.h"
+#include "EagleMemory.h"
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
-    EagleDbConsole *console = (EagleDbConsole*) malloc(sizeof(EagleDbConsole));
+    EagleDbConsole *console = (EagleDbConsole*) EagleMemory_Allocate("EagleDbConsole_New.1", sizeof(EagleDbConsole));
+    if(NULL == console) {
+        return NULL;
+    }
     
     console->startTime = mach_absolute_time();
     
@@ -19,7 +23,7 @@ EagleDbConsole* EagleDbConsole_New(void)
  */
 char* EagleDbConsole_GetLine(void)
 {
-    char *line = malloc(100), *linep = line, *linen = NULL;
+    char *line = EagleMemory_Allocate("EagleDbConsole_GetLine.1", 100), *linep = line, *linen = NULL;
     size_t lenmax = 100, len = lenmax;
     int c;
     
@@ -38,7 +42,7 @@ char* EagleDbConsole_GetLine(void)
             linen = realloc(linep, lenmax *= 2);
             
             if(linen == NULL) {
-                free(linep);
+                EagleMemory_Free(linep);
                 return NULL;
             }
             line = linen + (line - linep);
@@ -70,17 +74,17 @@ void EagleDbConsole_run(EagleDbConsole *console)
         /* check for quit */
         if(NULL != cmd && strcmp(cmd, "\\q") == 0) {
             printf("Bye.\n");
-            free(cmd);
+            EagleMemory_Free(cmd);
             break;
         }
         
         /* parse */
         EagleDbInstance_execute(db, cmd);
-        free(cmd);
+        EagleMemory_Free(cmd);
     }
 }
 
 void EagleDbConsole_Delete(EagleDbConsole *console)
 {
-    free(console);
+    EagleMemory_Free(console);
 }

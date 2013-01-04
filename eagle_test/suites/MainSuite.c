@@ -1,10 +1,11 @@
+#include "MainSuite.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "MainSuite.h"
 #include "EagleData.h"
 #include "EaglePageOperations.h"
 #include "EagleInstance.h"
 #include "EagleLinkedList.h"
+#include "EagleMemory.h"
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
@@ -39,7 +40,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_GreaterThanInt)
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     // clean up
-    free(int1);
+    EagleMemory_Free(int1);
     EaglePage_Delete(page);
     EaglePage_Delete(out);
 }
@@ -65,7 +66,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_LessThanInt)
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     // clean up
-    free(int1);
+    EagleMemory_Free(int1);
     EaglePage_Delete(page);
     EaglePage_Delete(out);
 }
@@ -256,6 +257,7 @@ CUNIT_TEST(MainSuite, EaglePlanOperation_toString)
     char *msg = (char*) EaglePlanOperation_toString(op);
     CUNIT_ASSERT_EQUAL_STRING(msg, "some description");
     EaglePlanOperation_Delete(op);
+    EagleMemory_Free(msg);
 }
 
 CUNIT_TEST(MainSuite, EaglePlan_Delete)
@@ -268,7 +270,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan *plan = EaglePlan_New(0);
     char *msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n");
-    free(msg);
+    EagleMemory_Free(msg);
     
     // add some buffer providers
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, NULL);
@@ -282,7 +284,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     
     msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
-    free(msg);
+    EagleMemory_Free(msg);
     
     EaglePlan_Delete(plan);
 }
@@ -293,7 +295,7 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
     char *description = EaglePlanBufferProvider_toString(bp);
     CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something, type = INTEGER");
-    free(description);
+    EagleMemory_Free(description);
     EaglePlanBufferProvider_Delete(bp);
 }
 
@@ -388,7 +390,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     for(int i = 0; i < testDataSize; ++i) {
         int *ptr = EagleData_Int(testData[i]);
         EaglePageProvider_add(provider, ptr);
-        free(ptr);
+        EagleMemory_Free(ptr);
     }
     
     // get first page
@@ -434,7 +436,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
     CUNIT_VERIFY_NULL(EaglePageProvider_nextPage(provider));
     
     // clean up
-    free(testData);
+    EagleMemory_Free(testData);
     EaglePageProvider_Delete(provider);
 }
 

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "EagleData.h"
 #include "EagleUtils.h"
+#include "EagleMemory.h"
 
 /**
  Allocate an integer and return the pointer.
@@ -11,7 +12,10 @@
  */
 int* EagleData_Int(int value)
 {
-    int *r = (int*) malloc(sizeof(int));
+    int *r = (int*) EagleMemory_Allocate("EagleData_Int.1", sizeof(int));
+    if(NULL == r) {
+        return NULL;
+    }
     *r = value;
     return r;
 }

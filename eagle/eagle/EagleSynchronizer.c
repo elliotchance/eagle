@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "EagleSynchronizer.h"
+#include "EagleMemory.h"
 
 /**
  Create a new EagleLock.
@@ -11,7 +12,10 @@
  */
 EagleLock* EagleSynchronizer_CreateLock(void)
 {
-    EagleLock *lock = (EagleLock*) malloc(sizeof(EagleLock));
+    EagleLock *lock = (EagleLock*) EagleMemory_Allocate("EagleSynchronizer_CreateLock.1", sizeof(EagleLock));
+    if(NULL == lock) {
+        return NULL;
+    }
     pthread_mutex_init(&lock->mutex, NULL);
     return lock;
 }
@@ -49,5 +53,5 @@ void EagleLock_Delete(EagleLock *lock)
 {
     pthread_mutex_destroy(&lock->mutex);
     pthread_mutexattr_destroy(&lock->attr);
-    free(lock);
+    EagleMemory_Free(lock);
 }

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "EagleDbSqlValue.h"
+#include "EagleMemory.h"
 
 /**
  Create a new Value with an integer.
@@ -10,7 +11,10 @@
  */
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithInteger.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeInteger;
@@ -21,7 +25,10 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithAsterisk.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeAsterisk;
@@ -31,7 +38,10 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void)
 
 EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
 {
-    EagleDbSqlValue *v = (EagleDbSqlValue*) malloc(sizeof(EagleDbSqlValue));
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithIdentifier.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeIdentifier;
@@ -43,9 +53,9 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
     if(EagleDbSqlValueTypeIdentifier == value->type) {
-        free(value->value.identifier);
+        EagleMemory_Free(value->value.identifier);
     }
-    free((void*) value);
+    EagleMemory_Free((void*) value);
 }
 
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value)

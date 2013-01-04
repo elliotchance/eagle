@@ -11,20 +11,10 @@
  */
 typedef enum {
     
-    /**
-     Everything is fine.
-     */
-    EaglePlanErrorNone = 0,
-    
-    /**
-     If an expression cannot be compiled (i.e. syntax error)
-     */
-    EaglePlanErrorCompile = 1,
-    
-    /**
-     Unknown column / identifier.
-     */
-    EaglePlanErrorIdentifier = 2
+    EaglePlanErrorNone = 0,       /**< Everything is fine. */
+    EaglePlanErrorCompile = 1,    /**< If an expression cannot be compiled (i.e. syntax error) */
+    EaglePlanErrorIdentifier = 2, /**< Unknown column / identifier. */
+    EaglePlanErrorNoSuchTable = 4 /**< The table name does not exist in the schema. */
     
 } EaglePlanError;
 

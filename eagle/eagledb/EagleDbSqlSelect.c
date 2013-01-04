@@ -2,13 +2,18 @@
 #include <stdio.h>
 #include <string.h>
 #include "EagleDbSqlSelect.h"
+#include "EagleMemory.h"
+#include "EagleUtils.h"
 
 /**
  Create a new EagleDbSqlSelect.
  */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 {
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) malloc(sizeof(EagleDbSqlSelect));
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) EagleMemory_Allocate("EagleDbSqlSelect_New.1", sizeof(EagleDbSqlSelect));
+    if(NULL == select) {
+        return NULL;
+    }
     
     select->expressionType = EagleDbSqlExpressionTypeSelect;
     select->tableName = NULL;
@@ -28,15 +33,15 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
         return;
     }
     
-    free(select->tableName);
+    EagleMemory_Free(select->tableName);
     EagleDbSqlExpression_Delete(select->whereExpression);
     
     for(i = 0; i < select->usedSelectExpressions; ++i) {
         EagleDbSqlExpression_Delete(select->selectExpressions[i]);
     }
-    free(select->selectExpressions);
+    EagleMemory_Free(select->selectExpressions);
     
-    free(select);
+    EagleMemory_Free(select);
 }
 
 /**
@@ -67,30 +72,53 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     EaglePlan *plan;
     EagleDbSqlExpression **expr;
     
+    if(NULL == select) {
+        return NULL;
+    }
+    if(NULL == db) {
+        return NULL;
+    }
+    
     /* create the plan skeleton */
     plan = EaglePlan_New(pageSize);
     
     /* the providers will contain the result */
     plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
-    plan->result = (EaglePageProvider**) calloc((size_t) plan->resultFields, sizeof(EaglePageProvider*));
+    plan->result = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.1", sizeof(EaglePageProvider*), plan->resultFields);
+    if(NULL == plan->result) {
+        EaglePlan_Delete(plan);
+        return NULL;
+    }
+    
     for(i = 0; i < plan->resultFields; ++i) {
         char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
         plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, desc);
-        free(desc);
+        EagleMemory_Free(desc);
     }
     
     /* get data */
-    for(i = 0; i < db->td->table->usedColumns; ++i) {
+    EagleDbTable *table = EagleDbInstance_getTable(db, select->tableName);
+    if(NULL == table) {
+        plan->errorCode = EaglePlanErrorNoSuchTable;
+        plan->errorMessage = "";
+        return NULL;
+    }
+    for(i = 0; i < table->usedColumns; ++i) {
         EaglePlanBufferProvider *bp;
         
-        EaglePageProvider_reset(db->td->providers[i]);
-        bp = EaglePlanBufferProvider_New(i, db->td->providers[i], EagleFalse);
+        EaglePageProvider_reset(table->td->providers[i]);
+        bp = EaglePlanBufferProvider_New(i, table->td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp);
     }
     
     /* merge expressions */
     exprCount = EagleDbSqlSelect_getExpressionsCount(select);
-    expr = (EagleDbSqlExpression**) calloc((size_t) exprCount, sizeof(EagleDbSqlExpression*));
+    expr = (EagleDbSqlExpression**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.2", sizeof(EagleDbSqlExpression*), exprCount);
+    if(NULL == expr) {
+        EaglePlan_Delete(plan);
+        return NULL;
+    }
+    
     for(expri = 0; expri < EagleDbSqlSelect_getFieldCount(select); ++expri) {
         expr[expri] = select->selectExpressions[expri];
     }

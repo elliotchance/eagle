@@ -1,15 +1,29 @@
 #include <stdlib.h>
 #include "EaglePlanJob.h"
+#include "EagleMemory.h"
 
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan)
 {
     int i;
-    EaglePlanJob *job = (EaglePlanJob*) malloc(sizeof(EaglePlanJob));
+    EaglePlanJob *job;
+    
+    if(NULL == plan) {
+        return NULL;
+    }
+    
+    job = (EaglePlanJob*) EagleMemory_Allocate("EaglePlanJob_New.1", sizeof(EaglePlanJob));
+    if(NULL == job) {
+        return NULL;
+    }
     
     job->plan = plan;
     
     /* initialize all buffers now */
-    job->buffers = (EaglePage**) calloc((size_t) plan->buffersNeeded, sizeof(EaglePage*));
+    job->buffers = (EaglePage**) EagleMemory_MultiAllocate("EaglePlanJob_New.2", sizeof(EaglePage*), plan->buffersNeeded);
+    if(NULL == job->buffers){
+        EaglePlanJob_Delete(job);
+        return NULL;
+    }
     for(i = 0; i < plan->buffersNeeded; ++i) {
         job->buffers[i] = EaglePage_Alloc(plan->bufferTypes[i], plan->pageSize);
     }
@@ -25,11 +39,12 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
         return;
     }
     
-    for(i = 0; i < job->plan->buffersNeeded; ++i) {
-        EaglePage_Delete(job->buffers[i]);
+    if(NULL != job->buffers) {
+        for(i = 0; i < job->plan->buffersNeeded; ++i) {
+            EaglePage_Delete(job->buffers[i]);
+        }
+        EagleMemory_Free((void*) job->buffers);
     }
-    free((void*) job->buffers);
     
-    free((void*) job);
-    job = NULL;
+    EagleMemory_Free((void*) job);
 }
