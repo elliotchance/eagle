@@ -6,6 +6,7 @@
 #include "EagleInstance.h"
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
