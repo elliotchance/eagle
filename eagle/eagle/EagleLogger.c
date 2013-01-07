@@ -72,19 +72,19 @@ char* EagleLoggerSeverity_toString(EagleLoggerSeverity severity)
     switch(severity) {
             
         case EagleLoggerSeverityDebug:
-            return strdup("DEBUG");
+            return "DEBUG";
             
         case EagleLoggerSeverityInfo:
-            return strdup("INFO");
+            return "INFO";
             
         case EagleLoggerSeverityUserError:
-            return strdup("USERERROR");
+            return "USERERROR";
             
         case EagleLoggerSeverityError:
-            return strdup("ERROR");
+            return "ERROR";
             
         case EagleLoggerSeverityFatal:
-            return strdup("FATAL");
+            return "FATAL";
             
     }
 }

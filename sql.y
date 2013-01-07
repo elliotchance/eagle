@@ -144,6 +144,9 @@
 
 %%
 
+/*
+ ( statement? T_END )?
+ */
 input:
     {
         yyparse_ast = NULL;
@@ -161,6 +164,9 @@ input:
     T_END
 ;
 
+/*
+ select_statement | create_table_statement
+ */
 statement:
     select_statement {
         /* bubble up yyreturn */
@@ -173,6 +179,9 @@ statement:
     }
 ;
 
+/*
+ K_CREATE K_TABLE IDENTIFIER T_BRACKET_OPEN column_definition_list T_BRACKET_CLOSE
+ */
 create_table_statement:
     K_CREATE K_TABLE {
         yyreturn_push(yyobj_push((void*) EagleDbTable_New(NULL)));
@@ -188,6 +197,9 @@ create_table_statement:
     T_BRACKET_CLOSE
 ;
 
+/*
+ column_definition next_column_definition
+ */
 column_definition_list:
     {
         yyobj_push(yylist_new());
@@ -202,6 +214,9 @@ column_definition_list:
     }
 ;
 
+/*
+ IDENTIFIER data_type
+ */
 column_definition:
     IDENTIFIER {
         yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger)));
@@ -212,6 +227,9 @@ column_definition:
     }
 ;
 
+/*
+ K_INTEGER | K_TEXT
+ */
 data_type:
     K_INTEGER {
         yy_data_type = EagleDataTypeInteger;
@@ -222,6 +240,9 @@ data_type:
     }
 ;
 
+/*
+ ( T_COMMA column_definition next_column_definition )?
+ */
 next_column_definition:
     |
     T_COMMA column_definition {
@@ -231,6 +252,9 @@ next_column_definition:
     next_column_definition
 ;
 
+/*
+ K_SELECT column_expression_list K_FROM IDENTIFIER where_expression
+ */
 select_statement:
     K_SELECT {
         yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
@@ -250,6 +274,9 @@ select_statement:
     }
 ;
 
+/*
+ column_expression next_column_expression
+ */
 column_expression_list:
     {
         yyobj_push(yylist_new());
@@ -264,6 +291,9 @@ column_expression_list:
     }
 ;
 
+/*
+ ( T_COMMA column_expression next_column_expression )?
+ */
 next_column_expression:
     |
     T_COMMA column_expression {
@@ -273,57 +303,69 @@ next_column_expression:
     next_column_expression
 ;
 
+/*
+ ( K_WHERE expression )?
+ */
 where_expression:
-        {
-            /* no where clause */
-            yyreturn_push(NULL);
-        }
+    {
+        /* no where clause */
+        yyreturn_push(NULL);
+    }
     |
-        K_WHERE expression {
-            /* bubble up expression */
-        }
+    K_WHERE expression {
+        /* bubble up expression */
+    }
 ;
 
+/*
+ T_ASTERISK | expression
+ */
 column_expression:
-        T_ASTERISK {
-            yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
-        }
+    T_ASTERISK {
+        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
+    }
     |
-        expression {
-            /* bubble up yyreturn */
-        }
+    expression {
+        /* bubble up yyreturn */
+    }
 ;
 
+/*
+ value ( ( T_PLUS | T_EQUALS ) value )?
+ */
 expression:
-        value {
-            /* bubble up yyreturn */
-        }
+    value {
+        /* bubble up yyreturn */
+    }
     |
-        value {
-            void *last = yyreturn_pop();
-            yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
-        }
-        T_PLUS {
-            ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorPlus;
-        }
-        value {
-            void *last = yyreturn_pop();
-            ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
-        }
+    value {
+        void *last = yyreturn_pop();
+        yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
+    }
+    T_PLUS {
+        ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorPlus;
+    }
+    value {
+        void *last = yyreturn_pop();
+        ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
+    }
     |
-        value {
-            void *last = yyreturn_pop();
-            yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
-        }
-        T_EQUALS {
-            ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorEquals;
-        }
-        value {
-            void *last = yyreturn_pop();
-            ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
-        }
+    value {
+        void *last = yyreturn_pop();
+        yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
+    }
+    T_EQUALS {
+        ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorEquals;
+    }
+    value {
+        void *last = yyreturn_pop();
+        ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
+    }
 ;
 
+/*
+ INTEGER | IDENTIFIER
+ */
 value:
     INTEGER {
         yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last))));

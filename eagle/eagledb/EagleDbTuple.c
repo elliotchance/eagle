@@ -5,6 +5,7 @@
 #include "EagleData.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
@@ -46,7 +47,8 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
 {
     if(tuple->table->columns[position]->type != EagleDataTypeInteger) {
-        EagleUtils_Fatal("Wrong type!");
+        EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
+        return;
     }
     tuple->data[position] = EagleData_Int(value);
 }
@@ -54,7 +56,8 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
 void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
 {
     if(tuple->table->columns[position]->type != EagleDataTypeText) {
-        EagleUtils_Fatal("Wrong type!");
+        EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
+        return;
     }
     
     ((char**) tuple->data)[position] = strdup(value);
