@@ -4,6 +4,7 @@
 #include "EagleDbTableData.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
 {
@@ -56,7 +57,8 @@ void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)
         switch(td->providers[i]->type) {
                 
             case EagleDataTypeUnknown:
-                EagleUtils_Fatal("Unknown type.");
+                EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+                return;
                 
             case EagleDataTypeInteger:
                 EaglePageProvider_add(td->providers[i], tuple->data[i]);

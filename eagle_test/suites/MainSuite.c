@@ -6,6 +6,7 @@
 #include "EagleInstance.h"
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EaglePage* MainSuite_GeneratePage(int pageSize)
 {
@@ -457,6 +458,15 @@ CUNIT_TEST(MainSuite, EagleInstance_Delete)
     EagleInstance_Delete(NULL);
 }
 
+CUNIT_TEST(MainSuite, EagleLoggerSeverity_toString)
+{
+    CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityDebug), "DEBUG");
+    CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityInfo), "INFO");
+    CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityUserError), "USERERROR");
+    CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityError), "ERROR");
+    CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityFatal), "FATAL");
+}
+
 /**
  * The suite init function.
  */
@@ -496,6 +506,7 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLoggerSeverity_toString));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));

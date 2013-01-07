@@ -3,6 +3,7 @@
 #include "EaglePageOperations.h"
 #include "EaglePageProvider.h"
 #include "EagleUtils.h"
+#include "EagleLogger.h"
 
 #include <unistd.h>
 
@@ -109,7 +110,8 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
             switch(provider->type) {
                     
                 case EagleDataTypeUnknown:
-                    EagleUtils_Fatal("Unknown type");
+                    EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+                    return;
                     
                 case EagleDataTypeInteger:
                 {

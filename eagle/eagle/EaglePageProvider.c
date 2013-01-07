@@ -7,6 +7,7 @@
 #include "EagleUtils.h"
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name)
 {
@@ -165,7 +166,8 @@ EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data)
     switch(epp->type) {
             
         case EagleDataTypeUnknown:
-            EagleUtils_Fatal("Unknown type.");
+            EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            return EagleFalse;
             
         case EagleDataTypeInteger:
             ((int*) page->data)[page->count++] = *((int*) data);
@@ -196,7 +198,8 @@ EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int re
     switch(type) {
             
         case EagleDataTypeUnknown:
-            EagleUtils_Fatal("");
+            EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            return NULL;
             
         case EagleDataTypeInteger:
             pageProvider->type = EagleDataTypeInteger;

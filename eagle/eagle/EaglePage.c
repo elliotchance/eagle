@@ -4,6 +4,7 @@
 #include "EaglePage.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 /**
  Create a new EaglePage.
@@ -92,7 +93,8 @@ EaglePage* EaglePage_Copy(EaglePage *page)
     switch(page->type) {
             
         case EagleDataTypeUnknown:
-            EagleUtils_Fatal("Cannot page of Unknown type.");
+            EagleLogger_Log(EagleLoggerSeverityError, "Cannot page of Unknown type.");
+            return NULL;
         
         case EagleDataTypeInteger:
             return EaglePage_CopyInt_(page);

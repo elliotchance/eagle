@@ -5,6 +5,7 @@
 #include "EagleInstance.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
@@ -44,7 +45,8 @@ void* EagleWorker_begin(void *obj)
                     if(epo->destination >= job->plan->buffersNeeded) {
                         char msg[1024];
                         sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->destination, job->plan->buffersNeeded);
-                        EagleUtils_Fatal(msg);
+                        EagleLogger_Log(EagleLoggerSeverityError, msg);
+                        return NULL;
                     }
                     destination = job->buffers[epo->destination];
                 }
@@ -52,7 +54,8 @@ void* EagleWorker_begin(void *obj)
                     if(epo->source1 >= job->plan->buffersNeeded) {
                         char msg[1024];
                         sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source1, job->plan->buffersNeeded);
-                        EagleUtils_Fatal(msg);
+                        EagleLogger_Log(EagleLoggerSeverityError, msg);
+                        return NULL;
                     }
                     source1 = job->buffers[epo->source1];
                 }
@@ -60,7 +63,8 @@ void* EagleWorker_begin(void *obj)
                     if(epo->source2 >= job->plan->buffersNeeded) {
                         char msg[1024];
                         sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source2, job->plan->buffersNeeded);
-                        EagleUtils_Fatal(msg);
+                        EagleLogger_Log(EagleLoggerSeverityError, msg);
+                        return NULL;
                     }
                     source2 = job->buffers[epo->source2];
                 }

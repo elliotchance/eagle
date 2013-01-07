@@ -4,6 +4,7 @@
 #include "EagleInstance.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 /**
  Create a new eagle instance. The instance is effectivly a database, with a certain amount of workers (threads) that
@@ -79,7 +80,8 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
         if(provider->destinationBuffer >= plan->buffersNeeded) {
             char msg[1024];
             sprintf(msg, "destination %d is greater than allowed %d buffers!\n", provider->destinationBuffer, plan->buffersNeeded);
-            EagleUtils_Fatal(msg);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return NULL;
         }
         EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
