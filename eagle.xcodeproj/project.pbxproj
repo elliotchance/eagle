@@ -78,6 +78,7 @@
 		8BD9E44D1675729A005C3BDE /* DBSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E4191675710B005C3BDE /* DBSuite.c */; };
 		8BD9E44E1675729A005C3BDE /* MainSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E41B1675710B005C3BDE /* MainSuite.c */; };
 		8BD9E44F1675729A005C3BDE /* TestSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E41D1675710B005C3BDE /* TestSuite.c */; };
+		8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +215,8 @@
 		8BD9E41C1675710B005C3BDE /* MainSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainSuite.h; sourceTree = "<group>"; };
 		8BD9E41D1675710B005C3BDE /* TestSuite.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = TestSuite.c; sourceTree = "<group>"; };
 		8BD9E41E1675710B005C3BDE /* TestSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSuite.h; sourceTree = "<group>"; };
+		8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BenchSuite.c; sourceTree = "<group>"; };
+		8BFDB9D2169A985200D3E8B0 /* BenchSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BenchSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +389,8 @@
 		8BD9E4181675710B005C3BDE /* suites */ = {
 			isa = PBXGroup;
 			children = (
+				8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */,
+				8BFDB9D2169A985200D3E8B0 /* BenchSuite.h */,
 				8BD9E4191675710B005C3BDE /* DBSuite.c */,
 				8BD9E41A1675710B005C3BDE /* DBSuite.h */,
 				8BD9E41B1675710B005C3BDE /* MainSuite.c */,
@@ -597,6 +602,7 @@
 				8B99A02D1694C3AA00C6D2B1 /* EagleMemory.c in Sources */,
 				8B99A03016954F9000C6D2B1 /* MemorySuite.c in Sources */,
 				8B61B7C91696BB2C00B27573 /* EagleLogger.c in Sources */,
+				8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

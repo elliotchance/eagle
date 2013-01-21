@@ -20,7 +20,7 @@ char* yyerrors_last();
 void yylex_init();
 void yylex_free();
 
-EagleDbInstance* EagleDbInstance_New(void)
+EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
     int i;
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
@@ -31,6 +31,8 @@ EagleDbInstance* EagleDbInstance_New(void)
     if(NULL == db) {
         return NULL;
     }
+    
+    db->pageSize = pageSize;
     
     /* schemas */
     db->allocatedSchemas = 10;

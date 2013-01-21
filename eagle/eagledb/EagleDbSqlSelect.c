@@ -66,7 +66,6 @@ int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select)
 
 EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
 {
-    int pageSize = 10;
     int i;
     int exprCount, whereExpressionId = -1, expri = 0;
     EaglePlan *plan;
@@ -81,7 +80,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     }
     
     /* create the plan skeleton */
-    plan = EaglePlan_New(pageSize);
+    plan = EaglePlan_New(db->pageSize);
     
     /* the providers will contain the result */
     plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
@@ -93,7 +92,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     
     for(i = 0; i < plan->resultFields; ++i) {
         char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
-        plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, desc);
+        plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, db->pageSize, desc);
         EagleMemory_Free(desc);
     }
     

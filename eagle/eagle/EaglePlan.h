@@ -86,6 +86,11 @@ typedef struct {
     uint64_t splitTime;
     
     /**
+     This is the total amount of time the plan has spent waiting for locks.
+     */
+    uint64_t lockWaitTime;
+    
+    /**
      The number of buffers needed for the execution.
      */
     int buffersNeeded;

@@ -5,6 +5,7 @@
 #include "EaglePage.h"
 #include "EagleSynchronizer.h"
 #include "EagleBoolean.h"
+#include "EagleLinkedList.h"
 
 struct EaglePageProvider_ {
     
@@ -74,6 +75,11 @@ struct EaglePageProvider_ {
      */
     EagleDataType type;
     
+    /**
+     This is used by streams. It allows it to keep the page it is upto when requesting the next page.
+     */
+    EagleLinkedListItem *cursor;
+    
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 
@@ -92,6 +98,8 @@ void EaglePageProvider_reset(EaglePageProvider *epp);
 EaglePageProvider* EaglePageProvider_New_(EagleDataType type, int recordsPerPage);
 int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);
 EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp);
+int EaglePageProvider_pagesRemainingFromInt_(EaglePageProvider *epp);
+EaglePage* EaglePageProvider_nextPageFromInt_(EaglePageProvider *epp);
 EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data);
 EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
 int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
