@@ -6,7 +6,7 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 
-EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
+EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
 {
     int i;
     EagleDbTableData *td;
@@ -34,7 +34,7 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table)
     }
     
     for(i = 0; i < td->usedProviders; ++i) {
-        td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, 1000, table->columns[i]->name);
+        td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, pageSize, table->columns[i]->name);
     }
     
     return td;

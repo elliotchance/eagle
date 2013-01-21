@@ -126,7 +126,7 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
                     EaglePageProvider_add(provider, source2data[i]);
                     break;
                 }
-                    
+                
             }
         }
     }

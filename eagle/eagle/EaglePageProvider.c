@@ -49,6 +49,8 @@ EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage
     }
     
     pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
+    pageProvider->nextPage = EaglePageProvider_nextPageFromInt_;
+    pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromInt_;
     
     for(i = 0; i < recordsPerPage; ++i) {
         data[i] = value;
@@ -91,6 +93,12 @@ int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp)
     return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
 }
 
+int EaglePageProvider_pagesRemainingFromInt_(EaglePageProvider *epp)
+{
+    /* unlimited supply of pages */
+    return 1;
+}
+
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
 {
     EaglePage *nextPage;
@@ -102,6 +110,17 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
     
     EagleSynchronizer_Unlock(epp->nextPageLock);
     return nextPage;
+}
+
+EaglePage* EaglePageProvider_nextPageFromInt_(EaglePageProvider *epp)
+{
+    int *begin = (int*) epp->records;
+    EaglePage *page;
+    
+    page = EaglePage_New(EagleDataTypeInteger, begin, epp->recordsPerPage, epp->recordsPerPage, epp->offsetRecords, EagleFalse);
+    epp->offsetRecords += epp->recordsPerPage;
+    
+    return page;
 }
 
 EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp)
@@ -218,6 +237,7 @@ EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int re
     pageProvider->add = EaglePageProvider_addStream_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
     pageProvider->name = (NULL == name ? NULL : strdup(name));
+    pageProvider->cursor = NULL;
     
     return pageProvider;
 }
@@ -229,22 +249,24 @@ int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp)
 
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp)
 {
-    int i = 0;
     EagleLinkedList *list = (EagleLinkedList*) epp->records;
-    EagleLinkedListItem *begin;
+    EaglePage *page;
     
-    for(begin = EagleLinkedList_begin(list); begin != NULL; begin = begin->next) {
-        if(i == epp->offsetRecords) {
-            /* always give a duplicate page, so that the original page is not modified or freed */
-            EaglePage *page = EaglePage_Copy((EaglePage*) begin->obj);
-            page->recordOffset = epp->offsetRecords;
-            epp->offsetRecords += page->count;
-            return page;
-        }
-        i += ((EaglePage*) begin->obj)->count;
+    if(NULL == epp->cursor) {
+        epp->cursor = EagleLinkedList_begin(list);
     }
     
-    return NULL;
+    /* there is no more pages to give */
+    if(epp->offsetRecords >= epp->totalRecords || NULL == epp->cursor) {
+        return NULL;
+    }
+    
+    /* always give a duplicate page, so that the original page is not modified or freed */
+    page = EaglePage_Copy((EaglePage*) epp->cursor->obj);
+    page->recordOffset = epp->offsetRecords;
+    epp->offsetRecords += page->count;
+    epp->cursor = epp->cursor->next;
+    return page;
 }
 
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data)
@@ -278,4 +300,5 @@ void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp)
 void EaglePageProvider_resetFromStream_(EaglePageProvider *epp)
 {
     epp->offsetRecords = 0;
+    epp->cursor = NULL;
 }

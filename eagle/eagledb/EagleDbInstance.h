@@ -35,9 +35,11 @@ typedef struct {
     
     int usedSchemas;
     
+    int pageSize;
+    
 } EagleDbInstance;
 
-EagleDbInstance* EagleDbInstance_New(void);
+EagleDbInstance* EagleDbInstance_New(int pageSize);
 void EagleDbInstance_Delete(EagleDbInstance *db);
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 void EagleDbInstance_executeSelect(EagleDbInstance *db);

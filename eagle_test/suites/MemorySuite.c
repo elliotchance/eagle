@@ -75,7 +75,7 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInstance_New.1");
     
-    CUNIT_ASSERT_NULL(EagleDbInstance_New());
+    CUNIT_ASSERT_NULL(EagleDbInstance_New(1000));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -175,7 +175,7 @@ CUNIT_TEST(MemorySuite, EagleDbTableData_New_1)
     EagleMemory_Mock("EagleDbTableData_New.1");
     
     EagleDbTable *table = EagleDbTable_New("mytable");
-    CUNIT_ASSERT_NULL(EagleDbTableData_New(table));
+    CUNIT_ASSERT_NULL(EagleDbTableData_New(table, 1000));
     EagleDbTable_Delete(table);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -190,7 +190,7 @@ CUNIT_TEST(MemorySuite, EagleDbTableData_New_2)
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbColumn *column = EagleDbColumn_New("test", EagleDataTypeInteger);
     EagleDbTable_addColumn(table, column);
-    CUNIT_ASSERT_NULL(EagleDbTableData_New(table));
+    CUNIT_ASSERT_NULL(EagleDbTableData_New(table, 1000));
     EagleDbTable_Delete(table);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -571,7 +571,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_1)
     EagleMemory_Mock("EagleDbSqlSelect_parse.1");
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
-    EagleDbInstance *instance = EagleDbInstance_New();
+    EagleDbInstance *instance = EagleDbInstance_New(1000);
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(NULL, NULL));
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
     EagleDbSqlSelect_Delete(select);
@@ -588,11 +588,11 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup("mytable");
-    EagleDbInstance *instance = EagleDbInstance_New();
+    EagleDbInstance *instance = EagleDbInstance_New(1000);
     
     EagleDbSchema *schema = EagleDbSchema_New("default");
     EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTableData *td = EagleDbTableData_New(table);
+    EagleDbTableData *td = EagleDbTableData_New(table, 1000);
     EagleDbSchema_addTable(schema, td);
     
     EagleDbInstance_addSchema(instance, schema);
