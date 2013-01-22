@@ -1,4 +1,6 @@
 #!/bin/bash
 
 ISSUE=`git branch | grep "* " | cut -c4-`
-echo -n "[#$ISSUE] `cat $1`" > $1
+if [ "`echo $ISSUE | egrep ^[[:digit:]]+$`" != "" ]; then
+	echo -n "[#$ISSUE] `cat $1`" > $1
+fi
