@@ -11,24 +11,20 @@
     #include "EagleDbColumn.h"
     #include "EagleDbInstance.h"
     #include "EagleMemory.h"
-
-    int yyerror(char *s);
-    int yylex();
-    int yylex_destroy();
+    #include "EagleDbParser.h"
     
     EagleDbSqlStatementType yystatementtype = EagleDbSqlStatementTypeNone;
-
-    /**
-     Contains the first 100 error messages.
-     */
-    char **yyerrors = NULL;
-    int yyerrors_length = 0;
     
     /**
      Push the error onto the stack.
      */
     char* yyerrors_push(void *ptr)
     {
+        /* we have reached the maximum amount of errors, in this case we just don't store any more errors */
+        if(yyerrors_length >= MAX_YYERRORS) {
+            free(ptr);
+            return NULL;
+        }
         return yyerrors[yyerrors_length++] = ptr;
     }
     
@@ -39,52 +35,50 @@
     {
         return yyerrors[yyerrors_length - 1];
     }
-
-    /**
-     This is the pointer to the final AST returned by the parser.
-     */
-    void *yyparse_ast = NULL;
-    
-    void **yyobj = NULL;
-    int yyobj_length = 0;
     
     /**
      Anything that is allocated during the parsing must call yyobj_push(), if the parsing fails this stack will do the cleanup.
      */
     void* yyobj_push(void *ptr)
     {
+        if(yyobj_length >= MAX_YYOBJ) {
+            char *msg = (char*) malloc(64);
+            sprintf(msg, "Cannot parse SQL. Maximum depth of %d exceeded.", MAX_YYOBJ);
+            yyerrors_push(msg);
+            return NULL;
+        }
         return yyobj[yyobj_length++] = ptr;
     }
     
-    /**
-     When returning an array of something you can use this mechanism.
-     */
-    void **yylist = NULL;
-    int yylist_length = 0;
-    
     void* yylist_push(void *ptr)
     {
+        if(yylist_length >= MAX_YYLIST) {
+            char *msg = (char*) malloc(64);
+            sprintf(msg, "Cannot parse SQL. Maximum list size of %d exceeded.", MAX_YYLIST);
+            yyerrors_push(msg);
+            return NULL;
+        }
         return yylist[yylist_length++] = ptr;
     }
     
     void* yylist_new()
     {
-        yylist = (void**) EagleMemory_MultiAllocate("yylist_new.1", sizeof(void*), 256);
+        yylist = (void**) EagleMemory_MultiAllocate("yylist_new.1", sizeof(void*), MAX_YYLIST);
         yylist_length = 0;
         return yylist;
     }
-
-    /**
-     A return stack. Maximum depth is 256.
-     */
-    void **yyreturn = NULL;
-    int yyreturn_length = 0;
 
     /**
      Push the return value onto the stack.
      */
     void* yyreturn_push(void *ptr)
     {
+        if(yyreturn_length >= MAX_YYRETURN) {
+            char *msg = (char*) malloc(64);
+            sprintf(msg, "Cannot parse SQL. Maximum return depth of %d exceeded.", MAX_YYRETURN);
+            yyerrors_push(msg);
+            return NULL;
+        }
         return yyreturn[yyreturn_length++] = ptr;
     }
 
@@ -386,13 +380,13 @@ int yyerror(char *s)
 
 void yylex_init()
 {
-    yyobj = (void**) EagleMemory_MultiAllocate("yylex_init.1", sizeof(void*), 256);
+    yyobj = (void**) EagleMemory_MultiAllocate("yylex_init.1", sizeof(void*), MAX_YYOBJ);
     yyobj_length = 0;
     
-    yyerrors = (char**) EagleMemory_MultiAllocate("yylex_init.2", sizeof(char*), 100);
+    yyerrors = (char**) EagleMemory_MultiAllocate("yylex_init.2", sizeof(char*), MAX_YYERRORS);
     yyerrors_length = 0;
     
-    yyreturn = (void**) EagleMemory_MultiAllocate("yylex_init.3", sizeof(void*), 256);
+    yyreturn = (void**) EagleMemory_MultiAllocate("yylex_init.3", sizeof(void*), MAX_YYRETURN);
     yyreturn_length = 0;
 }
 
