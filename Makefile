@@ -34,12 +34,12 @@ build_eagle:
 
 build_eagle_test:
 	xcodebuild -project eagle.xcodeproj -configuration Debug -target eagle_test build
+
+bench: build_eagle_test
+	build/Debug/eagle_test bench
 	
 # test for leaks
 leaks: build_eagle_test
-	# check that there are no free()
-	
-	
 	- killall eagle_test
 	MallocStackLogging=1 build/Debug/eagle_test wait &
 	sleep 2

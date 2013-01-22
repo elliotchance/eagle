@@ -50,7 +50,6 @@
 		8BCA5C2C167C995900FDB186 /* EagleDbTableData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */; };
 		8BCA5C2F167C9CB800FDB186 /* EagleDbTuple.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2E167C9CB800FDB186 /* EagleDbTuple.c */; };
 		8BCA5C30167C9CB800FDB186 /* EagleDbTuple.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2E167C9CB800FDB186 /* EagleDbTuple.c */; };
-		8BCA5C48167DF58F00FDB186 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C47167DF58F00FDB186 /* main.c */; };
 		8BD9E41F16757166005C3BDE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3FC16756FF4005C3BDE /* main.c */; };
 		8BD9E42016757166005C3BDE /* EagleData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3DB16756FF4005C3BDE /* EagleData.c */; };
 		8BD9E42216757166005C3BDE /* EagleInstance.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD9E3DD16756FF4005C3BDE /* EagleInstance.c */; };
@@ -125,15 +124,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BCA5C42167DF58F00FDB186 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -182,7 +172,6 @@
 		8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbTableData.c; sourceTree = "<group>"; };
 		8BCA5C2D167C9BC900FDB186 /* EagleDbTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbTuple.h; sourceTree = "<group>"; };
 		8BCA5C2E167C9CB800FDB186 /* EagleDbTuple.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbTuple.c; sourceTree = "<group>"; };
-		8BCA5C44167DF58F00FDB186 /* eagle_bench */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eagle_bench; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCA5C47167DF58F00FDB186 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		8BD9E3DB16756FF4005C3BDE /* EagleData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleData.c; sourceTree = "<group>"; };
 		8BD9E3DC16756FF4005C3BDE /* EagleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EagleData.h; sourceTree = "<group>"; };
@@ -243,13 +232,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BCA5C41167DF58F00FDB186 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -279,7 +261,6 @@
 				8B9AEABA166602CC0095B4F5 /* eagle */,
 				8BA065DC1674399B00991C6B /* eagle_test */,
 				8B1BF7D31675D752007C11E6 /* libsqlparser.a */,
-				8BCA5C44167DF58F00FDB186 /* eagle_bench */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -470,23 +451,6 @@
 			productReference = 8BA065DC1674399B00991C6B /* eagle_test */;
 			productType = "com.apple.product-type.tool";
 		};
-		8BCA5C43167DF58F00FDB186 /* eagle_bench */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8BCA5C4D167DF58F00FDB186 /* Build configuration list for PBXNativeTarget "eagle_bench" */;
-			buildPhases = (
-				8BCA5C40167DF58F00FDB186 /* Sources */,
-				8BCA5C41167DF58F00FDB186 /* Frameworks */,
-				8BCA5C42167DF58F00FDB186 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = eagle_bench;
-			productName = eagle_bench;
-			productReference = 8BCA5C44167DF58F00FDB186 /* eagle_bench */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -511,7 +475,6 @@
 				8B9AEAB9166602CC0095B4F5 /* eagle */,
 				8BA065DB1674399B00991C6B /* eagle_test */,
 				8B1BF7D21675D752007C11E6 /* sqlparser */,
-				8BCA5C43167DF58F00FDB186 /* eagle_bench */,
 			);
 		};
 /* End PBXProject section */
@@ -603,14 +566,6 @@
 				8B99A03016954F9000C6D2B1 /* MemorySuite.c in Sources */,
 				8B61B7C91696BB2C00B27573 /* EagleLogger.c in Sources */,
 				8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8BCA5C40167DF58F00FDB186 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8BCA5C48167DF58F00FDB186 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,22 +750,6 @@
 			};
 			name = Release;
 		};
-		8BCA5C4B167DF58F00FDB186 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				OTHER_LDFLAGS = "-ll";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		8BCA5C4C167DF58F00FDB186 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				OTHER_LDFLAGS = "-ll";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -846,15 +785,6 @@
 			buildConfigurations = (
 				8BA065E41674399B00991C6B /* Debug */,
 				8BA065E51674399B00991C6B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8BCA5C4D167DF58F00FDB186 /* Build configuration list for PBXNativeTarget "eagle_bench" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8BCA5C4B167DF58F00FDB186 /* Debug */,
-				8BCA5C4C167DF58F00FDB186 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

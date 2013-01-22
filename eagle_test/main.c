@@ -113,6 +113,7 @@ int main(int argc, char **argv)
         CUnitTests_Delete(tests);
     }
     
+    if(argc > 1 && !strcmp(argv[1], "bench"))
     {
         // add a suite to the registry
         CU_pSuite pSuite = CU_add_suite("BenchSuite", BenchSuite_init, BenchSuite_clean);

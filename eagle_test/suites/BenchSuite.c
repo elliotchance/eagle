@@ -5,6 +5,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EagleInstance.h"
 #include "EagleDbSchema.h"
+#include "EagleDbColumn.h"
 
 void yylex_init();
 void yylex_free();
@@ -36,12 +37,31 @@ EagleDbInstance* getInstance()
     for(int i = 1; i <= BenchSuite_TotalPages * BenchSuite_RecordsPerPage; ++i) {
         EagleDbTuple_setInt(tuple, 0, i);
         EagleDbTableData_insert(td, tuple);
+        
+        // this is a bit naughty, to save time on recreating the tuple for every row we are reusing it
+        free(tuple->data[0]);
+        tuple->data[0] = NULL;
     }
     EagleDbTuple_Delete(tuple);
     
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[0]), BenchSuite_TotalPages);
     
     return instance;
+}
+
+void freeInstance(EagleDbInstance *db)
+{
+    for(int i = 0; i < db->usedSchemas; ++i) {
+        for(int j = 0; j < db->schemas[i]->usedTables; ++j) {
+            /*for(int k = 0; k < db->schemas[i]->tables[j]->table->usedColumns; ++k) {
+                EagleDbColumn_Delete(db->schemas[i]->tables[j]->table->columns[k]);
+            }*/
+            EagleDbTable_Delete(db->schemas[i]->tables[j]->table);
+            EagleDbTableData_Delete(db->schemas[i]->tables[j]);
+        }
+        EagleDbSchema_Delete(db->schemas[i]);
+    }
+    EagleDbInstance_Delete(db);
 }
 
 void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan)
@@ -108,6 +128,7 @@ CUNIT_TEST(BenchSuite, SELECT)
     
     EagleInstance_Delete(eagle);
     EagleDbSqlSelect_Delete(select);
+    freeInstance(instance);
 }
 
 /**
