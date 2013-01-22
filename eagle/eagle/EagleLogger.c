@@ -42,6 +42,10 @@ void EagleLoggerEvent_Delete(EagleLoggerEvent *event)
  */
 void EagleLogger_Delete(EagleLogger *logger)
 {
+    if(NULL == logger) {
+        return;
+    }
+    
     EagleLock_Delete(logger->logLock);
     EagleMemory_Free(logger);
 }
@@ -56,6 +60,7 @@ EagleLogger *EagleLogger_Get(void)
     if(NULL == EagleLogger_Logger) {
         EagleLogger_Logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_Get.1", sizeof(EagleLogger_Logger));
         if(NULL == EagleLogger_Logger) {
+            EagleLock_Delete(lock);
             return NULL;
         }
         
@@ -79,6 +84,13 @@ void EagleLogger_LogEvent(EagleLoggerEvent *event)
 {
     EagleLogger *logger = EagleLogger_Get();
     char *timestamp;
+    
+    if(NULL == logger) {
+        return;
+    }
+    if(NULL == event) {
+        return;
+    }
     
     /* this function must be synchronized */
     EagleSynchronizer_Lock(logger->logLock);

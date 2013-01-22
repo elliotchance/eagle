@@ -777,6 +777,7 @@ CUNIT_TEST(MemorySuite, EagleLogger_Get)
     
     EagleLogger *logger = EagleLogger_Get();
     CUNIT_ASSERT_NULL(logger);
+    EagleLogger_Delete(logger);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -795,7 +796,6 @@ int MemorySuite_init()
  */
 int MemorySuite_clean()
 {
-    EagleLogger_Delete(EagleLogger_Get());
     return 0;
 }
 

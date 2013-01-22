@@ -49,6 +49,9 @@ EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage
     }
     
     pageProvider = EaglePageProvider_CreateFromIntArray(data, recordsPerPage, recordsPerPage, name);
+    if(NULL == pageProvider) {
+        return NULL;
+    }
     pageProvider->nextPage = EaglePageProvider_nextPageFromInt_;
     pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromInt_;
     
