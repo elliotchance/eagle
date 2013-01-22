@@ -5,3 +5,4 @@
 /doc
 /eagle.xcodeproj/project.xcworkspace
 /eagle.xcodeproj/xcuserdata
+leaks*.tmp

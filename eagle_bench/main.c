@@ -24,14 +24,14 @@ EagleDbTable* createTable()
      );
      */
     EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDbColumnTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
     return table;
 }
 
 EagleDbTableData* fillTable(EagleDbTable *table, int records)
 {
     // create the data provider
-    EagleDbTableData *td = EagleDbTableData_New(table);
+    EagleDbTableData *td = EagleDbTableData_New(table, 1000);
     
     for(int i = 0; i < records; ++i) {
         // create a record

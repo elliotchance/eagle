@@ -1,5 +1,10 @@
+SHELL := /bin/bash
 OBJROOT = $(shell xcodebuild -project eagle.xcodeproj -target eagle_test -showBuildSettings | grep OBJROOT | cut -c15-)
 GIT_BRANCH = $(shell git branch | grep \* | cut -c3-)
+
+# these are used by the `leaks` target
+OBJS = $(OBJROOT)/eagle.build/Debug/eagle.build/Objects-normal/x86_64
+NM = nm $(OBJS)/*.o -o 2>&1 | grep -v EagleMemory.o | grep -w '_malloc\|_calloc\|_free'
 
 all: clean build
 
@@ -30,16 +35,32 @@ build_analyze:
 	fi
 
 build_eagle:
-	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
+	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build -Dmalloc=@ERROR
 
 build_eagle_test:
 	xcodebuild -project eagle.xcodeproj -configuration Debug -target eagle_test build
+
+bench: build_eagle_test
+	build/Debug/eagle_test bench
 	
 # test for leaks
 leaks: build_eagle_test
-	# check that there are no free()
+	# check for stdlib memory functions
+	if [ `$(NM) | wc -l` -gt 0 ]; then \
+		echo "\n==> Do not use stdlib memory functions, use EagleMemory functions instead. <=="; \
+		$(NM); \
+		exit 1; \
+	fi
 	
-	
+	# make sure all allocations have tests
+	grep -w "EagleMemory_Allocate\|EagleMemory_MultiAllocate" -r eagle | perl -nle 'm/"(.*)"/; print $$1' | sort | uniq > leaks.alloc.tmp
+	grep "EagleMemory_Mock(" -r eagle_test | perl -nle 'm/"(.*)"/; print $$1' | sort | uniq > leaks.alloc_test.tmp
+	if [ `grep -f leaks.alloc_test.tmp -v leaks.alloc.tmp | wc -l` -gt 0 ]; then \
+		echo "\n==> The following allocations do not have MemorySuite tests: <=="; \
+		grep -f leaks.alloc_test.tmp -v leaks.alloc.tmp; \
+		exit 1; \
+	fi
+
 	- killall eagle_test
 	MallocStackLogging=1 build/Debug/eagle_test wait &
 	sleep 2

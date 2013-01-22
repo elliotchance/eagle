@@ -18,6 +18,8 @@
 #include "EagleWorkers.h"
 #include "EaglePage.h"
 #include "EaglePlan.h"
+#include "EagleDbSchema.h"
+#include "EagleLogger.h"
 
 extern void **yyreturn;
 extern char **yyerrors;
@@ -70,10 +72,21 @@ CUNIT_TEST(MemorySuite, EagleDbConsole_GetLine)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EagleDbInstance_New)
+CUNIT_TEST(MemorySuite, EagleDbInstance_New_1)
 {
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInstance_New.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbInstance_New(1000));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbInstance_New_2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbInstance_New.2");
     
     CUNIT_ASSERT_NULL(EagleDbInstance_New(1000));
     
@@ -721,6 +734,54 @@ CUNIT_TEST(MemorySuite, yylex_init_3)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleDbSchema_New_1)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSchema_New.1");
+    
+    EagleDbSchema *schema = EagleDbSchema_New("public");
+    EagleDbSchema_Delete(schema);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSchema_New_2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSchema_New.2");
+    
+    EagleDbSchema *schema = EagleDbSchema_New("public");
+    EagleDbSchema_Delete(schema);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleLoggerEvent_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleLoggerEvent_New.1");
+    
+    EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, "something");
+    EagleLoggerEvent_Delete(event);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleLogger_Get)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleLogger_Get.1");
+    
+    EagleLogger *logger = EagleLogger_Get();
+    CUNIT_ASSERT_NULL(logger);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 /**
  * The suite init function.
  */
@@ -734,6 +795,7 @@ int MemorySuite_init()
  */
 int MemorySuite_clean()
 {
+    EagleLogger_Delete(EagleLogger_Get());
     return 0;
 }
 
@@ -746,7 +808,8 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_GetLine));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New_1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlBinaryExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_New));
@@ -778,6 +841,8 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New_1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_parse_1));
@@ -798,6 +863,8 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_Get));
     
     return tests;
 }

@@ -6,18 +6,25 @@
 
 EagleDbSchema* EagleDbSchema_New(char *name)
 {
-    EagleDbSchema *schema = (EagleDbSchema*) malloc(sizeof(EagleDbSchema));
+    EagleDbSchema *schema = (EagleDbSchema*) EagleMemory_Allocate("EagleDbSchema_New.1", sizeof(EagleDbSchema));
+    if(NULL == schema) {
+        return NULL;
+    }
     
     schema->name = strdup(name);
     schema->allocatedTables = 16;
     schema->usedTables = 0;
-    schema->tables = (EagleDbTableData**) calloc((size_t) schema->allocatedTables, sizeof(EagleDbTableData*));
+    schema->tables = (EagleDbTableData**) EagleMemory_MultiAllocate("EagleDbSchema_New.2", sizeof(EagleDbTableData*), schema->allocatedTables);
     
     return schema;
 }
 
 void EagleDbSchema_Delete(EagleDbSchema *schema)
 {
+    if(NULL == schema) {
+        return;
+    }
+    
     EagleMemory_Free(schema->tables);
     EagleMemory_Free(schema->name);
     EagleMemory_Free(schema);

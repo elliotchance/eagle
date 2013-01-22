@@ -37,7 +37,11 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
     /* schemas */
     db->allocatedSchemas = 10;
     db->usedSchemas = 0;
-    db->schemas = (EagleDbSchema**) calloc((size_t) db->allocatedSchemas, sizeof(EagleDbSchema*));
+    db->schemas = (EagleDbSchema**) EagleMemory_MultiAllocate("EagleDbInstance_New.2", sizeof(EagleDbSchema*), db->allocatedSchemas);
+    if(NULL == db->schemas) {
+        EagleMemory_Free(db);
+        return NULL;
+    }
     
     /*defaultSchema = EagleDbSchema_New("default");
     eagledbSchema = EagleDbSchema_New("eagledb");
