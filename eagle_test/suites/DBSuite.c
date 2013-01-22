@@ -12,12 +12,7 @@
 #include "EagleDbTuple.h"
 #include "EagleDbConsole.h"
 #include "EagleMemory.h"
-
-extern void *yyparse_ast;
-extern int yyerrors_length;
-char* yyerrors_last();
-void yylex_init();
-void yylex_free();
+#include "EagleDbParser.h"
 
 int _testSqlSelect(const char *sql)
 {
@@ -388,6 +383,58 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
     EagleDbInstance_Delete(instance);
 }
 
+CUNIT_TEST(DBSuite, yyerrors_push)
+{
+    yylex_init();
+    for(int i = 0; i < MAX_YYERRORS + 10; ++i) {
+        yyerrors_push(strdup("some error"));
+    }
+    
+    CUNIT_ASSERT_EQUAL_INT(yyerrors_length, MAX_YYERRORS);
+    yylex_free();
+}
+
+CUNIT_TEST(DBSuite, yyobj_push)
+{
+    yylex_init();
+    for(int i = 0; i < MAX_YYOBJ + 10; ++i) {
+        yyobj_push(NULL);
+    }
+    
+    CUNIT_VERIFY_EQUAL_INT(yyobj_length, MAX_YYOBJ);
+    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum depth of 256 exceeded.");
+    yylex_free();
+}
+
+CUNIT_TEST(DBSuite, yylist_push)
+{
+    yylex_init();
+    yylist_new();
+    for(int i = 0; i < MAX_YYLIST + 10; ++i) {
+        yylist_push(NULL);
+    }
+    
+    CUNIT_VERIFY_EQUAL_INT(yylist_length, MAX_YYLIST);
+    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum list size of 256 exceeded.");
+    free(yylist);
+    yylex_free();
+}
+
+CUNIT_TEST(DBSuite, yyreturn_push)
+{
+    yylex_init();
+    for(int i = 0; i < MAX_YYRETURN + 10; ++i) {
+        yyreturn_push(NULL);
+    }
+    
+    CUNIT_VERIFY_EQUAL_INT(yyreturn_length, MAX_YYRETURN);
+    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum return depth of 256 exceeded.");
+    yylex_free();
+}
+
 /**
  * The suite init function.
  */
@@ -419,6 +466,10 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyerrors_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyobj_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yylist_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyreturn_push));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
