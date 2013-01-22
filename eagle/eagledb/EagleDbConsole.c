@@ -64,7 +64,7 @@ char* EagleDbConsole_GetLine(void)
 void EagleDbConsole_run(EagleDbConsole *console)
 {
     char *cmd = NULL;
-    EagleDbInstance *db = EagleDbInstance_New();
+    EagleDbInstance *db = EagleDbInstance_New(1000);
     
     while(1) {
         /* get line */

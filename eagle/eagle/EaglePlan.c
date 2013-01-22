@@ -34,6 +34,7 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
     plan->executionTime = 0;
+    plan->lockWaitTime = 0;
     
     plan->buffersNeeded = 0;
     plan->bufferTypes = NULL;

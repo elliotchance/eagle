@@ -341,7 +341,7 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         }
         EagleMemory_Free(parts);
     }
-    EagleDbTableData *td = EagleDbTableData_New(table);
+    EagleDbTableData *td = EagleDbTableData_New(table, 1000);
     tables[usedTables] = td;
     ++usedTables;
     

@@ -136,6 +136,28 @@ free(cu_msg); \
 }\
 }
 
+/**
+ Verify one number is less than another.
+ */
+#define CUNIT_VERIFY_LESS_THAN_DOUBLE(x, y) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_VERIFY_LESS_THAN_DOUBLE: %f from expression \"%s\" is not less than %f from expression \"%s\"", x, #x, y, #y); \
+if(CU_assertImplementation(((x) < (y)), __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
+ Assert one number is less than another.
+ */
+#define CUNIT_ASSERT_LESS_THAN_DOUBLE(x, y) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_ASSERT_LESS_THAN_DOUBLE: %f from expression \"%s\" is not less than %f from expression \"%s\"", x, #x, y, #y); \
+if(CU_assertImplementation(((x) < (y)), __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
+}
+
 
 typedef struct {
     const char *strName;

@@ -20,7 +20,7 @@ char* yyerrors_last();
 void yylex_init();
 void yylex_free();
 
-EagleDbInstance* EagleDbInstance_New(void)
+EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
     int i;
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
@@ -32,10 +32,16 @@ EagleDbInstance* EagleDbInstance_New(void)
         return NULL;
     }
     
+    db->pageSize = pageSize;
+    
     /* schemas */
     db->allocatedSchemas = 10;
     db->usedSchemas = 0;
-    db->schemas = (EagleDbSchema**) calloc((size_t) db->allocatedSchemas, sizeof(EagleDbSchema*));
+    db->schemas = (EagleDbSchema**) EagleMemory_MultiAllocate("EagleDbInstance_New.2", sizeof(EagleDbSchema*), db->allocatedSchemas);
+    if(NULL == db->schemas) {
+        EagleMemory_Free(db);
+        return NULL;
+    }
     
     /*defaultSchema = EagleDbSchema_New("default");
     eagledbSchema = EagleDbSchema_New("eagledb");

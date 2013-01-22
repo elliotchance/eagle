@@ -87,5 +87,6 @@ typedef struct {
 EagleLogger *EagleLogger_Get(void);
 EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message);
 void EagleLogger_LogEvent(EagleLoggerEvent *event);
+void EagleLogger_Delete(EagleLogger *logger);
 
 #endif

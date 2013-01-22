@@ -194,7 +194,7 @@ EagleDbTableData* _getTableWithData(int records, int recordsPerPage)
     EagleDbTable *table = _getTable();
     
     // create the data provider
-    EagleDbTableData *td = EagleDbTableData_New(table);
+    EagleDbTableData *td = EagleDbTableData_New(table, recordsPerPage);
     
     for(int i = 0; i < records; ++i) {
         // create a record
@@ -384,7 +384,7 @@ CUNIT_TEST(DBSuite, EagleDbConsole_New)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_New)
 {
-    EagleDbInstance *instance = EagleDbInstance_New();
+    EagleDbInstance *instance = EagleDbInstance_New(1000);
     EagleDbInstance_Delete(instance);
 }
 

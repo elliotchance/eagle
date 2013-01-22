@@ -61,11 +61,15 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     EaglePlan *plan = NULL;
     EaglePlanJob *job = NULL;
     int i;
+    uint64_t now, then;
     
     /* synchronize this function */
+    now = mach_absolute_time();
     EagleSynchronizer_Lock(eagle->nextJobLock);
+    then = mach_absolute_time();
     
     plan = eagle->plan;
+    plan->lockWaitTime += then - now;
     EaglePlan_resumeTimer(plan);
     job = EaglePlanJob_New(plan);
     

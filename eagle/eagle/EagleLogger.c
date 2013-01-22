@@ -3,12 +3,16 @@
 #include <strings.h>
 #include "EagleLogger.h"
 #include "EagleSynchronizer.h"
+#include "EagleMemory.h"
 
 static EagleLogger *EagleLogger_Logger = NULL;
 
 EagleLoggerEvent* EagleLoggerEvent_New(EagleLoggerSeverity severity, char *message)
 {
-    EagleLoggerEvent *event = (EagleLoggerEvent*) malloc(sizeof(EagleLoggerEvent));
+    EagleLoggerEvent *event = (EagleLoggerEvent*) EagleMemory_Allocate("EagleLoggerEvent_New.1", sizeof(EagleLoggerEvent));
+    if(NULL == event) {
+        return NULL;
+    }
     
     event->when = time(NULL);
     event->severity = severity;
@@ -20,8 +24,30 @@ EagleLoggerEvent* EagleLoggerEvent_New(EagleLoggerSeverity severity, char *messa
 
 void EagleLoggerEvent_Delete(EagleLoggerEvent *event)
 {
-    free(event->message);
-    free(event);
+    if(NULL == event) {
+        return;
+    }
+    
+    EagleMemory_Free(event->message);
+    EagleMemory_Free(event);
+}
+
+/**
+ Delete a logger.
+ 
+ @note Do not call this function unless you have a good reason. Once the logger is created it will be reused
+       automatically.
+ 
+ @param [in] logger The logger to free.
+ */
+void EagleLogger_Delete(EagleLogger *logger)
+{
+    if(NULL == logger) {
+        return;
+    }
+    
+    EagleLock_Delete(logger->logLock);
+    EagleMemory_Free(logger);
 }
 
 EagleLogger *EagleLogger_Get(void)
@@ -32,7 +58,11 @@ EagleLogger *EagleLogger_Get(void)
     
     /* initialise if its not started */
     if(NULL == EagleLogger_Logger) {
-        EagleLogger_Logger = (EagleLogger*) malloc(sizeof(EagleLogger_Logger));
+        EagleLogger_Logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_Get.1", sizeof(EagleLogger_Logger));
+        if(NULL == EagleLogger_Logger) {
+            EagleLock_Delete(lock);
+            return NULL;
+        }
         
         EagleLogger_Logger->totalMessages = 0;
         EagleLogger_Logger->logLock = EagleSynchronizer_CreateLock();
@@ -54,6 +84,13 @@ void EagleLogger_LogEvent(EagleLoggerEvent *event)
 {
     EagleLogger *logger = EagleLogger_Get();
     char *timestamp;
+    
+    if(NULL == logger) {
+        return;
+    }
+    if(NULL == event) {
+        return;
+    }
     
     /* this function must be synchronized */
     EagleSynchronizer_Lock(logger->logLock);
