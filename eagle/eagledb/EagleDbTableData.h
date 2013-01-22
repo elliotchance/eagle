@@ -28,6 +28,7 @@ typedef struct {
 } EagleDbTableData;
 
 EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize);
+
 void EagleDbTableData_Delete(EagleDbTableData *td);
 
 void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple);

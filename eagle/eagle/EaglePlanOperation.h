@@ -48,7 +48,9 @@ typedef struct {
 } EaglePlanOperation;
 
 EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function), int destination, int source1, int source2, void *obj, EagleBoolean freeObj, const char *description);
+
 void EaglePlanOperation_Delete(EaglePlanOperation *epo);
+
 char* EaglePlanOperation_toString(EaglePlanOperation *epo);
 
 #endif

@@ -20,13 +20,7 @@
 #include "EaglePlan.h"
 #include "EagleDbSchema.h"
 #include "EagleLogger.h"
-
-extern void **yyreturn;
-extern char **yyerrors;
-extern void **yyobj;
-
-void* yylist_new();
-void yylex_init();
+#include "EagleDbParser.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {

@@ -40,13 +40,41 @@ struct EaglePage_ {
 };
 typedef struct EaglePage_ EaglePage;
 
+/**
+ Create a new EaglePage.
+ You will be required to provide a data block with the number of records in that data block.
+ 
+ @param [in] type The data for this page.
+ @param [in] data The preallocated data block. This may be NULL, but the \p count must be 0.
+ @param [in] totalSize The number of records in the data block.
+ @param [in] count The number of used records (must be less than \p totalSize)
+ @param [in] recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the
+ record ID of a given record inside a page. If you are unsure as to what this value should be then you can use 0.
+ @param [in] freeData If EagleTrue the \p data will be freed with the page.
+ */
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData);
+
 EaglePage* EaglePage_Alloc(EagleDataType type, int count);
+
+/**
+ Allocate a new page of given size.
+ This function differs from EaglePage_New() because it will allocate the data block for you.
+ 
+ @note The page allocated will not be filled with any data, make sure you sanitise the page if you intend to read from
+ it.
+ 
+ @param [in] count The number of records of the page.
+ */
 EaglePage* EaglePage_AllocInt(int count);
+
 EaglePage* EaglePage_AllocText(int count);
+
 EaglePage* EaglePage_Copy(EaglePage *page);
+
 EaglePage* EaglePage_CopyInt_(EaglePage *page);
+
 EaglePage* EaglePage_CopyText_(EaglePage *page);
+
 void EaglePage_Delete(EaglePage *page);
 
 char* EaglePage_toString(EaglePage *page);

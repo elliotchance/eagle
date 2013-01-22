@@ -3,13 +3,6 @@
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleMemory.h"
 
-/**
- Create a new EagleDbSqlBinaryExpression.
- 
- @param [in] left Left operand.
- @param [in] op Operator.
- @param [in] right Right operand.
- */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)
 {
     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate("EagleDbSqlBinaryExpression_New.1", sizeof(EagleDbSqlBinaryExpression));

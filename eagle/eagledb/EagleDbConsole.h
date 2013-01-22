@@ -13,8 +13,14 @@ typedef struct {
 } EagleDbConsole;
 
 EagleDbConsole* EagleDbConsole_New(void);
+
 void EagleDbConsole_run(EagleDbConsole *console);
+
 void EagleDbConsole_Delete(EagleDbConsole *console);
+
+/**
+ http://stackoverflow.com/a/314422/1470961
+ */
 char* EagleDbConsole_GetLine(void);
 
 #endif

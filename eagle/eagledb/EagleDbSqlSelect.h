@@ -41,11 +41,25 @@ typedef struct {
     
 } EagleDbSqlSelect;
 
+/**
+ Create a new EagleDbSqlSelect.
+ */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);
+
 void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
+
 EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db);
+
+/**
+ Return the number of expressions after the SELECT clause.
+ */
 int EagleDbSqlSelect_getFieldCount(EagleDbSqlSelect *select);
+
+/**
+ Returns the total amount of expressions for an entire SELECT statements (containing all its clauses)
+ */
 int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select);
+
 char* EagleDbSqlSelect_toString(EagleDbSqlSelect *select);
 
 #endif

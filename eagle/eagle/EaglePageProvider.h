@@ -84,29 +84,55 @@ struct EaglePageProvider_ {
 typedef struct EaglePageProvider_ EaglePageProvider;
 
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name);
+
+/**
+ This creates a page provider that provides a single page filled with a fixed int.
+ 
+ @param [in] value The value to fill the pages with.
+ @param [in] recordsPerPage The number of records to return with each page.
+ @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
+ */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name);
+
 EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name);
+
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
+
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
+
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
+
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
+
 void EaglePageProvider_reset(EaglePageProvider *epp);
 
 /* private functions */
 EaglePageProvider* EaglePageProvider_New_(EagleDataType type, int recordsPerPage);
+
 int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);
+
 EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp);
+
 int EaglePageProvider_pagesRemainingFromInt_(EaglePageProvider *epp);
+
 EaglePage* EaglePageProvider_nextPageFromInt_(EaglePageProvider *epp);
+
 EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data);
+
 EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
+
 int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
+
 EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);
+
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp);
+
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp);
+
 void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp);
+
 void EaglePageProvider_resetFromStream_(EaglePageProvider *epp);
 
 #endif

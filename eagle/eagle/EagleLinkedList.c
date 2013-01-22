@@ -90,9 +90,6 @@ void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
     EagleMemory_Free(item);
 }
 
-/**
- Return a pointer to the first item on the list.
- */
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)
 {
     EagleLinkedListItem *first = NULL;

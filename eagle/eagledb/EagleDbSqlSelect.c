@@ -5,9 +5,6 @@
 #include "EagleMemory.h"
 #include "EagleUtils.h"
 
-/**
- Create a new EagleDbSqlSelect.
- */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 {
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) EagleMemory_Allocate("EagleDbSqlSelect_New.1", sizeof(EagleDbSqlSelect));
@@ -44,17 +41,11 @@ void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
     EagleMemory_Free(select);
 }
 
-/**
- Return the number of expressions after the SELECT clause.
- */
 int EagleDbSqlSelect_getFieldCount(EagleDbSqlSelect *select)
 {
     return select->usedSelectExpressions;
 }
 
-/**
- Returns the total amount of expressions for an entire SELECT statements (containing all its clauses)
- */
 int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select)
 {
     int exprs = EagleDbSqlSelect_getFieldCount(select);

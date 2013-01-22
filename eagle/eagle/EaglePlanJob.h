@@ -18,6 +18,7 @@ typedef struct {
 } EaglePlanJob;
 
 EaglePlanJob* EaglePlanJob_New(EaglePlan *plan);
+
 void EaglePlanJob_Delete(EaglePlanJob *job);
 
 #endif

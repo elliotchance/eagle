@@ -32,14 +32,6 @@ void EagleLoggerEvent_Delete(EagleLoggerEvent *event)
     EagleMemory_Free(event);
 }
 
-/**
- Delete a logger.
- 
- @note Do not call this function unless you have a good reason. Once the logger is created it will be reused
-       automatically.
- 
- @param [in] logger The logger to free.
- */
 void EagleLogger_Delete(EagleLogger *logger)
 {
     if(NULL == logger) {

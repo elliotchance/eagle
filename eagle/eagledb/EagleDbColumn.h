@@ -21,6 +21,7 @@ typedef struct {
 } EagleDbColumn;
 
 EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type);
+
 void EagleDbColumn_Delete(EagleDbColumn *column);
 
 #endif

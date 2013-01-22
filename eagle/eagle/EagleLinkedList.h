@@ -55,14 +55,22 @@ typedef struct {
 } EagleLinkedList;
 
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
 EagleLinkedList* EagleLinkedList_New(void);
+
 void EagleLinkedList_Delete(EagleLinkedList *list);
 
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
+
+/**
+ Return a pointer to the first item on the list.
+ */
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list);
+
 EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
+
 int EagleLinkedList_length(EagleLinkedList *list);
 
 #endif

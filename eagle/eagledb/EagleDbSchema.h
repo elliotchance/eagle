@@ -16,7 +16,9 @@ typedef struct {
 } EagleDbSchema;
 
 EagleDbSchema* EagleDbSchema_New(char *name);
+
 void EagleDbSchema_Delete(EagleDbSchema *schema);
+
 void EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td);
 
 #endif

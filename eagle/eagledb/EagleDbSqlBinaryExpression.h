@@ -30,8 +30,17 @@ typedef struct {
     
 } EagleDbSqlBinaryExpression;
 
+/**
+ Create a new EagleDbSqlBinaryExpression.
+ 
+ @param [in] left Left operand.
+ @param [in] op Operator.
+ @param [in] right Right operand.
+ */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right);
+
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr);
+
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
 
 #endif

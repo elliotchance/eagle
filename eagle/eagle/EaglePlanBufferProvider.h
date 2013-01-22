@@ -26,6 +26,7 @@ typedef struct {
 } EaglePlanBufferProvider;
 
 EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, EaglePageProvider *provider, EagleBoolean freeProvider);
+
 void EaglePlanBufferProvider_Delete(EaglePlanBufferProvider *bp);
 
 char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp);

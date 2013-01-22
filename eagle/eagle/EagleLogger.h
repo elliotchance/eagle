@@ -85,8 +85,19 @@ typedef struct {
 } EagleLogger;
 
 EagleLogger *EagleLogger_Get(void);
+
 EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message);
+
 void EagleLogger_LogEvent(EagleLoggerEvent *event);
+
+/**
+ Delete a logger.
+ 
+ @note Do not call this function unless you have a good reason. Once the logger is created it will be reused
+ automatically.
+ 
+ @param [in] logger The logger to free.
+ */
 void EagleLogger_Delete(EagleLogger *logger);
 
 #endif

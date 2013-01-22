@@ -103,19 +103,31 @@ typedef struct {
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);
+
 void EaglePlan_Delete(EaglePlan *plan);
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo);
+
 void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);
+
 EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer);
+
 const char* EaglePlan_toString(EaglePlan *plan);
+
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name);
+
 void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage);
+
 EagleBoolean EaglePlan_isError(EaglePlan *plan);
+
 void EaglePlan_resumeTimer(EaglePlan *plan);
+
 void EaglePlan_stopTimer(EaglePlan *plan);
+
 double EaglePlan_getExecutionSeconds(EaglePlan *plan);
+
 void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers);
+
 int EaglePlan_getRealResultFields(EaglePlan *plan);
 
 #endif

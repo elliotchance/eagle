@@ -12,10 +12,16 @@ typedef struct {
 } EagleWorker;
 
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance);
+
+/**
+ This does not release the \c instance as that's only a reference to the parent object.
+ */
 void EagleWorker_Delete(EagleWorker *worker);
 
 void EagleWorker_start(EagleWorker *worker);
+
 void* EagleWorker_begin(void *obj);
+
 void EagleWorker_join(EagleWorker *worker);
 
 #endif
