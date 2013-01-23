@@ -490,7 +490,7 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));
+    /*CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_GreaterThanInt));
@@ -512,7 +512,7 @@ CUnitTests* MainSuite_tests()
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceMulti));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceMulti));*/
     
     return tests;
 }

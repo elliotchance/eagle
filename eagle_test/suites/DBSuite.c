@@ -459,7 +459,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
+    /*CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
@@ -477,7 +477,7 @@ CUnitTests* DBSuite_tests()
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));*/
     
     return tests;
 }

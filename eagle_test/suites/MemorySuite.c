@@ -798,7 +798,7 @@ CUnitTests* MemorySuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));
+    /*CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_GetLine));
@@ -858,7 +858,7 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_Get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_Get));*/
     
     return tests;
 }

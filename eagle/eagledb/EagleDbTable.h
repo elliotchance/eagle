@@ -37,4 +37,6 @@ void EagleDbTable_addColumn(EagleDbTable *table, EagleDbColumn *column);
 
 void EagleDbTable_setColumns(EagleDbTable *table, EagleDbColumn** columns, int count);
 
+void EagleDbTable_DeleteWithColumns(EagleDbTable *table);
+
 #endif

@@ -41,6 +41,19 @@ void EagleDbTable_Delete(EagleDbTable *table)
     EagleMemory_Free(table);
 }
 
+void EagleDbTable_DeleteWithColumns(EagleDbTable *table)
+{
+    int i;
+    
+    for(i = 0; i < table->usedColumns; ++i) {
+        EagleDbColumn_Delete(table->columns[i]);
+    }
+    EagleMemory_Free(table->columns);
+    
+    EagleMemory_Free(table->name);
+    EagleMemory_Free(table);
+}
+
 void EagleDbTable_addColumn(EagleDbTable *table, EagleDbColumn *column)
 {
     table->columns[table->usedColumns++] = column;

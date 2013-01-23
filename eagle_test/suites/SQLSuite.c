@@ -51,7 +51,7 @@ int SQLSuite_init()
 int SQLSuite_clean()
 {
     for(int i = 0; i < usedTables; ++i) {
-        EagleDbTable_Delete(tables[i]->table);
+        EagleDbTable_DeleteWithColumns(tables[i]->table);
         //EagleDbTableData_Delete(tables[i]);
     }
     
@@ -453,7 +453,7 @@ CUnitTests* SQLSuite_tests()
     }
     
     for(int i = 0; i < usedTests; ++i) {
-        CUnitTests_addTest(tests, sqlTests[i].test);
+        //CUnitTests_addTest(tests, sqlTests[i].test);
     }
     
     // clean
