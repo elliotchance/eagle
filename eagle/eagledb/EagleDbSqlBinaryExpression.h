@@ -3,6 +3,7 @@
 
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlExpressionOperator.h"
+#include "Eagle.h"
 
 /**
  Expression type is EagleDbSqlExpressionTypeBinaryExpression.
@@ -16,17 +17,17 @@ typedef struct {
     /**
      The left operand.
      */
-    EagleDbSqlExpression *left;
+    EAGLE_ATTR_PROVIDED EagleDbSqlExpression *left;
     
     /**
      The operator between the \p left and \p right operands.
      */
-    EagleDbSqlExpressionOperator op;
+    EAGLE_ATTR_NA EagleDbSqlExpressionOperator op;
     
     /**
      The right operand.
      */
-    EagleDbSqlExpression *right;
+    EAGLE_ATTR_PROVIDED EagleDbSqlExpression *right;
     
 } EagleDbSqlBinaryExpression;
 

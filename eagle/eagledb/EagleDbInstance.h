@@ -3,39 +3,34 @@
 
 #include "EagleDbSchema.h"
 #include "EaglePlan.h"
-
-typedef enum {
-    
-    /**
-     Indicated a blank SQL statement. This may or may not be an error depending on the context.
-     */
-    EagleDbSqlStatementTypeNone = 0,
-    
-    /**
-     SELECT statement.
-     @see EagleDbSqlSelect
-     */
-    EagleDbSqlStatementTypeSelect = 1,
-    
-    /**
-     CREATE TABLE statement.
-     @see EagleDbTable
-     */
-    EagleDbSqlStatementTypeCreateTable = 2
-    
-} EagleDbSqlStatementType;
+#include "Eagle.h"
+#include "EagleDbSqlStatementType.h"
 
 extern EagleDbSqlStatementType yystatementtype;
 
 typedef struct {
     
-    EagleDbSchema **schemas;
+    /**
+     Contains the pointers to the individual schemas. This is semi managed because the array that contains the pointers
+     to the schemas is managed bu the schema objects themselves are managed externally (i.e. deleteing an
+     EagleDbInstance) will not deleted the respective schemas.
+     */
+    EAGLE_ATTR_SEMI_MANAGED EagleDbSchema **schemas;
     
-    int allocatedSchemas;
+    /**
+     The maximum possible schemas this instance can hold.
+     */
+    EAGLE_ATTR_NA int allocatedSchemas;
     
-    int usedSchemas;
+    /**
+     The number of used (real) schemas connected to this instance.
+     */
+    EAGLE_ATTR_NA int usedSchemas;
     
-    int pageSize;
+    /**
+     The page size to be provided to EaglePlan.
+     */
+    EAGLE_ATTR_NA int pageSize;
     
 } EagleDbInstance;
 

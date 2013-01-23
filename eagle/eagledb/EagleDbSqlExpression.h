@@ -2,26 +2,11 @@
 #define eagle_EagleDbSqlExpression_h
 
 #include "EaglePlan.h"
+#include "EagleDbSqlExpressionType.h"
 
 #define EagleDbSqlExpressionHeader EagleDbSqlExpressionType expressionType
 
 extern const int EagleDbSqlExpression_ERROR;
-
-/**
- The type of expression.
- */
-typedef enum {
-    
-    /** Real type is EagleDbSqlValue */
-    EagleDbSqlExpressionTypeValue = 1,
-    
-    /** Real type is EagleDbSqlBinaryExpression */
-    EagleDbSqlExpressionTypeBinaryExpression = 2,
-    
-    /** Real type is EagleDbSqlSelect */
-    EagleDbSqlExpressionTypeSelect = 3
-    
-} EagleDbSqlExpressionType;
 
 /**
  Dummy type for other expression structures.

@@ -4,6 +4,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EagleMemory.h"
 #include "EagleUtils.h"
+#include "EagleDbSqlExpressionType.h"
 
 EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 {
@@ -24,20 +25,11 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 
 void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
 {
-    int i;
-    
     if(NULL == select) {
         return;
     }
     
     EagleMemory_Free(select->tableName);
-    EagleDbSqlExpression_Delete(select->whereExpression);
-    
-    for(i = 0; i < select->usedSelectExpressions; ++i) {
-        EagleDbSqlExpression_Delete(select->selectExpressions[i]);
-    }
-    EagleMemory_Free(select->selectExpressions);
-    
     EagleMemory_Free(select);
 }
 

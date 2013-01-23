@@ -4,6 +4,7 @@
 #include "EagleDbTable.h"
 #include "EaglePageProvider.h"
 #include "EagleDbTuple.h"
+#include "Eagle.h"
 
 /**
  Provides data for a table.
@@ -13,17 +14,17 @@ typedef struct {
     /**
      Table definition.
      */
-    EagleDbTable *table;
+    EAGLE_ATTR_PROVIDED EagleDbTable *table;
     
     /**
      Providers for each column.
      */
-    EaglePageProvider **providers;
+    EAGLE_ATTR_MANAGED EaglePageProvider **providers;
     
     /**
      The number of used \c providers
      */
-    int usedProviders;
+    EAGLE_ATTR_NA int usedProviders;
     
 } EagleDbTableData;
 

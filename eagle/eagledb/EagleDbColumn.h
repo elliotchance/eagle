@@ -2,6 +2,7 @@
 #define eagle_EagleDbColumn_h
 
 #include "EagleData.h"
+#include "Eagle.h"
 
 /**
  The definition for a table column.
@@ -11,12 +12,12 @@ typedef struct {
     /**
      The name of the column.
      */
-    char *name;
+    EAGLE_ATTR_MANAGED char *name;
     
     /**
      Column data type.
      */
-    EagleDataType type;
+    EAGLE_ATTR_NA EagleDataType type;
     
 } EagleDbColumn;
 

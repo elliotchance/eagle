@@ -2,28 +2,30 @@
 #define eagle_EagleDbTable_h
 
 #include "EagleDbColumn.h"
+#include "Eagle.h"
 
 typedef struct {
     
     /**
      The raw name of the table.
      */
-    char *name;
+    EAGLE_ATTR_MANAGED char *name;
     
     /**
      The number of allocated \c columns.
      */
-    int allocatedColumns;
+    EAGLE_ATTR_NA int allocatedColumns;
     
     /**
      The number of used \c columns.
      */
-    int usedColumns;
+    EAGLE_ATTR_NA int usedColumns;
     
     /**
-     The table columns.
+     The table columns. This is self managed because the array that contains the pointers to the columns is managed
+     internally, but the columns themselves are managed externally (i.e. deleting the table will not delete the columns)
      */
-    EagleDbColumn **columns;
+    EAGLE_ATTR_SEMI_MANAGED EagleDbColumn **columns;
     
 } EagleDbTable;
 

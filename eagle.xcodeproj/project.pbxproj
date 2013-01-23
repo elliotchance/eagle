@@ -223,6 +223,9 @@
 		8BEDCFA016AFFE7E00EBCFAA /* EaglePlanError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanError.h; sourceTree = "<group>"; };
 		8BEDCFA116B0027100EBCFAA /* EagleLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleLock.h; sourceTree = "<group>"; };
 		8BEDCFA216B002B900EBCFAA /* EagleLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleLock.c; sourceTree = "<group>"; };
+		8BEDCFA516B004F700EBCFAA /* EagleDbSqlStatementType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlStatementType.h; sourceTree = "<group>"; };
+		8BEDCFA616B0073D00EBCFAA /* EagleDbSqlExpressionType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlExpressionType.h; sourceTree = "<group>"; };
+		8BEDCFA716B0085C00EBCFAA /* EagleDbSqlValueType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlValueType.h; sourceTree = "<group>"; };
 		8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BenchSuite.c; sourceTree = "<group>"; };
 		8BFDB9D2169A985200D3E8B0 /* BenchSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BenchSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -369,10 +372,13 @@
 				8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */,
 				8BB7FFE7168C2F3600DCFF3C /* EagleDbSqlExpressionOperator.c */,
 				8B1BF7F216770173007C11E6 /* EagleDbSqlExpressionOperator.h */,
+				8BEDCFA616B0073D00EBCFAA /* EagleDbSqlExpressionType.h */,
 				8B1BF7E61675DD09007C11E6 /* EagleDbSqlSelect.c */,
 				8B1BF7CE1675D007007C11E6 /* EagleDbSqlSelect.h */,
+				8BEDCFA516B004F700EBCFAA /* EagleDbSqlStatementType.h */,
 				8B1BF7EB1675F7AA007C11E6 /* EagleDbSqlValue.c */,
 				8B1BF7EA1675F727007C11E6 /* EagleDbSqlValue.h */,
+				8BEDCFA716B0085C00EBCFAA /* EagleDbSqlValueType.h */,
 				8B1BF808167A9A6C007C11E6 /* EagleDbTable.c */,
 				8B1BF806167A999D007C11E6 /* EagleDbTable.h */,
 				8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */,

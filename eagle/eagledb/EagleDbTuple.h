@@ -3,12 +3,19 @@
 
 #include "EagleDbColumn.h"
 #include "EagleDbTable.h"
+#include "Eagle.h"
 
 typedef struct {
     
-    void **data;
+    /**
+     The data contained in the tuple. Do not access this directy, use appopriate methods.
+     */
+    EAGLE_ATTR_MANAGED void **data;
     
-    EagleDbTable *table;
+    /**
+     A reference to the table structure that the tuple is based on.
+     */
+    EAGLE_ATTR_PROVIDED EagleDbTable *table;
     
 } EagleDbTuple;
 

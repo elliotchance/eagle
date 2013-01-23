@@ -40,7 +40,7 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeIdentifier;
-    v->value.identifier = strdup(identifier);
+    v->value.identifier = (NULL == identifier ? NULL : strdup(identifier));
     
     return v;
 }

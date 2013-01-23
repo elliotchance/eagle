@@ -2,13 +2,14 @@
 #define eagle_EagleDbConsole_h
 
 #include <mach/mach_time.h>
+#include "Eagle.h"
 
 typedef struct {
     
     /**
      The absolute time when the console was started.
      */
-    uint64_t startTime;
+    EAGLE_ATTR_NA uint64_t startTime;
     
 } EagleDbConsole;
 

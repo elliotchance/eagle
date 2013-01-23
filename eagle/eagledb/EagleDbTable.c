@@ -25,12 +25,7 @@ EagleDbTable* EagleDbTable_New(char *name)
 
 void EagleDbTable_setColumns(EagleDbTable *table, EagleDbColumn** columns, int count)
 {
-    int i;
-    
     /* free existing memory */
-    for(i = 0; i < table->usedColumns; ++i) {
-        EagleDbColumn_Delete(table->columns[i]);
-    }
     EagleMemory_Free(table->columns);
     
     /* set new columns */
@@ -41,13 +36,7 @@ void EagleDbTable_setColumns(EagleDbTable *table, EagleDbColumn** columns, int c
 
 void EagleDbTable_Delete(EagleDbTable *table)
 {
-    int i;
-    
-    for(i = 0; i < table->usedColumns; ++i) {
-        EagleDbColumn_Delete(table->columns[i]);
-    }
     EagleMemory_Free(table->columns);
-    
     EagleMemory_Free(table->name);
     EagleMemory_Free(table);
 }

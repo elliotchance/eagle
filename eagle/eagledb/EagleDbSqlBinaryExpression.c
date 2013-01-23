@@ -20,8 +20,6 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
 
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
 {
-    EagleDbSqlExpression_Delete(expr->left);
-    EagleDbSqlExpression_Delete(expr->right);
     EagleMemory_Free(expr);
 }
 
