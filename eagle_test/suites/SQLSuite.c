@@ -132,7 +132,7 @@ void SQLSuiteTest()
     for(int i = 0; i < td->table->usedColumns; ++i) {
         EaglePageProvider_reset(td->providers[i]);
         EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
-        EaglePlan_addBufferProvider(plan, bp);
+        EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     }
     
     // compile plan

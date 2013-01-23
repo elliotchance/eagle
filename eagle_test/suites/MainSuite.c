@@ -121,7 +121,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(data, totalRecords, recordsPerPage, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(1, provider, EagleTrue);
-    EaglePlan_addBufferProvider(plan, bp);
+    EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     
     // destination provider
     // We are being a bit naughty here to use totalRecords instead of recordsPerPage so that we can guarantee all the
@@ -181,7 +181,6 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePlanOperation_Delete(op2);
     EaglePlanOperation_Delete(op3);
     EaglePlanOperation_Delete(op4);
-    EaglePlanBufferProvider_Delete(bp);
     EaglePage_Delete(resultPage);
     EaglePageProvider_Delete(result);
     EaglePlan_Delete(plan);
@@ -286,7 +285,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     // add some buffer providers
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, NULL);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
-    EaglePlan_addBufferProvider(plan, bp);
+    EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     
     // add some steps
     EaglePlanOperation *op1, *op2, *op3;
@@ -299,7 +298,6 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EagleMemory_Free(msg);
     
     EaglePlan_Delete(plan);
-    EaglePlanBufferProvider_Delete(bp);
     EaglePlanOperation_Delete(op1);
     EaglePlanOperation_Delete(op2);
     EaglePlanOperation_Delete(op3);

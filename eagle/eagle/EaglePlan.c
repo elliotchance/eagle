@@ -42,6 +42,8 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->resultFields = 0;
     plan->result = NULL;
     
+    plan->freeObjects = EagleLinkedList_New();
+    
     return plan;
 }
 
@@ -50,9 +52,18 @@ void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo)
     plan->operations[plan->usedOperations++] = epo;
 }
 
-void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
+void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp, EagleBoolean free)
 {
     plan->providers[plan->usedProviders++] = bp;
+    if(EagleTrue == free) {
+        EaglePlan_addFreeObject(plan, bp, (void(*)(void*)) EaglePlanBufferProvider_Delete);
+    }
+}
+
+void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*))
+{
+    EagleLinkedListItem *item = EagleLinkedListItem_New(obj, EagleTrue, free);
+    EagleLinkedList_add(plan->freeObjects, item);
 }
 
 const char* EaglePlan_toString(EaglePlan *plan)
@@ -116,9 +127,10 @@ void EaglePlan_Delete(EaglePlan *plan)
         return;
     }
     
-    EagleMemory_Free(plan->operations);
-    EagleMemory_Free(plan->providers);
+    EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
+    EagleMemory_Free(plan->providers);
+    EagleMemory_Free(plan->operations);
     EagleMemory_Free(plan->errorMessage);
     EagleMemory_Free(plan->bufferTypes);
     EagleMemory_Free(plan);

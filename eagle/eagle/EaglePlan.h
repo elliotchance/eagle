@@ -37,11 +37,9 @@ typedef struct {
     EAGLE_ATTR_NA int usedProviders;
     
     /**
-     The page providers. This is where external data comes into the expression. For example, column data. This is semi
-     managed because the actual array that contains the providers will be managed by the object, but the individual
-     providers will be managed externally.
+     The page providers. This is where external data comes into the expression.
      */
-    EAGLE_ATTR_SEMI_MANAGED EaglePlanBufferProvider **providers;
+    EAGLE_ATTR_MANAGED EaglePlanBufferProvider **providers;
     
     /**
      The amount of records to read per page.
@@ -59,10 +57,9 @@ typedef struct {
     EAGLE_ATTR_MANAGED char *errorMessage;
     
     /**
-     Result set after execution. This is semi managed because the actual array that contains the result objects will be
-     managed by the object, but the individual result providers will be managed externally.
+     Result set after execution.
      */
-    EAGLE_ATTR_SEMI_MANAGED EaglePageProvider **result;
+    EAGLE_ATTR_MANAGED EaglePageProvider **result;
     
     /**
      The number of providers in \c result
@@ -94,6 +91,11 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED EagleDataType *bufferTypes;
     
+    /**
+     This is a stack of objects to be freed when this object is deleted.
+     */
+    EAGLE_ATTR_MANAGED EagleLinkedList *freeObjects;
+    
 } EaglePlan;
 
 EaglePlan* EaglePlan_New(int pageSize);
@@ -102,7 +104,7 @@ void EaglePlan_Delete(EaglePlan *plan);
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo);
 
-void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp);
+void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp, EagleBoolean free);
 
 EaglePage* EaglePlan_getBuffer(EaglePlan *plan, int buffer);
 
@@ -123,5 +125,7 @@ double EaglePlan_getExecutionSeconds(EaglePlan *plan);
 void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers);
 
 int EaglePlan_getRealResultFields(EaglePlan *plan);
+
+void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*));
 
 #endif

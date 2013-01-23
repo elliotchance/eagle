@@ -91,7 +91,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
         
         EaglePageProvider_reset(td->providers[i]);
         bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
-        EaglePlan_addBufferProvider(plan, bp);
+        EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     }
     
     /* merge expressions */

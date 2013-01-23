@@ -514,7 +514,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, plan), EagleDbSqlExpression_ERROR);
     
     EaglePlan_Delete(plan);
-    EagleDbSqlExpression_Delete(expr);
+    EagleDbSqlExpression_Delete(expr, EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
     EagleMemory_MockFinish();
 }
