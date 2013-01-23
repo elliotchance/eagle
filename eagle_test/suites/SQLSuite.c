@@ -149,7 +149,6 @@ void SQLSuiteTest()
         else {
             CUNIT_FAIL("%s", plan->errorMessage);
         }
-        EaglePlan_Delete(plan);
     }
     else {
         // execute
@@ -212,6 +211,7 @@ void SQLSuiteTest()
     }
     
     // clean up
+    EaglePlan_Delete(plan);
     EagleMemory_Free(expr);
     
     EagleDbSqlSelect_Delete(yyparse_ast, EagleTrue);
@@ -453,7 +453,7 @@ CUnitTests* SQLSuite_tests()
     }
     
     for(int i = 0; i < usedTests; ++i) {
-        //CUnitTests_addTest(tests, sqlTests[i].test);
+        CUnitTests_addTest(tests, sqlTests[i].test);
     }
     
     // clean

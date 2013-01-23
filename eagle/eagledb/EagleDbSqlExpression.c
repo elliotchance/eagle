@@ -221,6 +221,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
                 sprintf(msg, "ALL <%d> (%s) to provider <%d> (%s)", results[i], t1, i, t2);
                 epo = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, -1, results[i], plan->result[i], EagleFalse, msg);
                 EaglePlan_addOperation(plan, epo);
+                EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
                 
                 EagleMemory_Free(t1);
                 EagleMemory_Free(t2);
