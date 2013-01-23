@@ -23,10 +23,20 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
     return select;
 }
 
-void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select, EagleBoolean recursive)
 {
     if(NULL == select) {
         return;
+    }
+    
+    if(EagleTrue == recursive) {
+        int i;
+        for(i = 0; i < select->usedSelectExpressions; ++i) {
+            EagleDbSqlExpression_Delete(select->selectExpressions[i], recursive);
+        }
+        EagleMemory_Free(select->selectExpressions);
+        
+        EagleDbSqlExpression_Delete(select->whereExpression, recursive);
     }
     
     EagleMemory_Free(select->tableName);

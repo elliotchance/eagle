@@ -581,7 +581,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_1)
     EagleDbInstance *instance = EagleDbInstance_New(1000);
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(NULL, NULL));
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     EagleDbInstance_Delete(instance);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -606,7 +606,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     EagleDbSchema_Delete(schema);
     EagleDbTable_Delete(table);
     EagleDbTableData_Delete(td);

@@ -244,7 +244,7 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recurs
             break;
             
         case EagleDbSqlExpressionTypeSelect:
-            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr);
+            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr, recursive);
             break;
             
         case EagleDbSqlExpressionTypeValue:

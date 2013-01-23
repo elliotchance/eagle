@@ -197,7 +197,7 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
         EagleInstance_Delete(eagle);
     }
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
 }
 
 void EagleDbInstance_executeCreateTable(EagleDbInstance *db)

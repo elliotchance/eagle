@@ -47,7 +47,7 @@ typedef struct {
  */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);
 
-void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select, EagleBoolean recursive);
 
 EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db);
 

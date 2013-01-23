@@ -149,7 +149,7 @@ CUNIT_TEST(DBSuite, EagleDbColumn_New)
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
 {
-    EagleDbSqlSelect_Delete(NULL);
+    EagleDbSqlSelect_Delete(NULL, EagleTrue);
 }
 
 CUNIT_TEST(DBSuite, EagleDbTable_New)
@@ -165,7 +165,7 @@ CUNIT_TEST(DBSuite, EagleDbTable_New)
     CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
     CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
 }
 
 EagleDbTable* _getTable()
@@ -219,7 +219,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     EagleMemory_Free(desc);
     
     EagleDbTuple_Delete(tuple);
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
@@ -345,7 +345,7 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE)
         CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
     }
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     yylex_free();
 }
 
@@ -370,7 +370,7 @@ CUNIT_TEST(DBSuite, _, CREATE_TABLE)
         CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     }
     
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
     yylex_free();
 }
 
@@ -464,7 +464,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlan));
-    /*CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
@@ -477,7 +477,7 @@ CUnitTests* DBSuite_tests()
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));*/
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
     
     return tests;
 }

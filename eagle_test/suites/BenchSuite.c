@@ -127,7 +127,7 @@ CUNIT_TEST(BenchSuite, SELECT)
     CUNIT_ASSERT_BENCH_RESULT(plan);
     
     EagleInstance_Delete(eagle);
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     freeInstance(instance);
 }
 

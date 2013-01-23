@@ -214,7 +214,7 @@ void SQLSuiteTest()
     // clean up
     EagleMemory_Free(expr);
     
-    EagleDbSqlSelect_Delete(yyparse_ast);
+    EagleDbSqlSelect_Delete(yyparse_ast, EagleTrue);
     yylex_free();
 }
 
