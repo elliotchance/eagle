@@ -150,7 +150,7 @@ void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    EagleLinkedList_Delete((EagleLinkedList*) epp->records);
+    EagleLinkedList_DeleteWithItems((EagleLinkedList*) epp->records);
     EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }
