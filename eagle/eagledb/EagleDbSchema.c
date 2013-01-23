@@ -11,7 +11,7 @@ EagleDbSchema* EagleDbSchema_New(char *name)
         return NULL;
     }
     
-    schema->name = strdup(name);
+    schema->name = (NULL == name ? NULL : strdup(name));
     schema->allocatedTables = 16;
     schema->usedTables = 0;
     schema->tables = (EagleDbTableData**) EagleMemory_MultiAllocate("EagleDbSchema_New.2", sizeof(EagleDbTableData*), schema->allocatedTables);

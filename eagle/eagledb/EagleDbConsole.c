@@ -18,9 +18,6 @@ EagleDbConsole* EagleDbConsole_New(void)
     return console;
 }
 
-/**
- http://stackoverflow.com/a/314422/1470961
- */
 char* EagleDbConsole_GetLine(void)
 {
     char *line = EagleMemory_Allocate("EagleDbConsole_GetLine.1", 100), *linep = line, *linen = NULL;

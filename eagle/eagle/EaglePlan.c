@@ -42,6 +42,8 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->resultFields = 0;
     plan->result = NULL;
     
+    plan->freeObjects = EagleLinkedList_New();
+    
     return plan;
 }
 
@@ -50,9 +52,18 @@ void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo)
     plan->operations[plan->usedOperations++] = epo;
 }
 
-void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp)
+void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp, EagleBoolean free)
 {
     plan->providers[plan->usedProviders++] = bp;
+    if(EagleTrue == free) {
+        EaglePlan_addFreeObject(plan, bp, (void(*)(void*)) EaglePlanBufferProvider_Delete);
+    }
+}
+
+void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*))
+{
+    EagleLinkedListItem *item = EagleLinkedListItem_New(obj, EagleTrue, free);
+    EagleLinkedList_add(plan->freeObjects, item);
 }
 
 const char* EaglePlan_toString(EaglePlan *plan)
@@ -112,31 +123,17 @@ const char* EaglePlan_toString(EaglePlan *plan)
 
 void EaglePlan_Delete(EaglePlan *plan)
 {
-    int i;
-    
     if(NULL == plan) {
         return;
     }
     
-    for(i = 0; i < plan->usedOperations; ++i) {
-        EaglePlanOperation_Delete(plan->operations[i]);
-    }
-    EagleMemory_Free(plan->operations);
-    
-    for(i = 0; i < plan->usedProviders; ++i) {
-        EaglePlanBufferProvider_Delete(plan->providers[i]);
-    }
-    EagleMemory_Free(plan->providers);
-    
-    for(i = 0; i < plan->resultFields; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
-    }
+    EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
-    
+    EagleMemory_Free(plan->providers);
+    EagleMemory_Free(plan->operations);
     EagleMemory_Free(plan->errorMessage);
     EagleMemory_Free(plan->bufferTypes);
     EagleMemory_Free(plan);
-    plan = NULL;
 }
 
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name)
@@ -156,7 +153,7 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
 void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage)
 {
     plan->errorCode = errorCode;
-    plan->errorMessage = strdup(errorMessage);
+    plan->errorMessage = (NULL == errorMessage ? NULL : strdup(errorMessage));
 }
 
 EagleBoolean EaglePlan_isError(EaglePlan *plan)

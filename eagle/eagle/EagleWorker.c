@@ -95,9 +95,6 @@ void EagleWorker_join(EagleWorker *worker)
     pthread_join(worker->thread, NULL);
 }
 
-/**
- This does not release the \c instance as that's only a reference to the parent object.
- */
 void EagleWorker_Delete(EagleWorker *worker)
 {
     EagleMemory_Free(worker);

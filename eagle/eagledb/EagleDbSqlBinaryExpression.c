@@ -3,13 +3,6 @@
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleMemory.h"
 
-/**
- Create a new EagleDbSqlBinaryExpression.
- 
- @param [in] left Left operand.
- @param [in] op Operator.
- @param [in] right Right operand.
- */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)
 {
     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate("EagleDbSqlBinaryExpression_New.1", sizeof(EagleDbSqlBinaryExpression));
@@ -25,10 +18,12 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
     return expr;
 }
 
-void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr, EagleBoolean recursive)
 {
-    EagleDbSqlExpression_Delete(expr->left);
-    EagleDbSqlExpression_Delete(expr->right);
+    if(EagleTrue == recursive) {
+        EagleDbSqlExpression_Delete((EagleDbSqlExpression*) expr->left, recursive);
+        EagleDbSqlExpression_Delete((EagleDbSqlExpression*) expr->right, recursive);
+    }
     EagleMemory_Free(expr);
 }
 

@@ -25,20 +25,13 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
     pageProvider->add = EaglePageProvider_addUnsupported_;
     pageProvider->free = EaglePageProvider_DeleteIntArray_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
-    pageProvider->name = name;
+    pageProvider->name = (NULL == name ? NULL : strdup(name));
     pageProvider->reset = EaglePageProvider_resetFromIntArray_;
     pageProvider->type = EagleDataTypeInteger;
     
     return pageProvider;
 }
 
-/**
- This creates a page provider that provides a single page filled with a fixed int.
- 
- @param [in] value The value to fill the pages with.
- @param [in] recordsPerPage The number of records to return with each page.
- @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
- */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name)
 {
     int *data = (int*) EagleMemory_MultiAllocate("EaglePageProvider_CreateFromInt.1", sizeof(int), recordsPerPage), i;
@@ -150,14 +143,14 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    EagleMemory_Free(epp->records);
+    EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }
 
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    EagleLinkedList_Delete((EagleLinkedList*) epp->records);
+    EagleLinkedList_DeleteWithItems((EagleLinkedList*) epp->records);
     EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }

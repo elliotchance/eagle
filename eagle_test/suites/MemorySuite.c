@@ -20,13 +20,7 @@
 #include "EaglePlan.h"
 #include "EagleDbSchema.h"
 #include "EagleLogger.h"
-
-extern void **yyreturn;
-extern char **yyerrors;
-extern void **yyobj;
-
-void* yylist_new();
-void yylex_init();
+#include "EagleDbParser.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -204,7 +198,7 @@ CUNIT_TEST(MemorySuite, EagleDbTableData_New_2)
     EagleDbColumn *column = EagleDbColumn_New("test", EagleDataTypeInteger);
     EagleDbTable_addColumn(table, column);
     CUNIT_ASSERT_NULL(EagleDbTableData_New(table, 1000));
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -520,7 +514,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, plan), EagleDbSqlExpression_ERROR);
     
     EaglePlan_Delete(plan);
-    EagleDbSqlExpression_Delete(expr);
+    EagleDbSqlExpression_Delete(expr, EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
     EagleMemory_MockFinish();
 }
@@ -587,7 +581,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_1)
     EagleDbInstance *instance = EagleDbInstance_New(1000);
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(NULL, NULL));
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     EagleDbInstance_Delete(instance);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -612,7 +606,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     EagleDbSchema_Delete(schema);
     EagleDbTable_Delete(table);
     EagleDbTableData_Delete(td);

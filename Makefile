@@ -35,7 +35,7 @@ build_analyze:
 	fi
 
 build_eagle:
-	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build -Dmalloc=@ERROR
+	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
 
 build_eagle_test:
 	xcodebuild -project eagle.xcodeproj -configuration Debug -target eagle_test build

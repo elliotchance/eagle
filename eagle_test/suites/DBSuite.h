@@ -5,9 +5,6 @@
 #include <CUnit/Basic.h>
 #include "EagleDbSqlExpression.h"
 
-extern int yyparse();
-extern int yy_scan_string(const char *);
-
 int DBSuite_init();
 CUnitTests* DBSuite_tests();
 int DBSuite_clean();

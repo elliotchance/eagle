@@ -17,7 +17,7 @@ EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function),
     epo->source2 = source2;
     epo->obj = obj;
     epo->freeObj = freeObj;
-    epo->description = strdup(description);
+    epo->description = (NULL == description ? NULL : strdup(description));
     
     return epo;
 }

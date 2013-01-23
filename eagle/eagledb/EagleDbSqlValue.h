@@ -2,30 +2,8 @@
 #define eagle_EagleDbSqlValue_h
 
 #include "EagleDbSqlExpression.h"
-
-/**
- A value can contain several types.
- 
- The first member variable of EagleDbSqlValue will indicate the real type of the Value.
- */
-typedef enum {
-    
-    /**
-     Use \p intValue
-     */
-    EagleDbSqlValueTypeInteger = 1,
-    
-    /**
-     Asterisk expression for selecting multiple columns.
-     */
-    EagleDbSqlValueTypeAsterisk = 2,
-    
-    /**
-     The name of a column.
-     */
-    EagleDbSqlValueTypeIdentifier = 3
-    
-} EagleDbSqlValueType;
+#include "EagleDbSqlValueType.h"
+#include "Eagle.h"
 
 /**
  Encapsulates a Value of any type.
@@ -37,28 +15,37 @@ typedef struct {
     /**
      @see EagleDbSqlValueType
      */
-    EagleDbSqlValueType type;
+    EAGLE_ATTR_NA EagleDbSqlValueType type;
     
     union {
         
         /**
          @see EagleDbSqlValueTypeInteger
          */
-        int intValue;
+        EAGLE_ATTR_NA int intValue;
         
         /**
          When using identifier token. This is the name of the identifier.
          */
-        char *identifier;
+        EAGLE_ATTR_MANAGED char *identifier;
         
     } value;
     
 } EagleDbSqlValue;
 
+/**
+ Create a new Value with an integer.
+ 
+ @param [in] value Integer value.
+ */
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
+
 EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void);
+
 EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *name);
+
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
+
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value);
 
 #endif

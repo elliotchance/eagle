@@ -47,7 +47,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
         CUNIT_ASSERT_NULL(select->whereExpression);
     }
     
-    EagleDbSqlExpression_Delete((EagleDbSqlExpression*) select);
+    EagleDbSqlExpression_Delete((EagleDbSqlExpression*) select, EagleTrue);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
@@ -65,7 +65,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
         CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
     }
     
-    EagleDbSqlBinaryExpression_Delete(binary);
+    EagleDbSqlBinaryExpression_Delete(binary, EagleTrue);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
@@ -108,7 +108,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
         col1Data[i] = i;
     }
     EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue));
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
     
     EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);
@@ -149,7 +149,7 @@ CUNIT_TEST(DBSuite, EagleDbColumn_New)
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
 {
-    EagleDbSqlSelect_Delete(NULL);
+    EagleDbSqlSelect_Delete(NULL, EagleTrue);
 }
 
 CUNIT_TEST(DBSuite, EagleDbTable_New)
@@ -165,7 +165,7 @@ CUNIT_TEST(DBSuite, EagleDbTable_New)
     CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
     CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
 }
 
 EagleDbTable* _getTable()
@@ -219,7 +219,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     EagleMemory_Free(desc);
     
     EagleDbTuple_Delete(tuple);
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
@@ -258,8 +258,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     }
     EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
     EaglePageProvider *col2 = EaglePageProvider_CreateFromIntArray(col2Data, pageSize, pageSize, "col2");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue));
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2, EagleTrue));
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2, EagleTrue), EagleTrue);
     
     // compile plan
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
@@ -309,8 +309,11 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         EaglePage_Delete(page);
     }
     
+    free(col1Data);
+    free(col2Data);
+    EaglePlan_Delete(plan);
     for(int i = 0; i < exprs; ++i) {
-        EagleDbSqlExpression_Delete(expr[i]);
+        EagleDbSqlExpression_Delete(expr[i], EagleTrue);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
         EagleMemory_Free(answers[i]);
@@ -342,7 +345,7 @@ CUNIT_TEST(DBSuite, _, SELECT_WHERE)
         CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
     }
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
     yylex_free();
 }
 
@@ -367,7 +370,7 @@ CUNIT_TEST(DBSuite, _, CREATE_TABLE)
         CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
     }
     
-    EagleDbTable_Delete(table);
+    EagleDbTable_DeleteWithColumns(table);
     yylex_free();
 }
 

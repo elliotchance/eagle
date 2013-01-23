@@ -4,11 +4,6 @@
 #include "EagleDbSqlValue.h"
 #include "EagleMemory.h"
 
-/**
- Create a new Value with an integer.
- 
- @param [in] value Integer value.
- */
 EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
 {
     EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithInteger.1", sizeof(EagleDbSqlValue));
@@ -45,7 +40,7 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
     
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeIdentifier;
-    v->value.identifier = strdup(identifier);
+    v->value.identifier = (NULL == identifier ? NULL : strdup(identifier));
     
     return v;
 }

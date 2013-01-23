@@ -11,14 +11,7 @@
 #include "EagleDbTableData.h"
 #include "EagleMemory.h"
 #include "EagleDbInstance.h"
-
-extern void *yyparse_ast;
-extern int yyparse();
-extern int yy_scan_string(const char *);
-
-char* yyerrors_last();
-void yylex_init();
-void yylex_free();
+#include "EagleDbParser.h"
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
@@ -204,7 +197,7 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
         EagleInstance_Delete(eagle);
     }
     
-    EagleDbSqlSelect_Delete(select);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
 }
 
 void EagleDbInstance_executeCreateTable(EagleDbInstance *db)

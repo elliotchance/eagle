@@ -19,12 +19,15 @@ EaglePlanBufferProvider* EaglePlanBufferProvider_New(int destinationBuffer, Eagl
 
 char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
 {
-    char *msg = (char*) EagleMemory_Allocate("EaglePlanBufferProvider_toString.1", 1024);
+    char *msg = (char*) EagleMemory_Allocate("EaglePlanBufferProvider_toString.1", 1024), *name;
     if(NULL == msg) {
         return NULL;
     }
-    sprintf(msg, "destination = %d, name = %s, type = %s", bp->destinationBuffer, bp->provider->name,
-            EagleDataType_typeToName(bp->provider->type));
+    
+    name = EagleDataType_typeToName(bp->provider->type);
+    sprintf(msg, "destination = %d, name = %s, type = %s", bp->destinationBuffer, bp->provider->name, name);
+    EagleMemory_Free(name);
+    
     return msg;
 }
 

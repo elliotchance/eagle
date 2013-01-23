@@ -51,7 +51,7 @@ int SQLSuite_init()
 int SQLSuite_clean()
 {
     for(int i = 0; i < usedTables; ++i) {
-        EagleDbTable_Delete(tables[i]->table);
+        EagleDbTable_DeleteWithColumns(tables[i]->table);
         //EagleDbTableData_Delete(tables[i]);
     }
     
@@ -132,7 +132,7 @@ void SQLSuiteTest()
     for(int i = 0; i < td->table->usedColumns; ++i) {
         EaglePageProvider_reset(td->providers[i]);
         EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
-        EaglePlan_addBufferProvider(plan, bp);
+        EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     }
     
     // compile plan
@@ -149,7 +149,6 @@ void SQLSuiteTest()
         else {
             CUNIT_FAIL("%s", plan->errorMessage);
         }
-        EaglePlan_Delete(plan);
     }
     else {
         // execute
@@ -212,9 +211,10 @@ void SQLSuiteTest()
     }
     
     // clean up
+    EaglePlan_Delete(plan);
     EagleMemory_Free(expr);
     
-    EagleDbSqlSelect_Delete(yyparse_ast);
+    EagleDbSqlSelect_Delete(yyparse_ast, EagleTrue);
     yylex_free();
 }
 
