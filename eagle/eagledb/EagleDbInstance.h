@@ -41,6 +41,9 @@ typedef struct {
 
 EagleDbInstance* EagleDbInstance_New(int pageSize);
 
+/**
+ Free an instance.
+ */
 void EagleDbInstance_Delete(EagleDbInstance *db);
 
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql);

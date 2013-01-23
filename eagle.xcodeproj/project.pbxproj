@@ -80,6 +80,12 @@
 		8BEDCF8E16AE54A100EBCFAA /* EagleDbParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF8D16AE54A100EBCFAA /* EagleDbParser.c */; };
 		8BEDCF8F16AE54A100EBCFAA /* EagleDbParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF8D16AE54A100EBCFAA /* EagleDbParser.c */; };
 		8BEDCF9016AE54A100EBCFAA /* EagleDbParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF8D16AE54A100EBCFAA /* EagleDbParser.c */; };
+		8BEDCF9A16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF9916AFFA8500EBCFAA /* EagleLoggerEvent.c */; };
+		8BEDCF9B16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF9916AFFA8500EBCFAA /* EagleLoggerEvent.c */; };
+		8BEDCF9E16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF9D16AFFAEE00EBCFAA /* EagleLoggerSeverity.c */; };
+		8BEDCF9F16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF9D16AFFAEE00EBCFAA /* EagleLoggerSeverity.c */; };
+		8BEDCFA316B002BB00EBCFAA /* EagleLock.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFA216B002B900EBCFAA /* EagleLock.c */; };
+		8BEDCFA416B002BB00EBCFAA /* EagleLock.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFA216B002B900EBCFAA /* EagleLock.c */; };
 		8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */; };
 /* End PBXBuildFile section */
 
@@ -209,6 +215,14 @@
 		8BD9E41E1675710B005C3BDE /* TestSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSuite.h; sourceTree = "<group>"; };
 		8BEDCF8B16AE50D900EBCFAA /* EagleDbParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbParser.h; sourceTree = "<group>"; };
 		8BEDCF8D16AE54A100EBCFAA /* EagleDbParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbParser.c; sourceTree = "<group>"; };
+		8BEDCF9616AFF5C100EBCFAA /* Eagle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Eagle.h; sourceTree = "<group>"; };
+		8BEDCF9816AFFA5600EBCFAA /* EagleLoggerEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleLoggerEvent.h; sourceTree = "<group>"; };
+		8BEDCF9916AFFA8500EBCFAA /* EagleLoggerEvent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleLoggerEvent.c; sourceTree = "<group>"; };
+		8BEDCF9C16AFFAC700EBCFAA /* EagleLoggerSeverity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleLoggerSeverity.h; sourceTree = "<group>"; };
+		8BEDCF9D16AFFAEE00EBCFAA /* EagleLoggerSeverity.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleLoggerSeverity.c; sourceTree = "<group>"; };
+		8BEDCFA016AFFE7E00EBCFAA /* EaglePlanError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EaglePlanError.h; sourceTree = "<group>"; };
+		8BEDCFA116B0027100EBCFAA /* EagleLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleLock.h; sourceTree = "<group>"; };
+		8BEDCFA216B002B900EBCFAA /* EagleLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleLock.c; sourceTree = "<group>"; };
 		8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BenchSuite.c; sourceTree = "<group>"; };
 		8BFDB9D2169A985200D3E8B0 /* BenchSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BenchSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,6 +305,7 @@
 		8BD9E3DA16756FF4005C3BDE /* eagle */ = {
 			isa = PBXGroup;
 			children = (
+				8BEDCF9616AFF5C100EBCFAA /* Eagle.h */,
 				8B3BB344167C3D4400E282AF /* EagleBoolean.h */,
 				8BD9E3DB16756FF4005C3BDE /* EagleData.c */,
 				8BD9E3DC16756FF4005C3BDE /* EagleData.h */,
@@ -298,8 +313,14 @@
 				8BD9E3DE16756FF4005C3BDE /* EagleInstance.h */,
 				8B545247167E950000136437 /* EagleLinkedList.c */,
 				8B545245167E944100136437 /* EagleLinkedList.h */,
+				8BEDCFA216B002B900EBCFAA /* EagleLock.c */,
+				8BEDCFA116B0027100EBCFAA /* EagleLock.h */,
 				8B61B7C71696BB2C00B27573 /* EagleLogger.c */,
 				8B61B7C51696B75300B27573 /* EagleLogger.h */,
+				8BEDCF9916AFFA8500EBCFAA /* EagleLoggerEvent.c */,
+				8BEDCF9816AFFA5600EBCFAA /* EagleLoggerEvent.h */,
+				8BEDCF9D16AFFAEE00EBCFAA /* EagleLoggerSeverity.c */,
+				8BEDCF9C16AFFAC700EBCFAA /* EagleLoggerSeverity.h */,
 				8B99A02B1694C3AA00C6D2B1 /* EagleMemory.c */,
 				8B99A0291694C32400C6D2B1 /* EagleMemory.h */,
 				8BD9E3DF16756FF4005C3BDE /* EaglePage.c */,
@@ -312,6 +333,7 @@
 				8BD9E3E816756FF4005C3BDE /* EaglePlan.h */,
 				8BD9E3E916756FF4005C3BDE /* EaglePlanBufferProvider.c */,
 				8BD9E3EA16756FF4005C3BDE /* EaglePlanBufferProvider.h */,
+				8BEDCFA016AFFE7E00EBCFAA /* EaglePlanError.h */,
 				8BD9E3EB16756FF4005C3BDE /* EaglePlanJob.c */,
 				8BD9E3EC16756FF4005C3BDE /* EaglePlanJob.h */,
 				8BD9E3ED16756FF4005C3BDE /* EaglePlanOperation.c */,
@@ -531,6 +553,9 @@
 				8B99A02C1694C3AA00C6D2B1 /* EagleMemory.c in Sources */,
 				8B61B7C81696BB2C00B27573 /* EagleLogger.c in Sources */,
 				8BEDCF8E16AE54A100EBCFAA /* EagleDbParser.c in Sources */,
+				8BEDCF9A16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */,
+				8BEDCF9E16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */,
+				8BEDCFA316B002BB00EBCFAA /* EagleLock.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +601,9 @@
 				8B61B7C91696BB2C00B27573 /* EagleLogger.c in Sources */,
 				8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */,
 				8BEDCF8F16AE54A100EBCFAA /* EagleDbParser.c in Sources */,
+				8BEDCF9B16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */,
+				8BEDCF9F16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */,
+				8BEDCFA416B002BB00EBCFAA /* EagleLock.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

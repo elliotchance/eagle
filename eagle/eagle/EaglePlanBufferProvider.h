@@ -2,6 +2,7 @@
 #define eagle_EaglePlanBufferProvider_h
 
 #include "EaglePageProvider.h"
+#include "Eagle.h"
 
 /**
  This structure acts as a link between a page providers data and the buffer for an expression it will be loaded into.
@@ -11,17 +12,18 @@ typedef struct {
     /**
      The buffer ID where the next page will be loaded into.
      */
-    int destinationBuffer;
+    EAGLE_ATTR_NA int destinationBuffer;
     
     /**
-     The provider that contains the actual data for the buffer.
+     The provider that contains the actual data for the buffer. This is semi managed because it depends on
+     \c freeProvider
      */
-    EaglePageProvider *provider;
+    EAGLE_ATTR_SEMI_MANAGED EaglePageProvider *provider;
     
     /**
      Free the provider when the plan buffer provider is released.
      */
-    EagleBoolean freeProvider;
+    EAGLE_ATTR_NA EagleBoolean freeProvider;
     
 } EaglePlanBufferProvider;
 

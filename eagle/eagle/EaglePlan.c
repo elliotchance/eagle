@@ -112,31 +112,16 @@ const char* EaglePlan_toString(EaglePlan *plan)
 
 void EaglePlan_Delete(EaglePlan *plan)
 {
-    int i;
-    
     if(NULL == plan) {
         return;
     }
     
-    for(i = 0; i < plan->usedOperations; ++i) {
-        EaglePlanOperation_Delete(plan->operations[i]);
-    }
     EagleMemory_Free(plan->operations);
-    
-    for(i = 0; i < plan->usedProviders; ++i) {
-        EaglePlanBufferProvider_Delete(plan->providers[i]);
-    }
     EagleMemory_Free(plan->providers);
-    
-    for(i = 0; i < plan->resultFields; ++i) {
-        EaglePageProvider_Delete(plan->result[i]);
-    }
     EagleMemory_Free(plan->result);
-    
     EagleMemory_Free(plan->errorMessage);
     EagleMemory_Free(plan->bufferTypes);
     EagleMemory_Free(plan);
-    plan = NULL;
 }
 
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name)
@@ -156,7 +141,7 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
 void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMessage)
 {
     plan->errorCode = errorCode;
-    plan->errorMessage = strdup(errorMessage);
+    plan->errorMessage = (NULL == errorMessage ? NULL : strdup(errorMessage));
 }
 
 EagleBoolean EaglePlan_isError(EaglePlan *plan)

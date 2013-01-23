@@ -2,18 +2,19 @@
 #define eagle_EaglePlanJob_h
 
 #include "EaglePlan.h"
+#include "Eagle.h"
 
 typedef struct {
     
     /**
      A reference to the plan.
      */
-    EaglePlan *plan;
+    EAGLE_ATTR_PROVIDED EaglePlan *plan;
     
     /**
      The buffers.
      */
-    EaglePage **buffers;
+    EAGLE_ATTR_MANAGED EaglePage **buffers;
     
 } EaglePlanJob;
 

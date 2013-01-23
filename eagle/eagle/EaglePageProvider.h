@@ -6,6 +6,7 @@
 #include "EagleSynchronizer.h"
 #include "EagleBoolean.h"
 #include "EagleLinkedList.h"
+#include "Eagle.h"
 
 struct EaglePageProvider_ {
     
@@ -13,72 +14,74 @@ struct EaglePageProvider_ {
      The cursor position. An internal counter of the position of the stream. If the stream has more pages this will be
      incremented with each nextPage().
      */
-    int offsetRecords;
+    EAGLE_ATTR_NA int offsetRecords;
     
     /**
      The total amount of records. You should never access this directly since its value may be virtual or invalid -
      instead use EaglePageProvider_pagesRemaining()
      */
-    int totalRecords;
+    EAGLE_ATTR_NA int totalRecords;
     
     /**
      For convenience the page provider has a default page size.
      */
-    int recordsPerPage;
+    EAGLE_ATTR_NA int recordsPerPage;
     
     /**
      A pointer to the actual data that will be fed into pages. You should not rely on accessing this directly because
      its type and implementation will be different depending on the type of page provider. Use the appropriate methods
      nextPage() and pagesRemaining().
+     
+     The memory for this instance variable is only managed when the page provider is a stream type.
      */
-    void *records;
+    EAGLE_ATTR_SEMI_MANAGED void *records;
     
     /**
      Fetch the next page from the provider. If no more data is available this will return NULL.
      */
-    EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
+    EAGLE_ATTR_NA EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
     
     /**
      Ask the provider if there is more data available. This must be invoked before every nextPage() - since the stream
      might be variable and more data may be added to the stream while your reading from it.
      */
-    int (*pagesRemaining)(struct EaglePageProvider_ *epp);
+    EAGLE_ATTR_NA int (*pagesRemaining)(struct EaglePageProvider_ *epp);
     
     /**
      Some data provider types allow the addition of data.
      @return EagleTrue if the data was added on, EagleFalse otherwise.
      */
-    EagleBoolean (*add)(struct EaglePageProvider_ *epp, void *data);
+    EAGLE_ATTR_NA EagleBoolean (*add)(struct EaglePageProvider_ *epp, void *data);
     
     /**
      Virtual method for freeing this structure.
      */
-    void (*free)(struct EaglePageProvider_ *epp);
+    EAGLE_ATTR_NA void (*free)(struct EaglePageProvider_ *epp);
     
     /**
      Virtual method for resetting the page provider.
      */
-    void (*reset)(struct EaglePageProvider_ *epp);
+    EAGLE_ATTR_NA void (*reset)(struct EaglePageProvider_ *epp);
     
     /**
      Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining()
      */
-    EagleLock *nextPageLock;
+    EAGLE_ATTR_MANAGED EagleLock *nextPageLock;
     
     /**
      An optional name. For example, a column name. This is so named columns can be identified.
      */
-    char *name;
+    EAGLE_ATTR_MANAGED char *name;
     
     /**
      The data type for this provider.
      */
-    EagleDataType type;
+    EAGLE_ATTR_NA EagleDataType type;
     
     /**
      This is used by streams. It allows it to keep the page it is upto when requesting the next page.
      */
-    EagleLinkedListItem *cursor;
+    EAGLE_ATTR_PROVIDED EagleLinkedListItem *cursor;
     
 };
 typedef struct EaglePageProvider_ EaglePageProvider;

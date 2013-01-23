@@ -64,6 +64,12 @@ int EagleLinkedList_length(EagleLinkedList *list)
 
 void EagleLinkedList_Delete(EagleLinkedList *list)
 {
+    EagleLock_Delete(list->modifyLock);
+    EagleMemory_Free(list);
+}
+
+void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
+{
     EagleLinkedListItem *p, *next;
     EagleSynchronizer_Lock(list->modifyLock);
     
@@ -73,8 +79,7 @@ void EagleLinkedList_Delete(EagleLinkedList *list)
     }
     
     EagleSynchronizer_Unlock(list->modifyLock);
-    EagleLock_Delete(list->modifyLock);
-    EagleMemory_Free(list);
+    EagleLinkedList_Delete(list);
 }
 
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item)

@@ -3,39 +3,43 @@
 
 #include "EagleBoolean.h"
 #include "EagleData.h"
+#include "Eagle.h"
 
 /**
  Represents a single page of data.
  */
 struct EaglePage_ {
     
-    EagleDataType type;
+    /**
+     The data type for this page.
+     */
+    EAGLE_ATTR_NA EagleDataType type;
     
     /**
      An arbitrary counter for the row ID offset. The first record in this page will have \c recordOffset as the record
      ID, the next record will be recordOffset + 1, etc
      */
-    int recordOffset;
+    EAGLE_ATTR_NA int recordOffset;
     
     /**
      The allocated records for this page.
      */
-    int totalSize;
+    EAGLE_ATTR_NA int totalSize;
     
     /**
      The amount of used records in this page.
      */
-    int count;
+    EAGLE_ATTR_NA int count;
     
     /**
      The actual data for this page.
      */
-    void *data;
+    EAGLE_ATTR_SEMI_MANAGED void *data;
     
     /**
      Free \c data when freeing the page.
      */
-    EagleBoolean freeData;
+    EAGLE_ATTR_NA EagleBoolean freeData;
     
 };
 typedef struct EaglePage_ EaglePage;

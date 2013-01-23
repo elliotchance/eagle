@@ -21,10 +21,3 @@ void EagleSynchronizer_Unlock(EagleLock *lock)
 {
     pthread_mutex_unlock(&lock->mutex);
 }
-
-void EagleLock_Delete(EagleLock *lock)
-{
-    pthread_mutex_destroy(&lock->mutex);
-    pthread_mutexattr_destroy(&lock->attr);
-    EagleMemory_Free(lock);
-}

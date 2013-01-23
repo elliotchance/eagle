@@ -47,21 +47,6 @@ void EaglePage_Delete(EaglePage *page)
         return;
     }
     if(EagleTrue == page->freeData) {
-        int i;
-        switch(page->type) {
-                
-            case EagleDataTypeUnknown:
-            case EagleDataTypeInteger:
-                /* do nothing here */
-                break;
-                
-            case EagleDataTypeText:
-                for(i = 0; i < page->count; ++i) {
-                    /*free(((char**) page->data)[i]);*/
-                }
-                break;
-            
-        }
         EagleMemory_Free((void*) page->data);
     }
     EagleMemory_Free((void*) page);

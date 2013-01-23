@@ -16,6 +16,9 @@ EagleDbConsole* EagleDbConsole_New(void);
 
 void EagleDbConsole_run(EagleDbConsole *console);
 
+/**
+ Free the console.
+ */
 void EagleDbConsole_Delete(EagleDbConsole *console);
 
 /**

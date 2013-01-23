@@ -20,8 +20,17 @@ typedef struct {
     
 } EagleDbColumn;
 
+/**
+ Create a new table column.
+ 
+ @param [in] name The name will be duplicated.
+ @param [in] type The data type for this column.
+ */
 EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type);
 
+/**
+ Free a column.
+ */
 void EagleDbColumn_Delete(EagleDbColumn *column);
 
 #endif

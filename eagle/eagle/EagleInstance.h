@@ -6,14 +6,15 @@
 #include "EaglePageProvider.h"
 #include "EaglePlanJob.h"
 #include "EagleSynchronizer.h"
+#include "Eagle.h"
 
 /**
  An eagle instance (a database).
  */
 struct EagleInstance_ {
-    EagleWorkers *workers;  /**< The workers. */
-    EaglePlan *plan;        /**< The plan that needs to be executed. */
-    EagleLock *nextJobLock; /**< To syncronise the EagleInstance_nextJob() method. */
+    EAGLE_ATTR_MANAGED  EagleWorkers *workers;  /**< The workers. */
+    EAGLE_ATTR_PROVIDED EaglePlan *plan;        /**< The plan that needs to be executed. */
+    EAGLE_ATTR_MANAGED  EagleLock *nextJobLock; /**< To syncronise the EagleInstance_nextJob() method. */
 };
 typedef struct EagleInstance_ EagleInstance;
 

@@ -7,31 +7,6 @@
 
 static EagleLogger *EagleLogger_Logger = NULL;
 
-EagleLoggerEvent* EagleLoggerEvent_New(EagleLoggerSeverity severity, char *message)
-{
-    EagleLoggerEvent *event = (EagleLoggerEvent*) EagleMemory_Allocate("EagleLoggerEvent_New.1", sizeof(EagleLoggerEvent));
-    if(NULL == event) {
-        return NULL;
-    }
-    
-    event->when = time(NULL);
-    event->severity = severity;
-    event->message = strdup(message);
-    event->obj = NULL;
-    
-    return event;
-}
-
-void EagleLoggerEvent_Delete(EagleLoggerEvent *event)
-{
-    if(NULL == event) {
-        return;
-    }
-    
-    EagleMemory_Free(event->message);
-    EagleMemory_Free(event);
-}
-
 void EagleLogger_Delete(EagleLogger *logger)
 {
     if(NULL == logger) {
@@ -94,26 +69,4 @@ void EagleLogger_LogEvent(EagleLoggerEvent *event)
     fprintf(logger->out, "%s: [%s] %s\n", timestamp, EagleLoggerSeverity_toString(event->severity), event->message);
     
     EagleSynchronizer_Unlock(logger->logLock);
-}
-
-char* EagleLoggerSeverity_toString(EagleLoggerSeverity severity)
-{
-    switch(severity) {
-            
-        case EagleLoggerSeverityDebug:
-            return "DEBUG";
-            
-        case EagleLoggerSeverityInfo:
-            return "INFO";
-            
-        case EagleLoggerSeverityUserError:
-            return "USERERROR";
-            
-        case EagleLoggerSeverityError:
-            return "ERROR";
-            
-        case EagleLoggerSeverityFatal:
-            return "FATAL";
-            
-    }
 }

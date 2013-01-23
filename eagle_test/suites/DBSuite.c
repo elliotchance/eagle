@@ -309,6 +309,9 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         EaglePage_Delete(page);
     }
     
+    EaglePageProvider_Delete(col1);
+    EaglePageProvider_Delete(col2);
+    EaglePlan_Delete(plan);
     for(int i = 0; i < exprs; ++i) {
         EagleDbSqlExpression_Delete(expr[i]);
     }

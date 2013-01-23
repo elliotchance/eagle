@@ -174,6 +174,8 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     CUNIT_VERIFY_EQUAL_INT(misses, (totalRecords - (NULL == resultPage ? 0 : resultPage->count)));
     
     // clean up
+    free(data);
+    EaglePageProvider_Delete(provider);
     EaglePage_Delete(resultPage);
     EaglePageProvider_Delete(result);
     EagleInstance_Delete(eagle);

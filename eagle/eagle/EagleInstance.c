@@ -82,6 +82,5 @@ void EagleInstance_Delete(EagleInstance *eagle)
     
     EagleWorkers_Delete(eagle->workers);
     EagleLock_Delete(eagle->nextJobLock);
-    EaglePlan_Delete(eagle->plan);
     EagleMemory_Free(eagle);
 }

@@ -3,28 +3,29 @@
 
 #include "EagleSynchronizer.h"
 #include "EagleBoolean.h"
+#include "Eagle.h"
 
 struct EagleLinkedListItem_ {
     
     /**
      The actual item value.
      */
-    void *obj;
+    EAGLE_ATTR_SEMI_MANAGED void *obj;
     
     /**
      If EagleTrue the \c obj will be freed with the list item.
      */
-    EagleBoolean freeObj;
+    EAGLE_ATTR_NA EagleBoolean freeObj;
     
     /**
      A pointer to the next item.
      */
-    struct EagleLinkedListItem_ *next;
+    EAGLE_ATTR_PROVIDED struct EagleLinkedListItem_ *next;
     
     /**
      A pointer to the function that will free \c obj. If this is NULL then the normal free() function will be used.
      */
-    void (*free)(void *obj);
+    EAGLE_ATTR_NA void (*free)(void *obj);
     
 };
 typedef struct EagleLinkedListItem_ EagleLinkedListItem;
@@ -34,23 +35,23 @@ typedef struct {
     /**
      A pointer to the last item.
      */
-    EagleLinkedListItem *last;
+    EAGLE_ATTR_PROVIDED EagleLinkedListItem *last;
     
     /**
      A pointer to the first item.
      */
-    EagleLinkedListItem *first;
+    EAGLE_ATTR_PROVIDED EagleLinkedListItem *first;
     
     /**
      The amount of items in this linked list.
      @see EagleLinkedList_length()
      */
-    int length;
+    EAGLE_ATTR_NA int length;
     
     /**
      Lock to synchronize list modifications.
      */
-    EagleLock *modifyLock;
+    EAGLE_ATTR_MANAGED EagleLock *modifyLock;
     
 } EagleLinkedList;
 
@@ -60,7 +61,23 @@ void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
 EagleLinkedList* EagleLinkedList_New(void);
 
+/**
+ Delete a linked list.
+ 
+ @note This will only remove the list, not the items contained in the list.
+ 
+ @param [in] list The list object to free.
+ @see EagleLinkedList_DeleteWithItems
+ */
 void EagleLinkedList_Delete(EagleLinkedList *list);
+
+/**
+ Delete a linked list and all the items contained in it.
+ 
+ @param [in] list The list object to free.
+ @see EagleLinkedList_Delete
+ */
+void EagleLinkedList_DeleteWithItems(EagleLinkedList *list);
 
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
 
@@ -69,6 +86,9 @@ void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
  */
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list);
 
+/**
+ Return a pointer to the last item on the list.
+ */
 EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
 
 int EagleLinkedList_length(EagleLinkedList *list);

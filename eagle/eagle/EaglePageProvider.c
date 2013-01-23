@@ -25,7 +25,7 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
     pageProvider->add = EaglePageProvider_addUnsupported_;
     pageProvider->free = EaglePageProvider_DeleteIntArray_;
     pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
-    pageProvider->name = name;
+    pageProvider->name = (NULL == name ? NULL : strdup(name));
     pageProvider->reset = EaglePageProvider_resetFromIntArray_;
     pageProvider->type = EagleDataTypeInteger;
     
@@ -143,7 +143,7 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
-    EagleMemory_Free(epp->records);
+    EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }
 
