@@ -7,6 +7,7 @@
 #include "EaglePlanBufferProvider.h"
 #include "EaglePlanError.h"
 #include "Eagle.h"
+#include "EagleDataType.h"
 
 typedef struct {
     

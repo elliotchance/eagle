@@ -3,6 +3,7 @@
 
 #include "EagleData.h"
 #include "Eagle.h"
+#include "EagleDataType.h"
 
 /**
  The definition for a table column.

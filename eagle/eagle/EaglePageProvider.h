@@ -7,6 +7,7 @@
 #include "EagleBoolean.h"
 #include "EagleLinkedList.h"
 #include "Eagle.h"
+#include "EagleDataType.h"
 
 struct EaglePageProvider_ {
     

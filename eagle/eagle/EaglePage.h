@@ -4,6 +4,7 @@
 #include "EagleBoolean.h"
 #include "EagleData.h"
 #include "Eagle.h"
+#include "EagleDataType.h"
 
 /**
  Represents a single page of data.

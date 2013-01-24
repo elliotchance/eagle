@@ -86,6 +86,8 @@
 		8BEDCF9F16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCF9D16AFFAEE00EBCFAA /* EagleLoggerSeverity.c */; };
 		8BEDCFA316B002BB00EBCFAA /* EagleLock.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFA216B002B900EBCFAA /* EagleLock.c */; };
 		8BEDCFA416B002BB00EBCFAA /* EagleLock.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFA216B002B900EBCFAA /* EagleLock.c */; };
+		8BEDCFB016B0FC2E00EBCFAA /* EagleDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFAF16B0FC2D00EBCFAA /* EagleDataType.c */; };
+		8BEDCFB116B0FC2E00EBCFAA /* EagleDataType.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDCFAF16B0FC2D00EBCFAA /* EagleDataType.c */; };
 		8BFDB9D3169A985200D3E8B0 /* BenchSuite.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */; };
 /* End PBXBuildFile section */
 
@@ -226,6 +228,8 @@
 		8BEDCFA516B004F700EBCFAA /* EagleDbSqlStatementType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlStatementType.h; sourceTree = "<group>"; };
 		8BEDCFA616B0073D00EBCFAA /* EagleDbSqlExpressionType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlExpressionType.h; sourceTree = "<group>"; };
 		8BEDCFA716B0085C00EBCFAA /* EagleDbSqlValueType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlValueType.h; sourceTree = "<group>"; };
+		8BEDCFAD16B0FBEC00EBCFAA /* EagleDataType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDataType.h; sourceTree = "<group>"; };
+		8BEDCFAF16B0FC2D00EBCFAA /* EagleDataType.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDataType.c; sourceTree = "<group>"; };
 		8BFDB9D1169A985200D3E8B0 /* BenchSuite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BenchSuite.c; sourceTree = "<group>"; };
 		8BFDB9D2169A985200D3E8B0 /* BenchSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BenchSuite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -312,6 +316,8 @@
 				8B3BB344167C3D4400E282AF /* EagleBoolean.h */,
 				8BD9E3DB16756FF4005C3BDE /* EagleData.c */,
 				8BD9E3DC16756FF4005C3BDE /* EagleData.h */,
+				8BEDCFAF16B0FC2D00EBCFAA /* EagleDataType.c */,
+				8BEDCFAD16B0FBEC00EBCFAA /* EagleDataType.h */,
 				8BD9E3DD16756FF4005C3BDE /* EagleInstance.c */,
 				8BD9E3DE16756FF4005C3BDE /* EagleInstance.h */,
 				8B545247167E950000136437 /* EagleLinkedList.c */,
@@ -562,6 +568,7 @@
 				8BEDCF9A16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */,
 				8BEDCF9E16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */,
 				8BEDCFA316B002BB00EBCFAA /* EagleLock.c in Sources */,
+				8BEDCFB016B0FC2E00EBCFAA /* EagleDataType.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +617,7 @@
 				8BEDCF9B16AFFA8700EBCFAA /* EagleLoggerEvent.c in Sources */,
 				8BEDCF9F16AFFAF000EBCFAA /* EagleLoggerSeverity.c in Sources */,
 				8BEDCFA416B002BB00EBCFAA /* EagleLock.c in Sources */,
+				8BEDCFB116B0FC2E00EBCFAA /* EagleDataType.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
