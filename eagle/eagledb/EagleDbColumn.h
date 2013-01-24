@@ -32,6 +32,7 @@ EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type);
 
 /**
  Free a column.
+ @param [in] column Column.
  */
 void EagleDbColumn_Delete(EagleDbColumn *column);
 

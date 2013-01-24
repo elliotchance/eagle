@@ -33,8 +33,14 @@ struct EagleLinkedListItem_ {
 };
 typedef struct EagleLinkedListItem_ EagleLinkedListItem;
 
+/**
+ Initialise a new item to append to a linked list.
+ */
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
 
+/**
+ Free a linked list item.
+ */
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
 #endif

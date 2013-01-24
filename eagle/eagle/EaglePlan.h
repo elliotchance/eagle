@@ -9,6 +9,9 @@
 #include "Eagle.h"
 #include "EagleDataType.h"
 
+/**
+ An execution plan.
+ */
 typedef struct {
     
     /**

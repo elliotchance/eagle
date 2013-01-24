@@ -4,6 +4,9 @@
 #include <mach/mach_time.h>
 #include "Eagle.h"
 
+/**
+ Console instance.
+ */
 typedef struct {
     
     /**

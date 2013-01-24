@@ -53,18 +53,6 @@ void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1
     }
 }
 
-void EaglePageOperations_CastIntPageToBoolean(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
-{
-    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data;
-    
-    destination->recordOffset = source1->recordOffset;
-    destination->count = source1->count;
-    
-    for(i = 0; i < source1->count; ++i) {
-        destdata[i] = (source1data[i] != 0);
-    }
-}
-
 void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;

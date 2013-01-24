@@ -8,6 +8,9 @@
 #include "Eagle.h"
 #include "EagleLoggerEvent.h"
 
+/**
+ A logger instance.
+ */
 typedef struct {
     
     /**

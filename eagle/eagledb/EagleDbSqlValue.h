@@ -10,6 +10,9 @@
  */
 typedef struct {
     
+    /**
+     @see EagleDbSqlExpressionHeader
+     */
     EagleDbSqlExpressionHeader;
     
     /**

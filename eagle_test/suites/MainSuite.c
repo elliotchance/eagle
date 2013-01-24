@@ -359,33 +359,6 @@ CUNIT_TEST(MainSuite, EagleLinkedList_New)
     EagleLinkedList_DeleteWithItems(list);
 }
 
-CUNIT_TEST(MainSuite, EaglePageOperations_CastIntPageToBoolean)
-{
-    int pageSize = 1000;
-    EaglePage *page = EaglePage_AllocInt(pageSize);
-    EaglePage *out = EaglePage_AllocInt(pageSize);
-    
-    for(int i = 0; i < pageSize; ++i) {
-        ((int*) page->data)[i] = arc4random() % 2;
-    }
-    
-    EaglePageOperations_CastIntPageToBoolean(out, page, NULL, NULL);
-    
-    // verify
-    int valid = 1;
-    for(int i = 0; i < pageSize; ++i) {
-        if(((int*) out->data)[i] != (((int*) page->data)[i] != 0)) {
-            valid = 0;
-            break;
-        }
-    }
-    CUNIT_ASSERT_EQUAL_INT(valid, 1);
-    
-    // clean up
-    EaglePage_Delete(page);
-    EaglePage_Delete(out);
-}
-
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromIntStream)
 {
     int testDataSize = 5, recordsPerPage = 2;
@@ -507,7 +480,6 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_GreaterThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_LessThanInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_AndPage));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_CastIntPageToBoolean));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_TotalPages));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromIntStream));

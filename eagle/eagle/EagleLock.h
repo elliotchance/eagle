@@ -21,6 +21,9 @@ typedef struct {
     
 } EagleLock;
 
+/**
+ Free a lock.
+ */
 void EagleLock_Delete(EagleLock *lock);
 
 #endif

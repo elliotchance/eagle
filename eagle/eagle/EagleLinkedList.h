@@ -34,6 +34,9 @@ typedef struct {
     
 } EagleLinkedList;
 
+/**
+ Create a new linked list.
+ */
 EagleLinkedList* EagleLinkedList_New(void);
 
 /**
@@ -54,6 +57,9 @@ void EagleLinkedList_Delete(EagleLinkedList *list);
  */
 void EagleLinkedList_DeleteWithItems(EagleLinkedList *list);
 
+/**
+ Append an item to a linked list.
+ */
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
 
 /**
@@ -66,6 +72,9 @@ EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list);
  */
 EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
 
+/**
+ The number of items in the list.
+ */
 int EagleLinkedList_length(EagleLinkedList *list);
 
 #endif

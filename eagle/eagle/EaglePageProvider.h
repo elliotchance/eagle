@@ -9,6 +9,9 @@
 #include "Eagle.h"
 #include "EagleDataType.h"
 
+/**
+ A page provider.
+ */
 struct EaglePageProvider_ {
     
     /**
@@ -87,6 +90,9 @@ struct EaglePageProvider_ {
 };
 typedef struct EaglePageProvider_ EaglePageProvider;
 
+/**
+ Create a new read only page provider from a fixed size array.
+ */
 EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name);
 
 /**
@@ -98,21 +104,46 @@ EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalR
  */
 EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name);
 
+/**
+ Create a new writable page provider with zero records.
+ */
 EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name);
 
+/**
+ Calulate the amount of pages required to serve a given amount of records.
+ */
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 
+/**
+ Free a page provider.
+ @param [in] epp Page provider instance.
+ */
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
+/**
+ Return the number of pages remaining.
+ @param [in] epp Page provider instance.
+ */
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 
+/**
+ Get the next page from the provider.
+ @param [in] epp Page provider instance.
+ */
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 
+/**
+ Add a record to a writable provider.
+ @param [in] epp Page provider instance.
+ */
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 
+/**
+ Reset the cursor back to the beginning.
+ @param [in] epp Page provider instance.
+ */
 void EaglePageProvider_reset(EaglePageProvider *epp);
 
-/* private functions */
 EaglePageProvider* EaglePageProvider_New_(EagleDataType type, int recordsPerPage);
 
 int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);

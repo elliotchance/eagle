@@ -32,8 +32,14 @@ typedef struct {
     
 } EagleLoggerEvent;
 
+/**
+ Create a new logger event.
+ */
 EagleLoggerEvent* EagleLoggerEvent_New(EagleLoggerSeverity severity, char *message);
 
+/**
+ Free a logger event.
+ */
 void EagleLoggerEvent_Delete(EagleLoggerEvent *event);
 
 #endif

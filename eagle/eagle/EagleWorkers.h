@@ -5,6 +5,9 @@
 
 struct EagleInstance_;
 
+/**
+ A pool of workers.
+ */
 typedef struct {
     
     /**

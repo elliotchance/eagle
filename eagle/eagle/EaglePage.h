@@ -59,6 +59,9 @@ typedef struct EaglePage_ EaglePage;
  */
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData);
 
+/**
+ Allocate a new page.
+ */
 EaglePage* EaglePage_Alloc(EagleDataType type, int count);
 
 /**

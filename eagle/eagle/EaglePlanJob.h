@@ -4,6 +4,9 @@
 #include "EaglePlan.h"
 #include "Eagle.h"
 
+/**
+ A plan is divided up into single jobs that are run simultaneously.
+ */
 typedef struct {
     
     /**

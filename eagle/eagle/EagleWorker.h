@@ -6,6 +6,9 @@
 
 struct EagleInstance_;
 
+/**
+ A worker is a thread.
+ */
 typedef struct {
     
     /**
