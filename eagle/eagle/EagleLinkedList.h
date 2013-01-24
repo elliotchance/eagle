@@ -4,32 +4,11 @@
 #include "EagleSynchronizer.h"
 #include "EagleBoolean.h"
 #include "Eagle.h"
+#include "EagleLinkedListItem.h"
 
-struct EagleLinkedListItem_ {
-    
-    /**
-     The actual item value.
-     */
-    EAGLE_ATTR_SEMI_MANAGED void *obj;
-    
-    /**
-     If EagleTrue the \c obj will be freed with the list item.
-     */
-    EAGLE_ATTR_NA EagleBoolean freeObj;
-    
-    /**
-     A pointer to the next item.
-     */
-    EAGLE_ATTR_PROVIDED struct EagleLinkedListItem_ *next;
-    
-    /**
-     A pointer to the function that will free \c obj. If this is NULL then the normal free() function will be used.
-     */
-    EAGLE_ATTR_NA void (*free)(void *obj);
-    
-};
-typedef struct EagleLinkedListItem_ EagleLinkedListItem;
-
+/**
+ A linked list (FIFO).
+ */
 typedef struct {
     
     /**
@@ -54,10 +33,6 @@ typedef struct {
     EAGLE_ATTR_MANAGED EagleLock *modifyLock;
     
 } EagleLinkedList;
-
-EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
-
-void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
 EagleLinkedList* EagleLinkedList_New(void);
 
