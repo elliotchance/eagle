@@ -1,7 +1,11 @@
 <?php
 
+$exitCode = 0;
+
 function addError($desc)
 {
+	global $exitCode;
+	$exitCode = 1;
 	echo ">>> $desc\n";
 }
 
@@ -78,3 +82,4 @@ function validateDirectory($dirname)
 }
 
 validateDirectory("doc/xml");
+exit($exitCode);

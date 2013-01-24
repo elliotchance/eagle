@@ -96,6 +96,9 @@ doxygen:
 		exit 1; \
 	fi
 	mv doc/html doc/$(GIT_BRANCH)
+	
+	# validate docs
+	php bin/doxygen.php
 
 master-only:
 	if [ $(GIT_BRANCH) -neq "master" ]; then \
