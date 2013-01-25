@@ -135,6 +135,7 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 /**
  Add a record to a writable provider.
  @param [in] epp Page provider instance.
+ @param [in] data The data for the record.
  */
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 

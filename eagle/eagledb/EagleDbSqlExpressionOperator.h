@@ -25,6 +25,11 @@ typedef enum {
     
 } EagleDbSqlExpressionOperator;
 
+/**
+ * Get the string representation of the operator.
+ * @param op The operator.
+ * @return A new string. You must free this yourself.
+ */
 char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op);
 
 #endif

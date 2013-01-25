@@ -35,16 +35,27 @@ typedef struct {
 } EagleDbSqlBinaryExpression;
 
 /**
- Create a new EagleDbSqlBinaryExpression.
- 
- @param [in] left Left operand.
- @param [in] op Operator.
- @param [in] right Right operand.
+ * Create a new EagleDbSqlBinaryExpression.
+ * @param [in] left Left operand.
+ * @param [in] op Operator.
+ * @param [in] right Right operand.
+ * @return A new instance.
  */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right);
 
+/**
+ * Free a binary expression.
+ * @note It is safer to use EagleDbSqlExpression_Delete() since it will automatically use the correct Delete function.
+ * @param [in] expr The instance.
+ * @param [in] recursive If this is EagleTrue then it will cascade the delete to all the of the the children in the AST.
+ */
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr, EagleBoolean recursive);
 
+/**
+ * Render a binary expression into a string.
+ * @param [in] expr The instance.
+ * @return A new string representation of the expression.
+ */
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
 
 #endif
