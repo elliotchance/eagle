@@ -556,6 +556,58 @@ CUNIT_TEST(MainSuite, EaglePage_Copy)
     EaglePage_Delete(page);
 }
 
+CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProvider)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 1, "dummy");
+    provider->type = EagleDataTypeUnknown;
+    EaglePage *source2 = EaglePage_Alloc(EagleDataTypeInteger, 1);
+    EaglePageOperations_SendPageToProvider(NULL, NULL, source2, provider);
+    
+    EaglePageProvider_Delete(provider);
+    EaglePage_Delete(source2);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    
+    EaglePageProvider *provider = EaglePageProvider_CreateFromInt(0, 1, "bla");
+    CUNIT_ASSERT_NULL(provider);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_addStream_)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 10, "dummy");
+    
+    // before we change to Unknown we need to add one record so that the first page is initialised
+    int *data = EagleData_Int(123);
+    EaglePageProvider_addStream_(provider, data);
+    free(data);
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
+    
+    // now skrew up the type
+    provider->type = EagleDataTypeUnknown;
+    EaglePageProvider_addStream_(provider, NULL);
+    
+    EaglePageProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromStream)
+{
+    EaglePageProvider *p = EaglePageProvider_CreateFromStream(EagleDataTypeUnknown, 1, "dummy");
+    CUNIT_ASSERT_NULL(p);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanJob_New)
+{
+    EaglePlanJob *p = EaglePlanJob_New(NULL);
+    CUNIT_ASSERT_NULL(p);
+}
+
 /**
  * The suite init function.
  */
@@ -606,6 +658,11 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyText_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_addStream_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromStream));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_New));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));

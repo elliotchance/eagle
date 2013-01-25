@@ -205,14 +205,10 @@ EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int re
         return NULL;
     }
     
-    pageProvider->recordsPerPage = recordsPerPage;
-    pageProvider->offsetRecords = 0;
-    pageProvider->totalRecords = 0;
-    pageProvider->records = (void*) EagleLinkedList_New();
-    
     switch(type) {
             
         case EagleDataTypeUnknown:
+            EagleMemory_Free(pageProvider);
             EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
             return NULL;
             
@@ -226,6 +222,10 @@ EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int re
             
     }
     
+    pageProvider->recordsPerPage = recordsPerPage;
+    pageProvider->offsetRecords = 0;
+    pageProvider->totalRecords = 0;
+    pageProvider->records = (void*) EagleLinkedList_New();
     pageProvider->reset = EaglePageProvider_resetFromStream_;
     pageProvider->free = EaglePageProvider_DeleteStream_;
     pageProvider->nextPage = EaglePageProvider_nextPageFromStream_;
