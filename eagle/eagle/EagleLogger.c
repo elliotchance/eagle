@@ -43,6 +43,7 @@ EagleLogger* EagleLogger_Get(void)
     }
     
     EagleSynchronizer_Unlock(lock);
+    EagleLock_Delete(lock);
     return EagleLogger_Logger;
 }
 
@@ -50,6 +51,7 @@ EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity sever
 {
     EagleLoggerEvent *event = EagleLoggerEvent_New(severity, message);
     EagleLogger_logEvent(logger, event);
+    EagleLoggerEvent_Delete(event);
     return event;
 }
 

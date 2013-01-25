@@ -523,6 +523,39 @@ CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
     EagleLogger_LogEvent(EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla"));
 }
 
+CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
+{
+    EaglePage *page = EaglePage_CopyInt_(NULL);
+    CUNIT_ASSERT_NULL(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_CopyText_)
+{
+    EaglePage *page = EaglePage_CopyText_(NULL);
+    CUNIT_ASSERT_NULL(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_toString)
+{
+    EaglePage *page = EaglePage_New(EagleDataTypeInteger, NULL, 123, 456, 789, EagleFalse);
+    CUNIT_ASSERT_NOT_NULL(page);
+    char *desc = EaglePage_toString(page);
+    CUNIT_ASSERT_EQUAL_STRING(desc, "EaglePage { type = INTEGER, size = 123, count = 456, offset = 789 }");
+    free(desc);
+    EaglePage_Delete(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_Copy)
+{
+    EaglePage *page = EaglePage_New(EagleDataTypeUnknown, NULL, 123, 456, 789, EagleFalse);
+    CUNIT_ASSERT_NOT_NULL(page);
+    
+    EaglePage *page2 = EaglePage_Copy(page);
+    CUNIT_ASSERT_NULL(page2);
+    
+    EaglePage_Delete(page);
+}
+
 /**
  * The suite init function.
  */
@@ -569,6 +602,10 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Get));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyInt_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyText_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));
