@@ -311,13 +311,13 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     
     free(col1Data);
     free(col2Data);
-    EaglePlan_Delete(plan);
     for(int i = 0; i < exprs; ++i) {
         EagleDbSqlExpression_Delete(expr[i], EagleTrue);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
         EagleMemory_Free(answers[i]);
     }
+    EaglePlan_Delete(plan);
     EagleMemory_Free(answers_0);
     EagleMemory_Free(answers_1);
     EagleMemory_Free(answers);

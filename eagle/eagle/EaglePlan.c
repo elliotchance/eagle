@@ -26,8 +26,8 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->usedProviders = 0;
     plan->providers = (EaglePlanBufferProvider**) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(EaglePlanBufferProvider*), plan->allocatedProviders);
     if(NULL == plan->providers) {
-        EagleMemory_Free(plan);
         EagleMemory_Free(plan->operations);
+        EagleMemory_Free(plan);
         return NULL;
     }
     

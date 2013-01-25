@@ -764,12 +764,12 @@ CUNIT_TEST(MemorySuite, EagleLoggerEvent_New)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EagleLogger_Get)
+CUNIT_TEST(MemorySuite, EagleLogger_New)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EagleLogger_Get.1");
+    EagleMemory_Mock("EagleLogger_New.1");
     
-    EagleLogger *logger = EagleLogger_Get();
+    EagleLogger *logger = EagleLogger_New(stderr);
     CUNIT_ASSERT_NULL(logger);
     EagleLogger_Delete(logger);
     
@@ -858,7 +858,7 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_Get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_New));
     
     return tests;
 }

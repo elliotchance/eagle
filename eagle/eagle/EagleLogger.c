@@ -5,7 +5,7 @@
 #include "EagleSynchronizer.h"
 #include "EagleMemory.h"
 
-static EagleLogger *EagleLogger_Logger = NULL;
+EagleLogger *EagleLogger_Logger = NULL;
 
 void EagleLogger_Delete(EagleLogger *logger)
 {
@@ -17,7 +17,21 @@ void EagleLogger_Delete(EagleLogger *logger)
     EagleMemory_Free(logger);
 }
 
-EagleLogger *EagleLogger_Get(void)
+EagleLogger* EagleLogger_New(FILE *out)
+{
+    EagleLogger *logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_New.1", sizeof(EagleLogger));
+    if(NULL == logger) {
+        return NULL;
+    }
+    
+    logger->totalMessages = 0;
+    logger->logLock = EagleSynchronizer_CreateLock();
+    logger->out = out;
+    
+    return logger;
+}
+
+EagleLogger* EagleLogger_Get(void)
 {
     /* this function must be synchronized */
     EagleLock *lock = EagleSynchronizer_CreateLock();
@@ -25,31 +39,27 @@ EagleLogger *EagleLogger_Get(void)
     
     /* initialise if its not started */
     if(NULL == EagleLogger_Logger) {
-        EagleLogger_Logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_Get.1", sizeof(EagleLogger_Logger));
-        if(NULL == EagleLogger_Logger) {
-            EagleLock_Delete(lock);
-            return NULL;
-        }
-        
-        EagleLogger_Logger->totalMessages = 0;
-        EagleLogger_Logger->logLock = EagleSynchronizer_CreateLock();
-        EagleLogger_Logger->out = stderr;
+        EagleLogger_Logger = EagleLogger_New(stderr);
     }
     
     EagleSynchronizer_Unlock(lock);
     return EagleLogger_Logger;
 }
 
-EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message)
+EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity severity, char *message)
 {
     EagleLoggerEvent *event = EagleLoggerEvent_New(severity, message);
-    EagleLogger_LogEvent(event);
+    EagleLogger_logEvent(logger, event);
     return event;
 }
 
-void EagleLogger_LogEvent(EagleLoggerEvent *event)
+EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message)
 {
-    EagleLogger *logger = EagleLogger_Get();
+    return EagleLogger_log(EagleLogger_Logger, severity, message);
+}
+
+void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event)
+{
     char *timestamp;
     
     if(NULL == logger) {
@@ -65,8 +75,16 @@ void EagleLogger_LogEvent(EagleLoggerEvent *event)
     /* pretty time */
     timestamp = ctime(&event->when);
     timestamp[strlen(timestamp) - 1] = '\0';
-
-    fprintf(logger->out, "%s: [%s] %s\n", timestamp, EagleLoggerSeverity_toString(event->severity), event->message);
+    
+    if(NULL != logger->out) {
+        fprintf(logger->out, "%s: [%s] %s\n", timestamp, EagleLoggerSeverity_toString(event->severity), event->message);
+    }
+    ++logger->totalMessages;
     
     EagleSynchronizer_Unlock(logger->logLock);
+}
+
+void EagleLogger_LogEvent(EagleLoggerEvent *event)
+{
+    EagleLogger_logEvent(EagleLogger_Logger, event);
 }

@@ -480,6 +480,49 @@ CUNIT_TEST(MainSuite, EagleLoggerSeverity_toString)
     CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityFatal), "FATAL");
 }
 
+EagleLogger* GetLogger()
+{
+    EagleLogger *logger = EagleLogger_New(fopen("log.txt", "w"));
+    CUNIT_ASSERT_NOT_NULL(logger);
+    CUNIT_ASSERT_NOT_NULL(logger->out);
+    return logger;
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_log)
+{
+    EagleLogger *logger = GetLogger();
+    EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message");
+    CUNIT_ASSERT_EQUAL_INT(logger->totalMessages, 1);
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_logEvent)
+{
+    EagleLogger *logger = GetLogger();
+    EagleLogger_logEvent(logger, NULL);
+    EagleLogger_logEvent(NULL, NULL);
+    
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_Get)
+{
+    EagleLogger *logger = EagleLogger_Get();
+    CUNIT_ASSERT_NOT_NULL(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_Log)
+{
+    EagleLogger_Get()->out = NULL;
+    EagleLogger_Log(EagleLoggerSeverityDebug, "some message");
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
+{
+    EagleLogger_LogEvent(NULL);
+    EagleLogger_LogEvent(EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla"));
+}
+
 /**
  * The suite init function.
  */
@@ -493,6 +536,7 @@ int MainSuite_init()
  */
 int MainSuite_clean()
 {
+    EagleLogger_Delete(EagleLogger_Get());
     return 0;
 }
 
@@ -520,6 +564,11 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLoggerSeverity_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_log));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_logEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));
