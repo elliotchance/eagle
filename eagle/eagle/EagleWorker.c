@@ -20,6 +20,48 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
     return worker;
 }
 
+void EagleWorker_runJob(EaglePlanJob *job)
+{
+    int i;
+    EaglePlan_resumeTimer(job->plan);
+    for(i = 0; i < job->plan->usedOperations; ++i) {
+        EaglePlanOperation *epo = job->plan->operations[i];
+        EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
+        
+        /* prepare arguments */
+        if(epo->destination >= 0) {
+            if(epo->destination >= job->plan->buffersNeeded) {
+                char msg[1024];
+                sprintf(msg, "destination %d is greater than allowed %d buffers!", epo->destination, job->plan->buffersNeeded);
+                EagleLogger_Log(EagleLoggerSeverityError, msg);
+                return;
+            }
+            destination = job->buffers[epo->destination];
+        }
+        if(epo->source1 >= 0) {
+            if(epo->source1 >= job->plan->buffersNeeded) {
+                char msg[1024];
+                sprintf(msg, "source1 %d is greater than allowed %d buffers!", epo->source1, job->plan->buffersNeeded);
+                EagleLogger_Log(EagleLoggerSeverityError, msg);
+                return;
+            }
+            source1 = job->buffers[epo->source1];
+        }
+        if(epo->source2 >= 0) {
+            if(epo->source2 >= job->plan->buffersNeeded) {
+                char msg[1024];
+                sprintf(msg, "source2 %d is greater than allowed %d buffers!", epo->source2, job->plan->buffersNeeded);
+                EagleLogger_Log(EagleLoggerSeverityError, msg);
+                return;
+            }
+            source2 = job->buffers[epo->source2];
+        }
+        
+        /* execute page operation */
+        epo->function(destination, source1, source2, epo->obj);
+    }
+}
+
 void* EagleWorker_begin(void *obj)
 {
     EagleWorker *worker = (EagleWorker*) obj;
@@ -32,46 +74,8 @@ void* EagleWorker_begin(void *obj)
         
         /* run the job is one is returned */
         if(NULL != job) {
-            int i;
-            
             /* run operations */
-            EaglePlan_resumeTimer(job->plan);
-            for(i = 0; i < job->plan->usedOperations; ++i) {
-                EaglePlanOperation *epo = job->plan->operations[i];
-                EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
-                
-                /* prepare arguments */
-                if(epo->destination >= 0) {
-                    if(epo->destination >= job->plan->buffersNeeded) {
-                        char msg[1024];
-                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->destination, job->plan->buffersNeeded);
-                        EagleLogger_Log(EagleLoggerSeverityError, msg);
-                        return NULL;
-                    }
-                    destination = job->buffers[epo->destination];
-                }
-                if(epo->source1 >= 0) {
-                    if(epo->source1 >= job->plan->buffersNeeded) {
-                        char msg[1024];
-                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source1, job->plan->buffersNeeded);
-                        EagleLogger_Log(EagleLoggerSeverityError, msg);
-                        return NULL;
-                    }
-                    source1 = job->buffers[epo->source1];
-                }
-                if(epo->source2 >= 0) {
-                    if(epo->source2 >= job->plan->buffersNeeded) {
-                        char msg[1024];
-                        sprintf(msg, "destination %d is greater than allowed %d buffers!\n", epo->source2, job->plan->buffersNeeded);
-                        EagleLogger_Log(EagleLoggerSeverityError, msg);
-                        return NULL;
-                    }
-                    source2 = job->buffers[epo->source2];
-                }
-                
-                /* execute page operation */
-                epo->function(destination, source1, source2, epo->obj);
-            }
+            EagleWorker_runJob(job);
             
             /* free */
             EaglePlan_stopTimer(job->plan);

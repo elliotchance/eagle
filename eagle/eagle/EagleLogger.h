@@ -25,6 +25,11 @@ typedef struct {
      */
     EAGLE_ATTR_PROVIDED FILE *out;
     
+    /**
+     The most recent event.
+     */
+    EAGLE_ATTR_MANAGED EagleLoggerEvent *lastEvent;
+    
 } EagleLogger;
 
 /**
@@ -60,5 +65,9 @@ EagleLogger* EagleLogger_New(FILE *out);
 EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity severity, char *message);
 
 void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event);
+
+EagleLoggerEvent* EagleLogger_LastEvent(void);
+
+EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger);
 
 #endif

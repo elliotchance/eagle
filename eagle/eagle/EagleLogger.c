@@ -14,6 +14,7 @@ void EagleLogger_Delete(EagleLogger *logger)
     }
     
     EagleLock_Delete(logger->logLock);
+    EagleLoggerEvent_Delete(logger->lastEvent);
     EagleMemory_Free(logger);
 }
 
@@ -27,8 +28,19 @@ EagleLogger* EagleLogger_New(FILE *out)
     logger->totalMessages = 0;
     logger->logLock = EagleSynchronizer_CreateLock();
     logger->out = out;
+    logger->lastEvent = NULL;
     
     return logger;
+}
+
+EagleLoggerEvent* EagleLogger_LastEvent()
+{
+    return EagleLogger_lastEvent(EagleLogger_Logger);
+}
+
+EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger)
+{
+    return logger->lastEvent;
 }
 
 EagleLogger* EagleLogger_Get(void)
@@ -51,12 +63,13 @@ EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity sever
 {
     EagleLoggerEvent *event = EagleLoggerEvent_New(severity, message);
     EagleLogger_logEvent(logger, event);
-    EagleLoggerEvent_Delete(event);
     return event;
 }
 
 EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message)
 {
+    /* make sure the default logger if ready */
+    EagleLogger_Get();
     return EagleLogger_log(EagleLogger_Logger, severity, message);
 }
 
@@ -82,6 +95,12 @@ void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event)
         fprintf(logger->out, "%s: [%s] %s\n", timestamp, EagleLoggerSeverity_toString(event->severity), event->message);
     }
     ++logger->totalMessages;
+    
+    /* track most recent event */
+    if(NULL != logger->lastEvent) {
+        EagleLoggerEvent_Delete(logger->lastEvent);
+    }
+    logger->lastEvent = event;
     
     EagleSynchronizer_Unlock(logger->logLock);
 }

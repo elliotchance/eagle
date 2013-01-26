@@ -526,7 +526,6 @@ CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
     EagleLogger_LogEvent(NULL);
     EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla");
     EagleLogger_LogEvent(event);
-    EagleLoggerEvent_Delete(event);
 }
 
 CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
@@ -650,6 +649,73 @@ CUNIT_TEST(MainSuite, EagleInstance_nextJob)
     CUNIT_VERIFY_NULL(job);
     
     EagleInstance_Delete(instance);
+    EaglePlan_Delete(p);
+    EaglePageProvider_Delete(provider);
+    EaglePlanBufferProvider_Delete(bp);
+    EaglePlanJob_Delete(job);
+}
+
+CUNIT_TEST(MainSuite, EagleWorker_runJob)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlanJob *job = EaglePlanJob_New(plan);
+    
+    EaglePlanOperation *op = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, 1, 1, 1, NULL, EagleFalse, "1");
+    EaglePlan_addOperation(plan, op);
+    EaglePlan_prepareBuffers(plan, 1);
+    
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "destination 1 is greater than allowed 1 buffers!");
+    
+    op->destination = 0;
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source1 1 is greater than allowed 1 buffers!");
+    
+    op->source1 = 0;
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source2 1 is greater than allowed 1 buffers!");
+    
+    EaglePlanOperation_Delete(op);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
+{
+    EagleLogger_Log(EagleLoggerSeverityDebug, "some message 123");
+    
+    EagleLoggerEvent *event = EagleLogger_LastEvent();
+    CUNIT_ASSERT_NOT_NULL(event);
+    CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 123");
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_lastEvent)
+{
+    EagleLogger *logger = GetLogger();
+    EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message 456");
+    
+    EagleLoggerEvent *event = EagleLogger_lastEvent(logger);
+    CUNIT_ASSERT_NOT_NULL(event);
+    CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 456");
+    
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleMemory_MultiFree)
+{
+    void **data = EagleMemory_MultiAllocate(NULL, 16, 16);
+    CUNIT_ASSERT_NOT_NULL(data);
+    EagleMemory_MultiFree(data, 16);
+}
+
+CUNIT_TEST(MainSuite, EagleMemory_Allocate)
+{
+    void *data = EagleMemory_Allocate(NULL, SIZE_MAX);
+    CUNIT_ASSERT_NULL(data);
 }
 
 CUnitTests* MainSuite_tests()
@@ -657,6 +723,11 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_Allocate));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_MultiFree));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LastEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_lastEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJob));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getExecutionSeconds));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_prepareBuffers));

@@ -43,8 +43,8 @@ void EaglePlanJob_Delete(EaglePlanJob *job)
         for(i = 0; i < job->plan->buffersNeeded; ++i) {
             EaglePage_Delete(job->buffers[i]);
         }
-        EagleMemory_Free((void*) job->buffers);
+        EagleMemory_Free(job->buffers);
     }
     
-    EagleMemory_Free((void*) job);
+    EagleMemory_Free(job);
 }
