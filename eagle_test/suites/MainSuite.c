@@ -277,6 +277,9 @@ CUNIT_TEST(MainSuite, EaglePlan_Delete)
 
 CUNIT_TEST(MainSuite, EaglePlan_toString)
 {
+    // test NULL input
+    CUNIT_VERIFY_NULL(EaglePlan_toString(NULL));
+    
     EaglePlan *plan = EaglePlan_New(0);
     char *msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n");
@@ -286,6 +289,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, NULL);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
+    EaglePlan_prepareBuffers(plan, 1);
     
     // add some steps
     EaglePlanOperation *op1, *op2, *op3;
@@ -294,7 +298,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
     EagleMemory_Free(msg);
     
     EaglePlan_Delete(plan);
@@ -520,7 +524,9 @@ CUNIT_TEST(MainSuite, EagleLogger_Log)
 CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
 {
     EagleLogger_LogEvent(NULL);
-    EagleLogger_LogEvent(EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla"));
+    EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla");
+    EagleLogger_LogEvent(event);
+    EagleLoggerEvent_Delete(event);
 }
 
 CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
@@ -608,21 +614,42 @@ CUNIT_TEST(MainSuite, EaglePlanJob_New)
     CUNIT_ASSERT_NULL(p);
 }
 
-/**
- * The suite init function.
- */
-int MainSuite_init()
+CUNIT_TEST(MainSuite, EaglePlan_prepareBuffers)
 {
-    return 0;
+    EaglePlan_prepareBuffers(NULL, 1);
 }
 
-/**
- * The suite cleanup function.
- */
-int MainSuite_clean()
+CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
 {
-    EagleLogger_Delete(EagleLogger_Get());
-    return 0;
+    EaglePlan *p = EaglePlan_New(1);
+    
+    double time = EaglePlan_getExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.0, time);
+    
+    p->executionTime = 100000;
+    time = EaglePlan_getExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.0001, time);
+    
+    EaglePlan_Delete(p);
+}
+
+CUNIT_TEST(MainSuite, EagleInstance_nextJob)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 1, "dummy");
+    int *ptr = EagleData_Int(123);
+    EaglePageProvider_add(provider, ptr);
+    free(ptr);
+    
+    EaglePlan *p = EaglePlan_New(1);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(0, provider, EagleFalse);
+    EaglePlan_addBufferProvider(p, bp, EagleFalse);
+    
+    EagleInstance *instance = EagleInstance_New(1);
+    EagleInstance_addPlan(instance, p);
+    EaglePlanJob *job = EagleInstance_nextJob(instance);
+    CUNIT_VERIFY_NULL(job);
+    
+    EagleInstance_Delete(instance);
 }
 
 CUnitTests* MainSuite_tests()
@@ -630,6 +657,9 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getExecutionSeconds));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_prepareBuffers));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
@@ -669,4 +699,21 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceMulti));
     
     return tests;
+}
+
+/**
+ * The suite init function.
+ */
+int MainSuite_init()
+{
+    return 0;
+}
+
+/**
+ * The suite cleanup function.
+ */
+int MainSuite_clean()
+{
+    EagleLogger_Delete(EagleLogger_Get());
+    return 0;
 }
