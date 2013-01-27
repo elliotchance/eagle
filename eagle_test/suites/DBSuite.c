@@ -686,11 +686,123 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbTableData_Delete(td);
 }
 
+CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbInstance_executeCreateTable(db, table);
+    CUNIT_ASSERT_LAST_ERROR("Table 'mytable' created.");
+    
+    EagleDbTable_DeleteWithColumns(table);
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);");
+    CUNIT_ASSERT_LAST_ERROR("Table 'sometable' created.");
+    
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);");
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected IDENTIFIER, expecting K_TABLE");
+    
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbInstance_execute(db, "SELECT * FROM mytable;");
+    CUNIT_ASSERT_LAST_ERROR("mytable");
+    
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTableData *td = EagleDbInstance_getTable(db, "so_such_table");
+    CUNIT_VERIFY_NULL(td);
+    
+    EagleDbInstance_Delete(db);
+    EagleDbSchema_Delete(schema);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
+{
+    int pageSize = 1;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTable *table1 = EagleDbTable_New("table1");
+    EagleDbTableData *td1 = EagleDbTableData_New(table1, pageSize);
+    EagleDbSchema_addTable(schema, td1);
+    
+    EagleDbTable *table2 = EagleDbTable_New("table2");
+    EagleDbTableData *td2 = EagleDbTableData_New(table2, pageSize);
+    EagleDbSchema_addTable(schema, td2);
+    
+    EagleDbTableData *td = EagleDbInstance_getTable(db, "table2");
+    CUNIT_ASSERT_NOT_NULL(td);
+    CUNIT_VERIFY_EQUAL_STRING(td->table->name, "table2");
+    
+    EagleDbInstance_Delete(db);
+    EagleDbSchema_Delete(schema);
+    EagleDbTableData_Delete(td1);
+    EagleDbTableData_Delete(td2);
+    EagleDbTable_Delete(table1);
+    EagleDbTable_Delete(table2);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    EagleDbSchema *schema1 = EagleDbSchema_New("schema1");
+    EagleDbInstance_addSchema(db, schema1);
+    
+    EagleDbSchema *schema2 = EagleDbSchema_New("schema2");
+    EagleDbInstance_addSchema(db, schema2);
+    
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, "schema2");
+    CUNIT_ASSERT_NOT_NULL(schema);
+    CUNIT_VERIFY_EQUAL_STRING(schema->name, "schema2");
+    
+    EagleDbInstance_Delete(db);
+    EagleDbSchema_Delete(schema1);
+    EagleDbSchema_Delete(schema2);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute3));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeCreateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_PrintResults));

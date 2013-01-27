@@ -46,7 +46,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 
 void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
 
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db);
+void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
 
 void EagleDbInstance_PrintResults(EaglePlan *plan);
 
