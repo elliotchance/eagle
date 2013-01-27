@@ -9,6 +9,10 @@
 
 static EagleDbParser *EagleDbParser_Default = NULL;
 
+/* internal prototypes supplied by flex and bison */
+extern int yylex_destroy(void);
+extern int yy_scan_string(const char *str);
+
 EagleDbParser* EagleDbParser_New(void)
 {
     EagleDbParser *parser = (EagleDbParser*) EagleMemory_Allocate("EagleDbParser_New.1", sizeof(EagleDbParser));
@@ -154,22 +158,22 @@ int yyerror(char *s)
     return 0;
 }
 
-void yylex_init()
+void EagleDbParser_Init()
 {
     EagleDbParser *p;
     p = EagleDbParser_Default = EagleDbParser_New();
     
-    p->yyobj = (void**) EagleMemory_MultiAllocate("yylex_init.1", sizeof(void*), MAX_YYOBJ);
+    p->yyobj = (void**) EagleMemory_MultiAllocate("EagleDbParser_Init.1", sizeof(void*), MAX_YYOBJ);
     p->yyobj_length = 0;
     
-    p->yyerrors = (char**) EagleMemory_MultiAllocate("yylex_init.2", sizeof(char*), MAX_YYERRORS);
+    p->yyerrors = (char**) EagleMemory_MultiAllocate("EagleDbParser_Init.2", sizeof(char*), MAX_YYERRORS);
     p->yyerrors_length = 0;
     
-    p->yyreturn = (void**) EagleMemory_MultiAllocate("yylex_init.3", sizeof(void*), MAX_YYRETURN);
+    p->yyreturn = (void**) EagleMemory_MultiAllocate("EagleDbParser_Init.3", sizeof(void*), MAX_YYRETURN);
     p->yyreturn_length = 0;
 }
 
-void yylex_free()
+void EagleDbParser_Delete()
 {
     int i;
     EagleDbParser *p = EagleDbParser_Default;
@@ -196,4 +200,9 @@ void yylex_free()
     
     EagleMemory_Free(p);
     yylex_destroy();
+}
+
+int EagleDbParser_ParseString(const char *str)
+{
+    return yy_scan_string(str);
 }

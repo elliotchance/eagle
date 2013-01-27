@@ -22,8 +22,8 @@ int _testSqlSelect(const char *sql)
     char *newsql = (char*) malloc(strlen(sql) + 2);
     sprintf(newsql, "%s;", sql);
     
-    yylex_init();
-    yy_scan_string(newsql);
+    EagleDbParser_Init();
+    EagleDbParser_ParseString(newsql);
     int r = yyparse();
     EagleMemory_Free(newsql);
     return r;
@@ -336,19 +336,19 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
 
 CUNIT_TEST(DBSuite, yyerrors_push)
 {
-    yylex_init();
+    EagleDbParser_Init();
     for(int i = 0; i < MAX_YYERRORS + 10; ++i) {
         yyerrors_push(strdup("some error"));
     }
     
     EagleDbParser *p = EagleDbParser_Get();
     CUNIT_ASSERT_EQUAL_INT(p->yyerrors_length, MAX_YYERRORS);
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 CUNIT_TEST(DBSuite, yyobj_push)
 {
-    yylex_init();
+    EagleDbParser_Init();
     for(int i = 0; i < MAX_YYOBJ + 10; ++i) {
         yyobj_push(NULL);
     }
@@ -357,12 +357,12 @@ CUNIT_TEST(DBSuite, yyobj_push)
     CUNIT_VERIFY_EQUAL_INT(p->yyobj_length, MAX_YYOBJ);
     CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum depth of 256 exceeded.");
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 CUNIT_TEST(DBSuite, yylist_push)
 {
-    yylex_init();
+    EagleDbParser_Init();
     yylist_new();
     for(int i = 0; i < MAX_YYLIST + 10; ++i) {
         yylist_push(NULL);
@@ -373,12 +373,12 @@ CUNIT_TEST(DBSuite, yylist_push)
     CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum list size of 256 exceeded.");
     free(p->yylist);
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 CUNIT_TEST(DBSuite, yyreturn_push)
 {
-    yylex_init();
+    EagleDbParser_Init();
     for(int i = 0; i < MAX_YYRETURN + 10; ++i) {
         yyreturn_push(NULL);
     }
@@ -387,7 +387,7 @@ CUNIT_TEST(DBSuite, yyreturn_push)
     CUNIT_VERIFY_EQUAL_INT(p->yyreturn_length, MAX_YYRETURN);
     CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum return depth of 256 exceeded.");
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)

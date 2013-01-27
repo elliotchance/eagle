@@ -95,8 +95,8 @@ CUNIT_TEST(BenchSuite, SELECT)
     EagleDbInstance *instance = getInstance();
     
     // parse SELECT
-    yylex_init();
-    yy_scan_string("SELECT col1 FROM mytable WHERE col1=1000000");
+    EagleDbParser_Init();
+    EagleDbParser_ParseString("SELECT col1 FROM mytable WHERE col1=1000000");
     yyparse();
     
     EagleDbParser *parser = EagleDbParser_Get();

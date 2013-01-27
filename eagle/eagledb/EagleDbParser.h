@@ -50,14 +50,26 @@ typedef struct {
     
 } EagleDbParser;
 
+/**
+ Create a new parser.
+ 
+ @note Flex and bison are not thread safe so this is actually just an internal function that is called when its needed.
+       You should use EagleDbParser_Get()
+ @return A new parser instance.
+ */
 EagleDbParser* EagleDbParser_New(void);
 
+/**
+ Get the default parser.
+ @return The default parser.
+ */
 EagleDbParser* EagleDbParser_Get(void);
 
 /**
- Internal prototype provided by flex and bison.
+ Parse a string.
+ @return 0 on success, any other number is a failure.
  */
-int yy_scan_string(const char *str);
+int EagleDbParser_ParseString(const char *str);
 
 /**
  This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
@@ -78,13 +90,17 @@ int yyerror(char *s);
 
 int yylex(void);
 
-int yylex_destroy(void);
-
 char* yyerrors_last(void);
 
-void yylex_init(void);
+/**
+ Prepare the default parser. This must be invoked before the SQL is parsed.
+ */
+void EagleDbParser_Init(void);
 
-void yylex_free(void);
+/**
+ Clean up any internal resources associated with the most recent parse.
+ */
+void EagleDbParser_Delete(void);
 
 char* yyerrors_push(void *ptr);
 

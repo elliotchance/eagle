@@ -215,8 +215,8 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     EagleDbParser *p;
     
     /* parse sql */
-    yylex_init();
-    yy_scan_string(sql);
+    EagleDbParser_Init();
+    EagleDbParser_ParseString(sql);
     yyparse();
     
     /* check for errors */
@@ -247,7 +247,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     }
     
     /* clean up */
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 void EagleDbInstance_Delete(EagleDbInstance *db)

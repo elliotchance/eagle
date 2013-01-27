@@ -100,7 +100,7 @@ void SQLSuiteTest()
         // expected error
         if(NULL != test.errorMessage) {
             if(!strcmp(yyerrors_last(), test.errorMessage)) {
-                yylex_free();
+                EagleDbParser_Delete();
                 return;
             }
             CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), test.errorMessage);
@@ -214,7 +214,7 @@ void SQLSuiteTest()
     EagleMemory_Free(expr);
     
     EagleDbSqlSelect_Delete(p->yyparse_ast, EagleTrue);
-    yylex_free();
+    EagleDbParser_Delete();
 }
 
 void controlTest(FILE *file, int *lineNumber)

@@ -6,14 +6,7 @@
 #include "EagleDbSqlSelect.h"
 #include "EagleInstance.h"
 #include "EagleData.h"
-
-extern void *yyparse_ast;
-extern int yyerrors_length;
-char* yyerrors_last();
-void yylex_init();
-void yylex_free();
-extern int yyparse();
-extern int yy_scan_string(const char *);
+#include "EagleDbParser.h"
 
 EagleDbTable* createTable()
 {
@@ -47,8 +40,8 @@ EagleDbTableData* fillTable(EagleDbTable *table, int records)
 
 int query(const char *sql)
 {
-    yylex_init();
-    yy_scan_string(sql);
+    EagleDbParser_Init();
+    EagleDbParser_ParseString(sql);
     return yyparse();
 }
 

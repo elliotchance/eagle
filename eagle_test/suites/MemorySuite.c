@@ -670,38 +670,38 @@ CUNIT_TEST(MemorySuite, yylist_new)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, yylex_init_1)
+CUNIT_TEST(MemorySuite, EagleDbParser_Init_1)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("yylex_init.1");
+    EagleMemory_Mock("EagleDbParser_Init.1");
     
-    yylex_init();
+    EagleDbParser_Init();
     EagleDbParser_Get();
-    yylex_free();
+    EagleDbParser_Delete();
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, yylex_init_2)
+CUNIT_TEST(MemorySuite, EagleDbParser_Init_2)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("yylex_init.2");
+    EagleMemory_Mock("EagleDbParser_Init.2");
     
-    yylex_init();
+    EagleDbParser_Init();
     EagleDbParser_Get();
-    yylex_free();
+    EagleDbParser_Delete();
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, yylex_init_3)
+CUNIT_TEST(MemorySuite, EagleDbParser_Init_3)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("yylex_init.3");
+    EagleMemory_Mock("EagleDbParser_Init.3");
     
-    yylex_init();
+    EagleDbParser_Init();
     EagleDbParser *p = EagleDbParser_Get();
     free(p->yyreturn);
     free(p->yyerrors);
@@ -881,9 +881,9 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylist_new));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylex_init_3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_New));
     
