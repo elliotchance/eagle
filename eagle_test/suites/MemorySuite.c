@@ -676,9 +676,8 @@ CUNIT_TEST(MemorySuite, yylex_init_1)
     EagleMemory_Mock("yylex_init.1");
     
     yylex_init();
-    free(yyreturn);
-    free(yyerrors);
-    free(yyobj);
+    EagleDbParser_Get();
+    yylex_free();
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -690,9 +689,8 @@ CUNIT_TEST(MemorySuite, yylex_init_2)
     EagleMemory_Mock("yylex_init.2");
     
     yylex_init();
-    free(yyreturn);
-    free(yyerrors);
-    free(yyobj);
+    EagleDbParser_Get();
+    yylex_free();
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -704,9 +702,10 @@ CUNIT_TEST(MemorySuite, yylex_init_3)
     EagleMemory_Mock("yylex_init.3");
     
     yylex_init();
-    free(yyreturn);
-    free(yyerrors);
-    free(yyobj);
+    EagleDbParser *p = EagleDbParser_Get();
+    free(p->yyreturn);
+    free(p->yyerrors);
+    free(p->yyobj);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -761,20 +760,61 @@ CUNIT_TEST(MemorySuite, EagleLogger_New)
     EagleMemory_MockFinish();
 }
 
-/**
- * The suite init function.
- */
-int MemorySuite_init()
+CUNIT_TEST(MemorySuite, EagleDbParser_New)
 {
-    return 0;
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbParser_New.1");
+    
+    EagleDbParser *parser = EagleDbParser_New();
+    CUNIT_ASSERT_NULL(parser);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
 }
 
-/**
- * The suite cleanup function.
- */
-int MemorySuite_clean()
+CUNIT_TEST(MemorySuite, yylist_push)
 {
-    return 0;
+    EagleMemory_MockInit();
+    EagleMemory_Mock("yylist_push.1");
+    
+    EagleDbParser *p = EagleDbParser_Get();
+    p->yylist_length = MAX_YYLIST;
+    
+    void *t = yylist_push(NULL);
+    CUNIT_ASSERT_NULL(t);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, yyobj_push)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("yyobj_push.1");
+    
+    EagleDbParser *p = EagleDbParser_Get();
+    p->yyobj_length = MAX_YYOBJ;
+    
+    void *t = yyobj_push(NULL);
+    CUNIT_ASSERT_NULL(t);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, yyreturn_push)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("yyreturn_push.1");
+    
+    EagleDbParser *p = EagleDbParser_Get();
+    p->yyreturn_length = MAX_YYRETURN;
+    
+    void *t = yyreturn_push(NULL);
+    CUNIT_ASSERT_NULL(t);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
 }
 
 CUnitTests* MemorySuite_tests()
@@ -782,6 +822,10 @@ CUnitTests* MemorySuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yyreturn_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yyobj_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylist_push));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbConsole_New));
@@ -844,4 +888,20 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_New));
     
     return tests;
+}
+
+/**
+ * The suite init function.
+ */
+int MemorySuite_init()
+{
+    return 0;
+}
+
+/**
+ * The suite cleanup function.
+ */
+int MemorySuite_clean()
+{
+    return 0;
 }

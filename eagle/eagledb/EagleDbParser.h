@@ -2,11 +2,57 @@
 #define eagle_EagleDbParser_h
 
 #include "EagleData.h"
+#include "EagleDbSqlStatementType.h"
 
 #define MAX_YYOBJ 256
 #define MAX_YYERRORS 100
 #define MAX_YYRETURN 256
 #define MAX_YYLIST 256
+
+typedef struct {
+    
+    /**
+     The type of statement.
+     */
+    EAGLE_ATTR_NA EagleDbSqlStatementType yystatementtype;
+    
+    EAGLE_ATTR_MANAGED char **yyerrors;
+    
+    EAGLE_ATTR_NA int yyerrors_length;
+    
+    /**
+     This is the pointer to the final AST returned by the parser.
+     */
+    EAGLE_ATTR_MANAGED void *yyparse_ast;
+    
+    EAGLE_ATTR_MANAGED void **yyobj;
+    
+    EAGLE_ATTR_NA int yyobj_length;
+    
+    /**
+     When returning an array of something you can use this mechanism.
+     */
+    EAGLE_ATTR_MANAGED void **yylist;
+    
+    EAGLE_ATTR_NA int yylist_length;
+    
+    /**
+     A return stack. Maximum depth is 256.
+     */
+    EAGLE_ATTR_MANAGED void **yyreturn;
+    
+    EAGLE_ATTR_NA int yyreturn_length;
+    
+    /**
+     Used by "data_type"
+     */
+    EAGLE_ATTR_NA EagleDataType yy_data_type;
+    
+} EagleDbParser;
+
+EagleDbParser* EagleDbParser_New(void);
+
+EagleDbParser* EagleDbParser_Get(void);
 
 /**
  Internal prototype provided by flex and bison.
@@ -15,7 +61,7 @@ int yy_scan_string(const char *str);
 
 /**
  This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
- out if you intended to keep it. Since you cannot access the yytext direct from here?
+ out if you intended to keep it.
  */
 extern char *yytext_last;
 
@@ -25,10 +71,9 @@ extern char *yytext_last;
 int yyparse(void);
 
 /**
- Used by "data_type"
+ This function must be provided to give flex and bison somewhere to send the errors. They will be put onto a proper
+ stack once received.
  */
-extern EagleDataType yy_data_type;
-
 int yyerror(char *s);
 
 int yylex(void);
@@ -50,33 +95,6 @@ void* yylist_push(void *ptr);
 void* yylist_new(void);
 
 void* yyreturn_push(void *ptr);
-
-extern char **yyerrors;
-
-extern int yyerrors_length;
-
-/**
- This is the pointer to the final AST returned by the parser.
- */
-extern void *yyparse_ast;
-
-extern void **yyobj;
-
-extern int yyobj_length;
-
-/**
- When returning an array of something you can use this mechanism.
- */
-extern void **yylist;
-
-extern int yylist_length;
-
-/**
- A return stack. Maximum depth is 256.
- */
-extern void **yyreturn;
-
-extern int yyreturn_length;
 
 void* yyreturn_pop(void);
 

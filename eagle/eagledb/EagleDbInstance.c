@@ -212,32 +212,35 @@ void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table
 
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
 {
+    EagleDbParser *p;
+    
     /* parse sql */
     yylex_init();
     yy_scan_string(sql);
     yyparse();
     
     /* check for errors */
-    if(yyerrors_length > 0) {
+    p = EagleDbParser_Get();
+    if(p->yyerrors_length > 0) {
         char msg[1024];
         sprintf(msg, "Error: %s", yyerrors_last());
         EagleLogger_Log(EagleLoggerSeverityUserError, msg);
     }
     else {
-        switch(yystatementtype) {
+        switch(p->yystatementtype) {
                 
             case EagleDbSqlStatementTypeNone:
                 /* lets not consider this an error and ignore it */
                 break;
                 
             case EagleDbSqlStatementTypeSelect:
-                EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) yyparse_ast);
-                EagleDbSqlSelect_Delete((EagleDbSqlSelect*) yyparse_ast, EagleTrue);
+                EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
+                EagleDbSqlSelect_Delete((EagleDbSqlSelect*) p->yyparse_ast, EagleTrue);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:
-                EagleDbInstance_executeCreateTable(db, (EagleDbTable*) yyparse_ast);
-                EagleDbTable_DeleteWithColumns((EagleDbTable*) yyparse_ast);
+                EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
+                EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
                 break;
                 
         }

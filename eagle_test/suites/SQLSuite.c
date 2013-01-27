@@ -13,11 +13,9 @@
 #include "EagleDbInstance.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleDbParser.h"
 
-extern void *yyparse_ast;
-void yylex_free();
 int _testSqlSelect(const char *sql);
-char* yyerrors_last();
 
 EagleDbTableData **tables;
 int allocatedTables = 0;
@@ -116,7 +114,8 @@ void SQLSuiteTest()
     // create the plan skeleton
     EaglePlan *plan = EaglePlan_New(pageSize);
     
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    EagleDbParser *p = EagleDbParser_Get();
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
     exprs = EagleDbSqlSelect_getExpressionsCount(select);
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
     for(i = 0; i < EagleDbSqlSelect_getFieldCount(select); ++i) {
@@ -214,7 +213,7 @@ void SQLSuiteTest()
     EaglePlan_Delete(plan);
     EagleMemory_Free(expr);
     
-    EagleDbSqlSelect_Delete(yyparse_ast, EagleTrue);
+    EagleDbSqlSelect_Delete(p->yyparse_ast, EagleTrue);
     yylex_free();
 }
 

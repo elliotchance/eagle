@@ -47,17 +47,20 @@
  */
 input:
     {
-        yyparse_ast = NULL;
-        yystatementtype = EagleDbSqlStatementTypeNone;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = NULL;
+        p->yystatementtype = EagleDbSqlStatementTypeNone;
     }
     |
     T_END {
-        yyparse_ast = NULL;
-        yystatementtype = EagleDbSqlStatementTypeNone;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = NULL;
+        p->yystatementtype = EagleDbSqlStatementTypeNone;
     }
     |
     statement {
-        yyparse_ast = yyreturn_pop();
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = yyreturn_pop();
     }
     T_END
 ;
@@ -68,12 +71,14 @@ input:
 statement:
     select_statement {
         /* bubble up yyreturn */
-        yystatementtype = EagleDbSqlStatementTypeSelect;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeSelect;
     }
     |
     create_table_statement {
         /* bubble up yyreturn */
-        yystatementtype = EagleDbSqlStatementTypeCreateTable;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeCreateTable;
     }
 ;
 
@@ -89,8 +94,9 @@ create_table_statement:
     }
     T_BRACKET_OPEN
     column_definition_list {
+        EagleDbParser *p = EagleDbParser_Get();
         void *last = yyreturn_pop();
-        EagleDbTable_setColumns((EagleDbTable*) yyreturn_current(), last, yylist_length);
+        EagleDbTable_setColumns((EagleDbTable*) yyreturn_current(), last, p->yylist_length);
     }
     T_BRACKET_CLOSE
 ;
@@ -108,7 +114,8 @@ column_definition_list:
     }
     next_column_definition
     {
-        yyreturn_push(yylist);
+        EagleDbParser *p = EagleDbParser_Get();
+        yyreturn_push(p->yylist);
     }
 ;
 
@@ -121,7 +128,8 @@ column_definition:
         ((EagleDbColumn*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
     }
     data_type {
-        ((EagleDbColumn*) yyreturn_current())->type = yy_data_type;
+        EagleDbParser *p = EagleDbParser_Get();
+        ((EagleDbColumn*) yyreturn_current())->type = p->yy_data_type;
     }
 ;
 
@@ -130,11 +138,13 @@ column_definition:
  */
 data_type:
     K_INTEGER {
-        yy_data_type = EagleDataTypeInteger;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yy_data_type = EagleDataTypeInteger;
     }
     |
     K_TEXT {
-        yy_data_type = EagleDataTypeText;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yy_data_type = EagleDataTypeText;
     }
 ;
 
@@ -158,10 +168,11 @@ select_statement:
         yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
     }
     column_expression_list {
+        EagleDbParser *p = EagleDbParser_Get();
         void *last = yyreturn_pop();
         ((EagleDbSqlSelect*) yyreturn_current())->selectExpressions = last;
-        ((EagleDbSqlSelect*) yyreturn_current())->allocatedSelectExpressions = yylist_length;
-        ((EagleDbSqlSelect*) yyreturn_current())->usedSelectExpressions = yylist_length;
+        ((EagleDbSqlSelect*) yyreturn_current())->allocatedSelectExpressions = p->yylist_length;
+        ((EagleDbSqlSelect*) yyreturn_current())->usedSelectExpressions = p->yylist_length;
     }
     K_FROM IDENTIFIER {
         ((EagleDbSqlSelect*) yyreturn_current())->tableName = yyobj_push(strdup(yytext_last));
@@ -185,7 +196,8 @@ column_expression_list:
     }
     next_column_expression
     {
-        yyreturn_push(yylist);
+        EagleDbParser *p = EagleDbParser_Get();
+        yyreturn_push(p->yylist);
     }
 ;
 

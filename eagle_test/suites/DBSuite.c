@@ -29,14 +29,6 @@ int _testSqlSelect(const char *sql)
     return r;
 }
 
-CUNIT_TEST(DBSuite, _, BLANK)
-{
-    if(_testSqlSelect("")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    yylex_free();
-}
-
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
@@ -91,7 +83,8 @@ EagleDbSqlExpression* _getExpression(const char *sql)
         CUNIT_FAIL(yyerrors_last(), NULL);
     }
     
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    EagleDbParser *p = EagleDbParser_Get();
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
     CUNIT_ASSERT_NOT_NULL(select->selectExpressions[0]);
     
     return select->selectExpressions[0];
@@ -327,55 +320,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     EagleMemory_Free(answers);
     EagleMemory_Free(expr);
     EagleInstance_Delete(eagle);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_WHERE)
-{
-    if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
-    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
-    if(NULL != select->whereExpression) {
-        CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
-    }
-    
-    EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
-    CUNIT_ASSERT_NOT_NULL(value);
-    if(NULL != value) {
-        CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
-    }
-    
-    EagleDbSqlSelect_Delete(select, EagleTrue);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, CREATE_TABLE)
-{
-    if(_testSqlSelect("CREATE TABLE mytable ( col1 INT, col2 INTEGER )")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    
-    EagleDbTable *table = (EagleDbTable*) yyparse_ast;
-    CUNIT_VERIFY_EQUAL_STRING("mytable", table->name);
-    
-    CUNIT_ASSERT_EQUAL_INT(table->allocatedColumns, 2);
-    CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
-    CUNIT_ASSERT_NOT_NULL(table->columns);
-    
-    if(NULL != table->columns) {
-        CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-        CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
-        
-        CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-        CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
-    }
-    
-    EagleDbTable_DeleteWithColumns(table);
-    yylex_free();
 }
 
 CUNIT_TEST(DBSuite, EagleDbConsole_New)
@@ -397,7 +341,8 @@ CUNIT_TEST(DBSuite, yyerrors_push)
         yyerrors_push(strdup("some error"));
     }
     
-    CUNIT_ASSERT_EQUAL_INT(yyerrors_length, MAX_YYERRORS);
+    EagleDbParser *p = EagleDbParser_Get();
+    CUNIT_ASSERT_EQUAL_INT(p->yyerrors_length, MAX_YYERRORS);
     yylex_free();
 }
 
@@ -408,8 +353,9 @@ CUNIT_TEST(DBSuite, yyobj_push)
         yyobj_push(NULL);
     }
     
-    CUNIT_VERIFY_EQUAL_INT(yyobj_length, MAX_YYOBJ);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    EagleDbParser *p = EagleDbParser_Get();
+    CUNIT_VERIFY_EQUAL_INT(p->yyobj_length, MAX_YYOBJ);
+    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum depth of 256 exceeded.");
     yylex_free();
 }
@@ -422,10 +368,11 @@ CUNIT_TEST(DBSuite, yylist_push)
         yylist_push(NULL);
     }
     
-    CUNIT_VERIFY_EQUAL_INT(yylist_length, MAX_YYLIST);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    EagleDbParser *p = EagleDbParser_Get();
+    CUNIT_VERIFY_EQUAL_INT(p->yylist_length, MAX_YYLIST);
+    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum list size of 256 exceeded.");
-    free(yylist);
+    free(p->yylist);
     yylex_free();
 }
 
@@ -436,8 +383,9 @@ CUNIT_TEST(DBSuite, yyreturn_push)
         yyreturn_push(NULL);
     }
     
-    CUNIT_VERIFY_EQUAL_INT(yyreturn_length, MAX_YYRETURN);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
+    EagleDbParser *p = EagleDbParser_Get();
+    CUNIT_VERIFY_EQUAL_INT(p->yyreturn_length, MAX_YYRETURN);
+    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
     CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum return depth of 256 exceeded.");
     yylex_free();
 }
@@ -850,11 +798,6 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyobj_push));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yylist_push));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyreturn_push));
-    
-    // complex / execution tests
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
     
     return tests;
 }
