@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         CUnitTests_Delete(tests);
     }
     
-    /*{
+    {
         // add a suite to the registry
         CU_pSuite pSuite = CU_add_suite("SQLSuite", SQLSuite_init, SQLSuite_clean);
         if(NULL == pSuite) {
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
         
         // clean up
         CUnitTests_Delete(tests);
-    }*/
+    }
     
     {
         // add a suite to the registry

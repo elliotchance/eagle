@@ -6,6 +6,7 @@
 #include "EagleDbSqlStatementType.h"
 #include "EagleMemory.h"
 #include "EagleData.h"
+#include "EagleDbSqlExpression.h"
 
 static EagleDbParser *EagleDbParser_Default = NULL;
 
@@ -24,6 +25,7 @@ EagleDbParser* EagleDbParser_New(void)
     
     parser->errors = EagleLinkedList_New();
     parser->returns = EagleLinkedList_New();
+    parser->objects = EagleLinkedList_New();
     parser->yyparse_ast = NULL;
     parser->yystatementtype = EagleDbSqlStatementTypeNone;
     
@@ -61,7 +63,14 @@ char* EagleDbParser_LastError()
 void* EagleDbParser_AddReturn(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedList_add(p->returns, EagleLinkedListItem_New(ptr, EagleFalse, NULL));
+    EagleLinkedList_addObject(p->returns, ptr, EagleFalse, NULL);
+    return ptr;
+}
+
+void* EagleDbParser_AddObject(void *ptr, void (*free)(void*))
+{
+    EagleDbParser *p = EagleDbParser_Default;
+    EagleLinkedList_addObject(p->objects, ptr, EagleTrue, free);
     return ptr;
 }
 
@@ -77,7 +86,11 @@ void* EagleDbParser_PopReturn()
 void* EagleDbParser_CurrentReturn()
 {
     EagleDbParser *p = EagleDbParser_Default;
-    return EagleLinkedList_end(p->returns)->obj;
+    EagleLinkedListItem *item = EagleLinkedList_end(p->returns);
+    if(NULL == item) {
+        return NULL;
+    }
+    return item->obj;
 }
 
 int yyerror(char *s)
@@ -96,6 +109,7 @@ void EagleDbParser_Delete()
 {
     EagleDbParser *p = EagleDbParser_Default;
     
+    EagleLinkedList_DeleteWithItems(p->objects);
     EagleLinkedList_Delete(p->returns);
     EagleLinkedList_DeleteWithItems(p->errors);
     
