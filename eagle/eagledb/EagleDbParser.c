@@ -48,7 +48,7 @@ EagleBoolean EagleDbParser_HasError(void)
 char* EagleDbParser_AddError(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleFalse, NULL));
+    EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleTrue, NULL));
     return ptr;
 }
 
@@ -68,7 +68,10 @@ void* EagleDbParser_AddReturn(void *ptr)
 void* EagleDbParser_PopReturn()
 {
     EagleDbParser *p = EagleDbParser_Default;
-    return EagleLinkedList_pop(p->returns)->obj;
+    EagleLinkedListItem *item = EagleLinkedList_pop(p->returns);
+    void *obj = item->obj;
+    EagleLinkedListItem_Delete(item);
+    return obj;
 }
 
 void* EagleDbParser_CurrentReturn()
@@ -87,9 +90,6 @@ void EagleDbParser_Init()
 {
     EagleDbParser *p;
     p = EagleDbParser_Default = EagleDbParser_New();
-    
-    p->errors = EagleLinkedList_New();
-    p->returns = EagleLinkedList_New();
 }
 
 void EagleDbParser_Delete()

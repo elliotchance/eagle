@@ -21,7 +21,7 @@ EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
     }
     
     tuple->table = table;
-    tuple->data = (void**) EagleMemory_MultiAllocate("EagleDbTuple_New.2", sizeof(void*), table->usedColumns);
+    tuple->data = (void**) EagleMemory_MultiAllocate("EagleDbTuple_New.2", sizeof(void*), EagleDbTable_countColumns(table));
     if(NULL == tuple->data) {
         EagleDbTuple_Delete(tuple);
         return NULL;
@@ -35,7 +35,7 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
     int i;
     
     if(NULL != tuple->data) {
-        for(i = 0; i < tuple->table->usedColumns; ++i) {
+        for(i = 0; i < EagleDbTable_countColumns(tuple->table); ++i) {
             EagleMemory_Free(tuple->data[i]);
         }
         EagleMemory_Free(tuple->data);
@@ -46,7 +46,7 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
 {
-    if(tuple->table->columns[position]->type != EagleDataTypeInteger) {
+    if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeInteger) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
         return;
     }
@@ -55,7 +55,7 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
 
 void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
 {
-    if(tuple->table->columns[position]->type != EagleDataTypeText) {
+    if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeText) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
         return;
     }
@@ -74,14 +74,14 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
     
     desc[0] = 0;
     strcat_safe(desc, "(");
-    for(i = 0; i < tuple->table->usedColumns; ++i) {
+    for(i = 0; i < EagleDbTable_countColumns(tuple->table); ++i) {
         if(i > 0) {
             strcat_safe(desc, ",");
         }
-        strcat_safe(desc, tuple->table->columns[i]->name);
+        strcat_safe(desc, ((EagleDbColumn*) EagleLinkedList_get(tuple->table->columns, i))->name);
         strcat_safe(desc, "=");
         
-        switch(tuple->table->columns[i]->type) {
+        switch(((EagleDbColumn*) EagleLinkedList_get(tuple->table->columns, i))->type) {
                 
             case EagleDataTypeUnknown:
                 sprintf(desc, "%s?", desc);

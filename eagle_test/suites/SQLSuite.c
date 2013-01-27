@@ -119,7 +119,7 @@ void SQLSuiteTest()
     exprs = EagleDbSqlSelect_getExpressionsCount(select);
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
     for(i = 0; i < EagleDbSqlSelect_getFieldCount(select); ++i) {
-        expr[i] = select->selectExpressions[i];
+        expr[i] = EagleLinkedList_get(select->selectExpressions, i);
     }
     if(NULL != select->whereExpression) {
         whereClauseId = i;
@@ -128,7 +128,7 @@ void SQLSuiteTest()
     
     // get data
     EagleDbTableData *td = tables[0];
-    for(int i = 0; i < td->table->usedColumns; ++i) {
+    for(int i = 0; i < EagleDbTable_countColumns(td->table); ++i) {
         EaglePageProvider_reset(td->providers[i]);
         EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp, EagleTrue);
@@ -156,14 +156,14 @@ void SQLSuiteTest()
         EagleInstance_run(eagle);
         
         // validate column names
-        for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
-            CUNIT_ASSERT_EQUAL_STRING(test.answers[0]->table->columns[j]->name, plan->result[j]->name);
-            CUNIT_ASSERT_EQUAL_INT(test.answers[0]->table->columns[j]->type, plan->result[j]->type);
+        for(int j = 0; j < EagleDbTable_countColumns(test.answers[0]->table); ++j) {
+            CUNIT_ASSERT_EQUAL_STRING(EagleDbTable_getColumn(test.answers[0]->table, j)->name, plan->result[j]->name);
+            CUNIT_ASSERT_EQUAL_INT(EagleDbTable_getColumn(test.answers[0]->table, j)->type, plan->result[j]->type);
         }
         
         // validate results
         int valid = 1;
-        for(int j = 0; j < test.answers[0]->table->usedColumns; ++j) {
+        for(int j = 0; j < EagleDbTable_countColumns(test.answers[0]->table); ++j) {
             EaglePage *page = EaglePageProvider_nextPage(plan->result[j]);
             
             CUNIT_ASSERT_NOT_NULL(page);
@@ -213,7 +213,7 @@ void SQLSuiteTest()
     EaglePlan_Delete(plan);
     EagleMemory_Free(expr);
     
-    EagleDbSqlSelect_Delete(p->yyparse_ast, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(p->yyparse_ast);
     EagleDbParser_Delete();
 }
 
@@ -264,7 +264,7 @@ void controlTest(FILE *file, int *lineNumber)
         
         test.answers[test.usedAnswers] = EagleDbTuple_New(table);
         for(int j = 0; j < columns; ++j) {
-            switch(table->columns[j]->type) {
+            switch(EagleDbTable_getColumn(table, j)->type) {
                     
                 case EagleDataTypeUnknown:
                     CUNIT_FAIL("%s", "Unknown type");
@@ -364,7 +364,7 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
         char **data = split(line, &count, ",\n");
         EagleDbTuple *tuple = EagleDbTuple_New(table);
         for(int i = 0; i < count; ++i) {
-            switch(table->columns[i]->type) {
+            switch(EagleDbTable_getColumn(table, i)->type) {
                     
                 case EagleDataTypeUnknown:
                     CUNIT_FAIL("%s", "Unknown type.");

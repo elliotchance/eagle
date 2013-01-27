@@ -21,7 +21,7 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
     }
     
     td->table = table;
-    td->usedProviders = table->usedColumns;
+    td->usedProviders = EagleDbTable_countColumns(table);
     if(td->usedProviders > 0) {
         td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
         if(NULL == td->providers) {
@@ -34,7 +34,8 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
     }
     
     for(i = 0; i < td->usedProviders; ++i) {
-        td->providers[i] = EaglePageProvider_CreateFromStream(table->columns[i]->type, pageSize, table->columns[i]->name);
+        EagleDbColumn *column = EagleLinkedList_get(table->columns, i);
+        td->providers[i] = EaglePageProvider_CreateFromStream(column->type, pageSize, column->name);
     }
     
     return td;
@@ -53,7 +54,7 @@ void EagleDbTableData_Delete(EagleDbTableData *td)
 void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)
 {
     int i;
-    for(i = 0; i < td->table->usedColumns; ++i) {
+    for(i = 0; i < EagleLinkedList_length(td->table->columns); ++i) {
         switch(td->providers[i]->type) {
                 
             case EagleDataTypeUnknown:

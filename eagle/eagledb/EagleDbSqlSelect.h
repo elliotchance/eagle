@@ -4,6 +4,7 @@
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlValue.h"
 #include "Eagle.h"
+#include "EagleLinkedList.h"
 
 struct EagleDbInstance_;
 
@@ -27,19 +28,9 @@ typedef struct {
     EAGLE_ATTR_PROVIDED EagleDbSqlExpression *whereExpression;
     
     /**
-     Represents the expression for the first column.
+     Represents the expressions for the columns.
      */
-    EAGLE_ATTR_PROVIDED EagleDbSqlExpression **selectExpressions;
-    
-    /**
-     The number of allocated \c selectExpressions
-     */
-    EAGLE_ATTR_NA int allocatedSelectExpressions;
-    
-    /**
-     The number of used \c selectExpressions
-     */
-    EAGLE_ATTR_NA int usedSelectExpressions;
+    EAGLE_ATTR_PROVIDED EagleLinkedList *selectExpressions;
     
 } EagleDbSqlSelect;
 
@@ -48,7 +39,9 @@ typedef struct {
  */
 EagleDbSqlSelect* EagleDbSqlSelect_New(void);
 
-void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select, EagleBoolean recursive);
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select);
+
+void EagleDbSqlSelect_DeleteRecursive(EagleDbSqlSelect *select);
 
 EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance_ *db);
 

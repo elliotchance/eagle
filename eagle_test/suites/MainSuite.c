@@ -665,11 +665,12 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
     EagleLogger_Get()->out = NULL;
     
     EaglePlan *plan = EaglePlan_New(1);
-    EaglePlanJob *job = EaglePlanJob_New(plan);
     
     EaglePlanOperation *op = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, 1, 1, 1, NULL, EagleFalse, "1");
     EaglePlan_addOperation(plan, op);
     EaglePlan_prepareBuffers(plan, 1);
+    
+    EaglePlanJob *job = EaglePlanJob_New(plan);
     
     EagleWorker_runJob(job);
     CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
@@ -686,6 +687,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
     CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source2 1 is greater than allowed 1 buffers!");
     
     EaglePlanOperation_Delete(op);
+    EaglePlanJob_Delete(job);
     EaglePlan_Delete(plan);
 }
 

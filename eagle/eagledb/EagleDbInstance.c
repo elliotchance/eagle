@@ -235,7 +235,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
                 
             case EagleDbSqlStatementTypeSelect:
                 EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
-                EagleDbSqlSelect_Delete((EagleDbSqlSelect*) p->yyparse_ast, EagleTrue);
+                EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:

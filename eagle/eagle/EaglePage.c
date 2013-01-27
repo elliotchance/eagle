@@ -46,6 +46,7 @@ void EaglePage_Delete(EaglePage *page)
     if(NULL == page) {
         return;
     }
+    
     if(EagleTrue == page->freeData) {
         EagleMemory_Free((void*) page->data);
     }

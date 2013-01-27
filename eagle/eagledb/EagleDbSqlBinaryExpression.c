@@ -18,12 +18,15 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
     return expr;
 }
 
-void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr, EagleBoolean recursive)
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
 {
-    if(EagleTrue == recursive) {
-        EagleDbSqlExpression_Delete((EagleDbSqlExpression*) expr->left, recursive);
-        EagleDbSqlExpression_Delete((EagleDbSqlExpression*) expr->right, recursive);
-    }
+    EagleMemory_Free(expr);
+}
+
+void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr)
+{
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr->left);
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr->right);
     EagleMemory_Free(expr);
 }
 

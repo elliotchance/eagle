@@ -108,4 +108,8 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list);
  */
 void** EagleLinkedList_toArray(EagleLinkedList *list, int *size);
 
+void* EagleLinkedList_get(EagleLinkedList *list, int index);
+
+void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
 #endif

@@ -43,7 +43,9 @@ typedef struct {
  */
 extern const int EagleDbSqlExpression_ERROR;
 
-void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recursive);
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
+
+void EagleDbSqlExpression_DeleteRecursive(EagleDbSqlExpression *expr);
 
 void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int totalExpressions, int whereClause, EaglePlan *plan);
 
