@@ -277,6 +277,9 @@ CUNIT_TEST(MainSuite, EaglePlan_Delete)
 
 CUNIT_TEST(MainSuite, EaglePlan_toString)
 {
+    // test NULL input
+    CUNIT_VERIFY_NULL(EaglePlan_toString(NULL));
+    
     EaglePlan *plan = EaglePlan_New(0);
     char *msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n");
@@ -286,6 +289,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePageProvider *provider = EaglePageProvider_CreateFromIntArray(NULL, 0, 10, NULL);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
+    EaglePlan_prepareBuffers(plan, 1);
     
     // add some steps
     EaglePlanOperation *op1, *op2, *op3;
@@ -294,7 +298,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
     EagleMemory_Free(msg);
     
     EaglePlan_Delete(plan);
@@ -453,20 +457,254 @@ CUNIT_TEST(MainSuite, EagleLoggerSeverity_toString)
     CUNIT_ASSERT_EQUAL_STRING(EagleLoggerSeverity_toString(EagleLoggerSeverityFatal), "FATAL");
 }
 
-/**
- * The suite init function.
- */
-int MainSuite_init()
+EagleLogger* GetLogger()
 {
-    return 0;
+    EagleLogger *logger = EagleLogger_New(fopen("log.txt", "w"));
+    CUNIT_ASSERT_NOT_NULL(logger);
+    if(NULL != logger) {
+        CUNIT_ASSERT_NOT_NULL(logger->out);
+    }
+    return logger;
 }
 
-/**
- * The suite cleanup function.
- */
-int MainSuite_clean()
+CUNIT_TEST(MainSuite, EagleLogger_log)
 {
-    return 0;
+    EagleLogger *logger = GetLogger();
+    EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message");
+    if(NULL != logger) {
+        CUNIT_ASSERT_EQUAL_INT(logger->totalMessages, 1);
+    }
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_logEvent)
+{
+    EagleLogger *logger = GetLogger();
+    EagleLogger_logEvent(logger, NULL);
+    EagleLogger_logEvent(NULL, NULL);
+    
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_Get)
+{
+    EagleLogger *logger = EagleLogger_Get();
+    CUNIT_ASSERT_NOT_NULL(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_Log)
+{
+    EagleLogger_Get()->out = NULL;
+    EagleLogger_Log(EagleLoggerSeverityDebug, "some message");
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
+{
+    EagleLogger_LogEvent(NULL);
+    EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla");
+    EagleLogger_LogEvent(event);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
+{
+    EaglePage *page = EaglePage_CopyInt_(NULL);
+    CUNIT_ASSERT_NULL(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_CopyText_)
+{
+    EaglePage *page = EaglePage_CopyText_(NULL);
+    CUNIT_ASSERT_NULL(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_toString)
+{
+    EaglePage *page = EaglePage_New(EagleDataTypeInteger, NULL, 123, 456, 789, EagleFalse);
+    CUNIT_ASSERT_NOT_NULL(page);
+    char *desc = EaglePage_toString(page);
+    CUNIT_ASSERT_EQUAL_STRING(desc, "EaglePage { type = INTEGER, size = 123, count = 456, offset = 789 }");
+    free(desc);
+    EaglePage_Delete(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_Copy)
+{
+    EaglePage *page = EaglePage_New(EagleDataTypeUnknown, NULL, 123, 456, 789, EagleFalse);
+    CUNIT_ASSERT_NOT_NULL(page);
+    
+    EaglePage *page2 = EaglePage_Copy(page);
+    CUNIT_ASSERT_NULL(page2);
+    
+    EaglePage_Delete(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProvider)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 1, "dummy");
+    provider->type = EagleDataTypeUnknown;
+    EaglePage *source2 = EaglePage_Alloc(EagleDataTypeInteger, 1);
+    EaglePageOperations_SendPageToProvider(NULL, NULL, source2, provider);
+    
+    EaglePageProvider_Delete(provider);
+    EaglePage_Delete(source2);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    
+    EaglePageProvider *provider = EaglePageProvider_CreateFromInt(0, 1, "bla");
+    CUNIT_ASSERT_NULL(provider);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_addStream_)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 10, "dummy");
+    
+    // before we change to Unknown we need to add one record so that the first page is initialised
+    int *data = EagleData_Int(123);
+    EaglePageProvider_addStream_(provider, data);
+    free(data);
+    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
+    
+    // now skrew up the type
+    provider->type = EagleDataTypeUnknown;
+    EaglePageProvider_addStream_(provider, NULL);
+    
+    EaglePageProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromStream)
+{
+    EaglePageProvider *p = EaglePageProvider_CreateFromStream(EagleDataTypeUnknown, 1, "dummy");
+    CUNIT_ASSERT_NULL(p);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanJob_New)
+{
+    EaglePlanJob *p = EaglePlanJob_New(NULL);
+    CUNIT_ASSERT_NULL(p);
+}
+
+CUNIT_TEST(MainSuite, EaglePlan_prepareBuffers)
+{
+    EaglePlan_prepareBuffers(NULL, 1);
+}
+
+CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
+{
+    EaglePlan *p = EaglePlan_New(1);
+    
+    double time = EaglePlan_getExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.0, time);
+    
+    p->executionTime = 100000;
+    time = EaglePlan_getExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.0001, time);
+    
+    EaglePlan_Delete(p);
+}
+
+CUNIT_TEST(MainSuite, EagleInstance_nextJob)
+{
+    EaglePageProvider *provider = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, 1, "dummy");
+    int *ptr = EagleData_Int(123);
+    EaglePageProvider_add(provider, ptr);
+    free(ptr);
+    
+    EaglePlan *p = EaglePlan_New(1);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(0, provider, EagleFalse);
+    EaglePlan_addBufferProvider(p, bp, EagleFalse);
+    
+    EagleInstance *instance = EagleInstance_New(1);
+    EagleInstance_addPlan(instance, p);
+    EaglePlanJob *job = EagleInstance_nextJob(instance);
+    CUNIT_VERIFY_NULL(job);
+    
+    EagleInstance_Delete(instance);
+    EaglePlan_Delete(p);
+    EaglePageProvider_Delete(provider);
+    EaglePlanBufferProvider_Delete(bp);
+    EaglePlanJob_Delete(job);
+}
+
+CUNIT_TEST(MainSuite, EagleWorker_runJob)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlanJob *job = EaglePlanJob_New(plan);
+    
+    EaglePlanOperation *op = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, 1, 1, 1, NULL, EagleFalse, "1");
+    EaglePlan_addOperation(plan, op);
+    EaglePlan_prepareBuffers(plan, 1);
+    
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "destination 1 is greater than allowed 1 buffers!");
+    
+    op->destination = 0;
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source1 1 is greater than allowed 1 buffers!");
+    
+    op->source1 = 0;
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source2 1 is greater than allowed 1 buffers!");
+    
+    EaglePlanOperation_Delete(op);
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    EagleLogger_Log(EagleLoggerSeverityDebug, "some message 123");
+    
+    EagleLoggerEvent *event = EagleLogger_LastEvent();
+    CUNIT_ASSERT_NOT_NULL(event);
+    if(NULL != event) {
+        CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 123");
+    }
+}
+
+CUNIT_TEST(MainSuite, EagleLogger_lastEvent)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    CUNIT_VERIFY_NULL(EagleLogger_lastEvent(NULL));
+    
+    EagleLogger *logger = GetLogger();
+    EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message 456");
+    
+    EagleLoggerEvent *event = EagleLogger_lastEvent(logger);
+    CUNIT_ASSERT_NOT_NULL(event);
+    if(NULL != event) {
+        CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 456");
+    }
+    
+    EagleLogger_Delete(logger);
+}
+
+CUNIT_TEST(MainSuite, EagleMemory_MultiFree)
+{
+    void **data = EagleMemory_MultiAllocate(NULL, 16, 16);
+    CUNIT_ASSERT_NOT_NULL(data);
+    EagleMemory_MultiFree(data, 16);
+}
+
+CUNIT_TEST(MainSuite, EagleMemory_Allocate)
+{
+    void *data = EagleMemory_Allocate(NULL, SIZE_MAX);
+    CUNIT_ASSERT_NULL(data);
 }
 
 CUnitTests* MainSuite_tests()
@@ -474,6 +712,14 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_Allocate));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_MultiFree));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LastEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_lastEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJob));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getExecutionSeconds));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_prepareBuffers));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_New));
@@ -492,10 +738,40 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLoggerSeverity_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_log));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_logEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyInt_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyText_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_addStream_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromStream));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_New));
     
     // complex / execution tests
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceSingle));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, _, InstanceMulti));
     
     return tests;
+}
+
+/**
+ * The suite init function.
+ */
+int MainSuite_init()
+{
+    return 0;
+}
+
+/**
+ * The suite cleanup function.
+ */
+int MainSuite_clean()
+{
+    return 0;
 }

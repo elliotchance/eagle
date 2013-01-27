@@ -63,7 +63,10 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
             char msg[1024];
             sprintf(msg, "destination %d is greater than allowed %d buffers!\n", provider->destinationBuffer, plan->buffersNeeded);
             EagleLogger_Log(EagleLoggerSeverityError, msg);
-            return NULL;
+            
+            EaglePlanJob_Delete(job);
+            job = NULL;
+            break;
         }
         EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);

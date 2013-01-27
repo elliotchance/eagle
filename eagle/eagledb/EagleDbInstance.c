@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "EagleDbInstance.h"
 #include "EagleDbTable.h"
 #include "EagleDbTuple.h"
@@ -12,6 +11,8 @@
 #include "EagleMemory.h"
 #include "EagleDbInstance.h"
 #include "EagleDbParser.h"
+#include "EagleLogger.h"
+#include "EagleDbSchema.h"
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
@@ -172,18 +173,16 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     EagleMemory_Free(widths);
 }
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db)
+void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
 {
     EaglePlan *plan;
     
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
     plan = EagleDbSqlSelect_parse(select, db);
     /*printf("%s\n", EaglePlan_toString(plan));*/
     
     /* catch compilation error */
     if(EagleTrue == EaglePlan_isError(plan)) {
-        printf("Error: %s\n", plan->errorMessage);
-        EaglePlan_Delete(plan);
+        EagleLogger_Log(EagleLoggerSeverityUserError, plan->errorMessage);
     }
     else {
         /* execute */
@@ -197,15 +196,18 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
         EagleInstance_Delete(eagle);
     }
     
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EaglePlan_Delete(plan);
 }
 
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db)
+void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table)
 {
-    EagleDbTable *table = (EagleDbTable*) yyparse_ast;
-    printf("Table '%s' created.\n\n", table->name);
+    char msg[1024];
+    sprintf(msg, "Table '%s' created.", table->name);
+    EagleLogger_Log(EagleLoggerSeverityInfo, msg);
     
-    EagleDbTable_Delete(table);
+#ifndef CUNIT
+    printf("%s\n\n", msg);
+#endif
 }
 
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
@@ -216,8 +218,10 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     yyparse();
     
     /* check for errors */
-    if(NULL != yyerrors_last()) {
-        printf("Error: %s\n", yyerrors_last());
+    if(yyerrors_length > 0) {
+        char msg[1024];
+        sprintf(msg, "Error: %s", yyerrors_last());
+        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
     }
     else {
         switch(yystatementtype) {
@@ -227,11 +231,13 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
                 break;
                 
             case EagleDbSqlStatementTypeSelect:
-                EagleDbInstance_executeSelect(db);
+                EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) yyparse_ast);
+                EagleDbSqlSelect_Delete((EagleDbSqlSelect*) yyparse_ast, EagleTrue);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:
-                EagleDbInstance_executeCreateTable(db);
+                EagleDbInstance_executeCreateTable(db, (EagleDbTable*) yyparse_ast);
+                EagleDbTable_DeleteWithColumns((EagleDbTable*) yyparse_ast);
                 break;
                 
         }
@@ -250,7 +256,7 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
 EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
     int i;
-    EagleDbSchema *schema = EagleDbInstance_getSchema(db, "default");
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, (char*) EagleDbSchema_DefaultSchemaName);
     if(NULL == schema) {
         return NULL;
     }

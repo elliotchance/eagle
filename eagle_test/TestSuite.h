@@ -38,6 +38,28 @@ free(cu_msg); \
 }
 
 /**
+ Verify two doubles are the same.
+ */
+#define CUNIT_VERIFY_EQUAL_DOUBLE(actual, expected) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_VERIFY_EQUAL_DOUBLE: Expected %g from expression \"%s\", but received %g from expression \"%s\"", (double) (expected), #expected, (double) (actual), #actual); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
+ Assert two doubles are the same.
+ */
+#define CUNIT_ASSERT_EQUAL_DOUBLE(actual, expected) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_ASSERT_EQUAL_DOUBLE: Expected %g from expression \"%s\", but received %g from expression \"%s\"", (double) (expected), #expected, (double) (actual), #actual); \
+if(CU_assertImplementation(((actual) == (expected)), __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
  Assert two strings are the same.
  */
 #define CUNIT_VERIFY_EQUAL_STRING(actual, expected) { \
@@ -158,6 +180,7 @@ free(cu_msg); \
 }\
 }
 
+#define CUNIT_ASSERT_LAST_ERROR(msg) { EagleLoggerEvent *event = EagleLogger_LastEvent(); CUNIT_ASSERT_NOT_NULL(event); if(NULL != event) { CUNIT_ASSERT_EQUAL_STRING(event->message, msg); } }
 
 typedef struct {
     const char *strName;

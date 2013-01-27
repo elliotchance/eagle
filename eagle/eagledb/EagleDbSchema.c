@@ -4,6 +4,8 @@
 #include "EagleDbSchema.h"
 #include "EagleMemory.h"
 
+const char *EagleDbSchema_DefaultSchemaName = "default";
+
 EagleDbSchema* EagleDbSchema_New(char *name)
 {
     EagleDbSchema *schema = (EagleDbSchema*) EagleMemory_Allocate("EagleDbSchema_New.1", sizeof(EagleDbSchema));

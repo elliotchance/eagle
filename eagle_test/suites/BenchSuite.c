@@ -84,10 +84,11 @@ CUNIT_TEST(BenchSuite, calibrate)
 {
     // calculate how long it takes to do a bunch of calculations
     uint64_t start = mach_absolute_time();
+    int a;
     for(int i = 0; i < BenchSuite_TotalPages * BenchSuite_RecordsPerPage; ++i) {
-        int a = i;
-        a += i;
+        a = i;
     }
+    CUNIT_ASSERT_NOT_NULL(&a);
     uint64_t end = mach_absolute_time();
     BenchSuite_CalibrateAddition = end - start;
     
@@ -120,8 +121,10 @@ CUNIT_TEST(BenchSuite, SELECT)
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(plan->result[0]), 1);
     EaglePage *p = EaglePageProvider_nextPage(plan->result[0]);
     CUNIT_ASSERT_NOT_NULL(p);
-    CUNIT_ASSERT_EQUAL_INT(p->count, 1);
-    CUNIT_ASSERT_EQUAL_INT(((int*) p->data)[0], 1000000);
+    if(NULL != p) {
+        CUNIT_ASSERT_EQUAL_INT(p->count, 1);
+        CUNIT_ASSERT_EQUAL_INT(((int*) p->data)[0], 1000000);
+    }
     
     // check timing
     CUNIT_ASSERT_BENCH_RESULT(plan);

@@ -3,8 +3,9 @@
 
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlValue.h"
-#include "EagleDbInstance.h"
 #include "Eagle.h"
+
+struct EagleDbInstance_;
 
 /**
  SQL SELECT expression.
@@ -59,7 +60,7 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void);
  */
 void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select, EagleBoolean recursive);
 
-EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db);
+EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance_ *db);
 
 /**
  * Return the number of expressions after the SELECT clause.

@@ -5,6 +5,8 @@
 #include "EagleMemory.h"
 #include "EagleUtils.h"
 #include "EagleDbSqlExpressionType.h"
+#include "EagleDbTableData.h"
+#include "EagleDbInstance.h"
 
 EagleDbSqlSelect* EagleDbSqlSelect_New(void)
 {
@@ -57,7 +59,7 @@ int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select)
     return exprs;
 }
 
-EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
+EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance_ *db)
 {
     int i;
     int exprCount, whereExpressionId = -1, expri = 0;
@@ -75,26 +77,11 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     /* create the plan skeleton */
     plan = EaglePlan_New(db->pageSize);
     
-    /* the providers will contain the result */
-    plan->resultFields = EagleDbSqlSelect_getFieldCount(select);
-    plan->result = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbSqlSelect_parse.1", sizeof(EaglePageProvider*), plan->resultFields);
-    if(NULL == plan->result) {
-        EaglePlan_Delete(plan);
-        return NULL;
-    }
-    
-    for(i = 0; i < plan->resultFields; ++i) {
-        char *desc = EagleDbSqlExpression_toString(select->selectExpressions[i]);
-        plan->result[i] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, db->pageSize, desc);
-        EagleMemory_Free(desc);
-    }
-    
     /* get data */
     td = EagleDbInstance_getTable(db, select->tableName);
     if(NULL == td) {
-        plan->errorCode = EaglePlanErrorNoSuchTable;
-        plan->errorMessage = "";
-        return NULL;
+        EaglePlan_setError(plan, EaglePlanErrorNoSuchTable, select->tableName);
+        return plan;
     }
     for(i = 0; i < td->table->usedColumns; ++i) {
         EaglePlanBufferProvider *bp;
@@ -122,6 +109,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, EagleDbInstance *db)
     
     /* compile plan */
     EagleDbSqlExpression_CompilePlan(expr, exprCount, whereExpressionId, plan);
+    EagleMemory_Free(expr);
     
     return plan;
 }

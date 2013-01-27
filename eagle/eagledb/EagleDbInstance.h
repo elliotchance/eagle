@@ -5,13 +5,14 @@
 #include "EaglePlan.h"
 #include "Eagle.h"
 #include "EagleDbSqlStatementType.h"
+#include "EagleDbSqlSelect.h"
 
 extern EagleDbSqlStatementType yystatementtype;
 
 /**
  The database instance is a wrapper for a EagleInstance.
  */
-typedef struct {
+typedef struct EagleDbInstance_ {
     
     /**
      Contains the pointers to the individual schemas. This is semi managed because the array that contains the pointers
@@ -46,9 +47,9 @@ void EagleDbInstance_Delete(EagleDbInstance *db);
 
 void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db);
+void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
 
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db);
+void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
 
 void EagleDbInstance_PrintResults(EaglePlan *plan);
 

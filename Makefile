@@ -79,7 +79,7 @@ coverage: test
 	bin/genhtml --sort --no-branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
 	
 	# check percentage
-	perl -e 'open(DOC, "coverage/$(GIT_BRANCH)/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (75%).\n") if(($$m[10] + $$m[12]) < 150);'
+	perl -e 'open(DOC, "coverage/$(GIT_BRANCH)/index.html"); @m = (join("", <DOC>) =~ m/(\d+\.\d)&nbsp;%/g); die("Coverage " . (($$m[10] + $$m[12]) / 2) . "% is below minimum the coverage (100%).\n") if(($$m[10] + $$m[12]) < 200);'
 
 doxygen:
 	# generate docs

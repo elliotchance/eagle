@@ -26,8 +26,8 @@ EaglePlan* EaglePlan_New(int pageSize)
     plan->usedProviders = 0;
     plan->providers = (EaglePlanBufferProvider**) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(EaglePlanBufferProvider*), plan->allocatedProviders);
     if(NULL == plan->providers) {
-        EagleMemory_Free(plan);
         EagleMemory_Free(plan->operations);
+        EagleMemory_Free(plan);
         return NULL;
     }
     
@@ -109,13 +109,17 @@ const char* EaglePlan_toString(EaglePlan *plan)
         strcat_safe(str, "  Buffers:\n");
     }
     for(i = 0; i < plan->buffersNeeded; ++i) {
-        char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128);
+        char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128), *type;
         if(NULL == msg) {
             EagleMemory_Free(str);
             return NULL;
         }
-        sprintf(msg, "    %d type=%s\n", i, EagleDataType_typeToName(plan->bufferTypes[i]));
+        
+        type = EagleDataType_typeToName(plan->bufferTypes[i]);
+        sprintf(msg, "    %d type=%s\n", i, type);
         strcat_safe(str, msg);
+        EagleMemory_Free(type);
+        EagleMemory_Free(msg);
     }
     
     return str;
