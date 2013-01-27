@@ -686,6 +686,9 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
 
 CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
 {
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
     EagleLogger_Log(EagleLoggerSeverityDebug, "some message 123");
     
     EagleLoggerEvent *event = EagleLogger_LastEvent();
@@ -695,6 +698,9 @@ CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
 
 CUNIT_TEST(MainSuite, EagleLogger_lastEvent)
 {
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
     EagleLogger *logger = GetLogger();
     EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message 456");
     
@@ -785,6 +791,5 @@ int MainSuite_init()
  */
 int MainSuite_clean()
 {
-    EagleLogger_Delete(EagleLogger_Get());
     return 0;
 }

@@ -13,6 +13,7 @@
 #include "EagleDbConsole.h"
 #include "EagleMemory.h"
 #include "EagleDbParser.h"
+#include "EagleLogger.h"
 
 int _testSqlSelect(const char *sql)
 {
@@ -209,6 +210,8 @@ EagleDbTableData* _getTableWithData(int records, int recordsPerPage)
 
 CUNIT_TEST(DBSuite, EagleDbTuple_New)
 {
+    CUNIT_VERIFY_NULL(EagleDbTuple_New(NULL));
+    
     EagleDbTable *table = _getTable();
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
@@ -438,20 +441,82 @@ CUNIT_TEST(DBSuite, yyreturn_push)
     yylex_free();
 }
 
-/**
- * The suite init function.
- */
-int DBSuite_init()
+CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
 {
-    return 0;
+    EagleDbSqlValue *v = EagleDbSqlValue_NewWithAsterisk();
+    char *desc = EagleDbSqlValue_toString(v);
+    CUNIT_VERIFY_EQUAL_STRING(desc, "*");
+    free(desc);
+    EagleDbSqlValue_Delete(v);
 }
 
-/**
- * The suite cleanup function.
- */
-int DBSuite_clean()
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
 {
-    return 0;
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    EaglePlan *plan = EaglePlan_New(1);
+    
+    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);
+    CUNIT_VERIFY_EQUAL_INT(result, 0);
+    
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_toString)
+{
+    char *desc = EagleDbSqlExpression_toString(NULL);
+    CUNIT_VERIFY_EQUAL_STRING(desc, "");
+    free(desc);
+    
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    desc = EagleDbSqlExpression_toString((EagleDbSqlExpression*) select);
+    CUNIT_VERIFY_EQUAL_STRING(desc, "SELECT");
+    free(desc);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_setInt)
+{
+    EagleLogger_Get()->out = NULL;
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeText));
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setInt(tuple, 0, 123);
+    CUNIT_ASSERT_LAST_ERROR("Wrong type.");
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_setText)
+{
+    EagleLogger_Get()->out = NULL;
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setText(tuple, 0, "123");
+    CUNIT_ASSERT_LAST_ERROR("Wrong type.");
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_toString)
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeUnknown));
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    char *desc = EagleDbTuple_toString(tuple);
+    CUNIT_ASSERT_EQUAL_STRING(desc, "(a=?)");
+    free(desc);
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_DeleteWithColumns(table);
 }
 
 CUnitTests* DBSuite_tests()
@@ -459,6 +524,12 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setText));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));
@@ -480,4 +551,20 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
     
     return tests;
+}
+
+/**
+ * The suite init function.
+ */
+int DBSuite_init()
+{
+    return 0;
+}
+
+/**
+ * The suite cleanup function.
+ */
+int DBSuite_clean()
+{
+    return 0;
 }

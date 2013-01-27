@@ -180,6 +180,7 @@ free(cu_msg); \
 }\
 }
 
+#define CUNIT_ASSERT_LAST_ERROR(msg) { EagleLoggerEvent *event = EagleLogger_LastEvent(); CUNIT_ASSERT_NOT_NULL(event); CUNIT_ASSERT_EQUAL_STRING(event->message, msg); }
 
 typedef struct {
     const char *strName;

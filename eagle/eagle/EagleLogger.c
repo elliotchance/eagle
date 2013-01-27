@@ -5,8 +5,6 @@
 #include "EagleSynchronizer.h"
 #include "EagleMemory.h"
 
-EagleLogger *EagleLogger_Logger = NULL;
-
 void EagleLogger_Delete(EagleLogger *logger)
 {
     if(NULL == logger) {
@@ -20,7 +18,7 @@ void EagleLogger_Delete(EagleLogger *logger)
 
 EagleLogger* EagleLogger_New(FILE *out)
 {
-    EagleLogger *logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_New.1", sizeof(EagleLogger));
+    EagleLogger *logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_New.1", 1000);
     if(NULL == logger) {
         return NULL;
     }
@@ -35,7 +33,7 @@ EagleLogger* EagleLogger_New(FILE *out)
 
 EagleLoggerEvent* EagleLogger_LastEvent()
 {
-    return EagleLogger_lastEvent(EagleLogger_Logger);
+    return EagleLogger_lastEvent(EagleLogger_Get());
 }
 
 EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger)
@@ -45,8 +43,13 @@ EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger)
 
 EagleLogger* EagleLogger_Get(void)
 {
+    static EagleLogger *EagleLogger_Logger = NULL;
+    static EagleLock *lock = NULL;
+    
     /* this function must be synchronized */
-    EagleLock *lock = EagleSynchronizer_CreateLock();
+    if(NULL == lock) {
+        lock = EagleSynchronizer_CreateLock();
+    }
     EagleSynchronizer_Lock(lock);
     
     /* initialise if its not started */
@@ -55,7 +58,6 @@ EagleLogger* EagleLogger_Get(void)
     }
     
     EagleSynchronizer_Unlock(lock);
-    EagleLock_Delete(lock);
     return EagleLogger_Logger;
 }
 
@@ -68,9 +70,7 @@ EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity sever
 
 EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message)
 {
-    /* make sure the default logger if ready */
-    EagleLogger_Get();
-    return EagleLogger_log(EagleLogger_Logger, severity, message);
+    return EagleLogger_log(EagleLogger_Get(), severity, message);
 }
 
 void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event)
@@ -107,5 +107,5 @@ void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event)
 
 void EagleLogger_LogEvent(EagleLoggerEvent *event)
 {
-    EagleLogger_logEvent(EagleLogger_Logger, event);
+    EagleLogger_logEvent(EagleLogger_Get(), event);
 }
