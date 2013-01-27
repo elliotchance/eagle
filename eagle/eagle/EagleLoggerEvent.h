@@ -32,8 +32,22 @@ typedef struct {
     
 } EagleLoggerEvent;
 
+/**
+ Create a new logger event.
+ @param [in] severity How severe the event is.
+ @param [in] message The message.
+ @return A new logger event instance.
+ */
 EagleLoggerEvent* EagleLoggerEvent_New(EagleLoggerSeverity severity, char *message);
 
+/**
+ Delete a logger event.
+ 
+ @note If you have sent the event to a logger do not use this function, the logger will take care of freeing the event
+       when it no longer needs it.
+ 
+ @param [in] event The event to release.
+ */
 void EagleLoggerEvent_Delete(EagleLoggerEvent *event);
 
 #endif

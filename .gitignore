@@ -6,3 +6,4 @@
 /eagle.xcodeproj/project.xcworkspace
 /eagle.xcodeproj/xcuserdata
 leaks*.tmp
+/log.txt

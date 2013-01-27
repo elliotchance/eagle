@@ -93,19 +93,23 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
         case EagleDbSqlExpressionTypeValue:
         {
             EagleDbSqlValue *value = (EagleDbSqlValue*) expression;
+            int destination;
             
             switch(value->type) {
                 case EagleDbSqlValueTypeInteger:
                 {
-                    int destination = *destinationBuffer;
-                    EaglePageProvider *provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize, "(integer)");
-                    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+                    EaglePageProvider *provider;
+                    EaglePlanBufferProvider *bp;
+                    
+                    destination = *destinationBuffer;
+                    provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize, "(integer)");
+                    bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
                     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
                     EaglePlan_addFreeObject(plan, provider->records, NULL);
                     ++*destinationBuffer;
                     
                     plan->bufferTypes[destination] = EagleDataTypeInteger;
-                    return destination;
+                    break;
                 }
                     
                 case EagleDbSqlValueTypeIdentifier:
@@ -120,7 +124,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     }
                     
                     plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
-                    return provider->destinationBuffer;
+                    destination = provider->destinationBuffer;
+                    break;
                 }
                     
                 case EagleDbSqlValueTypeAsterisk:
@@ -128,9 +133,12 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     char msg[128];
                     sprintf(msg, "You can not use the star operator like this.");
                     EaglePlan_setError(plan, EaglePlanErrorCompile, msg);
-                    return EagleDbSqlExpression_ERROR;
+                    destination = EagleDbSqlExpression_ERROR;
+                    break;
                 }
             }
+            
+            return destination;
         }
             
         case EagleDbSqlExpressionTypeSelect:

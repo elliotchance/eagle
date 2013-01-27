@@ -3,6 +3,7 @@
 
 #include <pthread.h>
 #include "Eagle.h"
+#include "EaglePlanJob.h"
 
 struct EagleInstance_;
 
@@ -34,5 +35,11 @@ void EagleWorker_start(EagleWorker *worker);
 void* EagleWorker_begin(void *obj);
 
 void EagleWorker_join(EagleWorker *worker);
+
+/**
+ Execute a job.
+ @param [in] job The job to execute.
+ */
+void EagleWorker_runJob(EaglePlanJob *job);
 
 #endif

@@ -7,6 +7,7 @@
 #include "SQLSuite.h"
 #include "MemorySuite.h"
 #include "BenchSuite.h"
+#include "EagleLogger.h"
 
 /**
  * The main() function for setting up and running the tests.
@@ -142,6 +143,7 @@ int main(int argc, char **argv)
     
     //CU_cleanup_registry();
     int exitCode = CU_get_error();
+    EagleLogger_Delete(EagleLogger_Get());
     
     // may need to wait
     if(wait) {
