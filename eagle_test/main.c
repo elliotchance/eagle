@@ -90,7 +90,7 @@ int main(int argc, char **argv)
         
         // clean up
         CUnitTests_Delete(tests);
-    }
+    }*/
     
     {
         // add a suite to the registry
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
         
         // clean up
         CUnitTests_Delete(tests);
-    }*/
+    }
     
     if(argc > 1 && !strcmp(argv[1], "bench"))
     {
