@@ -51,7 +51,7 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithAsterisk(void);
 
 /**
  * Create a new EagleDbSqlValue with an identifier (a column name).
- * @param [in] value The name of the column.
+ * @param [in] name The name of the column.
  * @return A new EagleDbSqlValue instance.
  */
 EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *name);

@@ -16,17 +16,27 @@ typedef struct {
     
 } EagleDbConsole;
 
+/**
+ Create a new console.
+ @return New console instance.
+ */
 EagleDbConsole* EagleDbConsole_New(void);
 
+/**
+ Begin the console input.
+ @param [in] console Console instance.
+ */
 void EagleDbConsole_run(EagleDbConsole *console);
 
 /**
  Free the console.
+ @param [in] console Console instance.
  */
 void EagleDbConsole_Delete(EagleDbConsole *console);
 
 /**
  http://stackoverflow.com/a/314422/1470961
+ @return The line input from the user.
  */
 char* EagleDbConsole_GetLine(void);
 
