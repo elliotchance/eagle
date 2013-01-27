@@ -3,11 +3,7 @@
 
 #include "EagleData.h"
 #include "EagleDbSqlStatementType.h"
-
-#define MAX_YYOBJ 256
-#define MAX_YYERRORS 100
-#define MAX_YYRETURN 256
-#define MAX_YYLIST 256
+#include "EagleLinkedList.h"
 
 typedef struct {
     
@@ -19,12 +15,7 @@ typedef struct {
     /**
      Error stack.
      */
-    EAGLE_ATTR_MANAGED char **yyerrors;
-    
-    /**
-     Total number of errors.
-     */
-    EAGLE_ATTR_NA int yyerrors_length;
+    EAGLE_ATTR_MANAGED EagleLinkedList *errors;
     
     /**
      This is the pointer to the final AST returned by the parser.
@@ -32,40 +23,9 @@ typedef struct {
     EAGLE_ATTR_MANAGED void *yyparse_ast;
     
     /**
-     Object stack. This is used when something goes wrong it can free all the objects that were allocated during the
-     parsing process.
+     A return stack.
      */
-    EAGLE_ATTR_MANAGED void **yyobj;
-    
-    /**
-     The number of objects in the stack.
-     */
-    EAGLE_ATTR_NA int yyobj_length;
-    
-    /**
-     When returning an array of something you can use this mechanism.
-     */
-    EAGLE_ATTR_MANAGED void **yylist;
-    
-    /**
-     The number of items in the yylist instance.
-     */
-    EAGLE_ATTR_NA int yylist_length;
-    
-    /**
-     A return stack. Maximum depth is 256.
-     */
-    EAGLE_ATTR_MANAGED void **yyreturn;
-    
-    /**
-     The numbero of items in the return stack.
-     */
-    EAGLE_ATTR_NA int yyreturn_length;
-    
-    /**
-     Used by "data_type"
-     */
-    EAGLE_ATTR_NA EagleDataType yy_data_type;
+    EAGLE_ATTR_MANAGED EagleLinkedList *returns;
     
 } EagleDbParser;
 
@@ -124,18 +84,29 @@ void EagleDbParser_Delete(void);
  */
 char* EagleDbParser_LastError(void);
 
+/**
+ Push the error onto the stack.
+ */
 char* EagleDbParser_AddError(void *ptr);
 
-void* EagleDbParser_AddObject(void *ptr);
-
-void* yylist_push(void *ptr);
-
-void* yylist_new(void);
-
+/**
+ Push the return value onto the stack.
+ */
 void* EagleDbParser_AddReturn(void *ptr);
 
+/**
+ Return the last yyreturn and decrement back the stack.
+ */
 void* EagleDbParser_PopReturn(void);
 
+/**
+ Return the most recent yyreturn.
+ */
 void* EagleDbParser_CurrentReturn(void);
+
+/**
+ Did the parser encounter any errors?
+ */
+EagleBoolean EagleDbParser_HasError(void);
 
 #endif

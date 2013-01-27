@@ -86,98 +86,100 @@ statement:
 
 /*
  K_CREATE K_TABLE IDENTIFIER T_BRACKET_OPEN column_definition_list T_BRACKET_CLOSE
+ @return EagleDbTable
  */
 create_table_statement:
-    K_CREATE K_TABLE {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbTable_New(NULL)));
-    }
-    IDENTIFIER {
-        ((EagleDbTable*) EagleDbParser_CurrentReturn())->name = EagleDbParser_AddObject(strdup(EagleDbParser_LastToken()));
+    K_CREATE K_TABLE IDENTIFIER {
+        EagleDbParser_AddReturn((void*) EagleDbTable_New(NULL));
+        ((EagleDbTable*) EagleDbParser_CurrentReturn())->name = strdup(EagleDbParser_LastToken());
     }
     T_BRACKET_OPEN
     column_definition_list {
-        EagleDbParser *p = EagleDbParser_Get();
-        void *last = EagleDbParser_PopReturn();
-        EagleDbTable_setColumns((EagleDbTable*) EagleDbParser_CurrentReturn(), last, p->yylist_length);
+        int size;
+        EagleDbColumn **list = (EagleDbColumn**) EagleLinkedList_toArray(EagleDbParser_PopReturn(), &size);
+        EagleDbTable_setColumns((EagleDbTable*) EagleDbParser_CurrentReturn(), list, size);
     }
     T_BRACKET_CLOSE
 ;
 
 /*
  column_definition next_column_definition
+ @return EagleLinkedList
  */
 column_definition_list:
     {
-        EagleDbParser_AddObject(yylist_new());
+        EagleDbParser_AddReturn(EagleLinkedList_New());
     }
     column_definition {
-        void *last = EagleDbParser_PopReturn();
-        yylist_push(last);
+        EagleDbColumn *last = (EagleDbColumn*) EagleDbParser_PopReturn();
+        EagleLinkedListItem *item = EagleLinkedListItem_New(last, EagleTrue, (void(*)(void*)) EagleDbColumn_Delete);
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), item);
     }
     next_column_definition
-    {
-        EagleDbParser *p = EagleDbParser_Get();
-        EagleDbParser_AddReturn(p->yylist);
-    }
 ;
 
 /*
  IDENTIFIER data_type
+ @return EagleDbSqlColumn
  */
 column_definition:
     IDENTIFIER {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger)));
-        ((EagleDbColumn*) EagleDbParser_CurrentReturn())->name = EagleDbParser_AddObject(strdup(EagleDbParser_LastToken()));
+        EagleDbParser_AddReturn((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger));
+        ((EagleDbColumn*) EagleDbParser_CurrentReturn())->name = strdup(EagleDbParser_LastToken());
     }
     data_type {
-        EagleDbParser *p = EagleDbParser_Get();
-        ((EagleDbColumn*) EagleDbParser_CurrentReturn())->type = p->yy_data_type;
+        int *last = EagleDbParser_PopReturn();
+        ((EagleDbColumn*) EagleDbParser_CurrentReturn())->type = *last;
     }
 ;
 
 /*
  K_INTEGER | K_TEXT
+ @return int*
  */
 data_type:
     K_INTEGER {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yy_data_type = EagleDataTypeInteger;
+        EagleDbParser_AddReturn(EagleData_Int(EagleDataTypeInteger));
     }
     |
     K_TEXT {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yy_data_type = EagleDataTypeText;
+        EagleDbParser_AddReturn(EagleData_Int(EagleDataTypeText));
     }
 ;
 
 /*
  ( T_COMMA column_definition next_column_definition )?
+ @return EagleLinkedListItem
  */
 next_column_definition:
     |
     T_COMMA column_definition {
-        void *last = EagleDbParser_PopReturn();
-        yylist_push(last);
+        EagleLinkedListItem *last = EagleDbParser_PopReturn();
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), last);
     }
     next_column_definition
 ;
 
 /*
  K_SELECT column_expression_list K_FROM IDENTIFIER where_expression
+ @return EagleDbSqlSelect
  */
 select_statement:
     K_SELECT {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlSelect_New()));
+        EagleDbParser_AddReturn((void*) EagleDbSqlSelect_New());
     }
     column_expression_list {
-        EagleDbParser *p = EagleDbParser_Get();
-        void *last = EagleDbParser_PopReturn();
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->selectExpressions = last;
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->allocatedSelectExpressions = p->yylist_length;
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->usedSelectExpressions = p->yylist_length;
+        int size;
+        EagleLinkedList *last = (EagleLinkedList*) EagleDbParser_PopReturn();
+        EagleDbSqlExpression **lastArray = (EagleDbSqlExpression**) EagleLinkedList_toArray(last, &size);
+        
+        EagleDbSqlSelect *select = (EagleDbSqlSelect*) EagleDbParser_CurrentReturn();
+        select->selectExpressions = lastArray;
+        select->allocatedSelectExpressions = size;
+        select->usedSelectExpressions = size;
     }
     K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = EagleDbParser_AddObject(strdup(EagleDbParser_LastToken()));
+        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = strdup(EagleDbParser_LastToken());
     }
     where_expression {
         void *last = EagleDbParser_PopReturn();
@@ -187,36 +189,36 @@ select_statement:
 
 /*
  column_expression next_column_expression
+ @return EagleLinkedList
  */
 column_expression_list:
     {
-        EagleDbParser_AddObject(yylist_new());
+        EagleDbParser_AddReturn(EagleLinkedList_New());
     }
     column_expression {
-        void *last = EagleDbParser_PopReturn();
-        yylist_push(last);
+        EagleLinkedListItem *last = EagleDbParser_PopReturn();
+        EagleLinkedList *list = EagleDbParser_CurrentReturn();
+        EagleLinkedList_add(list, last);
     }
     next_column_expression
-    {
-        EagleDbParser *p = EagleDbParser_Get();
-        EagleDbParser_AddReturn(p->yylist);
-    }
 ;
 
 /*
  ( T_COMMA column_expression next_column_expression )?
+ @return EagleLinkedListItem
  */
 next_column_expression:
     |
     T_COMMA column_expression {
-        void *last = EagleDbParser_PopReturn();
-        yylist_push(last);
+        EagleLinkedListItem *last = EagleDbParser_PopReturn();
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), last);
     }
     next_column_expression
 ;
 
 /*
  ( K_WHERE expression )?
+ @return EagleDbSqlExpression | NULL
  */
 where_expression:
     {
@@ -231,43 +233,38 @@ where_expression:
 
 /*
  T_ASTERISK | expression
+ @return EagleLinkedListItem
  */
 column_expression:
     T_ASTERISK {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlValue_NewWithAsterisk()));
+        void *last = (void*) EagleDbSqlValue_NewWithAsterisk();
+        EagleLinkedListItem *item = EagleLinkedListItem_New(last, EagleTrue, (void(*)(void*)) EagleDbSqlValue_Delete);
+        EagleDbParser_AddReturn(item);
     }
     |
     expression {
-        /* bubble up yyreturn */
+        void *last = EagleDbParser_PopReturn();
+        EagleLinkedListItem *item = EagleLinkedListItem_New(last, EagleTrue, (void(*)(void*)) EagleDbSqlExpression_Delete);
+        EagleDbParser_AddReturn(item);
     }
 ;
 
 /*
  value ( ( T_PLUS | T_EQUALS ) value )?
+ @return EagleDbSqlExpression
  */
 expression:
     value {
-        /* bubble up yyreturn */
+        /* bubble up return */
     }
     |
     value {
         void *last = EagleDbParser_PopReturn();
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
+        EagleDbParser_AddReturn((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL));
     }
-    T_PLUS {
-        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->op = EagleDbSqlExpressionOperatorPlus;
-    }
-    value {
-        void *last = EagleDbParser_PopReturn();
-        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->right = (EagleDbSqlExpression*) last;
-    }
-    |
-    value {
-        void *last = EagleDbParser_PopReturn();
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
-    }
-    T_EQUALS {
-        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->op = EagleDbSqlExpressionOperatorEquals;
+    operator {
+        int *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->op = *last;
     }
     value {
         void *last = EagleDbParser_PopReturn();
@@ -275,16 +272,31 @@ expression:
     }
 ;
 
+/**
+ T_PLUS | T_EQUALS
+ @return int*
+ */
+operator:
+    T_PLUS {
+        EagleDbParser_AddReturn(EagleData_Int(EagleDbSqlExpressionOperatorPlus));
+    }
+    |
+    T_EQUALS {
+        EagleDbParser_AddReturn(EagleData_Int(EagleDbSqlExpressionOperatorEquals));
+    }
+;
+
 /*
  INTEGER | IDENTIFIER
+ @return EagleDbSqlValue
  */
 value:
     INTEGER {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlValue_NewWithInteger(atoi(EagleDbParser_LastToken()))));
+        EagleDbParser_AddReturn((void*) EagleDbSqlValue_NewWithInteger(atoi(EagleDbParser_LastToken())));
     }
     |
     IDENTIFIER {
-        EagleDbParser_AddReturn(EagleDbParser_AddObject((void*) EagleDbSqlValue_NewWithIdentifier(EagleDbParser_LastToken())));
+        EagleDbParser_AddReturn((void*) EagleDbSqlValue_NewWithIdentifier(EagleDbParser_LastToken()));
     }
 ;
 

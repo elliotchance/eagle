@@ -221,7 +221,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     
     /* check for errors */
     p = EagleDbParser_Get();
-    if(p->yyerrors_length > 0) {
+    if(EagleDbParser_HasError() > 0) {
         char msg[1024];
         sprintf(msg, "Error: %s", EagleDbParser_LastError());
         EagleLogger_Log(EagleLoggerSeverityUserError, msg);

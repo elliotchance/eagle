@@ -334,62 +334,6 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
     EagleDbInstance_Delete(instance);
 }
 
-CUNIT_TEST(DBSuite, EagleDbParser_AddError)
-{
-    EagleDbParser_Init();
-    for(int i = 0; i < MAX_YYERRORS + 10; ++i) {
-        EagleDbParser_AddError(strdup("some error"));
-    }
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    CUNIT_ASSERT_EQUAL_INT(p->yyerrors_length, MAX_YYERRORS);
-    EagleDbParser_Delete();
-}
-
-CUNIT_TEST(DBSuite, EagleDbParser_AddObject)
-{
-    EagleDbParser_Init();
-    for(int i = 0; i < MAX_YYOBJ + 10; ++i) {
-        EagleDbParser_AddObject(NULL);
-    }
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    CUNIT_VERIFY_EQUAL_INT(p->yyobj_length, MAX_YYOBJ);
-    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(EagleDbParser_LastError(), "Cannot parse SQL. Maximum depth of 256 exceeded.");
-    EagleDbParser_Delete();
-}
-
-CUNIT_TEST(DBSuite, yylist_push)
-{
-    EagleDbParser_Init();
-    yylist_new();
-    for(int i = 0; i < MAX_YYLIST + 10; ++i) {
-        yylist_push(NULL);
-    }
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    CUNIT_VERIFY_EQUAL_INT(p->yylist_length, MAX_YYLIST);
-    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(EagleDbParser_LastError(), "Cannot parse SQL. Maximum list size of 256 exceeded.");
-    free(p->yylist);
-    EagleDbParser_Delete();
-}
-
-CUNIT_TEST(DBSuite, EagleDbParser_AddReturn)
-{
-    EagleDbParser_Init();
-    for(int i = 0; i < MAX_YYRETURN + 10; ++i) {
-        EagleDbParser_AddReturn(NULL);
-    }
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    CUNIT_VERIFY_EQUAL_INT(p->yyreturn_length, MAX_YYRETURN);
-    CUNIT_VERIFY_EQUAL_INT(p->yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(EagleDbParser_LastError(), "Cannot parse SQL. Maximum return depth of 256 exceeded.");
-    EagleDbParser_Delete();
-}
-
 CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
 {
     EagleDbSqlValue *v = EagleDbSqlValue_NewWithAsterisk();
@@ -794,10 +738,6 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_AddError));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_AddObject));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yylist_push));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_AddReturn));
     
     return tests;
 }

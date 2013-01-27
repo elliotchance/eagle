@@ -25,10 +25,10 @@ EagleLinkedList* EagleLinkedList_New(void)
         return NULL;
     }
     
+    list->modifyLock = EagleSynchronizer_CreateLock();
     list->first = NULL;
     list->last = NULL;
     list->length = 0;
-    list->modifyLock = EagleSynchronizer_CreateLock();
     
     return list;
 }
@@ -68,7 +68,7 @@ void EagleLinkedList_Delete(EagleLinkedList *list)
     EagleMemory_Free(list);
 }
 
-void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
+void EagleLinkedList_DeleteItems(EagleLinkedList *list)
 {
     EagleLinkedListItem *p, *next;
     EagleSynchronizer_Lock(list->modifyLock);
@@ -79,6 +79,11 @@ void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
     }
     
     EagleSynchronizer_Unlock(list->modifyLock);
+}
+
+void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
+{
+    EagleLinkedList_DeleteItems(list);
     EagleLinkedList_Delete(list);
 }
 
@@ -111,4 +116,56 @@ EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
     head = list->last;
     EagleSynchronizer_Unlock(list->modifyLock);
     return head;
+}
+
+EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
+{
+    EagleLinkedListItem *next;
+    int i;
+    
+    if(EagleLinkedList_length(list) == 0) {
+        return NULL;
+    }
+    if(EagleLinkedList_length(list) == 1) {
+        EagleLinkedListItem *item = list->first;
+        list->first = list->last = NULL;
+        --list->length;
+        return item;
+    }
+    
+    /* find the second last item */
+    next = list->first;
+    for(i = 0; i < list->length - 2; ++i) {
+        next = next->next;
+    }
+    
+    --list->length;
+    list->last = next;
+    next->next->next = NULL;
+    return next->next;
+}
+
+EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)
+{
+    if(NULL == list->first) {
+        return EagleTrue;
+    }
+    return EagleFalse;
+}
+
+void** EagleLinkedList_toArray(EagleLinkedList *list, int *size)
+{
+    void **array;
+    EagleLinkedListItem *p, *next;
+    int i;
+    
+    *size = EagleLinkedList_length(list);
+    array = (void**) EagleMemory_MultiAllocate("EagleLinkedList_toArray.1", sizeof(void*), *size);
+    
+    for(p = list->first, i = 0; NULL != p; p = next, ++i) {
+        array[i] = p->obj;
+        next = p->next;
+    }
+    
+    return array;
 }

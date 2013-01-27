@@ -659,58 +659,6 @@ CUNIT_TEST(MemorySuite, EaglePlan_prepareBuffers)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, yylist_new)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("yylist_new.1");
-    
-    CUNIT_ASSERT_NULL(yylist_new());
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbParser_Init_1)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_Init.1");
-    
-    EagleDbParser_Init();
-    EagleDbParser_Get();
-    EagleDbParser_Delete();
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbParser_Init_2)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_Init.2");
-    
-    EagleDbParser_Init();
-    EagleDbParser_Get();
-    EagleDbParser_Delete();
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbParser_Init_3)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_Init.3");
-    
-    EagleDbParser_Init();
-    EagleDbParser *p = EagleDbParser_Get();
-    free(p->yyreturn);
-    free(p->yyerrors);
-    free(p->yyobj);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
 CUNIT_TEST(MemorySuite, EagleDbSchema_New_1)
 {
     EagleMemory_MockInit();
@@ -772,59 +720,11 @@ CUNIT_TEST(MemorySuite, EagleDbParser_New)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, yylist_push)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("yylist_push.1");
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    p->yylist_length = MAX_YYLIST;
-    
-    void *t = yylist_push(NULL);
-    CUNIT_ASSERT_NULL(t);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbParser_AddObject)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_AddObject.1");
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    p->yyobj_length = MAX_YYOBJ;
-    
-    void *t = EagleDbParser_AddObject(NULL);
-    CUNIT_ASSERT_NULL(t);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbParser_AddReturn)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_AddReturn.1");
-    
-    EagleDbParser *p = EagleDbParser_Get();
-    p->yyreturn_length = MAX_YYRETURN;
-    
-    void *t = EagleDbParser_AddReturn(NULL);
-    CUNIT_ASSERT_NULL(t);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_AddReturn));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_AddObject));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylist_push));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbColumn_New));
@@ -880,10 +780,6 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_prepareBuffers));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, yylist_new));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_Init_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLoggerEvent_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLogger_New));
     
