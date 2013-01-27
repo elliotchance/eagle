@@ -12,6 +12,8 @@ static EagleDbParser *EagleDbParser_Default = NULL;
 /* internal prototypes supplied by flex and bison */
 extern int yylex_destroy(void);
 extern int yy_scan_string(const char *str);
+extern char *yytext_last;
+extern int yyparse();
 
 EagleDbParser* EagleDbParser_New(void)
 {
@@ -34,6 +36,11 @@ EagleDbParser* EagleDbParser_New(void)
     return parser;
 }
 
+char* EagleDbParser_LastToken(void)
+{
+    return yytext_last;
+}
+
 EagleDbParser* EagleDbParser_Get(void)
 {
     return EagleDbParser_Default;
@@ -42,7 +49,7 @@ EagleDbParser* EagleDbParser_Get(void)
 /**
  Push the error onto the stack.
  */
-char* yyerrors_push(void *ptr)
+char* EagleDbParser_AddError(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
     
@@ -58,27 +65,28 @@ char* yyerrors_push(void *ptr)
 /**
  Returns the most recent error message.
  */
-char* yyerrors_last()
+char* EagleDbParser_LastError()
 {
     EagleDbParser *p = EagleDbParser_Default;
     return p->yyerrors[p->yyerrors_length - 1];
 }
 
 /**
- Anything that is allocated during the parsing must call yyobj_push(), if the parsing fails this stack will do the cleanup.
+ Anything that is allocated during the parsing must call EagleDbParser_AddObject(), if the parsing fails this stack will
+ do the cleanup.
  */
-void* yyobj_push(void *ptr)
+void* EagleDbParser_AddObject(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
     
     if(p->yyobj_length >= MAX_YYOBJ) {
-        char *msg = (char*) EagleMemory_Allocate("yyobj_push.1", 64);
+        char *msg = (char*) EagleMemory_Allocate("EagleDbParser_AddObject.1", 64);
         if(NULL == msg) {
             return NULL;
         }
         
         sprintf(msg, "Cannot parse SQL. Maximum depth of %d exceeded.", MAX_YYOBJ);
-        yyerrors_push(msg);
+        EagleDbParser_AddError(msg);
         return NULL;
     }
     
@@ -96,7 +104,7 @@ void* yylist_push(void *ptr)
         }
         
         sprintf(msg, "Cannot parse SQL. Maximum list size of %d exceeded.", MAX_YYLIST);
-        yyerrors_push(msg);
+        EagleDbParser_AddError(msg);
         return NULL;
     }
     
@@ -116,18 +124,18 @@ void* yylist_new()
 /**
  Push the return value onto the stack.
  */
-void* yyreturn_push(void *ptr)
+void* EagleDbParser_AddReturn(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
     
     if(p->yyreturn_length >= MAX_YYRETURN) {
-        char *msg = (char*) EagleMemory_Allocate("yyreturn_push.1", 64);
+        char *msg = (char*) EagleMemory_Allocate("EagleDbParser_AddReturn.1", 64);
         if(NULL == msg) {
             return NULL;
         }
         
         sprintf(msg, "Cannot parse SQL. Maximum return depth of %d exceeded.", MAX_YYRETURN);
-        yyerrors_push(msg);
+        EagleDbParser_AddError(msg);
         return NULL;
     }
     
@@ -137,7 +145,7 @@ void* yyreturn_push(void *ptr)
 /**
  Return the last yyreturn and decrement back the stack.
  */
-void* yyreturn_pop()
+void* EagleDbParser_PopReturn()
 {
     EagleDbParser *p = EagleDbParser_Default;
     return p->yyreturn[--p->yyreturn_length];
@@ -146,7 +154,7 @@ void* yyreturn_pop()
 /**
  Return the most recent yyreturn.
  */
-void* yyreturn_current()
+void* EagleDbParser_CurrentReturn()
 {
     EagleDbParser *p = EagleDbParser_Default;
     return p->yyreturn[p->yyreturn_length - 1];
@@ -154,7 +162,7 @@ void* yyreturn_current()
 
 int yyerror(char *s)
 {
-    yyerrors_push(strdup(s));
+    EagleDbParser_AddError(strdup(s));
     return 0;
 }
 
@@ -202,7 +210,12 @@ void EagleDbParser_Delete()
     yylex_destroy();
 }
 
-int EagleDbParser_ParseString(const char *str)
+int EagleDbParser_LoadString(const char *str)
 {
     return yy_scan_string(str);
+}
+
+int EagleDbParser_Parse(void)
+{
+    return yyparse();
 }

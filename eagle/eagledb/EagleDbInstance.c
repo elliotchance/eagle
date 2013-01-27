@@ -216,14 +216,14 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     
     /* parse sql */
     EagleDbParser_Init();
-    EagleDbParser_ParseString(sql);
-    yyparse();
+    EagleDbParser_LoadString(sql);
+    EagleDbParser_Parse();
     
     /* check for errors */
     p = EagleDbParser_Get();
     if(p->yyerrors_length > 0) {
         char msg[1024];
-        sprintf(msg, "Error: %s", yyerrors_last());
+        sprintf(msg, "Error: %s", EagleDbParser_LastError());
         EagleLogger_Log(EagleLoggerSeverityUserError, msg);
     }
     else {

@@ -42,7 +42,7 @@ int query(const char *sql)
 {
     EagleDbParser_Init();
     EagleDbParser_ParseString(sql);
-    return yyparse();
+    return EagleDbParser_Parse();
 }
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
@@ -124,7 +124,7 @@ int main(int argc, const char * argv[])
     start = clock();
     
     if(query("SELECT * FROM mytable WHERE 0")) {
-        printf("ERROR: %s\n", yyerrors_last());
+        printf("ERROR: %s\n", EagleDbParser_LastError());
         exit(1);
     }
     

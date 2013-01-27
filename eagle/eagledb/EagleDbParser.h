@@ -16,8 +16,14 @@ typedef struct {
      */
     EAGLE_ATTR_NA EagleDbSqlStatementType yystatementtype;
     
+    /**
+     Error stack.
+     */
     EAGLE_ATTR_MANAGED char **yyerrors;
     
+    /**
+     Total number of errors.
+     */
     EAGLE_ATTR_NA int yyerrors_length;
     
     /**
@@ -25,8 +31,15 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED void *yyparse_ast;
     
+    /**
+     Object stack. This is used when something goes wrong it can free all the objects that were allocated during the
+     parsing process.
+     */
     EAGLE_ATTR_MANAGED void **yyobj;
     
+    /**
+     The number of objects in the stack.
+     */
     EAGLE_ATTR_NA int yyobj_length;
     
     /**
@@ -34,6 +47,9 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED void **yylist;
     
+    /**
+     The number of items in the yylist instance.
+     */
     EAGLE_ATTR_NA int yylist_length;
     
     /**
@@ -41,6 +57,9 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED void **yyreturn;
     
+    /**
+     The numbero of items in the return stack.
+     */
     EAGLE_ATTR_NA int yyreturn_length;
     
     /**
@@ -66,31 +85,28 @@ EagleDbParser* EagleDbParser_New(void);
 EagleDbParser* EagleDbParser_Get(void);
 
 /**
- Parse a string.
+ Load a string into the parser. This does not start the parser.
  @return 0 on success, any other number is a failure.
+ @see EagleDbParser_Parse()
  */
-int EagleDbParser_ParseString(const char *str);
+int EagleDbParser_LoadString(const char *str);
 
 /**
  This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
  out if you intended to keep it.
  */
-extern char *yytext_last;
+char* EagleDbParser_LastToken(void);
 
 /**
- Internal prototype provided by flex and bison.
+ Parse the loaded content now.
  */
-int yyparse(void);
+int EagleDbParser_Parse(void);
 
 /**
  This function must be provided to give flex and bison somewhere to send the errors. They will be put onto a proper
  stack once received.
  */
 int yyerror(char *s);
-
-int yylex(void);
-
-char* yyerrors_last(void);
 
 /**
  Prepare the default parser. This must be invoked before the SQL is parsed.
@@ -102,18 +118,24 @@ void EagleDbParser_Init(void);
  */
 void EagleDbParser_Delete(void);
 
-char* yyerrors_push(void *ptr);
+/**
+ Get the last error from the parser.
+ @return The last error message.
+ */
+char* EagleDbParser_LastError(void);
 
-void* yyobj_push(void *ptr);
+char* EagleDbParser_AddError(void *ptr);
+
+void* EagleDbParser_AddObject(void *ptr);
 
 void* yylist_push(void *ptr);
 
 void* yylist_new(void);
 
-void* yyreturn_push(void *ptr);
+void* EagleDbParser_AddReturn(void *ptr);
 
-void* yyreturn_pop(void);
+void* EagleDbParser_PopReturn(void);
 
-void* yyreturn_current(void);
+void* EagleDbParser_CurrentReturn(void);
 
 #endif

@@ -99,15 +99,15 @@ void SQLSuiteTest()
     if(_testSqlSelect(test.sql)) {
         // expected error
         if(NULL != test.errorMessage) {
-            if(!strcmp(yyerrors_last(), test.errorMessage)) {
+            if(!strcmp(EagleDbParser_LastError(), test.errorMessage)) {
                 EagleDbParser_Delete();
                 return;
             }
-            CUNIT_ASSERT_EQUAL_STRING(yyerrors_last(), test.errorMessage);
+            CUNIT_ASSERT_EQUAL_STRING(EagleDbParser_LastError(), test.errorMessage);
         }
         // unexpected error
         else {
-            CUNIT_FAIL("%s", yyerrors_last());
+            CUNIT_FAIL("%s", EagleDbParser_LastError());
         }
     }
     
