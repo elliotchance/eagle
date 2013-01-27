@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "EagleDbInstance.h"
 #include "EagleDbTable.h"
 #include "EagleDbTuple.h"
@@ -12,6 +11,7 @@
 #include "EagleMemory.h"
 #include "EagleDbInstance.h"
 #include "EagleDbParser.h"
+#include "EagleLogger.h"
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
@@ -172,18 +172,16 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     EagleMemory_Free(widths);
 }
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db)
+void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
 {
     EaglePlan *plan;
     
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
     plan = EagleDbSqlSelect_parse(select, db);
     /*printf("%s\n", EaglePlan_toString(plan));*/
     
     /* catch compilation error */
     if(EagleTrue == EaglePlan_isError(plan)) {
-        printf("Error: %s\n", plan->errorMessage);
-        EaglePlan_Delete(plan);
+        EagleLogger_Log(EagleLoggerSeverityUserError, plan->errorMessage);
     }
     else {
         /* execute */
@@ -197,7 +195,7 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db)
         EagleInstance_Delete(eagle);
     }
     
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EaglePlan_Delete(plan);
 }
 
 void EagleDbInstance_executeCreateTable(EagleDbInstance *db)
@@ -227,7 +225,8 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
                 break;
                 
             case EagleDbSqlStatementTypeSelect:
-                EagleDbInstance_executeSelect(db);
+                EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) yyparse_ast);
+                EagleDbSqlSelect_Delete((EagleDbSqlSelect*) yyparse_ast, EagleTrue);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:

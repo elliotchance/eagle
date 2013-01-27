@@ -14,6 +14,7 @@
 #include "EagleMemory.h"
 #include "EagleDbParser.h"
 #include "EagleLogger.h"
+#include "EagleDbInstance.h"
 
 int _testSqlSelect(const char *sql)
 {
@@ -519,11 +520,186 @@ CUNIT_TEST(DBSuite, EagleDbTuple_toString)
     EagleDbTable_DeleteWithColumns(table);
 }
 
+CUNIT_TEST(DBSuite, EagleDbTableData_New)
+{
+    CUNIT_VERIFY_NULL(EagleDbTableData_New(NULL, 0));
+}
+
+CUNIT_TEST(DBSuite, EagleDbTableData_Delete)
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, 1);
+    
+    EagleDbTableData_Delete(td);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTableData_insert)
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, 1);
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setInt(tuple, 0, 123);
+    
+    td->providers[0]->type = EagleDataTypeUnknown;
+    EagleDbTableData_insert(td, tuple);
+    EagleDbTuple_Delete(tuple);
+    
+    EagleDbTableData_Delete(td);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse1)
+{
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(NULL, NULL));
+    CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(select, NULL));
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
+{
+    int pageSize = 1;
+    char *tableName = "mytable";
+    EagleDbInstance *instance = EagleDbInstance_New(pageSize);
+    
+    EagleDbTable *table = EagleDbTable_New(tableName);
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    select->tableName = strdup(tableName);
+    select->usedSelectExpressions = 1;
+    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
+    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    select->whereExpression = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(instance, schema);
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
+    EagleDbSchema_addTable(schema, td);
+    
+    CUNIT_ASSERT_NOT_NULL(EagleDbInstance_getTable(instance, tableName));
+    
+    EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
+    CUNIT_VERIFY_NOT_NULL(plan);
+    
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbTable_DeleteWithColumns(table);
+    EagleDbSchema_Delete(schema);
+    EagleDbTableData_Delete(td);
+    EagleDbInstance_Delete(instance);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
+{
+    int pageSize = 1;
+    char *tableName = "mytable";
+    EagleDbInstance *instance = EagleDbInstance_New(pageSize);
+    
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    select->tableName = strdup(tableName);
+    select->usedSelectExpressions = 1;
+    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
+    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
+    
+    CUNIT_ASSERT_NULL(EagleDbInstance_getTable(instance, tableName));
+    
+    EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
+    CUNIT_VERIFY_NOT_NULL(plan);
+    CUNIT_VERIFY_EQUAL_INT(plan->errorCode, EaglePlanErrorNoSuchTable);
+    CUNIT_VERIFY_EQUAL_STRING(plan->errorMessage, tableName);
+    
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbInstance_Delete(instance);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
+{
+    EagleDbInstance_PrintResults(NULL);
+    
+    int pageSize = 1;
+    EaglePlan *plan = EaglePlan_New(pageSize);
+    
+    plan->resultFields = 1;
+    plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
+    plan->result[0] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, "name");
+    
+    // some data
+    int *data = EagleData_Int(123);
+    EaglePageProvider_add(plan->result[0], data);
+    free(data);
+    
+    EagleDbInstance_PrintResults(plan);
+    EaglePageProvider_Delete(plan->result[0]);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    
+    EagleDbInstance_executeSelect(db, select);
+    
+    EagleDbInstance_Delete(db);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
+{
+    const char *tableName = "mytable";
+    int pageSize = 1;
+    
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbSqlSelect *select = EagleDbSqlSelect_New();
+    select->tableName = strdup(tableName);
+    select->usedSelectExpressions = 1;
+    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
+    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
+    
+    EagleDbTable *table = EagleDbTable_New((char*) tableName);
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
+    EagleDbSchema_addTable(schema, td);
+    
+    EagleDbInstance_executeSelect(db, select);
+    
+    EagleDbInstance_Delete(db);
+    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbTable_DeleteWithColumns(table);
+    EagleDbSchema_Delete(schema);
+    EagleDbTableData_Delete(td);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_PrintResults));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse3));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_insert));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setText));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));

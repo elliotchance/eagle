@@ -4,6 +4,11 @@
 #include "EagleDbTableData.h"
 #include "Eagle.h"
 
+/**
+ The name of the default schema.
+ */
+extern const char *EagleDbSchema_DefaultSchemaName;
+
 typedef struct {
     
     EAGLE_ATTR_NA int allocatedTables;
