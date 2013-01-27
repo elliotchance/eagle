@@ -61,6 +61,7 @@ char* EagleDbConsole_GetLine(void)
     
     return linep;
 #else
+    EagleMemory_Free(line);
     return NULL;
 #endif
 }

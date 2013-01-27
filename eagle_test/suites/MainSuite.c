@@ -488,7 +488,9 @@ EagleLogger* GetLogger()
 {
     EagleLogger *logger = EagleLogger_New(fopen("log.txt", "w"));
     CUNIT_ASSERT_NOT_NULL(logger);
-    CUNIT_ASSERT_NOT_NULL(logger->out);
+    if(NULL != logger) {
+        CUNIT_ASSERT_NOT_NULL(logger->out);
+    }
     return logger;
 }
 
@@ -496,7 +498,9 @@ CUNIT_TEST(MainSuite, EagleLogger_log)
 {
     EagleLogger *logger = GetLogger();
     EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message");
-    CUNIT_ASSERT_EQUAL_INT(logger->totalMessages, 1);
+    if(NULL != logger) {
+        CUNIT_ASSERT_EQUAL_INT(logger->totalMessages, 1);
+    }
     EagleLogger_Delete(logger);
 }
 
@@ -693,7 +697,9 @@ CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
     
     EagleLoggerEvent *event = EagleLogger_LastEvent();
     CUNIT_ASSERT_NOT_NULL(event);
-    CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 123");
+    if(NULL != event) {
+        CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 123");
+    }
 }
 
 CUNIT_TEST(MainSuite, EagleLogger_lastEvent)
@@ -701,12 +707,16 @@ CUNIT_TEST(MainSuite, EagleLogger_lastEvent)
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
     
+    CUNIT_VERIFY_NULL(EagleLogger_lastEvent(NULL));
+    
     EagleLogger *logger = GetLogger();
     EagleLogger_log(logger, EagleLoggerSeverityDebug, "some message 456");
     
     EagleLoggerEvent *event = EagleLogger_lastEvent(logger);
     CUNIT_ASSERT_NOT_NULL(event);
-    CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 456");
+    if(NULL != event) {
+        CUNIT_VERIFY_EQUAL_STRING(event->message, "some message 456");
+    }
     
     EagleLogger_Delete(logger);
 }

@@ -237,7 +237,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
                 
             case EagleDbSqlStatementTypeCreateTable:
                 EagleDbInstance_executeCreateTable(db, (EagleDbTable*) yyparse_ast);
-                EagleDbTable_Delete((EagleDbTable*) yyparse_ast);
+                EagleDbTable_DeleteWithColumns((EagleDbTable*) yyparse_ast);
                 break;
                 
         }

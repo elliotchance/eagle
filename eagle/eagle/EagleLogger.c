@@ -38,6 +38,9 @@ EagleLoggerEvent* EagleLogger_LastEvent()
 
 EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger)
 {
+    if(NULL == logger) {
+        return NULL;
+    }
     return logger->lastEvent;
 }
 

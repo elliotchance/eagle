@@ -615,8 +615,10 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
     
     EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
     CUNIT_VERIFY_NOT_NULL(plan);
-    CUNIT_VERIFY_EQUAL_INT(plan->errorCode, EaglePlanErrorNoSuchTable);
-    CUNIT_VERIFY_EQUAL_STRING(plan->errorMessage, tableName);
+    if(NULL != plan) {
+        CUNIT_VERIFY_EQUAL_INT(plan->errorCode, EaglePlanErrorNoSuchTable);
+        CUNIT_VERIFY_EQUAL_STRING(plan->errorMessage, tableName);
+    }
     
     EagleDbSqlSelect_Delete(select, EagleTrue);
     EagleDbInstance_Delete(instance);
@@ -762,7 +764,9 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
     
     EagleDbTableData *td = EagleDbInstance_getTable(db, "table2");
     CUNIT_ASSERT_NOT_NULL(td);
-    CUNIT_VERIFY_EQUAL_STRING(td->table->name, "table2");
+    if(NULL != td) {
+        CUNIT_VERIFY_EQUAL_STRING(td->table->name, "table2");
+    }
     
     EagleDbInstance_Delete(db);
     EagleDbSchema_Delete(schema);
@@ -784,7 +788,9 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
     
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, "schema2");
     CUNIT_ASSERT_NOT_NULL(schema);
-    CUNIT_VERIFY_EQUAL_STRING(schema->name, "schema2");
+    if(NULL != schema) {
+        CUNIT_VERIFY_EQUAL_STRING(schema->name, "schema2");
+    }
     
     EagleDbInstance_Delete(db);
     EagleDbSchema_Delete(schema1);
