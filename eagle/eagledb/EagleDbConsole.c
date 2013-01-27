@@ -20,14 +20,18 @@ EagleDbConsole* EagleDbConsole_New(void)
 
 char* EagleDbConsole_GetLine(void)
 {
-    char *line = EagleMemory_Allocate("EagleDbConsole_GetLine.1", 100), *linep = line, *linen = NULL;
+    char *line = EagleMemory_Allocate("EagleDbConsole_GetLine.1", 100);
+#ifndef CUNIT
+    char *linep = line, *linen = NULL;
     size_t lenmax = 100, len = lenmax;
     int c;
+#endif
     
     if(line == NULL) {
         return NULL;
     }
     
+#ifndef CUNIT
     while(1) {
         c = fgetc(stdin);
         if(c == EOF) {
@@ -56,10 +60,14 @@ char* EagleDbConsole_GetLine(void)
     linep[strlen(linep) - 1] = '\0';
     
     return linep;
+#else
+    return NULL;
+#endif
 }
 
 void EagleDbConsole_run(EagleDbConsole *console)
 {
+#ifndef CUNIT
     char *cmd = NULL;
     EagleDbInstance *db = EagleDbInstance_New(1000);
     
@@ -79,6 +87,7 @@ void EagleDbConsole_run(EagleDbConsole *console)
         EagleDbInstance_execute(db, cmd);
         EagleMemory_Free(cmd);
     }
+#endif
 }
 
 void EagleDbConsole_Delete(EagleDbConsole *console)

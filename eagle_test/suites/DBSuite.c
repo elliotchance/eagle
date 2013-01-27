@@ -791,11 +791,23 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
     EagleDbSchema_Delete(schema2);
 }
 
+CUNIT_TEST(DBSuite, EagleDbConsole_GetLine)
+{
+    CUNIT_ASSERT_NULL(EagleDbConsole_GetLine());
+}
+
+CUNIT_TEST(DBSuite, EagleDbConsole_run)
+{
+    EagleDbConsole_run(NULL);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_GetLine));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable1));
