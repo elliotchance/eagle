@@ -579,7 +579,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProvider)
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
     
     EaglePageProvider *provider = EaglePageProvider_CreateFromInt(0, 1, "bla");
     CUNIT_ASSERT_NULL(provider);
@@ -686,6 +686,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
     CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source2 1 is greater than allowed 1 buffers!");
     
     EaglePlanOperation_Delete(op);
+    EaglePlan_Delete(plan);
 }
 
 CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
@@ -769,6 +770,8 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 123);
+        
+        EagleLinkedListItem_Delete(origItem);
     }
     
     // two items
@@ -797,6 +800,9 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 234);
+        
+        EagleLinkedListItem_Delete(origItem1);
+        EagleLinkedListItem_Delete(origItem2);
     }
     
     // several items
@@ -834,9 +840,13 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 345);
+        
+        EagleLinkedListItem_Delete(origItem1);
+        EagleLinkedListItem_Delete(origItem2);
+        EagleLinkedListItem_Delete(origItem3);
     }
     
-    EagleLinkedList_DeleteWithItems(list);
+    EagleLinkedList_Delete(list);
 }
 
 CUNIT_TEST(MainSuite, EagleLinkedList_toArray)
@@ -852,6 +862,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_toArray)
     CUNIT_VERIFY_EQUAL_INT(*data[0], 345);
     CUNIT_VERIFY_EQUAL_INT(*data[1], 678);
     CUNIT_VERIFY_EQUAL_INT(*data[2], 901);
+    free(data);
     
     EagleLinkedList_DeleteWithItems(list);
 }

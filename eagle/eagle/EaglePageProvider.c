@@ -47,6 +47,7 @@ EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage
     }
     pageProvider->nextPage = EaglePageProvider_nextPageFromInt_;
     pageProvider->pagesRemaining = EaglePageProvider_pagesRemainingFromInt_;
+    pageProvider->free = EaglePageProvider_DeleteInt_;
     
     for(i = 0; i < recordsPerPage; ++i) {
         data[i] = value;
@@ -136,6 +137,7 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
     if(NULL == epp) {
         return;
     }
+    
     epp->free(epp);
     epp = NULL;
 }
@@ -143,6 +145,14 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
     EagleLock_Delete(epp->nextPageLock);
+    EagleMemory_Free(epp->name);
+    EagleMemory_Free(epp);
+}
+
+void EaglePageProvider_DeleteInt_(EaglePageProvider *epp)
+{
+    EagleLock_Delete(epp->nextPageLock);
+    EagleMemory_Free(epp->records);
     EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }
