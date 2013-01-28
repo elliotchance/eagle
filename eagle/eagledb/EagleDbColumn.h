@@ -23,16 +23,16 @@ typedef struct {
 } EagleDbColumn;
 
 /**
- Create a new table column.
- 
- @param [in] name The name will be duplicated.
- @param [in] type The data type for this column.
+ * Create a new table column.
+ * @param [in] name The name will be duplicated.
+ * @param [in] type The data type for this column.
+ * @return A new column instance.
  */
 EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type);
 
 /**
  Free a column.
- @param [in] column Column.
+ @param [in] column The column.
  */
 void EagleDbColumn_Delete(EagleDbColumn *column);
 

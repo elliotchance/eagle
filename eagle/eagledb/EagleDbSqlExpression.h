@@ -53,7 +53,6 @@ extern const int EagleDbSqlExpression_ERROR;
 /**
  * Free an expression of any type.
  * @param [in] expr The instance.
- * @param [in] recursive recursively delete the AST associated with the expression.
  */
 void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
 

@@ -24,12 +24,30 @@ typedef struct {
     
 } EagleWorkers;
 
+/**
+ Create a new pool of workers.
+ @param [in] totalWorkers All the workers will be initialised (but not started) when the pool is created.
+ @param [in] instance The eagle instance.
+ @return New pool of workers.
+ */
 EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance);
 
+/**
+ * Delete a pool of workers.
+ * @param [in] workers The pool.
+ */
 void EagleWorkers_Delete(EagleWorkers *workers);
 
+/**
+ * Start the pool of workers.
+ * @param [in] workers The workers.
+ */
 void EagleWorkers_start(EagleWorkers *workers);
 
+/**
+ * Wait for all workers to finish. This is used when closing down the instance.
+ * @param [in] workers The workers.
+ */
 void EagleWorkers_joinAll(EagleWorkers *workers);
 
 #endif
