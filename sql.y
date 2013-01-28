@@ -14,101 +14,9 @@
     #include "EagleDbParser.h"
     #include "EagleDataType.h"
     
-    EagleDbSqlStatementType yystatementtype = EagleDbSqlStatementTypeNone;
-    
-    /**
-     Push the error onto the stack.
-     */
-    char* yyerrors_push(void *ptr)
-    {
-        /* we have reached the maximum amount of errors, in this case we just don't store any more errors */
-        if(yyerrors_length >= MAX_YYERRORS) {
-            free(ptr);
-            return NULL;
-        }
-        return yyerrors[yyerrors_length++] = ptr;
-    }
-    
-    /**
-     Returns the most recent error message.
-     */
-    char* yyerrors_last()
-    {
-        return yyerrors[yyerrors_length - 1];
-    }
-    
-    /**
-     Anything that is allocated during the parsing must call yyobj_push(), if the parsing fails this stack will do the cleanup.
-     */
-    void* yyobj_push(void *ptr)
-    {
-        if(yyobj_length >= MAX_YYOBJ) {
-            char *msg = (char*) malloc(64);
-            sprintf(msg, "Cannot parse SQL. Maximum depth of %d exceeded.", MAX_YYOBJ);
-            yyerrors_push(msg);
-            return NULL;
-        }
-        return yyobj[yyobj_length++] = ptr;
-    }
-    
-    void* yylist_push(void *ptr)
-    {
-        if(yylist_length >= MAX_YYLIST) {
-            char *msg = (char*) malloc(64);
-            sprintf(msg, "Cannot parse SQL. Maximum list size of %d exceeded.", MAX_YYLIST);
-            yyerrors_push(msg);
-            return NULL;
-        }
-        return yylist[yylist_length++] = ptr;
-    }
-    
-    void* yylist_new()
-    {
-        yylist = (void**) EagleMemory_MultiAllocate("yylist_new.1", sizeof(void*), MAX_YYLIST);
-        yylist_length = 0;
-        return yylist;
-    }
+    int yylex(void);
 
-    /**
-     Push the return value onto the stack.
-     */
-    void* yyreturn_push(void *ptr)
-    {
-        if(yyreturn_length >= MAX_YYRETURN) {
-            char *msg = (char*) malloc(64);
-            sprintf(msg, "Cannot parse SQL. Maximum return depth of %d exceeded.", MAX_YYRETURN);
-            yyerrors_push(msg);
-            return NULL;
-        }
-        return yyreturn[yyreturn_length++] = ptr;
-    }
-
-    /**
-     Return the last yyreturn and decrement back the stack.
-     */
-    void* yyreturn_pop()
-    {
-        return yyreturn[--yyreturn_length];
-    }
-
-    /**
-     Return the most recent yyreturn.
-     */
-    void* yyreturn_current()
-    {
-        return yyreturn[yyreturn_length - 1];
-    }
-
-    /**
-     This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
-     out if you intended to keep it. Since you cannot access the yytext direct from here?
-     */
-    extern char *yytext_last;
-    
-    /**
-     Used by "data_type"
-     */
-    EagleDataType yy_data_type;
+    #define EagleDbParser_NewObject(obj, ...) EagleDbParser_AddObject(obj##_New(__VA_ARGS__), (void(*)(void*)) obj##_Delete);
 
 %}
 
@@ -144,17 +52,20 @@
  */
 input:
     {
-        yyparse_ast = NULL;
-        yystatementtype = EagleDbSqlStatementTypeNone;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = NULL;
+        p->yystatementtype = EagleDbSqlStatementTypeNone;
     }
     |
     T_END {
-        yyparse_ast = NULL;
-        yystatementtype = EagleDbSqlStatementTypeNone;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = NULL;
+        p->yystatementtype = EagleDbSqlStatementTypeNone;
     }
     |
     statement {
-        yyparse_ast = yyreturn_pop();
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = EagleDbParser_PopReturn();
     }
     T_END
 ;
@@ -165,146 +76,165 @@ input:
 statement:
     select_statement {
         /* bubble up yyreturn */
-        yystatementtype = EagleDbSqlStatementTypeSelect;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeSelect;
     }
     |
     create_table_statement {
         /* bubble up yyreturn */
-        yystatementtype = EagleDbSqlStatementTypeCreateTable;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeCreateTable;
     }
 ;
 
 /*
  K_CREATE K_TABLE IDENTIFIER T_BRACKET_OPEN column_definition_list T_BRACKET_CLOSE
+ @return EagleDbTable
  */
 create_table_statement:
-    K_CREATE K_TABLE {
-        yyreturn_push(yyobj_push((void*) EagleDbTable_New(NULL)));
-    }
-    IDENTIFIER {
-        ((EagleDbTable*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
+    K_CREATE K_TABLE IDENTIFIER {
+        EagleDbTable *table = EagleDbParser_NewObject(EagleDbTable, EagleDbParser_LastToken());
+        EagleDbParser_AddReturn(table);
     }
     T_BRACKET_OPEN
     column_definition_list {
-        void *last = yyreturn_pop();
-        EagleDbTable_setColumns((EagleDbTable*) yyreturn_current(), last, yylist_length);
+        EagleLinkedList *last = EagleDbParser_PopReturn();
+        EagleDbTable_setColumns((EagleDbTable*) EagleDbParser_CurrentReturn(), last);
     }
     T_BRACKET_CLOSE
 ;
 
 /*
  column_definition next_column_definition
+ @return EagleLinkedList
  */
 column_definition_list:
     {
-        yyobj_push(yylist_new());
+        EagleLinkedList *list = EagleDbParser_NewObject(EagleLinkedList); 
+        EagleDbParser_AddReturn(list);
     }
     column_definition {
-        void *last = yyreturn_pop();
-        yylist_push(last);
+        EagleDbColumn *last = (EagleDbColumn*) EagleDbParser_PopReturn();
+        EagleLinkedListItem *item = EagleDbParser_NewObject(EagleLinkedListItem, last, EagleTrue, (void(*)(void*)) EagleDbColumn_Delete);
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), item);
     }
     next_column_definition
-    {
-        yyreturn_push(yylist);
-    }
 ;
 
 /*
  IDENTIFIER data_type
+ @return EagleDbSqlColumn
  */
 column_definition:
     IDENTIFIER {
-        yyreturn_push(yyobj_push((void*) EagleDbColumn_New(NULL, EagleDataTypeInteger)));
-        ((EagleDbColumn*) yyreturn_current())->name = yyobj_push(strdup(yytext_last));
+        EagleDbColumn *column = EagleDbParser_NewObject(EagleDbColumn, EagleDbParser_LastToken(), EagleDataTypeInteger);
+        EagleDbParser_AddReturn(column);
     }
     data_type {
-        ((EagleDbColumn*) yyreturn_current())->type = yy_data_type;
+        int *last = EagleDbParser_PopReturn();
+        ((EagleDbColumn*) EagleDbParser_CurrentReturn())->type = *last;
+        EagleMemory_Free(last);
     }
 ;
 
 /*
  K_INTEGER | K_TEXT
+ @return int*
  */
 data_type:
     K_INTEGER {
-        yy_data_type = EagleDataTypeInteger;
+        EagleDbParser_AddReturn(EagleDbParser_AddObject(EagleData_Int(EagleDataTypeInteger), NULL));
     }
     |
     K_TEXT {
-        yy_data_type = EagleDataTypeText;
+        EagleDbParser_AddReturn(EagleDbParser_AddObject(EagleData_Int(EagleDataTypeText), NULL));
     }
 ;
 
 /*
  ( T_COMMA column_definition next_column_definition )?
+ @return EagleLinkedListItem
  */
 next_column_definition:
     |
     T_COMMA column_definition {
-        void *last = yyreturn_pop();
-        yylist_push(last);
+        EagleDbColumn *last = EagleDbParser_PopReturn();
+        EagleLinkedListItem *item = EagleDbParser_NewObject(EagleLinkedListItem, last, EagleTrue, (void(*)(void*)) EagleDbColumn_Delete);
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), item);
     }
     next_column_definition
 ;
 
 /*
  K_SELECT column_expression_list K_FROM IDENTIFIER where_expression
+ @return EagleDbSqlSelect
  */
 select_statement:
-    K_SELECT {
-        yyreturn_push(yyobj_push((void*) EagleDbSqlSelect_New()));
-    }
-    column_expression_list {
-        void *last = yyreturn_pop();
-        ((EagleDbSqlSelect*) yyreturn_current())->selectExpressions = last;
-        ((EagleDbSqlSelect*) yyreturn_current())->allocatedSelectExpressions = yylist_length;
-        ((EagleDbSqlSelect*) yyreturn_current())->usedSelectExpressions = yylist_length;
+    K_SELECT column_expression_list {
+        EagleDbSqlSelect *select = EagleDbParser_NewObject(EagleDbSqlSelect);
+        select->selectExpressions = EagleDbParser_PopReturn();
+        EagleDbParser_AddReturn(select);
     }
     K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) yyreturn_current())->tableName = yyobj_push(strdup(yytext_last));
+        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = EagleDbParser_AddObject(strdup(EagleDbParser_LastToken()), NULL);
     }
     where_expression {
-        void *last = yyreturn_pop();
-        ((EagleDbSqlSelect*) yyreturn_current())->whereExpression = last;
+        void *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->whereExpression = last;
     }
 ;
 
 /*
  column_expression next_column_expression
+ @return EagleLinkedList
  */
 column_expression_list:
-    {
-        yyobj_push(yylist_new());
-    }
     column_expression {
-        void *last = yyreturn_pop();
-        yylist_push(last);
+        EagleLinkedList *list = EagleDbParser_NewObject(EagleLinkedList);
+        EagleLinkedListItem *last = EagleDbParser_NewObject(EagleLinkedListItem, EagleDbParser_PopReturn(), EagleTrue, (void(*)(void*)) EagleDbSqlExpression_DeleteRecursive);
+        EagleLinkedList_add(list, last);
+        EagleDbParser_AddReturn(list);
     }
     next_column_expression
-    {
-        yyreturn_push(yylist);
+;
+
+/*
+ T_ASTERISK | expression
+ @return EagleLinkedListItem
+ */
+column_expression:
+    T_ASTERISK {
+        void *last = EagleDbParser_AddObject(EagleDbSqlValue_NewWithAsterisk(), (void(*)(void*)) EagleDbSqlValue_Delete);
+        EagleDbParser_AddReturn(last);
+    }
+    |
+    expression {
+        void *last = EagleDbParser_PopReturn();
+        EagleDbParser_AddReturn(last);
     }
 ;
 
 /*
  ( T_COMMA column_expression next_column_expression )?
+ @return none
  */
 next_column_expression:
     |
     T_COMMA column_expression {
-        void *last = yyreturn_pop();
-        yylist_push(last);
+        EagleLinkedListItem *last = EagleDbParser_NewObject(EagleLinkedListItem, EagleDbParser_PopReturn(), EagleTrue, (void(*)(void*)) EagleDbSqlExpression_DeleteRecursive);
+        EagleLinkedList_add((EagleLinkedList*) EagleDbParser_CurrentReturn(), last);
     }
     next_column_expression
 ;
 
 /*
  ( K_WHERE expression )?
+ @return EagleDbSqlExpression | NULL
  */
 where_expression:
     {
         /* no where clause */
-        yyreturn_push(NULL);
+        EagleDbParser_AddReturn(NULL);
     }
     |
     K_WHERE expression {
@@ -313,107 +243,58 @@ where_expression:
 ;
 
 /*
- T_ASTERISK | expression
- */
-column_expression:
-    T_ASTERISK {
-        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithAsterisk()));
-    }
-    |
-    expression {
-        /* bubble up yyreturn */
-    }
-;
-
-/*
  value ( ( T_PLUS | T_EQUALS ) value )?
+ @return EagleDbSqlExpression
  */
 expression:
     value {
-        /* bubble up yyreturn */
+        /* bubble up return */
     }
     |
     value {
-        void *last = yyreturn_pop();
-        yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
+        EagleDbSqlExpression *last = EagleDbParser_PopReturn();
+        EagleDbSqlBinaryExpression *expr = EagleDbParser_NewObject(EagleDbSqlBinaryExpression, last, 0, NULL);
+        EagleDbParser_AddReturn(expr);
     }
+    operator {
+        int *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->op = *last;
+        EagleMemory_Free(last);
+    }
+    value {
+        EagleDbSqlExpression *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlBinaryExpression*) EagleDbParser_CurrentReturn())->right = last;
+    }
+;
+
+/**
+ T_PLUS | T_EQUALS
+ @return int*
+ */
+operator:
     T_PLUS {
-        ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorPlus;
-    }
-    value {
-        void *last = yyreturn_pop();
-        ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
+        EagleDbParser_AddReturn(EagleDbParser_AddObject(EagleData_Int(EagleDbSqlExpressionOperatorPlus), NULL));
     }
     |
-    value {
-        void *last = yyreturn_pop();
-        yyreturn_push(yyobj_push((void*) EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) last, 0, NULL)));
-    }
     T_EQUALS {
-        ((EagleDbSqlBinaryExpression*) yyreturn_current())->op = EagleDbSqlExpressionOperatorEquals;
-    }
-    value {
-        void *last = yyreturn_pop();
-        ((EagleDbSqlBinaryExpression*) yyreturn_current())->right = (EagleDbSqlExpression*) last;
+        EagleDbParser_AddReturn(EagleDbParser_AddObject(EagleData_Int(EagleDbSqlExpressionOperatorEquals), NULL));
     }
 ;
 
 /*
  INTEGER | IDENTIFIER
+ @return EagleDbSqlValue
  */
 value:
     INTEGER {
-        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithInteger(atoi(yytext_last))));
+        void *v = EagleDbParser_AddObject(EagleDbSqlValue_NewWithInteger(atoi(EagleDbParser_LastToken())), (void(*)(void*)) EagleDbSqlValue_Delete);
+        EagleDbParser_AddReturn(v);
     }
     |
     IDENTIFIER {
-        yyreturn_push(yyobj_push((void*) EagleDbSqlValue_NewWithIdentifier(yytext_last)));
+        void *v = EagleDbParser_AddObject(EagleDbSqlValue_NewWithIdentifier(EagleDbParser_LastToken()), (void(*)(void*)) EagleDbSqlValue_Delete);
+        EagleDbParser_AddReturn(v);
     }
 ;
 
 %%
-
-int yyerror(char *s)
-{
-    yyerrors_push(strdup(s));
-    return 0;
-}
-
-void yylex_init()
-{
-    yyobj = (void**) EagleMemory_MultiAllocate("yylex_init.1", sizeof(void*), MAX_YYOBJ);
-    yyobj_length = 0;
-    
-    yyerrors = (char**) EagleMemory_MultiAllocate("yylex_init.2", sizeof(char*), MAX_YYERRORS);
-    yyerrors_length = 0;
-    
-    yyreturn = (void**) EagleMemory_MultiAllocate("yylex_init.3", sizeof(void*), MAX_YYRETURN);
-    yyreturn_length = 0;
-}
-
-void yylex_free()
-{
-    int i;
-    
-    /* yyobj */
-    if(yyerrors_length > 0) {
-        for(i = 0; i < yyobj_length; ++i) {
-            EagleMemory_Free(yyobj[i]);
-        }
-    }
-    EagleMemory_Free(yyobj);
-    yyobj = NULL;
-    
-    /* yyreturn */
-    EagleMemory_Free(yyreturn);
-    yyreturn = NULL;
-    
-    /* yyerrors */
-    for(i = 0; i < yyerrors_length; ++i) {
-        EagleMemory_Free(yyerrors[i]);
-    }
-    EagleMemory_Free(yyerrors);
-    yyerrors = NULL;
-    
-    yylex_destroy();
-}

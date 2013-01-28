@@ -46,6 +46,7 @@ void EaglePage_Delete(EaglePage *page)
     if(NULL == page) {
         return;
     }
+    
     if(EagleTrue == page->freeData) {
         EagleMemory_Free((void*) page->data);
     }
@@ -128,11 +129,14 @@ EaglePage* EaglePage_Alloc(EagleDataType type, int count)
 
 char* EaglePage_toString(EaglePage *page)
 {
-    char* buf = (char*) EagleMemory_Allocate("EaglePage_toString.1", 8192);
+    char* buf = (char*) EagleMemory_Allocate("EaglePage_toString.1", 8192), *type;
     if(NULL == buf) {
         return NULL;
     }
-    sprintf(buf, "EaglePage { type = %s, size = %d, count = %d, offset = %d }", EagleDataType_typeToName(page->type),
-            page->totalSize, page->count, page->recordOffset);
+    
+    type = EagleDataType_typeToName(page->type);
+    sprintf(buf, "EaglePage { type = %s, size = %d, count = %d, offset = %d }", type, page->totalSize, page->count,
+            page->recordOffset);
+    EagleMemory_Free(type);
     return buf;
 }

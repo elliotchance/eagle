@@ -77,4 +77,23 @@ EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
  */
 int EagleLinkedList_length(EagleLinkedList *list);
 
+EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list);
+
+EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list);
+
+void EagleLinkedList_DeleteItems(EagleLinkedList *list);
+
+/**
+ Convert a linked list to an array. No data is duplicated so if the items are freed in the linked list they will
+ disappear from your array as well.
+ @param [in] list The linked list.
+ @param [out] size The size of the array.
+ @return An array of objects (no the linked list items, the actual objects)
+ */
+void** EagleLinkedList_toArray(EagleLinkedList *list, int *size);
+
+void* EagleLinkedList_get(EagleLinkedList *list, int index);
+
+void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
 #endif

@@ -6,12 +6,7 @@
 #include "EagleInstance.h"
 #include "EagleDbSchema.h"
 #include "EagleDbColumn.h"
-
-void yylex_init();
-void yylex_free();
-extern int yy_scan_string(const char *);
-extern int yyparse();
-extern void *yyparse_ast;
+#include "EagleDbParser.h"
 
 static uint64_t BenchSuite_CalibrateAddition = 0;
 int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
@@ -100,10 +95,12 @@ CUNIT_TEST(BenchSuite, SELECT)
     EagleDbInstance *instance = getInstance();
     
     // parse SELECT
-    yylex_init();
-    yy_scan_string("SELECT col1 FROM mytable WHERE col1=1000000");
-    yyparse();
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
+    EagleDbParser_Init();
+    EagleDbParser_LoadString("SELECT col1 FROM mytable WHERE col1=1000000");
+    EagleDbParser_Parse();
+    
+    EagleDbParser *parser = EagleDbParser_Get();
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) parser->yyparse_ast;
 
     // execute
     EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
@@ -130,7 +127,7 @@ CUNIT_TEST(BenchSuite, SELECT)
     CUNIT_ASSERT_BENCH_RESULT(plan);
     
     EagleInstance_Delete(eagle);
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
     freeInstance(instance);
 }
 

@@ -552,7 +552,7 @@ CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProvider)
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
     
     EaglePageProvider *provider = EaglePageProvider_CreateFromInt(0, 1, "bla");
     CUNIT_ASSERT_NULL(provider);
@@ -638,11 +638,12 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
     EagleLogger_Get()->out = NULL;
     
     EaglePlan *plan = EaglePlan_New(1);
-    EaglePlanJob *job = EaglePlanJob_New(plan);
     
     EaglePlanOperation *op = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, 1, 1, 1, NULL, EagleFalse, "1");
     EaglePlan_addOperation(plan, op);
     EaglePlan_prepareBuffers(plan, 1);
+    
+    EaglePlanJob *job = EaglePlanJob_New(plan);
     
     EagleWorker_runJob(job);
     CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
@@ -659,6 +660,8 @@ CUNIT_TEST(MainSuite, EagleWorker_runJob)
     CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source2 1 is greater than allowed 1 buffers!");
     
     EaglePlanOperation_Delete(op);
+    EaglePlanJob_Delete(job);
+    EaglePlan_Delete(plan);
 }
 
 CUNIT_TEST(MainSuite, EagleLogger_LastEvent)
@@ -707,11 +710,177 @@ CUNIT_TEST(MainSuite, EagleMemory_Allocate)
     CUNIT_ASSERT_NULL(data);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_pop)
+{
+    EagleLinkedList *list = EagleLinkedList_New();
+    
+    // empty list
+    {
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleTrue);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
+        
+        EagleLinkedListItem *item = EagleLinkedList_pop(list);
+        CUNIT_ASSERT_NULL(item);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleTrue);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
+    }
+    
+    // one item
+    {
+        EagleLinkedListItem *origItem = EagleLinkedListItem_New(EagleData_Int(123), EagleTrue, NULL);
+        EagleLinkedList_add(list, origItem);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 1);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem);
+        
+        EagleLinkedListItem *item = EagleLinkedList_pop(list);
+        
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleTrue);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 123);
+        
+        EagleLinkedListItem_Delete(origItem);
+    }
+    
+    // two items
+    {
+        EagleLinkedListItem *item;
+        EagleLinkedListItem *origItem1 = EagleLinkedListItem_New(EagleData_Int(234), EagleTrue, NULL);
+        EagleLinkedListItem *origItem2 = EagleLinkedListItem_New(EagleData_Int(567), EagleTrue, NULL);
+        
+        EagleLinkedList_add(list, origItem1);
+        EagleLinkedList_add(list, origItem2);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 2);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem2);
+        
+        item = EagleLinkedList_pop(list);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 1);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 567);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem1);
+        
+        item = EagleLinkedList_pop(list);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleTrue);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 234);
+        
+        EagleLinkedListItem_Delete(origItem1);
+        EagleLinkedListItem_Delete(origItem2);
+    }
+    
+    // several items
+    {
+        EagleLinkedListItem *item;
+        EagleLinkedListItem *origItem1 = EagleLinkedListItem_New(EagleData_Int(345), EagleTrue, NULL);
+        EagleLinkedListItem *origItem2 = EagleLinkedListItem_New(EagleData_Int(678), EagleTrue, NULL);
+        EagleLinkedListItem *origItem3 = EagleLinkedListItem_New(EagleData_Int(901), EagleTrue, NULL);
+        
+        EagleLinkedList_add(list, origItem1);
+        EagleLinkedList_add(list, origItem2);
+        EagleLinkedList_add(list, origItem3);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 3);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem3);
+        
+        item = EagleLinkedList_pop(list);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 2);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem2);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 901);
+        
+        item = EagleLinkedList_pop(list);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 1);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem1);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 678);
+        
+        item = EagleLinkedList_pop(list);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
+        CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleTrue);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), NULL);
+        CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), NULL);
+        CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 345);
+        
+        EagleLinkedListItem_Delete(origItem1);
+        EagleLinkedListItem_Delete(origItem2);
+        EagleLinkedListItem_Delete(origItem3);
+    }
+    
+    EagleLinkedList_Delete(list);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_toArray)
+{
+    int size;
+    CUNIT_VERIFY_NULL(EagleLinkedList_toArray(NULL, &size));
+    
+    EagleLinkedList *list = EagleLinkedList_New();
+    EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(345), EagleTrue, NULL));
+    EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(678), EagleTrue, NULL));
+    EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(901), EagleTrue, NULL));
+    
+    int **data = (int**) EagleLinkedList_toArray(list, &size);
+    CUNIT_ASSERT_EQUAL_INT(size, 3);
+    CUNIT_VERIFY_EQUAL_INT(*data[0], 345);
+    CUNIT_VERIFY_EQUAL_INT(*data[1], 678);
+    CUNIT_VERIFY_EQUAL_INT(*data[2], 901);
+    free(data);
+    
+    EagleLinkedList_DeleteWithItems(list);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_add)
+{
+    EagleLinkedList_add(NULL, NULL);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_get)
+{
+    EagleLinkedList *list = EagleLinkedList_New();
+    EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(345), EagleTrue, NULL));
+    
+    CUNIT_VERIFY_NULL(EagleLinkedList_get(list, -1));
+    CUNIT_VERIFY_NULL(EagleLinkedList_get(list, 1));
+    
+    EagleLinkedList_DeleteWithItems(list);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    
+    CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_add));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_toArray));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_pop));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_Allocate));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_MultiFree));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LastEvent));

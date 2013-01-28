@@ -55,7 +55,9 @@ extern const int EagleDbSqlExpression_ERROR;
  * @param [in] expr The instance.
  * @param [in] recursive recursively delete the AST associated with the expression.
  */
-void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recursive);
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr);
+
+void EagleDbSqlExpression_DeleteRecursive(EagleDbSqlExpression *expr);
 
 /**
  * Compile a plan from one or more expressions.

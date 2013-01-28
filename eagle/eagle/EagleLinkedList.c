@@ -10,16 +10,19 @@ EagleLinkedList* EagleLinkedList_New(void)
         return NULL;
     }
     
+    list->modifyLock = EagleSynchronizer_CreateLock();
     list->first = NULL;
     list->last = NULL;
     list->length = 0;
-    list->modifyLock = EagleSynchronizer_CreateLock();
     
     return list;
 }
 
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item)
 {
+    if(NULL == list) {
+        return;
+    }
     if(NULL == item) {
         return;
     }
@@ -41,19 +44,29 @@ void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item)
 int EagleLinkedList_length(EagleLinkedList *list)
 {
     int length;
+    
+    if(NULL == list) {
+        return 0;
+    }
+    
     EagleSynchronizer_Lock(list->modifyLock);
     length = list->length;
     EagleSynchronizer_Unlock(list->modifyLock);
+    
     return length;
 }
 
 void EagleLinkedList_Delete(EagleLinkedList *list)
 {
+    if(NULL == list) {
+        return;
+    }
+    
     EagleLock_Delete(list->modifyLock);
     EagleMemory_Free(list);
 }
 
-void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
+void EagleLinkedList_DeleteItems(EagleLinkedList *list)
 {
     EagleLinkedListItem *p, *next;
     EagleSynchronizer_Lock(list->modifyLock);
@@ -64,6 +77,15 @@ void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
     }
     
     EagleSynchronizer_Unlock(list->modifyLock);
+}
+
+void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
+{
+    if(NULL == list) {
+        return;
+    }
+    
+    EagleLinkedList_DeleteItems(list);
     EagleLinkedList_Delete(list);
 }
 
@@ -83,4 +105,83 @@ EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
     head = list->last;
     EagleSynchronizer_Unlock(list->modifyLock);
     return head;
+}
+
+EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
+{
+    EagleLinkedListItem *next;
+    int i;
+    
+    if(EagleLinkedList_length(list) == 0) {
+        return NULL;
+    }
+    if(EagleLinkedList_length(list) == 1) {
+        EagleLinkedListItem *item = list->first;
+        list->first = list->last = NULL;
+        --list->length;
+        return item;
+    }
+    
+    /* find the second last item */
+    next = list->first;
+    for(i = 0; i < list->length - 2; ++i) {
+        next = next->next;
+    }
+    
+    --list->length;
+    list->last = next;
+    next->next->next = NULL;
+    return next->next;
+}
+
+EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)
+{
+    if(NULL == list->first) {
+        return EagleTrue;
+    }
+    return EagleFalse;
+}
+
+void** EagleLinkedList_toArray(EagleLinkedList *list, int *size)
+{
+    void **array;
+    EagleLinkedListItem *p, *next;
+    int i;
+    
+    if(NULL == list) {
+        return NULL;
+    }
+    
+    *size = EagleLinkedList_length(list);
+    array = (void**) EagleMemory_MultiAllocate("EagleLinkedList_toArray.1", sizeof(void*), *size);
+    
+    for(p = list->first, i = 0; NULL != p; p = next, ++i) {
+        array[i] = p->obj;
+        next = p->next;
+    }
+    
+    return array;
+}
+
+void* EagleLinkedList_get(EagleLinkedList *list, int index)
+{
+    EagleLinkedListItem *next;
+    int i;
+    
+    /* out of bounds */
+    if(index < 0 || index >= EagleLinkedList_length(list)) {
+        return NULL;
+    }
+    
+    next = list->first;
+    for(i = 0; i < index; ++i) {
+        next = next->next;
+    }
+    
+    return next->obj;
+}
+
+void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj))
+{
+    EagleLinkedList_add(list, EagleLinkedListItem_New(obj, freeObj, free));
 }

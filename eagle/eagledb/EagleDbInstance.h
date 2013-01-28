@@ -7,8 +7,6 @@
 #include "EagleDbSqlStatementType.h"
 #include "EagleDbSqlSelect.h"
 
-extern EagleDbSqlStatementType yystatementtype;
-
 /**
  The database instance is a wrapper for a EagleInstance.
  */

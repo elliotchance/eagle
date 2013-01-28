@@ -171,4 +171,6 @@ void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp);
 
 void EaglePageProvider_resetFromStream_(EaglePageProvider *epp);
 
+void EaglePageProvider_DeleteInt_(EaglePageProvider *epp);
+
 #endif

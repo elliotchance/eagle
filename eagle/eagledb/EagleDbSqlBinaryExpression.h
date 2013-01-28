@@ -47,9 +47,10 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
  * Free a binary expression.
  * @note It is safer to use EagleDbSqlExpression_Delete() since it will automatically use the correct Delete function.
  * @param [in] expr The instance.
- * @param [in] recursive If this is EagleTrue then it will cascade the delete to all the of the the children in the AST.
  */
-void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr, EagleBoolean recursive);
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr);
+
+void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr);
 
 /**
  * Render a binary expression into a string.

@@ -11,6 +11,10 @@ if [ $CMD = "fix" ]; then
 	
 	# make sure we are synced up with master
 	git merge master
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
 	
 	# make sure release passes
 	make release
@@ -21,31 +25,77 @@ if [ $CMD = "fix" ]; then
 	
 	# everything looks good
 	git checkout master
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git merge --no-ff --no-commit "i$ISSUE"
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git add .
 	git commit -m "fixes #$ISSUE"
 	
 	# remove remote and local branch
 	git push origin ":i$ISSUE"
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git branch -d "i$ISSUE"
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
 	
 	# gh-pages
 	make gh-pages
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
 
 	# push master
 	git push
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
 	
 elif [ $CMD = "open" ]; then
 	# auto install git hook for issue number in commit message
 	cp -f hooks/commit-msg .git/hooks/commit-msg
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
 	
 	# switch branches
 	git add .
 	git stash
 	git checkout master
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git branch "i$2"
 	git checkout "i$2"
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git push -u origin "i$2"
+	rc=$?
+	if [[ $rc != 0 ]] ; then \
+		exit $rc; \
+	fi
+	
 	git stash pop
 	
 fi
