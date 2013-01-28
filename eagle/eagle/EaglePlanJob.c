@@ -33,18 +33,20 @@ EaglePlanJob* EaglePlanJob_New(EaglePlan *plan)
 
 void EaglePlanJob_Delete(EaglePlanJob *job)
 {
-    int i;
-    
     if(NULL == job) {
         return;
     }
     
-    if(NULL != job->buffers) {
-        for(i = 0; i < job->plan->buffersNeeded; ++i) {
-            EaglePage_Delete(job->buffers[i]);
+    {
+        int i;
+        
+        if(NULL != job->buffers) {
+            for(i = 0; i < job->plan->buffersNeeded; ++i) {
+                EaglePage_Delete(job->buffers[i]);
+            }
+            EagleMemory_Free(job->buffers);
         }
-        EagleMemory_Free(job->buffers);
+        
+        EagleMemory_Free(job);
     }
-    
-    EagleMemory_Free(job);
 }

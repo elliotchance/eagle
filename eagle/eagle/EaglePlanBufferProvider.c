@@ -33,6 +33,10 @@ char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
 
 void EaglePlanBufferProvider_Delete(EaglePlanBufferProvider *bp)
 {
+    if(NULL == bp) {
+        return;
+    }
+    
     if(EagleTrue == bp->freeProvider) {
         EaglePageProvider_Delete(bp->provider);
     }

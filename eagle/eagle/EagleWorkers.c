@@ -43,12 +43,18 @@ void EagleWorkers_joinAll(EagleWorkers *workers)
 
 void EagleWorkers_Delete(EagleWorkers *workers)
 {
-    int i;
-    
-    for(i = 0; i < workers->totalWorkers; ++i) {
-        EagleWorker_Delete(workers->workers[i]);
+    if(NULL == workers) {
+        return;
     }
-    EagleMemory_Free((void*) workers->workers);
     
-    EagleMemory_Free((void*) workers);
+    {
+        int i;
+        
+        for(i = 0; i < workers->totalWorkers; ++i) {
+            EagleWorker_Delete(workers->workers[i]);
+        }
+        EagleMemory_Free((void*) workers->workers);
+        
+        EagleMemory_Free((void*) workers);
+    }
 }

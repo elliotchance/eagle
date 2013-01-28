@@ -32,16 +32,22 @@ EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 
 void EagleDbTuple_Delete(EagleDbTuple *tuple)
 {
-    int i;
-    
-    if(NULL != tuple->data) {
-        for(i = 0; i < EagleDbTable_countColumns(tuple->table); ++i) {
-            EagleMemory_Free(tuple->data[i]);
-        }
-        EagleMemory_Free(tuple->data);
+    if(NULL == tuple) {
+        return;
     }
     
-    EagleMemory_Free(tuple);
+    {
+        int i;
+        
+        if(NULL != tuple->data) {
+            for(i = 0; i < EagleDbTable_countColumns(tuple->table); ++i) {
+                EagleMemory_Free(tuple->data[i]);
+            }
+            EagleMemory_Free(tuple->data);
+        }
+        
+        EagleMemory_Free(tuple);
+    }
 }
 
 void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)

@@ -24,6 +24,10 @@ void EagleDbTable_setColumns(EagleDbTable *table, EagleLinkedList *columns)
 
 void EagleDbTable_Delete(EagleDbTable *table)
 {
+    if(NULL == table) {
+        return;
+    }
+    
     EagleLinkedList_Delete(table->columns);
     EagleMemory_Free(table->name);
     EagleMemory_Free(table);
@@ -31,6 +35,10 @@ void EagleDbTable_Delete(EagleDbTable *table)
 
 void EagleDbTable_DeleteWithColumns(EagleDbTable *table)
 {
+    if(NULL == table) {
+        return;
+    }
+    
     EagleLinkedList_DeleteWithItems(table->columns);
     EagleMemory_Free(table->name);
     EagleMemory_Free(table);

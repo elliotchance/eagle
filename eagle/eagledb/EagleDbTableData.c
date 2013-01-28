@@ -43,12 +43,18 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
 
 void EagleDbTableData_Delete(EagleDbTableData *td)
 {
-    int i;
-    for(i = 0; i < td->usedProviders; ++i) {
-        EaglePageProvider_Delete(td->providers[i]);
+    if(NULL == td) {
+        return;
     }
-    EagleMemory_Free(td->providers);
-    EagleMemory_Free(td);
+    
+    {
+        int i;
+        for(i = 0; i < td->usedProviders; ++i) {
+            EaglePageProvider_Delete(td->providers[i]);
+        }
+        EagleMemory_Free(td->providers);
+        EagleMemory_Free(td);
+    }
 }
 
 void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)

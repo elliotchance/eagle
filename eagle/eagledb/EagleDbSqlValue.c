@@ -47,6 +47,10 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
 
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
+    if(NULL == value) {
+        return;
+    }
+    
     if(EagleDbSqlValueTypeIdentifier == value->type) {
         EagleMemory_Free(value->value.identifier);
     }

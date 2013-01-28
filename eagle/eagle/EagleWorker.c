@@ -101,5 +101,9 @@ void EagleWorker_join(EagleWorker *worker)
 
 void EagleWorker_Delete(EagleWorker *worker)
 {
+    if(NULL == worker) {
+        return;
+    }
+    
     EagleMemory_Free(worker);
 }
