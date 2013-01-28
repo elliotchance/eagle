@@ -64,7 +64,7 @@ function validateFile($file)
 		}
 		
 		foreach($realparams as $param) {
-			if(!in_array($param, $docparams)) {
+			if($param != '' && !in_array($param, $docparams)) {
 				addError("[{$member->location['file']}:{$member->location['line']} {$member->name}{$member->argsstring}]: Parameter '$param' is not documented.");
 			}
 		}
