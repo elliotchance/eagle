@@ -40,7 +40,9 @@ typedef struct {
  */
 EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right);
 
-void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr, EagleBoolean recursive);
+void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr);
+
+void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr);
 
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
 

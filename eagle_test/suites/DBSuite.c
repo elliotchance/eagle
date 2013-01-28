@@ -22,19 +22,11 @@ int _testSqlSelect(const char *sql)
     char *newsql = (char*) malloc(strlen(sql) + 2);
     sprintf(newsql, "%s;", sql);
     
-    yylex_init();
-    yy_scan_string(newsql);
-    int r = yyparse();
+    EagleDbParser_Init();
+    EagleDbParser_LoadString(newsql);
+    int r = EagleDbParser_Parse();
     EagleMemory_Free(newsql);
     return r;
-}
-
-CUNIT_TEST(DBSuite, _, BLANK)
-{
-    if(_testSqlSelect("")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    yylex_free();
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
@@ -49,7 +41,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
         CUNIT_ASSERT_NULL(select->whereExpression);
     }
     
-    EagleDbSqlExpression_Delete((EagleDbSqlExpression*) select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
@@ -67,7 +59,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
         CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
     }
     
-    EagleDbSqlBinaryExpression_Delete(binary, EagleTrue);
+    EagleDbSqlBinaryExpression_DeleteRecursive(binary);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
@@ -88,13 +80,14 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 EagleDbSqlExpression* _getExpression(const char *sql)
 {
     if(_testSqlSelect(sql)) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
+        CUNIT_FAIL(EagleDbParser_LastError(), NULL);
     }
     
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_NOT_NULL(select->selectExpressions[0]);
+    EagleDbParser *p = EagleDbParser_Get();
+    EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
+    CUNIT_ASSERT_NOT_NULL(EagleLinkedList_get(select->selectExpressions, 0));
     
-    return select->selectExpressions[0];
+    return EagleLinkedList_get(select->selectExpressions, 0);
 }
 
 void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOperations, int *answers)
@@ -151,7 +144,7 @@ CUNIT_TEST(DBSuite, EagleDbColumn_New)
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete)
 {
-    EagleDbSqlSelect_Delete(NULL, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(NULL);
 }
 
 CUNIT_TEST(DBSuite, EagleDbTable_New)
@@ -161,11 +154,11 @@ CUNIT_TEST(DBSuite, EagleDbTable_New)
     EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeInteger));
     
     CUNIT_ASSERT_EQUAL_STRING(table->name, "mytable");
-    CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
-    CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
-    CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-    CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
+    CUNIT_ASSERT_EQUAL_INT(EagleDbTable_countColumns(table), 2);
+    CUNIT_ASSERT_EQUAL_STRING(EagleDbTable_getColumn(table, 0)->name, "col1");
+    CUNIT_ASSERT_EQUAL_INT(EagleDbTable_getColumn(table, 0)->type, EagleDataTypeInteger);
+    CUNIT_ASSERT_EQUAL_STRING(EagleDbTable_getColumn(table, 1)->name, "col2");
+    CUNIT_ASSERT_EQUAL_INT(EagleDbTable_getColumn(table, 1)->type, EagleDataTypeInteger);
     
     EagleDbTable_DeleteWithColumns(table);
 }
@@ -316,7 +309,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     free(col1Data);
     free(col2Data);
     for(int i = 0; i < exprs; ++i) {
-        EagleDbSqlExpression_Delete(expr[i], EagleTrue);
+        EagleDbSqlExpression_DeleteRecursive(expr[i]);
     }
     for(int i = 0; i < plan->resultFields; ++i) {
         EagleMemory_Free(answers[i]);
@@ -327,55 +320,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     EagleMemory_Free(answers);
     EagleMemory_Free(expr);
     EagleInstance_Delete(eagle);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, SELECT_WHERE)
-{
-    if(_testSqlSelect("SELECT * FROM mytable WHERE 123")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) yyparse_ast;
-    CUNIT_ASSERT_EQUAL_STRING("mytable", select->tableName);
-    CUNIT_ASSERT_NOT_NULL(select->whereExpression);
-    if(NULL != select->whereExpression) {
-        CUNIT_ASSERT_EQUAL_INT(select->whereExpression->expressionType, EagleDbSqlExpressionTypeValue);
-    }
-    
-    EagleDbSqlValue *value = (EagleDbSqlValue*) select->whereExpression;
-    CUNIT_ASSERT_NOT_NULL(value);
-    if(NULL != value) {
-        CUNIT_ASSERT_EQUAL_INT(123, value->value.intValue);
-    }
-    
-    EagleDbSqlSelect_Delete(select, EagleTrue);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, _, CREATE_TABLE)
-{
-    if(_testSqlSelect("CREATE TABLE mytable ( col1 INT, col2 INTEGER )")) {
-        CUNIT_FAIL(yyerrors_last(), NULL);
-    }
-    
-    EagleDbTable *table = (EagleDbTable*) yyparse_ast;
-    CUNIT_VERIFY_EQUAL_STRING("mytable", table->name);
-    
-    CUNIT_ASSERT_EQUAL_INT(table->allocatedColumns, 2);
-    CUNIT_ASSERT_EQUAL_INT(table->usedColumns, 2);
-    CUNIT_ASSERT_NOT_NULL(table->columns);
-    
-    if(NULL != table->columns) {
-        CUNIT_ASSERT_EQUAL_STRING(table->columns[0]->name, "col1");
-        CUNIT_ASSERT_EQUAL_INT(table->columns[0]->type, EagleDataTypeInteger);
-        
-        CUNIT_ASSERT_EQUAL_STRING(table->columns[1]->name, "col2");
-        CUNIT_ASSERT_EQUAL_INT(table->columns[1]->type, EagleDataTypeInteger);
-    }
-    
-    EagleDbTable_DeleteWithColumns(table);
-    yylex_free();
 }
 
 CUNIT_TEST(DBSuite, EagleDbConsole_New)
@@ -388,58 +332,6 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
 {
     EagleDbInstance *instance = EagleDbInstance_New(1000);
     EagleDbInstance_Delete(instance);
-}
-
-CUNIT_TEST(DBSuite, yyerrors_push)
-{
-    yylex_init();
-    for(int i = 0; i < MAX_YYERRORS + 10; ++i) {
-        yyerrors_push(strdup("some error"));
-    }
-    
-    CUNIT_ASSERT_EQUAL_INT(yyerrors_length, MAX_YYERRORS);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, yyobj_push)
-{
-    yylex_init();
-    for(int i = 0; i < MAX_YYOBJ + 10; ++i) {
-        yyobj_push(NULL);
-    }
-    
-    CUNIT_VERIFY_EQUAL_INT(yyobj_length, MAX_YYOBJ);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum depth of 256 exceeded.");
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, yylist_push)
-{
-    yylex_init();
-    yylist_new();
-    for(int i = 0; i < MAX_YYLIST + 10; ++i) {
-        yylist_push(NULL);
-    }
-    
-    CUNIT_VERIFY_EQUAL_INT(yylist_length, MAX_YYLIST);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum list size of 256 exceeded.");
-    free(yylist);
-    yylex_free();
-}
-
-CUNIT_TEST(DBSuite, yyreturn_push)
-{
-    yylex_init();
-    for(int i = 0; i < MAX_YYRETURN + 10; ++i) {
-        yyreturn_push(NULL);
-    }
-    
-    CUNIT_VERIFY_EQUAL_INT(yyreturn_length, MAX_YYRETURN);
-    CUNIT_VERIFY_EQUAL_INT(yyerrors_length, 10);
-    CUNIT_VERIFY_EQUAL_STRING(yyerrors_last(), "Cannot parse SQL. Maximum return depth of 256 exceeded.");
-    yylex_free();
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
@@ -459,7 +351,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
     int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);
     CUNIT_VERIFY_EQUAL_INT(result, 0);
     
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
     EaglePlan_Delete(plan);
 }
 
@@ -473,7 +365,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_toString)
     desc = EagleDbSqlExpression_toString((EagleDbSqlExpression*) select);
     CUNIT_VERIFY_EQUAL_STRING(desc, "SELECT");
     free(desc);
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbTuple_setInt)
@@ -559,7 +451,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse1)
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(NULL, NULL));
     CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(select, NULL));
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
@@ -573,9 +465,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup(tableName);
-    select->usedSelectExpressions = 1;
-    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
-    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    select->selectExpressions = EagleLinkedList_New();
+    EagleLinkedList_add(select->selectExpressions, EagleLinkedListItem_New(EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*))EagleDbSqlValue_Delete));
     select->whereExpression = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
     
@@ -590,7 +481,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
     EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
     CUNIT_VERIFY_NOT_NULL(plan);
     
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);
     EagleDbTable_DeleteWithColumns(table);
     EagleDbSchema_Delete(schema);
     EagleDbTableData_Delete(td);
@@ -606,9 +497,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup(tableName);
-    select->usedSelectExpressions = 1;
-    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
-    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    select->selectExpressions = EagleLinkedList_New();
+    EagleLinkedList_addObject(select->selectExpressions, EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*)) EagleDbSqlValue_Delete);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
     
     CUNIT_ASSERT_NULL(EagleDbInstance_getTable(instance, tableName));
@@ -620,7 +510,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
         CUNIT_VERIFY_EQUAL_STRING(plan->errorMessage, tableName);
     }
     
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
     EagleDbInstance_Delete(instance);
     EaglePlan_Delete(plan);
 }
@@ -654,7 +544,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
     EagleDbInstance_executeSelect(db, select);
     
     EagleDbInstance_Delete(db);
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
 }
 
 CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
@@ -665,9 +555,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbInstance *db = EagleDbInstance_New(1);
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup(tableName);
-    select->usedSelectExpressions = 1;
-    select->selectExpressions = (EagleDbSqlExpression**) calloc(select->usedSelectExpressions, sizeof(EagleDbSqlExpression*));
-    select->selectExpressions[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    select->selectExpressions = EagleLinkedList_New();
+    EagleLinkedList_addObject(select->selectExpressions, EagleDbSqlValue_NewWithInteger(123), EagleTrue, (void(*)(void*)) EagleDbSqlValue_Delete);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
     
     EagleDbTable *table = EagleDbTable_New((char*) tableName);
@@ -682,7 +571,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbInstance_executeSelect(db, select);
     
     EagleDbInstance_Delete(db);
-    EagleDbSqlSelect_Delete(select, EagleTrue);
+    EagleDbSqlSelect_DeleteRecursive(select);
     EagleDbTable_DeleteWithColumns(table);
     EagleDbSchema_Delete(schema);
     EagleDbTableData_Delete(td);
@@ -807,11 +696,46 @@ CUNIT_TEST(DBSuite, EagleDbConsole_run)
     EagleDbConsole_run(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete2)
+{
+    EagleDbSqlSelect_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbParser_CurrentReturn)
+{
+    EagleDbParser_Init();
+    CUNIT_VERIFY_NULL(EagleDbParser_CurrentReturn());
+    EagleDbParser_Delete();
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
+{
+    EagleDbSqlExpression_Delete(NULL);
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL);
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlSelect_New();
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+        EagleDbSqlExpression_Delete(expr);
+    }
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_CurrentReturn));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_GetLine));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));
@@ -846,15 +770,6 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_NewWithInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyerrors_push));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyobj_push));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yylist_push));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, yyreturn_push));
-    
-    // complex / execution tests
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, BLANK));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, SELECT_WHERE));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _, CREATE_TABLE));
     
     return tests;
 }

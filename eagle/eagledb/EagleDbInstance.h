@@ -7,8 +7,6 @@
 #include "EagleDbSqlStatementType.h"
 #include "EagleDbSqlSelect.h"
 
-extern EagleDbSqlStatementType yystatementtype;
-
 typedef struct EagleDbInstance_ {
     
     /**

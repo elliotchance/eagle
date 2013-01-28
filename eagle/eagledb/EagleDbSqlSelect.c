@@ -19,35 +19,35 @@ EagleDbSqlSelect* EagleDbSqlSelect_New(void)
     select->tableName = NULL;
     select->whereExpression = NULL;
     select->selectExpressions = NULL;
-    select->usedSelectExpressions = 0;
-    select->allocatedSelectExpressions = 0;
     
     return select;
 }
 
-void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select, EagleBoolean recursive)
+void EagleDbSqlSelect_Delete(EagleDbSqlSelect *select)
 {
     if(NULL == select) {
         return;
-    }
-    
-    if(EagleTrue == recursive) {
-        int i;
-        for(i = 0; i < select->usedSelectExpressions; ++i) {
-            EagleDbSqlExpression_Delete(select->selectExpressions[i], recursive);
-        }
-        EagleMemory_Free(select->selectExpressions);
-        
-        EagleDbSqlExpression_Delete(select->whereExpression, recursive);
     }
     
     EagleMemory_Free(select->tableName);
     EagleMemory_Free(select);
 }
 
+void EagleDbSqlSelect_DeleteRecursive(EagleDbSqlSelect *select)
+{
+    if(NULL == select) {
+        return;
+    }
+    
+    EagleLinkedList_DeleteWithItems(select->selectExpressions);
+    EagleDbSqlExpression_DeleteRecursive(select->whereExpression);
+    EagleMemory_Free(select->tableName);
+    EagleMemory_Free(select);
+}
+
 int EagleDbSqlSelect_getFieldCount(EagleDbSqlSelect *select)
 {
-    return select->usedSelectExpressions;
+    return EagleLinkedList_length(select->selectExpressions);
 }
 
 int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select)
@@ -83,7 +83,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
         EaglePlan_setError(plan, EaglePlanErrorNoSuchTable, select->tableName);
         return plan;
     }
-    for(i = 0; i < td->table->usedColumns; ++i) {
+    for(i = 0; i < EagleLinkedList_length(td->table->columns); ++i) {
         EaglePlanBufferProvider *bp;
         
         EaglePageProvider_reset(td->providers[i]);
@@ -100,7 +100,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
     }
     
     for(expri = 0; expri < EagleDbSqlSelect_getFieldCount(select); ++expri) {
-        expr[expri] = select->selectExpressions[expri];
+        expr[expri] = EagleLinkedList_get(select->selectExpressions, expri);
     }
     if(NULL != select->whereExpression) {
         whereExpressionId = expri;

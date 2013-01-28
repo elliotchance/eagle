@@ -105,7 +105,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize, "(integer)");
                     bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
                     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
-                    EaglePlan_addFreeObject(plan, provider->records, NULL);
                     ++*destinationBuffer;
                     
                     plan->bufferTypes[destination] = EagleDataTypeInteger;
@@ -240,7 +239,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
     EagleMemory_Free(results);
 }
 
-void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recursive)
+void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
 {
     if(NULL == expr) {
         return;
@@ -249,11 +248,34 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr, EagleBoolean recurs
     switch(expr->expressionType) {
             
         case EagleDbSqlExpressionTypeBinaryExpression:
-            EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr, recursive);
+            EagleDbSqlBinaryExpression_Delete((EagleDbSqlBinaryExpression*) expr);
             break;
             
         case EagleDbSqlExpressionTypeSelect:
-            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr, recursive);
+            EagleDbSqlSelect_Delete((EagleDbSqlSelect*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeValue:
+            EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
+            break;
+            
+    }
+}
+
+void EagleDbSqlExpression_DeleteRecursive(EagleDbSqlExpression *expr)
+{
+    if(NULL == expr) {
+        return;
+    }
+    
+    switch(expr->expressionType) {
+            
+        case EagleDbSqlExpressionTypeBinaryExpression:
+            EagleDbSqlBinaryExpression_DeleteRecursive((EagleDbSqlBinaryExpression*) expr);
+            break;
+            
+        case EagleDbSqlExpressionTypeSelect:
+            EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) expr);
             break;
             
         case EagleDbSqlExpressionTypeValue:
