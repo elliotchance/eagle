@@ -38,10 +38,6 @@ if [ $CMD = "fix" ]; then
 	
 	git add .
 	git commit -m "fixes #$ISSUE"
-	rc=$?
-	if [[ $rc != 0 ]] ; then \
-		exit $rc; \
-	fi
 	
 	# remove remote and local branch
 	git push origin ":i$ISSUE"
