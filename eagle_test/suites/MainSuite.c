@@ -871,11 +871,65 @@ CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt2)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_DeleteItems)
+{
+    EagleLinkedList_DeleteItems(NULL);
+}
+
+CUNIT_TEST(MainSuite, EagleWorker_Delete)
+{
+    EagleWorker_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_DeleteIntArray_)
+{
+    EaglePageProvider_DeleteIntArray_(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_DeleteInt_)
+{
+    EaglePageProvider_DeleteInt_(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_DeleteStream_)
+{
+    EaglePageProvider_DeleteStream_(NULL);
+}
+
+CUNIT_TEST(MainSuite, EagleWorkers_Delete)
+{
+    EagleWorkers_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_Delete)
+{
+    EaglePlanBufferProvider_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanOperation_Delete)
+{
+    EaglePlanOperation_Delete(NULL);
+}
+
+CUNIT_TEST(MainSuite, EagleLock_Delete)
+{
+    EagleLock_Delete(NULL);
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLock_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorkers_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_DeleteStream_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_DeleteInt_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_DeleteIntArray_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_DeleteItems));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_get));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_add));

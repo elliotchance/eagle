@@ -104,7 +104,7 @@ void EagleDbParser_Init()
     EagleDbParser_Default = EagleDbParser_New();
 }
 
-void EagleDbParser_Delete()
+void EagleDbParser_Finish()
 {
     EagleDbParser *p = EagleDbParser_Default;
     EagleLinkedListItem *next;

@@ -93,5 +93,9 @@ void EagleDbConsole_run(EagleDbConsole *console)
 
 void EagleDbConsole_Delete(EagleDbConsole *console)
 {
+    if(NULL == console) {
+        return;
+    }
+    
     EagleMemory_Free(console);
 }

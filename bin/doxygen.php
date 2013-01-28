@@ -1,6 +1,7 @@
 <?php
 
 $exitCode = 0;
+$deleteFunctions = array();
 
 function addError($desc)
 {
@@ -29,9 +30,16 @@ function getParamList($node)
 
 function validateFile($file)
 {
+	global $deleteFunctions;
+	
 	$xml = simplexml_load_file($file);
 	
 	foreach($xml->compounddef->sectiondef->memberdef as $member) {
+		// is this a delete function?
+		if(strpos((string) $member->name, "_Delete") !== false) {
+			$deleteFunctions[(string) $member->location['file']][] = (string) $member->name;
+		}
+	
 		// check for description
 		$desc = trim((string) $member->briefdescription->para);
 		if(!$desc) {
@@ -82,4 +90,21 @@ function validateDirectory($dirname)
 }
 
 validateDirectory("doc/xml");
+
+foreach($deleteFunctions as $file => $functions) {
+	if(substr($file, strlen($file) - 2) != '.c') {
+		continue;
+	}
+	$contents = @file_get_contents($file);
+	if(!$contents) {
+		continue;
+	}
+	foreach($functions as $f) {
+		preg_match(",{$f}[a-zA-Z0-9_]*\\([^\\)]*\\)\s*\\{\s*if\\(NULL ==,", $contents, $matches);
+		if(!count($matches)) {
+			echo "ERROR: [$file $f] This function does not handle NULL correctly.\n";
+			$exitCode = 2;
+		}
+	}
+}
 exit($exitCode);

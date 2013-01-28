@@ -20,11 +20,19 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
 
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
 {
+    if(NULL == expr) {
+        return;
+    }
+    
     EagleMemory_Free(expr);
 }
 
 void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr)
 {
+    if(NULL == expr) {
+        return;
+    }
+    
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr->left);
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr->right);
     EagleMemory_Free(expr);

@@ -18,6 +18,10 @@ EagleDbColumn* EagleDbColumn_New(char *name, EagleDataType type)
 
 void EagleDbColumn_Delete(EagleDbColumn *column)
 {
+    if(NULL == column) {
+        return;
+    }
+    
     EagleMemory_Free(column->name);
     EagleMemory_Free(column);
 }
