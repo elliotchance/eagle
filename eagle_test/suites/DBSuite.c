@@ -705,7 +705,7 @@ CUNIT_TEST(DBSuite, EagleDbParser_CurrentReturn)
 {
     EagleDbParser_Init();
     CUNIT_VERIFY_NULL(EagleDbParser_CurrentReturn());
-    EagleDbParser_Delete();
+    EagleDbParser_Finish();
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)

@@ -83,15 +83,21 @@ void EagleLinkedList_Delete(EagleLinkedList *list)
 
 void EagleLinkedList_DeleteItems(EagleLinkedList *list)
 {
-    EagleLinkedListItem *p, *next;
-    EagleSynchronizer_Lock(list->modifyLock);
-    
-    for(p = list->first; NULL != p; p = next) {
-        next = p->next;
-        EagleLinkedListItem_Delete(p);
+    if(NULL == list) {
+        return;
     }
     
-    EagleSynchronizer_Unlock(list->modifyLock);
+    {
+        EagleLinkedListItem *p, *next;
+        EagleSynchronizer_Lock(list->modifyLock);
+        
+        for(p = list->first; NULL != p; p = next) {
+            next = p->next;
+            EagleLinkedListItem_Delete(p);
+        }
+        
+        EagleSynchronizer_Unlock(list->modifyLock);
+    }
 }
 
 void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)

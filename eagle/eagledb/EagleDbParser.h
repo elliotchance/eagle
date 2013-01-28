@@ -81,7 +81,7 @@ void EagleDbParser_Init(void);
 /**
  Clean up any internal resources associated with the most recent parse.
  */
-void EagleDbParser_Delete(void);
+void EagleDbParser_Finish(void);
 
 /**
  Get the last error from the parser.

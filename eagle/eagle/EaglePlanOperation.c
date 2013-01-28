@@ -29,6 +29,10 @@ char* EaglePlanOperation_toString(EaglePlanOperation *epo)
 
 void EaglePlanOperation_Delete(EaglePlanOperation *epo)
 {
+    if(NULL == epo) {
+        return;
+    }
+    
     if(EagleTrue == epo->freeObj) {
         EagleMemory_Free(epo->obj);
     }

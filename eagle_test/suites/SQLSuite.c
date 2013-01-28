@@ -100,7 +100,7 @@ void SQLSuiteTest()
         // expected error
         if(NULL != test.errorMessage) {
             if(!strcmp(EagleDbParser_LastError(), test.errorMessage)) {
-                EagleDbParser_Delete();
+                EagleDbParser_Finish();
                 return;
             }
             CUNIT_ASSERT_EQUAL_STRING(EagleDbParser_LastError(), test.errorMessage);
@@ -214,7 +214,7 @@ void SQLSuiteTest()
     EagleMemory_Free(expr);
     
     EagleDbSqlSelect_DeleteRecursive(p->yyparse_ast);
-    EagleDbParser_Delete();
+    EagleDbParser_Finish();
 }
 
 void controlTest(FILE *file, int *lineNumber)

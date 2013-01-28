@@ -144,6 +144,10 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
 
 void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 {
+    if(NULL == epp) {
+        return;
+    }
+    
     EagleLock_Delete(epp->nextPageLock);
     EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
@@ -151,6 +155,10 @@ void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp)
 
 void EaglePageProvider_DeleteInt_(EaglePageProvider *epp)
 {
+    if(NULL == epp) {
+        return;
+    }
+    
     EagleLock_Delete(epp->nextPageLock);
     EagleMemory_Free(epp->records);
     EagleMemory_Free(epp->name);
@@ -159,6 +167,10 @@ void EaglePageProvider_DeleteInt_(EaglePageProvider *epp)
 
 void EaglePageProvider_DeleteStream_(EaglePageProvider *epp)
 {
+    if(NULL == epp) {
+        return;
+    }
+    
     EagleLock_Delete(epp->nextPageLock);
     EagleLinkedList_DeleteWithItems((EagleLinkedList*) epp->records);
     EagleMemory_Free(epp->name);

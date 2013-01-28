@@ -247,11 +247,15 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     }
     
     /* clean up */
-    EagleDbParser_Delete();
+    EagleDbParser_Finish();
 }
 
 void EagleDbInstance_Delete(EagleDbInstance *db)
 {
+    if(NULL == db) {
+        return;
+    }
+    
     EagleMemory_Free(db->schemas);
     EagleMemory_Free(db);
 }
