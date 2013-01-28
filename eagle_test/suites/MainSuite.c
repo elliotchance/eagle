@@ -853,12 +853,14 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
 
 CUNIT_TEST(MainSuite, EagleLinkedList_toArray)
 {
+    int size;
+    CUNIT_VERIFY_NULL(EagleLinkedList_toArray(NULL, &size));
+    
     EagleLinkedList *list = EagleLinkedList_New();
     EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(345), EagleTrue, NULL));
     EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(678), EagleTrue, NULL));
     EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(901), EagleTrue, NULL));
     
-    int size;
     int **data = (int**) EagleLinkedList_toArray(list, &size);
     CUNIT_ASSERT_EQUAL_INT(size, 3);
     CUNIT_VERIFY_EQUAL_INT(*data[0], 345);
@@ -869,11 +871,41 @@ CUNIT_TEST(MainSuite, EagleLinkedList_toArray)
     EagleLinkedList_DeleteWithItems(list);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_add)
+{
+    EagleLinkedList_add(NULL, NULL);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_get)
+{
+    EagleLinkedList *list = EagleLinkedList_New();
+    EagleLinkedList_add(list, EagleLinkedListItem_New(EagleData_Int(345), EagleTrue, NULL));
+    
+    CUNIT_VERIFY_NULL(EagleLinkedList_get(list, -1));
+    CUNIT_VERIFY_NULL(EagleLinkedList_get(list, 1));
+    
+    EagleLinkedList_DeleteWithItems(list);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    
+    CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_get));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_add));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_toArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_pop));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_Allocate));

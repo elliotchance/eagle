@@ -101,8 +101,7 @@ int yyerror(char *s)
 
 void EagleDbParser_Init()
 {
-    EagleDbParser *p;
-    p = EagleDbParser_Default = EagleDbParser_New();
+    EagleDbParser_Default = EagleDbParser_New();
 }
 
 void EagleDbParser_Delete()

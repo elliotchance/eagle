@@ -176,6 +176,10 @@ void** EagleLinkedList_toArray(EagleLinkedList *list, int *size)
     EagleLinkedListItem *p, *next;
     int i;
     
+    if(NULL == list) {
+        return NULL;
+    }
+    
     *size = EagleLinkedList_length(list);
     array = (void**) EagleMemory_MultiAllocate("EagleLinkedList_toArray.1", sizeof(void*), *size);
     

@@ -696,11 +696,46 @@ CUNIT_TEST(DBSuite, EagleDbConsole_run)
     EagleDbConsole_run(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete2)
+{
+    EagleDbSqlSelect_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbParser_CurrentReturn)
+{
+    EagleDbParser_Init();
+    CUNIT_VERIFY_NULL(EagleDbParser_CurrentReturn());
+    EagleDbParser_Delete();
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
+{
+    EagleDbSqlExpression_Delete(NULL);
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL);
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlSelect_New();
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+        EagleDbSqlExpression_Delete(expr);
+    }
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_CurrentReturn));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_GetLine));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));
