@@ -724,11 +724,24 @@ CUNIT_TEST(MemorySuite, EagleLinkedList_toArray)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleDbSqlInsert_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlInsert_New.1");
+    
+    EagleDbSqlInsert *insert = EagleDbSqlInsert_New();
+    CUNIT_ASSERT_NULL(insert);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlInsert_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_toArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Int));

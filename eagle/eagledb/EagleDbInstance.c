@@ -173,9 +173,10 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     EagleMemory_Free(widths);
 }
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
+EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
 {
     EaglePlan *plan;
+    EagleBoolean success = EagleTrue;
     
     plan = EagleDbSqlSelect_parse(select, db);
     /*printf("%s\n", EaglePlan_toString(plan));*/
@@ -183,6 +184,7 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select
     /* catch compilation error */
     if(EagleTrue == EaglePlan_isError(plan)) {
         EagleLogger_Log(EagleLoggerSeverityUserError, plan->errorMessage);
+        success = EagleFalse;
     }
     else {
         /* execute */
@@ -192,15 +194,103 @@ void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select
         
         /* print results */
         EagleDbInstance_PrintResults(plan);
-        
         EagleInstance_Delete(eagle);
     }
     
     EaglePlan_Delete(plan);
+    return success;
 }
 
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table)
+EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert)
 {
+    char msg[1024];
+    EagleLinkedListItem *cursor;
+    int i;
+    EagleDbTuple *tuple;
+    
+    /* make the table exists */
+    EagleDbTableData *td = EagleDbInstance_getTable(db, insert->table);
+    if(NULL == td) {
+        sprintf(msg, "No such table '%s'", insert->table);
+        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        return EagleFalse;
+    }
+    
+    /* make sure the number of columns match the number of values */
+    if(EagleLinkedList_length(insert->names) != EagleLinkedList_length(insert->values)) {
+        sprintf(msg, "There are %d columns and %d values", EagleLinkedList_length(insert->names),
+                EagleLinkedList_length(insert->values));
+        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        return EagleFalse;
+    }
+    
+    /* make sure all the columns exist */
+    for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) cursor->obj, *valueExpr;
+        EagleDbSqlValue *value, *valueValue;
+        EagleDbColumn *col;
+        
+        /* they must be column names, expressions are not acceptable */
+        if(EagleDbSqlExpressionTypeValue != expr->expressionType) {
+            EagleLogger_Log(EagleLoggerSeverityUserError, "You cannot use expressions for column names");
+            return EagleFalse;
+        }
+        
+        value = (EagleDbSqlValue*) expr;
+        if(EagleDbSqlValueTypeIdentifier != value->type) {
+            EagleLogger_Log(EagleLoggerSeverityUserError, "You cannot use expressions for column names");
+            return EagleFalse;
+        }
+        
+        /* column name exists in the table? */
+        col = EagleDbTable_getColumnByName(td->table, value->value.identifier);
+        if(NULL == col) {
+            sprintf(msg, "No such column '%s' in table '%s'", value->value.identifier, insert->table);
+            EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+            return EagleFalse;
+        }
+        
+        /* make sure the types are correct */
+        valueExpr = (EagleDbSqlExpression*) EagleLinkedList_get(insert->values, i);
+        if(EagleDbSqlExpressionTypeValue != valueExpr->expressionType) {
+            sprintf(msg, "Expressions in VALUES are not yet supported for column '%s'", col->name);
+            EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+            return EagleFalse;
+        }
+        
+        valueValue = (EagleDbSqlValue*) valueExpr;
+        if(col->type != EagleDataTypeInteger || valueValue->type != EagleDbSqlValueTypeInteger) {
+            sprintf(msg, "Only integers are supported for values");
+            EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+            return EagleFalse;
+        }
+    }
+    
+    /* everything looks good, we can create the tuple now */
+    tuple = EagleDbTuple_New(td->table);
+    for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
+        char *colName = ((EagleDbSqlValue*) cursor->obj)->value.identifier;
+        int colIndex = EagleDbTable_getColumnIndex(td->table, colName);
+        int value = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i))->value.intValue;
+        EagleDbTuple_setInt(tuple, colIndex, value);
+    }
+    
+    /* do the INSERT */
+    EagleDbTableData_insert(td, tuple);
+    
+    /* cleanup */
+    EagleDbTuple_Delete(tuple);
+    
+#ifndef CUNIT
+    printf("INSERT\n\n");
+#endif
+    
+    return EagleTrue;
+}
+
+EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table)
+{
+    EagleBoolean success = EagleTrue;
     char msg[1024];
     sprintf(msg, "Table '%s' created.", table->name);
     EagleLogger_Log(EagleLoggerSeverityInfo, msg);
@@ -208,11 +298,14 @@ void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table
 #ifndef CUNIT
     printf("%s\n\n", msg);
 #endif
+    
+    return success;
 }
 
-void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, char *sql)
 {
     EagleDbParser *p;
+    EagleBoolean success = EagleTrue;
     
     /* parse sql */
     EagleDbParser_Init();
@@ -225,6 +318,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
         char msg[1024];
         sprintf(msg, "Error: %s", EagleDbParser_LastError());
         EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        success = EagleFalse;
     }
     else {
         switch(p->yystatementtype) {
@@ -234,13 +328,18 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
                 break;
                 
             case EagleDbSqlStatementTypeSelect:
-                EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
+                success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
                 EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:
-                EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
+                success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
                 EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
+                break;
+                
+            case EagleDbSqlStatementTypeInsert:
+                success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p->yyparse_ast);
+                EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
                 break;
                 
         }
@@ -248,6 +347,7 @@ void EagleDbInstance_execute(EagleDbInstance *db, char *sql)
     
     /* clean up */
     EagleDbParser_Finish();
+    return success;
 }
 
 void EagleDbInstance_Delete(EagleDbInstance *db)

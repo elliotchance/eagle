@@ -13,6 +13,7 @@
     #include "EagleMemory.h"
     #include "EagleDbParser.h"
     #include "EagleDataType.h"
+    #include "EagleDbSqlInsert.h"
     
     int yylex(void);
 
@@ -31,6 +32,9 @@
 %token K_TABLE
 %token K_TEXT
 %token K_WHERE
+%token K_VALUES
+%token K_INSERT
+%token K_INTO
 
 /* variable tokens */
 %token IDENTIFIER
@@ -85,6 +89,38 @@ statement:
         EagleDbParser *p = EagleDbParser_Get();
         p->yystatementtype = EagleDbSqlStatementTypeCreateTable;
     }
+    |
+    insert_statement {
+        /* bubble up yyreturn */
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeInsert;
+    }
+;
+
+/*
+ K_INSERT K_INTO IDENTIFIER T_BRACKET_OPEN column_expression_list T_BRACKET_CLOSE
+ K_VALUES T_BRACKET_OPEN column_expression_list T_BRACKET_CLOSE
+ @return EagleDbSqlInsert
+ */
+insert_statement:
+    K_INSERT K_INTO IDENTIFIER {
+        EagleDbSqlInsert *insert = EagleDbParser_NewObject(EagleDbSqlInsert);
+        insert->table = strdup(EagleDbParser_LastToken());
+        EagleDbParser_AddReturn(insert);
+    }
+    T_BRACKET_OPEN
+    column_expression_list {
+        EagleLinkedList *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlInsert*) EagleDbParser_CurrentReturn())->names = last;
+    }
+    T_BRACKET_CLOSE
+    K_VALUES
+    T_BRACKET_OPEN
+    column_expression_list {
+        EagleLinkedList *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlInsert*) EagleDbParser_CurrentReturn())->values = last;
+    }
+    T_BRACKET_CLOSE
 ;
 
 /*
@@ -176,7 +212,7 @@ select_statement:
         EagleDbParser_AddReturn(select);
     }
     K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = EagleDbParser_AddObject(strdup(EagleDbParser_LastToken()), NULL);
+        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = strdup(EagleDbParser_LastToken());
     }
     where_expression {
         void *last = EagleDbParser_PopReturn();

@@ -21,7 +21,13 @@ typedef enum {
      CREATE TABLE statement.
      @see EagleDbTable
      */
-    EagleDbSqlStatementTypeCreateTable = 2
+    EagleDbSqlStatementTypeCreateTable = 2,
+    
+    /**
+     INSERT statement.
+     @see EagleDbSqlInsert
+     */
+    EagleDbSqlStatementTypeInsert = 3
     
 } EagleDbSqlStatementType;
 

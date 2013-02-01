@@ -6,6 +6,7 @@
 #include "Eagle.h"
 #include "EagleDbSqlStatementType.h"
 #include "EagleDbSqlSelect.h"
+#include "EagleDbSqlInsert.h"
 
 /**
  The database instance is a wrapper for a EagleInstance.
@@ -54,21 +55,21 @@ void EagleDbInstance_Delete(EagleDbInstance *db);
  @param [in] db The database instance.
  @param [in] sql The SQL statement.
  */
-void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 
 /**
  Execute a SELECT statement.
  @param [in] db The database instance.
  @param [in] select The SELECT statement (compiled).
  */
-void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
+EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
 
 /**
  Execute a CREATE TABLE statement.
  @param [in] db The database instance.
  @param [in] table The table definition to create.
  */
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
+EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
 
 /**
  Print a result set (fancy).
@@ -99,5 +100,7 @@ EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
  @param [in] schema The schema.
  */
 void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
+
+EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert);
 
 #endif

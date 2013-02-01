@@ -63,4 +63,8 @@ int EagleDbTable_countColumns(EagleDbTable *table);
 
 EagleDbColumn* EagleDbTable_getColumn(EagleDbTable *table, int index);
 
+EagleDbColumn* EagleDbTable_getColumnByName(EagleDbTable *table, char *name);
+
+int EagleDbTable_getColumnIndex(EagleDbTable *table, char *name);
+
 #endif
