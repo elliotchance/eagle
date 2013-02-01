@@ -8,6 +8,31 @@
 #include "MemorySuite.h"
 #include "BenchSuite.h"
 #include "EagleLogger.h"
+#include "SQLFuzzSuite.h"
+
+CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc pClean, CUnitTests* (*testsFunction)())
+{
+    // add a suite to the registry
+    CU_pSuite pSuite = CU_add_suite(name, pInit, pClean);
+    if(NULL == pSuite) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+    
+    // add the tests to the suite
+    CUnitTests *tests = testsFunction();
+    for(int i = 0; i < tests->usedTests; ++i) {
+        CUnitTest *test = tests->tests[i];
+        if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
+            CU_cleanup_registry();
+            return CU_get_error();
+        }
+    }
+    
+    // clean up
+    CUnitTests_Delete(tests);
+    return CUE_SUCCESS;
+}
 
 /**
  * The main() function for setting up and running the tests.
@@ -26,115 +51,26 @@ int main(int argc, char **argv)
         return CU_get_error();
     }
 
-    {
-        // add a suite to the registry
-        CU_pSuite pSuite = CU_add_suite("MainSuite", MainSuite_init, MainSuite_clean);
-        if(NULL == pSuite) {
-            CU_cleanup_registry();
-            return CU_get_error();
-        }
-        
-        // add the tests to the suite
-        CUnitTests *tests = MainSuite_tests();
-        for(int i = 0; i < tests->usedTests; ++i) {
-            CUnitTest *test = tests->tests[i];
-            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
-                CU_cleanup_registry();
-                return CU_get_error();
-            }
-        }
-        
-        // clean up
-        CUnitTests_Delete(tests);
+    // add suites
+    if(CUE_SUCCESS != addSuite("MainSuite", MainSuite_init, MainSuite_clean, MainSuite_tests)) {
+        return CU_get_error();
     }
-    
-    {
-        // add a suite to the registry
-        CU_pSuite pSuite = CU_add_suite("DBSuite", DBSuite_init, DBSuite_clean);
-        if(NULL == pSuite) {
-            CU_cleanup_registry();
-            return CU_get_error();
-        }
-        
-        // add the tests to the suite
-        CUnitTests *tests = DBSuite_tests();
-        for(int i = 0; i < tests->usedTests; ++i) {
-            CUnitTest *test = tests->tests[i];
-            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
-                CU_cleanup_registry();
-                return CU_get_error();
-            }
-        }
-        
-        // clean up
-        CUnitTests_Delete(tests);
+    if(CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, DBSuite_tests)) {
+        return CU_get_error();
     }
-    
-    {
-        // add a suite to the registry
-        CU_pSuite pSuite = CU_add_suite("SQLSuite", SQLSuite_init, SQLSuite_clean);
-        if(NULL == pSuite) {
-            CU_cleanup_registry();
-            return CU_get_error();
-        }
-        
-        // add the tests to the suite
-        CUnitTests *tests = SQLSuite_tests();
-        for(int i = 0; i < tests->usedTests; ++i) {
-            CUnitTest *test = tests->tests[i];
-            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
-                CU_cleanup_registry();
-                return CU_get_error();
-            }
-        }
-        
-        // clean up
-        CUnitTests_Delete(tests);
+    if(CUE_SUCCESS != addSuite("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
+        return CU_get_error();
     }
-    
-    {
-        // add a suite to the registry
-        CU_pSuite pSuite = CU_add_suite("MemorySuite", MemorySuite_init, MemorySuite_clean);
-        if(NULL == pSuite) {
-            CU_cleanup_registry();
-            return CU_get_error();
-        }
-        
-        // add the tests to the suite
-        CUnitTests *tests = MemorySuite_tests();
-        for(int i = 0; i < tests->usedTests; ++i) {
-            CUnitTest *test = tests->tests[i];
-            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
-                CU_cleanup_registry();
-                return CU_get_error();
-            }
-        }
-        
-        // clean up
-        CUnitTests_Delete(tests);
+    if(CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
+        return CU_get_error();
     }
-    
-    if(argc > 1 && !strcmp(argv[1], "bench"))
-    {
-        // add a suite to the registry
-        CU_pSuite pSuite = CU_add_suite("BenchSuite", BenchSuite_init, BenchSuite_clean);
-        if(NULL == pSuite) {
-            CU_cleanup_registry();
+    if(CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
+        return CU_get_error();
+    }
+    if(argc > 1 && !strcmp(argv[1], "bench")) {
+        if(CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
             return CU_get_error();
         }
-        
-        // add the tests to the suite
-        CUnitTests *tests = BenchSuite_tests();
-        for(int i = 0; i < tests->usedTests; ++i) {
-            CUnitTest *test = tests->tests[i];
-            if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
-                CU_cleanup_registry();
-                return CU_get_error();
-            }
-        }
-        
-        // clean up
-        CUnitTests_Delete(tests);
     }
     
     // Run all tests using the CUnit Basic interface
