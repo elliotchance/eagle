@@ -791,6 +791,14 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
     return db;
 }
 
+void EagleInstanceTest_Cleanup(EagleDbInstance* db)
+{
+    EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
+    EagleDbTableData_Delete(db->schemas[0]->tables[0]);
+    EagleDbSchema_Delete(db->schemas[0]);
+    EagleDbInstance_Delete(db);
+}
+
 CUNIT_TEST(DBSuite, _INSERT_BadTableName)
 {
     EagleLogger_Get()->out = NULL;
@@ -799,6 +807,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadTableName)
     EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1) VALUES (123);");
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("No such table 'mytable2'");
+    
+    EagleInstanceTest_Cleanup(db);
 }
 
 CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
@@ -808,6 +818,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
     EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col2) VALUES (123);");
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("No such column 'col2' in table 'mytable'");
+    
+    EagleInstanceTest_Cleanup(db);
 }
 
 CUNIT_TEST(DBSuite, _INSERT_Good)
@@ -827,6 +839,9 @@ CUNIT_TEST(DBSuite, _INSERT_Good)
     p = EaglePageProvider_nextPage(td->providers[0]);
     CUNIT_ASSERT_NOT_NULL(p);
     CUNIT_VERIFY_EQUAL_INT(p->count, 1);
+    
+    EaglePage_Delete(p);
+    EagleInstanceTest_Cleanup(db);
 }
 
 CUnitTests* DBSuite_tests()

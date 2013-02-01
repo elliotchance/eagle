@@ -21,8 +21,8 @@ void EagleDbSqlInsert_Delete(EagleDbSqlInsert *insert)
         return;
     }
     
-    EagleLinkedList_Delete(insert->names);
-    EagleLinkedList_Delete(insert->values);
+    EagleLinkedList_DeleteWithItems(insert->names);
+    EagleLinkedList_DeleteWithItems(insert->values);
     EagleMemory_Free(insert->table);
     EagleMemory_Free(insert);
 }

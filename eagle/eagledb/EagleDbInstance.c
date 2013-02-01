@@ -278,6 +278,9 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     /* do the INSERT */
     EagleDbTableData_insert(td, tuple);
     
+    /* cleanup */
+    EagleDbTuple_Delete(tuple);
+    
 #ifndef CUNIT
     printf("INSERT\n\n");
 #endif
