@@ -23,6 +23,9 @@ integer [0-9]+
 "TABLE" return K_TABLE;
 "TEXT" return K_TEXT;
 "WHERE" return K_WHERE;
+"VALUES" return K_VALUES;
+"INSERT" return K_INSERT;
+"INTO" return K_INTO;
 
 "*" return T_ASTERISK;
 "+" return T_PLUS;
