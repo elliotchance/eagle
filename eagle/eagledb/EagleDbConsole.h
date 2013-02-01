@@ -17,8 +17,8 @@ typedef struct {
 } EagleDbConsole;
 
 /**
- Create a new console.
- @return New console instance.
+ * Create a new console.
+ * @return New console instance.
  */
 EagleDbConsole* EagleDbConsole_New(void);
 
@@ -35,8 +35,9 @@ void EagleDbConsole_run(EagleDbConsole *console);
 void EagleDbConsole_Delete(EagleDbConsole *console);
 
 /**
- http://stackoverflow.com/a/314422/1470961
- @return The line input from the user.
+ * Read a line from the user.
+ * http://stackoverflow.com/a/314422/1470961
+ * @return The line input from the user.
  */
 char* EagleDbConsole_GetLine(void);
 

@@ -47,7 +47,7 @@ EagleBoolean EagleDbParser_HasError(void)
     return !EagleLinkedList_isEmpty(EagleDbParser_Get()->errors);
 }
 
-char* EagleDbParser_AddError(void *ptr)
+void* EagleDbParser_AddError(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
     EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleTrue, NULL));
