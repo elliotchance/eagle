@@ -11,16 +11,15 @@ struct EagleInstance_;
 typedef struct {
     
     /**
-     The workers in this pool.
-     
-     @note All workers are managed by this object, if you delete this object you will also kill all the of the workers.
+     * The workers in this pool. All workers are managed by this object, if you delete this object you will also kill all
+     * the of the workers.
      */
     EAGLE_ATTR_MANAGED EagleWorker **workers;
     
     /**
-     The number of workers in this pool.
+     * The number of workers in this pool.
      */
-    int totalWorkers;
+    EAGLE_ATTR_NA int totalWorkers;
     
 } EagleWorkers;
 

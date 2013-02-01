@@ -34,12 +34,17 @@ struct EagleLinkedListItem_ {
 typedef struct EagleLinkedListItem_ EagleLinkedListItem;
 
 /**
- Initialise a new item to append to a linked list.
+ * Initialise a new item to append to a linked list.
+ * @param [in] obj The object.
+ * @param [in] freeObj Free the object when linked list item is freed.
+ * @param [in] free The free function.
+ * @return A new linked list item.
  */
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
 
 /**
- Free a linked list item.
+ * Free a linked list item.
+ * @param [in] item The item.
  */
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 

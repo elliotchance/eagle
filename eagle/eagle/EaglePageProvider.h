@@ -207,6 +207,7 @@ EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *dat
 /**
  * Private function. Add a record to a writable provider.
  * @param [in] epp The provider.
+ * @param [in] data The data to add to the stream.
  * @return EagleTrue on success.
  */
 EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);

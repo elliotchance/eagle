@@ -72,7 +72,8 @@ void EagleMemory_Mock(char *id);
 void EagleMemory_MockFinish(void);
 
 /**
- Get the number of times a mocked malloc has returned NULL since EagleMemory_MockInit().
+ * Get the number of times a mocked malloc has returned NULL since EagleMemory_MockInit().
+ * @return The number of mock invocations.
  */
 int EagleMemory_GetMockInvocations(void);
 

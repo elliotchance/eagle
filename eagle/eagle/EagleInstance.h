@@ -24,6 +24,7 @@ typedef struct EagleInstance_ EagleInstance;
  
  @param [in] totalWorkers The number of workers to launch, this does not include the main thread that will handle the
  connections and look after the workers.
+ @return New instance.
  */
 EagleInstance* EagleInstance_New(int totalWorkers);
 

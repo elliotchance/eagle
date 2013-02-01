@@ -38,8 +38,9 @@ typedef enum {
 } EagleLoggerSeverity;
 
 /**
- Translate an EagleLoggerSeverity value into its string representation.
- @return String representation of a severity.
+ * Translate an EagleLoggerSeverity value into its string representation.
+ * @param [in] severity The severity.
+ * @return String representation of a severity.
  */
 char* EagleLoggerSeverity_toString(EagleLoggerSeverity severity);
 

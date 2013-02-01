@@ -22,7 +22,8 @@ typedef struct {
 } EagleLock;
 
 /**
- Free a lock.
+ * Free a lock.
+ * @param [in] lock The lock.
  */
 void EagleLock_Delete(EagleLock *lock);
 
