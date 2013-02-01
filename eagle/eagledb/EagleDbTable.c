@@ -64,3 +64,32 @@ EagleDbColumn* EagleDbTable_getColumn(EagleDbTable *table, int index)
 {
     return EagleLinkedList_get(table->columns, index);
 }
+
+EagleDbColumn* EagleDbTable_getColumnByName(EagleDbTable *table, char *name)
+{
+    EagleLinkedListItem *cursor;
+    
+    for(cursor = EagleLinkedList_begin(table->columns); NULL != cursor; cursor = cursor->next) {
+        EagleDbColumn *col = (EagleDbColumn*) cursor->obj;
+        if(0 == strcmp(col->name, name)) {
+            return col;
+        }
+    }
+    
+    return NULL;
+}
+
+int EagleDbTable_getColumnIndex(EagleDbTable *table, char *name)
+{
+    EagleLinkedListItem *cursor;
+    int i;
+    
+    for(cursor = EagleLinkedList_begin(table->columns), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
+        EagleDbColumn *col = (EagleDbColumn*) cursor->obj;
+        if(0 == strcmp(col->name, name)) {
+            return i;
+        }
+    }
+    
+    return -1;
+}

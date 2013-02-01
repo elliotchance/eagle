@@ -586,7 +586,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
     
-    EagleDbInstance_executeCreateTable(db, table);
+    CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table));
     CUNIT_ASSERT_LAST_ERROR("Table 'mytable' created.");
     
     EagleDbTable_DeleteWithColumns(table);
@@ -597,7 +597,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);");
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
     CUNIT_ASSERT_LAST_ERROR("Table 'sometable' created.");
     
     EagleDbInstance_Delete(db);
@@ -607,7 +607,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);");
+    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);"));
     CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected IDENTIFIER, expecting K_TABLE");
     
     EagleDbInstance_Delete(db);
@@ -617,7 +617,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    EagleDbInstance_execute(db, "SELECT * FROM mytable;");
+    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "SELECT * FROM mytable;"));
     CUNIT_ASSERT_LAST_ERROR("mytable");
     
     EagleDbInstance_Delete(db);
@@ -775,11 +775,160 @@ CUNIT_TEST(DBSuite, EagleDbColumn_Delete)
     EagleDbColumn_Delete(NULL);
 }
 
+EagleDbInstance* EagleInstanceTest(int pageSize)
+{
+    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
+    EagleDbSchema_addTable(schema, td);
+    
+    return db;
+}
+
+void EagleInstanceTest_Cleanup(EagleDbInstance* db)
+{
+    EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
+    EagleDbTableData_Delete(db->schemas[0]->tables[0]);
+    EagleDbSchema_Delete(db->schemas[0]);
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadTableName)
+{
+    EagleLogger_Get()->out = NULL;
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("No such table 'mytable2'");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col2) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("No such column 'col2' in table 'mytable'");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_Good)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    // make sure there are no rows in the table
+    EagleDbTableData *td = EagleDbInstance_getTable(db, "mytable");
+    EaglePage *p = EaglePageProvider_nextPage(td->providers[0]);
+    CUNIT_ASSERT_NULL(p);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123);");
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", EagleLogger_LastEvent()->message);
+    }
+    
+    p = EaglePageProvider_nextPage(td->providers[0]);
+    CUNIT_ASSERT_NOT_NULL(p);
+    CUNIT_VERIFY_EQUAL_INT(p->count, 1);
+    
+    EaglePage_Delete(p);
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTable_getColumnIndex)
+{
+    EagleDbTable *table = EagleDbTable_New("bla");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("bla", EagleDataTypeInteger));
+    
+    CUNIT_ASSERT_EQUAL_INT(-1, EagleDbTable_getColumnIndex(table, "nope"));
+    
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlInsert_Delete)
+{
+    EagleDbSqlInsert_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadMatch)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1, col2) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("There are 2 columns and 1 values");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadColumn1)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadColumn2)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123 + 456) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadValue1)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123 + 456);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Expressions in VALUES are not yet supported for column 'col1'");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadValue2)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Only integers are supported for values");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadMatch));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlInsert_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_getColumnIndex));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_Good));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumnName));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadTableName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_DeleteRecursive));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_Delete));

@@ -180,6 +180,50 @@ free(cu_msg); \
 }\
 }
 
+/**
+ Assert a EagleBoolean value is True.
+ */
+#define CUNIT_ASSERT_TRUE(actual) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_ASSERT_TRUE: Expression \"%s\" is not true", #actual); \
+if(CU_assertImplementation((actual) == EagleTrue, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
+ Verify a EagleBoolean value is True.
+ */
+#define CUNIT_VERIFY_TRUE(actual) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_VERIFY_TRUE: Expression \"%s\" is not true", #actual); \
+if(CU_assertImplementation((actual) == EagleTrue, __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
+ Assert a EagleBoolean value is False.
+ */
+#define CUNIT_ASSERT_FALSE(actual) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_ASSERT_FALSE: Expression \"%s\" is not true", #actual); \
+if(CU_assertImplementation((actual) == EagleFalse, __LINE__, cu_msg, __FILE__, "", CU_TRUE)) { \
+free(cu_msg); \
+}\
+}
+
+/**
+ Verify a EagleBoolean value is False.
+ */
+#define CUNIT_VERIFY_FALSE(actual) { \
+char *cu_msg = (char*) malloc(1024); \
+sprintf(cu_msg, "CUNIT_VERIFY_FALSE: Expression \"%s\" is not true", #actual); \
+if(CU_assertImplementation((actual) == EagleFalse, __LINE__, cu_msg, __FILE__, "", CU_FALSE)) { \
+free(cu_msg); \
+}\
+}
+
 #define CUNIT_ASSERT_LAST_ERROR(msg) { EagleLoggerEvent *event = EagleLogger_LastEvent(); CUNIT_ASSERT_NOT_NULL(event); if(NULL != event) { CUNIT_ASSERT_EQUAL_STRING(event->message, msg); } }
 
 typedef struct {

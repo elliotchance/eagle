@@ -6,6 +6,7 @@
 #include "Eagle.h"
 #include "EagleDbSqlStatementType.h"
 #include "EagleDbSqlSelect.h"
+#include "EagleDbSqlInsert.h"
 
 typedef struct EagleDbInstance_ {
     
@@ -40,11 +41,11 @@ EagleDbInstance* EagleDbInstance_New(int pageSize);
  */
 void EagleDbInstance_Delete(EagleDbInstance *db);
 
-void EagleDbInstance_execute(EagleDbInstance *db, char *sql);
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, char *sql);
 
-void EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
+EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
 
-void EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
+EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
 
 void EagleDbInstance_PrintResults(EaglePlan *plan);
 
@@ -53,5 +54,7 @@ EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
 
 void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
+
+EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert);
 
 #endif
