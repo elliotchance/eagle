@@ -844,11 +844,88 @@ CUNIT_TEST(DBSuite, _INSERT_Good)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbTable_getColumnIndex)
+{
+    EagleDbTable *table = EagleDbTable_New("bla");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("bla", EagleDataTypeInteger));
+    
+    CUNIT_ASSERT_EQUAL_INT(-1, EagleDbTable_getColumnIndex(table, "nope"));
+    
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlInsert_Delete)
+{
+    EagleDbSqlInsert_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadMatch)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1, col2) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("There are 2 columns and 1 values");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadColumn1)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadColumn2)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123 + 456) VALUES (123);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadValue1)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123 + 456);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Expressions in VALUES are not yet supported for column 'col1'");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _INSERT_BadValue2)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Only integers are supported for values");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadMatch));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlInsert_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTable_getColumnIndex));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_Good));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumnName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadTableName));
