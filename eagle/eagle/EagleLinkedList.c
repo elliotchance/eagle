@@ -93,6 +93,9 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list)
     if(NULL == list) {
         return;
     }
+    if(EagleTrue == EagleLinkedList_isEmpty(list)) {
+        return;
+    }
     
     {
         EagleLinkedListItem *p, *next;
@@ -102,6 +105,8 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list)
             next = p->next;
             EagleLinkedListItem_Delete(p);
         }
+        list->first = list->last = NULL;
+        list->length = 0;
         
         EagleSynchronizer_Unlock(list->modifyLock);
     }
@@ -151,7 +156,7 @@ EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
 
 EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
 {
-    EagleLinkedListItem *next;
+    EagleLinkedListItem *next, *r;
     int i;
     
     if(EagleLinkedList_length(list) == 0) {
@@ -161,6 +166,7 @@ EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
         EagleLinkedListItem *item = list->first;
         list->first = list->last = NULL;
         --list->length;
+        item->next = NULL;
         return item;
     }
     
@@ -173,7 +179,9 @@ EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
     --list->length;
     list->last = next;
     next->next->next = NULL;
-    return next->next;
+    r = next->next;
+    list->last->next = NULL;
+    return r;
 }
 
 EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)

@@ -821,6 +821,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem3);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 2);
@@ -828,6 +829,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem2);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 901);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 1);
@@ -835,6 +837,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem1);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 678);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);

@@ -50,7 +50,7 @@ char *getSQLFuzz(char *start, int total)
 CUNIT_TEST(SQLFuzzSuite, All)
 {
     // setup
-    int pageSize = 10, totalFuzzTests = 100;
+    int pageSize = 10, totalFuzzTests = 133;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);

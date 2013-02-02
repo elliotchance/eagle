@@ -92,7 +92,7 @@ char* EagleDbParser_AddError(void *ptr);
 /**
  Push the return value onto the stack.
  */
-void* EagleDbParser_AddReturn(void *ptr);
+void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*));
 
 /**
  Return the last yyreturn and decrement back the stack.
