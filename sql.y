@@ -15,6 +15,13 @@
     #include "EagleDbSqlInsert.h"
     
     int yylex(void);
+    
+    #define RAISE_ERROR(fmt, ...) { \
+    char msg[1024]; \
+    sprintf(msg, fmt, __VA_ARGS__); \
+    yyerror(msg); \
+    YYERROR; \
+    }
 
 %}
 
@@ -41,7 +48,7 @@
 %token T_ASTERISK
 %token T_PLUS
 %token T_EQUALS
-%token T_END
+%token T_END ";"
 %token T_COMMA
 %token T_BRACKET_OPEN
 %token T_BRACKET_CLOSE
@@ -69,6 +76,13 @@ input:
     statement {
         EagleDbParser *p = EagleDbParser_Get();
         p->yyparse_ast = EagleDbParser_PopReturn();
+        RAISE_ERROR("%s", "Missing terminating semi-colon.");
+    }
+    error
+    |
+    statement {
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yyparse_ast = EagleDbParser_PopReturn();
     }
     T_END END
 ;
@@ -78,19 +92,16 @@ input:
  */
 statement:
     select_statement {
-        /* bubble up yyreturn */
         EagleDbParser *p = EagleDbParser_Get();
         p->yystatementtype = EagleDbSqlStatementTypeSelect;
     }
     |
     create_table_statement {
-        /* bubble up yyreturn */
         EagleDbParser *p = EagleDbParser_Get();
         p->yystatementtype = EagleDbSqlStatementTypeCreateTable;
     }
     |
     insert_statement {
-        /* bubble up yyreturn */
         EagleDbParser *p = EagleDbParser_Get();
         p->yystatementtype = EagleDbSqlStatementTypeInsert;
     }
@@ -200,19 +211,40 @@ next_column_definition:
     next_column_definition
 ;
 
+keyword:
+    K_CREATE | K_FROM | K_INTEGER | K_SELECT | K_TABLE | K_TEXT | K_WHERE | K_VALUES | K_INSERT | K_INTO
+;
+
+table_name:
+    keyword {
+        //RAISE_ERROR("You cannot use a keyword (%s) for a table name.", EagleDbParser_LastToken());
+        EagleDbParser_AddReturn(strdup(EagleDbParser_LastToken()));
+    }
+    |
+    IDENTIFIER {
+        EagleDbParser_AddReturn(strdup(EagleDbParser_LastToken()));
+    }
+;
+
 /*
  K_SELECT column_expression_list K_FROM IDENTIFIER where_expression
  @return EagleDbSqlSelect
  */
 select_statement:
-    K_SELECT column_expression_list error {
-        yyerror("Expected FROM after column list.");
-        YYABORT;
+    K_SELECT column_expression_list {
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeSelect;
+        
+        EagleLinkedList *last = (EagleLinkedList*) EagleDbParser_PopReturn();
+        EagleLinkedList_DeleteWithItems(last);
+        RAISE_ERROR("%s", "Expected FROM after column list.");
     }
+    error
     |
     K_SELECT error {
-        yyerror("Expected column list after SELECT.");
-        YYABORT;
+        EagleDbParser *p = EagleDbParser_Get();
+        p->yystatementtype = EagleDbSqlStatementTypeSelect;
+        RAISE_ERROR("%s", "Expected column list after SELECT.");
     }
     |
     K_SELECT column_expression_list {
@@ -220,8 +252,9 @@ select_statement:
         select->selectExpressions = EagleDbParser_PopReturn();
         EagleDbParser_AddReturn(select);
     }
-    K_FROM IDENTIFIER {
-        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = strdup(EagleDbParser_LastToken());
+    K_FROM table_name {
+        char *last = EagleDbParser_PopReturn();
+        ((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName = last;
     }
     where_expression {
         void *last = EagleDbParser_PopReturn();
@@ -235,13 +268,8 @@ select_statement:
  */
 column_expression_list:
     column_expression error {
-        // free previous memory
         EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) EagleDbParser_PopReturn());
-
-        char msg[1024];
-        sprintf(msg, "Error at '%s'", EagleDbParser_LastToken());
-        yyerror(msg);
-        YYABORT;
+        RAISE_ERROR("Error at '%s'", EagleDbParser_LastToken());
     }
     |
     column_expression {
@@ -288,13 +316,10 @@ next_column_expression:
  */
 where_expression:
     {
-        /* no where clause */
         EagleDbParser_AddReturn(NULL);
     }
     |
-    K_WHERE expression {
-        /* bubble up expression */
-    }
+    K_WHERE expression
 ;
 
 /*
@@ -304,16 +329,10 @@ where_expression:
 expression:
     value error {
         EagleDbSqlExpression_Delete((EagleDbSqlExpression*) EagleDbParser_PopReturn());
-
-        char msg[1024];
-        sprintf(msg, "END '%s'", EagleDbParser_LastToken());
-        yyerror(msg);
-        YYABORT;
+        RAISE_ERROR("Error at '%s'", EagleDbParser_LastToken());
     }
     |
-    value {
-        /* bubble up return */
-    }
+    value
     |
     value {
         EagleDbSqlExpression *last = EagleDbParser_PopReturn();

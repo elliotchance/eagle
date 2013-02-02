@@ -50,7 +50,7 @@ char *getSQLFuzz(char *start, int total)
 CUNIT_TEST(SQLFuzzSuite, All)
 {
     // setup
-    int pageSize = 10, totalFuzzTests = 20;
+    int pageSize = 10, totalFuzzTests = 30;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
@@ -64,6 +64,7 @@ CUNIT_TEST(SQLFuzzSuite, All)
     
     // begin fuzz testing
     srand(0);
+    //EagleLogger_Get()->out = stderr;
     for(int i = 0; i < totalFuzzTests; ++i) {
         char *sql = getSQLFuzz("SELECT", 3);
         //fprintf(stderr, "\n%d: %s\n", i, sql);

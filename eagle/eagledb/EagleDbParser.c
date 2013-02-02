@@ -100,17 +100,7 @@ void EagleDbParser_Init()
 void EagleDbParser_Finish()
 {
     EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedListItem *next;
     
-    EagleBoolean hasError = EagleDbParser_HasError();
-    for(next = p->returns->first; NULL != next; next = next->next) {
-        next->freeObj = hasError;
-        /*EagleLinkedList_deleteObject(p->returns, next->obj);*/
-    }
-    
-    if(hasError) {
-        /*EagleLinkedList_DeleteItems(p->returns);*/
-    }
     EagleLinkedList_Delete(p->returns);
     EagleLinkedList_DeleteWithItems(p->errors);
     
