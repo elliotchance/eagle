@@ -16,6 +16,12 @@
     
     int yylex(void);
     
+    #define ADD_ERROR(fmt, ...) { \
+    char msg[1024]; \
+    sprintf(msg, fmt, __VA_ARGS__); \
+    yyerror(msg); \
+    }
+    
     #define RAISE_ERROR(fmt, ...) { \
     char msg[1024]; \
     sprintf(msg, fmt, __VA_ARGS__); \
@@ -76,9 +82,8 @@ input:
     statement {
         EagleDbParser *p = EagleDbParser_Get();
         p->yyparse_ast = EagleDbParser_PopReturn();
-        RAISE_ERROR("%s", "Missing terminating semi-colon.");
     }
-    error
+    END
     |
     statement {
         EagleDbParser *p = EagleDbParser_Get();
@@ -216,9 +221,14 @@ keyword:
 ;
 
 table_name:
+    error {
+        ADD_ERROR("%s", "Expected table name");
+        EagleDbParser_AddReturn(NULL);
+    }
+    |
     keyword {
-        //RAISE_ERROR("You cannot use a keyword (%s) for a table name.", EagleDbParser_LastToken());
-        EagleDbParser_AddReturn(strdup(EagleDbParser_LastToken()));
+        ADD_ERROR("You cannot use the keyword \"%s\" for a table name.", EagleDbParser_LastToken());
+        EagleDbParser_AddReturn(NULL);
     }
     |
     IDENTIFIER {
