@@ -64,9 +64,9 @@ int main(int argc, char **argv)
     if(CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
         return CU_get_error();
     }
-    /*if(CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
+    if(CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
         return CU_get_error();
-    }*/
+    }
     if(argc > 1 && !strcmp(argv[1], "bench")) {
         if(CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
             return CU_get_error();

@@ -965,6 +965,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject1)
     CUNIT_ASSERT_NULL(list->last);
     
     EagleLinkedList_DeleteWithItems(list);
+    EagleMemory_Free(obj1);
 }
 
 CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject2)

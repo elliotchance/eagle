@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "EagleDbInstance.h"
 #include "EagleLogger.h"
+#include "EagleDbParser.h"
 
 char *getSQLFuzz(char *start, int total)
 {
@@ -49,7 +50,7 @@ char *getSQLFuzz(char *start, int total)
 CUNIT_TEST(SQLFuzzSuite, All)
 {
     // setup
-    int pageSize = 10, totalFuzzTests = 1000;
+    int pageSize = 10, totalFuzzTests = 20;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
@@ -65,8 +66,7 @@ CUNIT_TEST(SQLFuzzSuite, All)
     srand(0);
     for(int i = 0; i < totalFuzzTests; ++i) {
         char *sql = getSQLFuzz("SELECT", 3);
-        fprintf(stderr, "\n%d: %s", i, sql);
-        fflush(stderr);
+        //fprintf(stderr, "\n%d: %s\n", i, sql);
         EagleBoolean success = EagleDbInstance_execute(db, sql);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);

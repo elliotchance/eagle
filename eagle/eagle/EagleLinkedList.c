@@ -49,6 +49,7 @@ void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item)
     }
     
     EagleSynchronizer_Lock(list->modifyLock);
+    item->next = NULL;
     if(NULL == list->last) {
         list->last = list->first = item;
     }
