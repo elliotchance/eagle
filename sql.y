@@ -324,6 +324,11 @@ where_expression:
         EagleDbParser_AddReturn(NULL, NULL);
     }
     |
+    K_WHERE error {
+        free(((EagleDbSqlSelect*) EagleDbParser_CurrentReturn())->tableName);
+        RAISE_ERROR("%s", "Syntax error in WHERE clause.");
+    }
+    |
     K_WHERE expression
 ;
 

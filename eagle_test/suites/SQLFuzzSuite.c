@@ -5,38 +5,38 @@
 #include "EagleLogger.h"
 #include "EagleDbParser.h"
 
+// fuzz tokens
+const char *tokens[] = {
+    // keywords
+    "CREATE",  // K_CREATE
+    "FROM",    // K_FROM
+    "INT",     // K_INTEGER
+    "INTEGER", // K_INTEGER
+    "SELECT",  // K_SELECT
+    "TABLE",   // K_TABLE
+    "TEXT",    // K_TEXT
+    "WHERE",   // K_WHERE
+    "VALUES",  // K_VALUES
+    "INSERT",  // K_INSERT
+    "INTO",    // K_INTO
+    
+    // tokens
+    "*", // T_ASTERISK
+    "+", // T_PLUS
+    "=", // T_EQUALS
+    ";", // T_END
+    ",", // T_COMMA
+    "(", // T_BRACKET_OPEN
+    ")", // T_BRACKET_CLOSE
+    
+    // dynamic
+    "SomeColumn", // IDENTIFIER
+    "1234",       // INTEGER
+};
+const int totalTokens = sizeof(tokens) / sizeof(char*);
+
 char *getSQLFuzz(char *start, int total)
 {
-    // fuzz tokens
-    char *tokens[] = {
-        // keywords
-        "CREATE",  // K_CREATE
-        "FROM",    // K_FROM
-        "INT",     // K_INTEGER
-        "INTEGER", // K_INTEGER
-        "SELECT",  // K_SELECT
-        "TABLE",   // K_TABLE
-        "TEXT",    // K_TEXT
-        "WHERE",   // K_WHERE
-        "VALUES",  // K_VALUES
-        "INSERT",  // K_INSERT
-        "INTO",    // K_INTO
-        
-        // tokens
-        "*", // T_ASTERISK
-        "+", // T_PLUS
-        "=", // T_EQUALS
-        ";", // T_END
-        ",", // T_COMMA
-        "(", // T_BRACKET_OPEN
-        ")", // T_BRACKET_CLOSE
-        
-        // dynamic
-        "SomeColumn", // IDENTIFIER
-        "1234",       // INTEGER
-    };
-    int totalTokens = sizeof(tokens) / sizeof(char*);
-    
     // build SQL
     char *sql = (char*) malloc(1024);
     sprintf(sql, "%s", start);
@@ -50,7 +50,7 @@ char *getSQLFuzz(char *start, int total)
 CUNIT_TEST(SQLFuzzSuite, All)
 {
     // setup
-    int pageSize = 10, totalFuzzTests = 133;
+    int pageSize = 10, totalFuzzTests = 10000, length = 5;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
@@ -64,10 +64,12 @@ CUNIT_TEST(SQLFuzzSuite, All)
     
     // begin fuzz testing
     srand(0);
-    //EagleLogger_Get()->out = stderr;
     for(int i = 0; i < totalFuzzTests; ++i) {
-        char *sql = getSQLFuzz("SELECT", 3);
-        //fprintf(stderr, "\n%d: %s\n", i, sql);
+        char *sql = getSQLFuzz("SELECT", length);
+        /*if(i == totalFuzzTests - 1) {
+            EagleLogger_Get()->out = stderr;
+            fprintf(stderr, "\n%d: %s\n", i, sql);
+        }*/
         EagleBoolean success = EagleDbInstance_execute(db, sql);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);
