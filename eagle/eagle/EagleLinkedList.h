@@ -27,6 +27,11 @@ struct EagleLinkedListItem_ {
      */
     EAGLE_ATTR_NA void (*free)(void *obj);
     
+    /**
+     A optional description of the item.
+     */
+    EAGLE_ATTR_PROVIDED char *description;
+    
 };
 typedef struct EagleLinkedListItem_ EagleLinkedListItem;
 
@@ -56,6 +61,8 @@ typedef struct {
 } EagleLinkedList;
 
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
+EagleLinkedListItem* EagleLinkedListItem_NewWithDescription(void *obj, EagleBoolean freeObj, void (*free)(void *obj), char *description);
 
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
 
@@ -111,5 +118,7 @@ void** EagleLinkedList_toArray(EagleLinkedList *list, int *size);
 void* EagleLinkedList_get(EagleLinkedList *list, int index);
 
 void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
+EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
 
 #endif
