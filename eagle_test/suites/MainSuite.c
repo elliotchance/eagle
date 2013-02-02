@@ -890,7 +890,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_get)
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt2)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
     
     CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
     

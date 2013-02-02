@@ -67,10 +67,19 @@ void* EagleDbParser_AddReturn(void *ptr)
     return ptr;
 }
 
-void* EagleDbParser_AddObject(void *ptr, void (*free)(void*))
+void* EagleDbParser_AddObject(void *ptr, void (*free)(void*), char *file, int line)
 {
+    /*char *description;
     EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedList_addObject(p->objects, ptr, EagleTrue, free);
+    EagleLinkedListItem *item;
+    
+    description = (char*) EagleMemory_Allocate("EagleDbParser_AddObject.1", 256);
+    if(NULL != description) {
+        sprintf(description, "%s:%d", file, line);
+    }
+    
+    item = EagleLinkedListItem_NewWithDescription(ptr, EagleTrue, free, description);
+    EagleLinkedList_add(p->objects, item);*/
     return ptr;
 }
 
@@ -112,11 +121,12 @@ void EagleDbParser_Finish()
     EagleBoolean hasError = EagleDbParser_HasError();
     for(next = p->objects->first; NULL != next; next = next->next) {
         next->freeObj = hasError;
+        EagleLinkedList_deleteObject(p->returns, next->obj);
     }
     EagleLinkedList_DeleteWithItems(p->objects);
     
     if(hasError) {
-        EagleLinkedList_DeleteItems(p->returns);
+        /*EagleLinkedList_DeleteItems(p->returns);*/
     }
     EagleLinkedList_Delete(p->returns);
     EagleLinkedList_DeleteWithItems(p->errors);

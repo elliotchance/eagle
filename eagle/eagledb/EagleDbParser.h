@@ -114,6 +114,6 @@ void* EagleDbParser_CurrentReturn(void);
  */
 EagleBoolean EagleDbParser_HasError(void);
 
-void* EagleDbParser_AddObject(void *ptr, void (*free)(void*));
+void* EagleDbParser_AddObject(void *ptr, void (*free)(void*), char *file, int line);
 
 #endif
