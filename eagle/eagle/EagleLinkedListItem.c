@@ -25,6 +25,10 @@ EagleLinkedListItem* EagleLinkedListItem_NewWithDescription(void *obj, EagleBool
 
 void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
 {
+    if(NULL == item) {
+        return;
+    }
+    
     if(item->freeObj) {
         if(NULL == item->free) {
             EagleMemory_Free(item->obj);

@@ -64,7 +64,7 @@ EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function),
 
 /**
  * Delete an operation.
- * @param epo The instance.
+ * @param [in] epo The instance.
  */
 void EaglePlanOperation_Delete(EaglePlanOperation *epo);
 

@@ -38,6 +38,9 @@ function validateFile($file)
 	
 	$xml = simplexml_load_file($file);
 	
+	if(!isset($xml->compounddef->sectiondef->memberdef)) {
+		return;
+	}
 	foreach($xml->compounddef->sectiondef->memberdef as $member) {
 		// is this a delete function?
 		if(strpos((string) $member->name, "_Delete") !== false) {

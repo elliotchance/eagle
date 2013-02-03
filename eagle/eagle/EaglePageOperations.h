@@ -1,6 +1,9 @@
 #ifndef eagle_EaglePageOperations_h
 #define eagle_EaglePageOperations_h
 
+/**
+ Function pointer.
+ */
 #define EaglePageOperationFunction(ptr) void (*ptr)(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 
 #include "EaglePage.h"

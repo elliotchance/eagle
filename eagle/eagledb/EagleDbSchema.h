@@ -9,10 +9,19 @@
  */
 extern const char *EagleDbSchema_DefaultSchemaName;
 
+/**
+ A database schema definition.
+ */
 typedef struct {
     
+    /**
+     The number of allocated tables.
+     */
     EAGLE_ATTR_NA int allocatedTables;
     
+    /**
+     The number of used tables.
+     */
     EAGLE_ATTR_NA int usedTables;
     
     /**
@@ -21,6 +30,9 @@ typedef struct {
      */
     EAGLE_ATTR_SEMI_MANAGED EagleDbTableData **tables;
     
+    /**
+     Schema name.
+     */
     EAGLE_ATTR_MANAGED char *name;
     
 } EagleDbSchema;

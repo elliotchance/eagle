@@ -101,6 +101,12 @@ EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
  */
 void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
 
+/**
+ Execute an INSERT statement.
+ @param [in] db Database instance.
+ @param [in] insert INSERT statement.
+ @return EagleTrue on success.
+ */
 EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert);
 
 #endif

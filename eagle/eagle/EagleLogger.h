@@ -44,15 +44,15 @@ EagleLogger* EagleLogger_Get(void);
 
 /**
  * Log an event.
- * @param severity The severity.
- * @param message The message.
+ * @param [in] severity The severity.
+ * @param [in] message The message.
  * @return The event instance that was created.
  */
 EagleLoggerEvent* EagleLogger_Log(EagleLoggerSeverity severity, char *message);
 
 /**
  * Log an event with the default logger.
- * @param event The event.
+ * @param [in] event The event.
  */
 void EagleLogger_LogEvent(EagleLoggerEvent *event);
 
@@ -75,17 +75,17 @@ EagleLogger* EagleLogger_New(FILE *out);
 
 /**
  * Log an event.
- * @param logger The logger.
- * @param severity The severity.
- * @param message The message.
+ * @param [in] logger The logger.
+ * @param [in] severity The severity.
+ * @param [in] message The message.
  * @return The event instance that was created.
  */
 EagleLoggerEvent* EagleLogger_log(EagleLogger* logger, EagleLoggerSeverity severity, char *message);
 
 /**
  * Log an event.
- * @param logger The logger,
- * @param event The event.
+ * @param [in] logger The logger,
+ * @param [in] event The event.
  */
 void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event);
 
@@ -97,7 +97,7 @@ EagleLoggerEvent* EagleLogger_LastEvent(void);
 
 /**
  * Get the last event from a logger.
- * @param logger The logger.
+ * @param [in] logger The logger.
  * @return The last event or NULL if there have been no events.
  */
 EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger);

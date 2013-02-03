@@ -13,6 +13,7 @@
 typedef struct {
     
     /**
+     Header.
      @see EagleDbSqlExpressionHeader
      */
     EagleDbSqlExpressionHeader;
@@ -50,6 +51,12 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
  */
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr);
 
+/**
+ * Free a binary expression (recursively).
+ * @note It is safer to use EagleDbSqlExpression_DeleteRecursive() since it will automatically use the correct Delete
+ *       function.
+ * @param [in] expr The instance.
+ */
 void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr);
 
 /**

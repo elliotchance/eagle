@@ -3,8 +3,19 @@
 #include <strings.h>
 #include "EagleMemory.h"
 
+/**
+ The current mocks.
+ */
 static char **EagleMemory_Mocks = NULL;
+
+/**
+ The number of mocks in use.
+ */
 static int EagleMemory_MocksInUse = 0;
+
+/**
+ The number of times a mocked malloc() has been invoked.
+ */
 static int EagleMemory_MockInvocations = 0;
 
 void* EagleMemory_Allocate(char *id, size_t size)

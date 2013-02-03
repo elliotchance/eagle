@@ -56,6 +56,7 @@ typedef struct EaglePage_ EaglePage;
  @param [in] recordOffset An arbitrary number stored in the page. This number is used as an offset when calculating the
  record ID of a given record inside a page. If you are unsure as to what this value should be then you can use 0.
  @param [in] freeData If EagleTrue the \p data will be freed with the page.
+ @return A new page.
  */
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData);
 

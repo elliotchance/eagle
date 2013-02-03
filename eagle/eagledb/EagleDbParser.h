@@ -101,6 +101,7 @@ void* EagleDbParser_AddError(void *ptr);
 /**
  * Push the return value onto the stack.
  * @param [in] ptr The object.
+ * @param [in] free The function responsible for freeing the pointer.
  * @return \p ptr
  */
 void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*));

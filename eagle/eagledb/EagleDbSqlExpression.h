@@ -39,6 +39,7 @@ extern const int EagleDbSqlExpression_ERROR;
 typedef struct {
     
     /**
+     Header.
      @see EagleDbSqlExpressionHeader
      */
     EagleDbSqlExpressionHeader;

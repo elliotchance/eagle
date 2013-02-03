@@ -11,18 +11,24 @@
 typedef struct {
     
     /**
+     Header.
      @see EagleDbSqlExpressionHeader
      */
     EagleDbSqlExpressionHeader;
     
     /**
+     Value type.
      @see EagleDbSqlValueType
      */
     EAGLE_ATTR_NA EagleDbSqlValueType type;
     
+    /**
+     Contains the actual value, depending on the type.
+     */
     union {
         
         /**
+         Integer.
          @see EagleDbSqlValueTypeInteger
          */
         EAGLE_ATTR_NA int intValue;
