@@ -28,6 +28,7 @@ void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item)
     }
     
     EagleSynchronizer_Lock(list->modifyLock);
+    item->next = NULL;
     if(NULL == list->last) {
         list->last = list->first = item;
     }
@@ -71,6 +72,9 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list)
     if(NULL == list) {
         return;
     }
+    if(EagleTrue == EagleLinkedList_isEmpty(list)) {
+        return;
+    }
     
     {
         EagleLinkedListItem *p, *next;
@@ -80,6 +84,8 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list)
             next = p->next;
             EagleLinkedListItem_Delete(p);
         }
+        list->first = list->last = NULL;
+        list->length = 0;
         
         EagleSynchronizer_Unlock(list->modifyLock);
     }
@@ -115,7 +121,7 @@ EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
 
 EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
 {
-    EagleLinkedListItem *next;
+    EagleLinkedListItem *next, *r;
     int i;
     
     if(EagleLinkedList_length(list) == 0) {
@@ -125,6 +131,7 @@ EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
         EagleLinkedListItem *item = list->first;
         list->first = list->last = NULL;
         --list->length;
+        item->next = NULL;
         return item;
     }
     
@@ -137,7 +144,9 @@ EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
     --list->length;
     list->last = next;
     next->next->next = NULL;
-    return next->next;
+    r = next->next;
+    list->last->next = NULL;
+    return r;
 }
 
 EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)
@@ -190,4 +199,60 @@ void* EagleLinkedList_get(EagleLinkedList *list, int index)
 void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj))
 {
     EagleLinkedList_add(list, EagleLinkedListItem_New(obj, freeObj, free));
+}
+
+EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj)
+{
+    EagleLinkedListItem *last, *cursor;
+    
+    /* problems */
+    if(NULL == obj) {
+        return EagleFalse;
+    }
+    if(EagleTrue == EagleLinkedList_isEmpty(list)) {
+        return EagleFalse;
+    }
+    
+    /* one item */
+    if(EagleLinkedList_length(list) == 1) {
+        if(list->first->obj == obj) {
+            EagleLinkedListItem_Delete(list->first);
+            list->length = 0;
+            list->first = NULL;
+            list->last = NULL;
+            
+            return EagleTrue;
+        }
+        return EagleFalse;
+    }
+    
+    /* begin item */
+    if(EagleLinkedList_begin(list)->obj == obj) {
+        EagleLinkedListItem *second = list->first->next;
+        
+        EagleLinkedListItem_Delete(list->first);
+        --list->length;
+        list->first = second;
+        
+        return EagleTrue;
+    }
+    
+    /* some item after the first */
+    last = EagleLinkedList_begin(list);
+    for(cursor = last->next; NULL != cursor; cursor = cursor->next, last = last->next) {
+        if(obj == cursor->obj) {
+            /* if this is the last item we need to fix the last pointer */
+            if(list->last == cursor) {
+                list->last = last;
+            }
+            
+            last->next = cursor->next;
+            EagleLinkedListItem_Delete(cursor);
+            --list->length;
+            return EagleTrue;
+        }
+    }
+    
+    /* object not found on list */
+    return EagleFalse;
 }

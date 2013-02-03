@@ -794,6 +794,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_isEmpty(list), EagleFalse);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem3);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 2);
@@ -801,6 +802,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem2);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 901);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 1);
@@ -808,6 +810,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_pop)
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_begin(list), origItem1);
         CUNIT_VERIFY_EQUAL_PTR(EagleLinkedList_end(list), origItem1);
         CUNIT_VERIFY_EQUAL_INT(*((int*) item->obj), 678);
+        CUNIT_VERIFY_NULL(EagleLinkedList_end(list)->next);
         
         item = EagleLinkedList_pop(list);
         CUNIT_VERIFY_EQUAL_INT(EagleLinkedList_length(list), 0);
@@ -863,7 +866,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_get)
 CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt2)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
+    EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
     
     CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
     
@@ -916,11 +919,134 @@ CUNIT_TEST(MainSuite, EagleLock_Delete)
     EagleLock_Delete(NULL);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject1)
+{
+    int *obj1 = EagleData_Int(123);
+    int *obj2 = EagleData_Int(456);
+    EagleLinkedList *list = EagleLinkedList_New();
+    
+    // NULL object
+    CUNIT_ASSERT_FALSE(EagleLinkedList_deleteObject(list, NULL));
+    CUNIT_ASSERT_EQUAL_INT(0, EagleLinkedList_length(list));
+    
+    // empty list
+    CUNIT_ASSERT_FALSE(EagleLinkedList_deleteObject(list, obj1));
+    CUNIT_ASSERT_EQUAL_INT(0, EagleLinkedList_length(list));
+    
+    // one object
+    EagleLinkedList_addObject(list, obj1, EagleFalse, NULL);
+    CUNIT_ASSERT_EQUAL_INT(1, EagleLinkedList_length(list));
+    
+    CUNIT_ASSERT_FALSE(EagleLinkedList_deleteObject(list, obj2));
+    CUNIT_ASSERT_EQUAL_INT(1, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NOT_NULL(list->first);
+    CUNIT_ASSERT_NOT_NULL(list->last);
+    
+    CUNIT_ASSERT_TRUE(EagleLinkedList_deleteObject(list, obj1));
+    CUNIT_ASSERT_EQUAL_INT(0, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NULL(list->first);
+    CUNIT_ASSERT_NULL(list->last);
+    
+    EagleLinkedList_DeleteWithItems(list);
+    EagleMemory_Free(obj1);
+    EagleMemory_Free(obj2);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject2)
+{
+    int *obj1 = EagleData_Int(123);
+    int *obj2 = EagleData_Int(456);
+    int *obj3 = EagleData_Int(789);
+    int *obj4 = EagleData_Int(789);
+    EagleLinkedList *list = EagleLinkedList_New();
+    
+    // add objects
+    EagleLinkedList_addObject(list, obj1, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj2, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj3, EagleTrue, NULL);
+    CUNIT_ASSERT_EQUAL_INT(3, EagleLinkedList_length(list));
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj1);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj3);
+    
+    // object that doesn't exist
+    CUNIT_ASSERT_FALSE(EagleLinkedList_deleteObject(list, obj4));
+    CUNIT_ASSERT_EQUAL_INT(3, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NOT_NULL(list->first);
+    CUNIT_ASSERT_NOT_NULL(list->last);
+    
+    // first object
+    CUNIT_ASSERT_TRUE(EagleLinkedList_deleteObject(list, obj1));
+    CUNIT_ASSERT_EQUAL_INT(2, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NOT_NULL(list->first);
+    CUNIT_ASSERT_NOT_NULL(list->last);
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj2);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj3);
+    
+    EagleLinkedList_DeleteWithItems(list);
+    EagleMemory_Free(obj4);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject3)
+{
+    int *obj1 = EagleData_Int(123);
+    int *obj2 = EagleData_Int(456);
+    int *obj3 = EagleData_Int(789);
+    EagleLinkedList *list = EagleLinkedList_New();
+    
+    // add objects
+    EagleLinkedList_addObject(list, obj1, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj2, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj3, EagleTrue, NULL);
+    CUNIT_ASSERT_EQUAL_INT(3, EagleLinkedList_length(list));
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj1);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj3);
+    
+    // middle object
+    CUNIT_ASSERT_TRUE(EagleLinkedList_deleteObject(list, obj2));
+    CUNIT_ASSERT_EQUAL_INT(2, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NOT_NULL(list->first);
+    CUNIT_ASSERT_NOT_NULL(list->last);
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj1);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj3);
+    
+    EagleLinkedList_DeleteWithItems(list);
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject4)
+{
+    int *obj1 = EagleData_Int(123);
+    int *obj2 = EagleData_Int(456);
+    int *obj3 = EagleData_Int(789);
+    EagleLinkedList *list = EagleLinkedList_New();
+    
+    // add objects
+    EagleLinkedList_addObject(list, obj1, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj2, EagleTrue, NULL);
+    EagleLinkedList_addObject(list, obj3, EagleTrue, NULL);
+    CUNIT_ASSERT_EQUAL_INT(3, EagleLinkedList_length(list));
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj1);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj3);
+    
+    // last object
+    CUNIT_ASSERT_TRUE(EagleLinkedList_deleteObject(list, obj3));
+    CUNIT_ASSERT_EQUAL_INT(2, EagleLinkedList_length(list));
+    CUNIT_ASSERT_NOT_NULL(list->first);
+    CUNIT_ASSERT_NOT_NULL(list->last);
+    CUNIT_ASSERT_EQUAL_PTR(list->first->obj, obj1);
+    CUNIT_ASSERT_EQUAL_PTR(list->last->obj, obj2);
+    
+    EagleLinkedList_DeleteWithItems(list);
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject4));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLock_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_Delete));

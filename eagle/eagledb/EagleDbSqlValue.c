@@ -54,7 +54,7 @@ void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
     if(EagleDbSqlValueTypeIdentifier == value->type) {
         EagleMemory_Free(value->value.identifier);
     }
-    EagleMemory_Free((void*) value);
+    EagleMemory_Free(value);
 }
 
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value)

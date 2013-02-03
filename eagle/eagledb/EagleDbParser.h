@@ -30,11 +30,6 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED EagleLinkedList *returns;
     
-    /**
-     A managed stack of allocated objects to be freed when an error occurs.
-     */
-    EAGLE_ATTR_MANAGED EagleLinkedList *objects;
-    
 } EagleDbParser;
 
 /**
@@ -108,7 +103,7 @@ void* EagleDbParser_AddError(void *ptr);
  * @param [in] ptr The object.
  * @return \p ptr
  */
-void* EagleDbParser_AddReturn(void *ptr);
+void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*));
 
 /**
  * Return the last yyreturn and decrement back the stack.
@@ -127,13 +122,5 @@ void* EagleDbParser_CurrentReturn(void);
  * @return EagleTrue if the parser encountered an error.
  */
 EagleBoolean EagleDbParser_HasError(void);
-
-/**
- * Add an object to be freed if an error occurs.
- * @param ptr The object.
- * @param free The function to use when freeing the object. You may use NULL for EagleMemory_Free()
- * @return 
- */
-void* EagleDbParser_AddObject(void *ptr, void (*free)(void*));
 
 #endif

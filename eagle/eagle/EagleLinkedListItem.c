@@ -4,7 +4,12 @@
 
 EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj))
 {
-    EagleLinkedListItem *item = (EagleLinkedListItem*) EagleMemory_Allocate("EagleLinkedListItem_New.1", sizeof(EagleLinkedListItem));
+    return EagleLinkedListItem_NewWithDescription(obj, freeObj, free, NULL);
+}
+
+EagleLinkedListItem* EagleLinkedListItem_NewWithDescription(void *obj, EagleBoolean freeObj, void (*free)(void *obj), char *description)
+{
+    EagleLinkedListItem *item = (EagleLinkedListItem*) EagleMemory_Allocate("EagleLinkedListItem_NewWithDescription.1", sizeof(EagleLinkedListItem));
     if(NULL == item) {
         return NULL;
     }
@@ -13,6 +18,7 @@ EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, vo
     item->freeObj = freeObj;
     item->next = NULL;
     item->free = free;
+    item->description = (NULL == description ? NULL : description);
     
     return item;
 }
@@ -27,5 +33,6 @@ void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
             item->free(item->obj);
         }
     }
+    EagleMemory_Free(item->description);
     EagleMemory_Free(item);
 }

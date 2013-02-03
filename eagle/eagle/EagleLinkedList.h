@@ -6,9 +6,6 @@
 #include "Eagle.h"
 #include "EagleLinkedListItem.h"
 
-/**
- A linked list (FIFO).
- */
 typedef struct {
     
     /**
@@ -34,10 +31,6 @@ typedef struct {
     
 } EagleLinkedList;
 
-/**
- * Create a new linked list.
- * @return A new linked list.
- */
 EagleLinkedList* EagleLinkedList_New(void);
 
 /**
@@ -133,5 +126,7 @@ void* EagleLinkedList_get(EagleLinkedList *list, int index);
  * @param free The function responsible for freeing the objec. This may be NULL if you want to use EagleMemory_Free()
  */
 void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj));
+
+EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
 
 #endif
