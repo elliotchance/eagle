@@ -30,6 +30,7 @@ void EagleMemory_Free(void *ptr);
  @param [in] id This is a unique string used for mocking memory allocations. See EagleMemory_Mock()
  @param [in] size The size of a single array element.
  @param [in] quantity The amount of array items.
+ @return A new single malloc block.
  */
 void** EagleMemory_MultiAllocate(char *id, size_t size, int quantity);
 
@@ -72,7 +73,8 @@ void EagleMemory_Mock(char *id);
 void EagleMemory_MockFinish(void);
 
 /**
- Get the number of times a mocked malloc has returned NULL since EagleMemory_MockInit().
+ * Get the number of times a mocked malloc has returned NULL since EagleMemory_MockInit().
+ * @return The number of mock invocations.
  */
 int EagleMemory_GetMockInvocations(void);
 

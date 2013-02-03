@@ -8,13 +8,20 @@
 #include "EagleData.h"
 #include "EagleDbSqlExpression.h"
 
+/**
+ Since the parser is synchronized and basically static we reuse the same internal parser instance.
+ */
 static EagleDbParser *EagleDbParser_Default = NULL;
 
 /* internal prototypes supplied by flex and bison */
 extern int yylex_destroy(void);
 extern int yy_scan_string(const char *str);
-extern char *yytext_last;
 extern int yyparse();
+
+/**
+ A symbol provided by flex that contains the last token read.
+ */
+extern char *yytext_last;
 
 EagleDbParser* EagleDbParser_New(void)
 {
@@ -25,7 +32,6 @@ EagleDbParser* EagleDbParser_New(void)
     
     parser->errors = EagleLinkedList_New();
     parser->returns = EagleLinkedList_New();
-    /*parser->objects = EagleLinkedList_New();*/
     parser->yyparse_ast = NULL;
     parser->yystatementtype = EagleDbSqlStatementTypeNone;
     
@@ -47,7 +53,7 @@ EagleBoolean EagleDbParser_HasError(void)
     return !EagleLinkedList_isEmpty(EagleDbParser_Get()->errors);
 }
 
-char* EagleDbParser_AddError(void *ptr)
+void* EagleDbParser_AddError(void *ptr)
 {
     EagleDbParser *p = EagleDbParser_Default;
     EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleTrue, NULL));

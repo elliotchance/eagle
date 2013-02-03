@@ -15,6 +15,7 @@
 #include "EagleDbParser.h"
 #include "EagleLogger.h"
 #include "EagleDbInstance.h"
+#include "EagleDbSqlBinaryExpression.h"
 
 int _testSqlSelect(const char *sql)
 {

@@ -1,6 +1,9 @@
 #ifndef eagle_EagleDbSqlStatementType_h
 #define eagle_EagleDbSqlStatementType_h
 
+/**
+ The SQL statement type.
+ */
 typedef enum {
     
     /**

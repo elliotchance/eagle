@@ -6,15 +6,19 @@ $deleteFunctions = array();
 function addError($desc)
 {
 	global $exitCode;
-	//$exitCode = 1;
-	echo "WARNING: $desc\n";
+	$exitCode = 1;
+	echo ">>> $desc\n";
 }
 
 function getReturnDesc($node)
 {
 	foreach($node->para as $n) {
-		if($n->simplesect && $n->simplesect['kind'] == 'return') {
-			return $n->simplesect->para;
+		if($n->simplesect) {
+			foreach($n->simplesect as $sect) {
+				if($sect['kind'] == 'return') {
+					return $sect->para;
+				}
+			}
 		}
 	}
 }
@@ -34,6 +38,9 @@ function validateFile($file)
 	
 	$xml = simplexml_load_file($file);
 	
+	if(!isset($xml->compounddef->sectiondef->memberdef)) {
+		return;
+	}
 	foreach($xml->compounddef->sectiondef->memberdef as $member) {
 		// is this a delete function?
 		if(strpos((string) $member->name, "_Delete") !== false) {
@@ -47,7 +54,7 @@ function validateFile($file)
 		}
 		
 		// check return
-		if((string) $member->type && (string) $member->type != 'void') {
+		if((string) $member['kind'] != 'variable' && (string) $member->type && (string) $member->type != 'void') {
 			$return = getReturnDesc($member->detaileddescription);
 			if(!$return) {
 				addError("[{$member->location['file']}:{$member->location['line']} {$member->name}{$member->argsstring}]: Missing @return description.");

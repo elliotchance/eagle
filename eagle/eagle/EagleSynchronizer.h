@@ -8,6 +8,7 @@
  
  Locks can be used to synchronize block of code over multiple threads.
  
+ @return A new lock instance.
  @see EagleSynchronizer_Lock()
  @see EagleSynchronizer_Unlock()
  */

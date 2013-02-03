@@ -7,6 +7,9 @@
 
 struct EagleInstance_;
 
+/**
+ A worker is a thread.
+ */
 typedef struct {
     
     /**
@@ -26,14 +29,37 @@ typedef struct {
     
 } EagleWorker;
 
+/**
+ * Create a new worker (thread)
+ * @param [in] workerId The worker ID is just an arbitrary number that should be unique to the worker for logging purposes.
+ * @param [in] instance The instance the workers belong to.
+ * @return A new worker.
+ */
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance);
 
+/**
+ * Delete a worker.
+ * @param [in] worker The worker.
+ */
 void EagleWorker_Delete(EagleWorker *worker);
 
+/**
+ * Start a worker.
+ * @param [in] worker The worker.
+ */
 void EagleWorker_start(EagleWorker *worker);
 
+/**
+ * Begin a worker.
+ * @param [in] obj This is a EagleWorker* but it must have void* to fit the definition for the pthread.
+ * @return Ignored.
+ */
 void* EagleWorker_begin(void *obj);
 
+/**
+ * Wait for a worker to complete and shutdown.
+ * @param [in] worker The worker.
+ */
 void EagleWorker_join(EagleWorker *worker);
 
 /**

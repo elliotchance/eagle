@@ -12,6 +12,7 @@
     #include "EagleDbInstance.h"
     #include "EagleMemory.h"
     #include "EagleDbParser.h"
+    #include "EagleDataType.h"
     #include "EagleDbSqlInsert.h"
     
     int yylex(void);

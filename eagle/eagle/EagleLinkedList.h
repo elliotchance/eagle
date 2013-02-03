@@ -4,37 +4,11 @@
 #include "EagleSynchronizer.h"
 #include "EagleBoolean.h"
 #include "Eagle.h"
+#include "EagleLinkedListItem.h"
 
-struct EagleLinkedListItem_ {
-    
-    /**
-     The actual item value.
-     */
-    EAGLE_ATTR_SEMI_MANAGED void *obj;
-    
-    /**
-     If EagleTrue the \c obj will be freed with the list item.
-     */
-    EAGLE_ATTR_NA EagleBoolean freeObj;
-    
-    /**
-     A pointer to the next item.
-     */
-    EAGLE_ATTR_PROVIDED struct EagleLinkedListItem_ *next;
-    
-    /**
-     A pointer to the function that will free \c obj. If this is NULL then the normal free() function will be used.
-     */
-    EAGLE_ATTR_NA void (*free)(void *obj);
-    
-    /**
-     A optional description of the item.
-     */
-    EAGLE_ATTR_PROVIDED char *description;
-    
-};
-typedef struct EagleLinkedListItem_ EagleLinkedListItem;
-
+/**
+ A linked list (FIFO).
+ */
 typedef struct {
     
     /**
@@ -60,12 +34,10 @@ typedef struct {
     
 } EagleLinkedList;
 
-EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj));
-
-EagleLinkedListItem* EagleLinkedListItem_NewWithDescription(void *obj, EagleBoolean freeObj, void (*free)(void *obj), char *description);
-
-void EagleLinkedListItem_Delete(EagleLinkedListItem *item);
-
+/**
+ Create a new linked list.
+ @return A new linked list.
+ */
 EagleLinkedList* EagleLinkedList_New(void);
 
 /**
@@ -86,24 +58,53 @@ void EagleLinkedList_Delete(EagleLinkedList *list);
  */
 void EagleLinkedList_DeleteWithItems(EagleLinkedList *list);
 
+/**
+ * Append an item to a linked list.
+ * @param [in] list The list.
+ * @param [in] item The item.
+ */
 void EagleLinkedList_add(EagleLinkedList *list, EagleLinkedListItem *item);
 
 /**
- Return a pointer to the first item on the list.
+ * Return a pointer to the first item on the list.
+ * @param [in] list The list.
+ * @return The pointer to the first element in the list.
  */
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list);
 
 /**
- Return a pointer to the last item on the list.
+ * Return a pointer to the last item on the list.
+ * @param [in] list The list.
+ * @return The pointer to the last item in the list.
  */
 EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list);
 
+/**
+ * The number of items in the list.
+ * @param [in] list The list.
+ * @return The number of items in the list.
+ */
 int EagleLinkedList_length(EagleLinkedList *list);
 
+/**
+ * Remove the last item on the list and return it. Since this does not free the item you will have to free it yourself.
+ * @param [in] list The list to pop from.
+ * @see EagleLinkedListItem_Delete()
+ * @return The linked list item on the end of the list.
+ */
 EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list);
 
+/**
+ * Check if the list is empty.
+ * @param [in] list The list.
+ * @return EagleTrue is there are no items on the list.
+ */
 EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list);
 
+/**
+ * Delete the items (but not the list itself). This is useful for clearing out a list and reusing it.
+ * @param [in] list The list.
+ */
 void EagleLinkedList_DeleteItems(EagleLinkedList *list);
 
 /**
@@ -115,10 +116,31 @@ void EagleLinkedList_DeleteItems(EagleLinkedList *list);
  */
 void** EagleLinkedList_toArray(EagleLinkedList *list, int *size);
 
+/**
+ * Get an item by index. The first item will have the index of 0.
+ * @param [in] list The list.
+ * @param [in] index The index.
+ * @return The object is returned (not the linked list item). If the index is out of bounds then NULL will be returned.
+ */
 void* EagleLinkedList_get(EagleLinkedList *list, int index);
 
+/**
+ * Add an object to the list. This is an easier method then creating the linked list item first, but it means you have
+ * to free the items with the list.
+ * @param [in] list The list.
+ * @param [in] obj The object.
+ * @param [in] freeObj Free the object when the item is freed.
+ * @param [in] free The function responsible for freeing the objec. This may be NULL if you want to use EagleMemory_Free()
+ */
 void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean freeObj, void (*free)(void *obj));
 
+/**
+ Delete an object from a linked list. This will also remove the EagleLinkedListItem that encapsulates in. If the same
+ pointer exists in multiple items only the first will be removed.
+ @param [in] list The list.
+ @param [in] obj The object to remove.
+ @return EagleTrue if the item was found and removed.
+ */
 EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
 
 #endif

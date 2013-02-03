@@ -3,27 +3,6 @@
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
 
-EagleLinkedListItem* EagleLinkedListItem_New(void *obj, EagleBoolean freeObj, void (*free)(void *obj))
-{
-    return EagleLinkedListItem_NewWithDescription(obj, freeObj, free, NULL);
-}
-
-EagleLinkedListItem* EagleLinkedListItem_NewWithDescription(void *obj, EagleBoolean freeObj, void (*free)(void *obj), char *description)
-{
-    EagleLinkedListItem *item = (EagleLinkedListItem*) EagleMemory_Allocate("EagleLinkedListItem_NewWithDescription.1", sizeof(EagleLinkedListItem));
-    if(NULL == item) {
-        return NULL;
-    }
-    
-    item->obj = obj;
-    item->freeObj = freeObj;
-    item->next = NULL;
-    item->free = free;
-    item->description = (NULL == description ? NULL : description);
-    
-    return item;
-}
-
 EagleLinkedList* EagleLinkedList_New(void)
 {
     EagleLinkedList *list = (EagleLinkedList*) EagleMemory_Allocate("EagleLinkedList_New.1", sizeof(EagleLinkedList));
@@ -120,20 +99,6 @@ void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
     
     EagleLinkedList_DeleteItems(list);
     EagleLinkedList_Delete(list);
-}
-
-void EagleLinkedListItem_Delete(EagleLinkedListItem *item)
-{
-    if(item->freeObj) {
-        if(NULL == item->free) {
-            EagleMemory_Free(item->obj);
-        }
-        else {
-            item->free(item->obj);
-        }
-    }
-    EagleMemory_Free(item->description);
-    EagleMemory_Free(item);
 }
 
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)
