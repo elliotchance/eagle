@@ -13,8 +13,12 @@ function addError($desc)
 function getReturnDesc($node)
 {
 	foreach($node->para as $n) {
-		if($n->simplesect && $n->simplesect['kind'] == 'return') {
-			return $n->simplesect->para;
+		if($n->simplesect) {
+			foreach($n->simplesect as $sect) {
+				if($sect['kind'] == 'return') {
+					return $sect->para;
+				}
+			}
 		}
 	}
 }
