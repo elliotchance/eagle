@@ -11,20 +11,8 @@ col1 int,col2 int,col3 text
 10,20,you doing?
 
 #==================================================
-# Parser Errors
+# Errors
 #==================================================
-
-% test_error
-SELECT * FROM
-syntax error, unexpected T_END, expecting IDENTIFIER
-
-% test_error
-SELECT *
-syntax error, unexpected T_END, expecting K_FROM
-
-% test_error
-SELECT
-syntax error, unexpected T_END, expecting IDENTIFIER or INTEGER or T_ASTERISK
 
 % test_error
 SELECT * FROM mytable WHERE 123

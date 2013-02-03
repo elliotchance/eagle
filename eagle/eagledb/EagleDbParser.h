@@ -27,11 +27,6 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED EagleLinkedList *returns;
     
-    /**
-     A managed stack of allocated objects to be freed when an error occurs.
-     */
-    EAGLE_ATTR_MANAGED EagleLinkedList *objects;
-    
 } EagleDbParser;
 
 /**
@@ -97,7 +92,7 @@ char* EagleDbParser_AddError(void *ptr);
 /**
  Push the return value onto the stack.
  */
-void* EagleDbParser_AddReturn(void *ptr);
+void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*));
 
 /**
  Return the last yyreturn and decrement back the stack.
@@ -113,7 +108,5 @@ void* EagleDbParser_CurrentReturn(void);
  Did the parser encounter any errors?
  */
 EagleBoolean EagleDbParser_HasError(void);
-
-void* EagleDbParser_AddObject(void *ptr, void (*free)(void*));
 
 #endif

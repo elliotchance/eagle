@@ -241,12 +241,12 @@ CUNIT_TEST(MemorySuite, EagleInstance_New)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EagleLinkedListItem_New)
+CUNIT_TEST(MemorySuite, EagleLinkedListItem_NewWithDescription)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EagleLinkedListItem_New.1");
+    EagleMemory_Mock("EagleLinkedListItem_NewWithDescription.1");
     
-    CUNIT_ASSERT_NULL(EagleLinkedListItem_New(NULL, EagleFalse, NULL));
+    CUNIT_ASSERT_NULL(EagleLinkedListItem_NewWithDescription(NULL, EagleFalse, NULL, NULL));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -624,10 +624,21 @@ CUNIT_TEST(MemorySuite, EaglePage_CopyText_)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePageProvider_CreateFromInt)
+CUNIT_TEST(MemorySuite, EaglePageProvider_CreateFromInt1)
 {
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
+    
+    CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePageProvider_CreateFromInt2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProvider_CreateFromIntArray.1");
     
     CUNIT_ASSERT_NULL(EaglePageProvider_CreateFromInt(0, 1, NULL));
     
@@ -736,11 +747,25 @@ CUNIT_TEST(MemorySuite, EagleDbSqlInsert_New)
     EagleMemory_MockFinish();
 }
 
+/*CUNIT_TEST(MemorySuite, EagleDbParser_AddObject)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbParser_AddObject.1");
+    
+    EagleDbParser_Init();
+    EagleDbParser_AddObject(NULL, NULL, NULL, 0);
+    EagleDbParser_Finish();
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}*/
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    //CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_AddObject));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlInsert_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_toArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));
@@ -761,7 +786,7 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_New_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleInstance_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedListItem_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedListItem_NewWithDescription));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyInt_));
@@ -791,7 +816,8 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocText));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyText_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProvider_CreateFromInt));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProvider_CreateFromInt1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProvider_CreateFromInt2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_prepareBuffers));
