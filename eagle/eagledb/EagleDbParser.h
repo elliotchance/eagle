@@ -124,4 +124,10 @@ void* EagleDbParser_CurrentReturn(void);
  */
 EagleBoolean EagleDbParser_HasError(void);
 
+/**
+ Set the type of statement that is being parsed.
+ @param [in] type The type.
+ */
+void EagleDbParser_SetStatementType(EagleDbSqlStatementType type);
+
 #endif

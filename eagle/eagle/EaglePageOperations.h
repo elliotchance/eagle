@@ -67,6 +67,16 @@ void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, Eag
 void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Multiplication of two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_MultiplyPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Equals comparison between two pages.
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.

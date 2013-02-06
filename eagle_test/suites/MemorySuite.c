@@ -747,25 +747,23 @@ CUNIT_TEST(MemorySuite, EagleDbSqlInsert_New)
     EagleMemory_MockFinish();
 }
 
-/*CUNIT_TEST(MemorySuite, EagleDbParser_AddObject)
+CUNIT_TEST(MemorySuite, EagleDbSqlSelect_toString)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbParser_AddObject.1");
+    EagleMemory_Mock("EagleDbSqlSelect_toString.1");
     
-    EagleDbParser_Init();
-    EagleDbParser_AddObject(NULL, NULL, NULL, 0);
-    EagleDbParser_Finish();
+    CUNIT_VERIFY_NULL(EagleDbSqlSelect_toString(NULL));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
-}*/
+}
 
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    //CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_AddObject));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlInsert_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_toArray));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbParser_New));

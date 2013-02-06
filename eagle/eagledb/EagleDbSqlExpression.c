@@ -64,6 +64,10 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                 case EagleDbSqlExpressionOperatorModulus:
                     pageOperation = EaglePageOperations_ModulusPage;
                     break;
+                    
+                case EagleDbSqlExpressionOperatorMultiply:
+                    pageOperation = EaglePageOperations_MultiplyPage;
+                    break;
                 
             }
             

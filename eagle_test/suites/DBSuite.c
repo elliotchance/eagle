@@ -364,7 +364,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_toString)
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     desc = EagleDbSqlExpression_toString((EagleDbSqlExpression*) select);
-    CUNIT_VERIFY_EQUAL_STRING(desc, "SELECT");
+    CUNIT_VERIFY_EQUAL_STRING(desc, "SELECT  FROM ");
     free(desc);
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);
 }

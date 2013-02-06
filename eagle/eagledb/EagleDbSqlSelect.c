@@ -116,5 +116,29 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
 
 char* EagleDbSqlSelect_toString(EagleDbSqlSelect *select)
 {
-    return strdup("SELECT");
+    EagleLinkedListItem *item = NULL;
+    char *str = (char*) EagleMemory_Allocate("EagleDbSqlSelect_toString.1", 1024);
+    if(NULL == str) {
+        return NULL;
+    }
+    
+    str[0] = '\0';
+    strcat_safe(str, "SELECT ");
+    
+    for(item = EagleLinkedList_begin(select->selectExpressions); item; item = item->next) {
+        if(item != EagleLinkedList_begin(select->selectExpressions)) {
+            strcat_safe(str, ", ");
+        }
+        strcat_safe(str, EagleDbSqlExpression_toString((EagleDbSqlExpression*) item->obj));
+    }
+    
+    strcat_safe(str, " FROM ");
+    strcat_safe(str, select->tableName);
+    
+    if(NULL != select->whereExpression) {
+        strcat_safe(str, " WHERE ");
+        strcat_safe(str, EagleDbSqlExpression_toString(select->whereExpression));
+    }
+    
+    return str;
 }

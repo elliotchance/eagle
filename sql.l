@@ -1,5 +1,6 @@
 %{
 
+#define YYSTYPE void*
 #include "y.tab.h"
 #include <stdlib.h>
 

@@ -46,12 +46,13 @@ char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)
     }
     
     left = EagleDbSqlExpression_toString(expr->left);
-    right = EagleDbSqlExpression_toString(expr->right);
     op = EagleDbSqlExpressionOperator_toString(expr->op);
-    sprintf(s, "%s %s %s", left, op, right);
-    EagleMemory_Free(left);
-    EagleMemory_Free(right);
-    EagleMemory_Free(op);
+    right = EagleDbSqlExpression_toString(expr->right);
     
+    sprintf(s, "%s %s %s", left, op, right);
+    
+    EagleMemory_Free(left);
+    EagleMemory_Free(op);
+    EagleMemory_Free(right);
     return s;
 }

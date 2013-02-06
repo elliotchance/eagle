@@ -21,7 +21,12 @@ typedef enum {
     /**
      Modulus (remainder) operator.
      */
-    EagleDbSqlExpressionOperatorModulus = 3
+    EagleDbSqlExpressionOperatorModulus = 3,
+    
+    /**
+     Multiplication operator.
+     */
+    EagleDbSqlExpressionOperatorMultiply = 4
     
 } EagleDbSqlExpressionOperator;
 

@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "EaglePageOperations.h"
 #include "EagleMemory.h"
+#include "EagleDbInstance.h"
+#include "EagleInstance.h"
+#include "EagleDbParser.h"
 
 EaglePage* OperatorSuite_GeneratePage(int pageSize)
 {
@@ -182,11 +185,62 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_ModulusPage)
     EaglePage_Delete(out);
 }
 
+CUNIT_TEST(OperatorSuite, OperatorPrecedence)
+{
+    int pageSize = 10;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
+    EagleDbSchema_addTable(schema, td);
+    
+    for(int i = 0; i < 10; ++i) {
+        // create a record
+        EagleDbTuple *tuple = EagleDbTuple_New(table);
+        EagleDbTuple_setInt(tuple, 0, i);
+        
+        // put record in
+        EagleDbTableData_insert(td, tuple);
+    }
+    
+    /* parse sql */
+    EagleDbParser_Init();
+    EagleDbParser_LoadString("SELECT col1 * 2 + 10 * 2 FROM mytable;");
+    EagleDbParser_Parse();
+    
+    if(EagleTrue == EagleDbParser_HasError()) {
+        CUNIT_FAIL("%s", EagleDbParser_LastError());
+    }
+    
+    /* compile plan */
+    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) EagleDbParser_Get()->yyparse_ast, db);
+    CUNIT_ASSERT_NOT_NULL(plan);
+    CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
+    
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    /* check results */
+    EaglePage *page = EaglePageProvider_nextPage(plan->result[0]);
+    CUNIT_ASSERT_NOT_NULL(page);
+    
+    for(int i = 0; i < page->count; ++i) {
+        printf("%d\n", ((int*) page->data)[i]);
+    }
+}
+
 CUnitTests* OperatorSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    //CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, "int > int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, "int < int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AndPage, "int AND int"));

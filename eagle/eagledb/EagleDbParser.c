@@ -50,7 +50,8 @@ EagleDbParser* EagleDbParser_Get(void)
 
 EagleBoolean EagleDbParser_HasError(void)
 {
-    return !EagleLinkedList_isEmpty(EagleDbParser_Get()->errors);
+    EagleDbParser *p = EagleDbParser_Get();
+    return !EagleLinkedList_isEmpty(p->errors);
 }
 
 void* EagleDbParser_AddError(void *ptr)
@@ -63,6 +64,9 @@ void* EagleDbParser_AddError(void *ptr)
 char* EagleDbParser_LastError()
 {
     EagleDbParser *p = EagleDbParser_Default;
+    if(EagleLinkedList_isEmpty(p->errors)) {
+        return NULL;
+    }
     return (char*) EagleLinkedList_end(p->errors)->obj;
 }
 
@@ -131,4 +135,10 @@ int EagleDbParser_LoadString(const char *str)
 int EagleDbParser_Parse(void)
 {
     return yyparse();
+}
+
+void EagleDbParser_SetStatementType(EagleDbSqlStatementType type)
+{
+    EagleDbParser *p = EagleDbParser_Default;
+    p->yystatementtype = type;
 }

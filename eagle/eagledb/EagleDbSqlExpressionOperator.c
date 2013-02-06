@@ -6,6 +6,7 @@
 char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op)
 {
     switch(op) {
+            
         case EagleDbSqlExpressionOperatorPlus:
             return strdup("+");
             
@@ -14,5 +15,9 @@ char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op)
             
         case EagleDbSqlExpressionOperatorModulus:
             return strdup("%");
+            
+        case EagleDbSqlExpressionOperatorMultiply:
+            return strdup("*");
+            
     }
 }
