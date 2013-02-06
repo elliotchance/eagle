@@ -55,7 +55,7 @@ void EagleDbInstance_Delete(EagleDbInstance *db);
  @param [in] db The database instance.
  @param [in] sql The SQL statement.
  */
-EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, char *sql);
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql);
 
 /**
  Execute a SELECT statement.
