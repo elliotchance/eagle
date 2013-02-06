@@ -62,7 +62,7 @@ leaks: build_eagle_test
 	fi
 
 	- killall eagle_test
-	MallocStackLogging=1 build/Debug/eagle_test wait &
+	MallocStackLogging=1 build/Debug/eagle_test --wait --all-suites --exclude-bench &
 	sleep 2
 	#malloc_history eagle_test -callTree -invert -collapseRecursion -chargeSystemLibraries
 	leaks eagle_test
@@ -70,7 +70,7 @@ leaks: build_eagle_test
 
 test: clean_eagle_test build_eagle_test
 	- rm coverage.info
-	build/Debug/eagle_test
+	build/Debug/eagle_test --all-suites
 	
 coverage: test
 	- rm -rf coverage
