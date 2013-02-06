@@ -302,7 +302,7 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
     return success;
 }
 
-EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, char *sql)
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
 {
     EagleDbParser *p;
     EagleBoolean success = EagleTrue;

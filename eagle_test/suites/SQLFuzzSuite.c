@@ -35,7 +35,7 @@ const char *tokens[] = {
 };
 const int totalTokens = sizeof(tokens) / sizeof(char*);
 
-char *getSQLFuzz(char *start, int total)
+char *getSQLFuzz(const char *start, int total)
 {
     // build SQL
     char *sql = (char*) malloc(1024);
@@ -47,10 +47,10 @@ char *getSQLFuzz(char *start, int total)
     return sql;
 }
 
-CUNIT_TEST(SQLFuzzSuite, All)
+void runFuzzTests(const char *pre, int totalFuzzTests, int length)
 {
     // setup
-    int pageSize = 10, totalFuzzTests = 10000, length = 5;
+    int pageSize = 10;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
@@ -63,13 +63,12 @@ CUNIT_TEST(SQLFuzzSuite, All)
     EagleDbSchema_addTable(schema, td);
     
     // begin fuzz testing
-    srand(0);
     for(int i = 0; i < totalFuzzTests; ++i) {
-        char *sql = getSQLFuzz("SELECT", length);
+        char *sql = getSQLFuzz(pre, length);
         /*if(i == totalFuzzTests - 1) {
-            EagleLogger_Get()->out = stderr;
-            fprintf(stderr, "\n%d: %s\n", i, sql);
-        }*/
+         EagleLogger_Get()->out = stderr;
+         fprintf(stderr, "\n%d: %s\n", i, sql);
+         }*/
         EagleBoolean success = EagleDbInstance_execute(db, sql);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);
@@ -86,12 +85,48 @@ CUNIT_TEST(SQLFuzzSuite, All)
     EagleDbInstance_Delete(db);
 }
 
+CUNIT_TEST(SQLFuzzSuite, FirstToken)
+{
+    EagleDbInstance *db = EagleDbInstance_New(10);
+    
+    for(int i = 0; i < totalTokens; ++i) {
+        if(!strcmp(tokens[i], ";")) {
+            continue;
+        }
+        
+        EagleBoolean success = EagleDbInstance_execute(db, tokens[i]);
+        if(EagleTrue == success) {
+            CUNIT_FAIL("First token \"%s\" did not fail.", tokens[i]);
+        }
+    }
+    
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(SQLFuzzSuite, SELECT)
+{
+    runFuzzTests("SELECT", 10000, 5);
+}
+
+CUNIT_TEST(SQLFuzzSuite, INSERT)
+{
+    runFuzzTests("INSERT", 10000, 1);
+}
+
+CUNIT_TEST(SQLFuzzSuite, CREATE_TABLE)
+{
+    runFuzzTests("CREATE TABLE", 10000, 1);
+}
+
 CUnitTests* SQLFuzzSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, All));
+    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, FirstToken));
+    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, SELECT));
+    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, INSERT));
+    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, CREATE_TABLE));
     
     return tests;
 }
@@ -101,6 +136,7 @@ CUnitTests* SQLFuzzSuite_tests()
  */
 int SQLFuzzSuite_init()
 {
+    srand(0);
     return 0;
 }
 
