@@ -1038,11 +1038,17 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject4)
     EagleLinkedList_DeleteWithItems(list);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedListItem_Delete)
+{
+    EagleLinkedListItem_Delete(NULL);
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedListItem_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject4));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject3));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject2));
