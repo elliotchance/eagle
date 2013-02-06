@@ -915,11 +915,21 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue2)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbParser_Finish)
+{
+    EagleDbParser_Init();
+    EagleDbParser *p = EagleDbParser_Get();
+    EagleLinkedList_addObject(p->errors, NULL, EagleFalse, NULL);
+    EagleLinkedList_addObject(p->returns, NULL, EagleFalse, NULL);
+    EagleDbParser_Finish();
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Finish));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn2));

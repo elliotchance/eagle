@@ -69,10 +69,12 @@ leaks: build_eagle_test
 	killall eagle_test
 
 test: clean_eagle_test build_eagle_test
-	- rm coverage.info
 	build/Debug/eagle_test --all-suites
 	
-coverage: test
+coverage: clean_eagle_test build_eagle_test
+	- rm coverage.info
+	build/Debug/eagle_test --all-suites --exclude-bench --exclude-sqlfuzz --exclude-sql
+	
 	- rm -rf coverage
 	mkdir -p coverage/$(GIT_BRANCH)
 	bin/geninfo -q --no-checksum --base-directory $(OBJROOT) --output-filename coverage.info $(OBJROOT)
