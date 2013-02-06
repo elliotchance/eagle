@@ -105,6 +105,11 @@ void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1,
     destination->count = source1->count;
     
     for(i = 0; i < source1->count; ++i) {
-        destdata[i] = source1data[i] % source2data[i];
+        if(0 == source2data[i]) {
+            destdata[i] = 0;
+        }
+        else {
+            destdata[i] = source1data[i] % source2data[i];
+        }
     }
 }
