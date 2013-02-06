@@ -104,7 +104,9 @@ insert_statement:
     K_VALUES T_BRACKET_OPEN column_expression_list T_BRACKET_CLOSE
     {
         EagleDbSqlInsert *insert = EagleDbSqlInsert_New();
-        insert->table = ((EagleDbSqlValue*) $3)->value.identifier;
+        char *table = strdup(((EagleDbSqlValue*) $3)->value.identifier);
+        EagleDbSqlValue_Delete($3);
+        insert->table = table;
         insert->names = $5;
         insert->values = $9;
         $$ = insert;
@@ -116,6 +118,7 @@ create_table_statement:
     {
         EagleDbTable *table = EagleDbTable_New(((EagleDbSqlValue*) $3)->value.identifier);
         EagleDbTable_setColumns(table, $5);
+        EagleDbSqlValue_Delete($3);
         $$ = table;
     }
 ;
@@ -136,6 +139,8 @@ column_definition_list:
 column_definition:
     identifier data_type {
         $$ = EagleDbColumn_New(((EagleDbSqlValue*) $1)->value.identifier, *((int*) $2));
+        EagleDbSqlValue_Delete($1);
+        EagleMemory_Free($2);
     }
 ;
 
@@ -166,7 +171,9 @@ select_statement:
     K_SELECT column_expression_list K_FROM table_name where_expression {
         EagleDbSqlSelect *select = EagleDbSqlSelect_New();
         select->selectExpressions = $2;
-        select->tableName = ((EagleDbSqlValue*) $4)->value.identifier;
+        char *name = strdup(((EagleDbSqlValue*) $4)->value.identifier);
+        EagleDbSqlValue_Delete($4);
+        select->tableName = name;
         select->whereExpression = $5;
         $$ = select;
     }
