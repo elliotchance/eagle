@@ -1,6 +1,7 @@
 #include "TestSuite.h"
 #include <CUnit/Basic.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "MainSuite.h"
 #include "DBSuite.h"
@@ -40,10 +41,84 @@ CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc 
  */
 int main(int argc, char **argv)
 {
-    // if we are checking for leaks then this may need to wait
-    int wait = 0;
-    if(argc > 1 && !strcmp(argv[1], "wait")) {
-        wait = 1;
+    // usage
+    if(argc < 2) {
+        fprintf(stderr, "\n");
+        fprintf(stderr, "Usage: eagle_test [--wait] [--all-suites] [--suite-X] [--exclude-X]\n");
+        fprintf(stderr, "         --wait        Keep process alive for 1 hour after the tests finish.\n");
+        fprintf(stderr, "         --all-suites  Run all test suites.\n");
+        fprintf(stderr, "         --suite-X     X can be:\n");
+        fprintf(stderr, "         --exclude-X     main\n");
+        fprintf(stderr, "                         db\n");
+        fprintf(stderr, "                         sql\n");
+        fprintf(stderr, "                         memory\n");
+        fprintf(stderr, "                         sqlfuzz\n");
+        fprintf(stderr, "                         bench\n");
+        fprintf(stderr, "\n");
+        exit(1);
+    }
+    
+    // options
+    EagleBoolean op_wait = EagleFalse;
+    EagleBoolean op_suite_main = EagleFalse;
+    EagleBoolean op_suite_db = EagleFalse;
+    EagleBoolean op_suite_sql = EagleFalse;
+    EagleBoolean op_suite_memory = EagleFalse;
+    EagleBoolean op_suite_sqlfuzz = EagleFalse;
+    EagleBoolean op_suite_bench = EagleFalse;
+    
+    for(int i = 1; i < argc; ++i) {
+        if(!strcmp(argv[i], "--wait")) {
+            op_wait = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-main")) {
+            op_suite_main = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-db")) {
+            op_suite_db = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-sql")) {
+            op_suite_sql = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-memory")) {
+            op_suite_memory = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-sqlfuzz")) {
+            op_suite_sqlfuzz = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--suite-bench")) {
+            op_suite_bench = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--all-suites")) {
+            op_suite_main = EagleTrue;
+            op_suite_db = EagleTrue;
+            op_suite_sql = EagleTrue;
+            op_suite_memory = EagleTrue;
+            op_suite_sqlfuzz = EagleTrue;
+            op_suite_bench = EagleTrue;
+        }
+        else if(!strcmp(argv[i], "--exclude-main")) {
+            op_suite_main = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-db")) {
+            op_suite_db = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-sql")) {
+            op_suite_sql = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-memory")) {
+            op_suite_memory = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-sqlfuzz")) {
+            op_suite_sqlfuzz = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-bench")) {
+            op_suite_bench = EagleFalse;
+        }
+        else {
+            fprintf(stderr, "\nUnknown option \"%s\"\n\n", argv[i]);
+            exit(1);
+        }
     }
     
     // initialize the CUnit test registry
@@ -52,25 +127,23 @@ int main(int argc, char **argv)
     }
 
     // add suites
-    if(CUE_SUCCESS != addSuite("MainSuite", MainSuite_init, MainSuite_clean, MainSuite_tests)) {
+    if(EagleTrue == op_suite_main && CUE_SUCCESS != addSuite("MainSuite", MainSuite_init, MainSuite_clean, MainSuite_tests)) {
         return CU_get_error();
     }
-    if(CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, DBSuite_tests)) {
+    if(EagleTrue == op_suite_db && CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, DBSuite_tests)) {
         return CU_get_error();
     }
-    if(CUE_SUCCESS != addSuite("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
+    if(EagleTrue == op_suite_sql && CUE_SUCCESS != addSuite("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
         return CU_get_error();
     }
-    if(CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
+    if(EagleTrue == op_suite_memory && CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
         return CU_get_error();
     }
-    if(CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
+    if(EagleTrue == op_suite_sqlfuzz && CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
         return CU_get_error();
     }
-    if(argc > 1 && !strcmp(argv[1], "bench")) {
-        if(CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
-            return CU_get_error();
-        }
+    if(EagleTrue == op_suite_bench && CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
+        return CU_get_error();
     }
     
     // Run all tests using the CUnit Basic interface
@@ -82,7 +155,7 @@ int main(int argc, char **argv)
     EagleLogger_Delete(EagleLogger_Get());
     
     // may need to wait
-    if(wait) {
+    if(EagleTrue == op_wait) {
         sleep(3600);
     }
     
