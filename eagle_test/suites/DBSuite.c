@@ -709,17 +709,26 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
     EagleDbSqlExpression_Delete(NULL);
     
     {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);
+        CUNIT_VERIFY_NOT_NULL(expr);
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlBinaryExpressionOperatorEquals, NULL);
+        CUNIT_VERIFY_NOT_NULL(expr);
         EagleDbSqlExpression_Delete(expr);
     }
     
     {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlSelect_New();
+        CUNIT_VERIFY_NOT_NULL(expr);
         EagleDbSqlExpression_Delete(expr);
     }
     
     {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+        CUNIT_VERIFY_NOT_NULL(expr);
         EagleDbSqlExpression_Delete(expr);
     }
 }
@@ -941,7 +950,8 @@ CUNIT_TEST(MainSuite, EagleDbSqlSelect_toString)
 
 CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
 {
-    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);
+    EagleDbSqlExpression *op = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);
+    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, op);
     EaglePlan *plan = EaglePlan_New(1);
     
     EaglePlan_prepareBuffers(plan, 10);
@@ -953,11 +963,23 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
     EaglePlan_Delete(plan);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_Delete)
+{
+    EagleDbSqlUnaryExpression_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive)
+{
+    EagleDbSqlUnaryExpression_DeleteRecursive(NULL);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDbSqlSelect_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_LastError));

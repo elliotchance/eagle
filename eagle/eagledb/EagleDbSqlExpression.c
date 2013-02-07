@@ -191,6 +191,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             int destination;
             
             switch(value->type) {
+                    
                 case EagleDbSqlValueTypeInteger:
                 {
                     EaglePageProvider *provider;
@@ -230,6 +231,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     destination = EagleDbSqlExpression_ERROR;
                     break;
                 }
+                    
             }
             
             return destination;

@@ -5,8 +5,8 @@
 
 EagleDbSqlUnaryExpression* EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperator op, EagleDbSqlExpression *expr)
 {
-    EagleDbSqlUnaryExpression *exp = (EagleDbSqlUnaryExpression*) EagleMemory_Allocate("EagleDbSqlUnaryExpression.1", sizeof(EagleDbSqlUnaryExpression));
-    if(NULL == expr) {
+    EagleDbSqlUnaryExpression *exp = (EagleDbSqlUnaryExpression*) EagleMemory_Allocate("EagleDbSqlUnaryExpression_New.1", sizeof(EagleDbSqlUnaryExpression));
+    if(NULL == exp) {
         return NULL;
     }
     
@@ -38,7 +38,7 @@ void EagleDbSqlUnaryExpression_DeleteRecursive(EagleDbSqlUnaryExpression *expr)
 
 char* EagleDbSqlUnaryExpression_toString(EagleDbSqlUnaryExpression *expr)
 {
-    char* s = (char*) EagleMemory_Allocate("EagleDbSqlUnaryExpression.1", 1024), *exp, *op;
+    char* s = (char*) EagleMemory_Allocate("EagleDbSqlUnaryExpression_toString.1", 1024), *exp, *op;
     if(NULL == s) {
         return NULL;
     }
