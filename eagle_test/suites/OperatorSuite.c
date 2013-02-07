@@ -131,6 +131,33 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_AdditionPage)
     EaglePage_Delete(out);
 }
 
+CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractPage)
+{
+    int pageSize = 1000;
+    EaglePage *page1 = EaglePage_AllocInt(pageSize);
+    EaglePage *page2 = EaglePage_AllocInt(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    for(int i = 0; i < pageSize; ++i) {
+        ((int*) page1->data)[i] = arc4random() % 100;
+        ((int*) page2->data)[i] = arc4random() % 100;
+    }
+    
+    EaglePageOperations_SubtractPage(out, page1, page2, NULL);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(((int*) page1->data)[i] - ((int*) page2->data)[i] != ((int*) out->data)[i]) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    EaglePage_Delete(out);
+}
+
 CUNIT_TEST(OperatorSuite, EaglePageOperations_MultiplyPage)
 {
     int pageSize = 1000;
@@ -403,12 +430,46 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     }
 }
 
+CUNIT_TEST(OperatorSuite, EaglePageOperations_DividePage)
+{
+    int pageSize = 1000;
+    EaglePage *page1 = EaglePage_AllocInt(pageSize);
+    EaglePage *page2 = EaglePage_AllocInt(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    for(int i = 0; i < pageSize; ++i) {
+        ((int*) page1->data)[i] = arc4random0(1000);
+        ((int*) page2->data)[i] = arc4random0(1000);
+    }
+    
+    // make sure the first one is 0
+    ((int*) page2->data)[0] = 0;
+    
+    EaglePageOperations_DividePage(out, page1, page2, NULL);
+    
+    // modulus by 0
+    CUNIT_VERIFY_EQUAL_INT(0, ((int*) out->data)[0]);
+    
+    int valid = 1;
+    for(int i = 1; i < pageSize; ++i) {
+        if((((int*) page1->data)[i] / ((int*) page2->data)[i]) != ((int*) out->data)[i]) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    EaglePage_Delete(out);
+}
+
 CUnitTests* OperatorSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
     //CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DividePage, "page(int) / page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, "int > int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanInt, "int < int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanPage, "page(int) > page(int)"));
@@ -417,6 +478,7 @@ CUnitTests* OperatorSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanEqualPage, "page(int) <= page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AndPage, "page(int) AND page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AdditionPage, "page(int) + page(int)"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_SubtractPage, "page(int) - page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_EqualsPage, "page(int) = page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_NotEqualsPage, "page(int) != page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_ModulusPage, "page(int) % page(int)"));

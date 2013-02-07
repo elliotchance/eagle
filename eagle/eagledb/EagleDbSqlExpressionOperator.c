@@ -34,5 +34,11 @@ char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op)
         case EagleDbSqlExpressionOperatorLessThanEqual:
             return strdup("<=");
             
+        case EagleDbSqlExpressionOperatorMinus:
+            return strdup("-");
+            
+        case EagleDbSqlExpressionOperatorDivide:
+            return strdup("/");
+            
     }
 }

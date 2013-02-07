@@ -51,7 +51,17 @@ typedef enum {
     /**
      Greater than or equal to operator.
      */
-    EagleDbSqlExpressionOperatorLessThanEqual = 9
+    EagleDbSqlExpressionOperatorLessThanEqual = 9,
+    
+    /**
+     Subtraction (or negate) operator.
+     */
+    EagleDbSqlExpressionOperatorMinus = 10,
+    
+    /**
+     Division operator.
+     */
+    EagleDbSqlExpressionOperatorDivide = 11
     
 } EagleDbSqlExpressionOperator;
 
