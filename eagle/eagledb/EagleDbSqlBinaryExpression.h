@@ -2,7 +2,7 @@
 #define eagle_EagleDbSqlBinaryExpression_h
 
 #include "EagleDbSqlExpression.h"
-#include "EagleDbSqlExpressionOperator.h"
+#include "EagleDbSqlBinaryExpressionOperator.h"
 #include "Eagle.h"
 
 /**
@@ -26,7 +26,7 @@ typedef struct {
     /**
      The operator between the \p left and \p right operands.
      */
-    EAGLE_ATTR_NA EagleDbSqlExpressionOperator op;
+    EAGLE_ATTR_NA EagleDbSqlBinaryExpressionOperator op;
     
     /**
      The right operand.
@@ -42,7 +42,7 @@ typedef struct {
  * @param [in] right Right operand.
  * @return A new instance.
  */
-EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right);
+EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlExpression *right);
 
 /**
  * Free a binary expression.

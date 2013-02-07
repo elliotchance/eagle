@@ -19,6 +19,9 @@ const char *tokens[] = {
     "VALUES",  // K_VALUES
     "INSERT",  // K_INSERT
     "INTO",    // K_INTO
+    "AND",     // K_AND
+    "OR",      // K_OR
+    "NOT",     // K_NOT
     
     // tokens
     ">",  // T_GREATER_THAN

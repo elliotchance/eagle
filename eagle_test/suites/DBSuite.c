@@ -15,7 +15,7 @@
 #include "EagleDbParser.h"
 #include "EagleLogger.h"
 #include "EagleDbInstance.h"
-#include "EagleDbSqlBinaryExpression.h"
+#include "EagleDbSqlUnaryExpression.h"
 
 int _testSqlSelect(const char *sql)
 {
@@ -50,13 +50,13 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_New)
     EagleDbSqlExpression *left = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
     EagleDbSqlExpression *right = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
     
-    EagleDbSqlBinaryExpression *binary = EagleDbSqlBinaryExpression_New(left, EagleDbSqlExpressionOperatorPlus, right);
+    EagleDbSqlBinaryExpression *binary = EagleDbSqlBinaryExpression_New(left, EagleDbSqlBinaryExpressionOperatorPlus, right);
     CUNIT_ASSERT_NOT_NULL(binary);
     if(NULL != binary) {
         CUNIT_ASSERT_EQUAL_INT(binary->expressionType, EagleDbSqlExpressionTypeBinaryExpression);
         
         CUNIT_VERIFY_EQUAL_PTR(binary->left, left);
-        CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlExpressionOperatorPlus);
+        CUNIT_VERIFY_EQUAL_INT(binary->op, EagleDbSqlBinaryExpressionOperatorPlus);
         CUNIT_VERIFY_EQUAL_PTR(binary->right, right);
     }
     
@@ -231,16 +231,16 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     expr[0] = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col1");
     expr[1] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col2"),
-        EagleDbSqlExpressionOperatorPlus,
+        EagleDbSqlBinaryExpressionOperatorPlus,
         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(8)
     );
     expr[2] = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
         (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(
             (EagleDbSqlExpression*) EagleDbSqlValue_NewWithIdentifier("col1"),
-            EagleDbSqlExpressionOperatorModulus,
+            EagleDbSqlBinaryExpressionOperatorModulus,
             (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(2)
         ),
-        EagleDbSqlExpressionOperatorEquals,
+        EagleDbSqlBinaryExpressionOperatorEquals,
         (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(1)
     );
     
@@ -344,7 +344,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
     EagleDbSqlValue_Delete(v);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1);
@@ -709,7 +709,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
     EagleDbSqlExpression_Delete(NULL);
     
     {
-        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL);
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlBinaryExpressionOperatorEquals, NULL);
         EagleDbSqlExpression_Delete(expr);
     }
     
@@ -939,11 +939,26 @@ CUNIT_TEST(MainSuite, EagleDbSqlSelect_toString)
     EagleDbSqlSelect_DeleteRecursive(select);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
+{
+    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);
+    EaglePlan *plan = EaglePlan_New(1);
+    
+    EaglePlan_prepareBuffers(plan, 10);
+    int destinationBuffer = 0;
+    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &destinationBuffer, plan);
+    CUNIT_VERIFY_EQUAL_INT(result, EagleDbSqlExpression_ERROR);
+    
+    EagleDbSqlExpression_DeleteRecursive(expr);
+    EaglePlan_Delete(plan);
+}
+
 CUnitTests* DBSuite_tests()
 {
-    CUnitTests *tests = CUnitTests_New(100);
+    CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDbSqlSelect_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_LastError));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Finish));
@@ -990,7 +1005,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setText));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));

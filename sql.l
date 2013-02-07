@@ -27,6 +27,9 @@ integer [0-9]+
 "VALUES" return K_VALUES;
 "INSERT" return K_INSERT;
 "INTO" return K_INTO;
+"AND" return K_AND;
+"OR" return K_OR;
+"NOT" return K_NOT;
 
 ">=" return T_GREATER_THAN_EQUAL;
 "<=" return T_LESS_THAN_EQUAL;

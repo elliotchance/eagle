@@ -3,7 +3,7 @@
 #include "EagleDbSqlBinaryExpression.h"
 #include "EagleMemory.h"
 
-EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlExpressionOperator op, EagleDbSqlExpression *right)
+EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression *left, EagleDbSqlBinaryExpressionOperator op, EagleDbSqlExpression *right)
 {
     EagleDbSqlBinaryExpression *expr = (EagleDbSqlBinaryExpression*) EagleMemory_Allocate("EagleDbSqlBinaryExpression_New.1", sizeof(EagleDbSqlBinaryExpression));
     if(NULL == expr) {
@@ -46,7 +46,7 @@ char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr)
     }
     
     left = EagleDbSqlExpression_toString(expr->left);
-    op = EagleDbSqlExpressionOperator_toString(expr->op);
+    op = EagleDbSqlBinaryExpressionOperator_toString(expr->op);
     right = EagleDbSqlExpression_toString(expr->right);
     
     sprintf(s, "%s %s %s", left, op, right);

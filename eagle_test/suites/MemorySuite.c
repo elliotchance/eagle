@@ -93,7 +93,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlBinaryExpression_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlBinaryExpression_New.1");
     
-    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL));
+    CUNIT_ASSERT_NULL(EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlBinaryExpressionOperatorEquals, NULL));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -494,7 +494,9 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlExpression_CompilePlanIntoBuffer_.1");
     
-    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(NULL, EagleDbSqlExpressionOperatorEquals, NULL);
+    EagleDbSqlExpression *left = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+    EagleDbSqlExpression *right = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
+    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(left, EagleDbSqlBinaryExpressionOperatorEquals, right);
     int dest = 0;
     EaglePlan *plan = EaglePlan_New(1);
     EaglePlan_prepareBuffers(plan, 1);
@@ -504,6 +506,8 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_)
     
     EaglePlan_Delete(plan);
     EagleDbSqlExpression_DeleteRecursive(expr);
+    EagleDbSqlExpression_DeleteRecursive(left);
+    EagleDbSqlExpression_DeleteRecursive(right);
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
     EagleMemory_MockFinish();
 }
