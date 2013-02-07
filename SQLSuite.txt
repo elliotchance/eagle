@@ -185,3 +185,35 @@ col1 - 3:integer
 -1
 2
 7
+
+% test
+SELECT -col1 FROM mytable
+- col1:integer
+0
+-1
+-2
+-5
+-10
+
+% test
+SELECT col1 FROM mytable WHERE NOT col1
+col1:integer
+0
+
+% test
+SELECT col1 OR col2 FROM mytable
+col1 OR col2:integer
+0
+1
+1
+1
+1
+
+% test
+SELECT col1 AND col2 FROM mytable
+col1 AND col2:integer
+0
+1
+1
+1
+1

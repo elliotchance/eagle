@@ -13,7 +13,10 @@ typedef enum {
     EagleDbSqlExpressionTypeBinaryExpression = 2,
     
     /** Real type is EagleDbSqlSelect */
-    EagleDbSqlExpressionTypeSelect = 3
+    EagleDbSqlExpressionTypeSelect = 3,
+    
+    /** Real type is EagleDbSqlUnaryExpression */
+    EagleDbSqlExpressionTypeUnaryExpression = 4
     
 } EagleDbSqlExpressionType;
 

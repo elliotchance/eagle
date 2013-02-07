@@ -9,6 +9,7 @@
 
     #include "EagleDbSqlSelect.h"
     #include "EagleDbSqlBinaryExpression.h"
+    #include "EagleDbSqlUnaryExpression.h"
     #include "EagleDbTable.h"
     #include "EagleDbColumn.h"
     #include "EagleDbInstance.h"
@@ -54,10 +55,13 @@
 %token T_BRACKET_CLOSE ")"
 
 /* operators */
-%left  T_NOT_EQUALS   "!=" T_EQUALS    "="
-%left  T_GREATER_THAN ">"  T_LESS_THAN "<"  T_GREATER_THAN_EQUAL ">="  T_LESS_THAN_EQUAL "<="
-%left  T_PLUS         "+"  T_MINUS     "-"
-%right T_ASTERISK     "*"  T_DIVIDE    "/"  T_MODULUS             "%"
+%left  K_OR             "OR"
+%left  K_AND           "AND"
+%left  T_NOT_EQUALS     "!=" T_EQUALS    "="
+%left  T_GREATER_THAN    ">"  T_LESS_THAN "<"  T_GREATER_THAN_EQUAL ">="  T_LESS_THAN_EQUAL "<="
+%left  T_PLUS            "+"  T_MINUS     "-"
+%left  K_NOT           "NOT"
+%right T_ASTERISK        "*"  T_DIVIDE    "/"  T_MODULUS             "%"
 
 %token END 0 "end of file"
 
@@ -206,20 +210,28 @@ where_expression:
 expression:
       value
 
+    /* unary operators */
+    | T_MINUS expression { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNegate, $2); }
+    | K_NOT expression { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, $2); }
+
+    /* logical operators */
+    | expression K_OR expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorOr, $3); }
+    | expression K_AND expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorAnd, $3); }
+
     /* arithmetic operators */
-    | expression T_PLUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorPlus, $3); }
-    | expression T_ASTERISK expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorMultiply, $3); }
-    | expression T_MINUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorMinus, $3); }
-    | expression T_DIVIDE expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorDivide, $3); }
-    | expression T_MODULUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorModulus, $3); }
+    | expression T_PLUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorPlus, $3); }
+    | expression T_ASTERISK expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorMultiply, $3); }
+    | expression T_MINUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorMinus, $3); }
+    | expression T_DIVIDE expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorDivide, $3); }
+    | expression T_MODULUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorModulus, $3); }
 
     /* comparison operators */
-    | expression T_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorEquals, $3); }
-    | expression T_NOT_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorNotEquals, $3); }
-    | expression T_GREATER_THAN expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorGreaterThan, $3); }
-    | expression T_LESS_THAN expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorLessThan, $3); }
-    | expression T_GREATER_THAN_EQUAL expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorGreaterThanEqual, $3); }
-    | expression T_LESS_THAN_EQUAL expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorLessThanEqual, $3); }
+    | expression T_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorEquals, $3); }
+    | expression T_NOT_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorNotEquals, $3); }
+    | expression T_GREATER_THAN expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorGreaterThan, $3); }
+    | expression T_LESS_THAN expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorLessThan, $3); }
+    | expression T_GREATER_THAN_EQUAL expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorGreaterThanEqual, $3); }
+    | expression T_LESS_THAN_EQUAL expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlBinaryExpressionOperatorLessThanEqual, $3); }
 ;
 
 value:

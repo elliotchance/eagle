@@ -57,6 +57,39 @@ void EaglePageOperations_CastIntToBool(EaglePage *destination, EaglePage *source
 void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Calculate logical OR between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 Left operand.
+ @param [in] source2 Right operand.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_OrPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Negate page.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 Operand.
+ @param [in] source2 Ignored.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_NegatePage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate logical NOT between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 Operand.
+ @param [in] source2 Ignored.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_NotPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Addition of two pages.
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
