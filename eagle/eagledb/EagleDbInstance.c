@@ -329,38 +329,23 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
                 
             case EagleDbSqlStatementTypeSelect:
                 success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
+                EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
                 break;
                 
             case EagleDbSqlStatementTypeCreateTable:
                 success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
+                EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
                 break;
                 
             case EagleDbSqlStatementTypeInsert:
                 success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p->yyparse_ast);
+                EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
                 break;
                 
         }
     }
     
     /* clean up */
-    switch(p->yystatementtype) {
-            
-        case EagleDbSqlStatementTypeNone:
-            break;
-            
-        case EagleDbSqlStatementTypeSelect:
-            EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
-            break;
-            
-        case EagleDbSqlStatementTypeCreateTable:
-            EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
-            break;
-            
-        case EagleDbSqlStatementTypeInsert:
-            EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
-            break;
-            
-    }
     EagleDbParser_Finish();
     
     return success;

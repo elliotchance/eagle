@@ -105,7 +105,7 @@ CUNIT_TEST(SQLFuzzSuite, FirstToken)
 
 CUNIT_TEST(SQLFuzzSuite, SELECT)
 {
-    runFuzzTests("SELECT", 19, 5);
+    runFuzzTests("SELECT", 10000, 5);
 }
 
 CUNIT_TEST(SQLFuzzSuite, INSERT)

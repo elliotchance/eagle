@@ -60,7 +60,14 @@
 
 %token END 0 "end of file"
 
-%destructor { EagleLinkedList_DeleteWithItems($$); } column_expression_list
+%destructor { EagleLinkedList_DeleteWithItems($$); } column_expression_list column_definition_list
+%destructor { EagleDbSqlValue_Delete($$); } integer identifier value
+%destructor { EagleDbSqlExpression_DeleteRecursive($$); } column_expression expression where_expression
+%destructor { EagleDbSqlSelect_Delete($$); } select_statement
+%destructor { EagleMemory_Free($$); } data_type
+%destructor { EagleDbColumn_Delete($$); } column_definition
+%destructor { EagleDbTable_Delete($$); } create_table_statement
+%destructor { EagleDbSqlInsert_Delete($$); } insert_statement
 
 %%
 
@@ -149,21 +156,21 @@ keyword:
     K_CREATE | K_FROM | K_INTEGER | K_SELECT | K_TABLE | K_TEXT | K_WHERE | K_VALUES | K_INSERT | K_INTO
 ;
 
-table_name:
-    keyword {
-        ABORT("%s", "You cannot a keyword for a table name.");
-    }
-    |
-    identifier
-;
-
 select_statement:
     K_SELECT error {
         EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect);
         ABORT("%s", "Missing expression list after SELECT");
     }
     |
-    K_SELECT column_expression_list K_FROM table_name where_expression {
+    K_SELECT column_expression_list K_FROM identifier error {
+        EagleLinkedList_DeleteWithItems($2);
+        EagleDbSqlValue_Delete($4);
+        
+        EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect);
+        ABORT("%s", "Unexpected token after FROM clause");
+    }
+    |
+    K_SELECT column_expression_list K_FROM identifier where_expression {
         EagleDbSqlSelect *select = EagleDbSqlSelect_New();
         select->selectExpressions = $2;
         char *name = strdup(((EagleDbSqlValue*) $4)->value.identifier);
