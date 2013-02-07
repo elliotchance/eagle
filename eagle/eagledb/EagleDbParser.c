@@ -63,6 +63,9 @@ void* EagleDbParser_AddError(void *ptr)
 char* EagleDbParser_LastError()
 {
     EagleDbParser *p = EagleDbParser_Default;
+    if(NULL == p) {
+        return NULL;
+    }
     if(EagleLinkedList_isEmpty(p->errors)) {
         return NULL;
     }

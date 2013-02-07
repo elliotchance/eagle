@@ -949,11 +949,29 @@ CUNIT_TEST(MainSuite, EagleLinkedListItem_Delete)
     EagleLinkedListItem_Delete(NULL);
 }
 
+CUNIT_TEST(MainSuite, EagleLinkedList_end)
+{
+    CUNIT_VERIFY_NULL(EagleLinkedList_end(NULL));
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_begin)
+{
+    CUNIT_VERIFY_NULL(EagleLinkedList_begin(NULL));
+}
+
+CUNIT_TEST(MainSuite, EagleLinkedList_isEmpty)
+{
+    CUNIT_VERIFY_TRUE(EagleLinkedList_isEmpty(NULL));
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_isEmpty));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_begin));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_end));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedListItem_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject4));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject3));

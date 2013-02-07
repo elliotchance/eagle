@@ -126,18 +126,26 @@ char* EagleDbSqlSelect_toString(EagleDbSqlSelect *select)
     strcat_safe(str, "SELECT ");
     
     for(item = EagleLinkedList_begin(select->selectExpressions); item; item = item->next) {
+        char *s;
         if(item != EagleLinkedList_begin(select->selectExpressions)) {
             strcat_safe(str, ", ");
         }
-        strcat_safe(str, EagleDbSqlExpression_toString((EagleDbSqlExpression*) item->obj));
+        
+        s = EagleDbSqlExpression_toString((EagleDbSqlExpression*) item->obj);
+        strcat_safe(str, s);
+        EagleMemory_Free(s);
     }
     
     strcat_safe(str, " FROM ");
     strcat_safe(str, select->tableName);
     
     if(NULL != select->whereExpression) {
+        char *s;
+        
         strcat_safe(str, " WHERE ");
-        strcat_safe(str, EagleDbSqlExpression_toString(select->whereExpression));
+        s = EagleDbSqlExpression_toString(select->whereExpression);
+        strcat_safe(str, s);
+        EagleMemory_Free(s);
     }
     
     return str;

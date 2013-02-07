@@ -71,6 +71,15 @@ SELECT 123 + 456 FROM mytable
 579
 
 % test
+SELECT col1 * 3 FROM mytable
+col1 * 3:integer
+0
+3
+6
+15
+30
+
+% test
 SELECT col1 FROM mytable WHERE 123
 col1:integer
 0
