@@ -26,7 +26,32 @@ typedef enum {
     /**
      Multiplication operator.
      */
-    EagleDbSqlExpressionOperatorMultiply = 4
+    EagleDbSqlExpressionOperatorMultiply = 4,
+    
+    /**
+     Not equals operator.
+     */
+    EagleDbSqlExpressionOperatorNotEquals = 5,
+    
+    /**
+     Greater than operator.
+     */
+    EagleDbSqlExpressionOperatorGreaterThan = 6,
+    
+    /**
+     Less than operator.
+     */
+    EagleDbSqlExpressionOperatorLessThan = 7,
+    
+    /**
+     Greater than or equal to operator.
+     */
+    EagleDbSqlExpressionOperatorGreaterThanEqual = 8,
+    
+    /**
+     Greater than or equal to operator.
+     */
+    EagleDbSqlExpressionOperatorLessThanEqual = 9
     
 } EagleDbSqlExpressionOperator;
 

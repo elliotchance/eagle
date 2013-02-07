@@ -21,13 +21,14 @@ const char *tokens[] = {
     "INTO",    // K_INTO
     
     // tokens
-    "*", // T_ASTERISK
-    "+", // T_PLUS
-    "=", // T_EQUALS
-    ";", // T_END
-    ",", // T_COMMA
-    "(", // T_BRACKET_OPEN
-    ")", // T_BRACKET_CLOSE
+    "!=", // T_NOT_EQUALS
+    "*",  // T_ASTERISK
+    "+",  // T_PLUS
+    "=",  // T_EQUALS
+    ";",  // T_END
+    ",",  // T_COMMA
+    "(",  // T_BRACKET_OPEN
+    ")",  // T_BRACKET_CLOSE
     
     // dynamic
     "SomeColumn", // IDENTIFIER

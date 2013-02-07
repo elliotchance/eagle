@@ -28,6 +28,11 @@ integer [0-9]+
 "INSERT" return K_INSERT;
 "INTO" return K_INTO;
 
+">=" return T_GREATER_THAN_EQUAL;
+"<=" return T_LESS_THAN_EQUAL;
+"!=" return T_NOT_EQUALS;
+">" return T_GREATER_THAN;
+"<" return T_LESS_THAN;
 "*" return T_ASTERISK;
 "+" return T_PLUS;
 "=" return T_EQUALS;

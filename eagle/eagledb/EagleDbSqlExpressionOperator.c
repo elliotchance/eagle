@@ -19,5 +19,20 @@ char* EagleDbSqlExpressionOperator_toString(EagleDbSqlExpressionOperator op)
         case EagleDbSqlExpressionOperatorMultiply:
             return strdup("*");
             
+        case EagleDbSqlExpressionOperatorNotEquals:
+            return strdup("!=");
+            
+        case EagleDbSqlExpressionOperatorGreaterThan:
+            return strdup(">");
+            
+        case EagleDbSqlExpressionOperatorLessThan:
+            return strdup("<");
+            
+        case EagleDbSqlExpressionOperatorGreaterThanEqual:
+            return strdup(">=");
+            
+        case EagleDbSqlExpressionOperatorLessThanEqual:
+            return strdup("<=");
+            
     }
 }

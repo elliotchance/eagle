@@ -87,6 +87,16 @@ void EaglePageOperations_MultiplyPage(EaglePage *destination, EaglePage *source1
 void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Not equals comparison between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_NotEqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Send records to another provider based on a condition.
  
  @param [in] destination Ignored.
@@ -105,5 +115,45 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
  @param [in] obj Ignored.
  */
 void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Greater than comparison between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_GreaterThanPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Less than comparison between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_LessThanPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Greater than or equal to comparison between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_GreaterThanEqualPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Less than or equal to comparison between two pages.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 Operand 1.
+ @param [in] source2 Operand 2.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_LessThanEqualPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 #endif
