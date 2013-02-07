@@ -21,6 +21,10 @@ const char *tokens[] = {
     "INTO",    // K_INTO
     
     // tokens
+    ">",  // T_GREATER_THAN
+    "<",  // T_LESS_THAN
+    ">=", // T_GREATER_THAN_EQUAL
+    "<=", // T_LESS_THAN_EQUAL
     "!=", // T_NOT_EQUALS
     "*",  // T_ASTERISK
     "+",  // T_PLUS
@@ -29,6 +33,9 @@ const char *tokens[] = {
     ",",  // T_COMMA
     "(",  // T_BRACKET_OPEN
     ")",  // T_BRACKET_CLOSE
+    "-",  // T_MINUS
+    "/",  // T_DIVIDE
+    "%",  // T_MODULUS
     
     // dynamic
     "SomeColumn", // IDENTIFIER

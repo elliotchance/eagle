@@ -158,3 +158,30 @@ col3:text,col1:integer
 hello,0
 world,1
 how,2
+
+% test
+SELECT col1 % 3 FROM mytable
+col1 % 3:integer
+0
+1
+2
+2
+1
+
+% test
+SELECT col1 / 3 FROM mytable
+col1 / 3:integer
+0
+0
+0
+1
+3
+
+% test
+SELECT col1 - 3 FROM mytable
+col1 - 3:integer
+-3
+-2
+-1
+2
+7

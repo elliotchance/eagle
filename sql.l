@@ -35,6 +35,9 @@ integer [0-9]+
 "<" return T_LESS_THAN;
 "*" return T_ASTERISK;
 "+" return T_PLUS;
+"-" return T_MINUS;
+"/" return T_DIVIDE;
+"%" return T_MODULUS;
 "=" return T_EQUALS;
 ";" return T_END;
 "," return T_COMMA;

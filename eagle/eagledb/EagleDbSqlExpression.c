@@ -88,6 +88,14 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                 case EagleDbSqlExpressionOperatorLessThanEqual:
                     pageOperation = EaglePageOperations_LessThanEqualPage;
                     break;
+                    
+                case EagleDbSqlExpressionOperatorMinus:
+                    pageOperation = EaglePageOperations_SubtractPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorDivide:
+                    pageOperation = EaglePageOperations_DividePage;
+                    break;
                 
             }
             

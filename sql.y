@@ -55,9 +55,9 @@
 
 /* operators */
 %left  T_NOT_EQUALS   "!=" T_EQUALS    "="
-%left  T_GREATER_THAN ">"  T_LESS_THAN "<" T_GREATER_THAN_EQUAL ">=" T_LESS_THAN_EQUAL "<="
-%left  T_PLUS         "+"
-%right T_ASTERISK     "*"
+%left  T_GREATER_THAN ">"  T_LESS_THAN "<"  T_GREATER_THAN_EQUAL ">="  T_LESS_THAN_EQUAL "<="
+%left  T_PLUS         "+"  T_MINUS     "-"
+%right T_ASTERISK     "*"  T_DIVIDE    "/"  T_MODULUS             "%"
 
 %token END 0 "end of file"
 
@@ -205,8 +205,15 @@ where_expression:
 
 expression:
       value
+
+    /* arithmetic operators */
     | expression T_PLUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorPlus, $3); }
     | expression T_ASTERISK expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorMultiply, $3); }
+    | expression T_MINUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorMinus, $3); }
+    | expression T_DIVIDE expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorDivide, $3); }
+    | expression T_MODULUS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorModulus, $3); }
+
+    /* comparison operators */
     | expression T_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorEquals, $3); }
     | expression T_NOT_EQUALS expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorNotEquals, $3); }
     | expression T_GREATER_THAN expression { $$ = EagleDbSqlBinaryExpression_New($1, EagleDbSqlExpressionOperatorGreaterThan, $3); }
