@@ -31,7 +31,6 @@ EagleDbParser* EagleDbParser_New(void)
     }
     
     parser->errors = EagleLinkedList_New();
-    parser->returns = EagleLinkedList_New();
     parser->yyparse_ast = NULL;
     parser->yystatementtype = EagleDbSqlStatementTypeNone;
     
@@ -70,32 +69,6 @@ char* EagleDbParser_LastError()
     return (char*) EagleLinkedList_end(p->errors)->obj;
 }
 
-void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*))
-{
-    EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedList_addObject(p->returns, ptr, EagleFalse, free);
-    return ptr;
-}
-
-void* EagleDbParser_PopReturn()
-{
-    EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedListItem *item = EagleLinkedList_pop(p->returns);
-    void *obj = item->obj;
-    EagleLinkedListItem_Delete(item);
-    return obj;
-}
-
-void* EagleDbParser_CurrentReturn()
-{
-    EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedListItem *item = EagleLinkedList_end(p->returns);
-    if(NULL == item) {
-        return NULL;
-    }
-    return item->obj;
-}
-
 int yyerror(char *s)
 {
     EagleDbParser_AddError(strdup(s));
@@ -110,19 +83,7 @@ void EagleDbParser_Init()
 void EagleDbParser_Finish()
 {
     EagleDbParser *p = EagleDbParser_Default;
-    EagleLinkedListItem *cursor = NULL;
-    
-    EagleBoolean hasError = EagleDbParser_HasError();
-    
-    if(EagleTrue == hasError) {
-        for(cursor = EagleLinkedList_begin(p->returns); cursor; cursor = cursor->next) {
-            cursor->freeObj = hasError;
-        }
-        EagleLinkedList_DeleteItems(p->returns);
-    }
-    EagleLinkedList_Delete(p->returns);
     EagleLinkedList_DeleteWithItems(p->errors);
-    
     EagleMemory_Free(p);
     yylex_destroy();
 }

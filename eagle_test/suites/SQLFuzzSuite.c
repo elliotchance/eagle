@@ -65,10 +65,10 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
     // begin fuzz testing
     for(int i = 0; i < totalFuzzTests; ++i) {
         char *sql = getSQLFuzz(pre, length);
-        /*if(i == totalFuzzTests - 1) {
-         EagleLogger_Get()->out = stderr;
-         fprintf(stderr, "\n%d: %s\n", i, sql);
-         }*/
+        
+        EagleLogger_Get()->out = stderr;
+        fprintf(stderr, "\n%d: %s\n", i, sql);
+        
         EagleBoolean success = EagleDbInstance_execute(db, sql);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);
@@ -105,7 +105,7 @@ CUNIT_TEST(SQLFuzzSuite, FirstToken)
 
 CUNIT_TEST(SQLFuzzSuite, SELECT)
 {
-    runFuzzTests("SELECT", 10000, 5);
+    runFuzzTests("SELECT", 19, 5);
 }
 
 CUNIT_TEST(SQLFuzzSuite, INSERT)
@@ -123,9 +123,9 @@ CUnitTests* SQLFuzzSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    /*CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, FirstToken));
+    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, FirstToken));
     CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, SELECT));
-    CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, INSERT));
+    /*CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, INSERT));
     CUnitTests_addTest(tests, CUNIT_NEW(SQLFuzzSuite, CREATE_TABLE));*/
     
     return tests;

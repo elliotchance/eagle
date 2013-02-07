@@ -19,13 +19,7 @@
     
     int yylex(void);
     
-    #define ADD_ERROR(fmt, ...) { \
-    char msg[1024]; \
-    sprintf(msg, fmt, __VA_ARGS__); \
-    yyerror(msg); \
-    }
-    
-    #define RAISE_ERROR(fmt, ...) { \
+    #define ABORT(fmt, ...) { \
     char msg[1024]; \
     sprintf(msg, fmt, __VA_ARGS__); \
     yyerror(msg); \
@@ -66,6 +60,8 @@
 
 %token END 0 "end of file"
 
+%destructor { EagleLinkedList_DeleteWithItems($$); } column_expression_list
+
 %%
 
 input:
@@ -93,7 +89,7 @@ input:
 ;
 
 statement:
-      select_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect); }
+      select_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect); } 
     | create_table_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeCreateTable); }
     | insert_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeInsert); }
 ;
@@ -154,20 +150,19 @@ keyword:
 ;
 
 table_name:
-    error {
-        ADD_ERROR("%s", "Expected table name");
-        $$ = NULL;
-    }
-    |
     keyword {
-        ADD_ERROR("You cannot use the keyword \"%s\" for a table name.", EagleDbParser_LastToken());
-        $$ = NULL;
+        ABORT("%s", "You cannot a keyword for a table name.");
     }
     |
     identifier
 ;
 
 select_statement:
+    K_SELECT error {
+        EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect);
+        ABORT("%s", "Missing expression list after SELECT");
+    }
+    |
     K_SELECT column_expression_list K_FROM table_name where_expression {
         EagleDbSqlSelect *select = EagleDbSqlSelect_New();
         select->selectExpressions = $2;
