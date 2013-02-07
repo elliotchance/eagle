@@ -158,7 +158,6 @@ keyword:
 
 select_statement:
     K_SELECT error {
-        EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect);
         ABORT("%s", "Missing expression list after SELECT");
     }
     |
@@ -166,7 +165,6 @@ select_statement:
         EagleLinkedList_DeleteWithItems($2);
         EagleDbSqlValue_Delete($4);
         
-        EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect);
         ABORT("%s", "Unexpected token after FROM clause");
     }
     |
