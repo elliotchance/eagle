@@ -30,7 +30,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
         {
             EagleDbSqlUnaryExpression *cast = (EagleDbSqlUnaryExpression*) expression;
             int destination, destinationLeft;
-            char *msg, *t1, *t2, *op;
+            char *msg, *t1, *t2, *beforeOp = NULL, *afterOp = NULL;
             EaglePlanOperation *epo;
             EaglePageOperationFunction(pageOperation);
             
@@ -41,11 +41,13 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
             }
             
             /* operator */
-            msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
-            if(NULL == msg) {
-                return EagleDbSqlExpression_ERROR;
+            if(EagleDbSqlUnaryExpressionOperatorGrouping != cast->op) {
+                msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
+                if(NULL == msg) {
+                    return EagleDbSqlExpression_ERROR;
+                }
+                destination = *destinationBuffer;
             }
-            destination = *destinationBuffer;
             
             switch(cast->op) {
                     
@@ -57,17 +59,26 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     pageOperation = EaglePageOperations_NotPage;
                     break;
                     
+                case EagleDbSqlUnaryExpressionOperatorGrouping:
+                    pageOperation = NULL;
+                    break;
+                    
+            }
+            
+            if(NULL == pageOperation) {
+                return destinationLeft;
             }
             
             t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
             t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
-            op = EagleDbSqlUnaryExpressionOperator_toString(cast->op);
+            EagleDbSqlUnaryExpressionOperator_toString(cast->op, &beforeOp, &afterOp);
             
-            sprintf(msg, "{ %s <%d> (%s) } into <%d> (%s)", op, destinationLeft, t2, destination, t2);
+            sprintf(msg, "{ %s<%d>%s (%s) } into <%d> (%s)", beforeOp, destinationLeft, afterOp, t2, destination, t2);
             
             EagleMemory_Free(t1);
             EagleMemory_Free(t2);
-            EagleMemory_Free(op);
+            EagleMemory_Free(beforeOp);
+            EagleMemory_Free(afterOp);
             
             plan->bufferTypes[destination] = EagleDataTypeInteger;
             epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, -1, NULL, EagleFalse, msg);

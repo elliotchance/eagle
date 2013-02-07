@@ -3,15 +3,24 @@
 #include <string.h>
 #include "EagleDbSqlUnaryExpressionOperator.h"
 
-char* EagleDbSqlUnaryExpressionOperator_toString(EagleDbSqlUnaryExpressionOperator op)
+void EagleDbSqlUnaryExpressionOperator_toString(EagleDbSqlUnaryExpressionOperator op, char **before, char **after)
 {
     switch(op) {
         
         case EagleDbSqlUnaryExpressionOperatorNegate:
-            return strdup("-");
+            *before = strdup("-");
+            *after = strdup("");
+            break;
             
         case EagleDbSqlUnaryExpressionOperatorNot:
-            return strdup("NOT");
+            *before = strdup("NOT ");
+            *after = strdup("");
+            break;
+            
+        case EagleDbSqlUnaryExpressionOperatorGrouping:
+            *before = strdup("(");
+            *after = strdup(")");
+            break;
             
     }
 }

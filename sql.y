@@ -210,6 +210,9 @@ where_expression:
 expression:
       value
 
+    /* grouping */
+    | T_BRACKET_OPEN expression T_BRACKET_CLOSE { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorGrouping, $2); }
+
     /* unary operators */
     | T_MINUS expression { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNegate, $2); }
     | K_NOT expression { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, $2); }

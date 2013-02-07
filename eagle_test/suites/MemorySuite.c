@@ -518,8 +518,6 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
     
     EaglePlan_Delete(plan);
     EagleDbSqlExpression_DeleteRecursive(expr);
-    EagleDbSqlExpression_DeleteRecursive(left);
-    EagleDbSqlExpression_DeleteRecursive(right);
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
     EagleMemory_MockFinish();
 }

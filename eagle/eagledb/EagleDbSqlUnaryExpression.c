@@ -38,17 +38,19 @@ void EagleDbSqlUnaryExpression_DeleteRecursive(EagleDbSqlUnaryExpression *expr)
 
 char* EagleDbSqlUnaryExpression_toString(EagleDbSqlUnaryExpression *expr)
 {
-    char* s = (char*) EagleMemory_Allocate("EagleDbSqlUnaryExpression_toString.1", 1024), *exp, *op;
+    char* s = (char*) EagleMemory_Allocate("EagleDbSqlUnaryExpression_toString.1", 1024), *exp;
+    char *beforeOp = NULL, *afterOp = NULL;
     if(NULL == s) {
         return NULL;
     }
     
-    op = EagleDbSqlUnaryExpressionOperator_toString(expr->op);
+    EagleDbSqlUnaryExpressionOperator_toString(expr->op, &beforeOp, &afterOp);
     exp = EagleDbSqlExpression_toString(expr->expr);
     
-    sprintf(s, "%s %s", op, exp);
+    sprintf(s, "%s%s%s", beforeOp, exp, afterOp);
     
-    EagleMemory_Free(op);
+    EagleMemory_Free(beforeOp);
+    EagleMemory_Free(afterOp);
     EagleMemory_Free(exp);
     return s;
 }
