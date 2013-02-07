@@ -188,7 +188,7 @@ col1 - 3:integer
 
 % test
 SELECT -col1 FROM mytable
-- col1:integer
+-col1:integer
 0
 -1
 -2
@@ -217,3 +217,12 @@ col1 AND col2:integer
 1
 1
 1
+
+% test
+SELECT 2 * (col1 + 3) FROM mytable
+2 * (col1 + 3):integer
+6
+8
+10
+16
+26

@@ -14,15 +14,22 @@ typedef enum {
     /**
      Logical NOT operator.
      */
-    EagleDbSqlUnaryExpressionOperatorNot = 2
+    EagleDbSqlUnaryExpressionOperatorNot = 2,
+    
+    /**
+     Grouping () operator.
+     */
+    EagleDbSqlUnaryExpressionOperatorGrouping = 3
     
 } EagleDbSqlUnaryExpressionOperator;
 
 /**
- * Get the string representation of the operator.
+ * Get the string representation of the operator. The \p before and \p after will be allocated automatically but you
+ * must free both of them (even if the value is blank)
  * @param [in] op The operator.
- * @return A new string. You must free this yourself.
+ * @param [out] before The string to put before the expression.
+ * @param [out] after The string to put before the expression.
  */
-char* EagleDbSqlUnaryExpressionOperator_toString(EagleDbSqlUnaryExpressionOperator op);
+void EagleDbSqlUnaryExpressionOperator_toString(EagleDbSqlUnaryExpressionOperator op, char **before, char **after);
 
 #endif
