@@ -10,6 +10,7 @@
 #include "BenchSuite.h"
 #include "EagleLogger.h"
 #include "SQLFuzzSuite.h"
+#include "OperatorSuite.h"
 
 CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc pClean, CUnitTests* (*testsFunction)())
 {
@@ -54,6 +55,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "                         memory\n");
         fprintf(stderr, "                         sqlfuzz\n");
         fprintf(stderr, "                         bench\n");
+        fprintf(stderr, "                         operator\n");
         fprintf(stderr, "\n");
         exit(1);
     }
@@ -66,6 +68,7 @@ int main(int argc, char **argv)
     EagleBoolean op_suite_memory = EagleFalse;
     EagleBoolean op_suite_sqlfuzz = EagleFalse;
     EagleBoolean op_suite_bench = EagleFalse;
+    EagleBoolean op_suite_operator = EagleFalse;
     
     for(int i = 1; i < argc; ++i) {
         if(!strcmp(argv[i], "--wait")) {
@@ -89,6 +92,9 @@ int main(int argc, char **argv)
         else if(!strcmp(argv[i], "--suite-bench")) {
             op_suite_bench = EagleTrue;
         }
+        else if(!strcmp(argv[i], "--suite-operator")) {
+            op_suite_operator = EagleTrue;
+        }
         else if(!strcmp(argv[i], "--all-suites")) {
             op_suite_main = EagleTrue;
             op_suite_db = EagleTrue;
@@ -96,6 +102,7 @@ int main(int argc, char **argv)
             op_suite_memory = EagleTrue;
             op_suite_sqlfuzz = EagleTrue;
             op_suite_bench = EagleTrue;
+            op_suite_operator = EagleTrue;
         }
         else if(!strcmp(argv[i], "--exclude-main")) {
             op_suite_main = EagleFalse;
@@ -114,6 +121,9 @@ int main(int argc, char **argv)
         }
         else if(!strcmp(argv[i], "--exclude-bench")) {
             op_suite_bench = EagleFalse;
+        }
+        else if(!strcmp(argv[i], "--exclude-operator")) {
+            op_suite_operator = EagleFalse;
         }
         else {
             fprintf(stderr, "\nUnknown option \"%s\"\n\n", argv[i]);
@@ -143,6 +153,9 @@ int main(int argc, char **argv)
         return CU_get_error();
     }
     if(EagleTrue == op_suite_bench && CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
+        return CU_get_error();
+    }
+    if(EagleTrue == op_suite_operator && CUE_SUCCESS != addSuite("OperatorSuite", OperatorSuite_init, OperatorSuite_clean, OperatorSuite_tests)) {
         return CU_get_error();
     }
     

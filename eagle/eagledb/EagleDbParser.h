@@ -25,11 +25,6 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED void *yyparse_ast;
     
-    /**
-     A return stack.
-     */
-    EAGLE_ATTR_MANAGED EagleLinkedList *returns;
-    
 } EagleDbParser;
 
 /**
@@ -99,29 +94,15 @@ char* EagleDbParser_LastError(void);
 void* EagleDbParser_AddError(void *ptr);
 
 /**
- * Push the return value onto the stack.
- * @param [in] ptr The object.
- * @param [in] free The function responsible for freeing the pointer.
- * @return \p ptr
- */
-void* EagleDbParser_AddReturn(void *ptr, void (*free)(void*));
-
-/**
- * Return the last yyreturn and decrement back the stack.
- * @return the last yyreturn
- */
-void* EagleDbParser_PopReturn(void);
-
-/**
- * Return the most recent yyreturn.
- * @return the most recent yyreturn.
- */
-void* EagleDbParser_CurrentReturn(void);
-
-/**
  * Did the parser encounter any errors?
  * @return EagleTrue if the parser encountered an error.
  */
 EagleBoolean EagleDbParser_HasError(void);
+
+/**
+ Set the type of statement that is being parsed.
+ @param [in] type The type.
+ */
+void EagleDbParser_SetStatementType(EagleDbSqlStatementType type);
 
 #endif

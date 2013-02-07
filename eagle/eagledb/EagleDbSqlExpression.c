@@ -64,6 +64,30 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                 case EagleDbSqlExpressionOperatorModulus:
                     pageOperation = EaglePageOperations_ModulusPage;
                     break;
+                    
+                case EagleDbSqlExpressionOperatorMultiply:
+                    pageOperation = EaglePageOperations_MultiplyPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorNotEquals:
+                    pageOperation = EaglePageOperations_NotEqualsPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorGreaterThan:
+                    pageOperation = EaglePageOperations_GreaterThanPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorLessThan:
+                    pageOperation = EaglePageOperations_LessThanPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorGreaterThanEqual:
+                    pageOperation = EaglePageOperations_GreaterThanEqualPage;
+                    break;
+                    
+                case EagleDbSqlExpressionOperatorLessThanEqual:
+                    pageOperation = EaglePageOperations_LessThanEqualPage;
+                    break;
                 
             }
             

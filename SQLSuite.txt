@@ -71,6 +71,15 @@ SELECT 123 + 456 FROM mytable
 579
 
 % test
+SELECT col1 * 3 FROM mytable
+col1 * 3:integer
+0
+3
+6
+15
+30
+
+% test
 SELECT col1 FROM mytable WHERE 123
 col1:integer
 0
@@ -115,3 +124,37 @@ world,1
 how,2
 are,5
 you doing?,10
+
+% test
+select col3, col1 from mytable where col2 != 4
+col3:text,col1:integer
+hello,0
+world,1
+are,5
+you doing?,10
+
+% test
+select col3, col1 from mytable where col2 > 4
+col3:text,col1:integer
+are,5
+you doing?,10
+
+% test
+select col3, col1 from mytable where col2 < 4
+col3:text,col1:integer
+hello,0
+world,1
+
+% test
+select col3, col1 from mytable where col2 >= 4
+col3:text,col1:integer
+how,2
+are,5
+you doing?,10
+
+% test
+select col3, col1 from mytable where col2 <= 4
+col3:text,col1:integer
+hello,0
+world,1
+how,2

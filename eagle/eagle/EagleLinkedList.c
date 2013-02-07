@@ -104,6 +104,11 @@ void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
 EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)
 {
     EagleLinkedListItem *first = NULL;
+    
+    if(NULL == list) {
+        return NULL;
+    }
+    
     EagleSynchronizer_Lock(list->modifyLock);
     first = list->first;
     EagleSynchronizer_Unlock(list->modifyLock);
@@ -113,6 +118,11 @@ EagleLinkedListItem* EagleLinkedList_begin(EagleLinkedList *list)
 EagleLinkedListItem* EagleLinkedList_end(EagleLinkedList *list)
 {
     EagleLinkedListItem *head = NULL;
+    
+    if(NULL == list) {
+        return NULL;
+    }
+    
     EagleSynchronizer_Lock(list->modifyLock);
     head = list->last;
     EagleSynchronizer_Unlock(list->modifyLock);
@@ -151,7 +161,10 @@ EagleLinkedListItem* EagleLinkedList_pop(EagleLinkedList *list)
 
 EagleBoolean EagleLinkedList_isEmpty(EagleLinkedList *list)
 {
-    if(NULL == list->first) {
+    if(NULL == list) {
+        return EagleTrue;
+    }
+    if(0 == list->length) {
         return EagleTrue;
     }
     return EagleFalse;

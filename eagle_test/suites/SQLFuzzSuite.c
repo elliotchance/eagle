@@ -21,13 +21,14 @@ const char *tokens[] = {
     "INTO",    // K_INTO
     
     // tokens
-    "*", // T_ASTERISK
-    "+", // T_PLUS
-    "=", // T_EQUALS
-    ";", // T_END
-    ",", // T_COMMA
-    "(", // T_BRACKET_OPEN
-    ")", // T_BRACKET_CLOSE
+    "!=", // T_NOT_EQUALS
+    "*",  // T_ASTERISK
+    "+",  // T_PLUS
+    "=",  // T_EQUALS
+    ";",  // T_END
+    ",",  // T_COMMA
+    "(",  // T_BRACKET_OPEN
+    ")",  // T_BRACKET_CLOSE
     
     // dynamic
     "SomeColumn", // IDENTIFIER
@@ -65,10 +66,10 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
     // begin fuzz testing
     for(int i = 0; i < totalFuzzTests; ++i) {
         char *sql = getSQLFuzz(pre, length);
-        /*if(i == totalFuzzTests - 1) {
-         EagleLogger_Get()->out = stderr;
-         fprintf(stderr, "\n%d: %s\n", i, sql);
-         }*/
+        
+        /*EagleLogger_Get()->out = stderr;
+        fprintf(stderr, "\n%d: %s\n", i, sql);*/
+        
         EagleBoolean success = EagleDbInstance_execute(db, sql);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);
@@ -110,12 +111,12 @@ CUNIT_TEST(SQLFuzzSuite, SELECT)
 
 CUNIT_TEST(SQLFuzzSuite, INSERT)
 {
-    runFuzzTests("INSERT", 10000, 1);
+    runFuzzTests("INSERT", 10000, 5);
 }
 
 CUNIT_TEST(SQLFuzzSuite, CREATE_TABLE)
 {
-    runFuzzTests("CREATE TABLE", 10000, 1);
+    runFuzzTests("CREATE TABLE", 10000, 5);
 }
 
 CUnitTests* SQLFuzzSuite_tests()

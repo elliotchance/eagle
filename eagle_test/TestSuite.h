@@ -14,6 +14,7 @@ answers[i] = expr; \
 #define CUNIT_TEST(suite, method, ...) void CUNIT_TESTNAME(suite, method, __VA_ARGS__)()
 #define QUOTE(str) #str
 #define CUNIT_NEW(suite, method, ...) CUnitTest_New(QUOTE(method##__VA_ARGS__), CUNIT_TESTNAME(suite, method, __VA_ARGS__))
+#define CUNIT_NEW_NAME(suite, method, name) CUnitTest_New(name, CUNIT_TESTNAME(suite, method))
 
 /**
  Verify two integers are the same.
