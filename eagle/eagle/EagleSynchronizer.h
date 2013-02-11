@@ -2,6 +2,7 @@
 #define eagle_EagleSynchronizer_h
 
 #include "EagleLock.h"
+#include "EagleBoolean.h"
 
 /**
  Create a new EagleLock.
@@ -36,5 +37,10 @@ void EagleSynchronizer_Lock(EagleLock *lock);
  @see EagleSynchronizer_Lock()
  */
 void EagleSynchronizer_Unlock(EagleLock *lock);
+
+/**
+ Test is a lock is currently active.
+ */
+EagleBoolean EagleSynchronizer_IsLocked(EagleLock *lock);
 
 #endif

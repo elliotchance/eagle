@@ -21,3 +21,11 @@ void EagleSynchronizer_Unlock(EagleLock *lock)
 {
     pthread_mutex_unlock(&lock->mutex);
 }
+
+EagleBoolean EagleSynchronizer_IsLocked(EagleLock *lock)
+{
+    if(0 == pthread_mutex_trylock(&lock->mutex)) {
+        return EagleFalse;
+    }
+    return EagleTrue;
+}
