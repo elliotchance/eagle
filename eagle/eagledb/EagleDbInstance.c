@@ -308,15 +308,12 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
     EagleBoolean success = EagleTrue;
     
     /* parse sql */
-    EagleDbParser_Init();
-    EagleDbParser_LoadString(sql);
-    EagleDbParser_Parse();
+    p = EagleDbParser_ParseWithString(sql);
     
     /* check for errors */
-    p = EagleDbParser_Get();
-    if(EagleDbParser_HasError() > 0) {
+    if(EagleTrue == EagleDbParser_hasError(p)) {
         char msg[1024];
-        sprintf(msg, "Error: %s", EagleDbParser_LastError());
+        sprintf(msg, "Error: %s", EagleDbParser_lastError(p));
         EagleLogger_Log(EagleLoggerSeverityUserError, msg);
         success = EagleFalse;
     }
@@ -346,7 +343,7 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
     }
     
     /* clean up */
-    EagleDbParser_Finish();
+    EagleDbParser_Delete(p);
     
     return success;
 }

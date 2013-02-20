@@ -15,7 +15,7 @@
 #include "EagleMemory.h"
 #include "EagleDbParser.h"
 
-int _testSqlSelect(const char *sql);
+EagleDbParser* _testSqlSelect(const char *sql);
 
 EagleDbTableData **tables;
 int allocatedTables = 0;
@@ -96,25 +96,25 @@ void SQLSuiteTest()
     SQLTest test = sqlTests[currentTest++];
     
     // check for parser errors
-    if(_testSqlSelect(test.sql)) {
+    EagleDbParser *p = _testSqlSelect(test.sql);
+    if(EagleDbParser_hasError(p)) {
         // expected error
         if(NULL != test.errorMessage) {
-            if(!strcmp(EagleDbParser_LastError(), test.errorMessage)) {
-                EagleDbParser_Finish();
+            if(!strcmp(EagleDbParser_lastError(p), test.errorMessage)) {
+                EagleDbParser_Delete(p);
                 return;
             }
-            CUNIT_ASSERT_EQUAL_STRING(EagleDbParser_LastError(), test.errorMessage);
+            CUNIT_ASSERT_EQUAL_STRING(EagleDbParser_lastError(p), test.errorMessage);
         }
         // unexpected error
         else {
-            CUNIT_FAIL("%s", EagleDbParser_LastError());
+            CUNIT_FAIL("%s", EagleDbParser_lastError(p));
         }
     }
     
     // create the plan skeleton
     EaglePlan *plan = EaglePlan_New(pageSize);
     
-    EagleDbParser *p = EagleDbParser_Get();
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
     exprs = EagleDbSqlSelect_getExpressionsCount(select);
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
@@ -214,7 +214,7 @@ void SQLSuiteTest()
     EagleMemory_Free(expr);
     
     EagleDbSqlSelect_DeleteRecursive(p->yyparse_ast);
-    EagleDbParser_Finish();
+    EagleDbParser_Delete(p);
 }
 
 void controlTest(FILE *file, int *lineNumber)

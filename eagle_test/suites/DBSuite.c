@@ -17,17 +17,15 @@
 #include "EagleDbInstance.h"
 #include "EagleDbSqlUnaryExpression.h"
 
-int _testSqlSelect(const char *sql)
+EagleDbParser* _testSqlSelect(const char *sql)
 {
     // add ;
     char *newsql = (char*) malloc(strlen(sql) + 2);
     sprintf(newsql, "%s;", sql);
     
-    EagleDbParser_Init();
-    EagleDbParser_LoadString(newsql);
-    int r = EagleDbParser_Parse();
+    EagleDbParser *parser = EagleDbParser_ParseWithString(newsql);
     EagleMemory_Free(newsql);
-    return r;
+    return parser;
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlSelect_New)
@@ -80,11 +78,11 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_NewWithInteger)
 
 EagleDbSqlExpression* _getExpression(const char *sql)
 {
-    if(_testSqlSelect(sql)) {
-        CUNIT_FAIL(EagleDbParser_LastError(), NULL);
+    EagleDbParser *p = _testSqlSelect(sql);
+    if(EagleDbParser_hasError(p)) {
+        CUNIT_FAIL(EagleDbParser_lastError(p), NULL);
     }
     
-    EagleDbParser *p = EagleDbParser_Get();
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
     CUNIT_ASSERT_NOT_NULL(EagleLinkedList_get(select->selectExpressions, 0));
     
@@ -609,7 +607,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
     EagleDbInstance *db = EagleDbInstance_New(1);
     
     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);"));
-    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected IDENTIFIER, expecting K_TABLE");
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier, expecting TABLE");
     
     EagleDbInstance_Delete(db);
 }
@@ -917,22 +915,6 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue2)
     EagleInstanceTest_Cleanup(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbParser_Finish)
-{
-    EagleDbParser_Init();
-    EagleDbParser *p = EagleDbParser_Get();
-    EagleLinkedList_addObject(p->errors, NULL, EagleFalse, NULL);
-    EagleDbParser_Finish();
-}
-
-CUNIT_TEST(DBSuite, EagleDbParser_LastError)
-{
-    CUNIT_VERIFY_NULL(EagleDbParser_LastError());
-    EagleDbParser_Init();
-    CUNIT_VERIFY_NULL(EagleDbParser_LastError());
-    EagleDbParser_Finish();
-}
-
 CUNIT_TEST(MainSuite, EagleDbSqlSelect_toString)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
@@ -973,17 +955,31 @@ CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive)
     EagleDbSqlUnaryExpression_DeleteRecursive(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbParser_lastError)
+{
+    CUNIT_VERIFY_NULL(EagleDbParser_lastError(NULL));
+    
+    EagleDbParser *parser = EagleDbParser_New();
+    CUNIT_VERIFY_NULL(EagleDbParser_lastError(parser));
+    EagleDbParser_Delete(parser);
+}
+
+CUNIT_TEST(DBSuite, EagleDbParser_Delete)
+{
+    EagleDbParser_Delete(NULL);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDbSqlSelect_toString));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_LastError));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Finish));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadValue1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _INSERT_BadColumn2));

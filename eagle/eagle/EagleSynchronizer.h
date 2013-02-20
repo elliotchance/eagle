@@ -2,6 +2,7 @@
 #define eagle_EagleSynchronizer_h
 
 #include "EagleLock.h"
+#include "EagleBoolean.h"
 
 /**
  Create a new EagleLock.

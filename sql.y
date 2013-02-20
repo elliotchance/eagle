@@ -2,6 +2,15 @@
 
     #define YYSTYPE void*
     
+    typedef struct YYLTYPE
+    {
+        int first_line;
+        int first_column;
+        int last_line;
+        int last_column;
+        char *filename;
+    } YYLTYPE;
+    
     #include <math.h>
     #include <stdio.h>
     #include <stdlib.h>
@@ -18,12 +27,12 @@
     #include "EagleDataType.h"
     #include "EagleDbSqlInsert.h"
     
-    int yylex(void);
+    int yylex(YYSTYPE *lvalp, YYLTYPE *llocp);
     
     #define ABORT(fmt, ...) { \
     char msg[1024]; \
     sprintf(msg, fmt, __VA_ARGS__); \
-    yyerror(msg); \
+    yyerror(parser, NULL, msg); \
     YYERROR; \
     }
 
@@ -32,21 +41,31 @@
 /* be more versbose about error messages */
 %error-verbose
 
+%pure-parser
+%lex-param   { void* scanner }
+%parse-param { EagleDbParser *parser }
+%parse-param { void* scanner }
+
+/*%union {
+    int value;
+    SExpression *expression;
+}*/
+
 /* keywords */
-%token K_CREATE
-%token K_FROM
-%token K_INTEGER
-%token K_SELECT
-%token K_TABLE
-%token K_TEXT
-%token K_WHERE
-%token K_VALUES
-%token K_INSERT
-%token K_INTO
+%token K_CREATE   "CREATE"
+%token K_FROM       "FROM"
+%token K_INTEGER "INTEGER"
+%token K_SELECT   "SELECT"
+%token K_TABLE     "TABLE"
+%token K_TEXT       "TEXT"
+%token K_WHERE     "WHERE"
+%token K_VALUES   "VALUES"
+%token K_INSERT   "INSERT"
+%token K_INTO       "INTO"
 
 /* variable tokens */
-%token IDENTIFIER
-%token INTEGER
+%token IDENTIFIER "identifier"
+%token INTEGER       "integer"
 
 /* fixed tokens */
 %token T_END           ";"
@@ -57,13 +76,15 @@
 /* operators */
 %left  K_OR             "OR"
 %left  K_AND           "AND"
-%left  T_NOT_EQUALS     "!=" T_EQUALS    "="
+%left  T_NOT_EQUALS     "!="  T_EQUALS    "="
 %left  T_GREATER_THAN    ">"  T_LESS_THAN "<"  T_GREATER_THAN_EQUAL ">="  T_LESS_THAN_EQUAL "<="
 %left  T_PLUS            "+"  T_MINUS     "-"
 %left  K_NOT           "NOT"
 %right T_ASTERISK        "*"  T_DIVIDE    "/"  T_MODULUS             "%"
 
 %token END 0 "end of file"
+
+/*%type <parser> statement*/
 
 %destructor { EagleLinkedList_DeleteWithItems($$); } column_expression_list column_definition_list
 %destructor { EagleDbSqlValue_Delete($$); } integer identifier value
@@ -77,33 +98,23 @@
 %%
 
 input:
-    END {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yyparse_ast = NULL;
-        p->yystatementtype = EagleDbSqlStatementTypeNone;
-    }
+    END
     |
-    T_END END {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yyparse_ast = NULL;
-        p->yystatementtype = EagleDbSqlStatementTypeNone;
-    }
+    T_END END
     |
     statement END {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yyparse_ast = $1;
+        parser->yyparse_ast = $1;
     }
     |
     statement T_END END {
-        EagleDbParser *p = EagleDbParser_Get();
-        p->yyparse_ast = $1;
+        parser->yyparse_ast = $1;
     }
 ;
 
 statement:
-      select_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeSelect); } 
-    | create_table_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeCreateTable); }
-    | insert_statement { EagleDbParser_SetStatementType(EagleDbSqlStatementTypeInsert); }
+      select_statement { parser->yystatementtype = EagleDbSqlStatementTypeSelect; }
+    | create_table_statement { parser->yystatementtype = EagleDbSqlStatementTypeCreateTable; }
+    | insert_statement { parser->yystatementtype = EagleDbSqlStatementTypeInsert; }
 ;
 
 insert_statement:
@@ -242,11 +253,18 @@ value:
 ;
 
 integer:
-    INTEGER { $$ = EagleDbSqlValue_NewWithInteger(atoi(EagleDbParser_LastToken())); }
+    INTEGER {
+        char *lastToken = EagleDbParser_lastToken(parser);
+        int value = atoi(lastToken);
+        $$ = EagleDbSqlValue_NewWithInteger(value);
+    }
 ;
 
 identifier:
-    IDENTIFIER { $$ = EagleDbSqlValue_NewWithIdentifier(EagleDbParser_LastToken()); }
+    IDENTIFIER {
+        char *lastToken = EagleDbParser_lastToken(parser);
+        $$ = EagleDbSqlValue_NewWithIdentifier(lastToken);
+    }
 ;
 
 %%

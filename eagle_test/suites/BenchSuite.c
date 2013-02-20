@@ -95,11 +95,7 @@ CUNIT_TEST(BenchSuite, SELECT)
     EagleDbInstance *instance = getInstance();
     
     // parse SELECT
-    EagleDbParser_Init();
-    EagleDbParser_LoadString("SELECT col1 FROM mytable WHERE col1=1000000");
-    EagleDbParser_Parse();
-    
-    EagleDbParser *parser = EagleDbParser_Get();
+    EagleDbParser *parser = EagleDbParser_ParseWithString("SELECT col1 FROM mytable WHERE col1=1000000");
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) parser->yyparse_ast;
 
     // execute

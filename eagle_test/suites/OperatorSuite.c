@@ -431,16 +431,13 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     }
     
     /* parse sql */
-    EagleDbParser_Init();
-    EagleDbParser_LoadString("SELECT col1 * 2 + 10 * 2 FROM mytable;");
-    EagleDbParser_Parse();
-    
-    if(EagleTrue == EagleDbParser_HasError()) {
-        CUNIT_FAIL("%s", EagleDbParser_LastError());
+    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1 * 2 + 10 * 2 FROM mytable;");
+    if(EagleTrue == EagleDbParser_hasError(p)) {
+        CUNIT_FAIL("%s", EagleDbParser_lastError(p));
     }
     
     /* compile plan */
-    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) EagleDbParser_Get()->yyparse_ast, db);
+    EaglePlan *plan = EagleDbSqlSelect_parse(p->yyparse_ast, db);
     CUNIT_ASSERT_NOT_NULL(plan);
     CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
     

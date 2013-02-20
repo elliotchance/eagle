@@ -1,14 +1,21 @@
 %{
-
-#define YYSTYPE void*
-#include "y.tab.h"
-#include <stdlib.h>
-
-char *yytext_last = NULL;
+    
+    #include <stdlib.h>
+    #include "y.tab.h"
+    #include "EagleDbParser.h"
+    
+    #define YYSTYPE void*
+    #define YY_EXTRA_TYPE EagleDbParser*
 
 %}
 
+/* SQL standard is not case sensitive */
 %option case-insensitive
+
+/* this parser must be thread safe */
+%option warn nodefault
+%option reentrant noyywrap never-interactive nounistd
+%option bison-bridge
 
 white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
@@ -52,11 +59,11 @@ integer [0-9]+
 }
 
 {identifier} {
-    yytext_last = yytext;
+    yyextra->yytext_last = yytext;
     return IDENTIFIER;
 }
 
 {integer} {
-    yytext_last = yytext;
+    yyextra->yytext_last = yytext;
     return INTEGER;
 }
