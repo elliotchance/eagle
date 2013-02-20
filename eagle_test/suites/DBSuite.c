@@ -607,7 +607,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
     EagleDbInstance *db = EagleDbInstance_New(1);
     
     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);"));
-    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected IDENTIFIER, expecting K_TABLE");
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier, expecting TABLE");
     
     EagleDbInstance_Delete(db);
 }
