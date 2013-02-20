@@ -38,9 +38,4 @@ void EagleSynchronizer_Lock(EagleLock *lock);
  */
 void EagleSynchronizer_Unlock(EagleLock *lock);
 
-/**
- Test is a lock is currently active.
- */
-EagleBoolean EagleSynchronizer_IsLocked(EagleLock *lock);
-
 #endif

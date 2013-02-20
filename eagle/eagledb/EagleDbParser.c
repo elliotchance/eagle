@@ -8,6 +8,9 @@
 #include "EagleData.h"
 #include "EagleDbSqlExpression.h"
 
+/**
+ Trivial internal type.
+ */
 typedef void* yyscan_t;
 
 /* internal prototypes supplied by flex and bison */
@@ -34,13 +37,15 @@ EagleDbParser* EagleDbParser_New(void)
     return parser;
 }
 
-EagleDbParser* EagleDbParser_ParseWithString(const char *str)
+EagleDbParser* EagleDbParser_ParseWithString(const char *sql)
 {
     EagleDbParser *parser = EagleDbParser_New();
     
     yylex_init_extra(parser, &parser->yyparse);
-    yy_scan_string(str, parser->yyparse);
-    yyparse(parser, parser->yyparse);
+    if(NULL != parser) {
+        yy_scan_string(sql, parser->yyparse);
+        yyparse(parser, parser->yyparse);
+    }
     
     return parser;
 }
@@ -84,6 +89,8 @@ void EagleDbParser_Delete(EagleDbParser *p)
     }
     
     EagleLinkedList_DeleteWithItems(p->errors);
-    yylex_destroy(p->yyparse);
+    if(NULL != p->yyparse) {
+        yylex_destroy(p->yyparse);
+    }
     EagleMemory_Free(p);
 }
