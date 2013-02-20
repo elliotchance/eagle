@@ -55,10 +55,9 @@ EagleBoolean EagleDbParser_hasError(EagleDbParser *p)
     return !EagleLinkedList_isEmpty(p->errors);
 }
 
-void* EagleDbParser_addError(EagleDbParser *p, void *ptr)
+void EagleDbParser_addError(EagleDbParser *p, char *message)
 {
-    EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleTrue, NULL));
-    return ptr;
+    EagleLinkedList_add(p->errors, EagleLinkedListItem_New(strdup(message), EagleTrue, NULL));
 }
 
 char* EagleDbParser_lastError(EagleDbParser *p)

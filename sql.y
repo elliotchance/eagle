@@ -28,7 +28,6 @@
     #include "EagleDbSqlInsert.h"
     
     int yylex(YYSTYPE *lvalp, YYLTYPE *llocp);
-    /*int yylex(void* scanner);*/
     
     #define ABORT(fmt, ...) { \
     char msg[1024]; \

@@ -73,10 +73,9 @@ char* EagleDbParser_lastError(EagleDbParser *p);
 
 /**
  * Push the error onto the stack.
- * @param [in] ptr The object.
- * @return \p ptr
+ * @param [in] message The error message.
  */
-void* EagleDbParser_addError(EagleDbParser *p, void *ptr);
+void EagleDbParser_addError(EagleDbParser *p, char *message);
 
 /**
  * Did the parser encounter any errors?
