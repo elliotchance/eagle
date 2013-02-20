@@ -54,7 +54,7 @@ function validateFile($file)
 		}
 		
 		// check return
-		if((string) $member['kind'] != 'variable' && (string) $member->type && (string) $member->type != 'void') {
+		if(!in_array((string) $member['kind'], array('variable', 'typedef')) && (string) $member->type && (string) $member->type != 'void') {
 			$return = getReturnDesc($member->detaileddescription);
 			if(!$return) {
 				addError("[{$member->location['file']}:{$member->location['line']} {$member->name}{$member->argsstring}]: Missing @return description.");
