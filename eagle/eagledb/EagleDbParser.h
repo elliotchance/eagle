@@ -11,6 +11,11 @@
 typedef struct {
     
     /**
+     Pointer to allow the reentrant parser to work.
+     */
+    EAGLE_ATTR_MANAGED void *yyparse;
+    
+    /**
      The type of statement.
      */
     EAGLE_ATTR_NA EagleDbSqlStatementType yystatementtype;
@@ -25,42 +30,27 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED void *yyparse_ast;
     
+    /**
+     A symbol provided by flex that contains the last token read.
+     */
+    EAGLE_ATTR_MANAGED char *yytext_last;
+    
 } EagleDbParser;
 
 /**
  * Create a new parser.
- * @note Flex and bison are not thread safe so this is actually just an internal function that is called when its
- * needed. You should use EagleDbParser_Get()
  * @return A new parser instance.
  */
 EagleDbParser* EagleDbParser_New(void);
 
-/**
- * Get the default parser.
- * @return The default parser.
- */
-EagleDbParser* EagleDbParser_Get(void);
-
-/**
- * Load a string into the parser. This does not start the parser.
- * @param [in] str The string to parse.
- * @return 0 on success, any other number is a failure.
- * @see EagleDbParser_Parse()
- */
-int EagleDbParser_LoadString(const char *str);
+EagleDbParser* EagleDbParser_ParseWithString(const char *str);
 
 /**
  * This can be used to get the most recent yytext token. This is not a data duplication of the token so you must copy it
  * out if you intended to keep it.
  * @return The last token.
  */
-char* EagleDbParser_LastToken(void);
-
-/**
- * Parse the loaded content now.
- * @return 0 on success.
- */
-int EagleDbParser_Parse(void);
+char* EagleDbParser_lastToken(EagleDbParser *p);
 
 /**
  * This function must be provided to give flex and bison somewhere to send the errors. They will be put onto a proper
@@ -68,41 +58,30 @@ int EagleDbParser_Parse(void);
  * @param [in] s The message.
  * @return Ignored.
  */
-int yyerror(char *s);
+int yyerror(EagleDbParser *parser, void *scanner, char *s);
 
 /**
- * Prepare the default parser. This must be invoked before the SQL is parsed.
+ * Delete the parser instance.
  */
-void EagleDbParser_Init(void);
-
-/**
- * Clean up any internal resources associated with the most recent parse.
- */
-void EagleDbParser_Finish(void);
+void EagleDbParser_Delete(EagleDbParser *p);
 
 /**
  * Get the last error from the parser.
  * @return The last error message.
  */
-char* EagleDbParser_LastError(void);
+char* EagleDbParser_lastError(EagleDbParser *p);
 
 /**
  * Push the error onto the stack.
  * @param [in] ptr The object.
  * @return \p ptr
  */
-void* EagleDbParser_AddError(void *ptr);
+void* EagleDbParser_addError(EagleDbParser *p, void *ptr);
 
 /**
  * Did the parser encounter any errors?
  * @return EagleTrue if the parser encountered an error.
  */
-EagleBoolean EagleDbParser_HasError(void);
-
-/**
- Set the type of statement that is being parsed.
- @param [in] type The type.
- */
-void EagleDbParser_SetStatementType(EagleDbSqlStatementType type);
+EagleBoolean EagleDbParser_hasError(EagleDbParser *p);
 
 #endif

@@ -8,20 +8,17 @@
 #include "EagleData.h"
 #include "EagleDbSqlExpression.h"
 
-/**
- Since the parser is synchronized and basically static we reuse the same internal parser instance.
- */
-static EagleDbParser *EagleDbParser_Default = NULL;
+typedef void* yyscan_t;
 
 /* internal prototypes supplied by flex and bison */
-extern int yylex_destroy(void);
-extern int yy_scan_string(const char *str);
-extern int yyparse();
+extern int yylex_destroy(yyscan_t);
+extern int yy_scan_string(const char *str, yyscan_t scanner);
+extern int yyparse(EagleDbParser*, yyscan_t);
 
-/**
- A symbol provided by flex that contains the last token read.
- */
-extern char *yytext_last;
+int yylex_init(yyscan_t *ptr_yy_globals);
+int yylex_init_extra(EagleDbParser *user_defined, yyscan_t *ptr_yy_globals);
+int yylex(yyscan_t yyscanner);
+int yylex_destroy(yyscan_t yyscanner);
 
 EagleDbParser* EagleDbParser_New(void)
 {
@@ -37,32 +34,35 @@ EagleDbParser* EagleDbParser_New(void)
     return parser;
 }
 
-char* EagleDbParser_LastToken(void)
+EagleDbParser* EagleDbParser_ParseWithString(const char *str)
 {
-    return yytext_last;
+    EagleDbParser *parser = EagleDbParser_New();
+    
+    yylex_init_extra(parser, &parser->yyparse);
+    yy_scan_string(str, parser->yyparse);
+    yyparse(parser, parser->yyparse);
+    
+    return parser;
 }
 
-EagleDbParser* EagleDbParser_Get(void)
+char* EagleDbParser_lastToken(EagleDbParser *p)
 {
-    return EagleDbParser_Default;
+    return p->yytext_last;
 }
 
-EagleBoolean EagleDbParser_HasError(void)
+EagleBoolean EagleDbParser_hasError(EagleDbParser *p)
 {
-    EagleDbParser *p = EagleDbParser_Get();
     return !EagleLinkedList_isEmpty(p->errors);
 }
 
-void* EagleDbParser_AddError(void *ptr)
+void* EagleDbParser_addError(EagleDbParser *p, void *ptr)
 {
-    EagleDbParser *p = EagleDbParser_Default;
     EagleLinkedList_add(p->errors, EagleLinkedListItem_New(ptr, EagleTrue, NULL));
     return ptr;
 }
 
-char* EagleDbParser_LastError()
+char* EagleDbParser_lastError(EagleDbParser *p)
 {
-    EagleDbParser *p = EagleDbParser_Default;
     if(NULL == p) {
         return NULL;
     }
@@ -72,37 +72,19 @@ char* EagleDbParser_LastError()
     return (char*) EagleLinkedList_end(p->errors)->obj;
 }
 
-int yyerror(char *s)
+int yyerror(EagleDbParser *parser, void *scanner, char *s)
 {
-    EagleDbParser_AddError(strdup(s));
+    EagleDbParser_addError(parser, s);
     return 0;
 }
 
-void EagleDbParser_Init()
+void EagleDbParser_Delete(EagleDbParser *p)
 {
-    EagleDbParser_Default = EagleDbParser_New();
-}
-
-void EagleDbParser_Finish()
-{
-    EagleDbParser *p = EagleDbParser_Default;
+    if(NULL == p) {
+        return;
+    }
+    
     EagleLinkedList_DeleteWithItems(p->errors);
+    yylex_destroy(p->yyparse);
     EagleMemory_Free(p);
-    yylex_destroy();
-}
-
-int EagleDbParser_LoadString(const char *str)
-{
-    return yy_scan_string(str);
-}
-
-int EagleDbParser_Parse(void)
-{
-    return yyparse();
-}
-
-void EagleDbParser_SetStatementType(EagleDbSqlStatementType type)
-{
-    EagleDbParser *p = EagleDbParser_Default;
-    p->yystatementtype = type;
 }

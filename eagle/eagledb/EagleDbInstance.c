@@ -304,51 +304,7 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
 
 EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
 {
-    EagleDbParser *p;
-    EagleBoolean success = EagleTrue;
-    
-    /* parse sql */
-    EagleDbParser_Init();
-    EagleDbParser_LoadString(sql);
-    EagleDbParser_Parse();
-    
-    /* check for errors */
-    p = EagleDbParser_Get();
-    if(EagleDbParser_HasError() > 0) {
-        char msg[1024];
-        sprintf(msg, "Error: %s", EagleDbParser_LastError());
-        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
-        success = EagleFalse;
-    }
-    else {
-        switch(p->yystatementtype) {
-                
-            case EagleDbSqlStatementTypeNone:
-                /* lets not consider this an error and ignore it */
-                break;
-                
-            case EagleDbSqlStatementTypeSelect:
-                success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast);
-                EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
-                break;
-                
-            case EagleDbSqlStatementTypeCreateTable:
-                success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
-                EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
-                break;
-                
-            case EagleDbSqlStatementTypeInsert:
-                success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p->yyparse_ast);
-                EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
-                break;
-                
-        }
-    }
-    
-    /* clean up */
-    EagleDbParser_Finish();
-    
-    return success;
+    return EagleFalse;
 }
 
 void EagleDbInstance_Delete(EagleDbInstance *db)
