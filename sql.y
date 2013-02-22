@@ -46,11 +46,6 @@
 %parse-param { EagleDbParser *parser }
 %parse-param { void* scanner }
 
-/*%union {
-    int value;
-    SExpression *expression;
-}*/
-
 /* keywords */
 %token K_CREATE   "CREATE"
 %token K_FROM       "FROM"
@@ -161,6 +156,10 @@ column_definition_list:
 ;
 
 column_definition:
+    keyword error {
+        ABORT("You cannot use the keyword '%s' for a column name.", $1);
+    }
+    |
     identifier data_type {
         $$ = EagleDbColumn_New(((EagleDbSqlValue*) $1)->value.identifier, *((int*) $2));
         EagleDbSqlValue_Delete($1);

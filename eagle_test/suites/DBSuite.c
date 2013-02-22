@@ -979,10 +979,15 @@ CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
 CUNIT_TEST(DBSuite, _BadEntityName)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
+    EagleBoolean success;
     
-    EagleBoolean success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);");
+    success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);");
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'INSERT' for an table name.");
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (TABLE int);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'TABLE' for a column name.");
     
     EagleInstanceTest_Cleanup(db);
 }
