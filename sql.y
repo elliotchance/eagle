@@ -75,7 +75,7 @@
 %left  T_GREATER_THAN    ">"  T_LESS_THAN "<"  T_GREATER_THAN_EQUAL ">="  T_LESS_THAN_EQUAL "<="
 %left  T_PLUS            "+"  T_MINUS     "-"
 %left  K_NOT           "NOT"
-%right T_ASTERISK        "*"  T_DIVIDE    "/"  T_MODULUS             "%"
+%left  T_ASTERISK        "*"  T_DIVIDE    "/"  T_MODULUS             "%"
 
 %token END 0 "end of file"
 

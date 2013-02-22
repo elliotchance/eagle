@@ -407,9 +407,52 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualPage)
     EaglePage_Delete(out);
 }
 
+void OperatorSuite_testOperator(EagleDbInstance *db, const char *expr, int result)
+{
+    char newsql[1024];
+    
+    /* parse sql */
+    sprintf(newsql, "SELECT %s FROM mytable;", expr);
+    EagleDbParser *p = EagleDbParser_ParseWithString(newsql);
+    if(EagleTrue == EagleDbParser_hasError(p)) {
+        CUNIT_FAIL("%s", EagleDbParser_lastError(p));
+    }
+    
+    /* compile plan */
+    EaglePlan *plan = EagleDbSqlSelect_parse(p->yyparse_ast, db);
+    if(NULL == plan) {
+        CUNIT_ASSERT_NOT_NULL(plan);
+    }
+    if(EagleTrue == EaglePlan_isError(plan)) {
+        CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
+    }
+    
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    /* check results */
+    EaglePage *page = EaglePageProvider_nextPage(plan->result[0]);
+    if(NULL == page) {
+        CUNIT_ASSERT_NOT_NULL(page);
+    }
+    
+    for(int i = 0; i < page->count; ++i) {
+        if(((int*) page->data)[i] != result) {
+            CUNIT_FAIL("Expression failed (%s): Expected %d, received %d", expr, result, ((int*) page->data)[i]);
+        }
+    }
+    
+    EagleDbSqlExpression_DeleteRecursive(p->yyparse_ast);
+    EaglePage_Delete(page);
+    EaglePlan_Delete(plan);
+    EagleDbParser_Delete(p);
+    EagleInstance_Delete(eagle);
+}
+
 CUNIT_TEST(OperatorSuite, OperatorPrecedence)
 {
-    int pageSize = 10;
+    int pageSize = 1;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
@@ -421,37 +464,145 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
     EagleDbSchema_addTable(schema, td);
     
-    for(int i = 0; i < 10; ++i) {
+    for(int i = 0; i < 1; ++i) {
         // create a record
         EagleDbTuple *tuple = EagleDbTuple_New(table);
         EagleDbTuple_setInt(tuple, 0, i);
         
         // put record in
         EagleDbTableData_insert(td, tuple);
+        
+        EagleDbTuple_Delete(tuple);
     }
     
-    /* parse sql */
-    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1 * 2 + 10 * 2 FROM mytable;");
-    if(EagleTrue == EagleDbParser_hasError(p)) {
-        CUNIT_FAIL("%s", EagleDbParser_lastError(p));
-    }
+    /*~ operators ~*/
+    OperatorSuite_testOperator(db, "601 >= 417 >= 563", 601 >= 417 >= 563);
+    OperatorSuite_testOperator(db, "601 >= 417 <= 695", 601 >= 417 <= 695);
+    OperatorSuite_testOperator(db, "601 >= 417 != 479", 601 >= 417 != 479);
+    OperatorSuite_testOperator(db, "601 >= 417 > 295", 601 >= 417 > 295);
+    OperatorSuite_testOperator(db, "601 >= 417 < 962", 601 >= 417 < 962);
+    OperatorSuite_testOperator(db, "601 >= 417 * 432", 601 >= 417 * 432);
+    OperatorSuite_testOperator(db, "601 >= 417 + 456", 601 >= 417 + 456);
+    OperatorSuite_testOperator(db, "601 >= 417 - 245", 601 >= 417 - 245);
+    OperatorSuite_testOperator(db, "601 >= 417 / 837", 601 >= 417 / 837);
+    OperatorSuite_testOperator(db, "601 >= 417 % 703", 601 >= 417 % 703);
+    OperatorSuite_testOperator(db, "601 >= 417 = 565", 601 >= 417 == 565);
+    OperatorSuite_testOperator(db, "601 <= 271 >= 216", 601 <= 271 >= 216);
+    OperatorSuite_testOperator(db, "601 <= 271 <= 346", 601 <= 271 <= 346);
+    OperatorSuite_testOperator(db, "601 <= 271 != 147", 601 <= 271 != 147);
+    OperatorSuite_testOperator(db, "601 <= 271 > 562", 601 <= 271 > 562);
+    OperatorSuite_testOperator(db, "601 <= 271 < 436", 601 <= 271 < 436);
+    OperatorSuite_testOperator(db, "601 <= 271 * 185", 601 <= 271 * 185);
+    OperatorSuite_testOperator(db, "601 <= 271 + 349", 601 <= 271 + 349);
+    OperatorSuite_testOperator(db, "601 <= 271 - 326", 601 <= 271 - 326);
+    OperatorSuite_testOperator(db, "601 <= 271 / 288", 601 <= 271 / 288);
+    OperatorSuite_testOperator(db, "601 <= 271 % 322", 601 <= 271 % 322);
+    OperatorSuite_testOperator(db, "601 <= 271 = 599", 601 <= 271 == 599);
+    OperatorSuite_testOperator(db, "601 != 226 >= 366", 601 != 226 >= 366);
+    OperatorSuite_testOperator(db, "601 != 226 <= 227", 601 != 226 <= 227);
+    OperatorSuite_testOperator(db, "601 != 226 != 347", 601 != 226 != 347);
+    OperatorSuite_testOperator(db, "601 != 226 > 752", 601 != 226 > 752);
+    OperatorSuite_testOperator(db, "601 != 226 < 435", 601 != 226 < 435);
+    OperatorSuite_testOperator(db, "601 != 226 * 948", 601 != 226 * 948);
+    OperatorSuite_testOperator(db, "601 != 226 + 521", 601 != 226 + 521);
+    OperatorSuite_testOperator(db, "601 != 226 - 999", 601 != 226 - 999);
+    OperatorSuite_testOperator(db, "601 != 226 / 644", 601 != 226 / 644);
+    OperatorSuite_testOperator(db, "601 != 226 % 1", 601 != 226 % 1);
+    OperatorSuite_testOperator(db, "601 != 226 = 646", 601 != 226 == 646);
+    OperatorSuite_testOperator(db, "601 > 606 >= 433", 601 > 606 >= 433);
+    OperatorSuite_testOperator(db, "601 > 606 <= 454", 601 > 606 <= 454);
+    OperatorSuite_testOperator(db, "601 > 606 != 204", 601 > 606 != 204);
+    OperatorSuite_testOperator(db, "601 > 606 > 622", 601 > 606 > 622);
+    OperatorSuite_testOperator(db, "601 > 606 < 157", 601 > 606 < 157);
+    OperatorSuite_testOperator(db, "601 > 606 * 769", 601 > 606 * 769);
+    OperatorSuite_testOperator(db, "601 > 606 + 246", 601 > 606 + 246);
+    OperatorSuite_testOperator(db, "601 > 606 - 725", 601 > 606 - 725);
+    OperatorSuite_testOperator(db, "601 > 606 / 115", 601 > 606 / 115);
+    OperatorSuite_testOperator(db, "601 > 606 % 745", 601 > 606 % 745);
+    OperatorSuite_testOperator(db, "601 > 606 = 639", 601 > 606 == 639);
+    OperatorSuite_testOperator(db, "601 < 903 >= 930", 601 < 903 >= 930);
+    OperatorSuite_testOperator(db, "601 < 903 <= 989", 601 < 903 <= 989);
+    OperatorSuite_testOperator(db, "601 < 903 != 581", 601 < 903 != 581);
+    OperatorSuite_testOperator(db, "601 < 903 > 570", 601 < 903 > 570);
+    OperatorSuite_testOperator(db, "601 < 903 < 663", 601 < 903 < 663);
+    OperatorSuite_testOperator(db, "601 < 903 * 181", 601 < 903 * 181);
+    OperatorSuite_testOperator(db, "601 < 903 + 796", 601 < 903 + 796);
+    OperatorSuite_testOperator(db, "601 < 903 - 29", 601 < 903 - 29);
+    OperatorSuite_testOperator(db, "601 < 903 / 760", 601 < 903 / 760);
+    OperatorSuite_testOperator(db, "601 < 903 % 496", 601 < 903 % 496);
+    OperatorSuite_testOperator(db, "601 < 903 = 134", 601 < 903 == 134);
+    OperatorSuite_testOperator(db, "601 * 196 >= 444", 601 * 196 >= 444);
+    OperatorSuite_testOperator(db, "601 * 196 <= 655", 601 * 196 <= 655);
+    OperatorSuite_testOperator(db, "601 * 196 != 547", 601 * 196 != 547);
+    OperatorSuite_testOperator(db, "601 * 196 > 440", 601 * 196 > 440);
+    OperatorSuite_testOperator(db, "601 * 196 < 8", 601 * 196 < 8);
+    OperatorSuite_testOperator(db, "601 * 196 * 193", 601 * 196 * 193);
+    OperatorSuite_testOperator(db, "601 * 196 + 399", 601 * 196 + 399);
+    OperatorSuite_testOperator(db, "601 * 196 - 793", 601 * 196 - 793);
+    OperatorSuite_testOperator(db, "601 * 196 / 647", 601 * 196 / 647);
+    OperatorSuite_testOperator(db, "601 * 196 % 603", 601 * 196 % 603);
+    OperatorSuite_testOperator(db, "601 * 196 = 768", 601 * 196 == 768);
+    OperatorSuite_testOperator(db, "601 + 156 >= 372", 601 + 156 >= 372);
+    OperatorSuite_testOperator(db, "601 + 156 <= 14", 601 + 156 <= 14);
+    OperatorSuite_testOperator(db, "601 + 156 != 233", 601 + 156 != 233);
+    OperatorSuite_testOperator(db, "601 + 156 > 839", 601 + 156 > 839);
+    OperatorSuite_testOperator(db, "601 + 156 < 111", 601 + 156 < 111);
+    OperatorSuite_testOperator(db, "601 + 156 * 873", 601 + 156 * 873);
+    OperatorSuite_testOperator(db, "601 + 156 + 94", 601 + 156 + 94);
+    OperatorSuite_testOperator(db, "601 + 156 - 41", 601 + 156 - 41);
+    OperatorSuite_testOperator(db, "601 + 156 / 214", 601 + 156 / 214);
+    OperatorSuite_testOperator(db, "601 + 156 % 675", 601 + 156 % 675);
+    OperatorSuite_testOperator(db, "601 + 156 = 612", 601 + 156 == 612);
+    OperatorSuite_testOperator(db, "601 - 877 >= 208", 601 - 877 >= 208);
+    OperatorSuite_testOperator(db, "601 - 877 <= 760", 601 - 877 <= 760);
+    OperatorSuite_testOperator(db, "601 - 877 != 906", 601 - 877 != 906);
+    OperatorSuite_testOperator(db, "601 - 877 > 969", 601 - 877 > 969);
+    OperatorSuite_testOperator(db, "601 - 877 < 256", 601 - 877 < 256);
+    OperatorSuite_testOperator(db, "601 - 877 * 392", 601 - 877 * 392);
+    OperatorSuite_testOperator(db, "601 - 877 + 517", 601 - 877 + 517);
+    OperatorSuite_testOperator(db, "601 - 877 - 53", 601 - 877 - 53);
+    OperatorSuite_testOperator(db, "601 - 877 / 400", 601 - 877 / 400);
+    OperatorSuite_testOperator(db, "601 - 877 % 64", 601 - 877 % 64);
+    OperatorSuite_testOperator(db, "601 - 877 = 493", 601 - 877 == 493);
+    OperatorSuite_testOperator(db, "601 / 408 >= 609", 601 / 408 >= 609);
+    OperatorSuite_testOperator(db, "601 / 408 <= 244", 601 / 408 <= 244);
+    OperatorSuite_testOperator(db, "601 / 408 != 202", 601 / 408 != 202);
+    OperatorSuite_testOperator(db, "601 / 408 > 608", 601 / 408 > 608);
+    OperatorSuite_testOperator(db, "601 / 408 < 847", 601 / 408 < 847);
+    OperatorSuite_testOperator(db, "601 / 408 * 970", 601 / 408 * 970);
+    OperatorSuite_testOperator(db, "601 / 408 + 116", 601 / 408 + 116);
+    OperatorSuite_testOperator(db, "601 / 408 - 571", 601 / 408 - 571);
+    OperatorSuite_testOperator(db, "601 / 408 / 336", 601 / 408 / 336);
+    OperatorSuite_testOperator(db, "601 / 408 % 349", 601 / 408 % 349);
+    OperatorSuite_testOperator(db, "601 / 408 = 762", 601 / 408 == 762);
+    OperatorSuite_testOperator(db, "601 % 447 >= 222", 601 % 447 >= 222);
+    OperatorSuite_testOperator(db, "601 % 447 <= 856", 601 % 447 <= 856);
+    OperatorSuite_testOperator(db, "601 % 447 != 840", 601 % 447 != 840);
+    OperatorSuite_testOperator(db, "601 % 447 > 788", 601 % 447 > 788);
+    OperatorSuite_testOperator(db, "601 % 447 < 884", 601 % 447 < 884);
+    OperatorSuite_testOperator(db, "601 % 447 * 804", 601 % 447 * 804);
+    OperatorSuite_testOperator(db, "601 % 447 + 665", 601 % 447 + 665);
+    OperatorSuite_testOperator(db, "601 % 447 - 444", 601 % 447 - 444);
+    OperatorSuite_testOperator(db, "601 % 447 / 917", 601 % 447 / 917);
+    OperatorSuite_testOperator(db, "601 % 447 % 924", 601 % 447 % 924);
+    OperatorSuite_testOperator(db, "601 % 447 = 765", 601 % 447 == 765);
+    OperatorSuite_testOperator(db, "601 = 525 >= 316", 601 == 525 >= 316);
+    OperatorSuite_testOperator(db, "601 = 525 <= 282", 601 == 525 <= 282);
+    OperatorSuite_testOperator(db, "601 = 525 != 578", 601 == 525 != 578);
+    OperatorSuite_testOperator(db, "601 = 525 > 716", 601 == 525 > 716);
+    OperatorSuite_testOperator(db, "601 = 525 < 698", 601 == 525 < 698);
+    OperatorSuite_testOperator(db, "601 = 525 * 424", 601 == 525 * 424);
+    OperatorSuite_testOperator(db, "601 = 525 + 477", 601 == 525 + 477);
+    OperatorSuite_testOperator(db, "601 = 525 - 659", 601 == 525 - 659);
+    OperatorSuite_testOperator(db, "601 = 525 / 668", 601 == 525 / 668);
+    OperatorSuite_testOperator(db, "601 = 525 % 679", 601 == 525 % 679);
+    OperatorSuite_testOperator(db, "601 = 525 = 267", 601 == 525 == 267);
+    /*~ /operators ~*/
     
-    /* compile plan */
-    EaglePlan *plan = EagleDbSqlSelect_parse(p->yyparse_ast, db);
-    CUNIT_ASSERT_NOT_NULL(plan);
-    CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
-    
-    EagleInstance *eagle = EagleInstance_New(1);
-    EagleInstance_addPlan(eagle, plan);
-    EagleInstance_run(eagle);
-    
-    /* check results */
-    EaglePage *page = EaglePageProvider_nextPage(plan->result[0]);
-    CUNIT_ASSERT_NOT_NULL(page);
-    
-    for(int i = 0; i < page->count; ++i) {
-        printf("%d\n", ((int*) page->data)[i]);
-    }
+    EagleDbTableData_Delete(td);
+    EagleDbTable_DeleteWithColumns(table);
+    EagleDbSchema_Delete(schema);
+    EagleDbInstance_Delete(db);
 }
 
 CUNIT_TEST(OperatorSuite, EaglePageOperations_DividePage)
@@ -540,7 +691,7 @@ CUnitTests* OperatorSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    //CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
+    CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DividePage, "page(int) / page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, "int > int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanInt, "int < int"));
