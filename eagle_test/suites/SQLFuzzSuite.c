@@ -64,8 +64,7 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
     int pageSize = 10;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
@@ -92,7 +91,6 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
     // tear down
     EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
     EagleDbTableData_Delete(db->schemas[0]->tables[0]);
-    EagleDbSchema_Delete(db->schemas[0]);
     EagleDbInstance_Delete(db);
 }
 

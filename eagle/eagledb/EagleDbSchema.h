@@ -10,6 +10,11 @@
 extern const char *EagleDbSchema_DefaultSchemaName;
 
 /**
+ The name of the internal eagledb schema.
+ */
+extern const char *EagleDbSchema_EagleSchemaName;
+
+/**
  A database schema definition.
  */
 typedef struct {

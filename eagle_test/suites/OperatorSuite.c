@@ -424,7 +424,7 @@ void OperatorSuite_testOperator(EagleDbInstance *db, const char *expr, int resul
         CUNIT_ASSERT_NOT_NULL(plan);
     }
     if(EagleTrue == EaglePlan_isError(plan)) {
-        CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
+        CUNIT_FAIL("%s", plan->errorMessage);
     }
     
     EagleInstance *eagle = EagleInstance_New(1);
@@ -455,8 +455,7 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     int pageSize = 1;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
@@ -601,7 +600,6 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     
     EagleDbTableData_Delete(td);
     EagleDbTable_DeleteWithColumns(table);
-    EagleDbSchema_Delete(schema);
     EagleDbInstance_Delete(db);
 }
 
