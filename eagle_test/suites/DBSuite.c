@@ -976,11 +976,23 @@ CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
     CUNIT_VERIFY_FALSE(EagleDbParser_IsKeyword("notakeyword"));
 }
 
+CUNIT_TEST(DBSuite, _BadEntityName)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    
+    EagleBoolean success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'INSERT' for an table name.");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));
