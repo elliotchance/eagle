@@ -37,7 +37,7 @@ build_analyze:
 build_eagle:
 	xcodebuild -project eagle.xcodeproj -configuration Release -target eagle build
 
-build_eagle_test:
+build_eagle_test: operator-tests
 	xcodebuild -project eagle.xcodeproj -configuration Debug -target eagle_test build
 
 bench: build_eagle_test
@@ -122,3 +122,6 @@ gh-pages: master-only coverage doxygen
 	git commit --amend -m "Auto generated"
 	git push --force origin gh-pages
 	git checkout master
+
+operator-tests:
+	php bin/operators.php
