@@ -44,110 +44,117 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
 
 void EagleDbInstance_PrintResults(EaglePlan *plan)
 {
-    int i, j, k, *widths;
     EaglePage **pages;
-    int totalRecords = 0;
+    int i, *widths, totalRecords = 0;
     
     if(NULL == plan) {
         return;
     }
     
-    /* calculate the widths of the fields */
-    widths = (int*) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.1", sizeof(int), plan->resultFields);
-    if(NULL == widths) {
-        return;
-    }
-    for(i = 0; i < plan->resultFields; ++i) {
-        widths[i] = (int) strlen(plan->result[i]->name);
-    }
+    if(plan->resultFields > 0 && EaglePageProvider_pagesRemaining(plan->result[0]) > 0) {
+        /* calculate the widths of the fields */
+        widths = (int*) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.1", sizeof(int), plan->resultFields);
+        if(NULL == widths) {
+            return;
+        }
+        for(i = 0; i < plan->resultFields; ++i) {
+            widths[i] = (int) strlen(plan->result[i]->name);
+        }
     
 #ifndef CUNIT
-    /* heading */
-    printf("\n");
-    for(i = 0; i < plan->resultFields; ++i) {
-        if(i > 0) {
-            printf("|");
+        /* heading */
+        printf("\n");
+        for(i = 0; i < plan->resultFields; ++i) {
+            if(i > 0) {
+                printf("|");
+            }
+            printf(" %s ", plan->result[i]->name);
         }
-        printf(" %s ", plan->result[i]->name);
-    }
-    printf("\n");
-    
-    for(i = 0; i < plan->resultFields; ++i) {
-        if(i > 0) {
-            printf("+");
+        printf("\n");
+        
+        for(i = 0; i < plan->resultFields; ++i) {
+            int j;
+            
+            if(i > 0) {
+                printf("+");
+            }
+            for(j = 0; j < widths[i] + 2; ++j) {
+                printf("-");
+            }
         }
-        for(j = 0; j < widths[i] + 2; ++j) {
-            printf("-");
-        }
-    }
-    printf("\n");
+        printf("\n");
 #endif
     
-    /* render out */
-    pages = (EaglePage**) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.2", sizeof(EaglePage*), plan->resultFields);
-    while(1) {
-        int finished = 0;
-        for(i = 0; i < plan->resultFields; ++i) {
-            EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
-            if(NULL == page) {
-                finished = 1;
-                break;
-            }
-            pages[i] = page;
+        /* render out */
+        pages = (EaglePage**) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.2", sizeof(EaglePage*), plan->resultFields);
+        if(NULL == pages) {
+            EagleMemory_Free(widths);
+            return;
         }
         
-        if(finished == 0) {
-            if(NULL == pages || NULL == pages[0]) {
-                break;
-            }
-            for(j = 0; j < pages[0]->count; ++j) {
 #ifndef CUNIT
-                for(k = 0; k < plan->resultFields; ++k) {
-                    if(k > 0) {
-                        printf("|");
-                    }
-                    
-                    switch(pages[k]->type) {
-                            
-                        case EagleDataTypeUnknown:
-                            printf(" %*s ", widths[k], "?");
-                            break;
-                            
-                        case EagleDataTypeInteger:
-                        {
-                            int *d = (int*) pages[k]->data;
-                            printf(" %*d ", widths[k], d[j]);
-                            break;
-                        }
-                            
-                        case EagleDataTypeText:
-                        {
-                            char **d = (char**) pages[k]->data;
-                            printf(" %*s ", widths[k], d[j]);
-                            break;
-                        }
-                            
-                    }
+        while(1) {
+            int j, k;
+            int finished = 0;
+            
+            for(i = 0; i < plan->resultFields; ++i) {
+                EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
+                if(NULL == page) {
+                    finished = 1;
+                    break;
                 }
-                printf("\n");
-#endif
-                ++totalRecords;
+                pages[i] = page;
             }
             
-            for(k = 0; k < plan->resultFields; ++k) {
-                EaglePage_Delete(pages[k]);
+            if(finished == 0) {
+                for(j = 0; j < pages[0]->count; ++j) {
+                    for(k = 0; k < plan->resultFields; ++k) {
+                        if(k > 0) {
+                            printf("|");
+                        }
+                        
+                        switch(pages[k]->type) {
+                                
+                            case EagleDataTypeUnknown:
+                                printf(" %*s ", widths[k], "?");
+                                break;
+                                
+                            case EagleDataTypeInteger:
+                            {
+                                int *d = (int*) pages[k]->data;
+                                printf(" %*d ", widths[k], d[j]);
+                                break;
+                            }
+                                
+                            case EagleDataTypeText:
+                            {
+                                char **d = (char**) pages[k]->data;
+                                printf(" %*s ", widths[k], d[j]);
+                                break;
+                            }
+                                
+                        }
+                    }
+                    printf("\n");
+                    ++totalRecords;
+                }
+                
+                for(k = 0; k < plan->resultFields; ++k) {
+                    EaglePage_Delete(pages[k]);
+                }
+            }
+            else {
+                break;
             }
         }
-        else {
-            break;
-        }
+        
+        printf("\n");
+#endif
+        EagleMemory_Free(widths);
+        EagleMemory_Free(pages);
     }
     
-#ifndef CUNIT
-    printf("\n%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
-#endif
-    EagleMemory_Free(pages);
-    EagleMemory_Free(widths);
+    printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
 }
 
 EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
