@@ -407,31 +407,13 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualPage)
     EaglePage_Delete(out);
 }
 
-CUNIT_TEST(OperatorSuite, OperatorPrecedence)
+void OperatorSuite_testOperator(EagleDbInstance *db, const char *expr, int result)
 {
-    int pageSize = 10;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
-    
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
-    
-    EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    
-    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
-    EagleDbSchema_addTable(schema, td);
-    
-    for(int i = 0; i < 10; ++i) {
-        // create a record
-        EagleDbTuple *tuple = EagleDbTuple_New(table);
-        EagleDbTuple_setInt(tuple, 0, i);
-        
-        // put record in
-        EagleDbTableData_insert(td, tuple);
-    }
+    char newsql[1024];
     
     /* parse sql */
-    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1 * 2 + 10 * 2 FROM mytable;");
+    sprintf(newsql, "SELECT %s FROM mytable;", expr);
+    EagleDbParser *p = EagleDbParser_ParseWithString(newsql);
     if(EagleTrue == EagleDbParser_hasError(p)) {
         CUNIT_FAIL("%s", EagleDbParser_lastError(p));
     }
@@ -450,8 +432,38 @@ CUNIT_TEST(OperatorSuite, OperatorPrecedence)
     CUNIT_ASSERT_NOT_NULL(page);
     
     for(int i = 0; i < page->count; ++i) {
-        printf("%d\n", ((int*) page->data)[i]);
+        if(((int*) page->data)[i] != result) {
+            CUNIT_FAIL("Expression failed (%s): Expected %d, received %d", expr, result, ((int*) page->data)[i]);
+        }
     }
+}
+
+CUNIT_TEST(OperatorSuite, OperatorPrecedence)
+{
+    int pageSize = 1;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbInstance_addSchema(db, schema);
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    
+    EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
+    EagleDbSchema_addTable(schema, td);
+    
+    for(int i = 0; i < 1; ++i) {
+        // create a record
+        EagleDbTuple *tuple = EagleDbTuple_New(table);
+        EagleDbTuple_setInt(tuple, 0, i);
+        
+        // put record in
+        EagleDbTableData_insert(td, tuple);
+    }
+    
+    /*~ operators ~*/
+    OperatorSuite_testOperator(db, "706 != 181 + 543", 706 != 181 + 543);
+    /*~ /operators ~*/
 }
 
 CUNIT_TEST(OperatorSuite, EaglePageOperations_DividePage)
@@ -540,7 +552,7 @@ CUnitTests* OperatorSuite_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
-    //CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
+    CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DividePage, "page(int) / page(int)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanInt, "int > int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanInt, "int < int"));
