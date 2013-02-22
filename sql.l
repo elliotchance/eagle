@@ -21,8 +21,8 @@ white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
 integer [0-9]+
 
+/* === NOTE: if you change this list of keywords you must update EagleDbParser_IsKeyword() === */
 %%
-
 "CREATE" return K_CREATE;
 "FROM" return K_FROM;
 "INT" return K_INTEGER;

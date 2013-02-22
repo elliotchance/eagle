@@ -7,6 +7,7 @@
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
 #include "EagleLogger.h"
+#include "EagleUtils.h"
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
 {
@@ -964,11 +965,27 @@ CUNIT_TEST(MainSuite, EagleLinkedList_isEmpty)
     CUNIT_VERIFY_TRUE(EagleLinkedList_isEmpty(NULL));
 }
 
+CUNIT_TEST(MainSuite, EagleUtils_CompareWithoutCase)
+{
+    CUNIT_VERIFY_TRUE(EagleUtils_CompareWithoutCase(NULL, NULL));
+    
+    CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase("a", NULL));
+    CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase(NULL, "a"));
+    
+    CUNIT_VERIFY_TRUE(EagleUtils_CompareWithoutCase("abc", "abc"));
+    CUNIT_VERIFY_TRUE(EagleUtils_CompareWithoutCase("abc", "ABC"));
+    
+    CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase("abc", "abd"));
+    CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase("abc", "ab"));
+    CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase("ab", "abc"));
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleUtils_CompareWithoutCase));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_isEmpty));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_begin));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_end));

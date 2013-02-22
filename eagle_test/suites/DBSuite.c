@@ -969,11 +969,19 @@ CUNIT_TEST(DBSuite, EagleDbParser_Delete)
     EagleDbParser_Delete(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
+{
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("CREATE"));
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("table"));
+    CUNIT_VERIFY_FALSE(EagleDbParser_IsKeyword("notakeyword"));
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));
