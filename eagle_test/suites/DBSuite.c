@@ -620,7 +620,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    EagleDbTableData *td = EagleDbInstance_getTable(db, "so_such_table");
+    EagleDbTableData *td = EagleDbInstance_getTable(db, "no_such_table");
     CUNIT_VERIFY_NULL(td);
     
     EagleDbInstance_Delete(db);
@@ -669,6 +669,9 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
     if(NULL != schema) {
         CUNIT_VERIFY_EQUAL_STRING(schema->name, "schema2");
     }
+    
+    schema = EagleDbInstance_getSchema(db, "schema3");
+    CUNIT_VERIFY_NULL(schema);
     
     EagleDbInstance_Delete(db);
     EagleDbSchema_Delete(schema1);
@@ -722,6 +725,11 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
 CUNIT_TEST(DBSuite, EagleDbInstance_Delete)
 {
     EagleDbInstance_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInstance_DeleteAll)
+{
+    EagleDbInstance_DeleteAll(NULL);
 }
 
 CUNIT_TEST(DBSuite, EagleDbTuple_Delete)
@@ -1010,6 +1018,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_DeleteAll));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));

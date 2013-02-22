@@ -379,13 +379,12 @@ EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
     int i;
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
-    if(NULL == schema) {
-        return NULL;
-    }
     
-    for(i = 0; i < schema->usedTables; ++i) {
-        if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
-            return schema->tables[i];
+    if(NULL != schema) {
+        for(i = 0; i < schema->usedTables; ++i) {
+            if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
+                return schema->tables[i];
+            }
         }
     }
     
