@@ -969,11 +969,36 @@ CUNIT_TEST(DBSuite, EagleDbParser_Delete)
     EagleDbParser_Delete(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
+{
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("CREATE"));
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("table"));
+    CUNIT_VERIFY_FALSE(EagleDbParser_IsKeyword("notakeyword"));
+}
+
+CUNIT_TEST(DBSuite, _BadEntityName)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    EagleBoolean success;
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'INSERT' for an table name.");
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (TABLE int);");
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'TABLE' for a column name.");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));

@@ -46,11 +46,6 @@
 %parse-param { EagleDbParser *parser }
 %parse-param { void* scanner }
 
-/*%union {
-    int value;
-    SExpression *expression;
-}*/
-
 /* keywords */
 %token K_CREATE   "CREATE"
 %token K_FROM       "FROM"
@@ -133,6 +128,11 @@ insert_statement:
 ;
 
 create_table_statement:
+    K_CREATE K_TABLE keyword error
+    {
+        ABORT("You cannot use the keyword '%s' for an table name.", $3);
+    }
+    |
     K_CREATE K_TABLE identifier T_BRACKET_OPEN column_definition_list T_BRACKET_CLOSE
     {
         EagleDbTable *table = EagleDbTable_New(((EagleDbSqlValue*) $3)->value.identifier);
@@ -156,6 +156,10 @@ column_definition_list:
 ;
 
 column_definition:
+    keyword error {
+        ABORT("You cannot use the keyword '%s' for a column name.", $1);
+    }
+    |
     identifier data_type {
         $$ = EagleDbColumn_New(((EagleDbSqlValue*) $1)->value.identifier, *((int*) $2));
         EagleDbSqlValue_Delete($1);
@@ -169,7 +173,19 @@ data_type:
 ;
 
 keyword:
-    K_CREATE | K_FROM | K_INTEGER | K_SELECT | K_TABLE | K_TEXT | K_WHERE | K_VALUES | K_INSERT | K_INTO
+      K_CREATE { $$ = "CREATE"; }
+    | K_FROM { $$ = "FROM"; }
+    | K_INTEGER { $$ = "INTEGER"; }
+    | K_SELECT { $$ = "SELECT"; }
+    | K_TABLE { $$ = "TABLE"; }
+    | K_TEXT { $$ = "TEXT"; }
+    | K_WHERE { $$ = "WHERE"; }
+    | K_VALUES { $$ = "VALUES"; }
+    | K_INSERT { $$ = "INSERT"; }
+    | K_INTO { $$ = "INTO"; }
+    | K_OR { $$ = "OR"; }
+    | K_AND { $$ = "AND"; }
+    | K_NOT { $$ = "NOT"; }
 ;
 
 select_statement:

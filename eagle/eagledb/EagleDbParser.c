@@ -7,6 +7,7 @@
 #include "EagleMemory.h"
 #include "EagleData.h"
 #include "EagleDbSqlExpression.h"
+#include "EagleUtils.h"
 
 /**
  Trivial internal type.
@@ -93,4 +94,33 @@ void EagleDbParser_Delete(EagleDbParser *p)
         yylex_destroy(p->yyparse);
     }
     EagleMemory_Free(p);
+}
+
+EagleBoolean EagleDbParser_IsKeyword(const char *word)
+{
+    unsigned long i;
+    static const char *words[] = {
+        "CREATE",
+        "FROM",
+        "INT",
+        "INTEGER",
+        "SELECT",
+        "TABLE",
+        "TEXT",
+        "WHERE",
+        "VALUES",
+        "INSERT",
+        "INTO",
+        "AND",
+        "OR",
+        "NOT"
+    };
+    
+    for(i = 0; i < sizeof(words) / sizeof(const char*); ++i) {
+        if(EagleTrue == EagleUtils_CompareWithoutCase(word, words[i])) {
+            return EagleTrue;
+        }
+    }
+    
+    return EagleFalse;
 }
