@@ -81,7 +81,7 @@ coverage: clean_eagle_test build_eagle_test
 	bin/genhtml --sort --no-branch-coverage -q -s -t eagle --legend -o coverage/$(GIT_BRANCH) coverage.info
 	
 	# check percentage
-	perl -e 'use List::Util qw(first); open(DOC, "coverage/i48/index.html"); $file = join("", <DOC>); @n = ($file =~ m/(\d+\.\d)&nbsp;%/g); @m = ($file =~ m/<a\shref=".*">(.*)<\/a>/g); $idx = first { $m[$_] eq "eagle/eagle" } 0..$#m; $coverage = ($n[($idx - 2) * 2] + $n[($idx - 1) * 2]) / 2; die("Coverage $coverage% is below minimum the coverage (100%).\n") if($coverage < 100.0);'
+	perl -e 'use List::Util qw(first); open(DOC, "coverage/$(GIT_BRANCH)/index.html"); $$file = join("", <DOC>); @n = ($$file =~ m/(\d+\.\d)&nbsp;%/g); @m = ($$file =~ m/<a\shref=".*">(.*)<\/a>/g); $$idx = first { $$m[$$_] eq "eagle/eagle" } 0..$$#m; $$coverage = ($$n[($$idx - 2) * 2] + $$n[($$idx - 1) * 2]) / 2; die("Coverage $$coverage% is below minimum the coverage (100%).\n") if($$coverage < 100.0);'
 
 doxygen:
 	# generate docs
