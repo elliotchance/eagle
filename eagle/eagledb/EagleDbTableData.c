@@ -23,7 +23,8 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
     td->table = table;
     td->usedProviders = EagleDbTable_countColumns(table);
     if(td->usedProviders > 0) {
-        td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2", sizeof(EaglePageProvider*), td->usedProviders);
+        td->providers = (EaglePageProvider**) EagleMemory_MultiAllocate("EagleDbTableData_New.2",
+            sizeof(EaglePageProvider*), td->usedProviders);
         if(NULL == td->providers) {
             EagleMemory_Free(td);
             return NULL;

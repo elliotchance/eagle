@@ -6,6 +6,8 @@
 
 const char *EagleDbSchema_DefaultSchemaName = "default";
 
+const char *EagleDbSchema_EagleSchemaName = "eagledb";
+
 EagleDbSchema* EagleDbSchema_New(char *name)
 {
     EagleDbSchema *schema = (EagleDbSchema*) EagleMemory_Allocate("EagleDbSchema_New.1", sizeof(EagleDbSchema));
