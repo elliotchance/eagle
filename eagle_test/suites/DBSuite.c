@@ -471,9 +471,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
     select->whereExpression = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
     CUNIT_ASSERT_EQUAL_INT(EagleDbSqlSelect_getFieldCount(select), 1);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(instance, schema);
-    
+    EagleDbSchema *schema = EagleDbInstance_getSchema(instance, EagleDbSchema_DefaultSchemaName);
     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
     EagleDbSchema_addTable(schema, td);
     
@@ -484,7 +482,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
     
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) select);
     EagleDbTable_DeleteWithColumns(table);
-    EagleDbSchema_Delete(schema);
     EagleDbTableData_Delete(td);
     EagleDbInstance_Delete(instance);
     EaglePlan_Delete(plan);
@@ -563,8 +560,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbTable *table = EagleDbTable_New((char*) tableName);
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
     EagleDbSchema_addTable(schema, td);
@@ -574,7 +570,6 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbInstance_Delete(db);
     EagleDbSqlSelect_DeleteRecursive(select);
     EagleDbTable_DeleteWithColumns(table);
-    EagleDbSchema_Delete(schema);
     EagleDbTableData_Delete(td);
 }
 
@@ -588,8 +583,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
     CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table));
     CUNIT_ASSERT_LAST_ERROR("Table 'mytable' created.");
     
-    EagleDbTable_DeleteWithColumns(table);
-    EagleDbInstance_Delete(db);
+    EagleDbInstance_DeleteAll(db);
 }
 
 CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
@@ -599,7 +593,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
     CUNIT_ASSERT_LAST_ERROR("Table 'sometable' created.");
     
-    EagleDbInstance_Delete(db);
+    EagleDbInstance_DeleteAll(db);
 }
 
 CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
@@ -626,14 +620,10 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
-    
     EagleDbTableData *td = EagleDbInstance_getTable(db, "so_such_table");
     CUNIT_VERIFY_NULL(td);
     
     EagleDbInstance_Delete(db);
-    EagleDbSchema_Delete(schema);
 }
 
 CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
@@ -641,8 +631,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
     int pageSize = 1;
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     EagleDbTable *table1 = EagleDbTable_New("table1");
     EagleDbTableData *td1 = EagleDbTableData_New(table1, pageSize);
@@ -659,7 +648,6 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
     }
     
     EagleDbInstance_Delete(db);
-    EagleDbSchema_Delete(schema);
     EagleDbTableData_Delete(td1);
     EagleDbTableData_Delete(td2);
     EagleDbTable_Delete(table1);
@@ -780,8 +768,7 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
 {
     EagleDbInstance *db = EagleDbInstance_New(pageSize);
     
-    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    EagleDbInstance_addSchema(db, schema);
+    EagleDbSchema *schema =  EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
@@ -796,7 +783,6 @@ void EagleInstanceTest_Cleanup(EagleDbInstance* db)
 {
     EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
     EagleDbTableData_Delete(db->schemas[0]->tables[0]);
-    EagleDbSchema_Delete(db->schemas[0]);
     EagleDbInstance_Delete(db);
 }
 

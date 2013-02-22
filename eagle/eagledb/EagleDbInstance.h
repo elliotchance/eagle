@@ -51,6 +51,12 @@ EagleDbInstance* EagleDbInstance_New(int pageSize);
 void EagleDbInstance_Delete(EagleDbInstance *db);
 
 /**
+ Free an instance and ALL of the schemas and tables.
+ @param [in] db The database instance.
+ */
+void EagleDbInstance_DeleteAll(EagleDbInstance *db);
+
+/**
  Execute an arbitrary SQL statement.
  @param [in] db The database instance.
  @param [in] sql The SQL statement.
@@ -92,7 +98,7 @@ EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
  @param [in] schemaName The name of the schema.
  @return NULL if the schema can not be found.
  */
-EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName);
+EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schemaName);
 
 /**
  Add a schema to the instance.

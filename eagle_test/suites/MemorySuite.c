@@ -604,17 +604,14 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     select->tableName = strdup("mytable");
     EagleDbInstance *instance = EagleDbInstance_New(1000);
     
-    EagleDbSchema *schema = EagleDbSchema_New("default");
+    EagleDbSchema *schema = EagleDbInstance_getSchema(instance, EagleDbSchema_DefaultSchemaName);
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTableData *td = EagleDbTableData_New(table, 1000);
     EagleDbSchema_addTable(schema, td);
     
-    EagleDbInstance_addSchema(instance, schema);
-    
     CUNIT_ASSERT_NULL(EagleDbSqlSelect_parse(select, instance));
     
     EagleDbSqlSelect_DeleteRecursive(select);
-    EagleDbSchema_Delete(schema);
     EagleDbTable_Delete(table);
     EagleDbTableData_Delete(td);
     EagleDbInstance_Delete(instance);

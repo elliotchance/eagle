@@ -16,11 +16,8 @@
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
-    int i;
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
-    /*EagleDbSchema *defaultSchema, *eagledbSchema;
-    EagleDbTableData *td;
-    EagleDbTable *table;*/
+    EagleDbSchema *defaultSchema, *eagledbSchema;
     
     if(NULL == db) {
         return NULL;
@@ -37,30 +34,10 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
         return NULL;
     }
     
-    /*defaultSchema = EagleDbSchema_New("default");
-    eagledbSchema = EagleDbSchema_New("eagledb");
-    EagleDbInstance_addSchema(defaultSchema);
-    EagleDbInstance_addSchema(eagledbSchema);*/
-    
-    /* create a virtual table */
-    /*table = EagleDbTable_New("t");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));*/
-    
-    /* put some data in it */
-    /*td = EagleDbTableData_New(table);
-    EagleDbSchema_addTable(defaultSchema, td);*/
-    
-    for(i = 0; i < 10; ++i) {
-        /* create a record */
-        /*EagleDbTuple *tuple = EagleDbTuple_New(table);
-        EagleDbTuple_setInt(tuple, 0, i);
-        EagleDbTuple_setText(tuple, 1, "hello");*/
-        
-        /* put record in */
-        /*EagleDbTableData_insert(db->td, tuple);*/
-        /*EagleDbTuple_Delete(tuple);*/
-    }
+    defaultSchema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    eagledbSchema = EagleDbSchema_New((char*) EagleDbSchema_EagleSchemaName);
+    EagleDbInstance_addSchema(db, defaultSchema);
+    EagleDbInstance_addSchema(db, eagledbSchema);
     
     return db;
 }
@@ -292,8 +269,18 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
 {
     EagleBoolean success = EagleTrue;
     char msg[1024];
+    EagleDbTableData *td;
+    EagleDbSchema *schema;
+    
     sprintf(msg, "Table '%s' created.", table->name);
     EagleLogger_Log(EagleLoggerSeverityInfo, msg);
+    
+    /* create the table data */
+    td = EagleDbTableData_New(table, db->pageSize);
+    
+    /* add table to default schema */
+    schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
+    EagleDbSchema_addTable(schema, td);
     
 #ifndef CUNIT
     printf("%s\n\n", msg);
@@ -331,7 +318,6 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql)
                 
             case EagleDbSqlStatementTypeCreateTable:
                 success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast);
-                EagleDbTable_DeleteWithColumns((EagleDbTable*) p->yyparse_ast);
                 break;
                 
             case EagleDbSqlStatementTypeInsert:
@@ -354,14 +340,45 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
         return;
     }
     
-    EagleMemory_Free(db->schemas);
-    EagleMemory_Free(db);
+    {
+        int i;
+        
+        for(i = 0; i < db->usedSchemas; ++i) {
+            if(0 == strcmp(db->schemas[i]->name, EagleDbSchema_DefaultSchemaName) ||
+               0 == strcmp(db->schemas[i]->name, EagleDbSchema_EagleSchemaName)) {
+                EagleDbSchema_Delete(db->schemas[i]);
+            }
+        }
+        EagleMemory_Free(db->schemas);
+        EagleMemory_Free(db);
+    }
+}
+
+void EagleDbInstance_DeleteAll(EagleDbInstance *db)
+{
+    if(NULL == db) {
+        return;
+    }
+    
+    {
+        int i, j;
+        
+        for(i = 0; i < db->usedSchemas; ++i) {
+            for(j = 0; j < db->schemas[i]->usedTables; ++j) {
+                EagleDbTable_DeleteWithColumns(db->schemas[i]->tables[j]->table);
+                EagleDbTableData_Delete(db->schemas[i]->tables[j]);
+            }
+            EagleDbSchema_Delete(db->schemas[i]);
+        }
+        EagleMemory_Free(db->schemas);
+        EagleMemory_Free(db);
+    }
 }
 
 EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
     int i;
-    EagleDbSchema *schema = EagleDbInstance_getSchema(db, (char*) EagleDbSchema_DefaultSchemaName);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     if(NULL == schema) {
         return NULL;
     }
@@ -375,7 +392,7 @@ EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
     return NULL;
 }
 
-EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, char *schemaName)
+EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schemaName)
 {
     int i;
     
