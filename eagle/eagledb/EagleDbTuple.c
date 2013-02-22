@@ -84,10 +84,10 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
         if(i > 0) {
             strcat_safe(desc, ",");
         }
-        strcat_safe(desc, ((EagleDbColumn*) EagleLinkedList_get(tuple->table->columns, i))->name);
+        strcat_safe(desc, EagleDbTable_getColumn(tuple->table, i)->name);
         strcat_safe(desc, "=");
         
-        switch(((EagleDbColumn*) EagleLinkedList_get(tuple->table->columns, i))->type) {
+        switch(EagleDbTable_getColumn(tuple->table, i)->type) {
                 
             case EagleDataTypeUnknown:
                 sprintf(desc, "%s?", desc);

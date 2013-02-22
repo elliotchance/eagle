@@ -34,7 +34,7 @@ EagleDbTableData* EagleDbTableData_New(EagleDbTable *table, int pageSize)
     }
     
     for(i = 0; i < td->usedProviders; ++i) {
-        EagleDbColumn *column = EagleLinkedList_get(table->columns, i);
+        EagleDbColumn *column = EagleDbTable_getColumn(table, i);
         td->providers[i] = EaglePageProvider_CreateFromStream(column->type, pageSize, column->name);
     }
     
