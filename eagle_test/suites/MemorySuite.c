@@ -548,7 +548,12 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_1)
     EagleMemory_Mock("EagleDbInstance_PrintResults.1");
     
     EaglePlan *plan = EaglePlan_New(1);
+    plan->resultFields = 1;
+    plan->result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));
+    plan->result[0] = EaglePageProvider_CreateFromInt(1, 1, "name");
     EagleDbInstance_PrintResults(plan);
+    
+    EaglePageProvider_Delete(plan->result[0]);
     EaglePlan_Delete(plan);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -561,7 +566,12 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_2)
     EagleMemory_Mock("EagleDbInstance_PrintResults.2");
     
     EaglePlan *plan = EaglePlan_New(1);
+    plan->resultFields = 1;
+    plan->result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));
+    plan->result[0] = EaglePageProvider_CreateFromInt(1, 1, "name");
     EagleDbInstance_PrintResults(plan);
+    
+    EaglePageProvider_Delete(plan->result[0]);
     EaglePlan_Delete(plan);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
