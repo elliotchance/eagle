@@ -194,7 +194,7 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
 {
     char msg[1024];
     EagleLinkedListItem *cursor;
-    int i;
+    int i, rowsInserted = 1;
     EagleDbTuple *tuple;
     
     /* make the table exists */
@@ -271,7 +271,10 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     EagleDbTuple_Delete(tuple);
     
 #ifndef CUNIT
-    printf("INSERT\n\n");
+    printf("%d row%s inserted\n\n", rowsInserted, (rowsInserted == 1 ? "" : "s"));
+#else
+    /* this is so the compiler does not complain about unused variable while in CUNIT */
+    rowsInserted = 0;
 #endif
     
     return EagleTrue;
