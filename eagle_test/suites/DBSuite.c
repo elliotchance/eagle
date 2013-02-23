@@ -599,6 +599,18 @@ CUNIT_TEST(DBSuite, _DuplicateTable)
     EagleDbInstance_DeleteAll(db);
 }
 
+CUNIT_TEST(DBSuite, _DuplicateSchema)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    
+    CUNIT_VERIFY_FALSE(EagleDbInstance_addSchema(db, schema));
+    CUNIT_ASSERT_LAST_ERROR("Error: Schema \"default\" already exists.");
+    
+    EagleDbSchema_Delete(schema);
+    EagleDbInstance_DeleteAll(db);
+}
+
 CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
@@ -1004,6 +1016,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
