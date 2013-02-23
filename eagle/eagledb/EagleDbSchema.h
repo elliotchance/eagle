@@ -46,6 +46,8 @@ EagleDbSchema* EagleDbSchema_New(char *name);
 
 void EagleDbSchema_Delete(EagleDbSchema *schema);
 
-void EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td);
+EagleBoolean EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td);
+
+EagleDbTableData* EagleDbSchema_getTable(EagleDbSchema *schema, const char *tableName);
 
 #endif

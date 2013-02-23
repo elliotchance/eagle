@@ -3,6 +3,7 @@
 #include <string.h>
 #include "EagleDbSchema.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 const char *EagleDbSchema_DefaultSchemaName = "default";
 
@@ -34,7 +35,29 @@ void EagleDbSchema_Delete(EagleDbSchema *schema)
     EagleMemory_Free(schema);
 }
 
-void EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td)
+EagleDbTableData* EagleDbSchema_getTable(EagleDbSchema *schema, const char *tableName)
 {
+    int i;
+    
+    for(i = 0; i < schema->usedTables; ++i) {
+        if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
+            return schema->tables[i];
+        }
+    }
+    
+    return NULL;
+}
+
+EagleBoolean EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td)
+{
+    /* check if the table alreadty exists */
+    if(NULL != EagleDbSchema_getTable(schema, td->table->name)) {
+        char msg[1024];
+        sprintf(msg, "Error: Table \"%s.%s\" already exists.", schema->name, td->table->name);
+        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        return EagleFalse;
+    }
+    
     schema->tables[schema->usedTables++] = td;
+    return EagleTrue;
 }

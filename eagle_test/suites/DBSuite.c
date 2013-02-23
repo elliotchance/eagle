@@ -581,8 +581,33 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
     
     CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table));
-    CUNIT_ASSERT_LAST_ERROR("Table 'mytable' created.");
+    CUNIT_ASSERT_LAST_ERROR("Table \"default.mytable\" created.");
     
+    EagleDbInstance_DeleteAll(db);
+}
+
+CUNIT_TEST(DBSuite, _DuplicateTable)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
+    CUNIT_ASSERT_LAST_ERROR("Table \"default.sometable\" created.");
+    
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
+    CUNIT_ASSERT_LAST_ERROR("Error: Table \"default.sometable\" already exists.");
+    
+    EagleDbInstance_DeleteAll(db);
+}
+
+CUNIT_TEST(DBSuite, _DuplicateSchema)
+{
+    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
+    
+    CUNIT_VERIFY_FALSE(EagleDbInstance_addSchema(db, schema));
+    CUNIT_ASSERT_LAST_ERROR("Error: Schema \"default\" already exists.");
+    
+    EagleDbSchema_Delete(schema);
     EagleDbInstance_DeleteAll(db);
 }
 
@@ -591,7 +616,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
     EagleDbInstance *db = EagleDbInstance_New(1);
     
     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
-    CUNIT_ASSERT_LAST_ERROR("Table 'sometable' created.");
+    CUNIT_ASSERT_LAST_ERROR("Table \"default.sometable\" created.");
     
     EagleDbInstance_DeleteAll(db);
 }
@@ -991,6 +1016,8 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));

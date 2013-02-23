@@ -104,8 +104,9 @@ EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schema
  Add a schema to the instance.
  @param [in] db The database instance.
  @param [in] schema The schema.
+ @return EagleTrue if it is successful.
  */
-void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
+EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema);
 
 /**
  Execute an INSERT statement.
