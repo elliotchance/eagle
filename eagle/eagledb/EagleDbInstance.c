@@ -154,7 +154,12 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
         EagleMemory_Free(pages);
     }
     
+#ifndef CUNIT
     printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
+#else
+    /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
+    totalRecords = 0;
+#endif
 }
 
 EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select)
@@ -279,15 +284,20 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
     EagleDbTableData *td;
     EagleDbSchema *schema;
     
-    sprintf(msg, "Table '%s' created.", table->name);
-    EagleLogger_Log(EagleLoggerSeverityInfo, msg);
-    
     /* create the table data */
     td = EagleDbTableData_New(table, db->pageSize);
     
     /* add table to default schema */
     schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
-    EagleDbSchema_addTable(schema, td);
+    if(EagleTrue == EagleDbSchema_addTable(schema, td)) {
+        sprintf(msg, "Table \"%s.%s\" created.", schema->name, table->name);
+        EagleLogger_Log(EagleLoggerSeverityInfo, msg);
+    }
+    else {
+        /* clean up resources */
+        EagleDbTable_DeleteWithColumns(table);
+        EagleDbTableData_Delete(td);
+    }
     
 #ifndef CUNIT
     printf("%s\n\n", msg);
@@ -411,7 +421,16 @@ EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schema
     return NULL;
 }
 
-void EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema)
+EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schema)
 {
+    /* check if the schema exists */
+    if(NULL != EagleDbInstance_getSchema(db, schema->name)) {
+        char msg[1024];
+        sprintf(msg, "Error: Schema \"%s\" already exists.", schema->name);
+        EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        return EagleFalse;
+    }
+    
     db->schemas[db->usedSchemas++] = schema;
+    return EagleTrue;
 }
