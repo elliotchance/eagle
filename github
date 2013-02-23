@@ -2,7 +2,7 @@
 
 CMD=$1
 
-if [ $CMD = "fix" ]; then
+if [ $CMD = "fix" ] || [ $CMD = "quickfix" ]; then
 	ISSUE=`git branch | grep "* " | cut -c4-`
 	if [ "`echo $ISSUE | egrep ^[[:digit:]]+$`" = "" ]; then
 		echo "You must run this from an issue branch with a name like 'i#'"
@@ -61,11 +61,13 @@ if [ $CMD = "fix" ]; then
 		exit $rc; \
 	fi
 	
-	# gh-pages
-	make gh-pages
-	rc=$?
-	if [[ $rc != 0 ]] ; then \
-		exit $rc; \
+	if [ $CMD = "fix" ]; then
+		# gh-pages
+		make gh-pages
+		rc=$?
+		if [[ $rc != 0 ]] ; then \
+			exit $rc; \
+		fi
 	fi
 
 	# push master
