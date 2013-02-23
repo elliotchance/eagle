@@ -8,7 +8,7 @@ NM = nm $(OBJS)/*.o -o 2>&1 | grep -v EagleMemory.o | grep -w '_malloc\|_calloc\
 
 all: clean build
 
-release: clean build build_analyze leaks coverage doxygen
+release: clean build build_analyze operator-tests cli-tests leaks coverage doxygen
 
 clean: clean_eagle clean_eagle_test
 	
@@ -68,7 +68,7 @@ leaks: build_eagle_test
 	leaks eagle_test
 	killall eagle_test
 
-test: clean_eagle_test build_eagle_test
+test: clean_eagle_test build_eagle_test operator-tests cli-tests
 	build/Debug/eagle_test --all-suites
 	
 coverage: clean_eagle_test build_eagle_test
@@ -125,3 +125,6 @@ gh-pages: master-only coverage doxygen
 
 operator-tests:
 	php bin/operators.php
+
+cli-tests:
+	bin/cli.sh

@@ -4,7 +4,7 @@ set timeout 2
 set sql_i 1
 
 set sql(1)   "create table mytable ( col1 int )"
-set sql_r(1) "Table 'mytable' created."
+set sql_r(1) "Table \"default.mytable\" created."
 set sql(2)   "select col1 from mytable"
 set sql_r(2) {.*0 records.*}
 set sql(3)   "insert into mytable (col1) values (123)"
@@ -35,5 +35,3 @@ proc run_sql {} {
 run_sql
 puts "\n"
 exit
-
-interact
