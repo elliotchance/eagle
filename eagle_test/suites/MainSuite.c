@@ -980,11 +980,17 @@ CUNIT_TEST(MainSuite, EagleUtils_CompareWithoutCase)
     CUNIT_VERIFY_FALSE(EagleUtils_CompareWithoutCase("ab", "abc"));
 }
 
+CUNIT_TEST(MainSuite, EagleLogger_GetLogFile)
+{
+    CUNIT_ASSERT_EQUAL_PTR(EagleLogger_GetLogFile(NULL), stderr);
+}
+
 CUnitTests* MainSuite_tests()
 {
-    CUnitTests *tests = CUnitTests_New(100);
+    CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_GetLogFile));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleUtils_CompareWithoutCase));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_isEmpty));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_begin));

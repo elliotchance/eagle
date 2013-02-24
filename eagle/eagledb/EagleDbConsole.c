@@ -5,6 +5,7 @@
 #include "EagleDbConsole.h"
 #include "EagleDbInstance.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
@@ -96,6 +97,11 @@ void EagleDbConsole_Delete(EagleDbConsole *console)
     if(NULL == console) {
         return;
     }
+    
+#ifndef CUNIT
+    /* make sure the log is closed cleanly */
+    EagleLogger_Delete(EagleLogger_Get());
+#endif
     
     EagleMemory_Free(console);
 }

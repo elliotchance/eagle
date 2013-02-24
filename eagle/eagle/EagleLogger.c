@@ -5,10 +5,17 @@
 #include "EagleSynchronizer.h"
 #include "EagleMemory.h"
 
+const char *EagleLogger_DefaultLogLocation = "/tmp/eagledb.log";
+
 void EagleLogger_Delete(EagleLogger *logger)
 {
     if(NULL == logger) {
         return;
+    }
+    
+    if(NULL != logger->out && stderr != logger->out && stdout != logger->out) {
+        fclose(logger->out);
+        logger->out = NULL;
     }
     
     EagleLock_Delete(logger->logLock);
@@ -44,6 +51,17 @@ EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger)
     return logger->lastEvent;
 }
 
+FILE* EagleLogger_GetLogFile(const char *location)
+{
+    FILE *logFile = fopen(location, "a");
+    if(NULL == logFile) {
+        fprintf(stderr, "Unable to open log file for writing '%s'.", location);
+        logFile = stderr;
+    }
+    
+    return logFile;
+}
+
 EagleLogger* EagleLogger_Get(void)
 {
     static EagleLogger *EagleLogger_Logger = NULL;
@@ -57,7 +75,10 @@ EagleLogger* EagleLogger_Get(void)
     
     /* initialise if its not started */
     if(NULL == EagleLogger_Logger) {
-        EagleLogger_Logger = EagleLogger_New(stderr);
+        /* use the default log location */
+        FILE *logFile = EagleLogger_GetLogFile(EagleLogger_DefaultLogLocation);
+        
+        EagleLogger_Logger = EagleLogger_New(logFile);
     }
     
     EagleSynchronizer_Unlock(lock);
@@ -96,6 +117,7 @@ void EagleLogger_logEvent(EagleLogger* logger, EagleLoggerEvent *event)
     
     if(NULL != logger->out) {
         fprintf(logger->out, "%s: [%s] %s\n", timestamp, EagleLoggerSeverity_toString(event->severity), event->message);
+        fflush(logger->out);
     }
     ++logger->totalMessages;
     
