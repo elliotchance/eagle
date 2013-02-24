@@ -22,10 +22,10 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 
 void EagleWorker_runJob(EaglePlanJob *job)
 {
-    int i;
     EaglePlan_resumeTimer(job->plan);
-    for(i = 0; i < job->plan->usedOperations; ++i) {
-        EaglePlanOperation *epo = job->plan->operations[i];
+    
+    EagleLinkedList_Foreach(job->plan->operations, EaglePlanOperation*, epo)
+    {
         EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
         
         /* prepare arguments */
@@ -60,6 +60,7 @@ void EagleWorker_runJob(EaglePlanJob *job)
         /* execute page operation */
         epo->function(destination, source1, source2, epo->obj);
     }
+    EagleLinkedList_ForeachEnd
 }
 
 void* EagleWorker_begin(void *obj)

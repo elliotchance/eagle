@@ -103,13 +103,13 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     }
     EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
-    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 1);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 1);
     
     EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
-    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, usedProviders);
-    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, usedOperations);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), usedProviders);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), usedOperations);
     
     // execute
     EagleInstance *eagle = EagleInstance_New(1);
@@ -261,8 +261,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
-    CUNIT_ASSERT_EQUAL_INT(plan->usedProviders, 5);
-    CUNIT_ASSERT_EQUAL_INT(plan->usedOperations, 5);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 5);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), 5);
     
     // execute
     EagleInstance *eagle = EagleInstance_New(1);

@@ -266,14 +266,17 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
     
     /* make sure we don't override buffers that are already assigned by providers */
     destinationBuffer = 0;
-    for(i = 0; i < plan->usedProviders; ++i) {
-        if(plan->providers[i]->destinationBuffer >= destinationBuffer) {
-            destinationBuffer = plan->providers[i]->destinationBuffer + 1;
+    
+    EagleLinkedList_Foreach(plan->providers, EaglePlanBufferProvider*, provider)
+    {
+        if(provider->destinationBuffer >= destinationBuffer) {
+            destinationBuffer = provider->destinationBuffer + 1;
         }
         
         /* each provider will go into a page, sync their types */
-        plan->bufferTypes[plan->providers[i]->destinationBuffer] = plan->providers[i]->provider->type;
+        plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
     }
+    EagleLinkedList_ForeachEnd
     
     /* prepare result providers */
     plan->resultFields = totalExpressions;
