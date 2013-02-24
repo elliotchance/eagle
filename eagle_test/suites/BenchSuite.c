@@ -48,13 +48,13 @@ void freeInstance(EagleDbInstance *db)
 {
     EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
     {
-        for(int j = 0; j < schema->usedTables; ++j) {
-            /*for(int k = 0; k < db->schemas[i]->tables[j]->table->usedColumns; ++k) {
-             EagleDbColumn_Delete(db->schemas[i]->tables[j]->table->columns[k]);
-             }*/
-            EagleDbTable_Delete(schema->tables[j]->table);
-            EagleDbTableData_Delete(schema->tables[j]);
+        EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+        {
+            EagleDbTable_Delete(table->table);
+            EagleDbTableData_Delete(table);
         }
+        EagleLinkedList_ForeachEnd
+        
         EagleDbSchema_Delete(schema);
     }
     EagleLinkedList_ForeachEnd

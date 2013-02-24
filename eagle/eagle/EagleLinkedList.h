@@ -7,6 +7,9 @@
 #include "EagleLinkedListItem.h"
 
 /**
+ Iterate through a linked list. This is safe no nest as long as the third parameter \p _name is unique to each nested
+ loop.
+ 
  @param [in] _list The EagleLinkedList.
  @param [in] _type The type for each individual EagleLinkedListItem.
  @param [in] _name The name of the iterator containing your object.
@@ -18,17 +21,17 @@
      char *name = schema->name;
  
      // Also exposes:
-     //   _cursor    The EagleLinkedListItem
-     //   _i         The item count (starting at 0)
+     //   _cursor_schema   The EagleLinkedListItem
+     //   _i_schema        The item count (starting at 0)
  }
  EagleLinkedList_ForeachEnd
  @endcode
  */
 #define EagleLinkedList_Foreach(_list, _type, _name) { \
-EagleLinkedListItem *_cursor; \
-int _i; \
-for(_cursor = EagleLinkedList_begin(_list), _i = 0; NULL != _cursor; _cursor = _cursor->next, ++_i) { \
-_type _name = (_type) _cursor->obj;
+EagleLinkedListItem *_cursor##_name; \
+int _i##_name; \
+for(_cursor##_name = EagleLinkedList_begin(_list), _i##_name = 0; NULL != _cursor##_name; _cursor##_name = _cursor##_name->next, ++_i##_name) { \
+_type _name = (_type) _cursor##_name->obj;
 
 /**
  This MUST always follow a EagleLinkedList_ForeachEnd

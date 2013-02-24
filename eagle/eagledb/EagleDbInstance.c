@@ -376,14 +376,15 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
     }
     
     {
-        int j;
-        
         EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
         {
-            for(j = 0; j < schema->usedTables; ++j) {
-                EagleDbTable_DeleteWithColumns(schema->tables[j]->table);
-                EagleDbTableData_Delete(schema->tables[j]);
+            EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+            {
+                EagleDbTable_DeleteWithColumns(table->table);
+                EagleDbTableData_Delete(table);
             }
+            EagleLinkedList_ForeachEnd
+            
             EagleDbSchema_Delete(schema);
         }
         EagleLinkedList_ForeachEnd
@@ -395,15 +396,16 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
 
 EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
-    int i;
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     if(NULL != schema) {
-        for(i = 0; i < schema->usedTables; ++i) {
-            if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
-                return schema->tables[i];
+        EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+        {
+            if(0 == strcmp(tableName, table->table->name)) {
+                return table;
             }
         }
+        EagleLinkedList_ForeachEnd
     }
     
     return NULL;

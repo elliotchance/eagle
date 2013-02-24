@@ -3,6 +3,7 @@
 
 #include "EagleDbTableData.h"
 #include "Eagle.h"
+#include "EagleLinkedList.h"
 
 /**
  The name of the default schema.
@@ -20,20 +21,11 @@ extern const char *EagleDbSchema_EagleSchemaName;
 typedef struct {
     
     /**
-     The number of allocated tables.
+     This is semi managed because the linked list that contains the pointers to the tables is managed internally but the
+     table objects themselves are managed externally (i.e. deleteing a EagleDbSchema will not delete the tables it
+     contains)
      */
-    EAGLE_ATTR_NA int allocatedTables;
-    
-    /**
-     The number of used tables.
-     */
-    EAGLE_ATTR_NA int usedTables;
-    
-    /**
-     This is semi managed because the array that contains the pointers to the tables is managed internally but the table
-     objects themselves are managed externally (i.e. deleteing a EagleDbSchema will not delete the tables it contains)
-     */
-    EAGLE_ATTR_SEMI_MANAGED EagleDbTableData **tables;
+    EAGLE_ATTR_SEMI_MANAGED EagleLinkedList *tables;
     
     /**
      Schema name.

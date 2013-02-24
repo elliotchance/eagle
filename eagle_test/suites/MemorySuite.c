@@ -689,22 +689,10 @@ CUNIT_TEST(MemorySuite, EaglePlan_prepareBuffers)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EagleDbSchema_New_1)
+CUNIT_TEST(MemorySuite, EagleDbSchema_New)
 {
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSchema_New.1");
-    
-    EagleDbSchema *schema = EagleDbSchema_New("public");
-    EagleDbSchema_Delete(schema);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbSchema_New_2)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbSchema_New.2");
     
     EagleDbSchema *schema = EagleDbSchema_New("public");
     EagleDbSchema_Delete(schema);
@@ -847,8 +835,7 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlan_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_parse_2));
