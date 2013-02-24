@@ -9,6 +9,11 @@
 #include "EagleLoggerEvent.h"
 
 /**
+ The location to save the logs.
+ */
+extern const char *EagleLogger_DefaultLogLocation;
+
+/**
  A logger instance.
  */
 typedef struct {
@@ -101,5 +106,12 @@ EagleLoggerEvent* EagleLogger_LastEvent(void);
  * @return The last event or NULL if there have been no events.
  */
 EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger);
+
+/**
+ Get the file handle for a log location. If the log file cannot be open then stderr is returned.
+ @param [in] location The file location.
+ @return Always a valid FILE handle, even in case of failure.
+ */
+FILE* EagleLogger_GetLogFile(const char *location);
 
 #endif
