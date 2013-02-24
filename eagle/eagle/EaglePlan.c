@@ -13,24 +13,8 @@ EaglePlan* EaglePlan_New(int pageSize)
     }
     
     plan->pageSize = pageSize;
-    
-    plan->allocatedOperations = 10;
-    plan->usedOperations = 0;
-    plan->operations = (EaglePlanOperation**) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(EaglePlanOperation*), plan->allocatedOperations);
-    if(NULL == plan->operations) {
-        EagleMemory_Free(plan);
-        return NULL;
-    }
-    
-    plan->allocatedProviders = 10;
-    plan->usedProviders = 0;
-    plan->providers = (EaglePlanBufferProvider**) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(EaglePlanBufferProvider*), plan->allocatedProviders);
-    if(NULL == plan->providers) {
-        EagleMemory_Free(plan->operations);
-        EagleMemory_Free(plan);
-        return NULL;
-    }
-    
+    plan->operations = EagleLinkedList_New();
+    plan->providers = EagleLinkedList_New();
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
     plan->executionTime = 0;
@@ -49,15 +33,12 @@ EaglePlan* EaglePlan_New(int pageSize)
 
 void EaglePlan_addOperation(EaglePlan *plan, EaglePlanOperation *epo)
 {
-    plan->operations[plan->usedOperations++] = epo;
+    EagleLinkedList_addObject(plan->operations, epo, EagleFalse, NULL);
 }
 
 void EaglePlan_addBufferProvider(EaglePlan *plan, EaglePlanBufferProvider *bp, EagleBoolean free)
 {
-    plan->providers[plan->usedProviders++] = bp;
-    if(EagleTrue == free) {
-        EaglePlan_addFreeObject(plan, bp, (void(*)(void*)) EaglePlanBufferProvider_Delete);
-    }
+    EagleLinkedList_addObject(plan->providers, bp, free, (void(*)(void*)) EaglePlanBufferProvider_Delete);
 }
 
 void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*))
@@ -83,43 +64,50 @@ const char* EaglePlan_toString(EaglePlan *plan)
     str[0] = 0;
     strcat_safe(str, "EaglePlan:\n");
     
-    if(plan->usedProviders > 0) {
+    if(!EagleLinkedList_isEmpty(plan->providers)) {
         strcat_safe(str, "  Providers:\n");
-    }
-    for(i = 0; i < plan->usedProviders; ++i) {
-        strcat_safe(str, "    ");
-        temp = EaglePlanBufferProvider_toString(plan->providers[i]);
-        strcat_safe(str, temp);
-        EagleMemory_Free(temp);
-        strcat_safe(str, "\n");
+        
+        EagleLinkedList_Foreach(plan->providers, EaglePlanBufferProvider*, provider)
+        {
+            strcat_safe(str, "    ");
+            temp = EaglePlanBufferProvider_toString(provider);
+            strcat_safe(str, temp);
+            EagleMemory_Free(temp);
+            strcat_safe(str, "\n");
+        }
+        EagleLinkedList_ForeachEnd
     }
     
-    if(plan->usedOperations > 0) {
+    if(!EagleLinkedList_isEmpty(plan->operations)) {
         strcat_safe(str, "  Operations:\n");
-    }
-    for(i = 0; i < plan->usedOperations; ++i) {
-        char *s = EaglePlanOperation_toString(plan->operations[i]);
-        strcat_safe(str, "    ");
-        strcat_safe(str, s);
-        strcat_safe(str, "\n");
-        EagleMemory_Free(s);
+        
+        EagleLinkedList_Foreach(plan->operations, EaglePlanOperation*, op)
+        {
+            char *s = EaglePlanOperation_toString(op);
+            strcat_safe(str, "    ");
+            strcat_safe(str, s);
+            strcat_safe(str, "\n");
+            EagleMemory_Free(s);
+        }
+        EagleLinkedList_ForeachEnd
     }
     
     if(plan->buffersNeeded > 0) {
         strcat_safe(str, "  Buffers:\n");
-    }
-    for(i = 0; i < plan->buffersNeeded; ++i) {
-        char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128), *type;
-        if(NULL == msg) {
-            EagleMemory_Free(str);
-            return NULL;
-        }
         
-        type = EagleDataType_typeToName(plan->bufferTypes[i]);
-        sprintf(msg, "    %d type=%s\n", i, type);
-        strcat_safe(str, msg);
-        EagleMemory_Free(type);
-        EagleMemory_Free(msg);
+        for(i = 0; i < plan->buffersNeeded; ++i) {
+            char *msg = (char*) EagleMemory_Allocate("EaglePlan_toString.2", 128), *type;
+            if(NULL == msg) {
+                EagleMemory_Free(str);
+                return NULL;
+            }
+            
+            type = EagleDataType_typeToName(plan->bufferTypes[i]);
+            sprintf(msg, "    %d type=%s\n", i, type);
+            strcat_safe(str, msg);
+            EagleMemory_Free(type);
+            EagleMemory_Free(msg);
+        }
     }
     
     return str;
@@ -133,8 +121,8 @@ void EaglePlan_Delete(EaglePlan *plan)
     
     EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
-    EagleMemory_Free(plan->providers);
-    EagleMemory_Free(plan->operations);
+    EagleLinkedList_DeleteWithItems(plan->providers);
+    EagleLinkedList_DeleteWithItems(plan->operations);
     EagleMemory_Free(plan->errorMessage);
     EagleMemory_Free(plan->bufferTypes);
     EagleMemory_Free(plan);
@@ -142,14 +130,13 @@ void EaglePlan_Delete(EaglePlan *plan)
 
 EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char *name)
 {
-    int i;
-    
-    for(i = 0; i < plan->usedProviders; ++i) {
-        EaglePageProvider *provider = plan->providers[i]->provider;
-        if(NULL != provider->name && strcmp(name, provider->name) == 0) {
-            return plan->providers[i];
+    EagleLinkedList_Foreach(plan->providers, EaglePlanBufferProvider*, provider)
+    {
+        if(NULL != provider->provider->name && strcmp(name, provider->provider->name) == 0) {
+            return provider;
         }
     }
+    EagleLinkedList_ForeachEnd
     
     return NULL;
 }

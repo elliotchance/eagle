@@ -38,7 +38,6 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
 {
     EaglePlan *plan = NULL;
     EaglePlanJob *job = NULL;
-    int i;
     uint64_t now, then;
     
     /* synchronize this function */
@@ -51,8 +50,8 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     EaglePlan_resumeTimer(plan);
     job = EaglePlanJob_New(plan);
     
-    for(i = 0; i < plan->usedProviders; ++i) {
-        EaglePlanBufferProvider *provider = plan->providers[i];
+    EagleLinkedList_Foreach(job->plan->providers, EaglePlanBufferProvider*, provider)
+    {
         if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
             EaglePlanJob_Delete(job);
             job = NULL;
@@ -71,6 +70,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
         EaglePage_Delete(job->buffers[provider->destinationBuffer]);
         job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
     }
+    EagleLinkedList_ForeachEnd
     
     EagleSynchronizer_Unlock(eagle->nextJobLock);
     EaglePlan_stopTimer(plan);

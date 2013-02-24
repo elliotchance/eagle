@@ -7,6 +7,38 @@
 #include "EagleLinkedListItem.h"
 
 /**
+ Iterate through a linked list. This is safe no nest as long as the third parameter \p _name is unique to each nested
+ loop.
+ 
+ @param [in] _list The EagleLinkedList.
+ @param [in] _type The type for each individual EagleLinkedListItem.
+ @param [in] _name The name of the iterator containing your object.
+ 
+ Example
+ @code
+ EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
+ {
+     char *name = schema->name;
+ 
+     // Also exposes:
+     //   _cursor_schema   The EagleLinkedListItem
+     //   _i_schema        The item count (starting at 0)
+ }
+ EagleLinkedList_ForeachEnd
+ @endcode
+ */
+#define EagleLinkedList_Foreach(_list, _type, _name) { \
+EagleLinkedListItem *_cursor##_name; \
+int _i##_name; \
+for(_cursor##_name = EagleLinkedList_begin(_list), _i##_name = 0; NULL != _cursor##_name; _cursor##_name = _cursor##_name->next, ++_i##_name) { \
+_type _name = (_type) _cursor##_name->obj;
+
+/**
+ This MUST always follow a EagleLinkedList_ForeachEnd
+ */
+#define EagleLinkedList_ForeachEnd }}
+
+/**
  A linked list (FIFO).
  */
 typedef struct {
@@ -142,5 +174,21 @@ void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean fr
  @return EagleTrue if the item was found and removed.
  */
 EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
+
+/**
+ Get the first object on the linked list. This is not the same as EagleLinkedList_begin() which returns the
+ EagleLinkedListItem rather than the object it is wrapping.
+ @param [in] list The list.
+ @return NULL or an object.
+ */
+EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list);
+
+/**
+ Get the last object on the linked list. This is not the same as EagleLinkedList_end() which returns the
+ EagleLinkedListItem rather than the object it is wrapping.
+ @param [in] list The list.
+ @return NULL or an object.
+ */
+EagleLinkedListItem* EagleLinkedList_last(EagleLinkedList *list);
 
 #endif

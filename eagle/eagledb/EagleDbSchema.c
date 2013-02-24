@@ -17,9 +17,7 @@ EagleDbSchema* EagleDbSchema_New(char *name)
     }
     
     schema->name = (NULL == name ? NULL : strdup(name));
-    schema->allocatedTables = 16;
-    schema->usedTables = 0;
-    schema->tables = (EagleDbTableData**) EagleMemory_MultiAllocate("EagleDbSchema_New.2", sizeof(EagleDbTableData*), schema->allocatedTables);
+    schema->tables = EagleLinkedList_New();
     
     return schema;
 }
@@ -30,20 +28,20 @@ void EagleDbSchema_Delete(EagleDbSchema *schema)
         return;
     }
     
-    EagleMemory_Free(schema->tables);
+    EagleLinkedList_DeleteWithItems(schema->tables);
     EagleMemory_Free(schema->name);
     EagleMemory_Free(schema);
 }
 
 EagleDbTableData* EagleDbSchema_getTable(EagleDbSchema *schema, const char *tableName)
 {
-    int i;
-    
-    for(i = 0; i < schema->usedTables; ++i) {
-        if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
-            return schema->tables[i];
+    EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+    {
+        if(0 == strcmp(tableName, table->table->name)) {
+            return table;
         }
     }
+    EagleLinkedList_ForeachEnd
     
     return NULL;
 }
@@ -58,6 +56,7 @@ EagleBoolean EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td)
         return EagleFalse;
     }
     
-    schema->tables[schema->usedTables++] = td;
+    EagleLinkedList_addObject(schema->tables, td, EagleFalse, NULL);
+    
     return EagleTrue;
 }

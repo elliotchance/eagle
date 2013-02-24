@@ -8,6 +8,7 @@
 #include "EaglePlanError.h"
 #include "Eagle.h"
 #include "EagleDataType.h"
+#include "EagleLinkedList.h"
 
 /**
  An execution plan.
@@ -15,35 +16,15 @@
 typedef struct {
     
     /**
-     The number of allocated operations.
-     */
-    EAGLE_ATTR_NA int allocatedOperations;
-    
-    /**
-     The number of used operations.
-     */
-    EAGLE_ATTR_NA int usedOperations;
-    
-    /**
      The operations. An operation is a task done on a page. This is semi managed because the actual array that contains
      the operations will be managed by the object, but the individual operations will be managed externally.
      */
-    EAGLE_ATTR_SEMI_MANAGED EaglePlanOperation **operations;
-    
-    /**
-     The number of allocated providers.
-     */
-    EAGLE_ATTR_NA int allocatedProviders;
-    
-    /**
-     The number of used providers.
-     */
-    EAGLE_ATTR_NA int usedProviders;
+    EAGLE_ATTR_SEMI_MANAGED EagleLinkedList *operations;
     
     /**
      The page providers. This is where external data comes into the expression.
      */
-    EAGLE_ATTR_MANAGED EaglePlanBufferProvider **providers;
+    EAGLE_ATTR_MANAGED EagleLinkedList *providers;
     
     /**
      The amount of records to read per page.

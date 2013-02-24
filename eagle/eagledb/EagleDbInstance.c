@@ -26,13 +26,7 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
     db->pageSize = pageSize;
     
     /* schemas */
-    db->allocatedSchemas = 10;
-    db->usedSchemas = 0;
-    db->schemas = (EagleDbSchema**) EagleMemory_MultiAllocate("EagleDbInstance_New.2", sizeof(EagleDbSchema*), db->allocatedSchemas);
-    if(NULL == db->schemas) {
-        EagleMemory_Free(db);
-        return NULL;
-    }
+    db->schemas = EagleLinkedList_New();
     
     defaultSchema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
     eagledbSchema = EagleDbSchema_New((char*) EagleDbSchema_EagleSchemaName);
@@ -361,15 +355,16 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
     }
     
     {
-        int i;
-        
-        for(i = 0; i < db->usedSchemas; ++i) {
-            if(0 == strcmp(db->schemas[i]->name, EagleDbSchema_DefaultSchemaName) ||
-               0 == strcmp(db->schemas[i]->name, EagleDbSchema_EagleSchemaName)) {
-                EagleDbSchema_Delete(db->schemas[i]);
+        EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
+        {
+            if(0 == strcmp(schema->name, EagleDbSchema_DefaultSchemaName) ||
+               0 == strcmp(schema->name, EagleDbSchema_EagleSchemaName)) {
+                EagleDbSchema_Delete(schema);
             }
         }
-        EagleMemory_Free(db->schemas);
+        EagleLinkedList_ForeachEnd
+        
+        EagleLinkedList_DeleteWithItems(db->schemas);
         EagleMemory_Free(db);
     }
 }
@@ -381,31 +376,36 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
     }
     
     {
-        int i, j;
-        
-        for(i = 0; i < db->usedSchemas; ++i) {
-            for(j = 0; j < db->schemas[i]->usedTables; ++j) {
-                EagleDbTable_DeleteWithColumns(db->schemas[i]->tables[j]->table);
-                EagleDbTableData_Delete(db->schemas[i]->tables[j]);
+        EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
+        {
+            EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+            {
+                EagleDbTable_DeleteWithColumns(table->table);
+                EagleDbTableData_Delete(table);
             }
-            EagleDbSchema_Delete(db->schemas[i]);
+            EagleLinkedList_ForeachEnd
+            
+            EagleDbSchema_Delete(schema);
         }
-        EagleMemory_Free(db->schemas);
+        EagleLinkedList_ForeachEnd
+        
+        EagleLinkedList_DeleteWithItems(db->schemas);
         EagleMemory_Free(db);
     }
 }
 
 EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
-    int i;
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
     if(NULL != schema) {
-        for(i = 0; i < schema->usedTables; ++i) {
-            if(0 == strcmp(tableName, schema->tables[i]->table->name)) {
-                return schema->tables[i];
+        EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
+        {
+            if(0 == strcmp(tableName, table->table->name)) {
+                return table;
             }
         }
+        EagleLinkedList_ForeachEnd
     }
     
     return NULL;
@@ -413,13 +413,13 @@ EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 
 EagleDbSchema* EagleDbInstance_getSchema(EagleDbInstance *db, const char *schemaName)
 {
-    int i;
-    
-    for(i = 0; i < db->usedSchemas; ++i) {
-        if(0 == strcmp(schemaName, db->schemas[i]->name)) {
-            return db->schemas[i];
+    EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
+    {
+        if(0 == strcmp(schemaName, schema->name)) {
+            return schema;
         }
     }
+    EagleLinkedList_ForeachEnd
     
     return NULL;
 }
@@ -434,6 +434,7 @@ EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schem
         return EagleFalse;
     }
     
-    db->schemas[db->usedSchemas++] = schema;
+    EagleLinkedList_addObject(db->schemas, schema, EagleFalse, NULL);
+    
     return EagleTrue;
 }
