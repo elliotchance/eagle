@@ -14,21 +14,10 @@
 typedef struct EagleDbInstance_ {
     
     /**
-     Contains the pointers to the individual schemas. This is semi managed because the array that contains the pointers
-     to the schemas is managed bu the schema objects themselves are managed externally (i.e. deleteing an
-     EagleDbInstance) will not deleted the respective schemas.
+     Contains the pointers to the individual schemas. The schema objects themselves are managed externally (i.e.
+     deleteing an EagleDbInstance) will not deleted the respective schemas.
      */
-    EAGLE_ATTR_SEMI_MANAGED EagleDbSchema **schemas;
-    
-    /**
-     The maximum possible schemas this instance can hold.
-     */
-    EAGLE_ATTR_NA int allocatedSchemas;
-    
-    /**
-     The number of used (real) schemas connected to this instance.
-     */
-    EAGLE_ATTR_NA int usedSchemas;
+    EAGLE_ATTR_SEMI_MANAGED EagleLinkedList *schemas;
     
     /**
      The page size to be provided to EaglePlan.

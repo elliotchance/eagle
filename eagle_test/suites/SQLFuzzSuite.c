@@ -89,8 +89,9 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
     printf(" %d fuzz tests ", totalFuzzTests);
     
     // tear down
-    EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
-    EagleDbTableData_Delete(db->schemas[0]->tables[0]);
+    EagleDbSchema *_schema = (EagleDbSchema*) EagleLinkedList_first(db->schemas);
+    EagleDbTable_DeleteWithColumns(_schema->tables[0]->table);
+    EagleDbTableData_Delete(_schema->tables[0]);
     EagleDbInstance_Delete(db);
 }
 

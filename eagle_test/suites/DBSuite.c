@@ -814,8 +814,9 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
 
 void EagleInstanceTest_Cleanup(EagleDbInstance* db)
 {
-    EagleDbTable_DeleteWithColumns(db->schemas[0]->tables[0]->table);
-    EagleDbTableData_Delete(db->schemas[0]->tables[0]);
+    EagleDbSchema *schema = (EagleDbSchema*) EagleLinkedList_first(db->schemas);
+    EagleDbTable_DeleteWithColumns(schema->tables[0]->table);
+    EagleDbTableData_Delete(schema->tables[0]);
     EagleDbInstance_Delete(db);
 }
 

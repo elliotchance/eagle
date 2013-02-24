@@ -7,6 +7,35 @@
 #include "EagleLinkedListItem.h"
 
 /**
+ @param [in] _list The EagleLinkedList.
+ @param [in] _type The type for each individual EagleLinkedListItem.
+ @param [in] _name The name of the iterator containing your object.
+ 
+ Example
+ @code
+ EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
+ {
+     char *name = schema->name;
+ 
+     // Also exposes:
+     //   _cursor    The EagleLinkedListItem
+     //   _i         The item count (starting at 0)
+ }
+ EagleLinkedList_ForeachEnd
+ @endcode
+ */
+#define EagleLinkedList_Foreach(_list, _type, _name) { \
+EagleLinkedListItem *_cursor; \
+int _i; \
+for(_cursor = EagleLinkedList_begin(_list), _i = 0; NULL != _cursor; _cursor = _cursor->next, ++_i) { \
+_type _name = (_type) _cursor->obj;
+
+/**
+ This MUST always follow a EagleLinkedList_ForeachEnd
+ */
+#define EagleLinkedList_ForeachEnd }}
+
+/**
  A linked list (FIFO).
  */
 typedef struct {
@@ -142,5 +171,21 @@ void EagleLinkedList_addObject(EagleLinkedList *list, void *obj, EagleBoolean fr
  @return EagleTrue if the item was found and removed.
  */
 EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
+
+/**
+ Get the first object on the linked list. This is not the same as EagleLinkedList_begin() which returns the
+ EagleLinkedListItem rather than the object it is wrapping.
+ @param [in] list The list.
+ @return NULL or an object.
+ */
+EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list);
+
+/**
+ Get the last object on the linked list. This is not the same as EagleLinkedList_end() which returns the
+ EagleLinkedListItem rather than the object it is wrapping.
+ @param [in] list The list.
+ @return NULL or an object.
+ */
+EagleLinkedListItem* EagleLinkedList_last(EagleLinkedList *list);
 
 #endif
