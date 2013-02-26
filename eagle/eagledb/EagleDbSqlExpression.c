@@ -12,6 +12,8 @@
 #include "EagleDbSqlBinaryExpressionOperator.h"
 #include "EagleDbSqlUnaryExpressionOperator.h"
 #include "EagleMemory.h"
+#include "EaglePageProviderSingle.h"
+#include "EaglePageProviderStream.h"
 
 const int EagleDbSqlExpression_ERROR = -1;
 
@@ -209,7 +211,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     EaglePlanBufferProvider *bp;
                     
                     destination = *destinationBuffer;
-                    provider = EaglePageProvider_CreateFromInt(value->value.intValue, plan->pageSize, "(integer)");
+                    provider = (EaglePageProvider*) EaglePageProviderSingle_NewInt(value->value.intValue, plan->pageSize, "(integer)");
                     bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
                     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
                     ++*destinationBuffer;
@@ -300,7 +302,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
          result provider now
          */
         desc = EagleDbSqlExpression_toString(expressions[i]);
-        provider = EaglePageProvider_CreateFromStream(plan->bufferTypes[results[i]], plan->pageSize, desc);
+        provider = (EaglePageProvider*) EaglePageProviderStream_New(plan->bufferTypes[results[i]], plan->pageSize, desc);
         plan->result[i] = provider;
         EaglePlan_addFreeObject(plan, provider, (void(*)(void*)) EaglePageProvider_Delete);
         EagleMemory_Free(desc);
