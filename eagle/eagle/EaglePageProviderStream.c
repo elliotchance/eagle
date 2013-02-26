@@ -1,0 +1,121 @@
+#include <string.h>
+#include "EaglePageProviderStream.h"
+#include "EagleMemory.h"
+#include "EagleLogger.h"
+
+EaglePageProviderStream* EaglePageProviderStream_New(EagleDataType type, int recordsPerPage, char *name)
+{
+    EaglePageProviderStream *pageProvider = (EaglePageProviderStream*) EagleMemory_Allocate("EaglePageProviderStream_New.1", sizeof(EaglePageProviderStream));
+    if(NULL == pageProvider) {
+        return NULL;
+    }
+    
+    switch(type) {
+            
+        case EagleDataTypeUnknown:
+            EagleMemory_Free(pageProvider);
+            EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            return NULL;
+            
+        case EagleDataTypeInteger:
+            pageProvider->type = EagleDataTypeInteger;
+            break;
+            
+        case EagleDataTypeText:
+            pageProvider->type = EagleDataTypeText;
+            break;
+            
+    }
+    
+    pageProvider->providerType = EaglePageProviderTypeStream;
+    pageProvider->recordsPerPage = recordsPerPage;
+    pageProvider->offsetRecords = 0;
+    pageProvider->totalRecords = 0;
+    pageProvider->list = EagleLinkedList_New();
+    pageProvider->nextPageLock = EagleSynchronizer_CreateLock();
+    pageProvider->name = (NULL == name ? NULL : strdup(name));
+    pageProvider->cursor = NULL;
+    
+    return pageProvider;
+}
+
+void EaglePageProviderStream_Delete(EaglePageProviderStream *epp)
+{
+    if(NULL == epp) {
+        return;
+    }
+    
+    EagleLock_Delete(epp->nextPageLock);
+    EagleLinkedList_DeleteWithItems(epp->list);
+    EagleMemory_Free(epp->name);
+    EagleMemory_Free(epp);
+}
+
+EagleBoolean EaglePageProviderStream_add(EaglePageProviderStream *epp, void *data)
+{
+    EagleLinkedListItem *head = EagleLinkedList_end(epp->list);
+    EaglePage *page = NULL;
+    
+    if(NULL == head || ((EaglePage*) head->obj)->count >= epp->recordsPerPage) {
+        /* the list is empty we need to create a new page */
+        EagleLinkedListItem *item;
+        page = EaglePage_Alloc(epp->type, epp->recordsPerPage);
+        page->count = 0;
+        item = EagleLinkedListItem_New(page, EagleTrue, (void (*)(void *obj)) EaglePage_Delete);
+        EagleLinkedList_add(epp->list, item);
+    }
+    else {
+        page = (EaglePage*) head->obj;
+    }
+    
+    switch(epp->type) {
+            
+        case EagleDataTypeUnknown:
+            EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            return EagleFalse;
+            
+        case EagleDataTypeInteger:
+            ((int*) page->data)[page->count++] = *((int*) data);
+            break;
+            
+        case EagleDataTypeText:
+            ((char**) page->data)[page->count++] = (char*) data;
+            break;
+            
+    }
+    
+    ++epp->totalRecords;
+    return EagleTrue;
+}
+
+int EaglePageProviderStream_pagesRemaining(EaglePageProviderStream *epp)
+{
+    return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
+}
+
+EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp)
+{
+    EaglePage *page;
+    
+    if(NULL == epp->cursor) {
+        epp->cursor = EagleLinkedList_begin(epp->list);
+    }
+    
+    /* there is no more pages to give */
+    if(epp->offsetRecords >= epp->totalRecords || NULL == epp->cursor) {
+        return NULL;
+    }
+    
+    /* always give a duplicate page, so that the original page is not modified or freed */
+    page = EaglePage_Copy((EaglePage*) epp->cursor->obj);
+    page->recordOffset = epp->offsetRecords;
+    epp->offsetRecords += page->count;
+    epp->cursor = epp->cursor->next;
+    return page;
+}
+
+void EaglePageProviderStream_reset(EaglePageProviderStream *epp)
+{
+    epp->offsetRecords = 0;
+    epp->cursor = NULL;
+}
