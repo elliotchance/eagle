@@ -5,6 +5,9 @@
 
 typedef struct {
     
+    /**
+     All "subtypes" of EaglePageProvider will have this header.
+     */
     EaglePageProviderHeader;
     
     /**
@@ -46,7 +49,7 @@ typedef struct {
 EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name);
 
 /**
- * Page remaining.
+ * Pages remaining.
  * @param [in] epp The provider.
  * @return The number of pages remaining when the provider is made from an int array.
  */
@@ -58,8 +61,17 @@ int EaglePageProviderArray_pagesRemaining(EaglePageProviderArray *epp);
  */
 void EaglePageProviderArray_Delete(EaglePageProviderArray *epp);
 
+/**
+ * Get the next page from a provider.
+ * @param [in] epp The provider.
+ * @return The next page, or NULL.
+ */
 EaglePage* EaglePageProviderArray_nextPage(EaglePageProviderArray *epp);
 
+/**
+ * Reset the cursor of a provider.
+ * @param [in] epp The provider.
+ */
 void EaglePageProviderArray_reset(EaglePageProviderArray *epp);
 
 #endif

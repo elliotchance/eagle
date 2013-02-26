@@ -8,6 +8,9 @@
 
 typedef struct {
     
+    /**
+     All "subtypes" of EaglePageProvider will have this header.
+     */
     EaglePageProviderHeader;
     
     /**
@@ -15,6 +18,9 @@ typedef struct {
      */
     EAGLE_ATTR_PROVIDED EagleLinkedListItem *cursor;
     
+    /**
+     A list containing EaglePage's with the records.
+     */
     EAGLE_ATTR_MANAGED EagleLinkedList *list;
     
     /**
@@ -73,6 +79,10 @@ int EaglePageProviderStream_pagesRemaining(EaglePageProviderStream *epp);
  */
 EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp);
 
+/**
+ * Reset the cursor of a provider.
+ * @param [in] epp The provider.
+ */
 void EaglePageProviderStream_reset(EaglePageProviderStream *epp);
 
 #endif
