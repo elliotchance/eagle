@@ -5,7 +5,7 @@
 
 EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name)
 {
-    EaglePageProviderArray *pageProvider = (EaglePageProviderArray*) EagleMemory_Allocate("EaglePageProviderArray.1", sizeof(EaglePageProviderArray));
+    EaglePageProviderArray *pageProvider = (EaglePageProviderArray*) EagleMemory_Allocate("EaglePageProviderArray_NewInt.1", sizeof(EaglePageProviderArray));
     if(NULL == pageProvider) {
         return NULL;
     }

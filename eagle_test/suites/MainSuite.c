@@ -462,18 +462,6 @@ CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProvider)
     EaglePage_Delete(source2);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProvider_CreateFromInt)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePageProvider_CreateFromInt.1");
-    
-    EaglePageProviderSingle *provider = EaglePageProviderSingle_NewInt(0, 1, "bla");
-    CUNIT_ASSERT_NULL(provider);
-    
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
-    EagleMemory_MockFinish();
-}
-
 CUNIT_TEST(MainSuite, EaglePageProvider_addStream_)
 {
     EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderStream_New(EagleDataTypeInteger, 10, "dummy");
@@ -1069,7 +1057,6 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_CreateFromInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_addStream_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_New));
     

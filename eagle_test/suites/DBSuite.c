@@ -287,7 +287,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         }
     }
     
-    // suvtract 1 becuase the WHERE clause does not get emitted
+    // subtract 1 because the WHERE clause does not get emitted
     for(int i = 0; i < plan->resultFields - 1; ++i) {
         EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
         CUNIT_ASSERT_NOT_NULL(page);
