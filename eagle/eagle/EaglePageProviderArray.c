@@ -25,7 +25,13 @@ EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRec
 
 int EaglePageProviderArray_pagesRemaining(EaglePageProviderArray *epp)
 {
-    return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
+    int r;
+    
+    EagleSynchronizer_Lock(epp->nextPageLock);
+    r = EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
+    EagleSynchronizer_Unlock(epp->nextPageLock);
+    
+    return r;
 }
 
 void EaglePageProviderArray_Delete(EaglePageProviderArray *epp)
@@ -45,13 +51,17 @@ EaglePage* EaglePageProviderArray_nextPage(EaglePageProviderArray *epp)
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
     EaglePage *page;
     
+    EagleSynchronizer_Lock(epp->nextPageLock);
     page = EaglePage_New(EagleDataTypeInteger, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
     epp->offsetRecords += pageSize;
+    EagleSynchronizer_Unlock(epp->nextPageLock);
     
     return page;
 }
 
 void EaglePageProviderArray_reset(EaglePageProviderArray *epp)
 {
+    EagleSynchronizer_Lock(epp->nextPageLock);
     epp->offsetRecords = 0;
+    EagleSynchronizer_Unlock(epp->nextPageLock);
 }
