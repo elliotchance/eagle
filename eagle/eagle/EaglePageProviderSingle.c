@@ -45,7 +45,7 @@ EaglePage* EaglePageProviderSingle_nextPage(EaglePageProviderSingle *epp)
         data[i] = epp->value;
     }
     
-    page = EaglePage_New(EagleDataTypeInteger, data, epp->recordsPerPage, epp->recordsPerPage, 0, EagleFalse);
+    page = EaglePage_New(EagleDataTypeInteger, data, epp->recordsPerPage, epp->recordsPerPage, 0, EagleTrue);
     
     return page;
 }
