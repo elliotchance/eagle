@@ -32,12 +32,20 @@ void EaglePageProviderSingle_Delete(EaglePageProviderSingle *epp)
 EaglePage* EaglePageProviderSingle_nextPage(EaglePageProviderSingle *epp)
 {
     EaglePage *page;
-    int *data = (int*) EagleMemory_MultiAllocate("EaglePageProviderSingle_nextPage.1", sizeof(int), epp->recordsPerPage);
+    int *data, i;
+    
+    /* allocate data for page */
+    data = (int*) EagleMemory_MultiAllocate("EaglePageProviderSingle_nextPage.1", sizeof(int), epp->recordsPerPage);
     if(NULL == data) {
         return NULL;
     }
     
-    page = EaglePage_New(EagleDataTypeInteger, data, 1, 1, 0, EagleFalse);
+    /* fill page */
+    for(i = 0; i < epp->recordsPerPage; ++i) {
+        data[i] = epp->value;
+    }
+    
+    page = EaglePage_New(EagleDataTypeInteger, data, epp->recordsPerPage, epp->recordsPerPage, 0, EagleFalse);
     
     return page;
 }
