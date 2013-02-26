@@ -10,6 +10,9 @@
 #include "EagleDataType.h"
 #include "EaglePageProviderType.h"
 
+/**
+ All "subtypes" of EaglePageProvider will have this header.
+ */
 #define EaglePageProviderHeader EaglePageProviderType providerType; EagleDataType type; char *name; int recordsPerPage
 
 /**
@@ -17,6 +20,9 @@
  */
 typedef struct {
     
+    /**
+     All "subtypes" of EaglePageProvider will have this header.
+     */
     EaglePageProviderHeader;
     
 } EaglePageProvider;
@@ -41,10 +47,26 @@ void EaglePageProvider_reset(EaglePageProvider *epp);
  */
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
+/**
+ * Add a record to a writable provider (if possible).
+ * @param [in] epp The provider.
+ * @param [in] data The data to add to the stream.
+ * @return EagleTrue on success.
+ */
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 
+/**
+ * Return the amount of pages remaining.
+ * @param [in] epp The provider.
+ * @return The number of pages available for reading.
+ */
 int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 
+/**
+ * Get the next page from a provider.
+ * @param [in] epp The provider.
+ * @return The next page, or NULL.
+ */
 EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 
 #endif
