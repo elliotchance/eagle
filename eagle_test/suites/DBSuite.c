@@ -16,6 +16,8 @@
 #include "EagleLogger.h"
 #include "EagleDbInstance.h"
 #include "EagleDbSqlUnaryExpression.h"
+#include "EaglePageProviderStream.h"
+#include "EaglePageProviderArray.h"
 
 EagleDbParser* _testSqlSelect(const char *sql)
 {
@@ -93,7 +95,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
 {
     // compile plan
     int pageSize = 10;
-    EaglePageProvider *receiver = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, NULL);
+    EaglePageProviderStream *receiver = EaglePageProviderStream_New(EagleDataTypeInteger, pageSize, NULL);
     EaglePlan *plan = EaglePlan_New(pageSize);
     
     // setup the table
@@ -101,7 +103,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     for(int i = 0; i < pageSize; ++i) {
         col1Data[i] = i;
     }
-    EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
+    EaglePageProvider *col1 = (EaglePageProvider*) EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 1);
     
@@ -117,7 +119,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     EagleInstance_run(eagle);
     
     // validate result
-    EaglePage *page = EaglePageProvider_nextPage(receiver);
+    EaglePage *page = EaglePageProvider_nextPage((EaglePageProvider*) receiver);
     CUNIT_ASSERT_EQUAL_INT(receiver->totalRecords, pageSize);
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
@@ -129,7 +131,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     }
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
-    EaglePageProvider_Delete(receiver);
+    EaglePageProvider_Delete((EaglePageProvider*) receiver);
     EagleInstance_Delete(eagle);
 }
 
@@ -195,8 +197,8 @@ EagleDbTableData* _getTableWithData(int records, int recordsPerPage)
         EagleDbTableData_insert(td, tuple);
     }
     
-    CUNIT_ASSERT_EQUAL_INT(td->providers[0]->totalRecords, records);
-    CUNIT_ASSERT_EQUAL_INT(td->providers[1]->totalRecords, records);
+    CUNIT_ASSERT_EQUAL_INT(((EaglePageProviderStream*) td->providers[0])->totalRecords, records);
+    CUNIT_ASSERT_EQUAL_INT(((EaglePageProviderStream*) td->providers[1])->totalRecords, records);
     
     return td;
 }
@@ -252,10 +254,10 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         col1Data[i] = i;
         col2Data[i] = i * 2;
     }
-    EaglePageProvider *col1 = EaglePageProvider_CreateFromIntArray(col1Data, pageSize, pageSize, "col1");
-    EaglePageProvider *col2 = EaglePageProvider_CreateFromIntArray(col2Data, pageSize, pageSize, "col2");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, col2, EagleTrue), EagleTrue);
+    EaglePageProviderArray *col1 = EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
+    EaglePageProviderArray *col2 = EaglePageProviderArray_NewInt(col2Data, pageSize, pageSize, "col2");
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
     
     // compile plan
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
@@ -285,7 +287,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         }
     }
     
-    // suvtract 1 becuase the WHERE clause does not get emitted
+    // subtract 1 because the WHERE clause does not get emitted
     for(int i = 0; i < plan->resultFields - 1; ++i) {
         EaglePage *page = EaglePageProvider_nextPage(plan->result[i]);
         CUNIT_ASSERT_NOT_NULL(page);
@@ -522,7 +524,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
     
     plan->resultFields = 1;
     plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
-    plan->result[0] = EaglePageProvider_CreateFromStream(EagleDataTypeInteger, pageSize, "name");
+    plan->result[0] = (EaglePageProvider*) EaglePageProviderStream_New(EagleDataTypeInteger, pageSize, "name");
     
     // some data
     int *data = EagleData_Int(123);

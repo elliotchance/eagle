@@ -55,7 +55,7 @@ FILE* EagleLogger_GetLogFile(const char *location)
 {
     FILE *logFile = fopen(location, "a");
     if(NULL == logFile) {
-        fprintf(stderr, "Unable to open log file for writing '%s'.", location);
+        /*fprintf(stderr, "Unable to open log file for writing '%s'.", location);*/
         logFile = stderr;
     }
     

@@ -8,115 +8,24 @@
 #include "EagleLinkedList.h"
 #include "Eagle.h"
 #include "EagleDataType.h"
+#include "EaglePageProviderType.h"
+
+/**
+ All "subtypes" of EaglePageProvider will have this header.
+ */
+#define EaglePageProviderHeader EaglePageProviderType providerType; EagleDataType type; char *name; int recordsPerPage
 
 /**
  A page provider.
  */
-struct EaglePageProvider_ {
+typedef struct {
     
     /**
-     The cursor position. An internal counter of the position of the stream. If the stream has more pages this will be
-     incremented with each nextPage().
+     All "subtypes" of EaglePageProvider will have this header.
      */
-    EAGLE_ATTR_NA int offsetRecords;
+    EaglePageProviderHeader;
     
-    /**
-     The total amount of records. You should never access this directly since its value may be virtual or invalid -
-     instead use EaglePageProvider_pagesRemaining()
-     */
-    EAGLE_ATTR_NA int totalRecords;
-    
-    /**
-     For convenience the page provider has a default page size.
-     */
-    EAGLE_ATTR_NA int recordsPerPage;
-    
-    /**
-     A pointer to the actual data that will be fed into pages. You should not rely on accessing this directly because
-     its type and implementation will be different depending on the type of page provider. Use the appropriate methods
-     nextPage() and pagesRemaining().
-     
-     The memory for this instance variable is only managed when the page provider is a stream type.
-     */
-    EAGLE_ATTR_SEMI_MANAGED void *records;
-    
-    /**
-     Fetch the next page from the provider. If no more data is available this will return NULL.
-     */
-    EAGLE_ATTR_NA EaglePage* (*nextPage)(struct EaglePageProvider_ *epp);
-    
-    /**
-     Ask the provider if there is more data available. This must be invoked before every nextPage() - since the stream
-     might be variable and more data may be added to the stream while your reading from it.
-     */
-    EAGLE_ATTR_NA int (*pagesRemaining)(struct EaglePageProvider_ *epp);
-    
-    /**
-     Some data provider types allow the addition of data.
-     @return EagleTrue if the data was added on, EagleFalse otherwise.
-     */
-    EAGLE_ATTR_NA EagleBoolean (*add)(struct EaglePageProvider_ *epp, void *data);
-    
-    /**
-     Virtual method for freeing this structure.
-     */
-    EAGLE_ATTR_NA void (*free)(struct EaglePageProvider_ *epp);
-    
-    /**
-     Virtual method for resetting the page provider.
-     */
-    EAGLE_ATTR_NA void (*reset)(struct EaglePageProvider_ *epp);
-    
-    /**
-     Synchronize EaglePageProvider_nextPage() and EaglePageProvider_pagesRemaining()
-     */
-    EAGLE_ATTR_MANAGED EagleLock *nextPageLock;
-    
-    /**
-     An optional name. For example, a column name. This is so named columns can be identified.
-     */
-    EAGLE_ATTR_MANAGED char *name;
-    
-    /**
-     The data type for this provider.
-     */
-    EAGLE_ATTR_NA EagleDataType type;
-    
-    /**
-     This is used by streams. It allows it to keep the page it is upto when requesting the next page.
-     */
-    EAGLE_ATTR_PROVIDED EagleLinkedListItem *cursor;
-    
-};
-typedef struct EaglePageProvider_ EaglePageProvider;
-
-/**
- * Create a new read only page provider from a fixed size array.
- * @param [in] records The data records.
- * @param [in] totalRecords The total records.
- * @param [in] recordsPerPage The amount of records to serve out per page.
- * @param [in] name The name of the provider.
- * @return A new provider.
- */
-EaglePageProvider* EaglePageProvider_CreateFromIntArray(int *records, int totalRecords, int recordsPerPage, char *name);
-
-/**
- * This creates a page provider that provides a single page filled with a fixed int.
- * @param [in] value The value to fill the pages with.
- * @param [in] recordsPerPage The number of records to return with each page.
- * @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
- * @return A new provider.
- */
-EaglePageProvider* EaglePageProvider_CreateFromInt(int value, int recordsPerPage, char *name);
-
-/**
- * Create a new writable page provider with zero records.
- * @param [in] type The data type for the provider (and its pages).
- * @param [in] recordsPerPage The amount of records per page.
- * @param [in] name The name of the provider.
- * @return A new read/write provider.
- */
-EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int recordsPerPage, char *name);
+} EaglePageProvider;
 
 /**
  * Calculate the amount of pages required to serve a given amount of records.
@@ -127,133 +36,37 @@ EaglePageProvider* EaglePageProvider_CreateFromStream(EagleDataType type, int re
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage);
 
 /**
- * Free a page provider.
- * @param [in] epp Page provider instance.
+ * Reset the cursor of a provider.
+ * @param [in] epp The provider.
+ */
+void EaglePageProvider_reset(EaglePageProvider *epp);
+
+/**
+ * Delete a provider.
+ * @param [in] epp The provider.
  */
 void EaglePageProvider_Delete(EaglePageProvider *epp);
 
 /**
- * Return the number of pages remaining.
- * @param [in] epp Page provider instance.
- * @return The number of pages remaining.
- */
-int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
-
-/**
- * Get the next page from the provider.
- * @param [in] epp Page provider instance.
- * @return The next page, or NULL.
- */
-EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
-
-/**
- * Add a record to a writable provider.
- * @param [in] epp Page provider instance.
- * @param [in] data The data for the record.
+ * Add a record to a writable provider (if possible).
+ * @param [in] epp The provider.
+ * @param [in] data The data to add to the stream.
  * @return EagleTrue on success.
  */
 EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data);
 
 /**
- * Reset the cursor back to the beginning.
- * @param [in] epp Page provider instance.
- */
-void EaglePageProvider_reset(EaglePageProvider *epp);
-
-/**
- * Private constructor. This is for internal use, use one of the other New functions.
- * @param [in] type The data type.
- * @param [in] recordsPerPage The amount of records per page.
- * @return A new provider.
- */
-EaglePageProvider* EaglePageProvider_New_(EagleDataType type, int recordsPerPage);
-
-/**
- * Private function.
- * @param [in] epp The provider.
- * @return The number of pages remaining when the provider is made from an int array.
- */
-int EaglePageProvider_pagesRemainingFromIntArray_(EaglePageProvider *epp);
-
-/**
- * Private function.
- * @param [in] epp The provider.
- * @return The next page when the provider is made from an int array.
- */
-EaglePage* EaglePageProvider_nextPageFromIntArray_(EaglePageProvider *epp);
-
-/**
- * Private function.
- * @param [in] epp The provider.
- * @return The number of pages remaining when the provider is made from an int.
- */
-int EaglePageProvider_pagesRemainingFromInt_(EaglePageProvider *epp);
-
-/**
- * Private function.
- * @param [in] epp The provider.
- * @return The next page when the provider is made from an int.
- */
-EaglePage* EaglePageProvider_nextPageFromInt_(EaglePageProvider *epp);
-
-/**
- * Private function. Invoked if a record is added to a read only provider.
- * @param [in] epp The provider.
- * @param [in] data The record.
- * @return EagleTrue on success.
- */
-EagleBoolean EaglePageProvider_addUnsupported_(EaglePageProvider *epp, void *data);
-
-/**
- * Private function. Add a record to a writable provider.
- * @param [in] epp The provider.
- * @param [in] data The data to add to the stream.
- * @return EagleTrue on success.
- */
-EagleBoolean EaglePageProvider_addStream_(EaglePageProvider *epp, void *data);
-
-/**
- * Private function. Return the amount of pages remaining at the moment for a read/write provider.
+ * Return the amount of pages remaining.
  * @param [in] epp The provider.
  * @return The number of pages available for reading.
  */
-int EaglePageProvider_pagesRemainingFromStream_(EaglePageProvider *epp);
+int EaglePageProvider_pagesRemaining(EaglePageProvider *epp);
 
 /**
- * Private function. Get the next page from a stream provider.
+ * Get the next page from a provider.
  * @param [in] epp The provider.
  * @return The next page, or NULL.
  */
-EaglePage* EaglePageProvider_nextPageFromStream_(EaglePageProvider *epp);
-
-/**
- * Delete a provider that was created from an int array.
- * @param [in] epp The provider.
- */
-void EaglePageProvider_DeleteIntArray_(EaglePageProvider *epp);
-
-/**
- * Delete a provider that was created from a stream.
- * @param [in] epp The provider.
- */
-void EaglePageProvider_DeleteStream_(EaglePageProvider *epp);
-
-/**
- * Reset the cursor of a provider.
- * @param [in] epp The provider.
- */
-void EaglePageProvider_resetFromIntArray_(EaglePageProvider *epp);
-
-/**
- * Reset the cursor of a provider.
- * @param [in] epp The provider.
- */
-void EaglePageProvider_resetFromStream_(EaglePageProvider *epp);
-
-/**
- * Delete a provider that was created from an int.
- * @param [in] epp The provider.
- */
-void EaglePageProvider_DeleteInt_(EaglePageProvider *epp);
+EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp);
 
 #endif
