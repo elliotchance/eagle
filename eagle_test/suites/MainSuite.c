@@ -11,6 +11,7 @@
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
 #include "EaglePageProviderSingle.h"
+#include "EaglePageProviderVirtual.h"
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
 {
@@ -1002,11 +1003,52 @@ CUNIT_TEST(MainSuite, EaglePageProvider_reset)
     EaglePageProviderSingle_Delete(epp);
 }
 
+CUNIT_TEST(MainSuite, EaglePageProviderVirtual_New)
+{
+    // create a virtual provider that acts like a single provider
+    EaglePageProviderSingle *single = EaglePageProviderSingle_NewInt(123, 1, "name");
+    EaglePageProviderVirtual *epp = EaglePageProviderVirtual_New(single->recordsPerPage,
+         "name2",
+         single,
+         (void (*)(void*)) EaglePageProvider_Delete,
+         (EagleBoolean (*)(void*, void*)) EaglePageProvider_add,
+         (int (*)(void*)) EaglePageProvider_pagesRemaining,
+         (EaglePage* (*)(void*)) EaglePageProvider_nextPage,
+         (void (*)(void*)) EaglePageProvider_reset);
+    
+    // add
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_add((EaglePageProvider*) epp, NULL), EaglePageProvider_add((EaglePageProvider*) single, NULL));
+    
+    // pagesRemaining
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining((EaglePageProvider*) epp), EaglePageProvider_pagesRemaining((EaglePageProvider*) single));
+    
+    // nextPage
+    EaglePage *page1 = EaglePageProvider_nextPage((EaglePageProvider*) epp);
+    EaglePage *page2 = EaglePageProvider_nextPage((EaglePageProvider*) single);
+    CUNIT_VERIFY_EQUAL_INT(page1->count, page2->count);
+    CUNIT_VERIFY_EQUAL_INT(page1->totalSize, page2->totalSize);
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    
+    // reset
+    EaglePageProvider_reset((EaglePageProvider*) epp);
+    EaglePageProvider_reset((EaglePageProvider*) single);
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderVirtual_Delete)
+{
+    EaglePageProviderVirtual_Delete(NULL);
+}
+
 CUnitTests* MainSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_reset));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_GetLogFile));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleUtils_CompareWithoutCase));

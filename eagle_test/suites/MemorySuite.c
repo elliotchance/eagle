@@ -25,6 +25,7 @@
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
 #include "EaglePageProviderSingle.h"
+#include "EaglePageProviderVirtual.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -766,11 +767,23 @@ CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EaglePageProviderVirtual_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProviderVirtual_New.1");
+    
+    CUNIT_VERIFY_NULL(EaglePageProviderVirtual_New(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderVirtual_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_New));
