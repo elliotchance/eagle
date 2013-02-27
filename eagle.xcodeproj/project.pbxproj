@@ -61,6 +61,8 @@
 		8BB7FFE9168C2F3600DCFF3C /* EagleDbSqlBinaryExpressionOperator.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7FFE7168C2F3600DCFF3C /* EagleDbSqlBinaryExpressionOperator.c */; };
 		8BC9D29F16DDA3F0001E5D68 /* EaglePageProviderVirtual.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29D16DDA3F0001E5D68 /* EaglePageProviderVirtual.c */; };
 		8BC9D2A016DDA3F0001E5D68 /* EaglePageProviderVirtual.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29D16DDA3F0001E5D68 /* EaglePageProviderVirtual.c */; };
+		8BC9D2AF16DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2AE16DDCFC1001E5D68 /* EagleDbInformationSchema.c */; };
+		8BC9D2B016DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2AE16DDCFC1001E5D68 /* EagleDbInformationSchema.c */; };
 		8BCA5C2B167C995900FDB186 /* EagleDbTableData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */; };
 		8BCA5C2C167C995900FDB186 /* EagleDbTableData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */; };
 		8BCA5C2F167C9CB800FDB186 /* EagleDbTuple.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2E167C9CB800FDB186 /* EagleDbTuple.c */; };
@@ -214,6 +216,8 @@
 		8BB7FFE7168C2F3600DCFF3C /* EagleDbSqlBinaryExpressionOperator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbSqlBinaryExpressionOperator.c; sourceTree = "<group>"; };
 		8BC9D29D16DDA3F0001E5D68 /* EaglePageProviderVirtual.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EaglePageProviderVirtual.c; sourceTree = "<group>"; };
 		8BC9D29E16DDA3F0001E5D68 /* EaglePageProviderVirtual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaglePageProviderVirtual.h; sourceTree = "<group>"; };
+		8BC9D2AC16DDCFAF001E5D68 /* EagleDbInformationSchema.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbInformationSchema.h; sourceTree = "<group>"; };
+		8BC9D2AE16DDCFC1001E5D68 /* EagleDbInformationSchema.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbInformationSchema.c; sourceTree = "<group>"; };
 		8BCA5C29167C977D00FDB186 /* EagleDbTableData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbTableData.h; sourceTree = "<group>"; };
 		8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbTableData.c; sourceTree = "<group>"; };
 		8BCA5C2D167C9BC900FDB186 /* EagleDbTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbTuple.h; sourceTree = "<group>"; };
@@ -416,6 +420,8 @@
 				8B1BF80B167A9B35007C11E6 /* EagleDbColumn.h */,
 				8BB7FFD4168B536D00DCFF3C /* EagleDbConsole.c */,
 				8BB7FFD2168B535A00DCFF3C /* EagleDbConsole.h */,
+				8BC9D2AE16DDCFC1001E5D68 /* EagleDbInformationSchema.c */,
+				8BC9D2AC16DDCFAF001E5D68 /* EagleDbInformationSchema.h */,
 				8BB7FFD8168B575700DCFF3C /* EagleDbInstance.c */,
 				8BB7FFD7168B574B00DCFF3C /* EagleDbInstance.h */,
 				8BEDCF8D16AE54A100EBCFAA /* EagleDbParser.c */,
@@ -637,6 +643,7 @@
 				8B1D8ABC16D9EB5F00F34724 /* EaglePageProviderSingle.c in Sources */,
 				8B1D8AC016D9EC3B00F34724 /* EaglePageProviderStream.c in Sources */,
 				8BC9D29F16DDA3F0001E5D68 /* EaglePageProviderVirtual.c in Sources */,
+				8BC9D2AF16DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +703,7 @@
 				8B1D8ABD16D9EB5F00F34724 /* EaglePageProviderSingle.c in Sources */,
 				8B1D8AC116D9EC3B00F34724 /* EaglePageProviderStream.c in Sources */,
 				8BC9D2A016DDA3F0001E5D68 /* EaglePageProviderVirtual.c in Sources */,
+				8BC9D2B016DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

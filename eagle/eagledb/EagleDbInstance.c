@@ -13,11 +13,12 @@
 #include "EagleDbParser.h"
 #include "EagleLogger.h"
 #include "EagleDbSchema.h"
+#include "EagleDbInformationSchema.h"
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
-    EagleDbSchema *defaultSchema, *eagledbSchema;
+    EagleDbSchema *defaultSchema, *infoSchema;
     
     if(NULL == db) {
         return NULL;
@@ -29,9 +30,12 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
     db->schemas = EagleLinkedList_New();
     
     defaultSchema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
-    eagledbSchema = EagleDbSchema_New((char*) EagleDbSchema_EagleSchemaName);
+    infoSchema = EagleDbSchema_New((char*) EagleDbSchema_InformationSchemaName);
     EagleDbInstance_addSchema(db, defaultSchema);
-    EagleDbInstance_addSchema(db, eagledbSchema);
+    EagleDbInstance_addSchema(db, infoSchema);
+    
+    /* setup information schema */
+    EagleDbInformationSchema_Init(db, defaultSchema);
     
     return db;
 }
@@ -355,10 +359,13 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
     }
     
     {
+        /* always clean up the information schema */
+        EagleDbInformationSchema_Cleanup(db);
+        
         EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
         {
             if(0 == strcmp(schema->name, EagleDbSchema_DefaultSchemaName) ||
-               0 == strcmp(schema->name, EagleDbSchema_EagleSchemaName)) {
+               0 == strcmp(schema->name, EagleDbSchema_InformationSchemaName)) {
                 EagleDbSchema_Delete(schema);
             }
         }
@@ -376,6 +383,9 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
     }
     
     {
+        /* always clean up the information schema */
+        EagleDbInformationSchema_Cleanup(db);
+        
         EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
         {
             EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
@@ -396,8 +406,13 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
 
 EagleDbTableData* EagleDbInstance_getTable(EagleDbInstance *db, char *tableName)
 {
-    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
+    EagleDbSchema *schema;
     
+    if(NULL == tableName) {
+        return NULL;
+    }
+    
+    schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     if(NULL != schema) {
         EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
         {

@@ -7,7 +7,7 @@
 
 const char *EagleDbSchema_DefaultSchemaName = "default";
 
-const char *EagleDbSchema_EagleSchemaName = "eagledb";
+const char *EagleDbSchema_InformationSchemaName = "information_schema";
 
 EagleDbSchema* EagleDbSchema_New(char *name)
 {
@@ -48,7 +48,7 @@ EagleDbTableData* EagleDbSchema_getTable(EagleDbSchema *schema, const char *tabl
 
 EagleBoolean EagleDbSchema_addTable(EagleDbSchema *schema, EagleDbTableData *td)
 {
-    /* check if the table alreadty exists */
+    /* check if the table already exists */
     if(NULL != EagleDbSchema_getTable(schema, td->table->name)) {
         char msg[1024];
         sprintf(msg, "Error: Table \"%s.%s\" already exists.", schema->name, td->table->name);

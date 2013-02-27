@@ -29,6 +29,7 @@ EaglePage* EaglePage_AllocInt(int count)
     if(NULL == data) {
         return NULL;
     }
+    
     return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
 }
 
@@ -38,6 +39,7 @@ EaglePage* EaglePage_AllocText(int count)
     if(NULL == data) {
         return NULL;
     }
+    
     return EaglePage_New(EagleDataTypeText, data, count, 0, 0, EagleTrue);
 }
 

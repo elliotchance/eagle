@@ -18,6 +18,7 @@
 #include "EagleDbSqlUnaryExpression.h"
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
+#include "EagleDbInformationSchema.h"
 
 EagleDbParser* _testSqlSelect(const char *sql)
 {
@@ -816,8 +817,8 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
 
 void EagleInstanceTest_Cleanup(EagleDbInstance* db)
 {
-    EagleDbSchema *schema = (EagleDbSchema*) EagleLinkedList_first(db->schemas);
-    EagleDbTableData *td = (EagleDbTableData*) EagleLinkedList_first(schema->tables);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
+    EagleDbTableData *td = (EagleDbTableData*) EagleDbSchema_getTable(schema, "mytable");
     
     EagleDbTable_DeleteWithColumns(td->table);
     EagleDbTableData_Delete(td);
@@ -1016,11 +1017,50 @@ CUNIT_TEST(DBSuite, _BadEntityName)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
+{
+    EagleDbInstance *db = EagleDbInstance_New(10);
+    
+    /* parse sql */
+    EagleDbParser *p = EagleDbParser_ParseWithString("select table_schema, table_name from information_schema_tables;");
+    CUNIT_ASSERT_FALSE(EagleDbParser_hasError(p));
+    
+    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
+    CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
+    
+    /* execute */
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    /* check results */
+    EaglePage *page1 = EaglePageProvider_nextPage(plan->result[0]);
+    EaglePage *page2 = EaglePageProvider_nextPage(plan->result[1]);
+    CUNIT_ASSERT_NOT_NULL(page1);
+    CUNIT_ASSERT_NOT_NULL(page2);
+    
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) p->yyparse_ast);
+    EaglePlan_Delete(plan);
+    EagleInstance_Delete(eagle);
+    EagleDbParser_Delete(p);
+    EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInformationSchema_Delete)
+{
+    EagleDbInformationSchema_Delete(NULL);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
