@@ -38,6 +38,9 @@ void EaglePageProviderVirtual_Delete(EaglePageProviderVirtual *epp)
         return;
     }
     
+    if(NULL != epp->free) {
+        epp->free(epp->obj);
+    }
     EagleMemory_Free(epp->name);
     EagleMemory_Free(epp);
 }

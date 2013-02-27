@@ -63,7 +63,7 @@ leaks: build_eagle_test
 
 	- killall eagle_test
 	MallocStackLogging=1 build/Debug/eagle_test --wait --all-suites --exclude-bench &
-	sleep 5
+	sleep 10
 	#malloc_history eagle_test -callTree -invert -collapseRecursion -chargeSystemLibraries
 	leaks eagle_test
 	killall eagle_test

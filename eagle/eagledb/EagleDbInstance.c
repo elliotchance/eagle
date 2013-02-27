@@ -359,14 +359,8 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
     }
     
     {
-        /* always clean up the information schema 
-        EagleDbInformationSchema_Cleanup(EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName));*/
-        EagleDbSchema *s = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
-        EagleDbTableData *td = EagleDbSchema_getTable(s, "information_schema_tables");
-        EagleLinkedList_deleteObject(s->tables, td);
-        
-        EagleDbTable_Delete(td->table);
-        EagleDbTableData_Delete(td);
+        /* always clean up the information schema */
+        EagleDbInformationSchema_Cleanup(db);
         
         EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
         {
@@ -389,6 +383,9 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
     }
     
     {
+        /* always clean up the information schema */
+        EagleDbInformationSchema_Cleanup(db);
+        
         EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
         {
             EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)

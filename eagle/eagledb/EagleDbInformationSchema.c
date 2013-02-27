@@ -110,7 +110,7 @@ EaglePage* EagleDbInformationSchema_tables_nextPage(EagleDbInformationSchema *in
     }
     EagleLinkedList_ForeachEnd
     
-    page = EaglePage_New(EagleDataTypeText, data, totalTables, totalTables, 0, EagleFalse);
+    page = EaglePage_New(EagleDataTypeText, data, totalTables, totalTables, 0, EagleTrue);
     
     infoSchema->recordOffset += totalTables;
     return page;
@@ -126,16 +126,16 @@ void EagleDbInformationSchema_Delete(EagleDbInformationSchema *infoSchema)
     if(NULL == infoSchema) {
         return;
     }
+    
+    EagleMemory_Free(infoSchema);
 }
 
-void EagleDbInformationSchema_Cleanup(EagleDbSchema *schema)
+void EagleDbInformationSchema_Cleanup(EagleDbInstance *db)
 {
-    /*int len, len2;
-    EagleDbTableData *td = EagleDbSchema_getTable(schema, "information_schema_tables");
-    len = EagleLinkedList_length(schema->tables);
-    EagleLinkedList_deleteObject(schema->tables, td);
-    len2 = EagleLinkedList_length(schema->tables);
+    EagleDbSchema *s = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
+    EagleDbTableData *td = EagleDbSchema_getTable(s, "information_schema_tables");
+    EagleLinkedList_deleteObject(s->tables, td);
     
-    EagleDbTable_Delete(td->table);
-    EagleDbTableData_Delete(td);*/
+    EagleDbTable_DeleteWithColumns(td->table);
+    EagleDbTableData_Delete(td);
 }
