@@ -20,6 +20,8 @@ EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, cons
 
 void EagleDbInformationSchema_Init(EagleDbInstance *db, EagleDbSchema *schema);
 
+void EagleDbInformationSchema_Cleanup(EagleDbSchema *schema);
+
 void EagleDbInformationSchema_Delete(EagleDbInformationSchema *infoSchema);
 
 /* --- */

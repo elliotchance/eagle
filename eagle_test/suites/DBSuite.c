@@ -816,8 +816,8 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
 
 void EagleInstanceTest_Cleanup(EagleDbInstance* db)
 {
-    EagleDbSchema *schema = (EagleDbSchema*) EagleLinkedList_first(db->schemas);
-    EagleDbTableData *td = (EagleDbTableData*) EagleLinkedList_first(schema->tables);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
+    EagleDbTableData *td = (EagleDbTableData*) EagleDbSchema_getTable(schema, "mytable");
     
     EagleDbTable_DeleteWithColumns(td->table);
     EagleDbTableData_Delete(td);
@@ -1041,7 +1041,12 @@ CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
         printf("%s\n", ((char**) page->data)[i]);
     }
     
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) p->yyparse_ast);
+    EaglePlan_Delete(plan);
+    EaglePage_Delete(page);
     EagleInstance_Delete(eagle);
+    EagleDbParser_Delete(p);
+    EagleDbInstance_Delete(db);
 }
 
 CUnitTests* DBSuite_tests()
