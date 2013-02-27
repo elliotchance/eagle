@@ -5,6 +5,7 @@
 #include "EaglePageProviderArray.h"
 #include "EaglePageProviderSingle.h"
 #include "EaglePageProviderStream.h"
+#include "EaglePageProviderVirtual.h"
 
 int EaglePageProvider_TotalPages(int totalRecords, int recordsPerPage)
 {
@@ -42,6 +43,10 @@ void EaglePageProvider_Delete(EaglePageProvider *epp)
             EaglePageProviderStream_Delete((EaglePageProviderStream*) epp);
             break;
             
+        case EaglePageProviderTypeVirtual:
+            EaglePageProviderVirtual_Delete((EaglePageProviderVirtual*) epp);
+            break;
+            
     }
 }
 
@@ -54,8 +59,10 @@ EagleBoolean EaglePageProvider_add(EaglePageProvider *epp, void *data)
             break;
             
         case EaglePageProviderTypeStream:
-            EaglePageProviderStream_add((EaglePageProviderStream*) epp, data);
-            return EagleTrue;
+            return EaglePageProviderStream_add((EaglePageProviderStream*) epp, data);
+            
+        case EaglePageProviderTypeVirtual:
+            return EaglePageProviderVirtual_add((EaglePageProviderVirtual*) epp, data);
             
     }
     
@@ -78,6 +85,10 @@ int EaglePageProvider_pagesRemaining(EaglePageProvider *epp)
             
         case EaglePageProviderTypeStream:
             r = EaglePageProviderStream_pagesRemaining((EaglePageProviderStream*) epp);
+            break;
+            
+        case EaglePageProviderTypeVirtual:
+            r = EaglePageProviderVirtual_pagesRemaining((EaglePageProviderVirtual*) epp);
             break;
             
     }
@@ -103,6 +114,10 @@ EaglePage* EaglePageProvider_nextPage(EaglePageProvider *epp)
             page = EaglePageProviderStream_nextPage((EaglePageProviderStream*) epp);
             break;
             
+        case EaglePageProviderTypeVirtual:
+            page = EaglePageProviderVirtual_nextPage((EaglePageProviderVirtual*) epp);
+            break;
+            
     }
     
     return page;
@@ -122,6 +137,10 @@ void EaglePageProvider_reset(EaglePageProvider *epp)
             
         case EaglePageProviderTypeStream:
             EaglePageProviderStream_reset((EaglePageProviderStream*) epp);
+            break;
+            
+        case EaglePageProviderTypeVirtual:
+            EaglePageProviderVirtual_reset((EaglePageProviderVirtual*) epp);
             break;
             
     }

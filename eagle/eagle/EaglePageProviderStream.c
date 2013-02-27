@@ -53,9 +53,12 @@ void EaglePageProviderStream_Delete(EaglePageProviderStream *epp)
 
 EagleBoolean EaglePageProviderStream_add(EaglePageProviderStream *epp, void *data)
 {
-    EagleLinkedListItem *head = EagleLinkedList_end(epp->list);
+    EagleLinkedListItem *head;
     EaglePage *page = NULL;
     
+    EagleSynchronizer_Lock(epp->nextPageLock);
+    
+    head = EagleLinkedList_end(epp->list);
     if(NULL == head || ((EaglePage*) head->obj)->count >= epp->recordsPerPage) {
         /* the list is empty we need to create a new page */
         EagleLinkedListItem *item;
@@ -72,6 +75,7 @@ EagleBoolean EaglePageProviderStream_add(EaglePageProviderStream *epp, void *dat
             
         case EagleDataTypeUnknown:
             EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            EagleSynchronizer_Unlock(epp->nextPageLock);
             return EagleFalse;
             
         case EagleDataTypeInteger:
@@ -85,17 +89,27 @@ EagleBoolean EaglePageProviderStream_add(EaglePageProviderStream *epp, void *dat
     }
     
     ++epp->totalRecords;
+    EagleSynchronizer_Unlock(epp->nextPageLock);
+    
     return EagleTrue;
 }
 
 int EaglePageProviderStream_pagesRemaining(EaglePageProviderStream *epp)
 {
-    return EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
+    int r;
+    
+    EagleSynchronizer_Lock(epp->nextPageLock);
+    r = EaglePageProvider_TotalPages(epp->totalRecords - epp->offsetRecords, epp->recordsPerPage);
+    EagleSynchronizer_Unlock(epp->nextPageLock);
+    
+    return r;
 }
 
 EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp)
 {
     EaglePage *page;
+    
+    EagleSynchronizer_Lock(epp->nextPageLock);
     
     if(NULL == epp->cursor) {
         epp->cursor = EagleLinkedList_begin(epp->list);
@@ -103,6 +117,7 @@ EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp)
     
     /* there is no more pages to give */
     if(epp->offsetRecords >= epp->totalRecords || NULL == epp->cursor) {
+        EagleSynchronizer_Unlock(epp->nextPageLock);
         return NULL;
     }
     
@@ -111,6 +126,8 @@ EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp)
     page->recordOffset = epp->offsetRecords;
     epp->offsetRecords += page->count;
     epp->cursor = epp->cursor->next;
+    
+    EagleSynchronizer_Unlock(epp->nextPageLock);
     return page;
 }
 

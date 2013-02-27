@@ -19,7 +19,13 @@ typedef enum {
     /**
      A read/write page provider that can be any length and can have records added to it.
      */
-    EaglePageProviderTypeStream = 3
+    EaglePageProviderTypeStream = 3,
+    
+    /**
+     A virtual table does not contain any actual data, but rather relies on callback functions to get data when
+     requested.
+     */
+    EaglePageProviderTypeVirtual = 4
     
 } EaglePageProviderType;
 
