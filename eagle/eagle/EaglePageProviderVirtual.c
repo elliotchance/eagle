@@ -5,6 +5,7 @@
 
 EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
                                                        char *name,
+                                                       EagleDataType type,
                                                        void *obj,
                                                        void (*free)(void*),
                                                        EagleBoolean (*add)(void*, void*),
@@ -20,7 +21,7 @@ EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
     pageProvider->providerType = EaglePageProviderTypeVirtual;
     pageProvider->recordsPerPage = recordsPerPage;
     pageProvider->name = (NULL == name ? NULL : strdup(name));
-    pageProvider->type = EagleDataTypeUnknown;
+    pageProvider->type = type;
     pageProvider->obj = obj;
     pageProvider->add = add;
     pageProvider->free = free;

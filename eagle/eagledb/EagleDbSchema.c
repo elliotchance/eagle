@@ -7,7 +7,7 @@
 
 const char *EagleDbSchema_DefaultSchemaName = "default";
 
-const char *EagleDbSchema_EagleSchemaName = "eagledb";
+const char *EagleDbSchema_InformationSchemaName = "information_schema";
 
 EagleDbSchema* EagleDbSchema_New(char *name)
 {

@@ -1016,11 +1016,40 @@ CUNIT_TEST(DBSuite, _BadEntityName)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
+{
+    EagleDbInstance *db = EagleDbInstance_New(10);
+    
+    /* parse sql */
+    EagleDbParser *p = EagleDbParser_ParseWithString("select table_schema, table_name from information_schema_tables;");
+    CUNIT_ASSERT_FALSE(EagleDbParser_hasError(p));
+    
+    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
+    CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
+    
+    /* execute */
+    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance_addPlan(eagle, plan);
+    EagleInstance_run(eagle);
+    
+    /* check results */
+    EaglePage *page = EaglePageProvider_nextPage(plan->result[0]);
+    CUNIT_ASSERT_NOT_NULL(page);
+    CUNIT_VERIFY_EQUAL_INT(page->count, 1);
+    
+    for(int i = 0; i < page->count; ++i) {
+        printf("%s\n", ((char**) page->data)[i]);
+    }
+    
+    EagleInstance_Delete(eagle);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));

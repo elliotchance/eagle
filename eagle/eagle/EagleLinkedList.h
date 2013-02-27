@@ -28,10 +28,10 @@
  @endcode
  */
 #define EagleLinkedList_Foreach(_list, _type, _name) { \
-EagleLinkedListItem *_cursor##_name; \
-int _i##_name; \
-for(_cursor##_name = EagleLinkedList_begin(_list), _i##_name = 0; NULL != _cursor##_name; _cursor##_name = _cursor##_name->next, ++_i##_name) { \
-_type _name = (_type) _cursor##_name->obj;
+EagleLinkedListItem *_cursor##_##_name; \
+int _i##_##_name; \
+for(_cursor##_##_name = EagleLinkedList_begin(_list), _i##_##_name = 0; NULL != _cursor##_##_name; _cursor##_##_name = _cursor##_##_name->next, ++_i##_##_name) { \
+_type _name = (_type) _cursor##_##_name->obj;
 
 /**
  This MUST always follow a EagleLinkedList_ForeachEnd

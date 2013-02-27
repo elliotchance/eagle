@@ -772,7 +772,7 @@ CUNIT_TEST(MemorySuite, EaglePageProviderVirtual_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePageProviderVirtual_New.1");
     
-    CUNIT_VERIFY_NULL(EaglePageProviderVirtual_New(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL));
+    CUNIT_VERIFY_NULL(EaglePageProviderVirtual_New(1, NULL, EagleDataTypeUnknown, NULL, NULL, NULL, NULL, NULL, NULL));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();

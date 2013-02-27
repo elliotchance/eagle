@@ -1009,6 +1009,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderVirtual_New)
     EaglePageProviderSingle *single = EaglePageProviderSingle_NewInt(123, 1, "name");
     EaglePageProviderVirtual *epp = EaglePageProviderVirtual_New(single->recordsPerPage,
          "name2",
+         EagleDataTypeInteger,
          single,
          (void (*)(void*)) EaglePageProvider_Delete,
          (EagleBoolean (*)(void*, void*)) EaglePageProvider_add,

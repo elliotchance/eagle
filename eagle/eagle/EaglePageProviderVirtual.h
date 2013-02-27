@@ -49,6 +49,7 @@ typedef struct {
  * Create a new writable page provider with zero records.
  * @param [in] recordsPerPage The amount of records per page.
  * @param [in] name The name of the provider.
+ * @param [in] type Data type.
  * @param [in] obj This object is passed as the first argument to all callback functions.
  * @param [in] free Function pointer.
  * @param [in] add Function pointer.
@@ -59,6 +60,7 @@ typedef struct {
  */
 EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
                                                        char *name,
+                                                       EagleDataType type,
                                                        void *obj,
                                                        void (*free)(void*),
                                                        EagleBoolean (*add)(void*, void*),

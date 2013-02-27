@@ -11,9 +11,9 @@
 extern const char *EagleDbSchema_DefaultSchemaName;
 
 /**
- The name of the internal eagledb schema.
+ The name of the information_schema.
  */
-extern const char *EagleDbSchema_EagleSchemaName;
+extern const char *EagleDbSchema_InformationSchemaName;
 
 /**
  A database schema definition.
