@@ -13,16 +13,34 @@ typedef struct {
      */
     EaglePageProviderHeader;
     
+    /**
+     Object to be passed to the callback functions.
+     */
     void *obj;
     
+    /**
+     Function pointer.
+     */
     void (*free)(void*);
     
+    /**
+     Function pointer.
+     */
     EagleBoolean (*add)(void*, void*);
     
+    /**
+     Function pointer.
+     */
     int (*pagesRemaining)(void*);
     
+    /**
+     Function pointer.
+     */
     EaglePage* (*nextPage)(void*);
     
+    /**
+     Function pointer.
+     */
     void (*reset)(void*);
     
 } EaglePageProviderVirtual;
