@@ -5,8 +5,9 @@
 #include "EagleDbTableData.h"
 #include "EaglePageProviderVirtual.h"
 #include "EagleMemory.h"
+#include "EagleLogger.h"
 
-EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, const char *columnName)
+EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, char *columnName)
 {
     EagleDbInformationSchema *infoSchema = (EagleDbInformationSchema*) EagleMemory_Allocate("EagleDbInformationSchema_New.1", sizeof(EagleDbInformationSchema));
     if(NULL == infoSchema) {
@@ -14,7 +15,7 @@ EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, cons
     }
     
     infoSchema->db = db;
-    infoSchema->columnName = columnName;
+    infoSchema->columnName = (NULL == columnName ? NULL : strdup(columnName));
     
     return infoSchema;
 }
@@ -90,19 +91,12 @@ EaglePage* EagleDbInformationSchema_tables_nextPage(EagleDbInformationSchema *in
     {
         EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, td)
         {
-            do {
-                
-                if(0 == strcmp("table_schema", infoSchema->columnName)) {
-                    data[tableCount] = schema->name;
-                    break;
-                }
-                
-                if(0 == strcmp("table_name", infoSchema->columnName)) {
-                    data[tableCount] = td->table->name;
-                    break;
-                }
-                
-            } while(0);
+            if(0 == strcmp("table_schema", infoSchema->columnName)) {
+                data[tableCount] = schema->name;
+            }
+            else if(0 == strcmp("table_name", infoSchema->columnName)) {
+                data[tableCount] = td->table->name;
+            }
         
             ++tableCount;
         }
@@ -127,6 +121,7 @@ void EagleDbInformationSchema_Delete(EagleDbInformationSchema *infoSchema)
         return;
     }
     
+    EagleMemory_Free(infoSchema->columnName);
     EagleMemory_Free(infoSchema);
 }
 

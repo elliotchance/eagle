@@ -12,11 +12,11 @@ typedef struct {
     
     EAGLE_ATTR_NA int recordOffset;
     
-    EAGLE_ATTR_MANAGED const char *columnName;
+    EAGLE_ATTR_MANAGED char *columnName;
     
 } EagleDbInformationSchema;
 
-EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, const char *columnName);
+EagleDbInformationSchema* EagleDbInformationSchema_New(EagleDbInstance *db, char *columnName);
 
 void EagleDbInformationSchema_Init(EagleDbInstance *db, EagleDbSchema *schema);
 

@@ -18,6 +18,7 @@
 #include "EagleDbSqlUnaryExpression.h"
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
+#include "EagleDbInformationSchema.h"
 
 EagleDbParser* _testSqlSelect(const char *sql)
 {
@@ -1033,20 +1034,24 @@ CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
     EagleInstance_run(eagle);
     
     /* check results */
-    EaglePage *page = EaglePageProvider_nextPage(plan->result[0]);
-    CUNIT_ASSERT_NOT_NULL(page);
-    CUNIT_VERIFY_EQUAL_INT(page->count, 1);
+    EaglePage *page1 = EaglePageProvider_nextPage(plan->result[0]);
+    EaglePage *page2 = EaglePageProvider_nextPage(plan->result[1]);
+    CUNIT_ASSERT_NOT_NULL(page1);
+    CUNIT_ASSERT_NOT_NULL(page2);
     
-    for(int i = 0; i < page->count; ++i) {
-        printf("%s\n", ((char**) page->data)[i]);
-    }
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
     
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) p->yyparse_ast);
     EaglePlan_Delete(plan);
-    EaglePage_Delete(page);
     EagleInstance_Delete(eagle);
     EagleDbParser_Delete(p);
     EagleDbInstance_Delete(db);
+}
+
+CUNIT_TEST(DBSuite, EagleDbInformationSchema_Delete)
+{
+    EagleDbInformationSchema_Delete(NULL);
 }
 
 CUnitTests* DBSuite_tests()
@@ -1054,6 +1059,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
