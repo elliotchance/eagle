@@ -51,6 +51,10 @@ EaglePage* EaglePageProviderArray_nextPage(EaglePageProviderArray *epp)
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
     EaglePage *page;
     
+    if(epp->offsetRecords >= epp->totalRecords) {
+        return NULL;
+    }
+    
     EagleSynchronizer_Lock(epp->nextPageLock);
     page = EaglePage_New(EagleDataTypeInteger, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
     epp->offsetRecords += pageSize;

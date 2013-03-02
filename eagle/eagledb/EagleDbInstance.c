@@ -43,7 +43,8 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
 void EagleDbInstance_PrintResults(EaglePlan *plan)
 {
     EaglePage **pages;
-    int i, *widths, totalRecords = 0;
+    int i, totalRecords = 0, j;
+    unsigned long *widths;
     
     if(NULL == plan) {
         return;
@@ -51,15 +52,60 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     
     if(plan->resultFields > 0 && EaglePageProvider_pagesRemaining(plan->result[0]) > 0) {
         /* calculate the widths of the fields */
-        widths = (int*) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.1", sizeof(int), plan->resultFields);
+        widths = (unsigned long*) EagleMemory_MultiAllocate("EagleDbInstance_PrintResults.1", sizeof(unsigned long), plan->resultFields);
         if(NULL == widths) {
             return;
         }
         for(i = 0; i < plan->resultFields; ++i) {
-            widths[i] = (int) strlen(plan->result[i]->name);
+            widths[i] = strlen(plan->result[i]->name);
         }
-    
+        
 #ifndef CUNIT
+        for(i = 0; i < plan->resultFields; ++i) {
+            EaglePage *page;
+            
+            while(NULL != (page = EaglePageProvider_nextPage(plan->result[i]))) {
+                for(j = 0; j < page->count; ++j) {
+                    switch(page->type) {
+                            
+                        case EagleDataTypeInteger:
+                        {
+                            char buf[30];
+                            unsigned long len;
+                            sprintf(buf, "%d", ((int*) page->data)[j]);
+                            len = strlen(buf);
+                            
+                            if(len > widths[i]) {
+                                widths[i] = len;
+                            }
+                            
+                            break;
+                        }
+                            
+                        case EagleDataTypeText:
+                        {
+                            unsigned long len = strlen(((char**) page->data)[j]);
+                            
+                            if(len > widths[i]) {
+                                widths[i] = len;
+                            }
+                            
+                            break;
+                        }
+                            
+                        case EagleDataTypeUnknown:
+                            break;
+                            
+                    }
+                }
+            }
+            
+            EaglePage_Delete(page);
+        }
+        for(i = 0; i < plan->resultFields; ++i) {
+            EaglePageProvider_reset(plan->result[i]);
+        }
+        
         /* heading */
         printf("\n");
         for(i = 0; i < plan->resultFields; ++i) {
@@ -71,16 +117,17 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
         printf("\n");
         
         for(i = 0; i < plan->resultFields; ++i) {
-            int j;
-            
             if(i > 0) {
                 printf("+");
             }
-            for(j = 0; j < widths[i] + 2; ++j) {
+            for(j = 0; j < (int) widths[i] + 2; ++j) {
                 printf("-");
             }
         }
         printf("\n");
+#else
+        /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
+        j = 0;
 #endif
     
         /* render out */
@@ -92,7 +139,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
         
 #ifndef CUNIT
         while(1) {
-            int j, k;
+            int k;
             int finished = 0;
             
             for(i = 0; i < plan->resultFields; ++i) {
@@ -114,20 +161,20 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                         switch(pages[k]->type) {
                                 
                             case EagleDataTypeUnknown:
-                                printf(" %*s ", widths[k], "?");
+                                printf(" %*s ", (int) widths[k], "?");
                                 break;
                                 
                             case EagleDataTypeInteger:
                             {
                                 int *d = (int*) pages[k]->data;
-                                printf(" %*d ", widths[k], d[j]);
+                                printf(" %*d ", (int) widths[k], d[j]);
                                 break;
                             }
                                 
                             case EagleDataTypeText:
                             {
                                 char **d = (char**) pages[k]->data;
-                                printf(" %*s ", widths[k], d[j]);
+                                printf(" %-*s ", (int) widths[k], d[j]);
                                 break;
                             }
                                 
