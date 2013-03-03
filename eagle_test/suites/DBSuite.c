@@ -1070,11 +1070,48 @@ CUNIT_TEST(DBSuite, EagleDbInformationSchema_Delete)
     EagleDbInformationSchema_Delete(NULL);
 }
 
+CUNIT_TEST(DBSuite, _comment_multi)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    EagleBoolean success;
+    EagleLoggerEvent *error = NULL;
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE /* abc */ mytable (col1 int);", &error);
+    CUNIT_ASSERT_TRUE(success);
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE /* abc", &error);
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected end of file");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
+CUNIT_TEST(DBSuite, _comment_single)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    EagleBoolean success;
+    EagleLoggerEvent *error = NULL;
+    
+    success = EagleDbInstance_execute(db, "-- create a table\nCREATE TABLE mytable (col1 int);", &error);
+    CUNIT_ASSERT_TRUE(success);
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable -- create a table\n (col1 int);", &error);
+    CUNIT_ASSERT_TRUE(success);
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable -- create a table (col1 int);", &error);
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected end of file, expecting (");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_single));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_multi));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
