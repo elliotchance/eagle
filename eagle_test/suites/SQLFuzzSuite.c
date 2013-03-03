@@ -79,7 +79,8 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
         /*EagleLogger_Get()->out = stderr;
         fprintf(stderr, "\n%d: %s\n", i, sql);*/
         
-        EagleBoolean success = EagleDbInstance_execute(db, sql);
+        EagleLoggerEvent *error = NULL;
+        EagleBoolean success = EagleDbInstance_execute(db, sql, &error);
         if(EagleTrue == success) {
             CUNIT_FAIL("%s", sql);
         }
@@ -105,7 +106,8 @@ CUNIT_TEST(SQLFuzzSuite, FirstToken)
             continue;
         }
         
-        EagleBoolean success = EagleDbInstance_execute(db, tokens[i]);
+        EagleLoggerEvent *error = NULL;
+        EagleBoolean success = EagleDbInstance_execute(db, tokens[i], &error);
         if(EagleTrue == success) {
             CUNIT_FAIL("First token \"%s\" did not fail.", tokens[i]);
         }

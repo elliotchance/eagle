@@ -13,6 +13,8 @@ set sql(4)   "select col1 from mytable"
 set sql_r(4) {.*1 record.*}
 set sql(5)   "select table_schema, table_name from information_schema_tables"
 set sql_r(5) {.* records.*}
+set sql(6)   "select col2 from mytable"
+set sql_r(6) {.*Unknown column.*}
 
 spawn "/Users/elliot/Library/Developer/Xcode/DerivedData/eagle-bvzxfkxjojdzztarraazawlgiejc/Build/Products/Debug/eagle"
 

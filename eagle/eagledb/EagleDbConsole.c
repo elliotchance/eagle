@@ -6,6 +6,7 @@
 #include "EagleDbInstance.h"
 #include "EagleMemory.h"
 #include "EagleLogger.h"
+#include "EagleLoggerEvent.h"
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
@@ -72,6 +73,7 @@ void EagleDbConsole_run(EagleDbConsole *console)
 #ifndef CUNIT
     char *cmd = NULL;
     EagleDbInstance *db = EagleDbInstance_New(1000);
+    EagleLoggerEvent *error = NULL;
     
     while(1) {
         /* get line */
@@ -86,7 +88,12 @@ void EagleDbConsole_run(EagleDbConsole *console)
         }
         
         /* parse */
-        EagleDbInstance_execute(db, cmd);
+        error = NULL;
+        EagleDbInstance_execute(db, cmd, &error);
+        if(NULL != error) {
+            printf("Error: %s\n\n", error->message);
+        }
+        
         EagleMemory_Free(cmd);
     }
 #endif
