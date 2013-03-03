@@ -542,7 +542,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
     EagleDbInstance *db = EagleDbInstance_New(1);
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     
-    EagleDbInstance_executeSelect(db, select);
+    EagleLoggerEvent *error = NULL;
+    EagleDbInstance_executeSelect(db, select, &error);
     
     EagleDbInstance_Delete(db);
     EagleDbSqlSelect_DeleteRecursive(select);
@@ -568,7 +569,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
     EagleDbSchema_addTable(schema, td);
     
-    EagleDbInstance_executeSelect(db, select);
+    EagleLoggerEvent *error = NULL;
+    EagleDbInstance_executeSelect(db, select, &error);
     
     EagleDbInstance_Delete(db);
     EagleDbSqlSelect_DeleteRecursive(select);
@@ -583,7 +585,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
     
-    CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table));
+    EagleLoggerEvent *error = NULL;
+    CUNIT_VERIFY_TRUE(EagleDbInstance_executeCreateTable(db, table, &error));
     CUNIT_ASSERT_LAST_ERROR("Table \"default.mytable\" created.");
     
     EagleDbInstance_DeleteAll(db);
@@ -593,10 +596,11 @@ CUNIT_TEST(DBSuite, _DuplicateTable)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
+    EagleLoggerEvent *error = NULL;
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);", &error));
     CUNIT_ASSERT_LAST_ERROR("Table \"default.sometable\" created.");
     
-    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);", &error));
     CUNIT_ASSERT_LAST_ERROR("Error: Table \"default.sometable\" already exists.");
     
     EagleDbInstance_DeleteAll(db);
@@ -618,7 +622,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);"));
+    EagleLoggerEvent *error = NULL;
+    CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);", &error));
     CUNIT_ASSERT_LAST_ERROR("Table \"default.sometable\" created.");
     
     EagleDbInstance_DeleteAll(db);
@@ -628,7 +633,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);"));
+    EagleLoggerEvent *error = NULL;
+    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);", &error));
     CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier, expecting TABLE");
     
     EagleDbInstance_Delete(db);
@@ -638,7 +644,8 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
 {
     EagleDbInstance *db = EagleDbInstance_New(1);
     
-    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "SELECT * FROM mytable;"));
+    EagleLoggerEvent *error = NULL;
+    CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "SELECT * FROM mytable;", &error));
     CUNIT_ASSERT_LAST_ERROR("mytable");
     
     EagleDbInstance_Delete(db);
@@ -830,7 +837,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadTableName)
     EagleLogger_Get()->out = NULL;
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("No such table 'mytable2'");
     
@@ -841,7 +849,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col2) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col2) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("No such column 'col2' in table 'mytable'");
     
@@ -857,7 +866,8 @@ CUNIT_TEST(DBSuite, _INSERT_Good)
     EaglePage *p = EaglePageProvider_nextPage(td->providers[0]);
     CUNIT_ASSERT_NULL(p);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123);", &error);
     if(EagleFalse == success) {
         CUNIT_FAIL("%s", EagleLogger_LastEvent()->message);
     }
@@ -889,7 +899,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadMatch)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1, col2) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1, col2) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("There are 2 columns and 1 values");
     
@@ -900,7 +911,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadColumn1)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
     
@@ -911,7 +923,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadColumn2)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123 + 456) VALUES (123);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (123 + 456) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("You cannot use expressions for column names");
     
@@ -922,7 +935,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue1)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123 + 456);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123 + 456);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("Expressions in VALUES are not yet supported for column 'col1'");
     
@@ -933,7 +947,8 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue2)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);");
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("Only integers are supported for values");
     
@@ -1005,12 +1020,13 @@ CUNIT_TEST(DBSuite, _BadEntityName)
 {
     EagleDbInstance *db = EagleInstanceTest(10);
     EagleBoolean success;
+    EagleLoggerEvent *error = NULL;
     
-    success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);");
+    success = EagleDbInstance_execute(db, "CREATE TABLE insert (col1 int);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'INSERT' for an table name.");
     
-    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (TABLE int);");
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (TABLE int);", &error);
     CUNIT_ASSERT_FALSE(success);
     CUNIT_ASSERT_LAST_ERROR("Error: You cannot use the keyword 'TABLE' for a column name.");
     

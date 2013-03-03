@@ -7,6 +7,7 @@
 #include "EagleDbSqlStatementType.h"
 #include "EagleDbSqlSelect.h"
 #include "EagleDbSqlInsert.h"
+#include "EagleLoggerEvent.h"
 
 /**
  The database instance is a wrapper for a EagleInstance.
@@ -49,22 +50,25 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db);
  Execute an arbitrary SQL statement.
  @param [in] db The database instance.
  @param [in] sql The SQL statement.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
-EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql);
+EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error);
 
 /**
  Execute a SELECT statement.
  @param [in] db The database instance.
  @param [in] select The SELECT statement (compiled).
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
-EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select);
+EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select, EagleLoggerEvent **error);
 
 /**
  Execute a CREATE TABLE statement.
  @param [in] db The database instance.
  @param [in] table The table definition to create.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
-EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table);
+EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table, EagleLoggerEvent **error);
 
 /**
  Print a result set (fancy).
@@ -101,8 +105,9 @@ EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schem
  Execute an INSERT statement.
  @param [in] db Database instance.
  @param [in] insert INSERT statement.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  @return EagleTrue on success.
  */
-EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert);
+EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert, EagleLoggerEvent **error);
 
 #endif
