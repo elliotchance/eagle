@@ -27,6 +27,7 @@ char* EagleDbConsole_GetLine(void)
     char *linep = line, *linen = NULL;
     size_t lenmax = 100, len = lenmax;
     int c;
+    EagleBoolean eof = EagleFalse;
 #endif
     
     if(line == NULL) {
@@ -37,6 +38,7 @@ char* EagleDbConsole_GetLine(void)
     while(1) {
         c = fgetc(stdin);
         if(c == EOF) {
+            eof = EagleTrue;
             break;
         }
         
@@ -61,6 +63,11 @@ char* EagleDbConsole_GetLine(void)
     /* chomp */
     linep[strlen(linep) - 1] = '\0';
     
+    /* if there is nothing left on the stream return NULL */
+    if(EagleTrue == eof && strlen(linep) == 0) {
+        return NULL;
+    }
+    
     return linep;
 #else
     EagleMemory_Free(line);
@@ -74,19 +81,10 @@ void EagleDbConsole_run(EagleDbConsole *console)
     char *cmd = NULL;
     EagleDbInstance *db = EagleDbInstance_New(1000);
     EagleLoggerEvent *error = NULL;
+    EagleBoolean readStdin = EagleFalse;
     
-    while(1) {
-        /* get line */
-        printf("eagle> ");
-        cmd = EagleDbConsole_GetLine();
-        
-        /* check for quit */
-        if(NULL != cmd && strcmp(cmd, "\\q") == 0) {
-            printf("Bye.\n");
-            EagleMemory_Free(cmd);
-            break;
-        }
-        
+    /* read stdin (this is for a file being redriected in) */
+    while(NULL != (cmd = EagleDbConsole_GetLine())) {
         /* parse */
         error = NULL;
         EagleDbInstance_execute(db, cmd, &error);
@@ -95,6 +93,38 @@ void EagleDbConsole_run(EagleDbConsole *console)
         }
         
         EagleMemory_Free(cmd);
+        readStdin = EagleTrue;
+    }
+    
+    /* now read commands */
+    if(EagleFalse == readStdin) {
+        while(1) {
+            /* get line */
+            printf("eagle> ");
+            cmd = EagleDbConsole_GetLine();
+            
+            /* broken input */
+            if(NULL == cmd) {
+                printf("Error: Broken stdin.\n");
+                break;
+            }
+            
+            /* check for quit */
+            if(strcmp(cmd, "\\q") == 0) {
+                printf("Bye.\n");
+                EagleMemory_Free(cmd);
+                break;
+            }
+            
+            /* parse */
+            error = NULL;
+            EagleDbInstance_execute(db, cmd, &error);
+            if(NULL != error) {
+                printf("Error: %s\n\n", error->message);
+            }
+            
+            EagleMemory_Free(cmd);
+        }
     }
 #endif
 }
