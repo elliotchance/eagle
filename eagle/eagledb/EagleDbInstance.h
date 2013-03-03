@@ -50,7 +50,7 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db);
  Execute an arbitrary SQL statement.
  @param [in] db The database instance.
  @param [in] sql The SQL statement.
- @param [out] If an error occurs it will be sent back through this parameter.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
 EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error);
 
@@ -58,7 +58,7 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, Eagle
  Execute a SELECT statement.
  @param [in] db The database instance.
  @param [in] select The SELECT statement (compiled).
- @param [out] If an error occurs it will be sent back through this parameter.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
 EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect *select, EagleLoggerEvent **error);
 
@@ -66,7 +66,7 @@ EagleBoolean EagleDbInstance_executeSelect(EagleDbInstance *db, EagleDbSqlSelect
  Execute a CREATE TABLE statement.
  @param [in] db The database instance.
  @param [in] table The table definition to create.
- @param [out] If an error occurs it will be sent back through this parameter.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  */
 EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTable *table, EagleLoggerEvent **error);
 
@@ -105,7 +105,7 @@ EagleBoolean EagleDbInstance_addSchema(EagleDbInstance *db, EagleDbSchema *schem
  Execute an INSERT statement.
  @param [in] db Database instance.
  @param [in] insert INSERT statement.
- @param [out] If an error occurs it will be sent back through this parameter.
+ @param [out] error If an error occurs it will be sent back through this parameter.
  @return EagleTrue on success.
  */
 EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert *insert, EagleLoggerEvent **error);
