@@ -6,6 +6,8 @@
     
     #define YYSTYPE void*
     #define YY_EXTRA_TYPE EagleDbParser*
+    
+    void comment(void);
 
 %}
 
@@ -20,6 +22,9 @@
 white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
 integer [0-9]+
+comment_single \-\-[^\n]*
+
+%x COMMENT
 
 /*
  === NOTE ===
@@ -57,8 +62,16 @@ integer [0-9]+
 "(" return T_BRACKET_OPEN;
 ")" return T_BRACKET_CLOSE;
 
+"/*"          { BEGIN(COMMENT); }
+<COMMENT>"*/" { BEGIN(INITIAL); }
+<COMMENT>.    { }
+
 {white} {
     /* skip white space */
+}
+
+{comment_single} {
+    /* skip comments */
 }
 
 {identifier} {
