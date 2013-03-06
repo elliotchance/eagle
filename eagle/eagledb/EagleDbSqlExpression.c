@@ -245,6 +245,21 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
                     break;
                 }
                     
+                case EagleDbSqlValueTypeString:
+                {
+                    EaglePageProvider *provider;
+                    EaglePlanBufferProvider *bp;
+                    
+                    destination = *destinationBuffer;
+                    provider = (EaglePageProvider*) EaglePageProviderSingle_NewVarchar(value->value.identifier, plan->pageSize, "(string literal)");
+                    bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+                    EaglePlan_addBufferProvider(plan, bp, EagleTrue);
+                    ++*destinationBuffer;
+                    
+                    plan->bufferTypes[destination] = EagleDataTypeVarchar;
+                    break;
+                }
+                    
             }
             
             return destination;

@@ -65,7 +65,8 @@ void EagleDbInformationSchema_tables_free(EagleDbInformationSchema *infoSchema)
 
 int EagleDbInformationSchema_tables_pagesRemaining(EagleDbInformationSchema *infoSchema)
 {
-    int totalTables = EagleLinkedList_length(EagleDbInstance_getSchema(infoSchema->db, EagleDbSchema_DefaultSchemaName)->tables);
+    EagleDbSchema *schema = EagleDbInstance_getSchema(infoSchema->db, EagleDbSchema_DefaultSchemaName);
+    int totalTables = EagleLinkedList_length(schema->tables);
     return EaglePageProvider_TotalPages(totalTables - infoSchema->recordOffset, infoSchema->db->pageSize);
 }
 
@@ -92,10 +93,10 @@ EaglePage* EagleDbInformationSchema_tables_nextPage(EagleDbInformationSchema *in
         EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, td)
         {
             if(0 == strcmp("table_schema", infoSchema->columnName)) {
-                data[tableCount] = schema->name;
+                data[tableCount] = strdup(schema->name);
             }
             else if(0 == strcmp("table_name", infoSchema->columnName)) {
-                data[tableCount] = td->table->name;
+                data[tableCount] = strdup(td->table->name);
             }
         
             ++tableCount;

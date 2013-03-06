@@ -59,7 +59,7 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
     tuple->data[position] = EagleData_Int(value);
 }
 
-void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, char *value)
+void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, const char *value)
 {
     if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeVarchar) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");

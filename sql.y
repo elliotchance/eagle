@@ -548,7 +548,8 @@
 
 /* variable tokens */
 %token IDENTIFIER "identifier"
-%token INTEGER       "integer"
+%token INTEGER "integer"
+%token STRING_LITERAL "string_literal"
 
 /* fixed tokens */
 %token T_END           ";"
@@ -1245,7 +1246,7 @@ expression:
 ;
 
 value:
-    integer | identifier
+    integer | identifier | string_literal
 ;
 
 integer:
@@ -1265,6 +1266,13 @@ identifier:
     | IDENTIFIER {
         char *lastToken = EagleDbParser_lastToken(parser);
         $$ = EagleDbSqlValue_NewWithIdentifier(lastToken);
+    }
+;
+
+string_literal:
+    STRING_LITERAL {
+        char *lastToken = EagleDbParser_lastToken(parser);
+        $$ = EagleDbSqlValue_NewWithString(lastToken, EagleTrue);
     }
 ;
 

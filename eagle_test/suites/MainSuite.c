@@ -1047,6 +1047,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage)
 {
     EaglePageProviderArray *epp = EaglePageProviderArray_NewInt(NULL, 0, 1, "name");
     CUNIT_VERIFY_NULL(EaglePageProviderArray_nextPage(epp));
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
 CUnitTests* MainSuite_tests()

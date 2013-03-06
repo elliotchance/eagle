@@ -23,6 +23,12 @@ void EagleLogger_Delete(EagleLogger *logger)
     EagleMemory_Free(logger);
 }
 
+void EagleLogger_reset(EagleLogger *logger)
+{
+    EagleLoggerEvent_Delete(logger->lastEvent);
+    logger->lastEvent = NULL;
+}
+
 EagleLogger* EagleLogger_New(FILE *out)
 {
     EagleLogger *logger = (EagleLogger*) EagleMemory_Allocate("EagleLogger_New.1", 1000);
