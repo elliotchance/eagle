@@ -255,6 +255,9 @@ const char *tokens[] = {
     "WITHOUT",
     "YEAR",
     
+    // no standard reserved keywords
+    "TEXT",
+    
     // tokens
     ">",  // T_GREATER_THAN
     "<",  // T_LESS_THAN

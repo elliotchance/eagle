@@ -544,6 +544,8 @@
 %token K_WRITE "WRITE"
 %token K_ZONE "ZONE"
 
+%token K_TEXT "TEXT"
+
 /* variable tokens */
 %token IDENTIFIER "identifier"
 %token INTEGER       "integer"
@@ -657,6 +659,7 @@ data_type:
       K_INTEGER { $$ = EagleData_Int(EagleDataTypeInteger); }
     | K_INT     { $$ = EagleData_Int(EagleDataTypeInteger); }
     | K_VARCHAR { $$ = EagleData_Int(EagleDataTypeVarchar); }
+    | K_TEXT    { $$ = EagleData_Int(EagleDataTypeVarchar); }
 ;
 
 keyword:

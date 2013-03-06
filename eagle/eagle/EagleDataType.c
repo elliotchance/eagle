@@ -6,7 +6,7 @@ EagleDataType EagleDataType_nameToType(char *name)
     if(!strcasecmp(name, "int") || !strcasecmp(name, "integer")) {
         return EagleDataTypeInteger;
     }
-    if(!strcasecmp(name, "varchar")) {
+    if(!strcasecmp(name, "varchar") || !strcasecmp(name, "text")) {
         return EagleDataTypeVarchar;
     }
     

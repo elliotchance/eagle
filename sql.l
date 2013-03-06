@@ -529,6 +529,8 @@ comment_single \-\-[^\n]*
 "WRITE" return K_WRITE;
 "ZONE" return K_ZONE;
 
+"TEXT" return K_TEXT;
+
 ">=" return T_GREATER_THAN_EQUAL;
 "<=" return T_LESS_THAN_EQUAL;
 "!=" return T_NOT_EQUALS;

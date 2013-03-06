@@ -610,7 +610,10 @@ EagleBoolean EagleDbParser_IsReservedKeyword(const char *word)
         "WITH",
         "WITHIN",
         "WITHOUT",
-        "YEAR"
+        "YEAR",
+        
+        /* reserved words that are not part of the SQL standard */
+        "TEXT"
     };
     
     for(i = 0; i < sizeof(words) / sizeof(const char*); ++i) {
