@@ -35,6 +35,88 @@ Unknown column 'col7'
 #==================================================
 
 % test
+SELECT 123 FROM mytable
+123:integer
+123
+123
+123
+123
+123
+
+% test
+SELECT col1=5 FROM mytable
+col1 = 5:integer
+0
+0
+0
+1
+0
+
+% test
+SELECT 4 = col2 FROM mytable
+4 = col2:integer
+0
+0
+1
+0
+0
+
+% test
+SELECT 123 + 456 FROM mytable
+123 + 456:integer
+579
+579
+579
+579
+579
+
+% test
+SELECT col1 * 3 FROM mytable
+col1 * 3:integer
+0
+3
+6
+15
+30
+
+% test
+SELECT col1 FROM mytable WHERE 123
+col1:integer
+0
+1
+2
+5
+10
+
+% test
+SELECT col1, col2 FROM mytable
+col1:integer,col2:integer
+0,0
+1,2
+2,4
+5,10
+10,20
+
+% test
+SELECT col1, col2, col1 + col2 FROM mytable
+col1:integer,col2:integer,col1 + col2:integer
+0,0,0
+1,2,3
+2,4,6
+5,10,15
+10,20,30
+
+% test
+SELECT col1, col2 FROM mytable WHERE col1 = 1
+col1:integer,col2:integer
+1,2
+
+% test
+SeLeCt col1, col2 fRoM mytable WhErE col1 = 1
+col1:integer,col2:integer
+1,2
+
+% test
 select col3, col1 from mytable
 col3:varchar,col1:integer
 hello,0
