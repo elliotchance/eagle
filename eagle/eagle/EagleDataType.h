@@ -8,7 +8,7 @@ typedef enum {
     
     EagleDataTypeUnknown = 0, /**< Unknown/invalid data type. */
     EagleDataTypeInteger = 1, /**< \c INT or \c INTEGER: 32bit integer. */
-    EagleDataTypeText    = 2  /**< \c TEXT: A NULL terminated string. */
+    EagleDataTypeVarchar = 2  /**< \c VARCHAR: A NULL terminated string. */
     
 } EagleDataType;
 

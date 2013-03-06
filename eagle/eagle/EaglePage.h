@@ -86,7 +86,7 @@ EaglePage* EaglePage_AllocInt(int count);
  * @param [in] count The number of records of the page.
  * @return The new page.
  */
-EaglePage* EaglePage_AllocText(int count);
+EaglePage* EaglePage_AllocVarchar(int count);
 
 /**
  * Copy a page.
@@ -96,7 +96,7 @@ EaglePage* EaglePage_AllocText(int count);
 EaglePage* EaglePage_Copy(EaglePage *page);
 
 /**
- * Private function. Copy an int page.
+ * Private function. Copy an INTEGER page.
  * @param [in] page The page.
  * @return A duplicate page.
  * @see EaglePage_Copy()
@@ -104,12 +104,12 @@ EaglePage* EaglePage_Copy(EaglePage *page);
 EaglePage* EaglePage_CopyInt_(EaglePage *page);
 
 /**
- * Private function. Copy a text page.
+ * Private function. Copy a VARCHAR page.
  * @param [in] page The page.
  * @return A duplicate page.
  * @see EaglePage_Copy()
  */
-EaglePage* EaglePage_CopyText_(EaglePage *page);
+EaglePage* EaglePage_CopyVarchar_(EaglePage *page);
 
 /**
  * Free a page.

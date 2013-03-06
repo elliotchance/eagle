@@ -73,7 +73,7 @@ void EagleDbTableData_insert(EagleDbTableData *td, EagleDbTuple *tuple)
                 EaglePageProvider_add(td->providers[i], tuple->data[i]);
                 break;
                 
-            case EagleDataTypeText:
+            case EagleDataTypeVarchar:
                 EaglePageProvider_add(td->providers[i], strdup(tuple->data[i]));
                 break;
                 

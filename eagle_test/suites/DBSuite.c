@@ -175,7 +175,7 @@ EagleDbTable* _getTable()
      */
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeText));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeVarchar));
     
     return table;
 }
@@ -212,7 +212,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
     EagleDbTuple_setInt(tuple, 0, 123);
-    EagleDbTuple_setText(tuple, 1, "hello");
+    EagleDbTuple_setVarchar(tuple, 1, "hello");
     char *desc = EagleDbTuple_toString(tuple);
     CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\")");
     EagleMemory_Free(desc);
@@ -375,7 +375,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_setInt)
     EagleLogger_Get()->out = NULL;
     
     EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeText));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeVarchar));
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
     EagleDbTuple_setInt(tuple, 0, 123);
@@ -385,7 +385,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_setInt)
     EagleDbTable_DeleteWithColumns(table);
 }
 
-CUNIT_TEST(DBSuite, EagleDbTuple_setText)
+CUNIT_TEST(DBSuite, EagleDbTuple_setVarchar)
 {
     EagleLogger_Get()->out = NULL;
     
@@ -393,7 +393,7 @@ CUNIT_TEST(DBSuite, EagleDbTuple_setText)
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
     
     EagleDbTuple *tuple = EagleDbTuple_New(table);
-    EagleDbTuple_setText(tuple, 0, "123");
+    EagleDbTuple_setVarchar(tuple, 0, "123");
     CUNIT_ASSERT_LAST_ERROR("Wrong type.");
     
     EagleDbTuple_Delete(tuple);
@@ -1009,11 +1009,11 @@ CUNIT_TEST(DBSuite, EagleDbParser_Delete)
     EagleDbParser_Delete(NULL);
 }
 
-CUNIT_TEST(DBSuite, EagleDbParser_IsKeyword)
+CUNIT_TEST(DBSuite, EagleDbParser_IsReservedKeyword)
 {
-    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("CREATE"));
-    CUNIT_VERIFY_TRUE(EagleDbParser_IsKeyword("table"));
-    CUNIT_VERIFY_FALSE(EagleDbParser_IsKeyword("notakeyword"));
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsReservedKeyword("CREATE"));
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsReservedKeyword("table"));
+    CUNIT_VERIFY_FALSE(EagleDbParser_IsReservedKeyword("notakeyword"));
 }
 
 CUNIT_TEST(DBSuite, _BadEntityName)
@@ -1039,9 +1039,15 @@ CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
     
     /* parse sql */
     EagleDbParser *p = EagleDbParser_ParseWithString("select table_schema, table_name from information_schema_tables;");
+    if(EagleTrue == EagleDbParser_hasError(p)) {
+        CUNIT_FAIL("%s", EagleDbParser_lastError(p));
+    }
     CUNIT_ASSERT_FALSE(EagleDbParser_hasError(p));
     
     EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
+    if(EagleTrue == EaglePlan_isError(plan)) {
+        CUNIT_FAIL("%s", plan->errorMessage);
+    }
     CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
     
     /* execute */
@@ -1093,9 +1099,15 @@ CUNIT_TEST(DBSuite, _comment_single)
     EagleLoggerEvent *error = NULL;
     
     success = EagleDbInstance_execute(db, "-- create a table\nCREATE TABLE mytable (col1 int);", &error);
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", error->message);
+    }
     CUNIT_ASSERT_TRUE(success);
     
     success = EagleDbInstance_execute(db, "CREATE TABLE mytable -- create a table\n (col1 int);", &error);
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", error->message);
+    }
     CUNIT_ASSERT_TRUE(success);
     
     success = EagleDbInstance_execute(db, "CREATE TABLE mytable -- create a table (col1 int);", &error);
@@ -1105,11 +1117,19 @@ CUNIT_TEST(DBSuite, _comment_single)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbParser_IsNonreservedKeyword)
+{
+    CUNIT_VERIFY_FALSE(EagleDbParser_IsNonreservedKeyword("CREATE"));
+    CUNIT_VERIFY_FALSE(EagleDbParser_IsNonreservedKeyword("table"));
+    CUNIT_VERIFY_TRUE(EagleDbParser_IsNonreservedKeyword("A"));
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsNonreservedKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_single));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_multi));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_Delete));
@@ -1117,7 +1137,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsKeyword));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsReservedKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_lastError));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_DeleteRecursive));
@@ -1165,7 +1185,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_toString));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setText));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setVarchar));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));

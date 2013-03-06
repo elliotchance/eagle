@@ -33,14 +33,14 @@ EaglePage* EaglePage_AllocInt(int count)
     return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
 }
 
-EaglePage* EaglePage_AllocText(int count)
+EaglePage* EaglePage_AllocVarchar(int count)
 {
-    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocText.1", sizeof(char*), count);
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocVarchar.1", sizeof(char*), count);
     if(NULL == data) {
         return NULL;
     }
     
-    return EaglePage_New(EagleDataTypeText, data, count, 0, 0, EagleTrue);
+    return EaglePage_New(EagleDataTypeVarchar, data, count, 0, 0, EagleTrue);
 }
 
 void EaglePage_Delete(EaglePage *page)
@@ -66,8 +66,8 @@ EaglePage* EaglePage_Copy(EaglePage *page)
         case EagleDataTypeInteger:
             return EaglePage_CopyInt_(page);
             
-        case EagleDataTypeText:
-            return EaglePage_CopyText_(page);
+        case EagleDataTypeVarchar:
+            return EaglePage_CopyVarchar_(page);
             
     }
 }
@@ -91,7 +91,7 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
 }
 
-EaglePage* EaglePage_CopyText_(EaglePage *page)
+EaglePage* EaglePage_CopyVarchar_(EaglePage *page)
 {
     char **newData;
     int i;
@@ -100,7 +100,7 @@ EaglePage* EaglePage_CopyText_(EaglePage *page)
         return NULL;
     }
     
-    newData = (char**) EagleMemory_MultiAllocate("EaglePage_CopyText_.1", sizeof(char*), page->count);
+    newData = (char**) EagleMemory_MultiAllocate("EaglePage_CopyVarchar_.1", sizeof(char*), page->count);
     
     if(NULL == newData) {
         return NULL;
@@ -123,8 +123,8 @@ EaglePage* EaglePage_Alloc(EagleDataType type, int count)
         case EagleDataTypeInteger:
             return EaglePage_AllocInt(count);
             
-        case EagleDataTypeText:
-            return EaglePage_AllocText(count);
+        case EagleDataTypeVarchar:
+            return EaglePage_AllocVarchar(count);
             
     }
 }

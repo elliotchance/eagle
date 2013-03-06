@@ -186,7 +186,7 @@ void SQLSuiteTest()
                             }
                             break;
                             
-                        case EagleDataTypeText:
+                        case EagleDataTypeVarchar:
                             if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
                                 CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
                                 valid = 0;
@@ -274,8 +274,8 @@ void controlTest(FILE *file, int *lineNumber)
                     EagleDbTuple_setInt(test.answers[test.usedAnswers], j, atoi(data[j]));
                     break;
                     
-                case EagleDataTypeText:
-                    EagleDbTuple_setText(test.answers[test.usedAnswers], j, data[j]);
+                case EagleDataTypeVarchar:
+                    EagleDbTuple_setVarchar(test.answers[test.usedAnswers], j, data[j]);
                     break;
                     
             }
@@ -374,8 +374,8 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
                     EagleDbTuple_setInt(tuple, i, atoi(data[i]));
                     break;
                     
-                case EagleDataTypeText:
-                    EagleDbTuple_setText(tuple, i, data[i]);
+                case EagleDataTypeVarchar:
+                    EagleDbTuple_setVarchar(tuple, i, data[i]);
                     break;
                     
             }

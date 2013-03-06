@@ -21,8 +21,8 @@ EaglePageProviderStream* EaglePageProviderStream_New(EagleDataType type, int rec
             pageProvider->type = EagleDataTypeInteger;
             break;
             
-        case EagleDataTypeText:
-            pageProvider->type = EagleDataTypeText;
+        case EagleDataTypeVarchar:
+            pageProvider->type = EagleDataTypeVarchar;
             break;
             
     }
@@ -82,7 +82,7 @@ EagleBoolean EaglePageProviderStream_add(EaglePageProviderStream *epp, void *dat
             ((int*) page->data)[page->count++] = *((int*) data);
             break;
             
-        case EagleDataTypeText:
+        case EagleDataTypeVarchar:
             ((char**) page->data)[page->count++] = (char*) data;
             break;
             

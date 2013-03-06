@@ -3,7 +3,7 @@
 #==================================================
 
 % table mytable
-col1 int,col2 int,col3 text
+col1 int,col2 int,col3 varchar
 0,0,hello
 1,2,world
 2,4,how
@@ -118,7 +118,7 @@ col1:integer,col2:integer
 
 % test
 select col3, col1 from mytable
-col3:text,col1:integer
+col3:varchar,col1:integer
 hello,0
 world,1
 how,2
@@ -127,7 +127,7 @@ you doing?,10
 
 % test
 select col3, col1 from mytable where col2 != 4
-col3:text,col1:integer
+col3:varchar,col1:integer
 hello,0
 world,1
 are,5
@@ -135,26 +135,26 @@ you doing?,10
 
 % test
 select col3, col1 from mytable where col2 > 4
-col3:text,col1:integer
+col3:varchar,col1:integer
 are,5
 you doing?,10
 
 % test
 select col3, col1 from mytable where col2 < 4
-col3:text,col1:integer
+col3:varchar,col1:integer
 hello,0
 world,1
 
 % test
 select col3, col1 from mytable where col2 >= 4
-col3:text,col1:integer
+col3:varchar,col1:integer
 how,2
 are,5
 you doing?,10
 
 % test
 select col3, col1 from mytable where col2 <= 4
-col3:text,col1:integer
+col3:varchar,col1:integer
 hello,0
 world,1
 how,2

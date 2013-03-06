@@ -23,4 +23,17 @@
  */
 EagleBoolean EagleUtils_CompareWithoutCase(const char *s1, const char *s2);
 
+/**
+ Convert a string to lower case. This will modify the string parsed in effectivly destorying the original case.
+ @param [in,out] str The string.
+ */
+void EagleUtils_ToLowerCase(char *str);
+
+/**
+ Create a new lowercase copy of a string.
+ @param [in] str The string.
+ @return A new allocated lowercase version of \p str.
+ */
+char* EagleUtils_ToLowerCaseCopy(const char *str);
+
 #endif
