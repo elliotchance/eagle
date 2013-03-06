@@ -3,6 +3,36 @@
 #include <string.h>
 #include <ctype.h>
 #include "EagleUtils.h"
+#include "EagleMemory.h"
+
+char* EagleUtils_ToLowerCaseCopy(const char *str)
+{
+    unsigned long len;
+    char *r;
+    
+    if(NULL == str) {
+        return NULL;
+    }
+    
+    len = strlen(str) + 1;
+    r = (char*) EagleMemory_Allocate("EagleUtils_ToLowerCaseCopy.1", len);
+    if(NULL == r) {
+        return NULL;
+    }
+    
+    memmove(r, str, len);
+    EagleUtils_ToLowerCase(r);
+    return r;
+}
+
+void EagleUtils_ToLowerCase(char *str)
+{
+    unsigned long i;
+    
+    for(i = 0; i < strlen(str); ++i) {
+        str[i] = (char) tolower(str[i]);
+    }
+}
 
 EagleBoolean EagleUtils_CompareWithoutCase(const char *s1, const char *s2)
 {

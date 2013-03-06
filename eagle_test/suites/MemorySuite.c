@@ -27,6 +27,7 @@
 #include "EaglePageProviderSingle.h"
 #include "EaglePageProviderVirtual.h"
 #include "EagleDbInformationSchema.h"
+#include "EagleUtils.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -610,24 +611,24 @@ CUNIT_TEST(MemorySuite, EaglePage_AllocInt)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePage_AllocText)
+CUNIT_TEST(MemorySuite, EaglePage_AllocVarchar)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePage_AllocText.1");
+    EagleMemory_Mock("EaglePage_AllocVarchar.1");
     
-    CUNIT_ASSERT_NULL(EaglePage_AllocText(1));
+    CUNIT_ASSERT_NULL(EaglePage_AllocVarchar(1));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePage_CopyText_)
+CUNIT_TEST(MemorySuite, EaglePage_CopyVarchar_)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePage_CopyText_.1");
+    EagleMemory_Mock("EaglePage_CopyVarchar_.1");
     
-    EaglePage *page = EaglePage_AllocText(1);
-    CUNIT_ASSERT_NULL(EaglePage_CopyText_(page));
+    EaglePage *page = EaglePage_AllocVarchar(1);
+    CUNIT_ASSERT_NULL(EaglePage_CopyVarchar_(page));
     EaglePage_Delete(page);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -808,11 +809,25 @@ CUNIT_TEST(MemorySuite, EagleDbInformationSchema_tables_nextPage)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleUtils_ToLowerCaseCopy)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleUtils_ToLowerCaseCopy.1");
+    
+    CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy(NULL));
+    
+    CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy("abc"));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleUtils_ToLowerCaseCopy));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_tables_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderVirtual_New));
@@ -867,8 +882,8 @@ CUnitTests* MemorySuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTableData_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbTuple_New_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocInt));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocText));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyText_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocVarchar));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyVarchar_));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewInt));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_prepareBuffers));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_2));

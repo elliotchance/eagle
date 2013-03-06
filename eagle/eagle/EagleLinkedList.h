@@ -181,7 +181,7 @@ EagleBoolean EagleLinkedList_deleteObject(EagleLinkedList *list, void *obj);
  @param [in] list The list.
  @return NULL or an object.
  */
-EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list);
+void* EagleLinkedList_first(EagleLinkedList *list);
 
 /**
  Get the last object on the linked list. This is not the same as EagleLinkedList_end() which returns the
@@ -189,6 +189,6 @@ EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list);
  @param [in] list The list.
  @return NULL or an object.
  */
-EagleLinkedListItem* EagleLinkedList_last(EagleLinkedList *list);
+void* EagleLinkedList_last(EagleLinkedList *list);
 
 #endif

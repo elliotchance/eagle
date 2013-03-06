@@ -29,8 +29,8 @@ void EagleDbInformationSchema_Init(EagleDbInstance *db, EagleDbSchema *schema)
     
     /* table definition */
     table = EagleDbTable_New("information_schema_tables");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("table_schema", EagleDataTypeText));
-    EagleDbTable_addColumn(table, EagleDbColumn_New("table_name", EagleDataTypeText));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("table_schema", EagleDataTypeVarchar));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("table_name", EagleDataTypeVarchar));
     
     /* replace the stream providers with virtual providers */
     td = EagleDbTableData_New(table, db->pageSize);
@@ -104,7 +104,7 @@ EaglePage* EagleDbInformationSchema_tables_nextPage(EagleDbInformationSchema *in
     }
     EagleLinkedList_ForeachEnd
     
-    page = EaglePage_New(EagleDataTypeText, data, totalTables, totalTables, 0, EagleTrue);
+    page = EaglePage_New(EagleDataTypeVarchar, data, totalTables, totalTables, 0, EagleTrue);
     
     infoSchema->recordOffset += totalTables;
     return page;

@@ -425,9 +425,9 @@ CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
     CUNIT_ASSERT_NULL(page);
 }
 
-CUNIT_TEST(MainSuite, EaglePage_CopyText_)
+CUNIT_TEST(MainSuite, EaglePage_CopyVarchar_)
 {
-    EaglePage *page = EaglePage_CopyText_(NULL);
+    EaglePage *page = EaglePage_CopyVarchar_(NULL);
     CUNIT_ASSERT_NULL(page);
 }
 
@@ -1111,7 +1111,7 @@ CUnitTests* MainSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyInt_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyText_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyVarchar_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));

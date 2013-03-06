@@ -101,7 +101,7 @@ void EagleLinkedList_DeleteWithItems(EagleLinkedList *list)
     EagleLinkedList_Delete(list);
 }
 
-EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list)
+void* EagleLinkedList_first(EagleLinkedList *list)
 {
     EagleLinkedListItem *first = EagleLinkedList_begin(list);
     
@@ -112,7 +112,7 @@ EagleLinkedListItem* EagleLinkedList_first(EagleLinkedList *list)
     return first->obj;
 }
 
-EagleLinkedListItem* EagleLinkedList_last(EagleLinkedList *list)
+void* EagleLinkedList_last(EagleLinkedList *list)
 {
     EagleLinkedListItem *last = EagleLinkedList_end(list);
     

@@ -59,9 +59,9 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
     tuple->data[position] = EagleData_Int(value);
 }
 
-void EagleDbTuple_setText(EagleDbTuple *tuple, int position, char *value)
+void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, char *value)
 {
-    if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeText) {
+    if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeVarchar) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
         return;
     }
@@ -97,7 +97,7 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
                 sprintf(desc, "%s%d", desc, *(((int**) tuple->data)[i]));
                 break;
                 
-            case EagleDataTypeText:
+            case EagleDataTypeVarchar:
                 sprintf(desc, "%s\"%s\"", desc, ((char**) tuple->data)[i]);
                 break;
                 

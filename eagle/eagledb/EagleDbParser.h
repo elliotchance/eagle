@@ -100,8 +100,15 @@ EagleBoolean EagleDbParser_hasError(EagleDbParser *p);
 /**
  * Check if a word is a reserved keyword. This is not case-sensitive.
  * @param [in] word The keyword.
- * @return EagleTrue if the word is a keyword
+ * @return EagleTrue if the word is a reserved keyword
  */
-EagleBoolean EagleDbParser_IsKeyword(const char *word);
+EagleBoolean EagleDbParser_IsReservedKeyword(const char *word);
+
+/**
+ * Check if a word is a nonreserved keyword. This is not case-sensitive.
+ * @param [in] word The keyword.
+ * @return EagleTrue if the word is a nonreserved keyword
+ */
+EagleBoolean EagleDbParser_IsNonreservedKeyword(const char *word);
 
 #endif

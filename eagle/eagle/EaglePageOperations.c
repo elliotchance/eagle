@@ -121,7 +121,7 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
                     break;
                 }
                     
-                case EagleDataTypeText:
+                case EagleDataTypeVarchar:
                 {
                     char **source2data = (char**) source2->data;
                     EaglePageProvider_add(provider, source2data[i]);

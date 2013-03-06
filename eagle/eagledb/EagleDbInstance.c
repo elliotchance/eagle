@@ -82,7 +82,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                             break;
                         }
                             
-                        case EagleDataTypeText:
+                        case EagleDataTypeVarchar:
                         {
                             unsigned long len = strlen(((char**) page->data)[j]);
                             
@@ -171,7 +171,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                                 break;
                             }
                                 
-                            case EagleDataTypeText:
+                            case EagleDataTypeVarchar:
                             {
                                 char **d = (char**) pages[k]->data;
                                 printf(" %-*s ", (int) widths[k], d[j]);
