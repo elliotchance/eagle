@@ -774,7 +774,6 @@ nonreserved_word:
     | K_INSTANTIABLE { $$ = "INSTANTIABLE"; }
     | K_INTERSECTION { $$ = "INTERSECTION"; }
     | K_INVOKER { $$ = "INVOKER"; }
-    | K_ISOLATION { $$ = "ISOLATION"; }
     | K_K { $$ = "K"; }
     | K_KEY { $$ = "KEY"; }
     | K_KEY_MEMBER { $$ = "KEY_MEMBER"; }
@@ -1256,7 +1255,9 @@ integer:
 
 identifier:
     nonreserved_word {
-        $$ = EagleDbSqlValue_NewWithIdentifier(EagleUtils_ToLowerCaseCopy($1));
+        char *lower = EagleUtils_ToLowerCaseCopy($1);
+        $$ = EagleDbSqlValue_NewWithIdentifier(lower);
+        free(lower);
     }
     | IDENTIFIER {
         char *lastToken = EagleDbParser_lastToken(parser);

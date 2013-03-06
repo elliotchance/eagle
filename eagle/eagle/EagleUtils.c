@@ -10,6 +10,10 @@ char* EagleUtils_ToLowerCaseCopy(const char *str)
     unsigned long len;
     char *r;
     
+    if(NULL == str) {
+        return NULL;
+    }
+    
     len = strlen(str) + 1;
     r = (char*) EagleMemory_Allocate("EagleUtils_ToLowerCaseCopy.1", len);
     if(NULL == r) {

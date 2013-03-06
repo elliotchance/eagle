@@ -27,6 +27,7 @@
 #include "EaglePageProviderSingle.h"
 #include "EaglePageProviderVirtual.h"
 #include "EagleDbInformationSchema.h"
+#include "EagleUtils.h"
 
 CUNIT_TEST(MemorySuite, EagleData_Int)
 {
@@ -808,11 +809,25 @@ CUNIT_TEST(MemorySuite, EagleDbInformationSchema_tables_nextPage)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleUtils_ToLowerCaseCopy)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleUtils_ToLowerCaseCopy.1");
+    
+    CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy(NULL));
+    
+    CUNIT_VERIFY_NULL(EagleUtils_ToLowerCaseCopy("abc"));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleUtils_ToLowerCaseCopy));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_tables_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderVirtual_New));
