@@ -1124,11 +1124,31 @@ CUNIT_TEST(DBSuite, EagleDbParser_IsNonreservedKeyword)
     CUNIT_VERIFY_TRUE(EagleDbParser_IsNonreservedKeyword("A"));
 }
 
+CUNIT_TEST(DBSuite, _CREATE)
+{
+    EagleDbInstance *db = EagleInstanceTest(10);
+    EagleBoolean success;
+    EagleLoggerEvent *error = NULL;
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (col1 int, col2 integer, col3 varchar, col4 text);", &error);
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", error->message);
+    }
+    CUNIT_ASSERT_TRUE(success);
+    
+    success = EagleDbInstance_execute(db, "CREATE TABLE mytable (col1 int, col2 badtype, col4 text);", &error);
+    CUNIT_ASSERT_FALSE(success);
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier, expecting INT or INTEGER or VARCHAR or TEXT");
+    
+    EagleInstanceTest_Cleanup(db);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _CREATE));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsNonreservedKeyword));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_single));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_multi));
