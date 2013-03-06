@@ -60,7 +60,7 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean pro
     }
     else {
         /* process the string */
-        unsigned long len, i;
+        unsigned long len, i, j;
         char *pstr;
         
         len = strlen(str);
@@ -70,8 +70,14 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean pro
             return NULL;
         }
         
-        for(i = 0; i < len - 1; ++i) {
-            pstr[i] = str[i + 1];
+        for(i = 1, j = 0; i < len - 1; ++i, ++j) {
+            if((str[i] == '\\' && str[i + 1] == '\'') || (str[i] == '\'' && str[i + 1] == '\'')) {
+                pstr[j] = '\'';
+                ++i;
+            }
+            else {
+                pstr[j] = str[i];
+            }
         }
         pstr[len - 2] = '\0';
         

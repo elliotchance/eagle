@@ -1163,7 +1163,7 @@ CUNIT_TEST(DBSuite, _string_literal)
     }
     CUNIT_ASSERT_TRUE(success);
     
-    success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1, col2) VALUES (123, 'some text');", &error);
+    success = EagleDbInstance_execute(db, "INSERT INTO mytable2 (col1, col2) VALUES (123, 'some '' cool \' text');", &error);
     if(EagleFalse == success) {
         CUNIT_FAIL("%s", error->message);
     }
@@ -1193,7 +1193,7 @@ CUNIT_TEST(DBSuite, _string_literal)
     CUNIT_ASSERT_EQUAL_INT(1, page1->count);
     CUNIT_ASSERT_EQUAL_INT(1, page2->count);
     CUNIT_ASSERT_EQUAL_INT(((int*) page1->data)[0], 123);
-    CUNIT_ASSERT_EQUAL_STRING(((char**) page2->data)[0], "some text");
+    CUNIT_ASSERT_EQUAL_STRING(((char**) page2->data)[0], "some ' cool ' text");
     
     EaglePage_Delete(page1);
     EaglePage_Delete(page2);
