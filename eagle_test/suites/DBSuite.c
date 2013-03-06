@@ -336,7 +336,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
     EagleDbInstance_Delete(instance);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlValue_toString)
+CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_1)
 {
     EagleDbSqlValue *v = EagleDbSqlValue_NewWithAsterisk();
     char *desc = EagleDbSqlValue_toString(v);
@@ -1170,7 +1170,7 @@ CUNIT_TEST(DBSuite, _string_literal)
     CUNIT_ASSERT_TRUE(success);
     
     // SELECT data back
-    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1, col2 FROM mytable2;");
+    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1, col2, 'some string' FROM mytable2;");
     CUNIT_ASSERT_FALSE(EagleDbParser_hasError(p));
     
     EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
@@ -1187,16 +1187,21 @@ CUNIT_TEST(DBSuite, _string_literal)
     // validate data
     EaglePage *page1 = EaglePageProvider_nextPage(plan->result[0]);
     EaglePage *page2 = EaglePageProvider_nextPage(plan->result[1]);
+    EaglePage *page3 = EaglePageProvider_nextPage(plan->result[2]);
     
     CUNIT_ASSERT_EQUAL_INT(page1->type, EagleDataTypeInteger);
     CUNIT_ASSERT_EQUAL_INT(page2->type, EagleDataTypeVarchar);
+    CUNIT_ASSERT_EQUAL_INT(page3->type, EagleDataTypeVarchar);
     CUNIT_ASSERT_EQUAL_INT(1, page1->count);
     CUNIT_ASSERT_EQUAL_INT(1, page2->count);
+    CUNIT_ASSERT_EQUAL_INT(10, page3->count);
     CUNIT_ASSERT_EQUAL_INT(((int*) page1->data)[0], 123);
     CUNIT_ASSERT_EQUAL_STRING(((char**) page2->data)[0], "some ' cool ' text");
+    CUNIT_ASSERT_EQUAL_STRING(((char**) page3->data)[0], "some string");
     
     EaglePage_Delete(page1);
     EaglePage_Delete(page2);
+    EaglePage_Delete(page3);
     
     EagleInstance_Delete(eagle);
     EaglePlan_Delete(plan);
@@ -1207,11 +1212,21 @@ CUNIT_TEST(DBSuite, _string_literal)
     EagleInstanceTest_Cleanup(db);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_2)
+{
+    EagleDbSqlValue *v = EagleDbSqlValue_NewWithString("some string", EagleFalse);
+    char *desc = EagleDbSqlValue_toString(v);
+    CUNIT_VERIFY_EQUAL_STRING(desc, "'some string'");
+    free(desc);
+    EagleDbSqlValue_Delete(v);
+}
+
 CUnitTests* DBSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _string_literal));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _CREATE));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbParser_IsNonreservedKeyword));
@@ -1274,7 +1289,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));

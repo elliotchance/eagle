@@ -10,6 +10,9 @@ typedef struct {
      */
     EaglePageProviderHeader;
     
+    /**
+     Contains the value.
+     */
     union {
         
         /**
