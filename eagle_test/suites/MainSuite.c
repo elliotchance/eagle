@@ -1047,6 +1047,28 @@ CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage)
 {
     EaglePageProviderArray *epp = EaglePageProviderArray_NewInt(NULL, 0, 1, "name");
     CUNIT_VERIFY_NULL(EaglePageProviderArray_nextPage(epp));
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_1)
+{
+    EaglePageProviderSingle *epp = EaglePageProviderSingle_NewInt(123, 1, "name");
+    epp->type = EagleDataTypeUnknown;
+    CUNIT_VERIFY_NULL(EaglePageProviderSingle_nextPage(epp));
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_2)
+{
+    int recordsPerPage = 5;
+    EaglePageProviderSingle *epp = EaglePageProviderSingle_NewVarchar("some value", recordsPerPage, "name");
+    
+    EaglePage *page = EaglePageProviderSingle_nextPage(epp);
+    CUNIT_ASSERT_NOT_NULL(page);
+    CUNIT_VERIFY_EQUAL_INT(page->count, recordsPerPage);
+    EaglePage_Delete(page);
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
 CUnitTests* MainSuite_tests()
@@ -1054,6 +1076,8 @@ CUnitTests* MainSuite_tests()
     CUnitTests *tests = CUnitTests_New(1000);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_New));

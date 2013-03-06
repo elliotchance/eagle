@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "EaglePageOperations.h"
 #include "EaglePageProvider.h"
 #include "EagleUtils.h"
@@ -124,7 +125,7 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
                 case EagleDataTypeVarchar:
                 {
                     char **source2data = (char**) source2->data;
-                    EaglePageProvider_add(provider, source2data[i]);
+                    EaglePageProvider_add(provider, strdup(source2data[i]));
                     break;
                 }
                 

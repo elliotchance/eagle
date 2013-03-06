@@ -757,7 +757,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlUnaryExpression_New)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage)
+CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage_1)
 {
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePageProviderSingle_nextPage.1");
@@ -822,16 +822,82 @@ CUNIT_TEST(MemorySuite, EagleUtils_ToLowerCaseCopy)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithString_1)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithString.1");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithString("something", EagleFalse));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithString_2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithString.2");
+    
+    CUNIT_ASSERT_NULL(EagleDbSqlValue_NewWithString("'something'", EagleTrue));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePageProviderSingle_NewVarchar)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProviderSingle_NewVarchar.1");
+    
+    CUNIT_ASSERT_NULL(EaglePageProviderSingle_NewVarchar("", 1, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage_2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProviderSingle_nextPage.2");
+    
+    EaglePageProviderSingle *epp = EaglePageProviderSingle_NewVarchar("123", 1, "bla");
+    CUNIT_VERIFY_NULL(EaglePageProviderSingle_nextPage(epp));
+    EaglePageProviderSingle_Delete(epp);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_toString)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_toString.1");
+    
+    CUNIT_VERIFY_NULL(EagleDbSqlValue_toString(NULL));
+    
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithString("abc", EagleFalse);
+    CUNIT_VERIFY_NULL(EagleDbSqlValue_toString(value));
+    EagleDbSqlValue_Delete(value);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewVarchar));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithString_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithString_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleUtils_ToLowerCaseCopy));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInformationSchema_tables_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderVirtual_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));

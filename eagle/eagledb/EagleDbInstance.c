@@ -261,7 +261,7 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     /* make sure all the columns exist */
     for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) cursor->obj, *valueExpr;
-        EagleDbSqlValue *value, *valueValue;
+        EagleDbSqlValue *value;
         EagleDbColumn *col;
         
         /* they must be column names, expressions are not acceptable */
@@ -291,22 +291,44 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
             return EagleFalse;
         }
-        
-        valueValue = (EagleDbSqlValue*) valueExpr;
-        if(col->type != EagleDataTypeInteger || valueValue->type != EagleDbSqlValueTypeInteger) {
-            sprintf(msg, "Only integers are supported for values");
-            *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
-            return EagleFalse;
-        }
     }
     
     /* everything looks good, we can create the tuple now */
     tuple = EagleDbTuple_New(td->table);
+    
     for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
         char *colName = ((EagleDbSqlValue*) cursor->obj)->value.identifier;
         int colIndex = EagleDbTable_getColumnIndex(td->table, colName);
-        int value = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i))->value.intValue;
-        EagleDbTuple_setInt(tuple, colIndex, value);
+        
+        EagleDbSqlValue *v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
+        switch(v->type) {
+                
+            case EagleDbSqlValueTypeInteger:
+            {
+                int value = v->value.intValue;
+                EagleDbTuple_setInt(tuple, colIndex, value);
+                break;
+            }
+                
+            case EagleDbSqlValueTypeString:
+            {
+                const char *value = v->value.identifier;
+                EagleDbTuple_setVarchar(tuple, colIndex, value);
+                break;
+            }
+                
+            case EagleDbSqlValueTypeAsterisk:
+            case EagleDbSqlValueTypeIdentifier:
+            {
+                EagleDbTuple_Delete(tuple);
+                
+                sprintf(msg, "Only literal values are allowed for expressions.");
+                *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+                return EagleFalse;
+            }
+            
+        }
+        
     }
     
     /* do the INSERT */
@@ -342,6 +364,10 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
         *error = EagleLogger_Log(EagleLoggerSeverityInfo, msg);
     }
     else {
+        success = EagleFalse;
+        sprintf(msg, "Table \"%s.%s\" already exists.", schema->name, table->name);
+        *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+        
         /* clean up resources */
         EagleDbTable_DeleteWithColumns(table);
         EagleDbTableData_Delete(td);
@@ -420,6 +446,9 @@ void EagleDbInstance_Delete(EagleDbInstance *db)
         
         EagleLinkedList_DeleteWithItems(db->schemas);
         EagleMemory_Free(db);
+        
+        /* clean up logger */
+        EagleLogger_reset(EagleLogger_Get());
     }
 }
 
@@ -448,6 +477,9 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db)
         
         EagleLinkedList_DeleteWithItems(db->schemas);
         EagleMemory_Free(db);
+        
+        /* clean up logger */
+        EagleLogger_reset(EagleLogger_Get());
     }
 }
 

@@ -21,7 +21,12 @@ typedef enum {
     /**
      The name of a column.
      */
-    EagleDbSqlValueTypeIdentifier = 3
+    EagleDbSqlValueTypeIdentifier = 3,
+    
+    /**
+     A string literal.
+     */
+    EagleDbSqlValueTypeString = 4
     
 } EagleDbSqlValueType;
 

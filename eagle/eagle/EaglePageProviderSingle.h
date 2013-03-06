@@ -11,9 +11,21 @@ typedef struct {
     EaglePageProviderHeader;
     
     /**
-     The value for the page.
+     Contains the value.
      */
-    EAGLE_ATTR_NA int value;
+    union {
+        
+        /**
+         Integer value.
+         */
+        EAGLE_ATTR_NA int intValue;
+        
+        /**
+         String value.
+         */
+        EAGLE_ATTR_MANAGED const char *strValue;
+        
+    } value;
     
 } EaglePageProviderSingle;
 
@@ -25,6 +37,15 @@ typedef struct {
  * @return A new provider.
  */
 EaglePageProviderSingle* EaglePageProviderSingle_NewInt(int value, int recordsPerPage, char *name);
+
+/**
+ * This creates a page provider that provides a single page filled with a fixed string.
+ * @param [in] value The value to fill the pages with.
+ * @param [in] recordsPerPage The number of records to return with each page.
+ * @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
+ * @return A new provider.
+ */
+EaglePageProviderSingle* EaglePageProviderSingle_NewVarchar(const char *value, int recordsPerPage, char *name);
 
 /**
  * Free a page provider.

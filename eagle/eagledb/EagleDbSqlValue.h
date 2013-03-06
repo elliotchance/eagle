@@ -43,6 +43,15 @@ typedef struct {
 } EagleDbSqlValue;
 
 /**
+ * Create a new EagleDbSqlValue with a string literal.
+ * @param [in] str String value.
+ * @param [in] process If this is EagleTrue then the string will be processed, ie remove the surrounding quotes and
+ * unescape inner quotes.
+ * @return A new EagleDbSqlValue instance.
+ */
+EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean process);
+
+/**
  * Create a new EagleDbSqlValue with an integer.
  * @param [in] value Integer value.
  * @return A new EagleDbSqlValue instance.

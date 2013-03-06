@@ -50,6 +50,25 @@ void EaglePage_Delete(EaglePage *page)
     }
     
     if(EagleTrue == page->freeData) {
+        switch(page->type) {
+                
+            case EagleDataTypeInteger:
+            case EagleDataTypeUnknown:
+                break;
+                
+            case EagleDataTypeVarchar:
+            {
+                /* free all strings first */
+                int i;
+                
+                for(i = 0; i < page->count; ++i) {
+                    EagleMemory_Free(((char**) page->data)[i]);
+                }
+                break;
+            }
+
+        }
+        
         EagleMemory_Free((void*) page->data);
     }
     EagleMemory_Free((void*) page);
@@ -101,13 +120,12 @@ EaglePage* EaglePage_CopyVarchar_(EaglePage *page)
     }
     
     newData = (char**) EagleMemory_MultiAllocate("EaglePage_CopyVarchar_.1", sizeof(char*), page->count);
-    
     if(NULL == newData) {
         return NULL;
     }
     
     for(i = 0; i < page->count; ++i) {
-        newData[i] = ((char**) page->data)[i];
+        newData[i] = strdup(((char**) page->data)[i]);
     }
     
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);

@@ -49,7 +49,7 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value);
  * @param [in] position The column position, the first column will be index 0.
  * @param [in] value The value.
  */
-void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, char *value);
+void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, const char *value);
 
 /**
  * Render a tuple as a string.

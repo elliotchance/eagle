@@ -45,21 +45,78 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
     return v;
 }
 
+EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean process)
+{
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithString.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
+    
+    v->expressionType = EagleDbSqlExpressionTypeValue;
+    v->type = EagleDbSqlValueTypeString;
+    
+    if(EagleFalse == process) {
+        v->value.identifier = (NULL == str ? NULL : strdup(str));
+    }
+    else {
+        /* process the string */
+        unsigned long len, i, j;
+        char *pstr;
+        
+        len = strlen(str);
+        pstr = (char*) EagleMemory_Allocate("EagleDbSqlValue_NewWithString.2", len + 1);
+        if(NULL == pstr) {
+            EagleMemory_Free(v);
+            return NULL;
+        }
+        
+        for(i = 1, j = 0; i < len - 1; ++i, ++j) {
+            if((str[i] == '\\' && str[i + 1] == '\'') || (str[i] == '\'' && str[i + 1] == '\'')) {
+                pstr[j] = '\'';
+                ++i;
+            }
+            else {
+                pstr[j] = str[i];
+            }
+        }
+        pstr[len - 2] = '\0';
+        
+        v->value.identifier = (char*) pstr;
+    }
+    
+    return v;
+}
+
 void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
 {
     if(NULL == value) {
         return;
     }
     
-    if(EagleDbSqlValueTypeIdentifier == value->type) {
-        EagleMemory_Free(value->value.identifier);
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeInteger:
+            break;
+            
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeString:
+            EagleMemory_Free(value->value.identifier);
+            break;
+            
     }
+    
     EagleMemory_Free(value);
 }
 
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
 {
+    if(NULL == value) {
+        return NULL;
+    }
+    
     switch(value->type) {
+            
         case EagleDbSqlValueTypeInteger:
         {
             char buf[32];
@@ -72,6 +129,17 @@ char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
             
         case EagleDbSqlValueTypeIdentifier:
             return strdup(value->value.identifier);
+            
+        case EagleDbSqlValueTypeString:
+        {
+            char *buf = (char*) EagleMemory_Allocate("EagleDbSqlValue_toString.1", strlen(value->value.identifier) + 3);
+            if(NULL == buf) {
+                return NULL;
+            }
+            
+            sprintf(buf, "'%s'", value->value.identifier);
+            return buf;
+        }
 
     }
 }

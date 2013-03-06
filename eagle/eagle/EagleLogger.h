@@ -114,4 +114,10 @@ EagleLoggerEvent* EagleLogger_lastEvent(EagleLogger *logger);
  */
 FILE* EagleLogger_GetLogFile(const char *location);
 
+/**
+ Reset a logger. Free the memory associated with the last error event.
+ @param [in] logger The logger.
+ */
+void EagleLogger_reset(EagleLogger *logger);
+
 #endif
