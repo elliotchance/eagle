@@ -1170,7 +1170,7 @@ CUNIT_TEST(DBSuite, _string_literal)
     CUNIT_ASSERT_TRUE(success);
     
     // SELECT data back
-    /*EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1, col2 FROM mytable2;");
+    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT col1, col2 FROM mytable2;");
     CUNIT_ASSERT_FALSE(EagleDbParser_hasError(p));
     
     EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
@@ -1202,7 +1202,7 @@ CUNIT_TEST(DBSuite, _string_literal)
     EaglePlan_Delete(plan);
     
     EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
-    EagleDbParser_Delete(p);*/
+    EagleDbParser_Delete(p);
     
     EagleInstanceTest_Cleanup(db);
 }
@@ -1218,7 +1218,7 @@ CUnitTests* DBSuite_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_single));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _comment_multi));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_Delete));
-    //CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInformationSchema_tables));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateSchema));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _DuplicateTable));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, _BadEntityName));
