@@ -883,7 +883,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlValue_toString)
     EagleMemory_MockFinish();
 }
 
-CUnitTests* MemorySuite_tests()
+CUnitTests* MemorySuite1_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     

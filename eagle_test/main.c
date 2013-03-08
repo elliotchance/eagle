@@ -187,8 +187,12 @@ int main(int argc, char **argv)
         return CU_get_error();
     }
     
-    if(EagleTrue == op_suite_memory && CUE_SUCCESS != addSuiteSingle("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
-        return CU_get_error();
+    if(EagleTrue == op_suite_memory) {
+        if(CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, &suite) ||
+           CUE_SUCCESS != addSuiteTests(suite, MemorySuite1_tests) ||
+           CUE_SUCCESS != addSuiteTests(suite, MemorySuite2_tests)) {
+            return CU_get_error();
+        }
     }
     
     if(EagleTrue == op_suite_sqlfuzz && CUE_SUCCESS != addSuiteSingle("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
