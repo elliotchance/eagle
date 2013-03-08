@@ -6,7 +6,8 @@
 #include "EaglePage.h"
 
 int MainSuite_init();
-CUnitTests* MainSuite_tests();
+CUnitTests* MainSuite1_tests();
+CUnitTests* MainSuite2_tests();
 int MainSuite_clean();
 
 #endif
