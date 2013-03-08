@@ -12,7 +12,7 @@
 #include "SQLFuzzSuite.h"
 #include "OperatorSuite.h"
 
-CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc pClean, CUnitTests* (*testsFunction)())
+CU_ErrorCode addSuiteSingle(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc pClean, CUnitTests* (*testsFunction)())
 {
     // add a suite to the registry
     CU_pSuite pSuite = CU_add_suite(name, pInit, pClean);
@@ -21,6 +21,35 @@ CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc 
         return CU_get_error();
     }
     
+    // add the tests to the suite
+    CUnitTests *tests = testsFunction();
+    for(int i = 0; i < tests->usedTests; ++i) {
+        CUnitTest *test = tests->tests[i];
+        if(NULL == CU_add_test(pSuite, test->strName, test->pTestFunc)) {
+            CU_cleanup_registry();
+            return CU_get_error();
+        }
+    }
+    
+    // clean up
+    CUnitTests_Delete(tests);
+    return CUE_SUCCESS;
+}
+
+CU_ErrorCode addSuite(const char *name, CU_InitializeFunc pInit, CU_CleanupFunc pClean, CU_pSuite *pSuite)
+{
+    // add a suite to the registry
+    *pSuite = CU_add_suite(name, pInit, pClean);
+    if(NULL == *pSuite) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+    
+    return CUE_SUCCESS;
+}
+
+CU_ErrorCode addSuiteTests(CU_pSuite pSuite, CUnitTests* (*testsFunction)())
+{
     // add the tests to the suite
     CUnitTests *tests = testsFunction();
     for(int i = 0; i < tests->usedTests; ++i) {
@@ -137,25 +166,40 @@ int main(int argc, char **argv)
     }
 
     // add suites
-    if(EagleTrue == op_suite_main && CUE_SUCCESS != addSuite("MainSuite", MainSuite_init, MainSuite_clean, MainSuite_tests)) {
+    CU_pSuite suite;
+    if(EagleTrue == op_suite_main) {
+        if(CUE_SUCCESS != addSuite("MainSuite", MainSuite_init, MainSuite_clean, &suite) ||
+           CUE_SUCCESS != addSuiteTests(suite, MainSuite1_tests) ||
+           CUE_SUCCESS != addSuiteTests(suite, MainSuite2_tests)) {
+               return CU_get_error();
+        }
+    }
+    
+    if(EagleTrue == op_suite_db) {
+        if(CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, &suite) ||
+           CUE_SUCCESS != addSuiteTests(suite, DBSuite1_tests) ||
+           CUE_SUCCESS != addSuiteTests(suite, DBSuite2_tests)) {
+            return CU_get_error();
+        }
+    }
+    
+    if(EagleTrue == op_suite_sql && CUE_SUCCESS != addSuiteSingle("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
         return CU_get_error();
     }
-    if(EagleTrue == op_suite_db && CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, DBSuite_tests)) {
+    
+    if(EagleTrue == op_suite_memory && CUE_SUCCESS != addSuiteSingle("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
         return CU_get_error();
     }
-    if(EagleTrue == op_suite_sql && CUE_SUCCESS != addSuite("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
+    
+    if(EagleTrue == op_suite_sqlfuzz && CUE_SUCCESS != addSuiteSingle("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
         return CU_get_error();
     }
-    if(EagleTrue == op_suite_memory && CUE_SUCCESS != addSuite("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
+    
+    if(EagleTrue == op_suite_bench && CUE_SUCCESS != addSuiteSingle("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
         return CU_get_error();
     }
-    if(EagleTrue == op_suite_sqlfuzz && CUE_SUCCESS != addSuite("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
-        return CU_get_error();
-    }
-    if(EagleTrue == op_suite_bench && CUE_SUCCESS != addSuite("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
-        return CU_get_error();
-    }
-    if(EagleTrue == op_suite_operator && CUE_SUCCESS != addSuite("OperatorSuite", OperatorSuite_init, OperatorSuite_clean, OperatorSuite_tests)) {
+    
+    if(EagleTrue == op_suite_operator && CUE_SUCCESS != addSuiteSingle("OperatorSuite", OperatorSuite_init, OperatorSuite_clean, OperatorSuite_tests)) {
         return CU_get_error();
     }
     
