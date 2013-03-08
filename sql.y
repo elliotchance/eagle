@@ -596,9 +596,9 @@ input:
 ;
 
 statement:
-      select_statement { parser->yystatementtype = EagleDbSqlStatementTypeSelect; }
-    | create_table_statement { parser->yystatementtype = EagleDbSqlStatementTypeCreateTable; }
-    | insert_statement { parser->yystatementtype = EagleDbSqlStatementTypeInsert; }
+      select_statement { $$ = $1; parser->yystatementtype = EagleDbSqlStatementTypeSelect; }
+    | create_table_statement { $$ = $1; parser->yystatementtype = EagleDbSqlStatementTypeCreateTable; }
+    | insert_statement { $$ = $1; parser->yystatementtype = EagleDbSqlStatementTypeInsert; }
 ;
 
 insert_statement:
@@ -620,6 +620,7 @@ create_table_statement:
     K_CREATE K_TABLE keyword error
     {
         ABORT("You cannot use the keyword '%s' for an table name.", $3);
+        $$ = NULL;
     }
     |
     K_CREATE K_TABLE identifier T_BRACKET_OPEN column_definition_list T_BRACKET_CLOSE
@@ -641,12 +642,14 @@ column_definition_list:
     column_definition_list T_COMMA column_definition {
         EagleLinkedListItem *item = EagleLinkedListItem_New($3, EagleTrue, (void(*)(void*)) EagleDbColumn_Delete);
         EagleLinkedList_add($1, item);
+        $$ = $$;
     }
 ;
 
 column_definition:
     keyword error {
         ABORT("You cannot use the keyword '%s' for a column name.", $1);
+        $$ = NULL;
     }
     |
     identifier data_type {
@@ -1172,6 +1175,7 @@ reserved_word:
 select_statement:
     K_SELECT error {
         ABORT("%s", "Missing expression list after SELECT");
+        $$ = NULL;
     }
     |
     K_SELECT column_expression_list K_FROM identifier error {
@@ -1179,6 +1183,7 @@ select_statement:
         EagleDbSqlValue_Delete($4);
         
         ABORT("%s", "Unexpected token after FROM clause");
+        $$ = NULL;
     }
     |
     K_SELECT column_expression_list K_FROM identifier where_expression {
@@ -1202,6 +1207,7 @@ column_expression_list:
     column_expression_list T_COMMA column_expression {
         EagleLinkedListItem *item = EagleLinkedListItem_New($3, EagleTrue, (void(*)(void*)) EagleDbSqlExpression_DeleteRecursive);
         EagleLinkedList_add($1, item);
+        $$ = $$;
     }
 ;
 
