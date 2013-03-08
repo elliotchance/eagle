@@ -5,7 +5,8 @@
 #include <CUnit/Basic.h>
 
 int MemorySuite_init();
-CUnitTests* MemorySuite_tests();
+CUnitTests* MemorySuite1_tests();
+CUnitTests* MemorySuite2_tests();
 int MemorySuite_clean();
 
 #endif

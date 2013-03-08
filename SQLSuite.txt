@@ -30,6 +30,10 @@ Unknown column 'col4'
 SELECT col7 + col1 FROM mytable
 Unknown column 'col7'
 
+% test_error
+SELECT blabla(col1) FROM mytable
+Function blabla() does not exist.
+
 #==================================================
 # SELECTs
 #==================================================
@@ -226,3 +230,21 @@ SELECT 2 * (col1 + 3) FROM mytable
 10
 16
 26
+
+% test
+SELECT sqrt(col1*col2) FROM mytable
+sqrt(col1 * col2):integer
+0
+1
+2
+7
+14
+
+% test
+SELECT SQRT(col1*col2) FROM mytable
+sqrt(col1 * col2):integer
+0
+1
+2
+7
+14
