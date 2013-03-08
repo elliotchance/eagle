@@ -174,21 +174,31 @@ int main(int argc, char **argv)
                return CU_get_error();
         }
     }
-    if(EagleTrue == op_suite_db && CUE_SUCCESS != addSuiteSingle("DBSuite", DBSuite_init, DBSuite_clean, DBSuite_tests)) {
-        return CU_get_error();
+    
+    if(EagleTrue == op_suite_db) {
+        if(CUE_SUCCESS != addSuite("DBSuite", DBSuite_init, DBSuite_clean, &suite) ||
+           CUE_SUCCESS != addSuiteTests(suite, DBSuite1_tests) ||
+           CUE_SUCCESS != addSuiteTests(suite, DBSuite2_tests)) {
+            return CU_get_error();
+        }
     }
+    
     if(EagleTrue == op_suite_sql && CUE_SUCCESS != addSuiteSingle("SQLSuite", SQLSuite_init, SQLSuite_clean, SQLSuite_tests)) {
         return CU_get_error();
     }
+    
     if(EagleTrue == op_suite_memory && CUE_SUCCESS != addSuiteSingle("MemorySuite", MemorySuite_init, MemorySuite_clean, MemorySuite_tests)) {
         return CU_get_error();
     }
+    
     if(EagleTrue == op_suite_sqlfuzz && CUE_SUCCESS != addSuiteSingle("SQLFuzzSuite", SQLFuzzSuite_init, SQLFuzzSuite_clean, SQLFuzzSuite_tests)) {
         return CU_get_error();
     }
+    
     if(EagleTrue == op_suite_bench && CUE_SUCCESS != addSuiteSingle("BenchSuite", BenchSuite_init, BenchSuite_clean, BenchSuite_tests)) {
         return CU_get_error();
     }
+    
     if(EagleTrue == op_suite_operator && CUE_SUCCESS != addSuiteSingle("OperatorSuite", OperatorSuite_init, OperatorSuite_clean, OperatorSuite_tests)) {
         return CU_get_error();
     }
