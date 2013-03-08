@@ -92,4 +92,44 @@ char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr);
  */
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
 
+/**
+ Private function for EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ 
+ @param [in] expression See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] destinationBuffer See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] plan See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @return See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ */
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
+
+/**
+ Private function for EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ 
+ @param [in] expression See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] destinationBuffer See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] plan See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @return See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ */
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
+
+/**
+ Private function for EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ 
+ @param [in] expression See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] destinationBuffer See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] plan See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @return See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ */
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
+
+/**
+ Private function for EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ 
+ @param [in] expression See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] destinationBuffer See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @param [in] plan See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ @return See EagleDbSqlExpression_CompilePlanIntoBuffer_().
+ */
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
+
 #endif
