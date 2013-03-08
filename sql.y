@@ -1232,6 +1232,7 @@ expression:
     | identifier T_BRACKET_OPEN expression T_BRACKET_CLOSE {
         EagleDbSqlValue *_1 = (EagleDbSqlValue*) $1;
         $$ = EagleDbSqlFunctionExpression_New(_1->value.identifier, $3);
+        EagleDbSqlValue_Delete(_1);
     }
 
     /* unary operators */
