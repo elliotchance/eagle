@@ -65,6 +65,8 @@
 		8BC9D2B016DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2AE16DDCFC1001E5D68 /* EagleDbInformationSchema.c */; };
 		8BC9D2CE16E96380001E5D68 /* MainSuite2.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2CD16E96380001E5D68 /* MainSuite2.c */; };
 		8BC9D2D016E96717001E5D68 /* DBSuite2.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2CF16E96716001E5D68 /* DBSuite2.c */; };
+		8BC9D2D716E96D71001E5D68 /* EagleDbSqlFunctionExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2D616E96D71001E5D68 /* EagleDbSqlFunctionExpression.c */; };
+		8BC9D2D816E96D71001E5D68 /* EagleDbSqlFunctionExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D2D616E96D71001E5D68 /* EagleDbSqlFunctionExpression.c */; };
 		8BCA5C2B167C995900FDB186 /* EagleDbTableData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */; };
 		8BCA5C2C167C995900FDB186 /* EagleDbTableData.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */; };
 		8BCA5C2F167C9CB800FDB186 /* EagleDbTuple.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BCA5C2E167C9CB800FDB186 /* EagleDbTuple.c */; };
@@ -223,6 +225,8 @@
 		8BC9D2BB16E2E08C001E5D68 /* load.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = load.sql; sourceTree = "<group>"; };
 		8BC9D2CD16E96380001E5D68 /* MainSuite2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MainSuite2.c; sourceTree = "<group>"; };
 		8BC9D2CF16E96716001E5D68 /* DBSuite2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DBSuite2.c; sourceTree = "<group>"; };
+		8BC9D2D616E96D71001E5D68 /* EagleDbSqlFunctionExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbSqlFunctionExpression.c; sourceTree = "<group>"; };
+		8BC9D2DA16E96D85001E5D68 /* EagleDbSqlFunctionExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbSqlFunctionExpression.h; sourceTree = "<group>"; };
 		8BCA5C29167C977D00FDB186 /* EagleDbTableData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbTableData.h; sourceTree = "<group>"; };
 		8BCA5C2A167C995900FDB186 /* EagleDbTableData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EagleDbTableData.c; sourceTree = "<group>"; };
 		8BCA5C2D167C9BC900FDB186 /* EagleDbTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EagleDbTuple.h; sourceTree = "<group>"; };
@@ -440,6 +444,8 @@
 				8B1BF7FE16777633007C11E6 /* EagleDbSqlExpression.c */,
 				8B1BF7F11676FDC9007C11E6 /* EagleDbSqlExpression.h */,
 				8BEDCFA616B0073D00EBCFAA /* EagleDbSqlExpressionType.h */,
+				8BC9D2D616E96D71001E5D68 /* EagleDbSqlFunctionExpression.c */,
+				8BC9D2DA16E96D85001E5D68 /* EagleDbSqlFunctionExpression.h */,
 				8B3124FF16B639CB00CADC93 /* EagleDbSqlInsert.c */,
 				8B3124FD16B639A400CADC93 /* EagleDbSqlInsert.h */,
 				8B1BF7E61675DD09007C11E6 /* EagleDbSqlSelect.c */,
@@ -652,6 +658,7 @@
 				8B1D8AC016D9EC3B00F34724 /* EaglePageProviderStream.c in Sources */,
 				8BC9D29F16DDA3F0001E5D68 /* EaglePageProviderVirtual.c in Sources */,
 				8BC9D2AF16DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */,
+				8BC9D2D716E96D71001E5D68 /* EagleDbSqlFunctionExpression.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +721,7 @@
 				8BC9D2B016DDCFC1001E5D68 /* EagleDbInformationSchema.c in Sources */,
 				8BC9D2CE16E96380001E5D68 /* MainSuite2.c in Sources */,
 				8BC9D2D016E96717001E5D68 /* DBSuite2.c in Sources */,
+				8BC9D2D816E96D71001E5D68 /* EagleDbSqlFunctionExpression.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

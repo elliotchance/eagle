@@ -79,7 +79,7 @@ void EaglePageOperations_OrPage(EaglePage *destination, EaglePage *source1, Eagl
 void EaglePageOperations_NegatePage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
- Calculate logical NOT between two pages.
+ Calculate logical NOT of a page.
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
  will be given a value or 0 or 1 based on the result of the comparison.
@@ -208,5 +208,16 @@ void EaglePageOperations_SubtractPage(EaglePage *destination, EaglePage *source1
  @param [in] obj Ignored.
  */
 void EaglePageOperations_DividePage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate square root of a page.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 Operand.
+ @param [in] source2 Ignored.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_SqrtPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 #endif

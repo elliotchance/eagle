@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "EaglePageOperations.h"
 #include "EaglePageProvider.h"
 #include "EagleUtils.h"
@@ -249,5 +250,17 @@ void EaglePageOperations_DividePage(EaglePage *destination, EaglePage *source1, 
         else {
             destdata[i] = source1data[i] / source2data[i];
         }
+    }
+}
+
+void EaglePageOperations_SqrtPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i, *destdata = (int*) destination->data, *source1data = (int*) source1->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (int) sqrt(source1data[i]);
     }
 }

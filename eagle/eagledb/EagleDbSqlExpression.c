@@ -14,6 +14,8 @@
 #include "EagleMemory.h"
 #include "EaglePageProviderSingle.h"
 #include "EaglePageProviderStream.h"
+#include "EagleDbSqlFunctionExpression.h"
+#include "EagleUtils.h"
 
 const int EagleDbSqlExpression_ERROR = -1;
 
@@ -27,6 +29,48 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression
     }
     
     switch(expression->expressionType) {
+            
+        case EagleDbSqlExpressionTypeFunctionExpression:
+        {
+            EagleDbSqlFunctionExpression *cast = (EagleDbSqlFunctionExpression*) expression;
+            int destination, destinationExpr;
+            EaglePlanOperation *epo;
+            EaglePageOperationFunction(pageOperation);
+            char msg[1024], *t1, *t2;
+            
+            /* expression */
+            destinationExpr = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->expr, destinationBuffer, plan);
+            if(EagleDbSqlExpression_ERROR == destinationExpr || EagleTrue == EaglePlan_isError(plan)) {
+                return EagleDbSqlExpression_ERROR;
+            }
+            
+            destination = *destinationBuffer;
+            
+            /* find the function */
+            if(EagleUtils_CompareWithoutCase("sqrt", cast->name)) {
+                pageOperation = EaglePageOperations_SqrtPage;
+            }
+            else {
+                /* function does not exist */
+                sprintf(msg, "Function %s() does not exist.", cast->name);
+                EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+                return EagleDbSqlExpression_ERROR;
+            }
+            
+            t1 = EagleDataType_typeToName(plan->bufferTypes[destinationExpr]);
+            t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
+            sprintf(msg, "{ %s(<%d>) (%s) } into <%d> (%s)", cast->name, destinationExpr, t1, destination, t2);
+            EagleMemory_Free(t1);
+            EagleMemory_Free(t2);
+            
+            plan->bufferTypes[destination] = EagleDataTypeInteger;
+            epo = EaglePlanOperation_New(pageOperation, destination, destinationExpr, -1, NULL, EagleFalse, msg);
+            EaglePlan_addOperation(plan, epo);
+            EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
+            ++*destinationBuffer;
+            
+            return destination;
+        }
             
         case EagleDbSqlExpressionTypeUnaryExpression:
         {
@@ -391,6 +435,10 @@ void EagleDbSqlExpression_Delete(EagleDbSqlExpression *expr)
             EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
             break;
             
+        case EagleDbSqlExpressionTypeFunctionExpression:
+            EagleDbSqlFunctionExpression_Delete((EagleDbSqlFunctionExpression*) expr);
+            break;
+            
     }
 }
 
@@ -418,6 +466,10 @@ void EagleDbSqlExpression_DeleteRecursive(EagleDbSqlExpression *expr)
             EagleDbSqlValue_Delete((EagleDbSqlValue*) expr);
             break;
             
+        case EagleDbSqlExpressionTypeFunctionExpression:
+            EagleDbSqlFunctionExpression_DeleteRecursive((EagleDbSqlFunctionExpression*) expr);
+            break;
+            
     }
 }
 
@@ -440,6 +492,9 @@ char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr)
             
         case EagleDbSqlExpressionTypeValue:
             return EagleDbSqlValue_toString((EagleDbSqlValue*) expr);
+            
+        case EagleDbSqlExpressionTypeFunctionExpression:
+            return EagleDbSqlFunctionExpression_toString((EagleDbSqlFunctionExpression*) expr);
             
     }
 }
