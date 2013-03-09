@@ -31,12 +31,18 @@ typedef struct {
          Integer.
          @see EagleDbSqlValueTypeInteger
          */
-        EAGLE_ATTR_NA int intValue;
+        EAGLE_ATTR_NA EagleDataTypeIntegerType intValue;
         
         /**
          When using identifier token. This is the name of the identifier.
          */
         EAGLE_ATTR_MANAGED char *identifier;
+        
+        /**
+         Floating point number.
+         @see EagleDbSqlValueTypeFloat
+         */
+        EAGLE_ATTR_NA EagleDataTypeFloatType floatValue;
         
     } value;
     
@@ -49,14 +55,21 @@ typedef struct {
  * unescape inner quotes.
  * @return A new EagleDbSqlValue instance.
  */
-EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean process);
+EagleDbSqlValue* EagleDbSqlValue_NewWithString(char *str, EagleBoolean process);
 
 /**
  * Create a new EagleDbSqlValue with an integer.
  * @param [in] value Integer value.
  * @return A new EagleDbSqlValue instance.
  */
-EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value);
+EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(EagleDataTypeIntegerType value);
+
+/**
+ * Create a new EagleDbSqlValue with an floating point number.
+ * @param [in] value Floating point value.
+ * @return A new EagleDbSqlValue instance.
+ */
+EagleDbSqlValue* EagleDbSqlValue_NewWithFloat(EagleDataTypeFloatType value);
 
 /**
  * Create a new EagleDbSqlValue with an asterisk token.

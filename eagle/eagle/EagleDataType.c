@@ -26,5 +26,8 @@ char* EagleDataType_typeToName(EagleDataType type)
         case EagleDataTypeVarchar:
             return strdup("VARCHAR");
             
+        case EagleDataTypeFloat:
+            return strdup("FLOAT");
+            
     }
 }

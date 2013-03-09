@@ -5,12 +5,24 @@
 #include "EagleUtils.h"
 #include "EagleMemory.h"
 
-int* EagleData_Int(int value)
+EagleDataTypeIntegerType* EagleData_Int(EagleDataTypeIntegerType value)
 {
-    int *r = (int*) EagleMemory_Allocate("EagleData_Int.1", sizeof(int));
+    EagleDataTypeIntegerType *r = (EagleDataTypeIntegerType*) EagleMemory_Allocate("EagleData_Int.1", sizeof(EagleDataTypeIntegerType));
     if(NULL == r) {
         return NULL;
     }
+    
+    *r = value;
+    return r;
+}
+
+EagleDataTypeFloatType* EagleData_Float(EagleDataTypeFloatType value)
+{
+    EagleDataTypeFloatType *r = (EagleDataTypeFloatType*) EagleMemory_Allocate("EagleData_Float.1", sizeof(EagleDataTypeFloatType));
+    if(NULL == r) {
+        return NULL;
+    }
+    
     *r = value;
     return r;
 }

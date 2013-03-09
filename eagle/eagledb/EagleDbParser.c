@@ -383,6 +383,7 @@ EagleBoolean EagleDbParser_IsReservedKeyword(const char *word)
         "BETWEEN",
         "BIGINT",
         "BINARY",
+        "BIT",
         "BLOB",
         "BOOLEAN",
         "BOTH",

@@ -66,6 +66,7 @@
 %token K_BETWEEN "BETWEEN"
 %token K_BIGINT "BIGINT"
 %token K_BINARY "BINARY"
+%token K_BIT "BIT"
 %token K_BLOB "BLOB"
 %token K_BOOLEAN "BOOLEAN"
 %token K_BOTH "BOTH"
@@ -550,6 +551,7 @@
 /* variable tokens */
 %token IDENTIFIER "identifier"
 %token INTEGER "integer"
+%token FLOAT "float"
 %token STRING_LITERAL "string_literal"
 
 /* fixed tokens */
@@ -661,10 +663,14 @@ column_definition:
 ;
 
 data_type:
-      K_INTEGER { $$ = EagleData_Int(EagleDataTypeInteger); }
-    | K_INT     { $$ = EagleData_Int(EagleDataTypeInteger); }
-    | K_VARCHAR { $$ = EagleData_Int(EagleDataTypeVarchar); }
-    | K_TEXT    { $$ = EagleData_Int(EagleDataTypeVarchar); }
+      K_INTEGER             { $$ = EagleData_Int(EagleDataTypeInteger); }
+    | K_INT                 { $$ = EagleData_Int(EagleDataTypeInteger); }
+    | K_VARCHAR             { $$ = EagleData_Int(EagleDataTypeVarchar); }
+    | K_TEXT                { $$ = EagleData_Int(EagleDataTypeVarchar); }
+    | K_FLOAT               { $$ = EagleData_Int(EagleDataTypeFloat); }
+    | K_REAL                { $$ = EagleData_Int(EagleDataTypeFloat); }
+    | K_DOUBLE              { $$ = EagleData_Int(EagleDataTypeFloat); }
+    | K_DOUBLE K_PRECISION  { $$ = EagleData_Int(EagleDataTypeFloat); }
 ;
 
 keyword:
@@ -943,6 +949,7 @@ reserved_word:
     | K_BETWEEN { $$ = "BETWEEN"; }
     | K_BIGINT { $$ = "BIGINT"; }
     | K_BINARY { $$ = "BINARY"; }
+    | K_BIT { $$ = "BIT"; }
     | K_BLOB { $$ = "BLOB"; }
     | K_BOOLEAN { $$ = "BOOLEAN"; }
     | K_BOTH { $$ = "BOTH"; }
@@ -1260,14 +1267,22 @@ expression:
 ;
 
 value:
-    integer | identifier | string_literal
+    integer | float | identifier | string_literal
 ;
 
 integer:
     INTEGER {
         char *lastToken = EagleDbParser_lastToken(parser);
-        int value = atoi(lastToken);
+        EagleDataTypeIntegerType value = atoi(lastToken);
         $$ = EagleDbSqlValue_NewWithInteger(value);
+    }
+;
+
+float:
+    FLOAT {
+        char *lastToken = EagleDbParser_lastToken(parser);
+        EagleDataTypeFloatType value = atof(lastToken);
+        $$ = EagleDbSqlValue_NewWithFloat(value);
     }
 ;
 

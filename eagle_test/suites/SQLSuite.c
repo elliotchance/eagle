@@ -180,15 +180,22 @@ void SQLSuiteTest()
                             break;
                             
                         case EagleDataTypeInteger:
-                            if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
-                                CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
+                            if(*((EagleDataTypeIntegerType*) test.answers[i]->data[j]) != ((EagleDataTypeIntegerType*) page->data)[i]) {
+                                CUNIT_FAIL("%d != %d\n", *((EagleDataTypeIntegerType*) test.answers[i]->data[j]), ((EagleDataTypeIntegerType*) page->data)[i]);
                                 valid = 0;
                             }
                             break;
                             
                         case EagleDataTypeVarchar:
-                            if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
-                                CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
+                            if(strcmp(((EagleDataTypeVarcharType*) test.answers[i]->data)[j], ((EagleDataTypeVarcharType*) page->data)[i])) {
+                                CUNIT_FAIL("'%s' != '%s'\n", ((EagleDataTypeVarcharType*) test.answers[i]->data)[j], ((EagleDataTypeVarcharType*) page->data)[i]);
+                                valid = 0;
+                            }
+                            break;
+                            
+                        case EagleDataTypeFloat:
+                            if(*((EagleDataTypeFloatType*) test.answers[i]->data[j]) != ((EagleDataTypeFloatType*) page->data)[i]) {
+                                CUNIT_FAIL("%g != %g\n", *((EagleDataTypeFloatType*) test.answers[i]->data[j]), ((EagleDataTypeFloatType*) page->data)[i]);
                                 valid = 0;
                             }
                             break;
@@ -276,6 +283,10 @@ void controlTest(FILE *file, int *lineNumber)
                     
                 case EagleDataTypeVarchar:
                     EagleDbTuple_setVarchar(test.answers[test.usedAnswers], j, data[j]);
+                    break;
+                    
+                case EagleDataTypeFloat:
+                    EagleDbTuple_setFloat(test.answers[test.usedAnswers], j, atof(data[j]));
                     break;
                     
             }
@@ -376,6 +387,10 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
                     
                 case EagleDataTypeVarchar:
                     EagleDbTuple_setVarchar(tuple, i, data[i]);
+                    break;
+                    
+                case EagleDataTypeFloat:
+                    EagleDbTuple_setFloat(tuple, i, atof(data[i]));
                     break;
                     
             }

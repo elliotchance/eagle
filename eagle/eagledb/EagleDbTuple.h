@@ -41,7 +41,15 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple);
  * @param [in] position The column position, the first column will be index 0.
  * @param [in] value The value.
  */
-void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value);
+void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, EagleDataTypeIntegerType value);
+
+/**
+ * Set a FLOAT value to a column in a tuple.
+ * @param [in] tuple The tuple instance.
+ * @param [in] position The column position, the first column will be index 0.
+ * @param [in] value The value.
+ */
+void EagleDbTuple_setFloat(EagleDbTuple *tuple, int position, EagleDataTypeFloatType value);
 
 /**
  * Set a VARCHAR value to a column in a tuple.
@@ -49,7 +57,7 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value);
  * @param [in] position The column position, the first column will be index 0.
  * @param [in] value The value.
  */
-void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, const char *value);
+void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, EagleDataTypeVarcharType value);
 
 /**
  * Render a tuple as a string.

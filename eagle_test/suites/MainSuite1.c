@@ -280,7 +280,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderStream_New)
     CUNIT_ASSERT_NULL(p);
     
     int testDataSize = 5, recordsPerPage = 2;
-    int *testData = (int*) calloc(testDataSize, sizeof(int));
+    int *testData = (EagleDataTypeIntegerType*) calloc(testDataSize, sizeof(EagleDataTypeIntegerType));
     testData[0] = 123;
     testData[1] = 456;
     testData[2] = 789;

@@ -86,6 +86,16 @@ EaglePage* EaglePage_AllocInt(int count);
  * @param [in] count The number of records of the page.
  * @return The new page.
  */
+EaglePage* EaglePage_AllocFloat(int count);
+
+/**
+ * Allocate a new page of given size.
+ * This function differs from EaglePage_New() because it will allocate the data block for you.
+ * @note The page allocated will not be filled with any data, make sure you sanitize the page if you intend to read from
+ * it.
+ * @param [in] count The number of records of the page.
+ * @return The new page.
+ */
 EaglePage* EaglePage_AllocVarchar(int count);
 
 /**
@@ -102,6 +112,14 @@ EaglePage* EaglePage_Copy(EaglePage *page);
  * @see EaglePage_Copy()
  */
 EaglePage* EaglePage_CopyInt_(EaglePage *page);
+
+/**
+ * Private function. Copy an FLOAT page.
+ * @param [in] page The page.
+ * @return A duplicate page.
+ * @see EaglePage_Copy()
+ */
+EaglePage* EaglePage_CopyFloat_(EaglePage *page);
 
 /**
  * Private function. Copy a VARCHAR page.

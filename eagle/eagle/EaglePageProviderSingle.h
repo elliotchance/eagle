@@ -18,12 +18,17 @@ typedef struct {
         /**
          Integer value.
          */
-        EAGLE_ATTR_NA int intValue;
+        EAGLE_ATTR_NA EagleDataTypeIntegerType intValue;
         
         /**
          String value.
          */
-        EAGLE_ATTR_MANAGED const char *strValue;
+        EAGLE_ATTR_MANAGED EagleDataTypeVarcharType strValue;
+        
+        /**
+         Floating point value.
+         */
+        EAGLE_ATTR_NA EagleDataTypeFloatType floatValue;
         
     } value;
     
@@ -36,7 +41,16 @@ typedef struct {
  * @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
  * @return A new provider.
  */
-EaglePageProviderSingle* EaglePageProviderSingle_NewInt(int value, int recordsPerPage, char *name);
+EaglePageProviderSingle* EaglePageProviderSingle_NewInt(EagleDataTypeIntegerType value, int recordsPerPage, char *name);
+
+/**
+ * This creates a page provider that provides a single page filled with a fixed floating point number.
+ * @param [in] value The value to fill the pages with.
+ * @param [in] recordsPerPage The number of records to return with each page.
+ * @param [in] name The name of the provider. Can contain any string, this may be a column name, an expression, etc.
+ * @return A new provider.
+ */
+EaglePageProviderSingle* EaglePageProviderSingle_NewFloat(EagleDataTypeFloatType value, int recordsPerPage, char *name);
 
 /**
  * This creates a page provider that provides a single page filled with a fixed string.

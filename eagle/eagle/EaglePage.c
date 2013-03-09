@@ -25,7 +25,17 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
 
 EaglePage* EaglePage_AllocInt(int count)
 {
-    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocInt.1", sizeof(int), count);
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocInt.1", sizeof(EagleDataTypeIntegerType), count);
+    if(NULL == data) {
+        return NULL;
+    }
+    
+    return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
+}
+
+EaglePage* EaglePage_AllocFloat(int count)
+{
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocFloat.1", sizeof(EagleDataTypeFloatType), count);
     if(NULL == data) {
         return NULL;
     }
@@ -35,7 +45,7 @@ EaglePage* EaglePage_AllocInt(int count)
 
 EaglePage* EaglePage_AllocVarchar(int count)
 {
-    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocVarchar.1", sizeof(char*), count);
+    void *data = (void*) EagleMemory_MultiAllocate("EaglePage_AllocVarchar.1", sizeof(EagleDataTypeVarcharType), count);
     if(NULL == data) {
         return NULL;
     }
@@ -54,6 +64,7 @@ void EaglePage_Delete(EaglePage *page)
                 
             case EagleDataTypeInteger:
             case EagleDataTypeUnknown:
+            case EagleDataTypeFloat:
                 break;
                 
             case EagleDataTypeVarchar:
@@ -62,7 +73,7 @@ void EaglePage_Delete(EaglePage *page)
                 int i;
                 
                 for(i = 0; i < page->count; ++i) {
-                    EagleMemory_Free(((char**) page->data)[i]);
+                    EagleMemory_Free(((EagleDataTypeVarcharType*) page->data)[i]);
                 }
                 break;
             }
@@ -88,20 +99,42 @@ EaglePage* EaglePage_Copy(EaglePage *page)
         case EagleDataTypeVarchar:
             return EaglePage_CopyVarchar_(page);
             
+        case EagleDataTypeFloat:
+            return EaglePage_CopyFloat_(page);
+            
     }
 }
 
 EaglePage* EaglePage_CopyInt_(EaglePage *page)
 {
     size_t memorySize;
-    int *newData;
+    EagleDataTypeIntegerType *newData;
     
     if(NULL == page) {
         return NULL;
     }
     
-    memorySize = (size_t) page->count * sizeof(int);
-    newData = (int*) EagleMemory_Allocate("EaglePage_CopyInt_.1", memorySize);
+    memorySize = (size_t) page->count * sizeof(EagleDataTypeIntegerType);
+    newData = (EagleDataTypeIntegerType*) EagleMemory_Allocate("EaglePage_CopyInt_.1", memorySize);
+    if(NULL == newData) {
+        return NULL;
+    }
+    
+    memmove(newData, page->data, memorySize);
+    return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
+}
+
+EaglePage* EaglePage_CopyFloat_(EaglePage *page)
+{
+    size_t memorySize;
+    EagleDataTypeFloatType *newData;
+    
+    if(NULL == page) {
+        return NULL;
+    }
+    
+    memorySize = (size_t) page->count * sizeof(EagleDataTypeFloatType);
+    newData = (EagleDataTypeFloatType*) EagleMemory_Allocate("EaglePage_CopyFloat_.1", memorySize);
     if(NULL == newData) {
         return NULL;
     }
@@ -112,20 +145,20 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
 
 EaglePage* EaglePage_CopyVarchar_(EaglePage *page)
 {
-    char **newData;
+    EagleDataTypeVarcharType *newData;
     int i;
     
     if(NULL == page) {
         return NULL;
     }
     
-    newData = (char**) EagleMemory_MultiAllocate("EaglePage_CopyVarchar_.1", sizeof(char*), page->count);
+    newData = (EagleDataTypeVarcharType*) EagleMemory_MultiAllocate("EaglePage_CopyVarchar_.1", sizeof(EagleDataTypeVarcharType), page->count);
     if(NULL == newData) {
         return NULL;
     }
     
     for(i = 0; i < page->count; ++i) {
-        newData[i] = strdup(((char**) page->data)[i]);
+        newData[i] = strdup(((EagleDataTypeVarcharType*) page->data)[i]);
     }
     
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
@@ -143,6 +176,9 @@ EaglePage* EaglePage_Alloc(EagleDataType type, int count)
             
         case EagleDataTypeVarchar:
             return EaglePage_AllocVarchar(count);
+            
+        case EagleDataTypeFloat:
+            return EaglePage_AllocFloat(count);
             
     }
 }

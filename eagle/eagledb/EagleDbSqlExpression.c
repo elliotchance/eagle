@@ -293,6 +293,21 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
             break;
         }
             
+        case EagleDbSqlValueTypeFloat:
+        {
+            EaglePageProvider *provider;
+            EaglePlanBufferProvider *bp;
+            
+            destination = *destinationBuffer;
+            provider = (EaglePageProvider*) EaglePageProviderSingle_NewFloat(value->value.floatValue, plan->pageSize, "(float)");
+            bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+            EaglePlan_addBufferProvider(plan, bp, EagleTrue);
+            ++*destinationBuffer;
+            
+            plan->bufferTypes[destination] = EagleDataTypeFloat;
+            break;
+        }
+            
     }
     
     return destination;
