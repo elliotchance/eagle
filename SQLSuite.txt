@@ -48,6 +48,15 @@ col4:float
 -456.789
 
 % test
+SELECT col4 * col4 FROM mytable
+col4 * col4:float
+10.24
+62.41
+15241.383936
+100000000
+208656.19052
+
+% test
 SELECT 123 FROM mytable
 123:integer
 123

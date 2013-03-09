@@ -135,7 +135,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
 {
     EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
     int destination, destinationLeft, destinationRight;
-    char *msg, *t1, *t2, *t3, *op;
+    char *msg, *t1, *t2, *t3, *op, *error;
     EaglePlanOperation *epo;
     EaglePageOperationFunction(pageOperation);
     
@@ -158,66 +158,22 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     }
     destination = *destinationBuffer;
     
-    switch(cast->op) {
-            
-        case EagleDbSqlBinaryExpressionOperatorPlus:
-            pageOperation = EaglePageOperations_AdditionPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorEquals:
-            pageOperation = EaglePageOperations_EqualsPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorModulus:
-            pageOperation = EaglePageOperations_ModulusPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorMultiply:
-            pageOperation = EaglePageOperations_MultiplyPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorNotEquals:
-            pageOperation = EaglePageOperations_NotEqualsPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorGreaterThan:
-            pageOperation = EaglePageOperations_GreaterThanPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorLessThan:
-            pageOperation = EaglePageOperations_LessThanPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorGreaterThanEqual:
-            pageOperation = EaglePageOperations_GreaterThanEqualPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorLessThanEqual:
-            pageOperation = EaglePageOperations_LessThanEqualPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorMinus:
-            pageOperation = EaglePageOperations_SubtractPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorDivide:
-            pageOperation = EaglePageOperations_DividePage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorOr:
-            pageOperation = EaglePageOperations_OrPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorAnd:
-            pageOperation = EaglePageOperations_AndPage;
-            break;
-            
-    }
-    
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
     t2 = EagleDataType_typeToName(plan->bufferTypes[destinationRight]);
     t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     op = EagleDbSqlBinaryExpressionOperator_toString(cast->op);
+    
+    pageOperation = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
+                                                            cast->op,
+                                                            plan->bufferTypes[destinationRight],
+                                                            &error);
+    if(NULL == pageOperation) {
+        /* operator does not exist */
+        sprintf(msg, "No such operator %s %s %s", t1, op, t2);
+        EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+        
+        return EagleDbSqlExpression_ERROR;
+    }
     
     sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2,
             destination, t3);
@@ -227,7 +183,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     EagleMemory_Free(t3);
     EagleMemory_Free(op);
     
-    plan->bufferTypes[destination] = EagleDataTypeInteger;
+    /* FIXME: this type should be returned from EagleDbSqlBinaryExpression_GetOperation() */
+    plan->bufferTypes[destination] = plan->bufferTypes[destinationLeft];
     epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
                                  EagleFalse, msg);
     EagleMemory_Free(msg);

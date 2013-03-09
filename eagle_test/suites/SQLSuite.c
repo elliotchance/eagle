@@ -196,11 +196,16 @@ void SQLSuiteTest()
                             break;
                             
                         case EagleDataTypeFloat:
-                            if(*((EagleDataTypeFloatType*) test.answers[i]->data[j]) != ((EagleDataTypeFloatType*) page->data)[i]) {
-                                CUNIT_FAIL("%g != %g\n", *((EagleDataTypeFloatType*) test.answers[i]->data[j]), ((EagleDataTypeFloatType*) page->data)[i]);
+                        {
+                            EagleDataTypeFloatType a = *((EagleDataTypeFloatType*) test.answers[i]->data[j]);
+                            EagleDataTypeFloatType b = ((EagleDataTypeFloatType*) page->data)[i];
+                            EagleDataTypeFloatType epsilon = fabs(MIN(a, b)) / 1000.0;
+                            if(fabs(a - b) > epsilon) {
+                                CUNIT_FAIL("%g != %g (difference = %g)\n", a, b, fabs(a - b));
                                 valid = 0;
                             }
                             break;
+                        }
                             
                     }
                     

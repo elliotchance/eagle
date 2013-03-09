@@ -4,6 +4,8 @@
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlBinaryExpressionOperator.h"
 #include "Eagle.h"
+#include "EaglePageOperations.h"
+#include "EagleDataType.h"
 
 /**
  Expression type is EagleDbSqlExpressionTypeBinaryExpression.
@@ -65,5 +67,10 @@ void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr
  * @return A new string representation of the expression.
  */
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
+
+EaglePageOperationFunction(EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
+                                                                   EagleDbSqlBinaryExpressionOperator op,
+                                                                   EagleDataType right,
+                                                                   char **error));
 
 #endif

@@ -196,7 +196,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_MultiplyPage)
         ((int*) page2->data)[i] = arc4random() % 100;
     }
     
-    EaglePageOperations_MultiplyPage(out, page1, page2, NULL);
+    EaglePageOperations_MultiplyIntPage(out, page1, page2, NULL);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
