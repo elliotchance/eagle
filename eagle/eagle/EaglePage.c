@@ -40,7 +40,7 @@ EaglePage* EaglePage_AllocFloat(int count)
         return NULL;
     }
     
-    return EaglePage_New(EagleDataTypeInteger, data, count, count, 0, EagleTrue);
+    return EaglePage_New(EagleDataTypeFloat, data, count, count, 0, EagleTrue);
 }
 
 EaglePage* EaglePage_AllocVarchar(int count)

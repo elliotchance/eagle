@@ -261,7 +261,7 @@ CUNIT_TEST(DBSuite, _CREATE)
     
     success = EagleDbInstance_execute(db, "CREATE TABLE mytable2 (col1 int, col2 badtype, col4 text);", &error);
     CUNIT_ASSERT_FALSE(success);
-    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier, expecting INT or INTEGER or VARCHAR or TEXT");
+    CUNIT_ASSERT_LAST_ERROR("Error: syntax error, unexpected identifier");
     
     EagleInstanceTest_Cleanup(db);
 }

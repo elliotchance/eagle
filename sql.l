@@ -21,10 +21,10 @@
 
 white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
-integer [0-9]+
+integer -?[0-9]+
 comment_single \-\-[^\n]*
 string_literal '([^\']|''|\')*'
-float [0-9]+\.[0-9]+
+float -?[0-9]+\.[0-9]+
 
 %x COMMENT
 

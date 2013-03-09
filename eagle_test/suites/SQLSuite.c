@@ -153,6 +153,8 @@ void SQLSuiteTest()
         // execute
         EagleInstance *eagle = EagleInstance_New(1);
         EagleInstance_addPlan(eagle, plan);
+        /*printf("%s\n", EaglePlan_toString(plan));*/
+        
         EagleInstance_run(eagle);
         
         // validate column names

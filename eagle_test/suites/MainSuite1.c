@@ -209,7 +209,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Input Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
     EagleMemory_Free(msg);
     
     EaglePlan_Delete(plan);

@@ -3,12 +3,12 @@
 #==================================================
 
 % table mytable
-col1 int,col2 int,col3 varchar
-0,0,hello
-1,2,world
-2,4,how
-5,10,are
-10,20,you doing?
+col1 int,col2 int,col3 varchar,col4 float
+0,0,hello,3.2
+1,2,world,7.9
+2,4,how,123.456
+5,10,are,10000
+10,20,you doing?,-456.789
 
 #==================================================
 # Errors
@@ -19,16 +19,16 @@ SELECT * FROM mytable WHERE 123
 You can not use the star operator like this.
 
 % test_error
-SELECT col4 FROM mytable
-Unknown column 'col4'
+SELECT col40 FROM mytable
+Unknown column 'col40'
 
 % test_error
-SELECT col1 + col4 FROM mytable
-Unknown column 'col4'
+SELECT col1 + col40 FROM mytable
+Unknown column 'col40'
 
 % test_error
-SELECT col7 + col1 FROM mytable
-Unknown column 'col7'
+SELECT col70 + col1 FROM mytable
+Unknown column 'col70'
 
 % test_error
 SELECT blabla(col1) FROM mytable
@@ -37,6 +37,15 @@ Function blabla() does not exist.
 #==================================================
 # SELECTs
 #==================================================
+
+% test
+SELECT col4 FROM mytable
+col4:float
+3.2
+7.9
+123.456
+10000
+-456.789
 
 % test
 SELECT 123 FROM mytable

@@ -9,6 +9,10 @@ EagleDataType EagleDataType_nameToType(char *name)
     if(!strcasecmp(name, "varchar") || !strcasecmp(name, "text")) {
         return EagleDataTypeVarchar;
     }
+    if(!strcasecmp(name, "float") || !strcasecmp(name, "double") ||
+       !strcasecmp(name, "double precision") || !strcasecmp(name, "real")) {
+        return EagleDataTypeFloat;
+    }
     
     return EagleDataTypeUnknown;
 }

@@ -118,21 +118,21 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
                     
                 case EagleDataTypeInteger:
                 {
-                    int *source2data = (EagleDataTypeIntegerType*) source2->data;
+                    EagleDataTypeIntegerType *source2data = (EagleDataTypeIntegerType*) source2->data;
                     EaglePageProvider_add(provider, &source2data[i]);
                     break;
                 }
                     
                 case EagleDataTypeVarchar:
                 {
-                    char **source2data = (EagleDataTypeVarcharType*) source2->data;
+                    EagleDataTypeVarcharType *source2data = (EagleDataTypeVarcharType*) source2->data;
                     EaglePageProvider_add(provider, strdup(source2data[i]));
                     break;
                 }
                     
                 case EagleDataTypeFloat:
                 {
-                    double *source2data = (EagleDataTypeFloatType*) source2->data;
+                    EagleDataTypeFloatType *source2data = (EagleDataTypeFloatType*) source2->data;
                     EaglePageProvider_add(provider, &source2data[i]);
                     break;
                 }
