@@ -153,6 +153,8 @@ void SQLSuiteTest()
         // execute
         EagleInstance *eagle = EagleInstance_New(1);
         EagleInstance_addPlan(eagle, plan);
+        /*printf("%s\n", EaglePlan_toString(plan));*/
+        
         EagleInstance_run(eagle);
         
         // validate column names
@@ -180,18 +182,30 @@ void SQLSuiteTest()
                             break;
                             
                         case EagleDataTypeInteger:
-                            if(*((int*) test.answers[i]->data[j]) != ((int*) page->data)[i]) {
-                                CUNIT_FAIL("%d != %d\n", *((int*) test.answers[i]->data[j]), ((int*) page->data)[i]);
+                            if(*((EagleDataTypeIntegerType*) test.answers[i]->data[j]) != ((EagleDataTypeIntegerType*) page->data)[i]) {
+                                CUNIT_FAIL("%d != %d\n", *((EagleDataTypeIntegerType*) test.answers[i]->data[j]), ((EagleDataTypeIntegerType*) page->data)[i]);
                                 valid = 0;
                             }
                             break;
                             
                         case EagleDataTypeVarchar:
-                            if(strcmp(((char**) test.answers[i]->data)[j], ((char**) page->data)[i])) {
-                                CUNIT_FAIL("'%s' != '%s'\n", ((char**) test.answers[i]->data)[j], ((char**) page->data)[i]);
+                            if(strcmp(((EagleDataTypeVarcharType*) test.answers[i]->data)[j], ((EagleDataTypeVarcharType*) page->data)[i])) {
+                                CUNIT_FAIL("'%s' != '%s'\n", ((EagleDataTypeVarcharType*) test.answers[i]->data)[j], ((EagleDataTypeVarcharType*) page->data)[i]);
                                 valid = 0;
                             }
                             break;
+                            
+                        case EagleDataTypeFloat:
+                        {
+                            EagleDataTypeFloatType a = *((EagleDataTypeFloatType*) test.answers[i]->data[j]);
+                            EagleDataTypeFloatType b = ((EagleDataTypeFloatType*) page->data)[i];
+                            EagleDataTypeFloatType epsilon = fabs(MIN(a, b)) / 1000.0;
+                            if(fabs(a - b) > epsilon) {
+                                CUNIT_FAIL("%g != %g (difference = %g)\n", a, b, fabs(a - b));
+                                valid = 0;
+                            }
+                            break;
+                        }
                             
                     }
                     
@@ -276,6 +290,10 @@ void controlTest(FILE *file, int *lineNumber)
                     
                 case EagleDataTypeVarchar:
                     EagleDbTuple_setVarchar(test.answers[test.usedAnswers], j, data[j]);
+                    break;
+                    
+                case EagleDataTypeFloat:
+                    EagleDbTuple_setFloat(test.answers[test.usedAnswers], j, atof(data[j]));
                     break;
                     
             }
@@ -376,6 +394,10 @@ void controlTable(FILE *file, char *firstLine, int *lineNumber)
                     
                 case EagleDataTypeVarchar:
                     EagleDbTuple_setVarchar(tuple, i, data[i]);
+                    break;
+                    
+                case EagleDataTypeFloat:
+                    EagleDbTuple_setFloat(tuple, i, atof(data[i]));
                     break;
                     
             }

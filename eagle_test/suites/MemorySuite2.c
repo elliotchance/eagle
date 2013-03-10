@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "EagleMemory.h"
 #include "EagleDbSqlFunctionExpression.h"
+#include "EaglePageProviderSingle.h"
+#include "EagleDbSqlValue.h"
 
 CUNIT_TEST(MemorySuite, EagleDbSqlFunctionExpression_New)
 {
@@ -26,6 +28,76 @@ CUNIT_TEST(MemorySuite, EagleDbSqlFunctionExpression_toString)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleData_Float)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleData_Float.1");
+    
+    CUNIT_VERIFY_NULL(EagleData_Float(123.0));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlValue_NewWithFloat)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlValue_NewWithFloat.1");
+    
+    CUNIT_VERIFY_NULL(EagleDbSqlValue_NewWithFloat(123.0));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePageProviderSingle_NewFloat)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProviderSingle_NewFloat.1");
+    
+    CUNIT_VERIFY_NULL(EaglePageProviderSingle_NewFloat(123.0, 1, "name"));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePageProviderSingle_nextPage_3)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePageProviderSingle_nextPage.3");
+    
+    EaglePageProviderSingle *single = EaglePageProviderSingle_NewFloat(123.0, 1, "name");
+    CUNIT_VERIFY_NULL(EaglePageProviderSingle_nextPage(single));
+    EaglePageProviderSingle_Delete(single);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePage_AllocFloat)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePage_AllocFloat.1");
+    
+    CUNIT_VERIFY_NULL(EaglePage_AllocFloat(1));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePage_CopyFloat_)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePage_CopyFloat_.1");
+    
+    EaglePage *page = EaglePage_AllocFloat(1);
+    CUNIT_VERIFY_NULL(EaglePage_CopyFloat_(page));
+    EaglePage_Delete(page);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
@@ -33,6 +105,12 @@ CUnitTests* MemorySuite2_tests()
     // method tests
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlFunctionExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlFunctionExpression_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Float));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_NewWithFloat));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewFloat));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_AllocFloat));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePage_CopyFloat_));
     
     return tests;
 }

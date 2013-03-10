@@ -19,7 +19,9 @@
 
 const int EagleDbSqlExpression_ERROR = -1;
 
-int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *expression,
+                                                         int *destinationBuffer,
+                                                         EaglePlan *plan)
 {
     EagleDbSqlFunctionExpression *cast = (EagleDbSqlFunctionExpression*) expression;
     int destination, destinationExpr;
@@ -36,12 +38,15 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *e
     destination = *destinationBuffer;
     
     /* find the function */
-    if(EagleUtils_CompareWithoutCase("sqrt", cast->name)) {
-        pageOperation = EaglePageOperations_SqrtPage;
+    if(EagleUtils_CompareWithoutCase("sqrt", cast->name) && plan->bufferTypes[destinationExpr] == EagleDataTypeFloat) {
+        pageOperation = EaglePageOperations_SqrtPageFloat;
     }
     else {
         /* function does not exist */
-        sprintf(msg, "Function %s() does not exist.", cast->name);
+        t1 = EagleDataType_typeToName(plan->bufferTypes[destinationExpr]);
+        sprintf(msg, "Function %s(%s) does not exist.", cast->name, t1);
+        EagleMemory_Free(t1);
+        
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         return EagleDbSqlExpression_ERROR;
     }
@@ -52,7 +57,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *e
     EagleMemory_Free(t1);
     EagleMemory_Free(t2);
     
-    plan->bufferTypes[destination] = EagleDataTypeInteger;
+    plan->bufferTypes[destination] = EagleDataTypeFloat;
     epo = EaglePlanOperation_New(pageOperation, destination, destinationExpr, -1, NULL, EagleFalse, msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
@@ -61,13 +66,16 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *e
     return destination;
 }
 
-int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expression,
+                                                      int *destinationBuffer,
+                                                      EaglePlan *plan)
 {
     EagleDbSqlUnaryExpression *cast = (EagleDbSqlUnaryExpression*) expression;
     int destination, destinationLeft;
     char *msg, *t1, *t2, *beforeOp = NULL, *afterOp = NULL;
     EaglePlanOperation *epo;
-    EaglePageOperationFunction(pageOperation);
+    EagleDbSqlUnaryOperator matchOp;
+    EagleBoolean matchedOp;
     
     /* operand */
     destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->expr, destinationBuffer, plan);
@@ -75,38 +83,37 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
         return EagleDbSqlExpression_ERROR;
     }
     
-    /* operator */
-    if(EagleDbSqlUnaryExpressionOperatorGrouping != cast->op) {
-        msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
-        if(NULL == msg) {
-            return EagleDbSqlExpression_ERROR;
-        }
-        destination = *destinationBuffer;
-    }
-    
-    switch(cast->op) {
-            
-        case EagleDbSqlUnaryExpressionOperatorNegate:
-            pageOperation = EaglePageOperations_NegatePage;
-            break;
-            
-        case EagleDbSqlUnaryExpressionOperatorNot:
-            pageOperation = EaglePageOperations_NotPage;
-            break;
-            
-        case EagleDbSqlUnaryExpressionOperatorGrouping:
-            pageOperation = NULL;
-            break;
-            
-    }
-    
-    if(NULL == pageOperation) {
+    /* catch grouping operator */
+    if(EagleDbSqlUnaryExpressionOperatorGrouping == cast->op) {
         return destinationLeft;
     }
     
+    /* operator */
+    msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
+    if(NULL == msg) {
+        return EagleDbSqlExpression_ERROR;
+    }
+    destination = *destinationBuffer;
+    
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
-    t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     EagleDbSqlUnaryExpressionOperator_toString(cast->op, &beforeOp, &afterOp);
+    
+    matchedOp = EagleDbSqlUnaryExpression_GetOperation(cast->op,
+                                                       plan->bufferTypes[destinationLeft],
+                                                       &matchOp);
+    if(EagleFalse == matchedOp) {
+        /* operator does not exist */
+        sprintf(msg, "No such operator %s%s%s", beforeOp, t1, afterOp);
+        EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+        
+        EagleMemory_Free(msg);
+        EagleMemory_Free(t1);
+        EagleMemory_Free(beforeOp);
+        EagleMemory_Free(afterOp);
+        return EagleDbSqlExpression_ERROR;
+    }
+    
+    t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     
     sprintf(msg, "{ %s<%d>%s (%s) } into <%d> (%s)", beforeOp, destinationLeft, afterOp, t2, destination, t2);
     
@@ -116,7 +123,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     EagleMemory_Free(afterOp);
     
     plan->bufferTypes[destination] = EagleDataTypeInteger;
-    epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, -1, NULL, EagleFalse, msg);
+    epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, -1, NULL, EagleFalse, msg);
     EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
@@ -125,13 +132,16 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     return destination;
 }
 
-int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan)
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpression *expression,
+                                                       int *destinationBuffer,
+                                                       EaglePlan *plan)
 {
     EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
     int destination, destinationLeft, destinationRight;
     char *msg, *t1, *t2, *t3, *op;
     EaglePlanOperation *epo;
-    EaglePageOperationFunction(pageOperation);
+    EagleDbSqlBinaryOperator matchOp;
+    EagleBoolean matchedOp;
     
     /* left */
     destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan);
@@ -152,77 +162,38 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     }
     destination = *destinationBuffer;
     
-    switch(cast->op) {
-            
-        case EagleDbSqlBinaryExpressionOperatorPlus:
-            pageOperation = EaglePageOperations_AdditionPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorEquals:
-            pageOperation = EaglePageOperations_EqualsPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorModulus:
-            pageOperation = EaglePageOperations_ModulusPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorMultiply:
-            pageOperation = EaglePageOperations_MultiplyPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorNotEquals:
-            pageOperation = EaglePageOperations_NotEqualsPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorGreaterThan:
-            pageOperation = EaglePageOperations_GreaterThanPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorLessThan:
-            pageOperation = EaglePageOperations_LessThanPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorGreaterThanEqual:
-            pageOperation = EaglePageOperations_GreaterThanEqualPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorLessThanEqual:
-            pageOperation = EaglePageOperations_LessThanEqualPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorMinus:
-            pageOperation = EaglePageOperations_SubtractPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorDivide:
-            pageOperation = EaglePageOperations_DividePage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorOr:
-            pageOperation = EaglePageOperations_OrPage;
-            break;
-            
-        case EagleDbSqlBinaryExpressionOperatorAnd:
-            pageOperation = EaglePageOperations_AndPage;
-            break;
-            
-    }
-    
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
     t2 = EagleDataType_typeToName(plan->bufferTypes[destinationRight]);
-    t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     op = EagleDbSqlBinaryExpressionOperator_toString(cast->op);
     
-    sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2, destination, t3);
+    matchedOp = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
+                                                        cast->op,
+                                                        plan->bufferTypes[destinationRight],
+                                                        &matchOp);
+    if(EagleFalse == matchedOp) {
+        /* operator does not exist */
+        sprintf(msg, "No such operator %s %s %s", t1, op, t2);
+        EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+        
+        EagleMemory_Free(msg);
+        EagleMemory_Free(t1);
+        EagleMemory_Free(t2);
+        EagleMemory_Free(op);
+        return EagleDbSqlExpression_ERROR;
+    }
+    
+    t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
+    
+    sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2,
+            destination, t3);
     
     EagleMemory_Free(t1);
     EagleMemory_Free(t2);
     EagleMemory_Free(t3);
     EagleMemory_Free(op);
     
-    plan->bufferTypes[destination] = EagleDataTypeInteger;
-    epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
-                                 EagleFalse, msg);
+    plan->bufferTypes[destination] = matchOp.returnType;
+    epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, destinationRight, NULL, EagleFalse, msg);
     EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
@@ -293,6 +264,21 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
             break;
         }
             
+        case EagleDbSqlValueTypeFloat:
+        {
+            EaglePageProvider *provider;
+            EaglePlanBufferProvider *bp;
+            
+            destination = *destinationBuffer;
+            provider = (EaglePageProvider*) EaglePageProviderSingle_NewFloat(value->value.floatValue, plan->pageSize, "(float)");
+            bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+            EaglePlan_addBufferProvider(plan, bp, EagleTrue);
+            ++*destinationBuffer;
+            
+            plan->bufferTypes[destination] = EagleDataTypeFloat;
+            break;
+        }
+            
     }
     
     return destination;
@@ -360,6 +346,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
     for(i = 0; i < totalExpressions; ++i) {
         char *desc;
         EaglePageProvider *provider;
+        EagleDataType dataType;
         
         results[i] = EagleDbSqlExpression_CompilePlanIntoBuffer_(expressions[i], &destinationBuffer, plan);
         
@@ -373,7 +360,8 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
          result provider now
          */
         desc = EagleDbSqlExpression_toString(expressions[i]);
-        provider = (EaglePageProvider*) EaglePageProviderStream_New(plan->bufferTypes[results[i]], plan->pageSize, desc);
+        dataType = plan->bufferTypes[results[i]];
+        provider = (EaglePageProvider*) EaglePageProviderStream_New(dataType, plan->pageSize, desc);
         plan->result[i] = provider;
         EaglePlan_addFreeObject(plan, provider, (void(*)(void*)) EaglePageProvider_Delete);
         EagleMemory_Free(desc);

@@ -26,6 +26,7 @@ const char *tokens[] = {
     "BETWEEN",
     "BIGINT",
     "BINARY",
+    "BIT",
     "BLOB",
     "BOOLEAN",
     "BOTH",

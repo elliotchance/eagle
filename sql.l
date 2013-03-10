@@ -21,9 +21,10 @@
 
 white [ \t\n\r]+
 identifier [a-zA-Z_][a-zA-Z0-9_]*
-integer [0-9]+
+integer -?[0-9]+
 comment_single \-\-[^\n]*
 string_literal '([^\']|''|\')*'
+float -?[0-9]+\.[0-9]+
 
 %x COMMENT
 
@@ -50,6 +51,7 @@ string_literal '([^\']|''|\')*'
 "BETWEEN" return K_BETWEEN;
 "BIGINT" return K_BIGINT;
 "BINARY" return K_BINARY;
+"BIT" return K_BIT;
 "BLOB" return K_BLOB;
 "BOOLEAN" return K_BOOLEAN;
 "BOTH" return K_BOTH;
@@ -568,6 +570,11 @@ string_literal '([^\']|''|\')*'
 {integer} {
     yyextra->yytext_last = yytext;
     return INTEGER;
+}
+
+{float} {
+    yyextra->yytext_last = yytext;
+    return FLOAT;
 }
 
 {string_literal} {

@@ -120,7 +120,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
  @param [in] plan See EagleDbSqlExpression_CompilePlanIntoBuffer_().
  @return See EagleDbSqlExpression_CompilePlanIntoBuffer_().
  */
-int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpression *expression, int *destinationBuffer, EaglePlan *plan);
 
 /**
  Private function for EagleDbSqlExpression_CompilePlanIntoBuffer_().

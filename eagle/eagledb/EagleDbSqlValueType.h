@@ -26,7 +26,12 @@ typedef enum {
     /**
      A string literal.
      */
-    EagleDbSqlValueTypeString = 4
+    EagleDbSqlValueTypeString = 4,
+    
+    /**
+     A floating point number.
+     */
+    EagleDbSqlValueTypeFloat = 5
     
 } EagleDbSqlValueType;
 

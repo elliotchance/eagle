@@ -4,7 +4,7 @@
 #include "EagleDbSqlValue.h"
 #include "EagleMemory.h"
 
-EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
+EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(EagleDataTypeIntegerType value)
 {
     EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithInteger.1", sizeof(EagleDbSqlValue));
     if(NULL == v) {
@@ -14,6 +14,20 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithInteger(int value)
     v->expressionType = EagleDbSqlExpressionTypeValue;
     v->type = EagleDbSqlValueTypeInteger;
     v->value.intValue = value;
+    
+    return v;
+}
+
+EagleDbSqlValue* EagleDbSqlValue_NewWithFloat(EagleDataTypeFloatType value)
+{
+    EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithFloat.1", sizeof(EagleDbSqlValue));
+    if(NULL == v) {
+        return NULL;
+    }
+    
+    v->expressionType = EagleDbSqlExpressionTypeValue;
+    v->type = EagleDbSqlValueTypeFloat;
+    v->value.floatValue = value;
     
     return v;
 }
@@ -45,7 +59,7 @@ EagleDbSqlValue* EagleDbSqlValue_NewWithIdentifier(char *identifier)
     return v;
 }
 
-EagleDbSqlValue* EagleDbSqlValue_NewWithString(const char *str, EagleBoolean process)
+EagleDbSqlValue* EagleDbSqlValue_NewWithString(char *str, EagleBoolean process)
 {
     EagleDbSqlValue *v = (EagleDbSqlValue*) EagleMemory_Allocate("EagleDbSqlValue_NewWithString.1", sizeof(EagleDbSqlValue));
     if(NULL == v) {
@@ -97,6 +111,7 @@ void EagleDbSqlValue_Delete(EagleDbSqlValue *value)
             
         case EagleDbSqlValueTypeAsterisk:
         case EagleDbSqlValueTypeInteger:
+        case EagleDbSqlValueTypeFloat:
             break;
             
         case EagleDbSqlValueTypeIdentifier:
@@ -121,6 +136,13 @@ char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
         {
             char buf[32];
             sprintf(buf, "%d", value->value.intValue);
+            return strdup(buf);
+        }
+            
+        case EagleDbSqlValueTypeFloat:
+        {
+            char buf[32];
+            sprintf(buf, "%g", value->value.floatValue);
             return strdup(buf);
         }
             

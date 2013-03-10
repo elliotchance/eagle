@@ -50,7 +50,7 @@ void EagleDbTuple_Delete(EagleDbTuple *tuple)
     }
 }
 
-void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
+void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, EagleDataTypeIntegerType value)
 {
     if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeInteger) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
@@ -59,7 +59,16 @@ void EagleDbTuple_setInt(EagleDbTuple *tuple, int position, int value)
     tuple->data[position] = EagleData_Int(value);
 }
 
-void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, const char *value)
+void EagleDbTuple_setFloat(EagleDbTuple *tuple, int position, EagleDataTypeFloatType value)
+{
+    if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeFloat) {
+        EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
+        return;
+    }
+    tuple->data[position] = EagleData_Float(value);
+}
+
+void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, EagleDataTypeVarcharType value)
 {
     if(EagleDbTable_getColumn(tuple->table, position)->type != EagleDataTypeVarchar) {
         EagleLogger_Log(EagleLoggerSeverityError, "Wrong type.");
@@ -94,11 +103,15 @@ char* EagleDbTuple_toString(EagleDbTuple *tuple)
                 break;
                 
             case EagleDataTypeInteger:
-                sprintf(desc, "%s%d", desc, *(((int**) tuple->data)[i]));
+                sprintf(desc, "%s%d", desc, *(((EagleDataTypeIntegerType**) tuple->data)[i]));
                 break;
                 
             case EagleDataTypeVarchar:
-                sprintf(desc, "%s\"%s\"", desc, ((char**) tuple->data)[i]);
+                sprintf(desc, "%s\"%s\"", desc, ((EagleDataTypeVarcharType*) tuple->data)[i]);
+                break;
+                
+            case EagleDataTypeFloat:
+                sprintf(desc, "%s%g", desc, *(((EagleDataTypeFloatType**) tuple->data)[i]));
                 break;
                 
         }

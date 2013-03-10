@@ -4,6 +4,13 @@
 #include "EagleDbSqlExpression.h"
 #include "EagleDbSqlBinaryExpressionOperator.h"
 #include "Eagle.h"
+#include "EaglePageOperations.h"
+#include "EagleDataType.h"
+
+/**
+ This is used by EagleDbSqlBinaryExpression_GetOperation()
+ */
+#define EagleDbSqlBinaryOperator_Make(left, op, right, func, returnType) { EagleDataType##left, EagleDbSqlBinaryExpressionOperator##op, EagleDataType##right, EaglePageOperations_##func, EagleDataType##returnType }
 
 /**
  Expression type is EagleDbSqlExpressionTypeBinaryExpression.
@@ -36,6 +43,38 @@ typedef struct {
 } EagleDbSqlBinaryExpression;
 
 /**
+ Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation for an operator.
+ */
+typedef struct {
+    
+    /**
+     Data type of the left side (first operand).
+     */
+    EagleDataType left;
+    
+    /**
+     The operator.
+     */
+    EagleDbSqlBinaryExpressionOperator op;
+    
+    /**
+     Data type of the right side (second operand).
+     */
+    EagleDataType right;
+    
+    /**
+     The page operation function.
+     */
+    EaglePageOperationFunction(func);
+    
+    /**
+     The return type that the page operation function outputs.
+     */
+    EagleDataType returnType;
+    
+} EagleDbSqlBinaryOperator;
+
+/**
  * Create a new EagleDbSqlBinaryExpression.
  * @param [in] left Left operand.
  * @param [in] op Operator.
@@ -65,5 +104,19 @@ void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr
  * @return A new string representation of the expression.
  */
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
+
+/**
+ Find the appropriate page operation for an operator.
+ 
+ @param [in] left Left data type (first operand).
+ @param [in] op The operator.
+ @param [in] right Right data type (second operand).
+ @param [out] match If a match is found it will be copied into this output parameter.
+ @return EagleTrue if the operator can be found.
+ */
+EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
+                                                     EagleDbSqlBinaryExpressionOperator op,
+                                                     EagleDataType right,
+                                                     EagleDbSqlBinaryOperator *match);
 
 #endif

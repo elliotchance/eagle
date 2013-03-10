@@ -43,7 +43,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePlanOperation *op1, *op2, *op3, *op4;
     EaglePlan_addOperation(plan, op1 = EaglePlanOperation_New(EaglePageOperations_GreaterThanInt,      2, 1, -1, EagleData_Int(min), EagleTrue,  "1"));
     EaglePlan_addOperation(plan, op2 = EaglePlanOperation_New(EaglePageOperations_LessThanInt,         3, 1, -1, EagleData_Int(max), EagleTrue,  "2"));
-    EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPage,             0, 2,  3, NULL,               EagleFalse, "3"));
+    EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPageInt,             0, 2,  3, NULL,               EagleFalse, "3"));
     EaglePlan_addOperation(plan, op4 = EaglePlanOperation_New(EaglePageOperations_SendPageToProvider, -1, 0,  1, result,             EagleFalse, "4"));
     
     // this will be enough buffers for the above operations
@@ -202,16 +202,22 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     EaglePlan_prepareBuffers(plan, 1);
     
+    // output providers
+    plan->resultFields = 1;
+    plan->result = (EaglePageProvider**) calloc(sizeof(EaglePageProvider*), plan->resultFields);
+    plan->result[0] = (EaglePageProvider*) EaglePageProviderSingle_NewInt(123, 1, "name");
+    
     // add some steps
     EaglePlanOperation *op1, *op2, *op3;
     EaglePlan_addOperation(plan, op1 = EaglePlanOperation_New(EaglePageOperations_GreaterThanInt, 2, 1, -1, NULL, EagleFalse, "Step 1"));
     EaglePlan_addOperation(plan, op2 = EaglePlanOperation_New(EaglePageOperations_LessThanInt,    3, 1, -1, NULL, EagleFalse, "Step 2"));
-    EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPage,        0, 2,  3, NULL, EagleFalse, "Step 3"));
+    EaglePlan_addOperation(plan, op3 = EaglePlanOperation_New(EaglePageOperations_AndPageInt,     0, 2,  3, NULL, EagleFalse, "Step 3"));
     
     msg = (char*) EaglePlan_toString(plan);
-    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Providers:\n    destination = 123, name = (null), type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
+    CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n  Input Providers:\n    destination = 123, name = (null), type = INTEGER\n  Output Providers:\n    destination = 0, name = name, type = INTEGER\n  Operations:\n    Step 1\n    Step 2\n    Step 3\n  Buffers:\n    0 type=UNKNOWN\n");
     EagleMemory_Free(msg);
     
+    EaglePageProvider_Delete(plan->result[0]);
     EaglePlan_Delete(plan);
     EaglePlanOperation_Delete(op1);
     EaglePlanOperation_Delete(op2);
@@ -280,7 +286,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderStream_New)
     CUNIT_ASSERT_NULL(p);
     
     int testDataSize = 5, recordsPerPage = 2;
-    int *testData = (int*) calloc(testDataSize, sizeof(int));
+    int *testData = (EagleDataTypeIntegerType*) calloc(testDataSize, sizeof(EagleDataTypeIntegerType));
     testData[0] = 123;
     testData[1] = 456;
     testData[2] = 789;
@@ -422,6 +428,12 @@ CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
 CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
 {
     EaglePage *page = EaglePage_CopyInt_(NULL);
+    CUNIT_ASSERT_NULL(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_CopyFloat_)
+{
+    EaglePage *page = EaglePage_CopyFloat_(NULL);
     CUNIT_ASSERT_NULL(page);
 }
 
@@ -932,6 +944,7 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyInt_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyVarchar_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyFloat_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));

@@ -3,12 +3,12 @@
 #==================================================
 
 % table mytable
-col1 int,col2 int,col3 varchar
-0,0,hello
-1,2,world
-2,4,how
-5,10,are
-10,20,you doing?
+col1 int,col2 int,col3 varchar,col4 float
+0,0,hello,3.2
+1,2,world,7.9
+2,4,how,123.456
+5,10,are,10000
+10,20,you doing?,-456.789
 
 #==================================================
 # Errors
@@ -19,24 +19,42 @@ SELECT * FROM mytable WHERE 123
 You can not use the star operator like this.
 
 % test_error
-SELECT col4 FROM mytable
-Unknown column 'col4'
+SELECT col40 FROM mytable
+Unknown column 'col40'
 
 % test_error
-SELECT col1 + col4 FROM mytable
-Unknown column 'col4'
+SELECT col1 + col40 FROM mytable
+Unknown column 'col40'
 
 % test_error
-SELECT col7 + col1 FROM mytable
-Unknown column 'col7'
+SELECT col70 + col1 FROM mytable
+Unknown column 'col70'
 
 % test_error
 SELECT blabla(col1) FROM mytable
-Function blabla() does not exist.
+Function blabla(INTEGER) does not exist.
 
 #==================================================
 # SELECTs
 #==================================================
+
+% test
+SELECT col4 FROM mytable
+col4:float
+3.2
+7.9
+123.456
+10000
+-456.789
+
+% test
+SELECT col4 * col4 FROM mytable
+col4 * col4:float
+10.24
+62.41
+15241.383936
+100000000
+208656.19052
 
 % test
 SELECT 123 FROM mytable
@@ -232,19 +250,10 @@ SELECT 2 * (col1 + 3) FROM mytable
 26
 
 % test
-SELECT sqrt(col1*col2) FROM mytable
-sqrt(col1 * col2):integer
-0
-1
-2
-7
-14
-
-% test
-SELECT SQRT(col1*col2) FROM mytable
-sqrt(col1 * col2):integer
-0
-1
-2
-7
-14
+SELECT sqrt(col4*col4) FROM mytable
+sqrt(col4 * col4):float
+3.2
+7.9
+123.456
+10000
+456.789

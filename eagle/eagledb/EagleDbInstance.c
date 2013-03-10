@@ -14,6 +14,7 @@
 #include "EagleLogger.h"
 #include "EagleDbSchema.h"
 #include "EagleDbInformationSchema.h"
+#include "EagleDataType.h"
 
 EagleDbInstance* EagleDbInstance_New(int pageSize)
 {
@@ -72,7 +73,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                         {
                             char buf[30];
                             unsigned long len;
-                            sprintf(buf, "%d", ((int*) page->data)[j]);
+                            sprintf(buf, "%d", ((EagleDataTypeIntegerType*) page->data)[j]);
                             len = strlen(buf);
                             
                             if(len > widths[i]) {
@@ -84,7 +85,21 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                             
                         case EagleDataTypeVarchar:
                         {
-                            unsigned long len = strlen(((char**) page->data)[j]);
+                            unsigned long len = strlen(((EagleDataTypeVarcharType*) page->data)[j]);
+                            
+                            if(len > widths[i]) {
+                                widths[i] = len;
+                            }
+                            
+                            break;
+                        }
+                            
+                        case EagleDataTypeFloat:
+                        {
+                            char buf[30];
+                            unsigned long len;
+                            sprintf(buf, "%g", ((EagleDataTypeFloatType*) page->data)[j]);
+                            len = strlen(buf);
                             
                             if(len > widths[i]) {
                                 widths[i] = len;
@@ -166,15 +181,22 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
                                 
                             case EagleDataTypeInteger:
                             {
-                                int *d = (int*) pages[k]->data;
+                                EagleDataTypeIntegerType *d = (EagleDataTypeIntegerType*) pages[k]->data;
                                 printf(" %*d ", (int) widths[k], d[j]);
                                 break;
                             }
                                 
                             case EagleDataTypeVarchar:
                             {
-                                char **d = (char**) pages[k]->data;
+                                EagleDataTypeVarcharType *d = (EagleDataTypeVarcharType*) pages[k]->data;
                                 printf(" %-*s ", (int) widths[k], d[j]);
+                                break;
+                            }
+                                
+                            case EagleDataTypeFloat:
+                            {
+                                EagleDataTypeFloatType *d = (EagleDataTypeFloatType*) pages[k]->data;
+                                printf(" %*g ", (int) widths[k], d[j]);
                                 break;
                             }
                                 
@@ -305,15 +327,22 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
                 
             case EagleDbSqlValueTypeInteger:
             {
-                int value = v->value.intValue;
+                EagleDataTypeIntegerType value = v->value.intValue;
                 EagleDbTuple_setInt(tuple, colIndex, value);
                 break;
             }
                 
             case EagleDbSqlValueTypeString:
             {
-                const char *value = v->value.identifier;
+                EagleDataTypeVarcharType value = v->value.identifier;
                 EagleDbTuple_setVarchar(tuple, colIndex, value);
+                break;
+            }
+                
+            case EagleDbSqlValueTypeFloat:
+            {
+                EagleDataTypeFloatType value = v->value.floatValue;
+                EagleDbTuple_setFloat(tuple, colIndex, value);
                 break;
             }
                 

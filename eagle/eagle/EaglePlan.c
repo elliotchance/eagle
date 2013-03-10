@@ -4,6 +4,7 @@
 #include "EaglePlan.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EaglePageProvider.h"
 
 EaglePlan* EaglePlan_New(int pageSize)
 {
@@ -65,7 +66,7 @@ const char* EaglePlan_toString(EaglePlan *plan)
     strcat_safe(str, "EaglePlan:\n");
     
     if(!EagleLinkedList_isEmpty(plan->providers)) {
-        strcat_safe(str, "  Providers:\n");
+        strcat_safe(str, "  Input Providers:\n");
         
         EagleLinkedList_Foreach(plan->providers, EaglePlanBufferProvider*, provider)
         {
@@ -76,6 +77,27 @@ const char* EaglePlan_toString(EaglePlan *plan)
             strcat_safe(str, "\n");
         }
         EagleLinkedList_ForeachEnd
+    }
+    
+    if(plan->resultFields > 0) {
+        strcat_safe(str, "  Output Providers:\n");
+        
+        for(i = 0; i < plan->resultFields; ++i) {
+            EaglePageProvider *provider = plan->result[i];
+            
+            strcat_safe(str, "    destination = ");
+            sprintf(str, "%s%d", str, i);
+            
+            strcat_safe(str, ", name = ");
+            strcat_safe(str, provider->name);
+            
+            strcat_safe(str, ", type = ");
+            temp = EagleDataType_typeToName(provider->type);
+            strcat_safe(str, temp);
+            EagleMemory_Free(temp);
+            
+            strcat_safe(str, "\n");
+        }
     }
     
     if(!EagleLinkedList_isEmpty(plan->operations)) {
