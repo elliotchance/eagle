@@ -132,7 +132,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     return destination;
 }
 
-int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *expression,
+int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpression *expression,
                                                        int *destinationBuffer,
                                                        EaglePlan *plan)
 {
@@ -168,9 +168,9 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     op = EagleDbSqlBinaryExpressionOperator_toString(cast->op);
     
     matchedOp = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
-                                                      cast->op,
-                                                      plan->bufferTypes[destinationRight],
-                                                      &matchOp);
+                                                        cast->op,
+                                                        plan->bufferTypes[destinationRight],
+                                                        &matchOp);
     if(EagleFalse == matchedOp) {
         /* operator does not exist */
         sprintf(msg, "No such operator %s %s %s", t1, op, t2);

@@ -176,6 +176,7 @@ EagleDbTable* _getTable()
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
     EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeVarchar));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col3", EagleDataTypeFloat));
     
     return table;
 }
@@ -213,8 +214,10 @@ CUNIT_TEST(DBSuite, EagleDbTuple_New)
     EagleDbTuple *tuple = EagleDbTuple_New(table);
     EagleDbTuple_setInt(tuple, 0, 123);
     EagleDbTuple_setVarchar(tuple, 1, "hello");
+    EagleDbTuple_setFloat(tuple, 2, 123.456);
+    
     char *desc = EagleDbTuple_toString(tuple);
-    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\")");
+    CUNIT_ASSERT_EQUAL_STRING(desc, "(col1=123,col2=\"hello\",col3=123.456)");
     EagleMemory_Free(desc);
     
     EagleDbTuple_Delete(tuple);
@@ -817,6 +820,7 @@ EagleDbInstance* EagleInstanceTest(int pageSize)
     
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col2", EagleDataTypeFloat));
     
     EagleDbTableData *td = EagleDbTableData_New(table, pageSize);
     EagleDbSchema_addTable(schema, td);
@@ -861,9 +865,9 @@ CUNIT_TEST(DBSuite, _INSERT_BadColumnName)
     EagleDbInstance *db = EagleInstanceTest(10);
     
     EagleLoggerEvent *error = NULL;
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col2) VALUES (123);", &error);
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1000) VALUES (123);", &error);
     CUNIT_ASSERT_FALSE(success);
-    CUNIT_ASSERT_LAST_ERROR("No such column 'col2' in table 'mytable'");
+    CUNIT_ASSERT_LAST_ERROR("No such column 'col1000' in table 'mytable'");
     
     EagleInstanceTest_Cleanup(db);
 }
@@ -878,7 +882,7 @@ CUNIT_TEST(DBSuite, _INSERT_Good)
     CUNIT_ASSERT_NULL(p);
     
     EagleLoggerEvent *error = NULL;
-    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (123);", &error);
+    EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1, col2) VALUES (123, 123.123);", &error);
     if(EagleFalse == success) {
         CUNIT_FAIL("%s", EagleLogger_LastEvent()->message);
     }

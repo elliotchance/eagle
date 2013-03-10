@@ -327,22 +327,22 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
                 
             case EagleDbSqlValueTypeInteger:
             {
-                int value = v->value.intValue;
+                EagleDataTypeIntegerType value = v->value.intValue;
                 EagleDbTuple_setInt(tuple, colIndex, value);
                 break;
             }
                 
             case EagleDbSqlValueTypeString:
             {
-                char *value = v->value.identifier;
+                EagleDataTypeVarcharType value = v->value.identifier;
                 EagleDbTuple_setVarchar(tuple, colIndex, value);
                 break;
             }
                 
             case EagleDbSqlValueTypeFloat:
             {
-                int value = v->value.intValue;
-                EagleDbTuple_setInt(tuple, colIndex, value);
+                EagleDataTypeFloatType value = v->value.floatValue;
+                EagleDbTuple_setFloat(tuple, colIndex, value);
                 break;
             }
                 

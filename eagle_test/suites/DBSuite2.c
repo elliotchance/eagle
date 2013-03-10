@@ -357,11 +357,72 @@ CUNIT_TEST(DBSuite, EagleDbSqlFunctionExpression_DeleteRecursive)
     EagleDbSqlFunctionExpression_DeleteRecursive(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetOperation)
+{
+    EagleDbSqlBinaryOperator op;
+    CUNIT_ASSERT_FALSE(EagleDbSqlBinaryExpression_GetOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, EagleDataTypeUnknown, &op));
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_3)
+{
+    {
+        EagleDbSqlValue *v = EagleDbSqlValue_NewWithFloat(123.0);
+        char *desc = EagleDbSqlValue_toString(v);
+        CUNIT_VERIFY_EQUAL_STRING(desc, "123");
+        free(desc);
+        EagleDbSqlValue_Delete(v);
+    }
+    
+    {
+        EagleDbSqlValue *v = EagleDbSqlValue_NewWithFloat(123.456);
+        char *desc = EagleDbSqlValue_toString(v);
+        CUNIT_VERIFY_EQUAL_STRING(desc, "123.456");
+        free(desc);
+        EagleDbSqlValue_Delete(v);
+    }
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_)
+{
+    EagleDbSqlBinaryExpression *expr = EagleDbSqlBinaryExpression_New((EagleDbSqlExpression*) EagleDbSqlValue_NewWithFloat(123.0),
+                                                                      EagleDbSqlBinaryExpressionOperatorPlus,
+                                                                      (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456));
+    int destinationBuffer = 0;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan_prepareBuffers(plan, 10);
+    
+    EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
+    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such operator FLOAT + INTEGER");
+    
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_setFloat)
+{
+    EagleLogger_Get()->out = NULL;
+    
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeVarchar));
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    EagleDbTuple_setFloat(tuple, 0, 123.0);
+    CUNIT_ASSERT_LAST_ERROR("Wrong type.");
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setFloat));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_3));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlFunctionExpression_DeleteRecursive));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlFunctionExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Function_));
