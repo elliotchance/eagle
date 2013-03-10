@@ -8,6 +8,11 @@
 #include "EagleDataType.h"
 
 /**
+ This is used by EagleDbSqlBinaryExpression_GetOperation()
+ */
+#define EagleDbSqlBinaryOperator_Make(left, op, right, func, returnType) { EagleDataType##left, EagleDbSqlBinaryExpressionOperator##op, EagleDataType##right, EaglePageOperations_##func, EagleDataType##returnType }
+
+/**
  Expression type is EagleDbSqlExpressionTypeBinaryExpression.
  
  @see EagleDbSqlExpressionType
@@ -36,6 +41,20 @@ typedef struct {
     EAGLE_ATTR_PROVIDED EagleDbSqlExpression *right;
     
 } EagleDbSqlBinaryExpression;
+
+typedef struct {
+    
+    EagleDataType left;
+    
+    EagleDbSqlBinaryExpressionOperator op;
+    
+    EagleDataType right;
+    
+    EaglePageOperationFunction(func);
+    
+    EagleDataType returnType;
+    
+} EagleDbSqlBinaryOperator;
 
 /**
  * Create a new EagleDbSqlBinaryExpression.
@@ -68,9 +87,9 @@ void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr
  */
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
 
-EaglePageOperationFunction(EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
-                                                                   EagleDbSqlBinaryExpressionOperator op,
-                                                                   EagleDataType right,
-                                                                   char **error));
+EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
+                                                     EagleDbSqlBinaryExpressionOperator op,
+                                                     EagleDataType right,
+                                                     EagleDbSqlBinaryOperator *match);
 
 #endif

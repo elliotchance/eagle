@@ -135,9 +135,10 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
 {
     EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
     int destination, destinationLeft, destinationRight;
-    char *msg, *t1, *t2, *t3, *op, *error;
+    char *msg, *t1, *t2, *t3, *op;
     EaglePlanOperation *epo;
-    EaglePageOperationFunction(pageOperation);
+    EagleDbSqlBinaryOperator matchOp;
+    EagleBoolean matchedOp;
     
     /* left */
     destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan);
@@ -163,11 +164,11 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     op = EagleDbSqlBinaryExpressionOperator_toString(cast->op);
     
-    pageOperation = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
-                                                            cast->op,
-                                                            plan->bufferTypes[destinationRight],
-                                                            &error);
-    if(NULL == pageOperation) {
+    matchedOp = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
+                                                      cast->op,
+                                                      plan->bufferTypes[destinationRight],
+                                                      &matchOp);
+    if(EagleFalse == matchedOp) {
         /* operator does not exist */
         sprintf(msg, "No such operator %s %s %s", t1, op, t2);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
@@ -183,10 +184,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(EagleDbSqlExpression *exp
     EagleMemory_Free(t3);
     EagleMemory_Free(op);
     
-    /* FIXME: this type should be returned from EagleDbSqlBinaryExpression_GetOperation() */
-    plan->bufferTypes[destination] = plan->bufferTypes[destinationLeft];
-    epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, destinationRight, NULL,
-                                 EagleFalse, msg);
+    plan->bufferTypes[destination] = matchOp.returnType;
+    epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, destinationRight, NULL, EagleFalse, msg);
     EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);

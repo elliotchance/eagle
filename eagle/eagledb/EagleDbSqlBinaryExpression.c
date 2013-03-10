@@ -21,117 +21,40 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
     return expr;
 }
 
-EaglePageOperationFunction(EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
-                                                                   EagleDbSqlBinaryExpressionOperator op,
-                                                                   EagleDataType right,
-                                                                   char **error))
+EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
+                                                     EagleDbSqlBinaryExpressionOperator op,
+                                                     EagleDataType right,
+                                                     EagleDbSqlBinaryOperator *match)
 {
-    EaglePageOperationFunction(pageOperation) = NULL;
+    unsigned long i;
+    static EagleDbSqlBinaryOperator ops[] = {
+        /* Integer                    left     operator          right    function              returns */
+        EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionPage,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsPage,           Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusPage,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyIntPage,      Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsPage,        Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanPage,      Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanPage,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualPage, Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualPage,    Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractPage,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DividePage,           Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Or,               Integer, OrPage,               Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, And,              Integer, AndPage,              Integer),
+        
+        /* Float                      left   operator  right  function           returns */
+        EagleDbSqlBinaryOperator_Make(Float, Multiply, Float, MultiplyFloatPage, Float),
+    };
     
-    if(left != right) {
-        *error = strdup("You cannot mix data types, both operands must be same data type.");
-        return NULL;
+    for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {
+        if(left == ops[i].left && right == ops[i].right && op == ops[i].op) {
+            *match = ops[i];
+            return EagleTrue;
+        }
     }
     
-    switch(left) {
-            
-        case EagleDataTypeVarchar:
-        case EagleDataTypeUnknown:
-            *error = strdup("No operators for data type.");
-            return NULL;
-            
-        case EagleDataTypeInteger:
-            
-            switch(op) {
-                    
-                case EagleDbSqlBinaryExpressionOperatorPlus:
-                    pageOperation = EaglePageOperations_AdditionPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorEquals:
-                    pageOperation = EaglePageOperations_EqualsPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorModulus:
-                    pageOperation = EaglePageOperations_ModulusPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorMultiply:
-                    pageOperation = EaglePageOperations_MultiplyIntPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorNotEquals:
-                    pageOperation = EaglePageOperations_NotEqualsPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorGreaterThan:
-                    pageOperation = EaglePageOperations_GreaterThanPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorLessThan:
-                    pageOperation = EaglePageOperations_LessThanPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorGreaterThanEqual:
-                    pageOperation = EaglePageOperations_GreaterThanEqualPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorLessThanEqual:
-                    pageOperation = EaglePageOperations_LessThanEqualPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorMinus:
-                    pageOperation = EaglePageOperations_SubtractPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorDivide:
-                    pageOperation = EaglePageOperations_DividePage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorOr:
-                    pageOperation = EaglePageOperations_OrPage;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorAnd:
-                    pageOperation = EaglePageOperations_AndPage;
-                    break;
-                    
-            }
-            break;
-            
-        case EagleDataTypeFloat:
-            switch(op) {
-                    
-                case EagleDbSqlBinaryExpressionOperatorPlus:
-                case EagleDbSqlBinaryExpressionOperatorEquals:
-                case EagleDbSqlBinaryExpressionOperatorModulus:
-                case EagleDbSqlBinaryExpressionOperatorNotEquals:
-                case EagleDbSqlBinaryExpressionOperatorGreaterThan:
-                case EagleDbSqlBinaryExpressionOperatorLessThan:
-                case EagleDbSqlBinaryExpressionOperatorGreaterThanEqual:
-                case EagleDbSqlBinaryExpressionOperatorLessThanEqual:
-                case EagleDbSqlBinaryExpressionOperatorMinus:
-                case EagleDbSqlBinaryExpressionOperatorDivide:
-                case EagleDbSqlBinaryExpressionOperatorOr:
-                case EagleDbSqlBinaryExpressionOperatorAnd:
-                    pageOperation = NULL;
-                    break;
-                    
-                case EagleDbSqlBinaryExpressionOperatorMultiply:
-                    pageOperation = EaglePageOperations_MultiplyFloatPage;
-                    break;
-                    
-            }
-            break;
-            
-    }
-    
-    if(NULL == pageOperation) {
-        *error = strdup("Data type unsupported for operators.");
-        return NULL;
-    }
-    
-    return pageOperation;
+    return EagleFalse;
 }
 
 void EagleDbSqlBinaryExpression_Delete(EagleDbSqlBinaryExpression *expr)
