@@ -54,3 +54,27 @@ char* EagleDbSqlUnaryExpression_toString(EagleDbSqlUnaryExpression *expr)
     EagleMemory_Free(exp);
     return s;
 }
+
+EagleBoolean EagleDbSqlUnaryExpression_GetOperation(EagleDbSqlUnaryExpressionOperator op,
+                                                    EagleDataType right,
+                                                    EagleDbSqlUnaryOperator *match)
+{
+    unsigned long i;
+    static EagleDbSqlUnaryOperator ops[] = {
+        /* Integer                   operator  right    function           returns */
+        EagleDbSqlUnaryOperator_Make(Negate,   Integer, NegatePageInt,     Integer),
+        EagleDbSqlUnaryOperator_Make(Not,      Integer, NotPageInt,        Integer),
+        
+        /* Float                     operator  right    function           returns */
+        EagleDbSqlUnaryOperator_Make(Negate,   Float,   NegatePageFloat,   Float),
+    };
+    
+    for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlUnaryOperator); ++i) {
+        if(right == ops[i].right && op == ops[i].op) {
+            *match = ops[i];
+            return EagleTrue;
+        }
+    }
+    
+    return EagleFalse;
+}

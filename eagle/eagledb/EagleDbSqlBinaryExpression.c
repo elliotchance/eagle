@@ -43,8 +43,17 @@ EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
         EagleDbSqlBinaryOperator_Make(Integer, Or,               Integer, OrPageInt,               Integer),
         EagleDbSqlBinaryOperator_Make(Integer, And,              Integer, AndPageInt,              Integer),
         
-        /* Float                      left   operator  right  function           returns */
-        EagleDbSqlBinaryOperator_Make(Float, Multiply, Float, MultiplyPageFloat, Float),
+        /* Float                      left   operator          right  function                   returns */
+        EagleDbSqlBinaryOperator_Make(Float, Multiply,         Float, MultiplyPageFloat,         Float),
+        EagleDbSqlBinaryOperator_Make(Float, Plus,             Float, AdditionPageFloat,         Float),
+        EagleDbSqlBinaryOperator_Make(Float, Equals,           Float, EqualsPageFloat,           Float),
+        EagleDbSqlBinaryOperator_Make(Float, NotEquals,        Float, NotEqualsPageFloat,        Float),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThan,      Float, GreaterThanPageFloat,      Float),
+        EagleDbSqlBinaryOperator_Make(Float, LessThan,         Float, LessThanPageFloat,         Float),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual, Float, GreaterThanEqualPageFloat, Float),
+        EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,    Float, LessThanEqualPageFloat,    Float),
+        EagleDbSqlBinaryOperator_Make(Float, Minus,            Float, SubtractPageFloat,         Float),
+        EagleDbSqlBinaryOperator_Make(Float, Divide,           Float, DividePageFloat,           Float)
     };
     
     for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {

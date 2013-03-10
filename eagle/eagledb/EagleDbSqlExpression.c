@@ -74,7 +74,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     int destination, destinationLeft;
     char *msg, *t1, *t2, *beforeOp = NULL, *afterOp = NULL;
     EaglePlanOperation *epo;
-    EaglePageOperationFunction(pageOperation);
+    EagleDbSqlUnaryOperator matchOp;
+    EagleBoolean matchedOp;
     
     /* operand */
     destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->expr, destinationBuffer, plan);
@@ -82,38 +83,37 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
         return EagleDbSqlExpression_ERROR;
     }
     
-    /* operator */
-    if(EagleDbSqlUnaryExpressionOperatorGrouping != cast->op) {
-        msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
-        if(NULL == msg) {
-            return EagleDbSqlExpression_ERROR;
-        }
-        destination = *destinationBuffer;
-    }
-    
-    switch(cast->op) {
-            
-        case EagleDbSqlUnaryExpressionOperatorNegate:
-            pageOperation = EaglePageOperations_NegatePageInt;
-            break;
-            
-        case EagleDbSqlUnaryExpressionOperatorNot:
-            pageOperation = EaglePageOperations_NotPageInt;
-            break;
-            
-        case EagleDbSqlUnaryExpressionOperatorGrouping:
-            pageOperation = NULL;
-            break;
-            
-    }
-    
-    if(NULL == pageOperation) {
+    /* catch grouping operator */
+    if(EagleDbSqlUnaryExpressionOperatorGrouping == cast->op) {
         return destinationLeft;
     }
     
+    /* operator */
+    msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
+    if(NULL == msg) {
+        return EagleDbSqlExpression_ERROR;
+    }
+    destination = *destinationBuffer;
+    
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
-    t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     EagleDbSqlUnaryExpressionOperator_toString(cast->op, &beforeOp, &afterOp);
+    
+    matchedOp = EagleDbSqlUnaryExpression_GetOperation(cast->op,
+                                                       plan->bufferTypes[destinationLeft],
+                                                       &matchOp);
+    if(EagleFalse == matchedOp) {
+        /* operator does not exist */
+        sprintf(msg, "No such operator %s%s%s", t1, beforeOp, afterOp);
+        EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
+        
+        EagleMemory_Free(msg);
+        EagleMemory_Free(t1);
+        EagleMemory_Free(beforeOp);
+        EagleMemory_Free(afterOp);
+        return EagleDbSqlExpression_ERROR;
+    }
+    
+    t2 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     
     sprintf(msg, "{ %s<%d>%s (%s) } into <%d> (%s)", beforeOp, destinationLeft, afterOp, t2, destination, t2);
     
@@ -123,7 +123,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     EagleMemory_Free(afterOp);
     
     plan->bufferTypes[destination] = EagleDataTypeInteger;
-    epo = EaglePlanOperation_New(pageOperation, destination, destinationLeft, -1, NULL, EagleFalse, msg);
+    epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, -1, NULL, EagleFalse, msg);
     EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);

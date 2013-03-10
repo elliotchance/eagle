@@ -83,10 +83,36 @@ void EaglePageOperations_NegatePageInt(EaglePage *destination, EaglePage *source
     }
 }
 
+void EaglePageOperations_NegatePageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = -source1data[i];
+    }
+}
+
 void EaglePageOperations_AdditionPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data, *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = source1data[i] + source2data[i];
+    }
+}
+
+void EaglePageOperations_AdditionPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -174,10 +200,36 @@ void EaglePageOperations_EqualsPageInt(EaglePage *destination, EaglePage *source
     }
 }
 
+void EaglePageOperations_EqualsPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = source1data[i] == source2data[i];
+    }
+}
+
 void EaglePageOperations_NotEqualsPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data, *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = source1data[i] != source2data[i];
+    }
+}
+
+void EaglePageOperations_NotEqualsPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -218,10 +270,36 @@ void EaglePageOperations_GreaterThanPageInt(EaglePage *destination, EaglePage *s
     }
 }
 
+void EaglePageOperations_GreaterThanPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (source1data[i] > source2data[i]);
+    }
+}
+
 void EaglePageOperations_LessThanPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data, *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (source1data[i] < source2data[i]);
+    }
+}
+
+void EaglePageOperations_LessThanPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -244,10 +322,36 @@ void EaglePageOperations_GreaterThanEqualPageInt(EaglePage *destination, EaglePa
     }
 }
 
+void EaglePageOperations_GreaterThanEqualPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (source1data[i] >= source2data[i]);
+    }
+}
+
 void EaglePageOperations_LessThanEqualPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data, *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (source1data[i] <= source2data[i]);
+    }
+}
+
+void EaglePageOperations_LessThanEqualPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -270,10 +374,41 @@ void EaglePageOperations_SubtractPageInt(EaglePage *destination, EaglePage *sour
     }
 }
 
+void EaglePageOperations_SubtractPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = source1data[i] - source2data[i];
+    }
+}
+
 void EaglePageOperations_DividePageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
     EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data, *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        if(0 == source2data[i]) {
+            destdata[i] = 0;
+        }
+        else {
+            destdata[i] = source1data[i] / source2data[i];
+        }
+    }
+}
+
+void EaglePageOperations_DividePageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data, *source2data = (EagleDataTypeFloatType*) source2->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
