@@ -1,12 +1,12 @@
 #ifndef eagle_EaglePageOperations_h
 #define eagle_EaglePageOperations_h
 
+#include "EaglePage.h"
+
 /**
- Function variable pointer.
+ Function pointer.
  */
 #define EaglePageOperationFunction(ptr) void (*ptr)(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
-
-#include "EaglePage.h"
 
 /**
  Calculate values in a page that are less than an integer.
@@ -54,7 +54,7 @@ void EaglePageOperations_CastIntToBool(EaglePage *destination, EaglePage *source
  @param [in] source2 Right operand.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_AndPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Calculate logical OR between two pages.
@@ -65,7 +65,7 @@ void EaglePageOperations_AndPage(EaglePage *destination, EaglePage *source1, Eag
  @param [in] source2 Right operand.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_OrPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_OrPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Negate page.
@@ -76,7 +76,7 @@ void EaglePageOperations_OrPage(EaglePage *destination, EaglePage *source1, Eagl
  @param [in] source2 Ignored.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_NegatePage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_NegatePageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Calculate logical NOT of a page.
@@ -87,7 +87,7 @@ void EaglePageOperations_NegatePage(EaglePage *destination, EaglePage *source1, 
  @param [in] source2 Ignored.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_NotPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_NotPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Addition of two pages.
@@ -97,7 +97,7 @@ void EaglePageOperations_NotPage(EaglePage *destination, EaglePage *source1, Eag
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_AdditionPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Multiplication of two pages.
@@ -107,7 +107,7 @@ void EaglePageOperations_AdditionPage(EaglePage *destination, EaglePage *source1
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_MultiplyIntPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_MultiplyPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Multiplication of two pages.
@@ -117,7 +117,7 @@ void EaglePageOperations_MultiplyIntPage(EaglePage *destination, EaglePage *sour
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_MultiplyFloatPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_MultiplyPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Equals comparison between two pages.
@@ -127,7 +127,7 @@ void EaglePageOperations_MultiplyFloatPage(EaglePage *destination, EaglePage *so
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_EqualsPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Not equals comparison between two pages.
@@ -137,7 +137,7 @@ void EaglePageOperations_EqualsPage(EaglePage *destination, EaglePage *source1, 
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_NotEqualsPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_NotEqualsPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Send records to another provider based on a condition.
@@ -157,7 +157,7 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_ModulusPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Greater than comparison between two pages.
@@ -167,7 +167,7 @@ void EaglePageOperations_ModulusPage(EaglePage *destination, EaglePage *source1,
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_GreaterThanPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_GreaterThanPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Less than comparison between two pages.
@@ -177,7 +177,7 @@ void EaglePageOperations_GreaterThanPage(EaglePage *destination, EaglePage *sour
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_LessThanPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_LessThanPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Greater than or equal to comparison between two pages.
@@ -187,7 +187,7 @@ void EaglePageOperations_LessThanPage(EaglePage *destination, EaglePage *source1
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_GreaterThanEqualPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_GreaterThanEqualPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Less than or equal to comparison between two pages.
@@ -197,7 +197,7 @@ void EaglePageOperations_GreaterThanEqualPage(EaglePage *destination, EaglePage 
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_LessThanEqualPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_LessThanEqualPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Subtraction (minus) of two pages.
@@ -207,7 +207,7 @@ void EaglePageOperations_LessThanEqualPage(EaglePage *destination, EaglePage *so
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_SubtractPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_SubtractPageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Division of two pages.
@@ -217,7 +217,7 @@ void EaglePageOperations_SubtractPage(EaglePage *destination, EaglePage *source1
  @param [in] source2 Operand 2.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_DividePage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_DividePageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
  Calculate square root of a page.
@@ -228,6 +228,6 @@ void EaglePageOperations_DividePage(EaglePage *destination, EaglePage *source1, 
  @param [in] source2 Ignored.
  @param [in] obj Ignored.
  */
-void EaglePageOperations_SqrtPage(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+void EaglePageOperations_SqrtPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 #endif

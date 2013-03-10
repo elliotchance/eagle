@@ -29,22 +29,22 @@ EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
     unsigned long i;
     static EagleDbSqlBinaryOperator ops[] = {
         /* Integer                    left     operator          right    function              returns */
-        EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionPage,         Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsPage,           Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusPage,          Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyIntPage,      Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsPage,        Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanPage,      Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanPage,         Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualPage, Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualPage,    Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractPage,         Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DividePage,           Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, Or,               Integer, OrPage,               Integer),
-        EagleDbSqlBinaryOperator_Make(Integer, And,              Integer, AndPage,              Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionPageInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsPageInt,           Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusPageInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyPageInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsPageInt,        Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanPageInt,      Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanPageInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualPageInt, Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualPageInt,    Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractPageInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DividePageInt,           Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Or,               Integer, OrPageInt,               Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, And,              Integer, AndPageInt,              Integer),
         
         /* Float                      left   operator  right  function           returns */
-        EagleDbSqlBinaryOperator_Make(Float, Multiply, Float, MultiplyFloatPage, Float),
+        EagleDbSqlBinaryOperator_Make(Float, Multiply, Float, MultiplyPageFloat, Float),
     };
     
     for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {

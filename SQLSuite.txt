@@ -32,7 +32,7 @@ Unknown column 'col70'
 
 % test_error
 SELECT blabla(col1) FROM mytable
-Function blabla() does not exist.
+Function blabla(INTEGER) does not exist.
 
 #==================================================
 # SELECTs
@@ -250,19 +250,10 @@ SELECT 2 * (col1 + 3) FROM mytable
 26
 
 % test
-SELECT sqrt(col1*col2) FROM mytable
-sqrt(col1 * col2):integer
-0
-1
-2
-7
-14
-
-% test
-SELECT SQRT(col1*col2) FROM mytable
-sqrt(col1 * col2):integer
-0
-1
-2
-7
-14
+SELECT sqrt(col4*col4) FROM mytable
+sqrt(col4 * col4):float
+3.2
+7.9
+123.456
+10000
+456.789

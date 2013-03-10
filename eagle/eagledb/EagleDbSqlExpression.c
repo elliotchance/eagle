@@ -38,12 +38,15 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *e
     destination = *destinationBuffer;
     
     /* find the function */
-    if(EagleUtils_CompareWithoutCase("sqrt", cast->name)) {
-        pageOperation = EaglePageOperations_SqrtPage;
+    if(EagleUtils_CompareWithoutCase("sqrt", cast->name) && plan->bufferTypes[destinationExpr] == EagleDataTypeFloat) {
+        pageOperation = EaglePageOperations_SqrtPageFloat;
     }
     else {
         /* function does not exist */
-        sprintf(msg, "Function %s() does not exist.", cast->name);
+        t1 = EagleDataType_typeToName(plan->bufferTypes[destinationExpr]);
+        sprintf(msg, "Function %s(%s) does not exist.", cast->name, t1);
+        EagleMemory_Free(t1);
+        
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         return EagleDbSqlExpression_ERROR;
     }
@@ -54,7 +57,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Function_(EagleDbSqlExpression *e
     EagleMemory_Free(t1);
     EagleMemory_Free(t2);
     
-    plan->bufferTypes[destination] = EagleDataTypeInteger;
+    plan->bufferTypes[destination] = EagleDataTypeFloat;
     epo = EaglePlanOperation_New(pageOperation, destination, destinationExpr, -1, NULL, EagleFalse, msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
@@ -91,11 +94,11 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     switch(cast->op) {
             
         case EagleDbSqlUnaryExpressionOperatorNegate:
-            pageOperation = EaglePageOperations_NegatePage;
+            pageOperation = EaglePageOperations_NegatePageInt;
             break;
             
         case EagleDbSqlUnaryExpressionOperatorNot:
-            pageOperation = EaglePageOperations_NotPage;
+            pageOperation = EaglePageOperations_NotPageInt;
             break;
             
         case EagleDbSqlUnaryExpressionOperatorGrouping:
