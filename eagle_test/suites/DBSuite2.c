@@ -414,11 +414,35 @@ CUNIT_TEST(DBSuite, EagleDbTuple_setFloat)
     EagleDbTable_DeleteWithColumns(table);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlUnaryExpression_GetOperation)
+{
+    EagleDbSqlUnaryOperator op;
+    CUNIT_ASSERT_FALSE(EagleDbSqlUnaryExpression_GetOperation(EagleDbSqlUnaryExpressionOperatorNegate, EagleDataTypeUnknown, &op));
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_)
+{
+    EagleDbSqlUnaryExpression *expr = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot,
+                                                                    (EagleDbSqlExpression*) EagleDbSqlValue_NewWithFloat(123.456));
+    int destinationBuffer = 0;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan_prepareBuffers(plan, 10);
+    
+    EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
+    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such operator NOT FLOAT");
+    
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr);
+    EaglePlan_Delete(plan);
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_GetOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setFloat));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_3));

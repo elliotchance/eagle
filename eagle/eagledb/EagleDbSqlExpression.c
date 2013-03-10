@@ -103,7 +103,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
                                                        &matchOp);
     if(EagleFalse == matchedOp) {
         /* operator does not exist */
-        sprintf(msg, "No such operator %s%s%s", t1, beforeOp, afterOp);
+        sprintf(msg, "No such operator %s%s%s", beforeOp, t1, afterOp);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         
         EagleMemory_Free(msg);
