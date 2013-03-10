@@ -207,11 +207,31 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject4)
     EagleLinkedList_DeleteWithItems(list);
 }
 
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage)
+{
+    CUNIT_ASSERT_NULL(EaglePageProviderSingle_nextPage(NULL));
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_3)
+{
+    int recordsPerPage = 5;
+    EaglePageProviderSingle *epp = EaglePageProviderSingle_NewFloat(123.0, recordsPerPage, "name");
+    
+    EaglePage *page = EaglePageProviderSingle_nextPage(epp);
+    CUNIT_ASSERT_NOT_NULL(page);
+    CUNIT_VERIFY_EQUAL_INT(page->count, recordsPerPage);
+    EaglePage_Delete(page);
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage));

@@ -79,6 +79,10 @@ EaglePage* EaglePageProviderSingle_nextPage(EaglePageProviderSingle *epp)
     EaglePage *page;
     int i;
     
+    if(NULL == epp) {
+        return NULL;
+    }
+    
     /* fill page */
     switch(epp->type) {
             
