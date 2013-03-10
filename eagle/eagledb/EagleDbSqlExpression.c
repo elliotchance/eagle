@@ -164,7 +164,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
     
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
     t2 = EagleDataType_typeToName(plan->bufferTypes[destinationRight]);
-    t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     op = EagleDbSqlBinaryExpressionOperator_toString(cast->op);
     
     matchedOp = EagleDbSqlBinaryExpression_GetOperation(plan->bufferTypes[destinationLeft],
@@ -176,8 +175,14 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
         sprintf(msg, "No such operator %s %s %s", t1, op, t2);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         
+        EagleMemory_Free(msg);
+        EagleMemory_Free(t1);
+        EagleMemory_Free(t2);
+        EagleMemory_Free(op);
         return EagleDbSqlExpression_ERROR;
     }
+    
+    t3 = EagleDataType_typeToName(plan->bufferTypes[destination]);
     
     sprintf(msg, "{ <%d> (%s) %s <%d> (%s) } into <%d> (%s)", destinationLeft, t1, op, destinationRight, t2,
             destination, t3);
