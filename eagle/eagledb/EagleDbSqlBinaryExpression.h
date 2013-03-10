@@ -42,16 +42,34 @@ typedef struct {
     
 } EagleDbSqlBinaryExpression;
 
+/**
+ Used by EagleDbSqlBinaryExpression_GetOperation() to find the appropriate page operation for an operator.
+ */
 typedef struct {
     
+    /**
+     Data type of the left side (first operand).
+     */
     EagleDataType left;
     
+    /**
+     The operator.
+     */
     EagleDbSqlBinaryExpressionOperator op;
     
+    /**
+     Data type of the right side (second operand).
+     */
     EagleDataType right;
     
+    /**
+     The page operation function.
+     */
     EaglePageOperationFunction(func);
     
+    /**
+     The return type that the page operation function outputs.
+     */
     EagleDataType returnType;
     
 } EagleDbSqlBinaryOperator;
@@ -87,6 +105,15 @@ void EagleDbSqlBinaryExpression_DeleteRecursive(EagleDbSqlBinaryExpression *expr
  */
 char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
 
+/**
+ Find the appropriate page operation for an operator.
+ 
+ @param [in] left Left data type (first operand).
+ @param [in] op The operator.
+ @param [in] right Right data type (second operand).
+ @param [out] match If a match is found it will be copied into this output parameter.
+ @return EagleTrue if the operator can be found.
+ */
 EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
                                                      EagleDbSqlBinaryExpressionOperator op,
                                                      EagleDataType right,
