@@ -83,6 +83,20 @@ void EaglePageOperations_NegatePageInt(EaglePage *destination, EaglePage *source
     }
 }
 
+void EaglePageOperations_CastPageIntFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    int i;
+    EagleDataTypeFloatType *destdata = (EagleDataTypeFloatType*) destination->data;
+    EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
+    destination->recordOffset = source1->recordOffset;
+    destination->count = source1->count;
+    
+    for(i = 0; i < source1->count; ++i) {
+        destdata[i] = (EagleDataTypeFloatType) source1data[i];
+    }
+}
+
 void EaglePageOperations_NegatePageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;

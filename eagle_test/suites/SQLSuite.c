@@ -136,7 +136,6 @@ void SQLSuiteTest()
     
     // compile plan
     EagleDbSqlExpression_CompilePlan(expr, exprs, whereClauseId, plan);
-    //printf("%s\n", EaglePlan_toString(plan));
     
     // catch compilation error
     if(EagleTrue == EaglePlan_isError(plan)) {
@@ -153,7 +152,7 @@ void SQLSuiteTest()
         // execute
         EagleInstance *eagle = EagleInstance_New(1);
         EagleInstance_addPlan(eagle, plan);
-        /*printf("%s\n", EaglePlan_toString(plan));*/
+        //printf("%s\n", EaglePlan_toString(plan)); exit(0);
         
         EagleInstance_run(eagle);
         

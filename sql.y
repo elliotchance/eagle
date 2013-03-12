@@ -28,6 +28,7 @@
     #include "EagleDbSqlInsert.h"
     #include "EagleUtils.h"
     #include "EagleDbSqlFunctionExpression.h"
+    #include "EagleDbSqlCastExpression.h"
     
     int yylex(YYSTYPE *lvalp, YYLTYPE *llocp);
     
@@ -1234,6 +1235,13 @@ expression:
 
     /* grouping */
     | T_BRACKET_OPEN expression T_BRACKET_CLOSE { $$ = EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorGrouping, $2); }
+
+    /* CAST */
+    | K_CAST T_BRACKET_OPEN expression K_AS data_type T_BRACKET_CLOSE {
+        int *type = $5;
+        $$ = EagleDbSqlCastExpression_New($3, *type);
+        EagleMemory_Free(type);
+    }
 
     /* function */
     | identifier T_BRACKET_OPEN expression T_BRACKET_CLOSE {
