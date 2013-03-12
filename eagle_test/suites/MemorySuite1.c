@@ -470,47 +470,6 @@ CUNIT_TEST(MemorySuite, EagleWorkers_New_2)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbSqlExpression_CompilePlanIntoBuffer_.1");
-    
-    EagleDbSqlExpression *left = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
-    EagleDbSqlExpression *right = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456);
-    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlBinaryExpression_New(left, EagleDbSqlBinaryExpressionOperatorEquals, right);
-    int dest = 0;
-    EaglePlan *plan = EaglePlan_New(1);
-    EaglePlan_prepareBuffers(plan, 1);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(NULL, &dest, NULL), EagleDbSqlExpression_ERROR);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, NULL), EagleDbSqlExpression_ERROR);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, plan), EagleDbSqlExpression_ERROR);
-    
-    EaglePlan_Delete(plan);
-    EagleDbSqlExpression_DeleteRecursive(expr);
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
-    EagleMemory_MockFinish();
-}
-
-CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
-{
-    EagleMemory_MockInit();
-    EagleMemory_Mock("EagleDbSqlExpression_CompilePlanIntoBuffer_.2");
-    
-    EagleDbSqlExpression *op = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
-    EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, op);
-    int dest = 0;
-    EaglePlan *plan = EaglePlan_New(1);
-    EaglePlan_prepareBuffers(plan, 1);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(NULL, &dest, NULL), EagleDbSqlExpression_ERROR);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, NULL), EagleDbSqlExpression_ERROR);
-    CUNIT_ASSERT_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &dest, plan), EagleDbSqlExpression_ERROR);
-    
-    EaglePlan_Delete(plan);
-    EagleDbSqlExpression_DeleteRecursive(expr);
-    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 2);
-    EagleMemory_MockFinish();
-}
-
 CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_1)
 {
     EagleMemory_MockInit();
@@ -900,7 +859,6 @@ CUnitTests* MemorySuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlUnaryExpression_New));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlSelect_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlInsert_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleLinkedList_toArray));
@@ -938,7 +896,6 @@ CUnitTests* MemorySuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleSynchronizer_CreateLock));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorker_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbInstance_PrintResults_2));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSchema_New));

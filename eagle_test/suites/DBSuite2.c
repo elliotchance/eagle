@@ -20,6 +20,7 @@
 #include "EaglePageProviderArray.h"
 #include "EagleDbInformationSchema.h"
 #include "EagleDbSqlFunctionExpression.h"
+#include "EagleDbSqlCastExpression.h"
 
 CUNIT_TEST(DBSuite, _INSERT_BadMatch)
 {
@@ -436,11 +437,39 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_)
     EaglePlan_Delete(plan);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_)
+{
+    EagleDbSqlCastExpression *expr = EagleDbSqlCastExpression_New(NULL,
+                                                                  EagleDataTypeFloat);
+    int destinationBuffer = 0;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan_prepareBuffers(plan, 10);
+    
+    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_((EagleDbSqlExpression*) expr, &destinationBuffer, plan), EagleDbSqlExpression_ERROR);
+    
+    EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlCastExpression_Delete)
+{
+    EagleDbSqlCastExpression_Delete(NULL);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlCastExpression_DeleteRecursive)
+{
+    EagleDbSqlCastExpression_DeleteRecursive(NULL);
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlCastExpression_Delete));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlCastExpression_DeleteRecursive));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlUnaryExpression_GetOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setFloat));

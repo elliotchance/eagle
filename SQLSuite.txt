@@ -34,9 +34,22 @@ Unknown column 'col70'
 SELECT blabla(col1) FROM mytable
 Function blabla(INTEGER) does not exist.
 
+% test_error
+SELECT CAST(col1 AS TEXT) FROM mytable
+Can not cast INTEGER to VARCHAR.
+
 #==================================================
 # SELECTs
 #==================================================
+
+% test
+SELECT sqrt(cast(col1 as float) * col4) FROM mytable
+sqrt(CAST(col1 AS FLOAT) * col4):float
+0
+2.81069
+15.71343374313838
+223.606797749979
+0
 
 % test
 SELECT col4 FROM mytable

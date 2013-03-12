@@ -79,6 +79,17 @@ void EaglePageOperations_OrPageInt(EaglePage *destination, EaglePage *source1, E
 void EaglePageOperations_NegatePageInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Cast INTEGER page to FLOAT page.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 Operand.
+ @param [in] source2 Ignored.
+ @param [in] obj Ignored.
+ */
+void EaglePageOperations_CastPageIntFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Negate page.
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
