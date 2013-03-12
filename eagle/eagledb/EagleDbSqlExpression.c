@@ -74,7 +74,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
 {
     EagleDbSqlUnaryExpression *cast = (EagleDbSqlUnaryExpression*) expression;
     int destination, destinationLeft;
-    char *msg, *t1, *t2, *beforeOp = NULL, *afterOp = NULL;
+    char msg[1024], *t1, *t2, *beforeOp = NULL, *afterOp = NULL;
     EaglePlanOperation *epo;
     EagleDbSqlUnaryOperator matchOp;
     EagleBoolean matchedOp;
@@ -91,10 +91,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     }
     
     /* operator */
-    msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.2", 1024);
-    if(NULL == msg) {
-        return EagleDbSqlExpression_ERROR;
-    }
     destination = *destinationBuffer;
     
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
@@ -108,7 +104,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
         sprintf(msg, "No such operator %s%s%s", beforeOp, t1, afterOp);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         
-        EagleMemory_Free(msg);
         EagleMemory_Free(t1);
         EagleMemory_Free(beforeOp);
         EagleMemory_Free(afterOp);
@@ -127,7 +122,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_(EagleDbSqlExpression *expr
     EagleMemory_Free(afterOp);
     
     epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, -1, NULL, EagleFalse, msg);
-    EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
     ++*destinationBuffer;
@@ -141,7 +135,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_(const EagleDbSqlExpression 
 {
     EagleDbSqlCastExpression *cast = (EagleDbSqlCastExpression*) expression;
     int destination, destinationLeft;
-    char *msg, *t1, *t2, *t3;
+    char msg[1024], *t1, *t2, *t3;
     EaglePlanOperation *epo;
     EagleDbSqlCastOperator matchOp;
     EagleBoolean matchedOp;
@@ -153,10 +147,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_(const EagleDbSqlExpression 
     }
     
     /* operator */
-    msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.1", 1024);
-    if(NULL == msg) {
-        return EagleDbSqlExpression_ERROR;
-    }
     destination = *destinationBuffer;
     
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
@@ -170,7 +160,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_(const EagleDbSqlExpression 
         sprintf(msg, "Can not cast %s to %s.", t1, t2);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         
-        EagleMemory_Free(msg);
         EagleMemory_Free(t1);
         EagleMemory_Free(t2);
         return EagleDbSqlExpression_ERROR;
@@ -187,7 +176,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_(const EagleDbSqlExpression 
     EagleMemory_Free(t3);
     
     epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, -1, NULL, EagleFalse, msg);
-    EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
     ++*destinationBuffer;
@@ -201,7 +189,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
 {
     EagleDbSqlBinaryExpression *cast = (EagleDbSqlBinaryExpression*) expression;
     int destination, destinationLeft, destinationRight;
-    char *msg, *t1, *t2, *t3, *op;
+    char msg[1024], *t1, *t2, *t3, *op;
     EaglePlanOperation *epo;
     EagleDbSqlBinaryOperator matchOp;
     EagleBoolean matchedOp;
@@ -219,10 +207,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
     }
     
     /* operator */
-    msg = (char*) EagleMemory_Allocate("EagleDbSqlExpression_CompilePlanIntoBuffer_.1", 1024);
-    if(NULL == msg) {
-        return EagleDbSqlExpression_ERROR;
-    }
     destination = *destinationBuffer;
     
     t1 = EagleDataType_typeToName(plan->bufferTypes[destinationLeft]);
@@ -238,7 +222,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
         sprintf(msg, "No such operator %s %s %s", t1, op, t2);
         EaglePlan_setError(plan, EaglePlanErrorIdentifier, msg);
         
-        EagleMemory_Free(msg);
         EagleMemory_Free(t1);
         EagleMemory_Free(t2);
         EagleMemory_Free(op);
@@ -258,7 +241,6 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
     EagleMemory_Free(op);
     
     epo = EaglePlanOperation_New(matchOp.func, destination, destinationLeft, destinationRight, NULL, EagleFalse, msg);
-    EagleMemory_Free(msg);
     EaglePlan_addOperation(plan, epo);
     EaglePlan_addFreeObject(plan, epo, (void(*)(void*)) EaglePlanOperation_Delete);
     ++*destinationBuffer;

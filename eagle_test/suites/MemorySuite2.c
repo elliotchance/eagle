@@ -5,6 +5,7 @@
 #include "EagleDbSqlFunctionExpression.h"
 #include "EaglePageProviderSingle.h"
 #include "EagleDbSqlValue.h"
+#include "EagleDbSqlCastExpression.h"
 
 CUNIT_TEST(MemorySuite, EagleDbSqlFunctionExpression_New)
 {
@@ -98,11 +99,35 @@ CUNIT_TEST(MemorySuite, EaglePage_CopyFloat_)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EagleDbSqlCastExpression_New)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlCastExpression_New.1");
+    
+    CUNIT_VERIFY_NULL(EagleDbSqlCastExpression_New(NULL, EagleDataTypeInteger));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EagleDbSqlCastExpression_toString)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EagleDbSqlCastExpression_toString.1");
+    
+    CUNIT_VERIFY_NULL(EagleDbSqlCastExpression_toString(NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlFunctionExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlFunctionExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleData_Float));
