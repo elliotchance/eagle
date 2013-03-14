@@ -98,7 +98,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_AndPageInt)
     
     EaglePageOperations_AndPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, &&);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, &&);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -115,7 +115,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_OrPageInt)
     
     EaglePageOperations_OrPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, ||);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, ||);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -132,7 +132,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_AdditionPageInt)
     
     EaglePageOperations_AdditionPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, +);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, +);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -149,7 +149,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractPageInt)
     
     EaglePageOperations_SubtractPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, -);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, -);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -166,7 +166,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_MultiplyPageInt)
     
     EaglePageOperations_MultiplyPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, *);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, *);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -183,7 +183,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_EqualsPageInt)
     
     EaglePageOperations_EqualsPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, ==);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, ==);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -200,7 +200,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_NotEqualsPageInt)
     
     EaglePageOperations_NotEqualsPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, !=);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, !=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -250,7 +250,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanPageInt)
     
     EaglePageOperations_GreaterThanPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, >);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, >);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -267,7 +267,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanPageInt)
     
     EaglePageOperations_LessThanPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, <);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, <);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -284,7 +284,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanEqualPageInt)
     
     EaglePageOperations_GreaterThanEqualPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, >=);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, >=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -301,7 +301,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualPageInt)
     
     EaglePageOperations_LessThanEqualPageInt(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, <=);
+    OperatorSuite_ValidateBinary(EagleDataTypeIntegerType, EagleDataTypeIntegerType, <=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -592,7 +592,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_AdditionPageFloat)
     
     EaglePageOperations_AdditionPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, +);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeFloatType, +);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -605,11 +605,11 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_EqualsPageFloat)
     int pageSize = 1000;
     EaglePage *page1 = OperatorSuite_GeneratePageFloat(pageSize);
     EaglePage *page2 = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     EaglePageOperations_EqualsPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, ==);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, ==);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -622,11 +622,11 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_NotEqualsPageFloat)
     int pageSize = 1000;
     EaglePage *page1 = OperatorSuite_GeneratePageFloat(pageSize);
     EaglePage *page2 = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     EaglePageOperations_NotEqualsPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, !=);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, !=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -639,11 +639,11 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanEqualPageFloat)
     int pageSize = 1000;
     EaglePage *page1 = OperatorSuite_GeneratePageFloat(pageSize);
     EaglePage *page2 = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     EaglePageOperations_GreaterThanEqualPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, >=);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, >=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -656,11 +656,11 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualPageFloat)
     int pageSize = 1000;
     EaglePage *page1 = OperatorSuite_GeneratePageFloat(pageSize);
     EaglePage *page2 = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     EaglePageOperations_LessThanEqualPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, <=);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, <=);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -673,11 +673,11 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanPageFloat)
     int pageSize = 1000;
     EaglePage *page1 = OperatorSuite_GeneratePageFloat(pageSize);
     EaglePage *page2 = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     
     EaglePageOperations_GreaterThanPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, >);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, >);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -694,7 +694,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanPageFloat)
     
     EaglePageOperations_LessThanPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, <);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeIntegerType, <);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);
@@ -711,7 +711,7 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractPageFloat)
     
     EaglePageOperations_SubtractPageFloat(out, page1, page2, NULL);
     
-    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, -);
+    OperatorSuite_ValidateBinary(EagleDataTypeFloatType, EagleDataTypeFloatType, -);
     CUNIT_ASSERT_EQUAL_INT(valid, 1);
     
     EaglePage_Delete(page1);

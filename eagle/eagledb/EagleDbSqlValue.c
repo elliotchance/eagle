@@ -165,3 +165,90 @@ char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
 
     }
 }
+
+EagleDataTypeIntegerType EagleDbSqlValue_getInteger(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeString:
+            *success = EagleFalse;
+            return 0;
+            
+        case EagleDbSqlValueTypeFloat:
+            *success = EagleTrue;
+            return (EagleDataTypeIntegerType) value->value.floatValue;
+            
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleTrue;
+            return value->value.intValue;
+            
+    }
+}
+
+EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeString:
+            *success = EagleFalse;
+            return 0.0;
+            
+        case EagleDbSqlValueTypeFloat:
+            *success = EagleTrue;
+            return value->value.floatValue;
+            
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleTrue;
+            return (EagleDataTypeFloatType) value->value.intValue;
+            
+    }
+}
+
+EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeFloat:
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleFalse;
+            return NULL;
+            
+        case EagleDbSqlValueTypeString:
+            *success = EagleTrue;
+            return value->value.identifier;
+            
+    }
+}
+
+EagleBoolean EagleDbSqlValue_castable(EagleDbSqlValue *value, EagleDataType type)
+{
+    EagleBoolean canCast;
+    
+    switch(type) {
+            
+        case EagleDataTypeInteger:
+            EagleDbSqlValue_getInteger(value, &canCast);
+            break;
+            
+        case EagleDataTypeFloat:
+            EagleDbSqlValue_getFloat(value, &canCast);
+            break;
+            
+        case EagleDataTypeUnknown:
+            canCast = EagleFalse;
+            break;
+            
+        case EagleDataTypeVarchar:
+            EagleDbSqlValue_getVarchar(value, &canCast);
+            break;
+            
+    }
+    
+    return canCast;
+}

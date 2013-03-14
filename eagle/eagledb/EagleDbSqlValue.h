@@ -97,4 +97,39 @@ void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
  */
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value);
 
+/**
+ Get the integer representation of a value.
+ @param [in] value The value.
+ @param [out] success Set ot EagleTrue if the returned value is correct.
+ @return The integer value of whatever the original type of the \p value was. If the value could now be cast then
+ \p success will be set to EagleFalse and 0 will be returned.
+ */
+EagleDataTypeIntegerType EagleDbSqlValue_getInteger(EagleDbSqlValue *value, EagleBoolean *success);
+
+/**
+ Get the float representation of a value.
+ @param [in] value The value.
+ @param [out] success Set ot EagleTrue if the returned value is correct.
+ @return The float value of whatever the original type of the \p value was. If the value could now be cast then
+ \p success will be set to EagleFalse and 0.0 will be returned.
+ */
+EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoolean *success);
+
+/**
+ Get the varchar representation of a value.
+ @param [in] value The value.
+ @param [out] success Set ot EagleTrue if the returned value is correct.
+ @return The varchar value of whatever the original type of the \p value was. If the value could now be cast then
+ \p success will be set to EagleFalse and NULL will be returned.
+ */
+EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, EagleBoolean *success);
+
+/**
+ Check if a EagleDbSqlValue can be cast into a data type.
+ @param [in] value The value to cast (can be any type).
+ @param [in] type The data type to attempt to cast to.
+ @return EagleTrue if the value can successfully be cast to the new type.
+ */
+EagleBoolean EagleDbSqlValue_castable(EagleDbSqlValue *value, EagleDataType type);
+
 #endif

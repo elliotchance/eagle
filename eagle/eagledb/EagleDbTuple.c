@@ -6,6 +6,7 @@
 #include "EagleUtils.h"
 #include "EagleMemory.h"
 #include "EagleLogger.h"
+#include "EagleDbSqlValue.h"
 
 EagleDbTuple* EagleDbTuple_New(EagleDbTable *table)
 {
@@ -75,7 +76,45 @@ void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, EagleDataTypeVar
         return;
     }
     
-    ((char**) tuple->data)[position] = strdup(value);
+    ((EagleDataTypeVarcharType*) tuple->data)[position] = strdup(value);
+}
+
+EagleBoolean EagleDbTuple_set(EagleDbTuple *tuple, int position, EagleDbSqlValue *v, EagleDataType columnType)
+{
+    EagleBoolean canCast;
+    
+    switch(columnType) {
+            
+        case EagleDataTypeInteger:
+        {
+            EagleDataTypeIntegerType value = EagleDbSqlValue_getInteger(v, &canCast);
+            EagleDbTuple_setInt(tuple, position, value);
+            break;
+        }
+            
+        case EagleDataTypeFloat:
+        {
+            EagleDataTypeFloatType value = EagleDbSqlValue_getFloat(v, &canCast);
+            EagleDbTuple_setFloat(tuple, position, value);
+            break;
+        }
+            
+        case EagleDataTypeVarchar:
+        {
+            EagleDataTypeVarcharType value = EagleDbSqlValue_getVarchar(v, &canCast);
+            EagleDbTuple_setVarchar(tuple, position, value);
+            break;
+        }
+            
+        case EagleDataTypeUnknown:
+        {
+            canCast = EagleFalse;
+            break;
+        }
+            
+    }
+    
+    return canCast;
 }
 
 char* EagleDbTuple_toString(EagleDbTuple *tuple)

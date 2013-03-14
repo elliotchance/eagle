@@ -4,6 +4,7 @@
 #include "EagleDbColumn.h"
 #include "EagleDbTable.h"
 #include "Eagle.h"
+#include "EagleDbSqlValue.h"
 
 /**
  A tuple represents a row in a table.
@@ -65,5 +66,16 @@ void EagleDbTuple_setVarchar(EagleDbTuple *tuple, int position, EagleDataTypeVar
  * @return A new string instance.
  */
 char* EagleDbTuple_toString(EagleDbTuple *tuple);
+
+/**
+ * Set a tuple column with a dynamic value.
+ * @param [in] tuple The tuple instance.
+ * @param [in] position The column position, the first column will be index 0.
+ * @param [in] value The value (of any type).
+ * @param [in] columnType The type of the column in the tuple.
+ * @return EagleTrue if the \p value can be cast successfully and put into the tuple. Otherwise EagleFalse will be
+ *         returned and the tuple will remain unmodified.
+ */
+EagleBoolean EagleDbTuple_set(EagleDbTuple *tuple, int position, EagleDbSqlValue *value, EagleDataType columnType);
 
 #endif

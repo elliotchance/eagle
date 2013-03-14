@@ -313,6 +313,19 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
             return EagleFalse;
         }
+        
+        /* match data type */
+        if(EagleFalse == EagleDbSqlValue_castable((EagleDbSqlValue*) valueExpr, col->type)) {
+            char *type1 = EagleDataType_typeToName(col->type);
+            char *type2 = EagleDbSqlValueType_toString(((EagleDbSqlValue*) valueExpr)->type);
+            
+            sprintf(msg, "Type for column %s is %s, but %s given.", col->name, type1, type2);
+            
+            EagleMemory_Free(type1);
+            EagleMemory_Free(type2);
+            *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+            return EagleFalse;
+        }
     }
     
     /* everything looks good, we can create the tuple now */
@@ -320,44 +333,15 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     
     for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
         char *colName = ((EagleDbSqlValue*) cursor->obj)->value.identifier;
-        int colIndex = EagleDbTable_getColumnIndex(td->table, colName);
+        EagleDbColumn *col;
+        int colIndex;
+        EagleDbSqlValue *v;
         
-        EagleDbSqlValue *v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
-        switch(v->type) {
-                
-            case EagleDbSqlValueTypeInteger:
-            {
-                EagleDataTypeIntegerType value = v->value.intValue;
-                EagleDbTuple_setInt(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDbSqlValueTypeString:
-            {
-                EagleDataTypeVarcharType value = v->value.identifier;
-                EagleDbTuple_setVarchar(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDbSqlValueTypeFloat:
-            {
-                EagleDataTypeFloatType value = v->value.floatValue;
-                EagleDbTuple_setFloat(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDbSqlValueTypeAsterisk:
-            case EagleDbSqlValueTypeIdentifier:
-            {
-                EagleDbTuple_Delete(tuple);
-                
-                sprintf(msg, "Only literal values are allowed for expressions.");
-                *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
-                return EagleFalse;
-            }
-            
-        }
+        colIndex = EagleDbTable_getColumnIndex(td->table, colName);
+        col = EagleDbTable_getColumnByName(td->table, colName);
+        v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
         
+        EagleDbTuple_set(tuple, colIndex, v, col->type);
     }
     
     /* do the INSERT */

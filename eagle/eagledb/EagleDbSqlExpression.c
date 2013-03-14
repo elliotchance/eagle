@@ -370,8 +370,8 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
         return;
     }
     
-    /* for now we will just assume we don't need more than 10 buffers */
-    EaglePlan_prepareBuffers(plan, 10);
+    /* for now we will just assume we don't need more than 20 buffers */
+    EaglePlan_prepareBuffers(plan, 20);
     
     /* make sure we don't override buffers that are already assigned by providers */
     destinationBuffer = 0;
