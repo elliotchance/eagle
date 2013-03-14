@@ -77,7 +77,7 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue2)
     EagleLoggerEvent *error = NULL;
     EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);", &error);
     CUNIT_ASSERT_FALSE(success);
-    CUNIT_ASSERT_LAST_ERROR("Type for column col1 is INTEGER, but Indentifer given.");
+    CUNIT_ASSERT_LAST_ERROR("Type for column col1 is INTEGER, but Identifier given.");
     
     EagleInstanceTest_Cleanup(db);
 }
@@ -462,11 +462,107 @@ CUNIT_TEST(DBSuite, EagleDbSqlCastExpression_DeleteRecursive)
     EagleDbSqlCastExpression_DeleteRecursive(NULL);
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlValue_getInteger)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
+    EagleBoolean success;
+    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlValue_getInteger(value, &success), 123);
+    CUNIT_VERIFY_EQUAL_INT(success, EagleTrue);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValue_getFloat_1)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithAsterisk();
+    EagleBoolean success;
+    CUNIT_VERIFY_EQUAL_DOUBLE(EagleDbSqlValue_getFloat(value, &success), 0.0);
+    CUNIT_VERIFY_EQUAL_INT(success, EagleFalse);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValue_getFloat_2)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(456);
+    EagleBoolean success;
+    CUNIT_VERIFY_EQUAL_DOUBLE(EagleDbSqlValue_getFloat(value, &success), 456.0);
+    CUNIT_VERIFY_EQUAL_INT(success, EagleTrue);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValue_getVarchar)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
+    EagleBoolean success;
+    CUNIT_VERIFY_NULL(EagleDbSqlValue_getVarchar(value, &success));
+    CUNIT_VERIFY_EQUAL_INT(success, EagleFalse);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValue_castable)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
+    EagleBoolean success = EagleDbSqlValue_castable(value, EagleDataTypeUnknown);
+    CUNIT_VERIFY_EQUAL_INT(success, EagleFalse);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbTuple_set)
+{
+    EagleDbTable *table = EagleDbTable_New("mytable");
+    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeUnknown));
+    
+    EagleDbTuple *tuple = EagleDbTuple_New(table);
+    CUNIT_VERIFY_FALSE(EagleDbTuple_set(tuple, 0, NULL, EagleDataTypeUnknown));
+    
+    EagleDbTuple_Delete(tuple);
+    EagleDbTable_DeleteWithColumns(table);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlValueType_toString)
+{
+    {
+        char *s = EagleDbSqlValueType_toString(EagleDbSqlValueTypeAsterisk);
+        CUNIT_VERIFY_EQUAL_STRING(s, "Asterisk");
+        free(s);
+    }
+    
+    {
+        char *s = EagleDbSqlValueType_toString(EagleDbSqlValueTypeFloat);
+        CUNIT_VERIFY_EQUAL_STRING(s, "FLOAT");
+        free(s);
+    }
+    
+    {
+        char *s = EagleDbSqlValueType_toString(EagleDbSqlValueTypeIdentifier);
+        CUNIT_VERIFY_EQUAL_STRING(s, "Identifier");
+        free(s);
+    }
+    
+    {
+        char *s = EagleDbSqlValueType_toString(EagleDbSqlValueTypeInteger);
+        CUNIT_VERIFY_EQUAL_STRING(s, "INTEGER");
+        free(s);
+    }
+    
+    {
+        char *s = EagleDbSqlValueType_toString(EagleDbSqlValueTypeString);
+        CUNIT_VERIFY_EQUAL_STRING(s, "VARCHAR");
+        free(s);
+    }
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValueType_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_set));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_castable));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_getVarchar));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_getFloat_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_getFloat_1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_getInteger));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlCastExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlCastExpression_DeleteRecursive));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_));

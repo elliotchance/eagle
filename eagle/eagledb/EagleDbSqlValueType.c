@@ -12,7 +12,7 @@ char* EagleDbSqlValueType_toString(EagleDbSqlValueType type)
             return strdup("FLOAT");
             
         case EagleDbSqlValueTypeIdentifier:
-            return strdup("Indentifer");
+            return strdup("Identifier");
             
         case EagleDbSqlValueTypeInteger:
             return strdup("INTEGER");

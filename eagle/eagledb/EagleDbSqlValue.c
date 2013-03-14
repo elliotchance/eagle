@@ -225,3 +225,30 @@ EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, Eagl
             
     }
 }
+
+EagleBoolean EagleDbSqlValue_castable(EagleDbSqlValue *value, EagleDataType type)
+{
+    EagleBoolean canCast;
+    
+    switch(type) {
+            
+        case EagleDataTypeInteger:
+            EagleDbSqlValue_getInteger(value, &canCast);
+            break;
+            
+        case EagleDataTypeFloat:
+            EagleDbSqlValue_getFloat(value, &canCast);
+            break;
+            
+        case EagleDataTypeUnknown:
+            canCast = EagleFalse;
+            break;
+            
+        case EagleDataTypeVarchar:
+            EagleDbSqlValue_getVarchar(value, &canCast);
+            break;
+            
+    }
+    
+    return canCast;
+}

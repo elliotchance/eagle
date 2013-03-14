@@ -263,7 +263,6 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     EagleLinkedListItem *cursor;
     int i, rowsInserted = 1;
     EagleDbTuple *tuple;
-    EagleBoolean canCast;
     
     /* make the table exists */
     EagleDbTableData *td = EagleDbInstance_getTable(db, insert->table);
@@ -316,27 +315,7 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
         }
         
         /* match data type */
-        switch(col->type) {
-                
-            case EagleDataTypeInteger:
-                EagleDbSqlValue_getInteger((EagleDbSqlValue*) valueExpr, &canCast);
-                break;
-                
-            case EagleDataTypeFloat:
-                EagleDbSqlValue_getFloat((EagleDbSqlValue*) valueExpr, &canCast);
-                break;
-                
-            case EagleDataTypeUnknown:
-                canCast = EagleFalse;
-                break;
-                
-            case EagleDataTypeVarchar:
-                EagleDbSqlValue_getVarchar((EagleDbSqlValue*) valueExpr, &canCast);
-                break;
-                
-        }
-        
-        if(EagleFalse == canCast) {
+        if(EagleFalse == EagleDbSqlValue_castable((EagleDbSqlValue*) valueExpr, col->type)) {
             char *type1 = EagleDataType_typeToName(col->type);
             char *type2 = EagleDbSqlValueType_toString(((EagleDbSqlValue*) valueExpr)->type);
             
@@ -362,40 +341,7 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
         col = EagleDbTable_getColumnByName(td->table, colName);
         v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
         
-        switch(col->type) {
-                
-            case EagleDataTypeInteger:
-            {
-                EagleDataTypeIntegerType value = EagleDbSqlValue_getInteger(v, &canCast);
-                EagleDbTuple_setInt(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDataTypeFloat:
-            {
-                EagleDataTypeFloatType value = EagleDbSqlValue_getFloat(v, &canCast);
-                EagleDbTuple_setFloat(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDataTypeVarchar:
-            {
-                EagleDataTypeVarcharType value = EagleDbSqlValue_getVarchar(v, &canCast);
-                EagleDbTuple_setVarchar(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDataTypeUnknown:
-            {
-                EagleDbTuple_Delete(tuple);
-                
-                sprintf(msg, "Only literal values are allowed for expressions.");
-                *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
-                return EagleFalse;
-            }
-            
-        }
-        
+        EagleDbTuple_set(tuple, colIndex, v, col->type);
     }
     
     /* do the INSERT */

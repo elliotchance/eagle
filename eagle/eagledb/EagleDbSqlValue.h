@@ -124,4 +124,12 @@ EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoo
  */
 EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, EagleBoolean *success);
 
+/**
+ Check if a EagleDbSqlValue can be cast into a data type.
+ @param [in] value The value to cast (can be any type).
+ @param [in] type The data type to attempt to cast to.
+ @return EagleTrue if the value can successfully be cast to the new type.
+ */
+EagleBoolean EagleDbSqlValue_castable(EagleDbSqlValue *value, EagleDataType type);
+
 #endif
