@@ -165,3 +165,63 @@ char* EagleDbSqlValue_toString(EagleDbSqlValue *value)
 
     }
 }
+
+EagleDataTypeIntegerType EagleDbSqlValue_getInteger(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeString:
+            *success = EagleFalse;
+            return 0;
+            
+        case EagleDbSqlValueTypeFloat:
+            *success = EagleTrue;
+            return (EagleDataTypeIntegerType) value->value.floatValue;
+            
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleTrue;
+            return value->value.intValue;
+            
+    }
+}
+
+EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeString:
+            *success = EagleFalse;
+            return 0;
+            
+        case EagleDbSqlValueTypeFloat:
+            *success = EagleTrue;
+            return value->value.floatValue;
+            
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleTrue;
+            return (EagleDataTypeFloatType) value->value.intValue;
+            
+    }
+}
+
+EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, EagleBoolean *success)
+{
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+        case EagleDbSqlValueTypeFloat:
+        case EagleDbSqlValueTypeInteger:
+            *success = EagleFalse;
+            return NULL;
+            
+        case EagleDbSqlValueTypeString:
+            *success = EagleTrue;
+            return value->value.identifier;
+            
+    }
+}

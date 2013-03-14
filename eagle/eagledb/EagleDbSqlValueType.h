@@ -35,4 +35,6 @@ typedef enum {
     
 } EagleDbSqlValueType;
 
+char* EagleDbSqlValueType_toString(EagleDbSqlValueType type);
+
 #endif

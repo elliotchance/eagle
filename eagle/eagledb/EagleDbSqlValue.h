@@ -97,4 +97,10 @@ void EagleDbSqlValue_Delete(EagleDbSqlValue *value);
  */
 char* EagleDbSqlValue_toString(EagleDbSqlValue *value);
 
+EagleDataTypeIntegerType EagleDbSqlValue_getInteger(EagleDbSqlValue *value, EagleBoolean *success);
+
+EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoolean *success);
+
+EagleDataTypeVarcharType EagleDbSqlValue_getVarchar(EagleDbSqlValue *value, EagleBoolean *success);
+
 #endif

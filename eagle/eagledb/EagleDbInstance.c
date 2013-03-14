@@ -263,6 +263,7 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     EagleLinkedListItem *cursor;
     int i, rowsInserted = 1;
     EagleDbTuple *tuple;
+    EagleBoolean canCast;
     
     /* make the table exists */
     EagleDbTableData *td = EagleDbInstance_getTable(db, insert->table);
@@ -313,6 +314,39 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
             *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
             return EagleFalse;
         }
+        
+        /* match data type */
+        switch(col->type) {
+                
+            case EagleDataTypeInteger:
+                EagleDbSqlValue_getInteger((EagleDbSqlValue*) valueExpr, &canCast);
+                break;
+                
+            case EagleDataTypeFloat:
+                EagleDbSqlValue_getFloat((EagleDbSqlValue*) valueExpr, &canCast);
+                break;
+                
+            case EagleDataTypeUnknown:
+                canCast = EagleFalse;
+                break;
+                
+            case EagleDataTypeVarchar:
+                EagleDbSqlValue_getVarchar((EagleDbSqlValue*) valueExpr, &canCast);
+                break;
+                
+        }
+        
+        if(EagleFalse == canCast) {
+            char *type1 = EagleDataType_typeToName(col->type);
+            char *type2 = EagleDbSqlValueType_toString(((EagleDbSqlValue*) valueExpr)->type);
+            
+            sprintf(msg, "Type for column %s is %s, but %s given.", col->name, type1, type2);
+            
+            EagleMemory_Free(type1);
+            EagleMemory_Free(type2);
+            *error = EagleLogger_Log(EagleLoggerSeverityUserError, msg);
+            return EagleFalse;
+        }
     }
     
     /* everything looks good, we can create the tuple now */
@@ -320,34 +354,38 @@ EagleBoolean EagleDbInstance_executeInsert(EagleDbInstance *db, EagleDbSqlInsert
     
     for(cursor = EagleLinkedList_begin(insert->names), i = 0; NULL != cursor; cursor = cursor->next, ++i) {
         char *colName = ((EagleDbSqlValue*) cursor->obj)->value.identifier;
-        int colIndex = EagleDbTable_getColumnIndex(td->table, colName);
+        EagleDbColumn *col;
+        int colIndex;
+        EagleDbSqlValue *v;
         
-        EagleDbSqlValue *v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
-        switch(v->type) {
+        colIndex = EagleDbTable_getColumnIndex(td->table, colName);
+        col = EagleDbTable_getColumnByName(td->table, colName);
+        v = ((EagleDbSqlValue*) EagleLinkedList_get(insert->values, i));
+        
+        switch(col->type) {
                 
-            case EagleDbSqlValueTypeInteger:
+            case EagleDataTypeInteger:
             {
-                EagleDataTypeIntegerType value = v->value.intValue;
+                EagleDataTypeIntegerType value = EagleDbSqlValue_getInteger(v, &canCast);
                 EagleDbTuple_setInt(tuple, colIndex, value);
                 break;
             }
                 
-            case EagleDbSqlValueTypeString:
+            case EagleDataTypeFloat:
             {
-                EagleDataTypeVarcharType value = v->value.identifier;
-                EagleDbTuple_setVarchar(tuple, colIndex, value);
-                break;
-            }
-                
-            case EagleDbSqlValueTypeFloat:
-            {
-                EagleDataTypeFloatType value = v->value.floatValue;
+                EagleDataTypeFloatType value = EagleDbSqlValue_getFloat(v, &canCast);
                 EagleDbTuple_setFloat(tuple, colIndex, value);
                 break;
             }
                 
-            case EagleDbSqlValueTypeAsterisk:
-            case EagleDbSqlValueTypeIdentifier:
+            case EagleDataTypeVarchar:
+            {
+                EagleDataTypeVarcharType value = EagleDbSqlValue_getVarchar(v, &canCast);
+                EagleDbTuple_setVarchar(tuple, colIndex, value);
+                break;
+            }
+                
+            case EagleDataTypeUnknown:
             {
                 EagleDbTuple_Delete(tuple);
                 
