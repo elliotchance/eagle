@@ -11,64 +11,13 @@
 static uint64_t BenchSuite_CalibrateAddition = 0;
 int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
 
-EagleDbInstance* getInstance()
-{
-    EagleDbInstance *instance = EagleDbInstance_New(BenchSuite_RecordsPerPage);
-    
-    // create schema
-    EagleDbSchema *schema = EagleDbSchema_New("default");
-    EagleDbInstance_addSchema(instance, schema);
-    
-    // create table
-    EagleDbTable *table = EagleDbTable_New("mytable");
-    EagleDbTable_addColumn(table, EagleDbColumn_New("col1", EagleDataTypeInteger));
-    
-    // create table data
-    EagleDbTableData *td = EagleDbTableData_New(table, BenchSuite_RecordsPerPage);
-    EagleDbSchema_addTable(schema, td);
-    
-    // tuples
-    EagleDbTuple *tuple = EagleDbTuple_New(table);
-    for(int i = 1; i <= BenchSuite_TotalPages * BenchSuite_RecordsPerPage; ++i) {
-        EagleDbTuple_setInt(tuple, 0, i);
-        EagleDbTableData_insert(td, tuple);
-        
-        // this is a bit naughty, to save time on recreating the tuple for every row we are reusing it
-        free(tuple->data[0]);
-        tuple->data[0] = NULL;
-    }
-    EagleDbTuple_Delete(tuple);
-    
-    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(td->providers[0]), BenchSuite_TotalPages);
-    
-    return instance;
-}
-
-void freeInstance(EagleDbInstance *db)
-{
-    EagleLinkedList_Foreach(db->schemas, EagleDbSchema*, schema)
-    {
-        EagleLinkedList_Foreach(schema->tables, EagleDbTableData*, table)
-        {
-            EagleDbTable_Delete(table->table);
-            EagleDbTableData_Delete(table);
-        }
-        EagleLinkedList_ForeachEnd
-        
-        EagleDbSchema_Delete(schema);
-    }
-    EagleLinkedList_ForeachEnd
-    
-    EagleDbInstance_Delete(db);
-}
-
 void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan)
 {
     double execMultiplier = plan->executionTime / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
     double executionTime = plan->executionTime / 1.0e9;
     double waitTime = plan->lockWaitTime / 1.0e9;
-    //printf(" exec time: %f; wait time: %f; exec multiplier: %f; ", executionTime, waitTime, execMultiplier);
-    printf(" exec multiplier: %f; ", execMultiplier);
+    printf(" exec time: %f; wait time: %f; exec multiplier: %f; ", executionTime, waitTime, execMultiplier);
+    //printf(" exec multiplier: %f; ", execMultiplier);
     
     // make sure the wait time is very small in preportion to the execution time
     CUNIT_VERIFY_LESS_THAN_DOUBLE(waitTime / executionTime, 0.1);
@@ -93,41 +42,98 @@ CUNIT_TEST(BenchSuite, calibrate)
     printf(" %lld nano seconds; ", BenchSuite_CalibrateAddition);
 }
 
-CUNIT_TEST(BenchSuite, SELECT)
+double frand(double max)
 {
-    EagleDbInstance *instance = getInstance();
-    
-    // parse SELECT
-    EagleDbParser *parser = EagleDbParser_ParseWithString("SELECT col1 FROM mytable WHERE col1=1000000");
-    EagleDbSqlSelect *select = (EagleDbSqlSelect*) parser->yyparse_ast;
+    return ((double) rand() / (double) RAND_MAX) * max;
+}
 
-    // execute
-    EaglePlan *plan = EagleDbSqlSelect_parse(select, instance);
+CUNIT_TEST(BenchSuite, distance)
+{
+    int pageSize = 1000, rows = 1000000;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success;
+    
+    // create table
+    success = EagleDbInstance_execute(db, "CREATE TABLE point (id INT, x DOUBLE, y DOUBLE);", &error);
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", error->message);
+    }
+    
+    // add data
+    srand(0);
+    
+    /*
+     SLOW INSERT
+    for(int i = 0; i < rows; ++i) {
+        char sql[1024];
+        sprintf(sql, "INSERT INTO point (id, x, y) VALUES (%d, %g, %g);", i + 1, frand(1000.0), frand(1000.0));
+        //printf("%s\n", sql);
+        
+        success = EagleDbInstance_execute(db, sql, &error);
+        if(EagleFalse == success) {
+            CUNIT_FAIL("%s", error->message);
+        }
+    }
+     */
+    
+    EagleDbTableData *td = EagleDbInstance_getTable(db, "point");
+    EagleDbTuple *tuple = EagleDbTuple_New(td->table);
+    for(int i = 0; i < rows; ++i) {
+        EagleDbTuple_setInt(tuple, 0, i + 1);
+        EagleDbTuple_setFloat(tuple, 1, frand(1000.0));
+        EagleDbTuple_setFloat(tuple, 2, frand(1000.0));
+        EagleDbTableData_insert(td, tuple);
+        
+        // this is a bit naughty, to save time on recreating the tuple for every row we are reusing it
+        free(tuple->data[0]);
+        free(tuple->data[1]);
+        free(tuple->data[2]);
+        tuple->data[0] = NULL;
+        tuple->data[1] = NULL;
+        tuple->data[2] = NULL;
+    }
+    EagleDbTuple_Delete(tuple);
+    
+    // do a distance search
+    EagleDbParser *p = EagleDbParser_ParseWithString("SELECT id, x, y FROM point WHERE sqrt((500.0 - x) * (500.0 - x) + (500.0 - y) * (500.0 - y)) < 1.0");
+    if(EagleTrue == EagleDbParser_hasError(p)) {
+        CUNIT_FAIL("%s", EagleDbParser_lastError(p));
+    }
+    
+    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
+    if(EagleTrue == EaglePlan_isError(plan)) {
+        CUNIT_FAIL("%s", plan->errorMessage);
+    }
     //printf("%s\n", EaglePlan_toString(plan));
     
-    // catch compilation error
-    CUNIT_ASSERT_EQUAL_INT(EaglePlan_isError(plan), EagleFalse);
-    
     // execute
-    EagleInstance *eagle = EagleInstance_New(4);
+    EagleInstance *eagle = EagleInstance_New(1);
     EagleInstance_addPlan(eagle, plan);
     EagleInstance_run(eagle);
     
     // print results
-    CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(plan->result[0]), 1);
-    EaglePage *p = EaglePageProvider_nextPage(plan->result[0]);
-    CUNIT_ASSERT_NOT_NULL(p);
-    if(NULL != p) {
-        CUNIT_ASSERT_EQUAL_INT(p->count, 1);
-        CUNIT_ASSERT_EQUAL_INT(((int*) p->data)[0], 1000000);
-    }
+    /*while(EaglePageProvider_pagesRemaining(plan->result[0]) > 0) {
+        EaglePage *id = EaglePageProvider_nextPage(plan->result[0]);
+        EaglePage *x = EaglePageProvider_nextPage(plan->result[1]);
+        EaglePage *y = EaglePageProvider_nextPage(plan->result[2]);
+        
+        for(int i = 0; i < id->count; ++i) {
+            EagleDataTypeFloatType _x = ((EagleDataTypeFloatType*) x->data)[i];
+            EagleDataTypeFloatType _y = ((EagleDataTypeFloatType*) y->data)[i];
+            
+            printf("(id = %d, x = %g, y = %g) -> %g\n", ((EagleDataTypeIntegerType*) id->data)[i], _x, _y,
+                   sqrt((500.0 - _x) * (500.0 - _x) + (500.0 - _y) * (500.0 - _y)));
+        }
+    }*/
     
     // check timing
     CUNIT_ASSERT_BENCH_RESULT(plan);
     
-    EagleInstance_Delete(eagle);
-    EagleDbSqlSelect_DeleteRecursive(select);
-    freeInstance(instance);
+    EaglePlan_Delete(plan);
+    EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
+    EagleDbParser_Delete(p);
+    EagleDbInstance_Delete(db);
 }
 
 /**
@@ -152,7 +158,7 @@ CUnitTests* BenchSuite_tests()
     
     // method tests
     CUnitTests_addTest(tests, CUNIT_NEW(BenchSuite, calibrate));
-    CUnitTests_addTest(tests, CUNIT_NEW(BenchSuite, SELECT));
+    CUnitTests_addTest(tests, CUNIT_NEW(BenchSuite, distance));
     
     return tests;
 }
