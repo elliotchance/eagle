@@ -77,7 +77,7 @@ CUNIT_TEST(DBSuite, _INSERT_BadValue2)
     EagleLoggerEvent *error = NULL;
     EagleBoolean success = EagleDbInstance_execute(db, "INSERT INTO mytable (col1) VALUES (col1);", &error);
     CUNIT_ASSERT_FALSE(success);
-    CUNIT_ASSERT_LAST_ERROR("Only literal values are allowed for expressions.");
+    CUNIT_ASSERT_LAST_ERROR("Type for column col1 is INTEGER, but Indentifer given.");
     
     EagleInstanceTest_Cleanup(db);
 }

@@ -35,6 +35,11 @@ typedef enum {
     
 } EagleDbSqlValueType;
 
+/**
+ Get the string representation of a EagleDbSqlValueType.
+ @param [in] type The type.
+ @return A newly allocated string is always returned, you must free this manually when you are finished with it.
+ */
 char* EagleDbSqlValueType_toString(EagleDbSqlValueType type);
 
 #endif

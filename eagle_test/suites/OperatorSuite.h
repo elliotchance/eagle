@@ -5,9 +5,9 @@
 #include <CUnit/Basic.h>
 #include "EaglePage.h"
 
-#define OperatorSuite_ValidateBinary(_type, _op) int valid = 1; \
+#define OperatorSuite_ValidateBinary(_type1, _type2, _op) int valid = 1; \
 for(int i = 0; i < pageSize; ++i) { \
-if((((_type*) page1->data)[i] _op ((_type*) page2->data)[i]) != ((_type*) out->data)[i]) { \
+if((((_type1*) page1->data)[i] _op ((_type1*) page2->data)[i]) != ((_type2*) out->data)[i]) { \
 valid = 0; \
 break; \
 } \

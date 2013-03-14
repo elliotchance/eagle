@@ -195,7 +195,7 @@ EagleDataTypeFloatType EagleDbSqlValue_getFloat(EagleDbSqlValue *value, EagleBoo
         case EagleDbSqlValueTypeIdentifier:
         case EagleDbSqlValueTypeString:
             *success = EagleFalse;
-            return 0;
+            return 0.0;
             
         case EagleDbSqlValueTypeFloat:
             *success = EagleTrue;
