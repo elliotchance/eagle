@@ -262,14 +262,14 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
             
             destination = *destinationBuffer;
             provider = (EaglePageProvider*) EaglePageProviderSingle_NewInt(value->value.intValue, plan->pageSize, "(integer)");
-            bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+            bp = EaglePlanBufferProvider_NewWithProvider(destination, provider, EagleTrue);
             EaglePlan_addBufferProvider(plan, bp, EagleTrue);
             ++*destinationBuffer;
             
             plan->bufferTypes[destination] = EagleDataTypeInteger;
             break;
         }
-            
+        
         case EagleDbSqlValueTypeIdentifier:
         {
             /* find the provider for this column */
@@ -281,7 +281,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
                 return EagleDbSqlExpression_ERROR;
             }
             
-            plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
+            plan->bufferTypes[provider->destinationBuffer] = provider->value.provider.provider->type;
             destination = provider->destinationBuffer;
             break;
         }
@@ -302,7 +302,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
             
             destination = *destinationBuffer;
             provider = (EaglePageProvider*) EaglePageProviderSingle_NewVarchar(value->value.identifier, plan->pageSize, "(string literal)");
-            bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+            bp = EaglePlanBufferProvider_NewWithProvider(destination, provider, EagleTrue);
             EaglePlan_addBufferProvider(plan, bp, EagleTrue);
             ++*destinationBuffer;
             
@@ -317,7 +317,7 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Value_(EagleDbSqlExpression *expr
             
             destination = *destinationBuffer;
             provider = (EaglePageProvider*) EaglePageProviderSingle_NewFloat(value->value.floatValue, plan->pageSize, "(float)");
-            bp = EaglePlanBufferProvider_New(destination, provider, EagleTrue);
+            bp = EaglePlanBufferProvider_NewWithProvider(destination, provider, EagleTrue);
             EaglePlan_addBufferProvider(plan, bp, EagleTrue);
             ++*destinationBuffer;
             
@@ -383,7 +383,7 @@ void EagleDbSqlExpression_CompilePlan(EagleDbSqlExpression **expressions, int to
         }
         
         /* each provider will go into a page, sync their types */
-        plan->bufferTypes[provider->destinationBuffer] = provider->provider->type;
+        plan->bufferTypes[provider->destinationBuffer] = provider->value.provider.provider->type;
     }
     EagleLinkedList_ForeachEnd
     

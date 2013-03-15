@@ -2,13 +2,7 @@
 #define eagle_EagleDbSqlExpression_h
 
 #include "EaglePlan.h"
-#include "EagleDbSqlExpressionType.h"
-
-/**
- * This header must exists in all structs that "extend" EagleDbSqlExpression.
- * @see EagleDbSqlExpression
- */
-#define EagleDbSqlExpressionHeader EagleDbSqlExpressionType expressionType
+#include "EagleDbSqlExpressionHeader.h"
 
 extern const int EagleDbSqlExpression_ERROR;
 

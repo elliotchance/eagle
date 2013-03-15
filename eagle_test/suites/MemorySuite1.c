@@ -367,12 +367,12 @@ CUNIT_TEST(MemorySuite, EaglePlan_toString_2)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_New)
+CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_NewWithProvider)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePlanBufferProvider_New.1");
+    EagleMemory_Mock("EaglePlanBufferProvider_NewWithProvider.1");
     
-    CUNIT_ASSERT_NULL(EaglePlanBufferProvider_New(0, NULL, EagleFalse));
+    CUNIT_ASSERT_NULL(EaglePlanBufferProvider_NewWithProvider(0, NULL, EagleFalse));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -889,7 +889,7 @@ CUnitTests* MemorySuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_toString_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_toString_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_NewWithProvider));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_1));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_New));

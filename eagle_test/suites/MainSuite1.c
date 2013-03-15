@@ -31,7 +31,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     // input data
     EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_NewInt(data, totalRecords, recordsPerPage, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
-    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(1, provider, EagleTrue);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(1, provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     
     // destination provider
@@ -198,7 +198,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     
     // add some buffer providers
     EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 10, NULL);
-    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, (EaglePageProvider*) provider, EagleTrue);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(123, (EaglePageProvider*) provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     EaglePlan_prepareBuffers(plan, 1);
     
@@ -227,7 +227,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
 CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
 {
     EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 10, "something");
-    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(123, (EaglePageProvider*) provider, EagleTrue);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(123, (EaglePageProvider*) provider, EagleTrue);
     char *description = EaglePlanBufferProvider_toString(bp);
     CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something, type = INTEGER");
     EagleMemory_Free(description);
@@ -525,7 +525,7 @@ CUNIT_TEST(MainSuite, EagleInstance_nextJob)
     free(ptr);
     
     EaglePlan *p = EaglePlan_New(1);
-    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(0, (EaglePageProvider*) provider, EagleFalse);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(0, (EaglePageProvider*) provider, EagleFalse);
     EaglePlan_addBufferProvider(p, bp, EagleFalse);
     
     EagleInstance *instance = EagleInstance_New(1);

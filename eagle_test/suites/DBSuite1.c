@@ -19,7 +19,6 @@
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
 #include "EagleDbInformationSchema.h"
-#include "EagleDbSqlCastExpression.h"
 
 EagleDbParser* _testSqlSelect(const char *sql)
 {
@@ -106,7 +105,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
         col1Data[i] = i;
     }
     EaglePageProvider *col1 = (EaglePageProvider*) EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, col1, EagleTrue), EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 1);
     
     EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);
@@ -261,8 +260,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     }
     EaglePageProviderArray *col1 = EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
     EaglePageProviderArray *col2 = EaglePageProviderArray_NewInt(col2Data, pageSize, pageSize, "col2");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
     
     // compile plan
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
@@ -353,8 +352,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1);
-    
-    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, NULL), EagleDbSqlExpression_ERROR);
     
     int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);
     CUNIT_VERIFY_EQUAL_INT(result, 0);
@@ -760,12 +757,6 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
     
     {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
-        CUNIT_VERIFY_NOT_NULL(expr);
-        EagleDbSqlExpression_Delete(expr);
-    }
-    
-    {
-        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlCastExpression_New(NULL, EagleDataTypeInteger);
         CUNIT_VERIFY_NOT_NULL(expr);
         EagleDbSqlExpression_Delete(expr);
     }

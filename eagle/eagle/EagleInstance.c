@@ -52,7 +52,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     
     EagleLinkedList_Foreach(job->plan->providers, EaglePlanBufferProvider*, provider)
     {
-        if(EaglePageProvider_pagesRemaining(provider->provider) == 0) {
+        if(EaglePageProvider_pagesRemaining(provider->value.provider.provider) == 0) {
             EaglePlanJob_Delete(job);
             job = NULL;
             break;
@@ -68,7 +68,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
             break;
         }
         EaglePage_Delete(job->buffers[provider->destinationBuffer]);
-        job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->provider);
+        job->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->value.provider.provider);
     }
     EagleLinkedList_ForeachEnd
     
