@@ -7,6 +7,16 @@
 #include "EagleInstance.h"
 #include "EagleDbParser.h"
 
+u_int32_t arc4random0(u_int32_t max)
+{
+    while(1) {
+        u_int32_t r = arc4random() % max;
+        if(0 != r) {
+            return r;
+        }
+    }
+}
+
 EaglePage* OperatorSuite_GeneratePageInt(int pageSize, int max)
 {
     EaglePage *page = EaglePage_AllocInt(pageSize);
@@ -29,16 +39,6 @@ EaglePage* OperatorSuite_GeneratePageFloat(int pageSize)
     }
     
     return page;
-}
-
-u_int32_t arc4random0(u_int32_t max)
-{
-    while(1) {
-        u_int32_t r = arc4random() % max;
-        if(0 != r) {
-            return r;
-        }
-    }
 }
 
 CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanInt)
@@ -752,12 +752,324 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_DividePageFloat)
     EaglePage_Delete(out);
 }
 
+CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanEqualsInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_GreaterThanEqualsInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!(((EagleDataTypeIntegerType*) page->data)[i] >= testValue == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualsInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_LessThanEqualsInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!(((EagleDataTypeIntegerType*) page->data)[i] <= testValue == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_EqualsInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_EqualsInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] == testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_NotEqualsInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_NotEqualsInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] != testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_AdditionInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_AdditionInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] + testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_MultiplyInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_MultiplyInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] * testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractLeftInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_SubtractLeftInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] - testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_SubtractRightInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random();
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_SubtractRightInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((testValue - ((EagleDataTypeIntegerType*) page->data)[i]) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_ModulusLeftInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random0(100);
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_ModulusLeftInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] % testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_ModulusRightInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random0(100);
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_ModulusRightInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(((EagleDataTypeIntegerType*) page->data)[i] == 0) {
+            if(((EagleDataTypeIntegerType*) out->data)[i] != 0) {
+                valid = 0;
+                break;
+            }
+        }
+        else if(!((testValue % ((EagleDataTypeIntegerType*) page->data)[i]) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_DivideLeftInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random0(100);
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_DivideLeftInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(!((((EagleDataTypeIntegerType*) page->data)[i] / testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
+CUNIT_TEST(OperatorSuite, EaglePageOperations_DivideRightInt)
+{
+    int pageSize = 1000;
+    EagleDataTypeIntegerType testValue = arc4random0(100);
+    EaglePage *page = OperatorSuite_GeneratePageInt(pageSize, 100);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
+    EagleDataTypeIntegerType *int1 = EagleData_Int(testValue);
+    
+    EaglePageOperations_DivideRightInt(out, page, NULL, int1);
+    
+    int valid = 1;
+    for(int i = 0; i < pageSize; ++i) {
+        if(((EagleDataTypeIntegerType*) page->data)[i] == 0) {
+            if(((EagleDataTypeIntegerType*) out->data)[i] != 0) {
+                valid = 0;
+                break;
+            }
+        }
+        else if(!((testValue / ((EagleDataTypeIntegerType*) page->data)[i]) == ((EagleDataTypeIntegerType*) out->data)[i])) {
+            valid = 0;
+            break;
+        }
+    }
+    CUNIT_ASSERT_EQUAL_INT(valid, 1);
+    
+    EagleMemory_Free(int1);
+    EaglePage_Delete(page);
+    EaglePage_Delete(out);
+}
+
 CUnitTests* OperatorSuite_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
     CUnitTests_addTest(tests, CUNIT_NEW(OperatorSuite, OperatorPrecedence));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DivideLeftInt, "int / int [left page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DivideRightInt, "int / int [right page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_ModulusLeftInt, "int % int [left page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_ModulusRightInt, "int % int [right page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_SubtractLeftInt, "int - int [left page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_SubtractRightInt, "int - int [right page]"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_MultiplyInt, "int * int"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_AdditionInt, "int + int"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_NotEqualsInt, "int != int"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_EqualsInt, "int = int"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanEqualsInt, "int >= int"));
+    CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_LessThanEqualsInt, "int <= int"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_DividePageFloat, "page(float) / page(float)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_SubtractPageFloat, "page(float) - page(float)"));
     CUnitTests_addTest(tests, CUNIT_NEW_NAME(OperatorSuite, EaglePageOperations_GreaterThanEqualPageFloat, "page(float) >= page(float)"));
