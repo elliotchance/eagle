@@ -68,4 +68,8 @@ void EagleWorker_join(EagleWorker *worker);
  */
 void EagleWorker_runJob(EaglePlanJob *job);
 
+void EagleWorker_runJobLiteral(EaglePlanJob *job, EaglePlanOperation *epo);
+
+void EagleWorker_runJobPage(EaglePlanJob *job, EaglePlanOperation *epo);
+
 #endif

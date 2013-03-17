@@ -114,9 +114,17 @@ char* EagleDbSqlBinaryExpression_toString(EagleDbSqlBinaryExpression *expr);
  @param [out] match If a match is found it will be copied into this output parameter.
  @return EagleTrue if the operator can be found.
  */
-EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
-                                                     EagleDbSqlBinaryExpressionOperator op,
-                                                     EagleDataType right,
-                                                     EagleDbSqlBinaryOperator *match);
+EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation(EagleDataType left,
+                                                         EagleDbSqlBinaryExpressionOperator op,
+                                                         EagleDataType right,
+                                                         EagleDbSqlBinaryOperator *match);
+
+EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataType left,
+                                                         EagleDbSqlBinaryExpressionOperator op,
+                                                         EagleDbSqlBinaryOperator *match);
+
+EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation(EagleDataType right,
+                                                          EagleDbSqlBinaryExpressionOperator op,
+                                                          EagleDbSqlBinaryOperator *match);
 
 #endif

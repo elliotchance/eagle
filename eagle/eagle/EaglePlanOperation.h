@@ -5,11 +5,22 @@
 #include "EaglePageProvider.h"
 #include "EagleBoolean.h"
 #include "Eagle.h"
+#include "EagleDbSqlValue.h"
+
+typedef enum {
+    
+    EaglePlanOperationTypePage = 1,
+    
+    EaglePlanOperationTypeLiteral = 2
+    
+} EaglePlanOperationType;
 
 /**
  Represents a plan operation, or a single step in the executation of an expression.
  */
 typedef struct {
+    
+    EAGLE_ATTR_NA EaglePlanOperationType type;
     
     /**
      Destination buffer ID.
@@ -59,8 +70,20 @@ typedef struct {
  * @param [in] description A human readable description to be rendered into EaglePlanOperation_toString()
  * @return A new EaglePlanOperation.
  */
-EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function), int destination, int source1,
-        int source2, void *obj, EagleBoolean freeObj, const char *description);
+EaglePlanOperation* EaglePlanOperation_NewWithPage(EaglePageOperationFunction(function),
+                                                   int destination,
+                                                   int source1,
+                                                   int source2,
+                                                   void *obj,
+                                                   EagleBoolean freeObj,
+                                                   const char *description);
+
+EaglePlanOperation* EaglePlanOperation_NewWithLiteral(EaglePageOperationFunction(function),
+                                                      int destination,
+                                                      int source1,
+                                                      EagleDbSqlValue *literal,
+                                                      EagleBoolean freeLiteral,
+                                                      const char *description);
 
 /**
  * Delete an operation.

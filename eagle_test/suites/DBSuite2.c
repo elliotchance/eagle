@@ -105,7 +105,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
     
     EaglePlan_prepareBuffers(plan, 10);
     int destinationBuffer = 0;
-    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &destinationBuffer, plan);
+    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_(expr, &destinationBuffer, plan, EagleTrue);
     CUNIT_VERIFY_EQUAL_INT(result, EagleDbSqlExpression_ERROR);
     
     EagleDbSqlExpression_DeleteRecursive(expr);
@@ -358,10 +358,10 @@ CUNIT_TEST(DBSuite, EagleDbSqlFunctionExpression_DeleteRecursive)
     EagleDbSqlFunctionExpression_DeleteRecursive(NULL);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetOperation)
+CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetPageOperation)
 {
     EagleDbSqlBinaryOperator op;
-    CUNIT_ASSERT_FALSE(EagleDbSqlBinaryExpression_GetOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, EagleDataTypeUnknown, &op));
+    CUNIT_ASSERT_FALSE(EagleDbSqlBinaryExpression_GetPageOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, EagleDataTypeUnknown, &op));
 }
 
 CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_3)
@@ -394,7 +394,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_)
     EaglePlan_prepareBuffers(plan, 10);
     
     EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
-    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such operator FLOAT + INTEGER");
+    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such binary operator FLOAT + INTEGER");
     
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr);
     EaglePlan_Delete(plan);
@@ -431,7 +431,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_)
     EaglePlan_prepareBuffers(plan, 10);
     
     EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
-    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such operator NOT FLOAT");
+    CUNIT_ASSERT_EQUAL_STRING(plan->errorMessage, "No such unary operator NOT FLOAT");
     
     EagleDbSqlExpression_DeleteRecursive((EagleDbSqlExpression*) expr);
     EaglePlan_Delete(plan);
@@ -571,7 +571,7 @@ CUnitTests* DBSuite2_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setFloat));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_3));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetOperation));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetPageOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlFunctionExpression_DeleteRecursive));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlFunctionExpression_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Function_));

@@ -267,7 +267,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
-    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 5);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 2);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), 5);
     
     // execute
@@ -353,7 +353,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1);
     
-    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);
+    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan, EagleTrue);
     CUNIT_VERIFY_EQUAL_INT(result, 0);
     
     EagleDbSqlSelect_DeleteRecursive(select);

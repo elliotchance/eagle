@@ -415,12 +415,23 @@ CUNIT_TEST(MemorySuite, EaglePlanJob_New_2)
     EagleMemory_MockFinish();
 }
 
-CUNIT_TEST(MemorySuite, EaglePlanOperation_New)
+CUNIT_TEST(MemorySuite, EaglePlanOperation_NewWithLiteral)
 {
     EagleMemory_MockInit();
-    EagleMemory_Mock("EaglePlanOperation_New.1");
+    EagleMemory_Mock("EaglePlanOperation_NewWithLiteral.1");
     
-    CUNIT_ASSERT_NULL(EaglePlanOperation_New(NULL, 0, 0, 0, NULL, EagleFalse, NULL));
+    CUNIT_ASSERT_NULL(EaglePlanOperation_NewWithLiteral(NULL, 0, 0, NULL, EagleFalse, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePlanOperation_NewWithPage)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePlanOperation_NewWithPage.1");
+    
+    CUNIT_ASSERT_NULL(EaglePlanOperation_NewWithPage(NULL, 0, 0, 0, NULL, EagleFalse, NULL));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -847,6 +858,7 @@ CUnitTests* MemorySuite1_tests()
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_NewWithLiteral));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlValue_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_NewVarchar));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePageProviderSingle_nextPage_2));
@@ -892,7 +904,7 @@ CUnitTests* MemorySuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_NewWithProvider));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanJob_New_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_New));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanOperation_NewWithPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleSynchronizer_CreateLock));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorker_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleWorkers_New_1));

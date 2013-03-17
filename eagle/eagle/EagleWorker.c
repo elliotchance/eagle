@@ -20,45 +20,110 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
     return worker;
 }
 
+void EagleWorker_runJobLiteral(EaglePlanJob *job, EaglePlanOperation *epo)
+{
+    EaglePage *destination = NULL, *source1 = NULL;
+    EagleDbSqlValue *value;
+    
+    /* prepare arguments */
+    if(epo->destination >= 0) {
+        if(epo->destination >= job->plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "destination %d is greater than allowed %d buffers!", epo->destination, job->plan->buffersNeeded);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return;
+        }
+        destination = job->buffers[epo->destination];
+    }
+    if(epo->source1 >= 0) {
+        if(epo->source1 >= job->plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "source1 %d is greater than allowed %d buffers!", epo->source1, job->plan->buffersNeeded);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return;
+        }
+        source1 = job->buffers[epo->source1];
+    }
+    
+    /* execute page operation */
+    value = (EagleDbSqlValue*) epo->obj;
+    switch(value->type) {
+            
+        case EagleDbSqlValueTypeAsterisk:
+        case EagleDbSqlValueTypeIdentifier:
+            /* these are bogus and should never occur */
+            break;
+            
+        case EagleDbSqlValueTypeFloat:
+            epo->function(destination, source1, NULL, &value->value.floatValue);
+            break;
+            
+        case EagleDbSqlValueTypeInteger:
+            epo->function(destination, source1, NULL, &value->value.intValue);
+            break;
+            
+        case EagleDbSqlValueTypeString:
+            epo->function(destination, source1, NULL, &value->value.identifier);
+            break;
+            
+    }
+}
+
+void EagleWorker_runJobPage(EaglePlanJob *job, EaglePlanOperation *epo)
+{
+    EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
+    
+    /* prepare arguments */
+    if(epo->destination >= 0) {
+        if(epo->destination >= job->plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "destination %d is greater than allowed %d buffers!", epo->destination, job->plan->buffersNeeded);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return;
+        }
+        destination = job->buffers[epo->destination];
+    }
+    if(epo->source1 >= 0) {
+        if(epo->source1 >= job->plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "source1 %d is greater than allowed %d buffers!", epo->source1, job->plan->buffersNeeded);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return;
+        }
+        source1 = job->buffers[epo->source1];
+    }
+    if(epo->source2 >= 0) {
+        if(epo->source2 >= job->plan->buffersNeeded) {
+            char msg[1024];
+            sprintf(msg, "source2 %d is greater than allowed %d buffers!", epo->source2, job->plan->buffersNeeded);
+            EagleLogger_Log(EagleLoggerSeverityError, msg);
+            return;
+        }
+        source2 = job->buffers[epo->source2];
+    }
+    
+    /* execute page operation */
+    epo->function(destination, source1, source2, epo->obj);
+}
+
 void EagleWorker_runJob(EaglePlanJob *job)
 {
     EaglePlan_resumeTimer(job->plan);
     
     EagleLinkedList_Foreach(job->plan->operations, EaglePlanOperation*, epo)
     {
-        EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
-        
-        /* prepare arguments */
-        if(epo->destination >= 0) {
-            if(epo->destination >= job->plan->buffersNeeded) {
-                char msg[1024];
-                sprintf(msg, "destination %d is greater than allowed %d buffers!", epo->destination, job->plan->buffersNeeded);
-                EagleLogger_Log(EagleLoggerSeverityError, msg);
-                return;
-            }
-            destination = job->buffers[epo->destination];
-        }
-        if(epo->source1 >= 0) {
-            if(epo->source1 >= job->plan->buffersNeeded) {
-                char msg[1024];
-                sprintf(msg, "source1 %d is greater than allowed %d buffers!", epo->source1, job->plan->buffersNeeded);
-                EagleLogger_Log(EagleLoggerSeverityError, msg);
-                return;
-            }
-            source1 = job->buffers[epo->source1];
-        }
-        if(epo->source2 >= 0) {
-            if(epo->source2 >= job->plan->buffersNeeded) {
-                char msg[1024];
-                sprintf(msg, "source2 %d is greater than allowed %d buffers!", epo->source2, job->plan->buffersNeeded);
-                EagleLogger_Log(EagleLoggerSeverityError, msg);
-                return;
-            }
-            source2 = job->buffers[epo->source2];
+        switch(epo->type) {
+                
+            case EaglePlanOperationTypePage:
+                EagleWorker_runJobPage(job, epo);
+                break;
+                
+            case EaglePlanOperationTypeLiteral:
+                EagleWorker_runJobLiteral(job, epo);
+                break;
+                
         }
         
-        /* execute page operation */
-        epo->function(destination, source1, source2, epo->obj);
     }
     EagleLinkedList_ForeachEnd
 }
