@@ -39,6 +39,17 @@ EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation(EagleDataType right,
         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusRightInt,      Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideRightInt,       Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractRightInt,     Integer),
+        
+        EagleDbSqlBinaryOperator_Make(Float, LessThan,           Float, GreaterThanFloat,       Integer),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThan,        Float, LessThanFloat,          Integer),
+        EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,      Float, GreaterThanEqualsFloat, Integer),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual,   Float, LessThanEqualsFloat,    Integer),
+        EagleDbSqlBinaryOperator_Make(Float, Equals,             Float, EqualsFloat,            Integer),
+        EagleDbSqlBinaryOperator_Make(Float, NotEquals,          Float, NotEqualsFloat,         Integer),
+        EagleDbSqlBinaryOperator_Make(Float, Plus,               Float, AdditionFloat,          Float),
+        EagleDbSqlBinaryOperator_Make(Float, Multiply,           Float, MultiplyFloat,          Float),
+        EagleDbSqlBinaryOperator_Make(Float, Divide,             Float, DivideRightFloat,       Float),
+        EagleDbSqlBinaryOperator_Make(Float, Minus,              Float, SubtractRightFloat,     Float),
     };
     
     for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {
@@ -69,6 +80,17 @@ EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataType left,
         EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractLeftInt,      Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideLeftInt,        Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusLeftInt,       Integer),
+        
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThan,        Float, GreaterThanFloat,       Integer),
+        EagleDbSqlBinaryOperator_Make(Float, LessThan,           Float, LessThanFloat,          Integer),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual,   Float, GreaterThanEqualsFloat, Integer),
+        EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,      Float, LessThanEqualsFloat,    Integer),
+        EagleDbSqlBinaryOperator_Make(Float, Equals,             Float, EqualsFloat,            Integer),
+        EagleDbSqlBinaryOperator_Make(Float, NotEquals,          Float, NotEqualsFloat,         Integer),
+        EagleDbSqlBinaryOperator_Make(Float, Plus,               Float, AdditionFloat,          Float),
+        EagleDbSqlBinaryOperator_Make(Float, Multiply,           Float, MultiplyFloat,          Float),
+        EagleDbSqlBinaryOperator_Make(Float, Minus,              Float, SubtractLeftFloat,      Float),
+        EagleDbSqlBinaryOperator_Make(Float, Divide,             Float, DivideLeftFloat,        Float),
     };
     
     for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {
