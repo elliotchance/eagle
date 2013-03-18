@@ -68,4 +68,18 @@ void EagleWorker_join(EagleWorker *worker);
  */
 void EagleWorker_runJob(EaglePlanJob *job);
 
+/**
+ Internal function used by EagleWorker_runJob().
+ @param [in] job The job to execute.
+ @param [in] epo The job plan operation.
+ */
+void EagleWorker_runJobLiteral_(EaglePlanJob *job, EaglePlanOperation *epo);
+
+/**
+ Internal function used by EagleWorker_runJob().
+ @param [in] job The job to execute.
+ @param [in] epo The job plan operation.
+ */
+void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo);
+
 #endif

@@ -5,11 +5,28 @@
 #include "EaglePageProvider.h"
 #include "EagleBoolean.h"
 #include "Eagle.h"
+#include "EagleDbSqlValue.h"
+
+/**
+ The plan operation type.
+ */
+typedef enum {
+    
+    EaglePlanOperationTypePage = 1,    /**< Page operation. */
+    
+    EaglePlanOperationTypeLiteral = 2  /**< Literal operation. */
+    
+} EaglePlanOperationType;
 
 /**
  Represents a plan operation, or a single step in the executation of an expression.
  */
 typedef struct {
+    
+    /**
+     The plan operation type.
+     */
+    EAGLE_ATTR_NA EaglePlanOperationType type;
     
     /**
      Destination buffer ID.
@@ -49,7 +66,7 @@ typedef struct {
 } EaglePlanOperation;
 
 /**
- * Create a new plan operation.
+ * Create a new plan operation with a page operation.
  * 
  * @param [in] destination Buffer ID for the destination, this can be less than zero for no buffer.
  * @param [in] source1 Buffer ID for the left operand, this can be less than zero for no buffer.
@@ -59,8 +76,30 @@ typedef struct {
  * @param [in] description A human readable description to be rendered into EaglePlanOperation_toString()
  * @return A new EaglePlanOperation.
  */
-EaglePlanOperation* EaglePlanOperation_New(EaglePageOperationFunction(function), int destination, int source1,
-        int source2, void *obj, EagleBoolean freeObj, const char *description);
+EaglePlanOperation* EaglePlanOperation_NewWithPage(EaglePageOperationFunction(function),
+                                                   int destination,
+                                                   int source1,
+                                                   int source2,
+                                                   void *obj,
+                                                   EagleBoolean freeObj,
+                                                   const char *description);
+
+/**
+ * Create a new plan operation with a literal.
+ *
+ * @param [in] destination Buffer ID for the destination, this can be less than zero for no buffer.
+ * @param [in] source1 Buffer ID for the left operand, this can be less than zero for no buffer.
+ * @param [in] literal The value.
+ * @param [in] freeLiteral Free the \p literal when deleting the EaglePlanOperation.
+ * @param [in] description A human readable description to be rendered into EaglePlanOperation_toString()
+ * @return A new EaglePlanOperation.
+ */
+EaglePlanOperation* EaglePlanOperation_NewWithLiteral(EaglePageOperationFunction(function),
+                                                      int destination,
+                                                      int source1,
+                                                      EagleDbSqlValue *literal,
+                                                      EagleBoolean freeLiteral,
+                                                      const char *description);
 
 /**
  * Delete an operation.

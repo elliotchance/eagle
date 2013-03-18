@@ -106,7 +106,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
         col1Data[i] = i;
     }
     EaglePageProvider *col1 = (EaglePageProvider*) EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, col1, EagleTrue), EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 1);
     
     EagleDbSqlExpression_CompilePlan((EagleDbSqlExpression**) where, 1, -1, plan);
@@ -261,14 +261,14 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     }
     EaglePageProviderArray *col1 = EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
     EaglePageProviderArray *col2 = EaglePageProviderArray_NewInt(col2Data, pageSize, pageSize, "col2");
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
-    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_New(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
+    EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
     
     // compile plan
     EagleDbSqlExpression_CompilePlan(expr, exprs, 2, plan);
     //printf("\n%s\n", EaglePlan_toString(plan));
     
-    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 5);
+    CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 2);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), 5);
     
     // execute
@@ -354,9 +354,9 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1);
     
-    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, NULL), EagleDbSqlExpression_ERROR);
+    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, NULL, EagleTrue), EagleDbSqlExpression_ERROR);
     
-    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan);
+    int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan, EagleTrue);
     CUNIT_VERIFY_EQUAL_INT(result, 0);
     
     EagleDbSqlSelect_DeleteRecursive(select);

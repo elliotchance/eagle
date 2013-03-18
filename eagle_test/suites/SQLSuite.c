@@ -130,7 +130,7 @@ void SQLSuiteTest()
     EagleDbTableData *td = tables[0];
     for(int i = 0; i < EagleDbTable_countColumns(td->table); ++i) {
         EaglePageProvider_reset(td->providers[i]);
-        EaglePlanBufferProvider *bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
+        EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(i, td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     }
     

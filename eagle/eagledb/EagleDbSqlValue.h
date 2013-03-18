@@ -1,9 +1,11 @@
 #ifndef eagle_EagleDbSqlValue_h
 #define eagle_EagleDbSqlValue_h
 
-#include "EagleDbSqlExpression.h"
+#include "EagleDbSqlExpressionHeader.h"
 #include "EagleDbSqlValueType.h"
 #include "Eagle.h"
+#include "EagleDataType.h"
+#include "EagleBoolean.h"
 
 /**
  Encapsulates a Value of any type.

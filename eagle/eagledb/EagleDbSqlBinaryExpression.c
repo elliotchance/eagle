@@ -21,14 +21,74 @@ EagleDbSqlBinaryExpression* EagleDbSqlBinaryExpression_New(EagleDbSqlExpression 
     return expr;
 }
 
-EagleBoolean EagleDbSqlBinaryExpression_GetOperation(EagleDataType left,
-                                                     EagleDbSqlBinaryExpressionOperator op,
-                                                     EagleDataType right,
-                                                     EagleDbSqlBinaryOperator *match)
+EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation(EagleDataType right,
+                                                          EagleDbSqlBinaryExpressionOperator op,
+                                                          EagleDbSqlBinaryOperator *match)
 {
     unsigned long i;
     static EagleDbSqlBinaryOperator ops[] = {
         /* Integer                    left     operator          right    function              returns */
+        EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, GreaterThanInt,       Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, LessThanInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, GreaterThanEqualsInt, Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, LessThanEqualsInt,    Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsInt,            Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusRightInt,      Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideRightInt,       Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractRightInt,     Integer),
+    };
+    
+    for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {
+        if(right == ops[i].right && op == ops[i].op) {
+            *match = ops[i];
+            return EagleTrue;
+        }
+    }
+    
+    return EagleFalse;
+}
+
+EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataType left,
+                                                         EagleDbSqlBinaryExpressionOperator op,
+                                                         EagleDbSqlBinaryOperator *match)
+{
+    unsigned long i;
+    static EagleDbSqlBinaryOperator ops[] = {
+        /* Integer                    left     operator          right    function              returns */
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThan,      Integer, GreaterThanInt,       Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThan,         Integer, LessThanInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, GreaterThanEqual, Integer, GreaterThanEqualsInt, Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, LessThanEqual,    Integer, LessThanEqualsInt,    Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsInt,            Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, NotEquals,        Integer, NotEqualsInt,         Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Multiply,         Integer, MultiplyInt,          Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Minus,            Integer, SubtractLeftInt,      Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Divide,           Integer, DivideLeftInt,        Integer),
+        EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusLeftInt,       Integer),
+    };
+    
+    for(i = 0; i < sizeof(ops) / sizeof(EagleDbSqlBinaryOperator); ++i) {
+        if(left == ops[i].left && op == ops[i].op) {
+            *match = ops[i];
+            return EagleTrue;
+        }
+    }
+    
+    return EagleFalse;
+}
+
+EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation(EagleDataType left,
+                                                         EagleDbSqlBinaryExpressionOperator op,
+                                                         EagleDataType right,
+                                                         EagleDbSqlBinaryOperator *match)
+{
+    unsigned long i;
+    static EagleDbSqlBinaryOperator ops[] = {
+        /* Integer                    left     operator          right    function                 returns */
         EagleDbSqlBinaryOperator_Make(Integer, Plus,             Integer, AdditionPageInt,         Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Equals,           Integer, EqualsPageInt,           Integer),
         EagleDbSqlBinaryOperator_Make(Integer, Modulus,          Integer, ModulusPageInt,          Integer),

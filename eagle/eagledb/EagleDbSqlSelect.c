@@ -87,7 +87,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
         EaglePlanBufferProvider *bp;
         
         EaglePageProvider_reset(td->providers[i]);
-        bp = EaglePlanBufferProvider_New(i, td->providers[i], EagleFalse);
+        bp = EaglePlanBufferProvider_NewWithProvider(i, td->providers[i], EagleFalse);
         EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     }
     

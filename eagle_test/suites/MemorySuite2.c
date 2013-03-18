@@ -121,11 +121,23 @@ CUNIT_TEST(MemorySuite, EagleDbSqlCastExpression_toString)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_NewWithValue)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePlanBufferProvider_NewWithValue.1");
+    
+    CUNIT_VERIFY_NULL(EaglePlanBufferProvider_NewWithValue(0, NULL));
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_NewWithValue));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlFunctionExpression_New));

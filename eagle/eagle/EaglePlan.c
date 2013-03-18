@@ -154,7 +154,7 @@ EaglePlanBufferProvider* EaglePlan_getBufferProviderByName(EaglePlan *plan, char
 {
     EagleLinkedList_Foreach(plan->providers, EaglePlanBufferProvider*, provider)
     {
-        if(NULL != provider->provider->name && strcmp(name, provider->provider->name) == 0) {
+        if(NULL != provider->value.provider.provider->name && strcmp(name, provider->value.provider.provider->name) == 0) {
             return provider;
         }
     }

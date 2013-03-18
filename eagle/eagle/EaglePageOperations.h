@@ -35,6 +35,154 @@ void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1,
 void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Calculate values in a page that are less than or equal to an integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value for comparison.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_LessThanEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate values in a page that are greater or equal to than an integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value for comparison.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_GreaterThanEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Compare a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value for comparison.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_EqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Compare a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value for comparison.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_NotEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Add a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_AdditionInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Subtract a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_SubtractLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Subtract a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_SubtractRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Multiply a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_MultiplyInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Divide a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_DivideLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Divide a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_DivideRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Modulus (remainder) a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_ModulusLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Modulus (remainder) a page of integers with a fixed integer.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be int* which is dereferenced to the integer value.
+ 
+ @see EagleData_Int()
+ */
+void EaglePageOperations_ModulusRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Cast integer values to boolean (0 and 1).
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
