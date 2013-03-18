@@ -19,6 +19,7 @@
 #include "EaglePageProviderStream.h"
 #include "EaglePageProviderArray.h"
 #include "EagleDbInformationSchema.h"
+#include "EagleDbSqlCastExpression.h"
 
 EagleDbParser* _testSqlSelect(const char *sql)
 {
@@ -352,6 +353,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1);
+    
+    CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, NULL, EagleTrue), EagleDbSqlExpression_ERROR);
     
     int result = EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, plan, EagleTrue);
     CUNIT_VERIFY_EQUAL_INT(result, 0);
@@ -757,6 +760,12 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_Delete)
     
     {
         EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(123);
+        CUNIT_VERIFY_NOT_NULL(expr);
+        EagleDbSqlExpression_Delete(expr);
+    }
+    
+    {
+        EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlCastExpression_New(NULL, EagleDataTypeInteger);
         CUNIT_VERIFY_NOT_NULL(expr);
         EagleDbSqlExpression_Delete(expr);
     }

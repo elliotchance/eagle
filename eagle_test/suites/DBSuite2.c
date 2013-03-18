@@ -551,11 +551,41 @@ CUNIT_TEST(DBSuite, EagleDbSqlValueType_toString)
     }
 }
 
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Value_)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithString("abc", EagleFalse);
+    int destinationBuffer = 1;
+    
+    EaglePlan *plan = EaglePlan_New(10);
+    EaglePlan_prepareBuffers(plan, 3);
+    
+    EagleDbSqlExpression_CompilePlanIntoBuffer_Value_((EagleDbSqlExpression*) value, &destinationBuffer, plan, EagleFalse);
+    CUNIT_VERIFY_EQUAL_INT(plan->bufferTypes[destinationBuffer], EagleDataTypeVarchar);
+    
+    EaglePlan_Delete(plan);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetRightOperation)
+{
+    EagleDbSqlBinaryOperator match;
+    CUNIT_VERIFY_FALSE(EagleDbSqlBinaryExpression_GetRightOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, &match));
+}
+
+CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetLeftOperation)
+{
+    EagleDbSqlBinaryOperator match;
+    CUNIT_VERIFY_FALSE(EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, &match));
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetLeftOperation));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetRightOperation));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Value_));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValueType_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_set));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_castable));

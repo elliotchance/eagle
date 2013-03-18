@@ -185,6 +185,8 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_(const EagleDbSqlExpression 
 
 EagleBoolean EagleDbSqlExpression_isLiteral(const EagleDbSqlExpression *expression)
 {
+    EagleBoolean r = EagleFalse;
+    
     switch(expression->expressionType) {
             
         case EagleDbSqlExpressionTypeValue:
@@ -194,12 +196,13 @@ EagleBoolean EagleDbSqlExpression_isLiteral(const EagleDbSqlExpression *expressi
                     
                 case EagleDbSqlValueTypeAsterisk:
                 case EagleDbSqlValueTypeIdentifier:
-                    return EagleFalse;
+                    break;
                     
                 case EagleDbSqlValueTypeFloat:
                 case EagleDbSqlValueTypeInteger:
                 case EagleDbSqlValueTypeString:
-                    return EagleTrue;
+                    r = EagleTrue;
+                    break;
                     
             }
         }
@@ -209,9 +212,11 @@ EagleBoolean EagleDbSqlExpression_isLiteral(const EagleDbSqlExpression *expressi
         case EagleDbSqlExpressionTypeFunctionExpression:
         case EagleDbSqlExpressionTypeSelect:
         case EagleDbSqlExpressionTypeUnaryExpression:
-            return EagleFalse;
+            break;
             
     }
+    
+    return r;
 }
 
 int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpression *expression,
@@ -245,17 +250,10 @@ int EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_(const EagleDbSqlExpressio
         /* this is a bit stupid and inefficient, but to handle a binary operation on two literals we create providers
          for each literal and handle it like a page operation. Issue #98 will address this. */
         
-        /* left */
+        /* notice that we do not check the error status after these because the error status has already been checked
+         above */
         destinationLeft = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->left, destinationBuffer, plan, EagleTrue);
-        if(EagleDbSqlExpression_ERROR == destinationLeft || EagleTrue == EaglePlan_isError(plan)) {
-            return EagleDbSqlExpression_ERROR;
-        }
-        
-        /* right */
         destinationRight = EagleDbSqlExpression_CompilePlanIntoBuffer_(cast->right, destinationBuffer, plan, EagleTrue);
-        if(EagleDbSqlExpression_ERROR == destinationRight || EagleTrue == EaglePlan_isError(plan)) {
-            return EagleDbSqlExpression_ERROR;
-        }
     }
     
     if(EagleFalse == leftLiteral && EagleTrue == rightLiteral) {
