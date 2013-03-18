@@ -263,29 +263,59 @@ CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral2)
     EaglePlan_addOperation(plan, op);
     EaglePlan_prepareBuffers(plan, 2);
     
-    EaglePlanJob *job = EaglePlanJob_New(plan);
-    job->buffers = (EaglePage**) calloc(sizeof(EaglePage*), 2);
-    job->buffers[0] = EaglePage_AllocInt(10);
-    job->buffers[1] = EaglePage_AllocInt(10);
+    {
+        plan->bufferTypes[0] = EagleDataTypeInteger;
+        plan->bufferTypes[1] = EagleDataTypeInteger;
+        
+        EaglePlanJob *job = EaglePlanJob_New(plan);
+        
+        op->obj = EagleDbSqlValue_NewWithInteger(123);
+        EagleWorker_runJob(job);
+        EagleDbSqlValue_Delete(op->obj);
+        
+        EaglePlanJob_Delete(job);
+    }
     
-    op->obj = EagleDbSqlValue_NewWithInteger(123);
-    EagleWorker_runJob(job);
-    EagleDbSqlValue_Delete(op->obj);
+    {
+        plan->bufferTypes[0] = EagleDataTypeInteger;
+        plan->bufferTypes[1] = EagleDataTypeInteger;
+        
+        EaglePlanJob *job = EaglePlanJob_New(plan);
+        
+        op->obj = EagleDbSqlValue_NewWithFloat(123.456);
+        EagleWorker_runJob(job);
+        EagleDbSqlValue_Delete(op->obj);
+        
+        EaglePlanJob_Delete(job);
+    }
     
-    op->obj = EagleDbSqlValue_NewWithFloat(123.456);
-    EagleWorker_runJob(job);
-    EagleDbSqlValue_Delete(op->obj);
+    {
+        plan->bufferTypes[0] = EagleDataTypeInteger;
+        plan->bufferTypes[1] = EagleDataTypeInteger;
+        
+        EaglePlanJob *job = EaglePlanJob_New(plan);
+        
+        op->obj = EagleDbSqlValue_NewWithString("abc", EagleFalse);
+        EagleWorker_runJob(job);
+        EagleDbSqlValue_Delete(op->obj);
+        
+        EaglePlanJob_Delete(job);
+    }
     
-    op->obj = EagleDbSqlValue_NewWithString("abc", EagleFalse);
-    EagleWorker_runJob(job);
-    EagleDbSqlValue_Delete(op->obj);
-    
-    op->obj = EagleDbSqlValue_NewWithAsterisk();
-    EagleWorker_runJob(job);
-    EagleDbSqlValue_Delete(op->obj);
+    {
+        plan->bufferTypes[0] = EagleDataTypeInteger;
+        plan->bufferTypes[1] = EagleDataTypeInteger;
+        
+        EaglePlanJob *job = EaglePlanJob_New(plan);
+        
+        op->obj = EagleDbSqlValue_NewWithAsterisk();
+        EagleWorker_runJob(job);
+        EagleDbSqlValue_Delete(op->obj);
+        
+        EaglePlanJob_Delete(job);
+    }
     
     EaglePlanOperation_Delete(op);
-    EaglePlanJob_Delete(job);
     EaglePlan_Delete(plan);
 }
 
@@ -310,6 +340,7 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString2)
     char *description = EaglePlanBufferProvider_toString(bp);
     CUNIT_ASSERT_EQUAL_STRING(description, "destination = 789, type = FLOAT");
     
+    EagleDbSqlValue_Delete(value);
     EagleMemory_Free(description);
     EaglePlanBufferProvider_Delete(bp);
 }

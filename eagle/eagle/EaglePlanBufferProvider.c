@@ -57,6 +57,7 @@ char* EaglePlanBufferProvider_toString(EaglePlanBufferProvider *bp)
         {
             name = EagleDbSqlValueType_toString(bp->value.value->type);
             sprintf(msg, "destination = %d, type = %s", bp->destinationBuffer, name);
+            EagleMemory_Free(name);
             break;
         }
             
