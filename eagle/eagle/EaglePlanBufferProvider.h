@@ -5,11 +5,14 @@
 #include "Eagle.h"
 #include "EagleDbSqlValue.h"
 
+/**
+ A buffer provider can be a container for a traditional generic page provider or for a single value.
+ */
 typedef enum {
     
-    EaglePlanBufferProviderTypeProvider = 1,
+    EaglePlanBufferProviderTypeProvider = 1, /**< This buffer provider wraps a generic page provider. */
     
-    EaglePlanBufferProviderTypeValue = 2
+    EaglePlanBufferProviderTypeValue = 2     /**< This buffer provider wraps a EagleDbSqlValue */
     
 } EaglePlanBufferProviderType;
 
@@ -28,8 +31,14 @@ typedef struct {
      */
     EAGLE_ATTR_NA EaglePlanBufferProviderType type;
     
+    /**
+     The value.
+     */
     union {
         
+        /**
+         Value for a provider.
+         */
         struct {
             
             /**
@@ -55,7 +64,7 @@ typedef struct {
 } EaglePlanBufferProvider;
 
 /**
- * Create a new plan buffer provider.
+ * Create a new plan buffer provider with a generic provider.
  * @param [in] destinationBuffer The destination buffer ID.
  * @param [in] provider The provider.
  * @param [in] freeProvider Free the \p provider when this instance is deleted?
@@ -65,6 +74,12 @@ EaglePlanBufferProvider* EaglePlanBufferProvider_NewWithProvider(int destination
                                                                  EaglePageProvider *provider,
                                                                  EagleBoolean freeProvider);
 
+/**
+ * Create a new plan buffer provider with a EagleDbSqlValue.
+ * @param [in] destinationBuffer The destination buffer ID.
+ * @param [in] value The value.
+ * @return A new plan buffer provider.
+ */
 EaglePlanBufferProvider* EaglePlanBufferProvider_NewWithValue(int destinationBuffer,
                                                               EagleDbSqlValue *value);
 

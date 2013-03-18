@@ -119,10 +119,28 @@ EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation(EagleDataType left,
                                                          EagleDataType right,
                                                          EagleDbSqlBinaryOperator *match);
 
+/**
+ Find the appropriate operation for an operator. "Left" means that the expression (not not the literal) is on the left
+ side of the binary expression.
+ 
+ @param [in] left Left data type.
+ @param [in] op The operator.
+ @param [out] match If a match is found it will be copied into this output parameter.
+ @return EagleTrue if the operator can be found.
+ */
 EagleBoolean EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataType left,
                                                          EagleDbSqlBinaryExpressionOperator op,
                                                          EagleDbSqlBinaryOperator *match);
 
+/**
+ Find the appropriate operation for an operator. "Right" means that the expression (not not the literal) is on the right
+ side of the binary expression.
+ 
+ @param [in] right Right data type.
+ @param [in] op The operator.
+ @param [out] match If a match is found it will be copied into this output parameter.
+ @return EagleTrue if the operator can be found.
+ */
 EagleBoolean EagleDbSqlBinaryExpression_GetRightOperation(EagleDataType right,
                                                           EagleDbSqlBinaryExpressionOperator op,
                                                           EagleDbSqlBinaryOperator *match);

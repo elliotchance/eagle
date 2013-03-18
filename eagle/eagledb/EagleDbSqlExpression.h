@@ -82,8 +82,8 @@ char* EagleDbSqlExpression_toString(EagleDbSqlExpression *expr);
  put, it is only the start ID of which buffers can be written to - the function will return an int which is the
  buffer ID with the real result. You may need to copy that buffer into buffer 0.
  @param [in] plan The plan the operations will be compiled into.
- @param [in] useProvider If this is EagleTrue then a provider will be created for a literal. Otherwise it is assumed
- the parent will handle the literal.
+ @param [in] useProviderForValue If this is EagleTrue then a provider will be created for a literal. Otherwise it is
+ assumed the parent will handle the literal.
  @return The buffer ID that contains the real result.
  */
 int EagleDbSqlExpression_CompilePlanIntoBuffer_(EagleDbSqlExpression *expression,

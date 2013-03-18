@@ -20,7 +20,7 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
     return worker;
 }
 
-void EagleWorker_runJobLiteral(EaglePlanJob *job, EaglePlanOperation *epo)
+void EagleWorker_runJobLiteral_(EaglePlanJob *job, EaglePlanOperation *epo)
 {
     EaglePage *destination = NULL, *source1 = NULL;
     EagleDbSqlValue *value;
@@ -69,7 +69,7 @@ void EagleWorker_runJobLiteral(EaglePlanJob *job, EaglePlanOperation *epo)
     }
 }
 
-void EagleWorker_runJobPage(EaglePlanJob *job, EaglePlanOperation *epo)
+void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo)
 {
     EaglePage *destination = NULL, *source1 = NULL, *source2 = NULL;
     
@@ -115,11 +115,11 @@ void EagleWorker_runJob(EaglePlanJob *job)
         switch(epo->type) {
                 
             case EaglePlanOperationTypePage:
-                EagleWorker_runJobPage(job, epo);
+                EagleWorker_runJobPage_(job, epo);
                 break;
                 
             case EaglePlanOperationTypeLiteral:
-                EagleWorker_runJobLiteral(job, epo);
+                EagleWorker_runJobLiteral_(job, epo);
                 break;
                 
         }

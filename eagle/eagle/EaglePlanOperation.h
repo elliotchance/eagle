@@ -7,11 +7,14 @@
 #include "Eagle.h"
 #include "EagleDbSqlValue.h"
 
+/**
+ The plan operation type.
+ */
 typedef enum {
     
-    EaglePlanOperationTypePage = 1,
+    EaglePlanOperationTypePage = 1,    /**< Page operation. */
     
-    EaglePlanOperationTypeLiteral = 2
+    EaglePlanOperationTypeLiteral = 2  /**< Literal operation. */
     
 } EaglePlanOperationType;
 
@@ -20,6 +23,9 @@ typedef enum {
  */
 typedef struct {
     
+    /**
+     The plan operation type.
+     */
     EAGLE_ATTR_NA EaglePlanOperationType type;
     
     /**
@@ -60,7 +66,7 @@ typedef struct {
 } EaglePlanOperation;
 
 /**
- * Create a new plan operation.
+ * Create a new plan operation with a page operation.
  * 
  * @param [in] destination Buffer ID for the destination, this can be less than zero for no buffer.
  * @param [in] source1 Buffer ID for the left operand, this can be less than zero for no buffer.
@@ -78,6 +84,16 @@ EaglePlanOperation* EaglePlanOperation_NewWithPage(EaglePageOperationFunction(fu
                                                    EagleBoolean freeObj,
                                                    const char *description);
 
+/**
+ * Create a new plan operation with a literal.
+ *
+ * @param [in] destination Buffer ID for the destination, this can be less than zero for no buffer.
+ * @param [in] source1 Buffer ID for the left operand, this can be less than zero for no buffer.
+ * @param [in] literal The value.
+ * @param [in] freeLiteral Free the \p literal when deleting the EaglePlanOperation.
+ * @param [in] description A human readable description to be rendered into EaglePlanOperation_toString()
+ * @return A new EaglePlanOperation.
+ */
 EaglePlanOperation* EaglePlanOperation_NewWithLiteral(EaglePageOperationFunction(function),
                                                       int destination,
                                                       int source1,
