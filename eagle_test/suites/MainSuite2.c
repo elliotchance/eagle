@@ -225,11 +225,104 @@ CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_3)
     EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
+CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral1)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    
+    EaglePlanOperation *op = EaglePlanOperation_NewWithLiteral(EaglePageOperations_AdditionInt, 10, 10, NULL, EagleFalse, "1");
+    EaglePlan_addOperation(plan, op);
+    EaglePlan_prepareBuffers(plan, 1);
+    
+    EaglePlanJob *job = EaglePlanJob_New(plan);
+    
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "destination 10 is greater than allowed 1 buffers!");
+    
+    op->destination = 0;
+    EagleWorker_runJob(job);
+    CUNIT_ASSERT_NOT_NULL(EagleLogger_Get()->lastEvent);
+    CUNIT_VERIFY_EQUAL_STRING(EagleLogger_Get()->lastEvent->message, "source1 10 is greater than allowed 1 buffers!");
+    
+    EaglePlanOperation_Delete(op);
+    EaglePlanJob_Delete(job);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral2)
+{
+    // redirect the errors to nowhere
+    EagleLogger_Get()->out = NULL;
+    
+    EaglePlan *plan = EaglePlan_New(1);
+    
+    EaglePlanOperation *op = EaglePlanOperation_NewWithLiteral(EaglePageOperations_AdditionInt, 0, 1, NULL, EagleFalse, "1");
+    EaglePlan_addOperation(plan, op);
+    EaglePlan_prepareBuffers(plan, 2);
+    
+    EaglePlanJob *job = EaglePlanJob_New(plan);
+    job->buffers = (EaglePage**) calloc(sizeof(EaglePage*), 2);
+    job->buffers[0] = EaglePage_AllocInt(10);
+    job->buffers[1] = EaglePage_AllocInt(10);
+    
+    op->obj = EagleDbSqlValue_NewWithInteger(123);
+    EagleWorker_runJob(job);
+    EagleDbSqlValue_Delete(op->obj);
+    
+    op->obj = EagleDbSqlValue_NewWithFloat(123.456);
+    EagleWorker_runJob(job);
+    EagleDbSqlValue_Delete(op->obj);
+    
+    op->obj = EagleDbSqlValue_NewWithString("abc", EagleFalse);
+    EagleWorker_runJob(job);
+    EagleDbSqlValue_Delete(op->obj);
+    
+    op->obj = EagleDbSqlValue_NewWithAsterisk();
+    EagleWorker_runJob(job);
+    EagleDbSqlValue_Delete(op->obj);
+    
+    EaglePlanOperation_Delete(op);
+    EaglePlanJob_Delete(job);
+    EaglePlan_Delete(plan);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_NewWithValue)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
+    EaglePlanBufferProvider *provider = EaglePlanBufferProvider_NewWithValue(1, value);
+    
+    CUNIT_ASSERT_NOT_NULL(provider);
+    CUNIT_VERIFY_EQUAL_INT(provider->type, EaglePlanBufferProviderTypeValue);
+    CUNIT_VERIFY_EQUAL_INT(provider->destinationBuffer, 1);
+    
+    EagleDbSqlValue_Delete(value);
+    EaglePlanBufferProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString2)
+{
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithValue(789, value);
+    
+    char *description = EaglePlanBufferProvider_toString(bp);
+    CUNIT_ASSERT_EQUAL_STRING(description, "destination = 789, type = FLOAT");
+    
+    EagleMemory_Free(description);
+    EaglePlanBufferProvider_Delete(bp);
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_NewWithValue));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_2));

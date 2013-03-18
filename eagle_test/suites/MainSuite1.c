@@ -224,7 +224,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EaglePlanOperation_Delete(op3);
 }
 
-CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString)
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString1)
 {
     EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 10, "something");
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(123, (EaglePageProvider*) provider, EagleTrue);
@@ -540,7 +540,7 @@ CUNIT_TEST(MainSuite, EagleInstance_nextJob)
     EaglePlanJob_Delete(job);
 }
 
-CUNIT_TEST(MainSuite, EagleWorker_runJob)
+CUNIT_TEST(MainSuite, EagleWorker_runJobPage)
 {
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
@@ -918,7 +918,7 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleMemory_MultiFree));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LastEvent));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_lastEvent));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJob));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getExecutionSeconds));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_prepareBuffers));
@@ -933,7 +933,7 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getBufferProviderByName));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanJob_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanOperation_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLoggerSeverity_toString));
