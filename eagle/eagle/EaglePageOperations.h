@@ -183,6 +183,156 @@ void EaglePageOperations_ModulusLeftInt(EaglePage *destination, EaglePage *sourc
 void EaglePageOperations_ModulusRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
 
 /**
+ Calculate values in a page that are less than an float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_LessThanFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate values in a page that are greater than an float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_GreaterThanFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate values in a page that are less than or equal to an float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_LessThanEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Calculate values in a page that are greater or equal to than an float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_GreaterThanEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Compare a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_EqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Compare a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
+ will be given a value or 0 or 1 based on the result of the comparison.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value for comparison.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_NotEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Add a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_AdditionFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Subtract a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_SubtractLeftFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Subtract a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_SubtractRightFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Multiply a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_MultiplyFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Divide a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_DivideLeftFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Divide a page of floats with a fixed float.
+ 
+ @param [in] destination Must be preallocated to the same size as \p source1 and \p source2.
+ @param [in] source1 The page to scan, can be any size.
+ @param [in] source2 Ignored.
+ @param [in] obj Must be float* which is dereferenced to the float value.
+ 
+ @see EagleData_Float()
+ */
+void EaglePageOperations_DivideRightFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
  Cast integer values to boolean (0 and 1).
  
  @param [in] destination Must be preallocated to the same size as \p source1 and \p source2. All records in this page
