@@ -128,12 +128,12 @@ EagleBoolean EagleDbSqlBinaryExpression_GetPageOperation(EagleDataType left,
         /* Float                      left   operator          right  function                   returns */
         EagleDbSqlBinaryOperator_Make(Float, Multiply,         Float, MultiplyPageFloat,         Float),
         EagleDbSqlBinaryOperator_Make(Float, Plus,             Float, AdditionPageFloat,         Float),
-        EagleDbSqlBinaryOperator_Make(Float, Equals,           Float, EqualsPageFloat,           Float),
-        EagleDbSqlBinaryOperator_Make(Float, NotEquals,        Float, NotEqualsPageFloat,        Float),
-        EagleDbSqlBinaryOperator_Make(Float, GreaterThan,      Float, GreaterThanPageFloat,      Float),
-        EagleDbSqlBinaryOperator_Make(Float, LessThan,         Float, LessThanPageFloat,         Float),
-        EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual, Float, GreaterThanEqualPageFloat, Float),
-        EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,    Float, LessThanEqualPageFloat,    Float),
+        EagleDbSqlBinaryOperator_Make(Float, Equals,           Float, EqualsPageFloat,           Integer),
+        EagleDbSqlBinaryOperator_Make(Float, NotEquals,        Float, NotEqualsPageFloat,        Integer),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThan,      Float, GreaterThanPageFloat,      Integer),
+        EagleDbSqlBinaryOperator_Make(Float, LessThan,         Float, LessThanPageFloat,         Integer),
+        EagleDbSqlBinaryOperator_Make(Float, GreaterThanEqual, Float, GreaterThanEqualPageFloat, Integer),
+        EagleDbSqlBinaryOperator_Make(Float, LessThanEqual,    Float, LessThanEqualPageFloat,    Integer),
         EagleDbSqlBinaryOperator_Make(Float, Minus,            Float, SubtractPageFloat,         Float),
         EagleDbSqlBinaryOperator_Make(Float, Divide,           Float, DividePageFloat,           Float)
     };
