@@ -514,9 +514,80 @@ void EaglePageOperations_MultiplyPageFloat(EaglePage *destination, EaglePage *so
     }
 }
 
-void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+void EaglePageOperations_SendPageToProviderInteger_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2)
 {
     int i;
+    EagleDataTypeIntegerType *source2data = (EagleDataTypeIntegerType*) source2->data;
+    
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, &source2data[i]);
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, &source2data[i]);
+            }
+        }
+    }
+}
+
+void EaglePageOperations_SendPageToProviderVarchar_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2)
+{
+    int i;
+    EagleDataTypeVarcharType *source2data = (EagleDataTypeVarcharType*) source2->data;
+    
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, strdup(source2data[i]));
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, strdup(source2data[i]));
+            }
+        }
+    }
+}
+
+void EaglePageOperations_SendPageToProviderFloat_(EaglePageProvider *provider,
+                                                  EaglePage *source1,
+                                                  EaglePage *source2)
+{
+    int i;
+    EagleDataTypeFloatType *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, &source2data[i]);
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, &source2data[i]);
+            }
+        }
+    }
+}
+
+void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
     EaglePageProvider *provider = (EaglePageProvider*) obj;
     
     switch(provider->type) {
@@ -526,73 +597,16 @@ void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *s
             return;
             
         case EagleDataTypeInteger:
-        {
-            EagleDataTypeIntegerType *source1data;
-            EagleDataTypeIntegerType *source2data = (EagleDataTypeIntegerType*) source2->data;
-            
-            /* send all */
-            if(NULL == source1) {
-                for(i = 0; i < source2->count; ++i) {
-                    EaglePageProvider_add(provider, &source2data[i]);
-                }
-                break;
-            }
-            
-            /* send some */
-            source1data = (EagleDataTypeIntegerType*) source1->data;
-            for(i = 0; i < source2->count; ++i) {
-                if(source1data[i]) {
-                    EaglePageProvider_add(provider, &source2data[i]);
-                }
-            }
+            EaglePageOperations_SendPageToProviderInteger_(provider, source1, source2);
             break;
-        }
             
         case EagleDataTypeVarchar:
-        {
-            EagleDataTypeIntegerType *source1data;
-            EagleDataTypeVarcharType *source2data = (EagleDataTypeVarcharType*) source2->data;
-            
-            /* send all */
-            if(NULL == source1) {
-                for(i = 0; i < source2->count; ++i) {
-                    EaglePageProvider_add(provider, strdup(source2data[i]));
-                }
-                break;
-            }
-            
-            /* send some */
-            source1data = (EagleDataTypeIntegerType*) source1->data;
-            for(i = 0; i < source2->count; ++i) {
-                if(source1data[i]) {
-                    EaglePageProvider_add(provider, strdup(source2data[i]));
-                }
-            }
+            EaglePageOperations_SendPageToProviderVarchar_(provider, source1, source2);
             break;
-        }
             
         case EagleDataTypeFloat:
-        {
-            EagleDataTypeIntegerType *source1data;
-            EagleDataTypeFloatType *source2data = (EagleDataTypeFloatType*) source2->data;
-            
-            /* send all */
-            if(NULL == source1) {
-                for(i = 0; i < source2->count; ++i) {
-                    EaglePageProvider_add(provider, &source2data[i]);
-                }
-                break;
-            }
-            
-            /* send some */
-            source1data = (EagleDataTypeIntegerType*) source1->data;
-            for(i = 0; i < source2->count; ++i) {
-                if(source1data[i]) {
-                    EaglePageProvider_add(provider, &source2data[i]);
-                }
-            }
+            EaglePageOperations_SendPageToProviderFloat_(provider, source1, source2);
             break;
-        }
             
     }
 }

@@ -60,4 +60,12 @@ void EagleInstance_run(EagleInstance *eagle);
  */
 EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle);
 
+/**
+ This is the internal non-synchronised version of EagleInstance_nextJob(). Having the core functionality in another
+ function is mainly to help with profiling code.
+ @param [in] plan The plan.
+ @param [in] job A reference to the job.
+ */
+void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job);
+
 #endif

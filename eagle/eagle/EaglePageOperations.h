@@ -2,6 +2,7 @@
 #define eagle_EaglePageOperations_h
 
 #include "EaglePage.h"
+#include "EaglePageProvider.h"
 
 /**
  Function pointer.
@@ -639,5 +640,38 @@ void EaglePageOperations_DividePageFloat(EaglePage *destination, EaglePage *sour
  @param [in] obj Ignored.
  */
 void EaglePageOperations_SqrtPageFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj);
+
+/**
+ Private function used by EaglePageOperations_SendPageToProvider().
+ @param [in] provider The provider.
+ @param [in] source1 Left source.
+ @param [in] source2 Right source.
+ @see EaglePageOperations_SendPageToProvider()
+ */
+void EaglePageOperations_SendPageToProviderInteger_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2);
+
+/**
+ Private function used by EaglePageOperations_SendPageToProvider().
+ @param [in] provider The provider.
+ @param [in] source1 Left source.
+ @param [in] source2 Right source.
+ @see EaglePageOperations_SendPageToProvider()
+ */
+void EaglePageOperations_SendPageToProviderVarchar_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2);
+
+/**
+ Private function used by EaglePageOperations_SendPageToProvider().
+ @param [in] provider The provider.
+ @param [in] source1 Left source.
+ @param [in] source2 Right source.
+ @see EaglePageOperations_SendPageToProvider()
+ */
+void EaglePageOperations_SendPageToProviderFloat_(EaglePageProvider *provider,
+                                                  EaglePage *source1,
+                                                  EaglePage *source2);
 
 #endif
