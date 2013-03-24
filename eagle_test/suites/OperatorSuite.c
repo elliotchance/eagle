@@ -103,14 +103,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_LessThanFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] < testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] < testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -127,14 +127,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_GreaterThanFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] > testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] > testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -151,14 +151,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_LessThanEqualsFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_LessThanEqualsFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] <= testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] <= testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -175,14 +175,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_GreaterThanEqualsFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_GreaterThanEqualsFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] >= testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] >= testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -199,14 +199,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_EqualsFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_EqualsFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] == testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] == testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
@@ -223,14 +223,14 @@ CUNIT_TEST(OperatorSuite, EaglePageOperations_NotEqualsFloat)
     int pageSize = 1000;
     EagleDataTypeFloatType testValue = arc4randomf();
     EaglePage *page = OperatorSuite_GeneratePageFloat(pageSize);
-    EaglePage *out = EaglePage_AllocFloat(pageSize);
+    EaglePage *out = EaglePage_AllocInt(pageSize);
     EagleDataTypeFloatType *float1 = EagleData_Float(testValue);
     
     EaglePageOperations_NotEqualsFloat(out, page, NULL, float1);
     
     int valid = 1;
     for(int i = 0; i < pageSize; ++i) {
-        if(!((((EagleDataTypeFloatType*) page->data)[i] != testValue) == ((EagleDataTypeFloatType*) out->data)[i])) {
+        if(!((((EagleDataTypeFloatType*) page->data)[i] != testValue) == ((EagleDataTypeIntegerType*) out->data)[i])) {
             valid = 0;
             break;
         }
