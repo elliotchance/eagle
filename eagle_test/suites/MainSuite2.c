@@ -345,11 +345,30 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString2)
     EaglePlanBufferProvider_Delete(bp);
 }
 
+CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProviderFloat_)
+{
+    int recordsPerPage = 1;
+    EaglePage *source1 = EaglePage_AllocInt(recordsPerPage);
+    EaglePage *source2 = EaglePage_AllocFloat(recordsPerPage);
+    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderStream_New(EagleDataTypeFloat, recordsPerPage, "dummy");
+    
+    EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+    source1data[0] = 1;
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 0);
+    EaglePageOperations_SendPageToProviderFloat_(provider, source1, source2);
+    CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), 1);
+    
+    EaglePage_Delete(source1);
+    EaglePage_Delete(source2);
+    EaglePageProvider_Delete(provider);
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProviderFloat_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_NewWithValue));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral2));

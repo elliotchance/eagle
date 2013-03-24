@@ -11,7 +11,9 @@
 
 void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -22,7 +24,9 @@ void EaglePageOperations_LessThanInt(EaglePage *destination, EaglePage *source1,
 
 void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -33,7 +37,9 @@ void EaglePageOperations_GreaterThanInt(EaglePage *destination, EaglePage *sourc
 
 void EaglePageOperations_LessThanEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -44,7 +50,9 @@ void EaglePageOperations_LessThanEqualsInt(EaglePage *destination, EaglePage *so
 
 void EaglePageOperations_GreaterThanEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -55,7 +63,9 @@ void EaglePageOperations_GreaterThanEqualsInt(EaglePage *destination, EaglePage 
 
 void EaglePageOperations_EqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -66,7 +76,9 @@ void EaglePageOperations_EqualsInt(EaglePage *destination, EaglePage *source1, E
 
 void EaglePageOperations_NotEqualsInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -77,7 +89,9 @@ void EaglePageOperations_NotEqualsInt(EaglePage *destination, EaglePage *source1
 
 void EaglePageOperations_AdditionInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -88,7 +102,9 @@ void EaglePageOperations_AdditionInt(EaglePage *destination, EaglePage *source1,
 
 void EaglePageOperations_ModulusLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -104,7 +120,9 @@ void EaglePageOperations_ModulusLeftInt(EaglePage *destination, EaglePage *sourc
 
 void EaglePageOperations_ModulusRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -120,7 +138,9 @@ void EaglePageOperations_ModulusRightInt(EaglePage *destination, EaglePage *sour
 
 void EaglePageOperations_SubtractLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -131,7 +151,9 @@ void EaglePageOperations_SubtractLeftInt(EaglePage *destination, EaglePage *sour
 
 void EaglePageOperations_SubtractRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -142,7 +164,9 @@ void EaglePageOperations_SubtractRightInt(EaglePage *destination, EaglePage *sou
 
 void EaglePageOperations_MultiplyInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -153,7 +177,9 @@ void EaglePageOperations_MultiplyInt(EaglePage *destination, EaglePage *source1,
 
 void EaglePageOperations_DivideLeftInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -169,7 +195,9 @@ void EaglePageOperations_DivideLeftInt(EaglePage *destination, EaglePage *source
 
 void EaglePageOperations_DivideRightInt(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
-    int value = *((EagleDataTypeIntegerType*) obj), i, *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    int i;
+    EagleDataTypeIntegerType value = *((EagleDataTypeIntegerType*) obj), *destdata = (EagleDataTypeIntegerType*) destination->data, *source1data = (EagleDataTypeIntegerType*) source1->data;
+    
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
     
@@ -186,7 +214,8 @@ void EaglePageOperations_DivideRightInt(EaglePage *destination, EaglePage *sourc
 void EaglePageOperations_LessThanFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -199,7 +228,8 @@ void EaglePageOperations_LessThanFloat(EaglePage *destination, EaglePage *source
 void EaglePageOperations_GreaterThanFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -212,7 +242,8 @@ void EaglePageOperations_GreaterThanFloat(EaglePage *destination, EaglePage *sou
 void EaglePageOperations_LessThanEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -225,7 +256,8 @@ void EaglePageOperations_LessThanEqualsFloat(EaglePage *destination, EaglePage *
 void EaglePageOperations_GreaterThanEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -238,7 +270,8 @@ void EaglePageOperations_GreaterThanEqualsFloat(EaglePage *destination, EaglePag
 void EaglePageOperations_EqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -251,7 +284,8 @@ void EaglePageOperations_EqualsFloat(EaglePage *destination, EaglePage *source1,
 void EaglePageOperations_NotEqualsFloat(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
 {
     int i;
-    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *destdata = (EagleDataTypeFloatType*) destination->data, *source1data = (EagleDataTypeFloatType*) source1->data;
+    EagleDataTypeIntegerType *destdata = (EagleDataTypeIntegerType*) destination->data;
+    EagleDataTypeFloatType value = *((EagleDataTypeFloatType*) obj), *source1data = (EagleDataTypeFloatType*) source1->data;
     
     destination->recordOffset = source1->recordOffset;
     destination->count = source1->count;
@@ -480,42 +514,100 @@ void EaglePageOperations_MultiplyPageFloat(EaglePage *destination, EaglePage *so
     }
 }
 
-void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+void EaglePageOperations_SendPageToProviderInteger_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2)
 {
     int i;
-    EaglePageProvider *provider = (EaglePageProvider*) obj;
+    EagleDataTypeIntegerType *source2data = (EagleDataTypeIntegerType*) source2->data;
     
-    for(i = 0; i < source2->count; ++i) {
-        if(source1 == NULL || ((int*) source1->data)[i]) {
-            switch(provider->type) {
-                    
-                case EagleDataTypeUnknown:
-                    EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
-                    return;
-                    
-                case EagleDataTypeInteger:
-                {
-                    EagleDataTypeIntegerType *source2data = (EagleDataTypeIntegerType*) source2->data;
-                    EaglePageProvider_add(provider, &source2data[i]);
-                    break;
-                }
-                    
-                case EagleDataTypeVarchar:
-                {
-                    EagleDataTypeVarcharType *source2data = (EagleDataTypeVarcharType*) source2->data;
-                    EaglePageProvider_add(provider, strdup(source2data[i]));
-                    break;
-                }
-                    
-                case EagleDataTypeFloat:
-                {
-                    EagleDataTypeFloatType *source2data = (EagleDataTypeFloatType*) source2->data;
-                    EaglePageProvider_add(provider, &source2data[i]);
-                    break;
-                }
-                
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, &source2data[i]);
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, &source2data[i]);
             }
         }
+    }
+}
+
+void EaglePageOperations_SendPageToProviderVarchar_(EaglePageProvider *provider,
+                                                    EaglePage *source1,
+                                                    EaglePage *source2)
+{
+    int i;
+    EagleDataTypeVarcharType *source2data = (EagleDataTypeVarcharType*) source2->data;
+    
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, strdup(source2data[i]));
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, strdup(source2data[i]));
+            }
+        }
+    }
+}
+
+void EaglePageOperations_SendPageToProviderFloat_(EaglePageProvider *provider,
+                                                  EaglePage *source1,
+                                                  EaglePage *source2)
+{
+    int i;
+    EagleDataTypeFloatType *source2data = (EagleDataTypeFloatType*) source2->data;
+    
+    if(NULL == source1) {
+        /* send all */
+        for(i = 0; i < source2->count; ++i) {
+            EaglePageProvider_add(provider, &source2data[i]);
+        }
+    }
+    else {
+        /* send some */
+        EagleDataTypeIntegerType *source1data = (EagleDataTypeIntegerType*) source1->data;
+        for(i = 0; i < source2->count; ++i) {
+            if(source1data[i]) {
+                EaglePageProvider_add(provider, &source2data[i]);
+            }
+        }
+    }
+}
+
+void EaglePageOperations_SendPageToProvider(EaglePage *destination, EaglePage *source1, EaglePage *source2, void *obj)
+{
+    EaglePageProvider *provider = (EaglePageProvider*) obj;
+    
+    switch(provider->type) {
+            
+        case EagleDataTypeUnknown:
+            EagleLogger_Log(EagleLoggerSeverityError, "Unknown type.");
+            return;
+            
+        case EagleDataTypeInteger:
+            EaglePageOperations_SendPageToProviderInteger_(provider, source1, source2);
+            break;
+            
+        case EagleDataTypeVarchar:
+            EaglePageOperations_SendPageToProviderVarchar_(provider, source1, source2);
+            break;
+            
+        case EagleDataTypeFloat:
+            EaglePageOperations_SendPageToProviderFloat_(provider, source1, source2);
+            break;
+            
     }
 }
 

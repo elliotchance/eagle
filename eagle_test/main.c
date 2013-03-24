@@ -208,11 +208,15 @@ int main(int argc, char **argv)
     }
     
     // Run all tests using the CUnit Basic interface
+    if(EagleTrue == op_suite_bench) {
+        CU_basic_set_mode(CU_BRM_VERBOSE);
+    }
+    else {
+        CU_basic_set_mode(CU_BRM_NORMAL);
+    }
     CU_set_error_action(CUEA_ABORT);
-    CU_basic_set_mode(CU_BRM_NORMAL);
     CU_basic_run_tests();
     
-    //CU_cleanup_registry();
     int exitCode = CU_get_error();
     EagleLogger_Delete(EagleLogger_Get());
     

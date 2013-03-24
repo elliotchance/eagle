@@ -9,7 +9,7 @@
 /**
  Represents a single page of data.
  */
-struct EaglePage_ {
+typedef struct EaglePage {
     
     /**
      The data type for this page.
@@ -42,8 +42,7 @@ struct EaglePage_ {
      */
     EAGLE_ATTR_NA EagleBoolean freeData;
     
-};
-typedef struct EaglePage_ EaglePage;
+} EaglePage;
 
 /**
  Create a new EaglePage.
