@@ -49,7 +49,8 @@ void EagleDbInformationSchema_Init(EagleDbInstance *db, EagleDbSchema *schema)
             NULL,
             (int (*)(void*)) EagleDbInformationSchema_tables_pagesRemaining,
             (EaglePage* (*)(void*)) EagleDbInformationSchema_tables_nextPage,
-            (void (*)(void*)) EagleDbInformationSchema_tables_reset
+            (void (*)(void*)) EagleDbInformationSchema_tables_reset,
+            NULL
         );
         
         EaglePageProvider_Delete(temp);

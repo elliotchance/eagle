@@ -144,3 +144,13 @@ void EaglePageProviderStream_reset(EaglePageProviderStream *epp)
     epp->offsetRecords = 0;
     epp->cursor = NULL;
 }
+
+EagleBoolean EaglePageProviderStream_isRandomAccess(EaglePageProviderStream *epp)
+{
+    return EagleFalse;
+}
+
+EaglePage* EaglePageProviderStream_getPage(EaglePageProviderStream *epp, int pageNumber)
+{
+    return NULL;
+}

@@ -11,7 +11,8 @@ EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
                                                        EagleBoolean (*add)(void*, void*),
                                                        int (*pagesRemaining)(void*),
                                                        EaglePage* (*nextPage)(void*),
-                                                       void (*reset)(void*))
+                                                       void (*reset)(void*),
+                                                       EaglePage* (*getPage)(void*, int))
 {
     EaglePageProviderVirtual *pageProvider = (EaglePageProviderVirtual*) EagleMemory_Allocate("EaglePageProviderVirtual_New.1", sizeof(EaglePageProviderVirtual));
     if(NULL == pageProvider) {
@@ -28,6 +29,7 @@ EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
     pageProvider->nextPage = nextPage;
     pageProvider->pagesRemaining = pagesRemaining;
     pageProvider->reset = reset;
+    pageProvider->getPage = getPage;
     
     return pageProvider;
 }
@@ -63,4 +65,17 @@ EaglePage* EaglePageProviderVirtual_nextPage(EaglePageProviderVirtual *epp)
 void EaglePageProviderVirtual_reset(EaglePageProviderVirtual *epp)
 {
     epp->reset(epp->obj);
+}
+
+EagleBoolean EaglePageProviderVirtual_isRandomAccess(EaglePageProviderVirtual *epp)
+{
+    if(NULL == epp->getPage) {
+        return EagleFalse;
+    }
+    return EagleTrue;
+}
+
+EaglePage* EaglePageProviderVirtual_getPage(EaglePageProviderVirtual *epp, int pageNumber)
+{
+    return epp->getPage(epp->obj, pageNumber);
 }

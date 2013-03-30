@@ -74,4 +74,18 @@ EaglePage* EaglePageProviderArray_nextPage(EaglePageProviderArray *epp);
  */
 void EaglePageProviderArray_reset(EaglePageProviderArray *epp);
 
+/**
+ * Check is a providers pages can be access in any order with EaglePageProvider_getPage().
+ * @param [in] epp The provider.
+ */
+EagleBoolean EaglePageProviderArray_isRandomAccess(EaglePageProviderArray *epp);
+
+/**
+ * Get a random page from a provider. You may only use this if EaglePageProvider_isRandomAccess() returns EagleTrue.
+ * @param [in] epp The provider.
+ * @param [in] pageNumber The number of the page where the first page will be 0.
+ * @return The page, or NULL.
+ */
+EaglePage* EaglePageProviderArray_getPage(EaglePageProviderArray *epp, int pageNumber);
+
 #endif

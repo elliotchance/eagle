@@ -85,4 +85,18 @@ EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp);
  */
 void EaglePageProviderStream_reset(EaglePageProviderStream *epp);
 
+/**
+ * Check is a providers pages can be access in any order with EaglePageProvider_getPage().
+ * @param [in] epp The provider.
+ */
+EagleBoolean EaglePageProviderStream_isRandomAccess(EaglePageProviderStream *epp);
+
+/**
+ * Get a random page from a provider. You may only use this if EaglePageProvider_isRandomAccess() returns EagleTrue.
+ * @param [in] epp The provider.
+ * @param [in] pageNumber The number of the page where the first page will be 0.
+ * @return The page, or NULL.
+ */
+EaglePage* EaglePageProviderStream_getPage(EaglePageProviderStream *epp, int pageNumber);
+
 #endif

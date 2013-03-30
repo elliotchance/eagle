@@ -145,3 +145,57 @@ void EaglePageProvider_reset(EaglePageProvider *epp)
             
     }
 }
+
+EagleBoolean EaglePageProvider_isRandomAccess(EaglePageProvider *epp)
+{
+    EagleBoolean r;
+    
+    switch(epp->providerType) {
+            
+        case EaglePageProviderTypeArray:
+            r = EaglePageProviderArray_isRandomAccess((EaglePageProviderArray*) epp);
+            break;
+            
+        case EaglePageProviderTypeSingle:
+            r = EaglePageProviderSingle_isRandomAccess((EaglePageProviderSingle*) epp);
+            break;
+            
+        case EaglePageProviderTypeStream:
+            r = EaglePageProviderStream_isRandomAccess((EaglePageProviderStream*) epp);
+            break;
+            
+        case EaglePageProviderTypeVirtual:
+            r = EaglePageProviderVirtual_isRandomAccess((EaglePageProviderVirtual*) epp);
+            break;
+            
+    }
+    
+    return r;
+}
+
+EaglePage* EaglePageProvider_getPage(EaglePageProvider *epp, int pageNumber)
+{
+    EaglePage *page;
+    
+    switch(epp->providerType) {
+            
+        case EaglePageProviderTypeArray:
+            page = EaglePageProviderArray_getPage((EaglePageProviderArray*) epp, pageNumber);
+            break;
+            
+        case EaglePageProviderTypeSingle:
+            page = EaglePageProviderSingle_getPage((EaglePageProviderSingle*) epp, pageNumber);
+            break;
+            
+        case EaglePageProviderTypeStream:
+            page = EaglePageProviderStream_getPage((EaglePageProviderStream*) epp, pageNumber);
+            break;
+            
+        case EaglePageProviderTypeVirtual:
+            page = EaglePageProviderVirtual_getPage((EaglePageProviderVirtual*) epp, pageNumber);
+            break;
+            
+    }
+    
+    return page;
+}

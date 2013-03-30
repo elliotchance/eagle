@@ -32,7 +32,8 @@ CUNIT_TEST(MainSuite, EaglePageProviderVirtual_New)
          (EagleBoolean (*)(void*, void*)) EaglePageProvider_add,
          (int (*)(void*)) EaglePageProvider_pagesRemaining,
          (EaglePage* (*)(void*)) EaglePageProvider_nextPage,
-         (void (*)(void*)) EaglePageProvider_reset);
+         (void (*)(void*)) EaglePageProvider_reset,
+         (EaglePage* (*)(void*, int)) EaglePageProvider_getPage);
     
     // add
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_add((EaglePageProvider*) epp, NULL), EaglePageProvider_add((EaglePageProvider*) single, NULL));
@@ -363,11 +364,87 @@ CUNIT_TEST(MainSuite, EaglePageOperations_SendPageToProviderFloat_)
     EaglePageProvider_Delete(provider);
 }
 
+CUNIT_TEST(MainSuite, EaglePageProviderStream_getPage)
+{
+    CUNIT_VERIFY_NULL(EaglePageProviderStream_getPage(NULL, 0));
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_getPage)
+{
+    int recordsPerPage = 5;
+    EaglePageProviderSingle *epp = EaglePageProviderSingle_NewVarchar("some value", recordsPerPage, "name");
+    
+    EaglePage *page1 = EaglePageProviderSingle_nextPage(epp);
+    EaglePage *page2 = EaglePageProviderSingle_getPage(epp, 0);
+    CUNIT_ASSERT_NOT_NULL(page1);
+    CUNIT_ASSERT_NOT_NULL(page2);
+    CUNIT_VERIFY_EQUAL_INT(page1->count, recordsPerPage);
+    CUNIT_VERIFY_EQUAL_INT(page2->count, recordsPerPage);
+    EaglePage_Delete(page1);
+    EaglePage_Delete(page2);
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderVirtual_isRandomAccess)
+{
+    EaglePageProviderVirtual *epp = EaglePageProviderVirtual_New(1, "name", EagleDataTypeInteger, NULL, NULL, NULL,
+                                                                 NULL, NULL, NULL, NULL);
+    
+    CUNIT_VERIFY_FALSE(EaglePageProvider_isRandomAccess((EaglePageProvider*) epp));
+    
+    epp->getPage = (EaglePage* (*)(void*, int)) EaglePageProvider_getPage;
+    CUNIT_VERIFY_TRUE(EaglePageProvider_isRandomAccess((EaglePageProvider*) epp));
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderVirtual_getPage)
+{
+    EaglePageProviderVirtual *epp = EaglePageProviderVirtual_New(1, "name", EagleDataTypeInteger, NULL, NULL, NULL,
+                                                                 NULL, NULL, NULL,
+                                                                 (EaglePage* (*)(void*, int)) EaglePageProviderStream_getPage);
+    
+    CUNIT_VERIFY_NULL(EaglePageProvider_getPage((EaglePageProvider*) epp, 0));
+    
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProvider_getPage)
+{
+    {
+        EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_NewInt(NULL, 0, 1, "name");
+        EaglePage *page = EaglePageProvider_getPage(provider, 0);
+        CUNIT_VERIFY_NULL(page);
+        EaglePageProvider_Delete(provider);
+    }
+    
+    {
+        EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderSingle_NewInt(0, 1, "name");
+        EaglePage *page = EaglePageProvider_getPage(provider, 0);
+        CUNIT_VERIFY_NOT_NULL(page);
+        EaglePage_Delete(page);
+        EaglePageProvider_Delete(provider);
+    }
+    
+    {
+        EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderStream_New(EagleDataTypeInteger, 1, "name");
+        EaglePage *page = EaglePageProvider_getPage(provider, 0);
+        CUNIT_VERIFY_NULL(page);
+        EaglePageProvider_Delete(provider);
+    }
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_getPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_getPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_isRandomAccess));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_getPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderStream_getPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProviderFloat_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_NewWithValue));

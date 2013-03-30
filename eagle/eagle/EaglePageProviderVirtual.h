@@ -43,6 +43,11 @@ typedef struct {
      */
     void (*reset)(void*);
     
+    /**
+     Function pointer.
+     */
+    EaglePage* (*getPage)(void*, int);
+    
 } EaglePageProviderVirtual;
 
 /**
@@ -56,6 +61,7 @@ typedef struct {
  * @param [in] pagesRemaining Function pointer.
  * @param [in] nextPage Function pointer.
  * @param [in] reset Function pointer.
+ * @param [in] getPage Function pointer. If this is NULL then EaglePageProvider_isRandomAccess() will return EagleFalse.
  * @return A new virtual provider.
  */
 EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
@@ -66,7 +72,8 @@ EaglePageProviderVirtual* EaglePageProviderVirtual_New(int recordsPerPage,
                                                        EagleBoolean (*add)(void*, void*),
                                                        int (*pagesRemaining)(void*),
                                                        EaglePage* (*nextPage)(void*),
-                                                       void (*reset)(void*));
+                                                       void (*reset)(void*),
+                                                       EaglePage* (*getPage)(void*, int));
 
 /**
  * Free a page provider.
@@ -101,5 +108,19 @@ EaglePage* EaglePageProviderVirtual_nextPage(EaglePageProviderVirtual *epp);
  * @param [in] epp The provider.
  */
 void EaglePageProviderVirtual_reset(EaglePageProviderVirtual *epp);
+
+/**
+ * Check is a providers pages can be access in any order with EaglePageProvider_getPage().
+ * @param [in] epp The provider.
+ */
+EagleBoolean EaglePageProviderVirtual_isRandomAccess(EaglePageProviderVirtual *epp);
+
+/**
+ * Get a random page from a provider. You may only use this if EaglePageProvider_isRandomAccess() returns EagleTrue.
+ * @param [in] epp The provider.
+ * @param [in] pageNumber The number of the page where the first page will be 0.
+ * @return The page, or NULL.
+ */
+EaglePage* EaglePageProviderVirtual_getPage(EaglePageProviderVirtual *epp, int pageNumber);
 
 #endif
