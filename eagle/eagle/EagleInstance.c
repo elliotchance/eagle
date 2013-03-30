@@ -37,6 +37,7 @@ void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)
 void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job)
 {
     EaglePlan_resumeTimer(plan);
+    
     EagleLinkedList_Foreach((*job)->plan->providers, EaglePlanBufferProvider*, provider)
     {
         if(EaglePageProvider_pagesRemaining(provider->value.provider.provider) == 0) {
@@ -58,6 +59,7 @@ void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job)
         (*job)->buffers[provider->destinationBuffer] = EaglePageProvider_nextPage(provider->value.provider.provider);
     }
     EagleLinkedList_ForeachEnd
+    
     EaglePlan_stopTimer(plan);
 }
 
@@ -66,21 +68,46 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     EaglePlan *plan = NULL;
     EaglePlanJob *job = NULL;
     uint64_t now, then;
+    EagleBoolean sync = EagleTrue;
     
     plan = eagle->plan;
     EaglePlan_resumeTimer(plan);
     job = EaglePlanJob_New(plan);
     EaglePlan_stopTimer(plan);
     
-    /* synchronize this function */
-    now = mach_absolute_time();
-    EagleSynchronizer_Lock(eagle->nextJobLock);
-    then = mach_absolute_time();
-    plan->lockWaitTime += then - now;
+    /* if all the providers can be accessed randomly we do not need to syncronise this function */
+    EagleLinkedList_Foreach(eagle->plan->providers, EaglePlanBufferProvider*, provider)
+    {
+        switch(provider->type) {
+                
+            case EaglePlanBufferProviderTypeValue:
+                /* this case in find, we do not need sychronisation for this */
+                break;
+                
+            case EaglePlanBufferProviderTypeProvider:
+                if(EagleFalse == EaglePageProvider_isRandomAccess(provider->value.provider.provider)) {
+                    sync = EagleFalse;
+                }
+                break;
+                
+        }
+    }
+    EagleLinkedList_ForeachEnd
+    
+    if(EagleTrue == sync) {
+        /* synchronize this function */
+        now = mach_absolute_time();
+        EagleSynchronizer_Lock(eagle->nextJobLock);
+        then = mach_absolute_time();
+        plan->lockWaitTime += then - now;
+    }
     
     EagleInstance_nextJob_(eagle->plan, &job);
     
-    EagleSynchronizer_Unlock(eagle->nextJobLock);
+    if(EagleTrue == sync) {
+        EagleSynchronizer_Unlock(eagle->nextJobLock);
+    }
+    
     return job;
 }
 

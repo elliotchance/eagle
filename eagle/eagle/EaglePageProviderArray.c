@@ -47,16 +47,41 @@ void EaglePageProviderArray_Delete(EaglePageProviderArray *epp)
 
 EaglePage* EaglePageProviderArray_nextPage(EaglePageProviderArray *epp)
 {
-    int *begin = (int*) epp->records;
     int pageSize = MIN(epp->recordsPerPage, epp->totalRecords - epp->offsetRecords);
-    EaglePage *page;
+    EaglePage *page = NULL;
     
     if(epp->offsetRecords >= epp->totalRecords) {
         return NULL;
     }
     
     EagleSynchronizer_Lock(epp->nextPageLock);
-    page = EaglePage_New(EagleDataTypeInteger, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
+    switch(epp->type) {
+            
+        case EagleDataTypeInteger:
+        {
+            EagleDataTypeIntegerType *begin = (EagleDataTypeIntegerType*) epp->records;
+            page = EaglePage_New(epp->type, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeFloat:
+        {
+            EagleDataTypeFloatType *begin = (EagleDataTypeFloatType*) epp->records;
+            page = EaglePage_New(epp->type, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeVarchar:
+        {
+            EagleDataTypeVarcharType *begin = (EagleDataTypeVarcharType*) epp->records;
+            page = EaglePage_New(epp->type, begin + epp->offsetRecords, pageSize, pageSize, epp->offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeUnknown:
+            break;
+            
+    }
     epp->offsetRecords += pageSize;
     EagleSynchronizer_Unlock(epp->nextPageLock);
     
@@ -68,4 +93,50 @@ void EaglePageProviderArray_reset(EaglePageProviderArray *epp)
     EagleSynchronizer_Lock(epp->nextPageLock);
     epp->offsetRecords = 0;
     EagleSynchronizer_Unlock(epp->nextPageLock);
+}
+
+EagleBoolean EaglePageProviderArray_isRandomAccess(EaglePageProviderArray *epp)
+{
+    return EagleTrue;
+}
+
+EaglePage* EaglePageProviderArray_getPage(EaglePageProviderArray *epp, int pageNumber)
+{
+    EaglePage *page = NULL;
+    int offsetRecords = pageNumber * epp->recordsPerPage;
+    
+    /* check for out of range */
+    if(pageNumber < 0 || pageNumber >= EaglePageProvider_TotalPages(epp->totalRecords, epp->recordsPerPage)) {
+        return NULL;
+    }
+    
+    switch(epp->type) {
+            
+        case EagleDataTypeInteger:
+        {
+            EagleDataTypeIntegerType *begin = (EagleDataTypeIntegerType*) epp->records;
+            page = EaglePage_New(epp->type, begin + offsetRecords, epp->recordsPerPage, epp->recordsPerPage, offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeFloat:
+        {
+            EagleDataTypeFloatType *begin = (EagleDataTypeFloatType*) epp->records;
+            page = EaglePage_New(epp->type, begin + offsetRecords, epp->recordsPerPage, epp->recordsPerPage, offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeVarchar:
+        {
+            EagleDataTypeVarcharType *begin = (EagleDataTypeVarcharType*) epp->records;
+            page = EaglePage_New(epp->type, begin + offsetRecords, epp->recordsPerPage, epp->recordsPerPage, offsetRecords, EagleFalse);
+            break;
+        }
+            
+        case EagleDataTypeUnknown:
+            break;
+            
+    }
+    
+    return page;
 }

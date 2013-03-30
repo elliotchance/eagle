@@ -158,3 +158,20 @@ int EaglePageProviderSingle_pagesRemaining(EaglePageProviderSingle *epp)
     /* unlimited supply of pages */
     return 1;
 }
+
+EagleBoolean EaglePageProviderSingle_isRandomAccess(EaglePageProviderSingle *epp)
+{
+    return EagleTrue;
+}
+
+EaglePage* EaglePageProviderSingle_getPage(EaglePageProviderSingle *epp, int pageNumber)
+{
+    EaglePage *page;
+    
+    page = EaglePageProviderSingle_nextPage(epp);
+    if(NULL != page) {
+        page->recordOffset = pageNumber * epp->recordsPerPage;
+    }
+    
+    return page;
+}
