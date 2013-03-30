@@ -583,7 +583,7 @@
 		8B9AEAB1166602CC0095B4F5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Elliot Chance";
 			};
 			buildConfigurationList = 8B9AEAB4166602CC0095B4F5 /* Build configuration list for PBXProject "eagle" */;
@@ -759,6 +759,7 @@
 		8B1BF7D51675D752007C11E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -767,6 +768,7 @@
 		8B1BF7D61675D752007C11E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
