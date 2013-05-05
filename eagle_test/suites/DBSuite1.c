@@ -96,9 +96,9 @@ EagleDbSqlExpression* _getExpression(const char *sql)
 void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOperations, int *answers)
 {
     // compile plan
-    int pageSize = 10;
+    int pageSize = 10, cores = 1;
     EaglePageProviderStream *receiver = EaglePageProviderStream_New(EagleDataTypeInteger, pageSize, NULL);
-    EaglePlan *plan = EaglePlan_New(pageSize);
+    EaglePlan *plan = EaglePlan_New(pageSize, cores);
     
     // setup the table
     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
@@ -116,7 +116,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), usedOperations);
     
     // execute
-    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance *eagle = EagleInstance_New(cores);
     EagleInstance_addPlan(eagle, plan);
     EagleInstance_run(eagle);
     
@@ -230,6 +230,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     int pageSize = 10;
     int exprs = 3;
     int totalResults = 5;
+    int cores = 1;
     EagleDbSqlExpression **expr = (EagleDbSqlExpression**) calloc(exprs, sizeof(EagleDbSqlExpression*));
     
     // SELECT col1, col2 + 8 FROM mytable WHERE col1 % 2 = 1
@@ -250,7 +251,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     );
     
     // create the plan skeleton
-    EaglePlan *plan = EaglePlan_New(pageSize);
+    EaglePlan *plan = EaglePlan_New(pageSize, cores);
     
     // create a virtual table that consists of 2 columns; col1 and col2
     int *col1Data = (int*) calloc((size_t) pageSize, sizeof(int));
@@ -272,7 +273,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->operations), 5);
     
     // execute
-    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance *eagle = EagleInstance_New(cores);
     EagleInstance_addPlan(eagle, plan);
     EagleInstance_run(eagle);
     
@@ -336,7 +337,7 @@ CUNIT_TEST(DBSuite, EagleDbConsole_New)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_New)
 {
-    EagleDbInstance *instance = EagleDbInstance_New(1000);
+    EagleDbInstance *instance = EagleDbInstance_New(1000, 1);
     EagleDbInstance_Delete(instance);
 }
 
@@ -352,7 +353,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_1)
 CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     
     CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_((EagleDbSqlExpression*) select, NULL, NULL, EagleTrue), EagleDbSqlExpression_ERROR);
     
@@ -468,7 +469,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
 {
     int pageSize = 1;
     char *tableName = "mytable";
-    EagleDbInstance *instance = EagleDbInstance_New(pageSize);
+    EagleDbInstance *instance = EagleDbInstance_New(pageSize, 1);
     
     EagleDbTable *table = EagleDbTable_New(tableName);
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
@@ -500,7 +501,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
 {
     int pageSize = 1;
     char *tableName = "mytable";
-    EagleDbInstance *instance = EagleDbInstance_New(pageSize);
+    EagleDbInstance *instance = EagleDbInstance_New(pageSize, 1);
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup(tableName);
@@ -527,7 +528,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
     EagleDbInstance_PrintResults(NULL);
     
     int pageSize = 1;
-    EaglePlan *plan = EaglePlan_New(pageSize);
+    EaglePlan *plan = EaglePlan_New(pageSize, 1);
     
     plan->resultFields = 1;
     plan->result = (EaglePageProvider**) calloc(plan->resultFields, sizeof(EaglePageProvider*));
@@ -545,7 +546,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     
     EagleLoggerEvent *error = NULL;
@@ -560,7 +561,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
     const char *tableName = "mytable";
     int pageSize = 1;
     
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup(tableName);
     select->selectExpressions = EagleLinkedList_New();
@@ -586,7 +587,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleDbTable *table = EagleDbTable_New("mytable");
     EagleDbTable_addColumn(table, EagleDbColumn_New("a", EagleDataTypeInteger));
@@ -600,7 +601,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeCreateTable)
 
 CUNIT_TEST(DBSuite, _DuplicateTable)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleLoggerEvent *error = NULL;
     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);", &error));
@@ -616,7 +617,7 @@ CUNIT_TEST(DBSuite, _DuplicateTable)
 
 CUNIT_TEST(DBSuite, _DuplicateSchema)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     EagleDbSchema *schema = EagleDbSchema_New((char*) EagleDbSchema_DefaultSchemaName);
     
     CUNIT_VERIFY_FALSE(EagleDbInstance_addSchema(db, schema));
@@ -628,7 +629,7 @@ CUNIT_TEST(DBSuite, _DuplicateSchema)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleLoggerEvent *error = NULL;
     CUNIT_VERIFY_TRUE(EagleDbInstance_execute(db, "CREATE TABLE sometable (id INT);", &error));
@@ -639,7 +640,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleLoggerEvent *error = NULL;
     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "CREATE TABL sometable (id INT);", &error));
@@ -650,7 +651,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleLoggerEvent *error = NULL;
     CUNIT_VERIFY_FALSE(EagleDbInstance_execute(db, "SELECT * FROM mytable;", &error));
@@ -661,7 +662,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleDbTableData *td = EagleDbInstance_getTable(db, "no_such_table");
     CUNIT_VERIFY_NULL(td);
@@ -672,7 +673,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
 CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
 {
     int pageSize = 1;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, 1);
     
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
@@ -699,7 +700,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
 
 CUNIT_TEST(DBSuite, EagleDbInstance_getSchema)
 {
-    EagleDbInstance *db = EagleDbInstance_New(1);
+    EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
     EagleDbSchema *schema1 = EagleDbSchema_New("schema1");
     EagleDbInstance_addSchema(db, schema1);
@@ -823,7 +824,7 @@ CUNIT_TEST(DBSuite, EagleDbColumn_Delete)
 
 EagleDbInstance* EagleInstanceTest(int pageSize)
 {
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, 1);
     
     EagleDbSchema *schema =  EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     

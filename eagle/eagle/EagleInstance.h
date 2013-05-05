@@ -58,7 +58,7 @@ void EagleInstance_run(EagleInstance *eagle);
  @param [in] eagle Instance.
  @return Initialised EaglePlanJob, or NULL if there are no available jobs.
  */
-EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle);
+EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId);
 
 /**
  This is the internal non-synchronised version of EagleInstance_nextJob(). Having the core functionality in another
@@ -66,6 +66,6 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle);
  @param [in] plan The plan.
  @param [in] job A reference to the job.
  */
-void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job);
+void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job, int coreId);
 
 #endif

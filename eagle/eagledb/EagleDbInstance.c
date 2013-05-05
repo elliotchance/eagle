@@ -16,7 +16,7 @@
 #include "EagleDbInformationSchema.h"
 #include "EagleDataType.h"
 
-EagleDbInstance* EagleDbInstance_New(int pageSize)
+EagleDbInstance* EagleDbInstance_New(int pageSize, int cores)
 {
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
     EagleDbSchema *defaultSchema, *infoSchema;
@@ -26,6 +26,7 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
     }
     
     db->pageSize = pageSize;
+    db->cores = cores;
     
     /* schemas */
     db->schemas = EagleLinkedList_New();
@@ -222,7 +223,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     }
     
 #ifndef CUNIT
-    printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
+    printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan, 1 /* FIXME */));
 #else
     /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
     totalRecords = 0;

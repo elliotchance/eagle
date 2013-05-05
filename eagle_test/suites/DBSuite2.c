@@ -101,7 +101,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_2)
 {
     EagleDbSqlExpression *op = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, NULL);
     EagleDbSqlExpression *expr = (EagleDbSqlExpression*) EagleDbSqlUnaryExpression_New(EagleDbSqlUnaryExpressionOperatorNot, op);
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     
     EaglePlan_prepareBuffers(plan, 10);
     int destinationBuffer = 0;
@@ -162,7 +162,8 @@ CUNIT_TEST(DBSuite, _BadEntityName)
 
 CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
 {
-    EagleDbInstance *db = EagleDbInstance_New(10);
+    int cores = 1;
+    EagleDbInstance *db = EagleDbInstance_New(10, cores);
     
     /* parse sql */
     EagleDbParser *p = EagleDbParser_ParseWithString("select table_schema, table_name from information_schema_tables;");
@@ -178,7 +179,7 @@ CUNIT_TEST(DBSuite, EagleDbInformationSchema_tables)
     CUNIT_ASSERT_FALSE(EaglePlan_isError(plan));
     
     /* execute */
-    EagleInstance *eagle = EagleInstance_New(1);
+    EagleInstance *eagle = EagleInstance_New(cores);
     EagleInstance_addPlan(eagle, plan);
     EagleInstance_run(eagle);
     
@@ -390,7 +391,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_)
                                                                       (EagleDbSqlExpression*) EagleDbSqlValue_NewWithInteger(456));
     int destinationBuffer = 0;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EaglePlan_prepareBuffers(plan, 10);
     
     EagleDbSqlExpression_CompilePlanIntoBuffer_Binary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
@@ -427,7 +428,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_)
                                                                     (EagleDbSqlExpression*) EagleDbSqlValue_NewWithFloat(123.456));
     int destinationBuffer = 0;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EaglePlan_prepareBuffers(plan, 10);
     
     EagleDbSqlExpression_CompilePlanIntoBuffer_Unary_((EagleDbSqlExpression*) expr, &destinationBuffer, plan);
@@ -443,7 +444,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_)
                                                                   EagleDataTypeFloat);
     int destinationBuffer = 0;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EaglePlan_prepareBuffers(plan, 10);
     
     CUNIT_VERIFY_EQUAL_INT(EagleDbSqlExpression_CompilePlanIntoBuffer_Cast_((EagleDbSqlExpression*) expr, &destinationBuffer, plan), EagleDbSqlExpression_ERROR);
@@ -556,7 +557,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Value_)
     EagleDbSqlValue *value = EagleDbSqlValue_NewWithString("abc", EagleFalse);
     int destinationBuffer = 1;
     
-    EaglePlan *plan = EaglePlan_New(10);
+    EaglePlan *plan = EaglePlan_New(10, 1);
     EaglePlan_prepareBuffers(plan, 3);
     
     EagleDbSqlExpression_CompilePlanIntoBuffer_Value_((EagleDbSqlExpression*) value, &destinationBuffer, plan, EagleFalse);

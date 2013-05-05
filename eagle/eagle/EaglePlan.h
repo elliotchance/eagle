@@ -54,17 +54,22 @@ typedef struct {
     /**
      The total time the query took to execute.
      */
-    EAGLE_ATTR_NA uint64_t executionTime;
+    EAGLE_ATTR_MANAGED uint64_t *executionTime;
     
     /**
      Internal use for the timer.
      */
-    EAGLE_ATTR_NA uint64_t splitTime;
+    EAGLE_ATTR_MANAGED uint64_t *executionSplitTime;
     
     /**
      This is the total amount of time the plan has spent waiting for locks.
      */
-    EAGLE_ATTR_NA uint64_t lockWaitTime;
+    EAGLE_ATTR_MANAGED uint64_t *lockTime;
+    
+    /**
+     Internal use for the timer.
+     */
+    EAGLE_ATTR_MANAGED uint64_t *lockSplitTime;
     
     /**
      The number of buffers needed for the execution.
@@ -88,7 +93,7 @@ typedef struct {
  * @param [in] pageSize The default page size for the providers.
  * @return A new plan instance.
  */
-EaglePlan* EaglePlan_New(int pageSize);
+EaglePlan* EaglePlan_New(int pageSize, int cores);
 
 /**
  * Delete a plan.
@@ -153,20 +158,39 @@ EagleBoolean EaglePlan_isError(EaglePlan *plan);
  * Resume the internal timer.
  * @param [in] plan The plan.
  */
-void EaglePlan_resumeTimer(EaglePlan *plan);
+void EaglePlan_resumeExecutionTimer(EaglePlan *plan, int coreId);
 
 /**
  * Stop the internal timer.
  * @param [in] plan The plan.
  */
-void EaglePlan_stopTimer(EaglePlan *plan);
+void EaglePlan_stopExecutionTimer(EaglePlan *plan, int coreId);
+
+/**
+ * Resume the internal timer.
+ * @param [in] plan The plan.
+ */
+void EaglePlan_resumeWaitTimer(EaglePlan *plan, int coreId);
+
+/**
+ * Stop the internal timer.
+ * @param [in] plan The plan.
+ */
+void EaglePlan_stopWaitTimer(EaglePlan *plan, int coreId);
 
 /**
  * Get the total execution time for all CPUs in seconds. This does not include IO wait time, only CPU time.
  * @param [in] plan The plan.
  * @return Number of CPU seconds.
  */
-double EaglePlan_getExecutionSeconds(EaglePlan *plan);
+double EaglePlan_getExecutionSeconds(EaglePlan *plan, int cores);
+
+/**
+ * Get the total wait time for all CPUs in seconds.
+ * @param [in] plan The plan.
+ * @return Number of CPU seconds.
+ */
+double EaglePlan_getWaitSeconds(EaglePlan *plan, int cores);
 
 /**
  * Prepare the buffers before the expression can be compiled.

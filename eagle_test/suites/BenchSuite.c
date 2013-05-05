@@ -13,9 +13,10 @@ int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
 
 void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan)
 {
-    double execMultiplier = plan->executionTime / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
-    double executionTime = plan->executionTime / 1.0e9;
-    double waitTime = plan->lockWaitTime / 1.0e9;
+    int cores = 1;
+    double execMultiplier = EaglePlan_getExecutionSeconds(plan, cores) / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
+    double executionTime = EaglePlan_getExecutionSeconds(plan, cores) / 1.0e9;
+    double waitTime = EaglePlan_getWaitSeconds(plan, cores) / 1.0e9;
     printf(" exec time: %f; wait time: %f; exec multiplier: %f; ", executionTime, waitTime, execMultiplier);
     //printf(" exec multiplier: %f; ", execMultiplier);
     
@@ -49,8 +50,8 @@ double frand(double max)
 
 CUNIT_TEST(BenchSuite, distance)
 {
-    int pageSize = 1000, rows = 10000000;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    int pageSize = 1000, rows = 10000000, cores = 8;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, cores);
     EagleLoggerEvent *error = NULL;
     EagleBoolean success;
     
@@ -109,7 +110,7 @@ CUNIT_TEST(BenchSuite, distance)
     
     // execute
     for(int i = 0; i < 10; ++i) {
-        EagleInstance *eagle = EagleInstance_New(8);
+        EagleInstance *eagle = EagleInstance_New(cores);
         EagleInstance_addPlan(eagle, plan);
         EagleInstance_run(eagle);
         

@@ -78,7 +78,7 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInstance_New.1");
     
-    CUNIT_ASSERT_NULL(EagleDbInstance_New(1000));
+    CUNIT_ASSERT_NULL(EagleDbInstance_New(1000, 1));
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
     EagleMemory_MockFinish();
@@ -332,7 +332,7 @@ CUNIT_TEST(MemorySuite, EaglePlan_New)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_New.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     CUNIT_ASSERT_NULL(plan);
     EaglePlan_Delete(plan);
     
@@ -345,7 +345,7 @@ CUNIT_TEST(MemorySuite, EaglePlan_toString_1)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_toString.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     CUNIT_ASSERT_NULL(EaglePlan_toString(plan));
     EaglePlan_Delete(plan);
     
@@ -358,7 +358,7 @@ CUNIT_TEST(MemorySuite, EaglePlan_toString_2)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_toString.2");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EaglePlan_prepareBuffers(plan, 1);
     CUNIT_ASSERT_NULL(EaglePlan_toString(plan));
     EaglePlan_Delete(plan);
@@ -394,7 +394,7 @@ CUNIT_TEST(MemorySuite, EaglePlanJob_New_1)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlanJob_New.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     CUNIT_ASSERT_NULL(EaglePlanJob_New(plan));
     EaglePlan_Delete(plan);
     
@@ -407,7 +407,7 @@ CUNIT_TEST(MemorySuite, EaglePlanJob_New_2)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlanJob_New.2");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     CUNIT_ASSERT_NULL(EaglePlanJob_New(plan));
     EaglePlan_Delete(plan);
     
@@ -486,7 +486,7 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_1)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInstance_PrintResults.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     plan->resultFields = 1;
     plan->result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));
     plan->result[0] = (EaglePageProvider*) EaglePageProviderSingle_NewInt(1, 1, "name");
@@ -504,7 +504,7 @@ CUNIT_TEST(MemorySuite, EagleDbInstance_PrintResults_2)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInstance_PrintResults.2");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     plan->resultFields = 1;
     plan->result = (EaglePageProvider**) calloc(1, sizeof(EaglePageProvider*));
     int data[1];
@@ -523,7 +523,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlan_1)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlExpression_CompilePlan.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, NULL);
     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, plan);
     EaglePlan_Delete(plan);
@@ -537,7 +537,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlExpression_CompilePlan_2)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbSqlExpression_CompilePlan.2");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EagleDbSqlExpression_CompilePlan(NULL, 0, -1, plan);
     EaglePlan_Delete(plan);
     
@@ -552,7 +552,7 @@ CUNIT_TEST(MemorySuite, EagleDbSqlSelect_parse_2)
     
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     select->tableName = strdup("mytable");
-    EagleDbInstance *instance = EagleDbInstance_New(1000);
+    EagleDbInstance *instance = EagleDbInstance_New(1000, 1);
     
     EagleDbSchema *schema = EagleDbInstance_getSchema(instance, EagleDbSchema_DefaultSchemaName);
     EagleDbTable *table = EagleDbTable_New("mytable");
@@ -621,7 +621,7 @@ CUNIT_TEST(MemorySuite, EaglePlan_prepareBuffers)
     EagleMemory_MockInit();
     EagleMemory_Mock("EaglePlan_prepareBuffers.1");
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     EaglePlan_prepareBuffers(plan, 2);
     EaglePlan_Delete(plan);
     
@@ -767,7 +767,7 @@ CUNIT_TEST(MemorySuite, EagleDbInformationSchema_tables_nextPage)
     EagleMemory_MockInit();
     EagleMemory_Mock("EagleDbInformationSchema_tables_nextPage.1");
     
-    EagleDbInstance *db = EagleDbInstance_New(10);
+    EagleDbInstance *db = EagleDbInstance_New(10, 1);
     EagleDbInformationSchema *infoSchema = EagleDbInformationSchema_New(db, NULL);
     
     CUNIT_VERIFY_NULL(EagleDbInformationSchema_tables_nextPage(infoSchema));

@@ -75,7 +75,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
     }
     
     /* create the plan skeleton */
-    plan = EaglePlan_New(db->pageSize);
+    plan = EaglePlan_New(db->pageSize, db->cores);
     
     /* get data */
     td = EagleDbInstance_getTable(db, select->tableName);

@@ -25,6 +25,8 @@ typedef struct EagleDbInstance_ {
      */
     EAGLE_ATTR_NA int pageSize;
     
+    EAGLE_ATTR_NA int cores;
+    
 } EagleDbInstance;
 
 /**
@@ -32,7 +34,7 @@ typedef struct EagleDbInstance_ {
  @param [in] pageSize The default page size to use for EaglePlan.
  @return A new instance.
  */
-EagleDbInstance* EagleDbInstance_New(int pageSize);
+EagleDbInstance* EagleDbInstance_New(int pageSize, int cores);
 
 /**
  Free an instance.

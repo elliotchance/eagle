@@ -34,9 +34,9 @@ void EagleInstance_addPlan(EagleInstance *eagle, EaglePlan *plan)
     eagle->plan = plan;
 }
 
-void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job)
+void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job, int coreId)
 {
-    EaglePlan_resumeTimer(plan);
+    EaglePlan_resumeExecutionTimer(plan, coreId);
     
     EagleLinkedList_Foreach((*job)->plan->providers, EaglePlanBufferProvider*, provider)
     {
@@ -60,20 +60,19 @@ void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job)
     }
     EagleLinkedList_ForeachEnd
     
-    EaglePlan_stopTimer(plan);
+    EaglePlan_stopExecutionTimer(plan, coreId);
 }
 
-EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
+EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId)
 {
     EaglePlan *plan = NULL;
     EaglePlanJob *job = NULL;
-    uint64_t now, then;
+    /*uint64_t now, then;*/
     EagleBoolean sync = EagleTrue;
     
     plan = eagle->plan;
-    EaglePlan_resumeTimer(plan);
+    /*EaglePlan_resumeExecutionTimer(plan, coreId);*/
     job = EaglePlanJob_New(plan);
-    EaglePlan_stopTimer(plan);
     
     /* if all the providers can be accessed randomly we do not need to syncronise this function */
     EagleLinkedList_Foreach(eagle->plan->providers, EaglePlanBufferProvider*, provider)
@@ -94,15 +93,16 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle)
     }
     EagleLinkedList_ForeachEnd
     
+    /*EaglePlan_stopExexutionTimer(plan, coreId);*/
+    
     if(EagleTrue == sync) {
         /* synchronize this function */
-        now = mach_absolute_time();
+        EaglePlan_resumeWaitTimer(plan, coreId);
         EagleSynchronizer_Lock(eagle->nextJobLock);
-        then = mach_absolute_time();
-        plan->lockWaitTime += then - now;
+        EaglePlan_stopWaitTimer(plan, coreId);
     }
     
-    EagleInstance_nextJob_(eagle->plan, &job);
+    EagleInstance_nextJob_(eagle->plan, &job, coreId);
     
     if(EagleTrue == sync) {
         EagleSynchronizer_Unlock(eagle->nextJobLock);

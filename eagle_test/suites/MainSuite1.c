@@ -26,7 +26,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     
     // plan: ? BETWEEN ? AND 20000000
     int min = 10000000, max = 20000000;
-    EaglePlan *plan = EaglePlan_New(recordsPerPage);
+    EaglePlan *plan = EaglePlan_New(recordsPerPage, cores);
     
     // input data
     EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_NewInt(data, totalRecords, recordsPerPage, NULL);
@@ -191,7 +191,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     // test NULL input
     CUNIT_VERIFY_NULL(EaglePlan_toString(NULL));
     
-    EaglePlan *plan = EaglePlan_New(0);
+    EaglePlan *plan = EaglePlan_New(0, 1);
     char *msg = (char*) EaglePlan_toString(plan);
     CUNIT_ASSERT_EQUAL_STRING(msg, "EaglePlan:\n");
     EagleMemory_Free(msg);
@@ -353,7 +353,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderStream_New)
 
 CUNIT_TEST(MainSuite, EaglePlan_getBufferProviderByName)
 {
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     CUNIT_ASSERT_NULL(EaglePlan_getBufferProviderByName(plan, "abc"));
     EaglePlan_Delete(plan);
 }
@@ -505,13 +505,14 @@ CUNIT_TEST(MainSuite, EaglePlan_prepareBuffers)
 
 CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
 {
-    EaglePlan *p = EaglePlan_New(1);
+    int cores = 1;
+    EaglePlan *p = EaglePlan_New(1, cores);
     
-    double time = EaglePlan_getExecutionSeconds(p);
+    double time = EaglePlan_getExecutionSeconds(p, cores);
     CUNIT_VERIFY_EQUAL_DOUBLE(0.0, time);
     
-    p->executionTime = 100000;
-    time = EaglePlan_getExecutionSeconds(p);
+    p->executionTime[0] = 100000;
+    time = EaglePlan_getExecutionSeconds(p, cores);
     CUNIT_VERIFY_EQUAL_DOUBLE(0.0001, time);
     
     EaglePlan_Delete(p);
@@ -519,18 +520,19 @@ CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
 
 CUNIT_TEST(MainSuite, EagleInstance_nextJob)
 {
+    int cores = 1;
     EaglePageProviderStream *provider = EaglePageProviderStream_New(EagleDataTypeInteger, 1, "dummy");
     int *ptr = EagleData_Int(123);
     EaglePageProvider_add((EaglePageProvider*) provider, ptr);
     free(ptr);
     
-    EaglePlan *p = EaglePlan_New(1);
+    EaglePlan *p = EaglePlan_New(1, cores);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(0, (EaglePageProvider*) provider, EagleFalse);
     EaglePlan_addBufferProvider(p, bp, EagleFalse);
     
-    EagleInstance *instance = EagleInstance_New(1);
+    EagleInstance *instance = EagleInstance_New(cores);
     EagleInstance_addPlan(instance, p);
-    EaglePlanJob *job = EagleInstance_nextJob(instance);
+    EaglePlanJob *job = EagleInstance_nextJob(instance, 0);
     CUNIT_VERIFY_NULL(job);
     
     EagleInstance_Delete(instance);
@@ -545,7 +547,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJobPage)
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     
     EaglePlanOperation *op = EaglePlanOperation_NewWithPage(EaglePageOperations_SendPageToProvider, 1, 1, 1, NULL, EagleFalse, "1");
     EaglePlan_addOperation(plan, op);

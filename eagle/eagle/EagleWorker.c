@@ -108,8 +108,6 @@ void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo)
 
 void EagleWorker_runJob(EaglePlanJob *job)
 {
-    EaglePlan_resumeTimer(job->plan);
-    
     EagleLinkedList_Foreach(job->plan->operations, EaglePlanOperation*, epo)
     {
         switch(epo->type) {
@@ -136,15 +134,16 @@ void* EagleWorker_begin(void *obj)
         EaglePlanJob *job = NULL;
         
         /* ask the instance for the next job */
-        job = EagleInstance_nextJob(worker->instance);
+        job = EagleInstance_nextJob(worker->instance, worker->workerId);
         
         /* run the job is one is returned */
         if(NULL != job) {
             /* run operations */
+            EaglePlan_resumeExecutionTimer(job->plan, worker->workerId);
             EagleWorker_runJob(job);
+            EaglePlan_stopExecutionTimer(job->plan, worker->workerId);
             
             /* free */
-            EaglePlan_stopTimer(job->plan);
             EaglePlanJob_Delete(job);
         }
         else {

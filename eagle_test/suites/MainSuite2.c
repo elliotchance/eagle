@@ -231,7 +231,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral1)
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     
     EaglePlanOperation *op = EaglePlanOperation_NewWithLiteral(EaglePageOperations_AdditionInt, 10, 10, NULL, EagleFalse, "1");
     EaglePlan_addOperation(plan, op);
@@ -258,7 +258,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral2)
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
     
-    EaglePlan *plan = EaglePlan_New(1);
+    EaglePlan *plan = EaglePlan_New(1, 1);
     
     EaglePlanOperation *op = EaglePlanOperation_NewWithLiteral(EaglePageOperations_AdditionInt, 0, 1, NULL, EagleFalse, "1");
     EaglePlan_addOperation(plan, op);

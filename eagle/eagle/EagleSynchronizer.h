@@ -1,6 +1,7 @@
 #ifndef eagle_EagleSynchronizer_h
 #define eagle_EagleSynchronizer_h
 
+#include <mach/mach_time.h>
 #include "EagleLock.h"
 #include "EagleBoolean.h"
 
@@ -25,7 +26,7 @@ EagleLock* EagleSynchronizer_CreateLock(void);
  
  @see EagleSynchronizer_Unlock()
  */
-void EagleSynchronizer_Lock(EagleLock *lock);
+uint64_t EagleSynchronizer_Lock(EagleLock *lock);
 
 /**
  Unlock an EagleLock.

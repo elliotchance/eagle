@@ -79,7 +79,7 @@ void EagleDbConsole_run(EagleDbConsole *console)
 {
 #ifndef CUNIT
     char *cmd = NULL;
-    EagleDbInstance *db = EagleDbInstance_New(1000);
+    EagleDbInstance *db = EagleDbInstance_New(1000, 1 /* FIXME */);
     EagleLoggerEvent *error = NULL;
     EagleBoolean readStdin = EagleFalse;
     
