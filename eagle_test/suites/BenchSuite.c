@@ -11,13 +11,13 @@
 static uint64_t BenchSuite_CalibrateAddition = 0;
 int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
 
-void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan)
+void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan, int cores)
 {
-    int cores = 1;
-    double execMultiplier = EaglePlan_getExecutionSeconds(plan, cores) / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
-    double executionTime = EaglePlan_getExecutionSeconds(plan, cores) / 1.0e9;
-    double waitTime = EaglePlan_getWaitSeconds(plan, cores) / 1.0e9;
-    printf(" exec time: %f; wait time: %f; exec multiplier: %f; ", executionTime, waitTime, execMultiplier);
+    double execMultiplier = EaglePlan_getExecutionSeconds(plan) / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
+    double executionTime = EaglePlan_getExecutionSeconds(plan);
+    double realTime = EaglePlan_getRealExecutionSeconds(plan);
+    double waitTime = EaglePlan_getWaitSeconds(plan);
+    printf("\n real time: %f; CPU time: %f; wait time: %f; exec multiplier: %f; ", realTime, executionTime, waitTime, execMultiplier);
     //printf(" exec multiplier: %f; ", execMultiplier);
     
     // make sure the wait time is very small in preportion to the execution time
@@ -50,7 +50,7 @@ double frand(double max)
 
 CUNIT_TEST(BenchSuite, distance)
 {
-    int pageSize = 1000, rows = 10000000, cores = 8;
+    int pageSize = 1000, rows = 1000000, cores = 8;
     EagleDbInstance *db = EagleDbInstance_New(pageSize, cores);
     EagleLoggerEvent *error = NULL;
     EagleBoolean success;
@@ -102,14 +102,14 @@ CUNIT_TEST(BenchSuite, distance)
         CUNIT_FAIL("%s", EagleDbParser_lastError(p));
     }
     
-    EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
-    if(EagleTrue == EaglePlan_isError(plan)) {
-        CUNIT_FAIL("%s", plan->errorMessage);
-    }
-    //printf("%s\n", EaglePlan_toString(plan));
-    
     // execute
     for(int i = 0; i < 10; ++i) {
+        EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);
+        if(EagleTrue == EaglePlan_isError(plan)) {
+            CUNIT_FAIL("%s", plan->errorMessage);
+        }
+        //printf("%s\n", EaglePlan_toString(plan));
+        
         EagleInstance *eagle = EagleInstance_New(cores);
         EagleInstance_addPlan(eagle, plan);
         EagleInstance_run(eagle);
@@ -130,10 +130,10 @@ CUNIT_TEST(BenchSuite, distance)
          }*/
         
         // check timing
-        CUNIT_ASSERT_BENCH_RESULT(plan);
+        CUNIT_ASSERT_BENCH_RESULT(plan, cores);
+        EaglePlan_Delete(plan);
     }
     
-    EaglePlan_Delete(plan);
     EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
     EagleDbParser_Delete(p);
     EagleDbInstance_Delete(db);

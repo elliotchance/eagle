@@ -8,6 +8,7 @@
 
 EaglePlan* EaglePlan_New(int pageSize, int cores)
 {
+    int i;
     EaglePlan *plan = (EaglePlan*) EagleMemory_Allocate("EaglePlan_New.1", sizeof(EaglePlan));
     if(NULL == plan) {
         return NULL;
@@ -20,10 +21,15 @@ EaglePlan* EaglePlan_New(int pageSize, int cores)
     plan->errorMessage = NULL;
     
     /* timers */
+    plan->cores = cores;
     plan->executionTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(uint64_t), cores);
-    plan->executionSplitTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(uint64_t), cores);
-    plan->lockTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.4", sizeof(uint64_t), cores);
-    plan->lockSplitTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.5", sizeof(uint64_t), cores);
+    plan->lockTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(uint64_t), cores);
+    plan->startTime = 0;
+    
+    for(i = 0; i < cores; ++i) {
+        plan->executionTime[i] = 0;
+        plan->lockTime[i] = 0;
+    }
     
     plan->buffersNeeded = 0;
     plan->bufferTypes = NULL;
@@ -146,9 +152,7 @@ void EaglePlan_Delete(EaglePlan *plan)
     }
     
     EagleMemory_Free(plan->executionTime);
-    EagleMemory_Free(plan->executionSplitTime);
     EagleMemory_Free(plan->lockTime);
-    EagleMemory_Free(plan->lockSplitTime);
     
     EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
@@ -186,56 +190,40 @@ EagleBoolean EaglePlan_isError(EaglePlan *plan)
     return EagleTrue;
 }
 
-void EaglePlan_resumeWaitTimer(EaglePlan *plan, int coreId)
+double EaglePlan_getRealExecutionSeconds(EaglePlan *plan)
 {
-    plan->lockSplitTime[coreId] = mach_absolute_time();
+    uint64_t elapsed = mach_absolute_time() - plan->startTime;
+    
+    /* the timer was not started - bad */
+    if(0 == plan->startTime) {
+        return 0.0;
+    }
+    
+    return ((double) elapsed * 1.0e-9);
 }
 
-void EaglePlan_stopWaitTimer(EaglePlan *plan, int coreId)
-{
-    plan->lockTime[coreId] += mach_absolute_time() - plan->lockSplitTime[coreId];
-}
-
-void EaglePlan_resumeExecutionTimer(EaglePlan *plan, int coreId)
-{
-    plan->executionSplitTime[coreId] = mach_absolute_time();
-}
-
-void EaglePlan_stopExecutionTimer(EaglePlan *plan, int coreId)
-{
-    plan->executionTime[coreId] += mach_absolute_time() - plan->executionSplitTime[coreId];
-}
-
-double EaglePlan_getExecutionSeconds(EaglePlan *plan, int cores)
+double EaglePlan_getExecutionSeconds(EaglePlan *plan)
 {
     uint64_t total = 0.0;
     int i;
     
-    for(i = 0; i < cores; ++i) {
+    for(i = 0; i < plan->cores; ++i) {
         total += plan->executionTime[i];
     }
     
-    if(0 == total) {
-        return 0.0;
-    }
-    
-    return (double) total * (double) 1.0e-9;
+    return ((double) total * 1.0e-9) - EaglePlan_getWaitSeconds(plan);
 }
 
-double EaglePlan_getWaitSeconds(EaglePlan *plan, int cores)
+double EaglePlan_getWaitSeconds(EaglePlan *plan)
 {
     uint64_t total = 0.0;
     int i;
     
-    for(i = 0; i < cores; ++i) {
+    for(i = 0; i < plan->cores; ++i) {
         total += plan->lockTime[i];
     }
     
-    if(0 == total) {
-        return 0.0;
-    }
-    
-    return (double) total * (double) 1.0e-9;
+    return (double) total * 1.0e-9;
 }
 
 void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers)

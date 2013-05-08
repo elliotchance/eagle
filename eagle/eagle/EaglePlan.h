@@ -57,19 +57,14 @@ typedef struct {
     EAGLE_ATTR_MANAGED uint64_t *executionTime;
     
     /**
-     Internal use for the timer.
-     */
-    EAGLE_ATTR_MANAGED uint64_t *executionSplitTime;
-    
-    /**
      This is the total amount of time the plan has spent waiting for locks.
      */
     EAGLE_ATTR_MANAGED uint64_t *lockTime;
     
     /**
-     Internal use for the timer.
+     The absolute start time.
      */
-    EAGLE_ATTR_MANAGED uint64_t *lockSplitTime;
+    EAGLE_ATTR_NA uint64_t startTime;
     
     /**
      The number of buffers needed for the execution.
@@ -85,6 +80,8 @@ typedef struct {
      This is a stack of objects to be freed when this object is deleted.
      */
     EAGLE_ATTR_MANAGED EagleLinkedList *freeObjects;
+    
+    EAGLE_ATTR_NA int cores;
     
 } EaglePlan;
 
@@ -155,42 +152,18 @@ void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMe
 EagleBoolean EaglePlan_isError(EaglePlan *plan);
 
 /**
- * Resume the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_resumeExecutionTimer(EaglePlan *plan, int coreId);
-
-/**
- * Stop the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_stopExecutionTimer(EaglePlan *plan, int coreId);
-
-/**
- * Resume the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_resumeWaitTimer(EaglePlan *plan, int coreId);
-
-/**
- * Stop the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_stopWaitTimer(EaglePlan *plan, int coreId);
-
-/**
  * Get the total execution time for all CPUs in seconds. This does not include IO wait time, only CPU time.
  * @param [in] plan The plan.
  * @return Number of CPU seconds.
  */
-double EaglePlan_getExecutionSeconds(EaglePlan *plan, int cores);
+double EaglePlan_getExecutionSeconds(EaglePlan *plan);
 
 /**
  * Get the total wait time for all CPUs in seconds.
  * @param [in] plan The plan.
  * @return Number of CPU seconds.
  */
-double EaglePlan_getWaitSeconds(EaglePlan *plan, int cores);
+double EaglePlan_getWaitSeconds(EaglePlan *plan);
 
 /**
  * Prepare the buffers before the expression can be compiled.
@@ -213,5 +186,7 @@ int EaglePlan_getRealResultFields(EaglePlan *plan);
  * @param [in] free The Delete function required to free it. You may use NULL for EagleMemory_Free()
  */
 void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*));
+
+double EaglePlan_getRealExecutionSeconds(EaglePlan *plan);
 
 #endif

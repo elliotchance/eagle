@@ -223,7 +223,7 @@ void EagleDbInstance_PrintResults(EaglePlan *plan)
     }
     
 #ifndef CUNIT
-    printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan, 1 /* FIXME */));
+    printf("%d record%s, %.3f seconds\n\n", totalRecords, (totalRecords == 1 ? "" : "s"), EaglePlan_getExecutionSeconds(plan));
 #else
     /* this is just so the compile doesn't give a warning that totalRecords is not used when CUNIT is running */
     totalRecords = 0;

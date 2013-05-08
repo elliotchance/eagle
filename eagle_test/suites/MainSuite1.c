@@ -508,11 +508,11 @@ CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
     int cores = 1;
     EaglePlan *p = EaglePlan_New(1, cores);
     
-    double time = EaglePlan_getExecutionSeconds(p, cores);
+    double time = EaglePlan_getExecutionSeconds(p);
     CUNIT_VERIFY_EQUAL_DOUBLE(0.0, time);
     
     p->executionTime[0] = 100000;
-    time = EaglePlan_getExecutionSeconds(p, cores);
+    time = EaglePlan_getExecutionSeconds(p);
     CUNIT_VERIFY_EQUAL_DOUBLE(0.0001, time);
     
     EaglePlan_Delete(p);

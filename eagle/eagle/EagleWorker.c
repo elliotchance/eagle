@@ -132,16 +132,23 @@ void* EagleWorker_begin(void *obj)
     
     while(1) {
         EaglePlanJob *job = NULL;
+        uint64_t start = mach_absolute_time();
         
         /* ask the instance for the next job */
         job = EagleInstance_nextJob(worker->instance, worker->workerId);
         
         /* run the job is one is returned */
         if(NULL != job) {
+            /* is this the start of the plan itself? */
+            if(0 == job->plan->startTime) {
+                job->plan->startTime = start;
+            }
+                
             /* run operations */
-            EaglePlan_resumeExecutionTimer(job->plan, worker->workerId);
             EagleWorker_runJob(job);
-            EaglePlan_stopExecutionTimer(job->plan, worker->workerId);
+            
+            /* add time */
+            job->plan->executionTime[worker->workerId] += mach_absolute_time() - start;
             
             /* free */
             EaglePlanJob_Delete(job);

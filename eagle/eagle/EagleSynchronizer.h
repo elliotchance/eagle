@@ -25,8 +25,10 @@ EagleLock* EagleSynchronizer_CreateLock(void);
  @param [in] lock The lock initialized with EagleSynchronizer_CreateLock()
  
  @see EagleSynchronizer_Unlock()
- */
-uint64_t EagleSynchronizer_Lock(EagleLock *lock);
+ 
+uint64_t EagleSynchronizer_Lock(EagleLock *lock);*/
+
+#define EagleSynchronizer_Lock(lock) { pthread_mutex_lock(&(lock)->mutex); }
 
 /**
  Unlock an EagleLock.
