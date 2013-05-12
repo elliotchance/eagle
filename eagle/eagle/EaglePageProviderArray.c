@@ -2,6 +2,7 @@
 #include "EaglePageProviderArray.h"
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+#include "EagleWorker.h"
 
 EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name)
 {

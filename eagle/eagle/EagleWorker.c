@@ -7,6 +7,8 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 
+__thread EagleWorker *EagleWorker_ThisWorker = NULL;
+
 EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
 {
     EagleWorker *worker = (EagleWorker*) EagleMemory_Allocate("EagleWorker_New.1", sizeof(EagleWorker));
@@ -16,6 +18,7 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
     
     worker->workerId = workerId;
     worker->instance = instance;
+    worker->lockTime = 0;
     
     return worker;
 }
@@ -129,10 +132,15 @@ void EagleWorker_runJob(EaglePlanJob *job)
 void* EagleWorker_begin(void *obj)
 {
     EagleWorker *worker = (EagleWorker*) obj;
+    EagleWorker_SetForCurrentThread(worker);
     
     while(1) {
         EaglePlanJob *job = NULL;
-        uint64_t start = mach_absolute_time();
+        uint64_t start;
+        
+        /* start the timers at zero */
+        start = mach_absolute_time();
+        worker->lockTime = 0;
         
         /* ask the instance for the next job */
         job = EagleInstance_nextJob(worker->instance, worker->workerId);
@@ -149,6 +157,7 @@ void* EagleWorker_begin(void *obj)
             
             /* add time */
             job->plan->executionTime[worker->workerId] += mach_absolute_time() - start;
+            job->plan->lockTime[worker->workerId] += worker->lockTime;
             
             /* free */
             EaglePlanJob_Delete(job);
@@ -178,4 +187,14 @@ void EagleWorker_Delete(EagleWorker *worker)
     }
     
     EagleMemory_Free(worker);
+}
+
+EagleWorker* EagleWorker_GetForCurrentThread(void)
+{
+    return EagleWorker_ThisWorker;
+}
+
+void EagleWorker_SetForCurrentThread(EagleWorker *worker)
+{
+    EagleWorker_ThisWorker = worker;
 }

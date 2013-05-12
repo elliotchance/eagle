@@ -8,16 +8,10 @@ EagleLock* EagleSynchronizer_CreateLock(void)
     if(NULL == lock) {
         return NULL;
     }
+    
     pthread_mutex_init(&lock->mutex, NULL);
     return lock;
 }
-
-/*uint64_t EagleSynchronizer_Lock(EagleLock *lock)
-{
-    uint64_t now = mach_absolute_time();
-    pthread_mutex_lock(&lock->mutex);
-    return mach_absolute_time() - now;
-}*/
 
 void EagleSynchronizer_Unlock(EagleLock *lock)
 {

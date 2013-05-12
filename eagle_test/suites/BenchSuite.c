@@ -13,11 +13,10 @@ int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
 
 void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan, int cores)
 {
-    double execMultiplier = EaglePlan_getExecutionSeconds(plan) / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
     double executionTime = EaglePlan_getExecutionSeconds(plan);
+    double lockTime = EaglePlan_getLockSeconds(plan);
     double realTime = EaglePlan_getRealExecutionSeconds(plan);
-    double waitTime = EaglePlan_getWaitSeconds(plan);
-    printf("\n real time: %f; CPU time: %f; wait time: %f; exec multiplier: %f; ", realTime, executionTime, waitTime, execMultiplier);
+    printf("\n real time: %f; CPU time: %f; lock time: %f; ", realTime, executionTime, lockTime);
     //printf(" exec multiplier: %f; ", execMultiplier);
     
     // make sure the wait time is very small in preportion to the execution time
@@ -48,34 +47,20 @@ double frand(double max)
     return ((double) rand() / (double) RAND_MAX) * max;
 }
 
-CUNIT_TEST(BenchSuite, distance)
+EagleDbParser* _BenchSuite_distance(EagleDbInstance *db, int rows)
 {
-    int pageSize = 1000, rows = 1000000, cores = 8;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize, cores);
-    EagleLoggerEvent *error = NULL;
-    EagleBoolean success;
-    
-    // create table
-    success = EagleDbInstance_execute(db, "CREATE TABLE point (id INT, x DOUBLE, y DOUBLE);", &error);
-    if(EagleFalse == success) {
-        CUNIT_FAIL("%s", error->message);
-    }
-    
-    // add data
-    srand(0);
-    
     /*
      SLOW INSERT
-    for(int i = 0; i < rows; ++i) {
-        char sql[1024];
-        sprintf(sql, "INSERT INTO point (id, x, y) VALUES (%d, %g, %g);", i + 1, frand(1000.0), frand(1000.0));
-        //printf("%s\n", sql);
-        
-        success = EagleDbInstance_execute(db, sql, &error);
-        if(EagleFalse == success) {
-            CUNIT_FAIL("%s", error->message);
-        }
-    }
+     for(int i = 0; i < rows; ++i) {
+     char sql[1024];
+     sprintf(sql, "INSERT INTO point (id, x, y) VALUES (%d, %g, %g);", i + 1, frand(1000.0), frand(1000.0));
+     //printf("%s\n", sql);
+     
+     success = EagleDbInstance_execute(db, sql, &error);
+     if(EagleFalse == success) {
+     CUNIT_FAIL("%s", error->message);
+     }
+     }
      */
     
     EagleDbTableData *td = EagleDbInstance_getTable(db, "point");
@@ -102,6 +87,26 @@ CUNIT_TEST(BenchSuite, distance)
         CUNIT_FAIL("%s", EagleDbParser_lastError(p));
     }
     
+    return p;
+}
+
+CUNIT_TEST(BenchSuite, distance)
+{
+    int pageSize = 1000, rows = 1000000, cores = 8;
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, cores);
+    EagleLoggerEvent *error = NULL;
+    EagleBoolean success;
+    
+    // create table
+    success = EagleDbInstance_execute(db, "CREATE TABLE point (id INT, x DOUBLE, y DOUBLE);", &error);
+    if(EagleFalse == success) {
+        CUNIT_FAIL("%s", error->message);
+    }
+    
+    // add data
+    srand(0);
+    EagleDbParser *p = _BenchSuite_distance(db, rows);
+        
     // execute
     for(int i = 0; i < 10; ++i) {
         EaglePlan *plan = EagleDbSqlSelect_parse((EagleDbSqlSelect*) p->yyparse_ast, db);

@@ -27,6 +27,11 @@ typedef struct {
      */
     EAGLE_ATTR_PROVIDED struct EagleInstance_ *instance;
     
+    /**
+     Total lock time.
+     */
+    EAGLE_ATTR_NA uint64_t lockTime;
+    
 } EagleWorker;
 
 /**
@@ -81,5 +86,9 @@ void EagleWorker_runJobLiteral_(EaglePlanJob *job, EaglePlanOperation *epo);
  @param [in] epo The job plan operation.
  */
 void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo);
+
+EagleWorker* EagleWorker_GetForCurrentThread(void);
+
+void EagleWorker_SetForCurrentThread(EagleWorker *worker);
 
 #endif

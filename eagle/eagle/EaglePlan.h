@@ -57,7 +57,7 @@ typedef struct {
     EAGLE_ATTR_MANAGED uint64_t *executionTime;
     
     /**
-     This is the total amount of time the plan has spent waiting for locks.
+     The total time the thread was left waiting for a mutex lock to be release.
      */
     EAGLE_ATTR_MANAGED uint64_t *lockTime;
     
@@ -163,7 +163,7 @@ double EaglePlan_getExecutionSeconds(EaglePlan *plan);
  * @param [in] plan The plan.
  * @return Number of CPU seconds.
  */
-double EaglePlan_getWaitSeconds(EaglePlan *plan);
+double EaglePlan_getLockSeconds(EaglePlan *plan);
 
 /**
  * Prepare the buffers before the expression can be compiled.

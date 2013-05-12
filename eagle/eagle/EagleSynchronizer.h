@@ -22,13 +22,20 @@ EagleLock* EagleSynchronizer_CreateLock(void);
  Only one thread may hold a lock at any given time so other threads trying to get access to this lock will wait until it
  is unlocked.
  
+ This is a macro for time profiling.
+ 
  @param [in] lock The lock initialized with EagleSynchronizer_CreateLock()
  
  @see EagleSynchronizer_Unlock()
- 
-uint64_t EagleSynchronizer_Lock(EagleLock *lock);*/
-
-#define EagleSynchronizer_Lock(lock) { pthread_mutex_lock(&(lock)->mutex); }
+ */
+#define EagleSynchronizer_Lock(lock) { \
+    EagleWorker *currentWorker = EagleWorker_GetForCurrentThread(); \
+    uint64_t start = mach_absolute_time();\
+    pthread_mutex_lock(&(lock)->mutex); \
+    if(NULL != currentWorker) { \
+        currentWorker->lockTime += mach_absolute_time() - start;\
+    } \
+}
 
 /**
  Unlock an EagleLock.

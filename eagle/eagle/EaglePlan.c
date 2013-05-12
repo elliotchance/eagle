@@ -152,7 +152,6 @@ void EaglePlan_Delete(EaglePlan *plan)
     }
     
     EagleMemory_Free(plan->executionTime);
-    EagleMemory_Free(plan->lockTime);
     
     EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
@@ -202,6 +201,18 @@ double EaglePlan_getRealExecutionSeconds(EaglePlan *plan)
     return ((double) elapsed * 1.0e-9);
 }
 
+double EaglePlan_getLockSeconds(EaglePlan *plan)
+{
+    uint64_t total = 0.0;
+    int i;
+    
+    for(i = 0; i < plan->cores; ++i) {
+        total += plan->lockTime[i];
+    }
+    
+    return ((double) total * 1.0e-9);
+}
+
 double EaglePlan_getExecutionSeconds(EaglePlan *plan)
 {
     uint64_t total = 0.0;
@@ -211,19 +222,7 @@ double EaglePlan_getExecutionSeconds(EaglePlan *plan)
         total += plan->executionTime[i];
     }
     
-    return ((double) total * 1.0e-9) - EaglePlan_getWaitSeconds(plan);
-}
-
-double EaglePlan_getWaitSeconds(EaglePlan *plan)
-{
-    uint64_t total = 0.0;
-    int i;
-    
-    for(i = 0; i < plan->cores; ++i) {
-        total += plan->lockTime[i];
-    }
-    
-    return (double) total * 1.0e-9;
+    return ((double) total * 1.0e-9) - EaglePlan_getLockSeconds(plan);
 }
 
 void EaglePlan_prepareBuffers(EaglePlan *plan, int buffers)
