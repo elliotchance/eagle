@@ -19,23 +19,34 @@ EaglePlan* EaglePlan_New(int pageSize, int cores)
     plan->providers = EagleLinkedList_New();
     plan->errorCode = EaglePlanErrorNone;
     plan->errorMessage = NULL;
-    
-    /* timers */
-    plan->cores = cores;
-    plan->executionTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(uint64_t), cores);
-    plan->lockTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(uint64_t), cores);
-    plan->startTime = 0;
-    
-    for(i = 0; i < cores; ++i) {
-        plan->executionTime[i] = 0;
-        plan->lockTime[i] = 0;
-    }
+    plan->lockTime = NULL;
     
     plan->buffersNeeded = 0;
     plan->bufferTypes = NULL;
     
     plan->resultFields = 0;
     plan->result = NULL;
+    
+    plan->cores = cores;
+    plan->startTime = 0;
+    
+    /* timers */
+    plan->executionTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.2", sizeof(uint64_t), cores);
+    if(NULL == plan->executionTime) {
+        EaglePlan_Delete(plan);
+        return NULL;
+    }
+    
+    plan->lockTime = (uint64_t*) EagleMemory_MultiAllocate("EaglePlan_New.3", sizeof(uint64_t), cores);
+    if(NULL == plan->lockTime) {
+        EaglePlan_Delete(plan);
+        return NULL;
+    }
+    
+    for(i = 0; i < cores; ++i) {
+        plan->executionTime[i] = 0;
+        plan->lockTime[i] = 0;
+    }
     
     plan->freeObjects = EagleLinkedList_New();
     
@@ -152,7 +163,7 @@ void EaglePlan_Delete(EaglePlan *plan)
     }
     
     EagleMemory_Free(plan->executionTime);
-    
+    EagleMemory_Free(plan->lockTime);
     EagleLinkedList_DeleteWithItems(plan->freeObjects);
     EagleMemory_Free(plan->result);
     EagleLinkedList_DeleteWithItems(plan->providers);
