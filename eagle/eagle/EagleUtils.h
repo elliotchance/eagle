@@ -1,6 +1,7 @@
 #ifndef eagle_EagleUtils_h
 #define eagle_EagleUtils_h
 
+#include <mach/mach_time.h>
 #include "EagleBoolean.h"
 
 /**
@@ -35,5 +36,17 @@ void EagleUtils_ToLowerCase(char *str);
  @return A new allocated lowercase version of \p str.
  */
 char* EagleUtils_ToLowerCaseCopy(const char *str);
+
+/**
+ * Get the absolute time. One second is 1 billion clock ticks.
+ * @return The absolute time of the mocked time.
+ */
+uint64_t EagleUtils_GetAbsoluteTime(void);
+
+/**
+ * If this is not zero then EagleUtils_GetAbsoluteTime() will return this. You must set this to 0 to return the true
+ * absolute time.
+ */
+extern uint64_t EagleUtils_MockAbsoluteTime;
 
 #endif

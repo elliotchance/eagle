@@ -684,7 +684,7 @@ void OperatorSuite_testOperator(EagleDbInstance *db, const char *expr, int resul
 CUNIT_TEST(OperatorSuite, OperatorPrecedence)
 {
     int pageSize = 1;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, 1);
     
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     

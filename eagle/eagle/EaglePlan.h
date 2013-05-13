@@ -54,17 +54,17 @@ typedef struct {
     /**
      The total time the query took to execute.
      */
-    EAGLE_ATTR_NA uint64_t executionTime;
+    EAGLE_ATTR_MANAGED uint64_t *executionTime;
     
     /**
-     Internal use for the timer.
+     The total time the thread was left waiting for a mutex lock to be release.
      */
-    EAGLE_ATTR_NA uint64_t splitTime;
+    EAGLE_ATTR_MANAGED uint64_t *lockTime;
     
     /**
-     This is the total amount of time the plan has spent waiting for locks.
+     The absolute start time.
      */
-    EAGLE_ATTR_NA uint64_t lockWaitTime;
+    EAGLE_ATTR_NA uint64_t startTime;
     
     /**
      The number of buffers needed for the execution.
@@ -81,14 +81,20 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED EagleLinkedList *freeObjects;
     
+    /**
+     The number of CPU cores.
+     */
+    EAGLE_ATTR_NA int cores;
+    
 } EaglePlan;
 
 /**
  * Create a new plan.
  * @param [in] pageSize The default page size for the providers.
+ * @param [in] cores The number of CPU cores.
  * @return A new plan instance.
  */
-EaglePlan* EaglePlan_New(int pageSize);
+EaglePlan* EaglePlan_New(int pageSize, int cores);
 
 /**
  * Delete a plan.
@@ -150,23 +156,18 @@ void EaglePlan_setError(EaglePlan *plan, EaglePlanError errorCode, char *errorMe
 EagleBoolean EaglePlan_isError(EaglePlan *plan);
 
 /**
- * Resume the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_resumeTimer(EaglePlan *plan);
-
-/**
- * Stop the internal timer.
- * @param [in] plan The plan.
- */
-void EaglePlan_stopTimer(EaglePlan *plan);
-
-/**
  * Get the total execution time for all CPUs in seconds. This does not include IO wait time, only CPU time.
  * @param [in] plan The plan.
  * @return Number of CPU seconds.
  */
 double EaglePlan_getExecutionSeconds(EaglePlan *plan);
+
+/**
+ * Get the total wait time for all CPUs in seconds.
+ * @param [in] plan The plan.
+ * @return Number of CPU seconds.
+ */
+double EaglePlan_getLockSeconds(EaglePlan *plan);
 
 /**
  * Prepare the buffers before the expression can be compiled.
@@ -189,5 +190,12 @@ int EaglePlan_getRealResultFields(EaglePlan *plan);
  * @param [in] free The Delete function required to free it. You may use NULL for EagleMemory_Free()
  */
 void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*));
+
+/**
+ * Get the real execution seconds. This is the absolute time difference from when the plan begins executing until now.
+ * @param [in] plan The plan.
+ * @return The number of absolute execution seconds.
+ */
+double EaglePlan_getRealExecutionSeconds(EaglePlan *plan);
 
 #endif

@@ -7,6 +7,7 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 #include "EagleLoggerEvent.h"
+#include "EagleUtils.h"
 
 EagleDbConsole* EagleDbConsole_New(void)
 {
@@ -15,7 +16,7 @@ EagleDbConsole* EagleDbConsole_New(void)
         return NULL;
     }
     
-    console->startTime = mach_absolute_time();
+    console->startTime = EagleUtils_GetAbsoluteTime();
     
     return console;
 }
@@ -79,7 +80,7 @@ void EagleDbConsole_run(EagleDbConsole *console)
 {
 #ifndef CUNIT
     char *cmd = NULL;
-    EagleDbInstance *db = EagleDbInstance_New(1000);
+    EagleDbInstance *db = EagleDbInstance_New(1000, 1 /* FIXME */);
     EagleLoggerEvent *error = NULL;
     EagleBoolean readStdin = EagleFalse;
     

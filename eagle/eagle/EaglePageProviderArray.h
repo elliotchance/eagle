@@ -40,13 +40,14 @@ typedef struct {
 
 /**
  * Create a new read only page provider from a fixed size array.
+ * @param [in] type The data type.
  * @param [in] records The data records.
  * @param [in] totalRecords The total records.
  * @param [in] recordsPerPage The amount of records to serve out per page.
  * @param [in] name The name of the provider.
  * @return A new provider.
  */
-EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name);
+EaglePageProviderArray* EaglePageProviderArray_New(EagleDataType type, void *records, int totalRecords, int recordsPerPage, char *name);
 
 /**
  * Pages remaining.

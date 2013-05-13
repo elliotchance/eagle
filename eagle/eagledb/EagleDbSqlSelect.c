@@ -59,7 +59,7 @@ int EagleDbSqlSelect_getExpressionsCount(EagleDbSqlSelect *select)
     return exprs;
 }
 
-EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance_ *db)
+EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance *db)
 {
     int i;
     int exprCount, whereExpressionId = -1, expri = 0;
@@ -75,7 +75,7 @@ EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstan
     }
     
     /* create the plan skeleton */
-    plan = EaglePlan_New(db->pageSize);
+    plan = EaglePlan_New(db->pageSize, db->cores);
     
     /* get data */
     td = EagleDbInstance_getTable(db, select->tableName);

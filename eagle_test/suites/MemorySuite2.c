@@ -132,11 +132,39 @@ CUNIT_TEST(MemorySuite, EaglePlanBufferProvider_NewWithValue)
     EagleMemory_MockFinish();
 }
 
+CUNIT_TEST(MemorySuite, EaglePlan_New_2)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePlan_New.2");
+    
+    EaglePlan *plan = EaglePlan_New(1, 1);
+    CUNIT_ASSERT_NULL(plan);
+    EaglePlan_Delete(plan);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
+CUNIT_TEST(MemorySuite, EaglePlan_New_3)
+{
+    EagleMemory_MockInit();
+    EagleMemory_Mock("EaglePlan_New.3");
+    
+    EaglePlan *plan = EaglePlan_New(1, 1);
+    CUNIT_ASSERT_NULL(plan);
+    EaglePlan_Delete(plan);
+    
+    CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
+    EagleMemory_MockFinish();
+}
+
 CUnitTests* MemorySuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New_2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlan_New_3));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EaglePlanBufferProvider_NewWithValue));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MemorySuite, EagleDbSqlCastExpression_New));
