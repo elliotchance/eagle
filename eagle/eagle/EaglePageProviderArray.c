@@ -4,15 +4,15 @@
 #include "EagleMemory.h"
 #include "EagleWorker.h"
 
-EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name)
+EaglePageProviderArray* EaglePageProviderArray_New(EagleDataType type, void *records, int totalRecords, int recordsPerPage, char *name)
 {
-    EaglePageProviderArray *pageProvider = (EaglePageProviderArray*) EagleMemory_Allocate("EaglePageProviderArray_NewInt.1", sizeof(EaglePageProviderArray));
+    EaglePageProviderArray *pageProvider = (EaglePageProviderArray*) EagleMemory_Allocate("EaglePageProviderArray_New.1", sizeof(EaglePageProviderArray));
     if(NULL == pageProvider) {
         return NULL;
     }
     
     pageProvider->providerType = EaglePageProviderTypeArray;
-    pageProvider->type = EagleDataTypeInteger;
+    pageProvider->type = type;
     pageProvider->name = (NULL == name ? NULL : strdup(name));
     pageProvider->recordsPerPage = recordsPerPage;
     

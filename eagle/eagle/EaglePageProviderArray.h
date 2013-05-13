@@ -46,7 +46,7 @@ typedef struct {
  * @param [in] name The name of the provider.
  * @return A new provider.
  */
-EaglePageProviderArray* EaglePageProviderArray_NewInt(int *records, int totalRecords, int recordsPerPage, char *name);
+EaglePageProviderArray* EaglePageProviderArray_New(EagleDataType type, void *records, int totalRecords, int recordsPerPage, char *name);
 
 /**
  * Pages remaining.

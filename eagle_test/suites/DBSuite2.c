@@ -579,11 +579,18 @@ CUNIT_TEST(DBSuite, EagleDbSqlBinaryExpression_GetLeftOperation)
     CUNIT_VERIFY_FALSE(EagleDbSqlBinaryExpression_GetLeftOperation(EagleDataTypeUnknown, EagleDbSqlBinaryExpressionOperatorAnd, &match));
 }
 
+CUNIT_TEST(DBSuite, EagleDbInstance_executeParser)
+{
+    EagleDbParser *p = EagleDbParser_New();
+    CUNIT_VERIFY_TRUE(EagleDbInstance_executeParser(NULL, p, NULL));
+}
+
 CUnitTests* DBSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeParser));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetLeftOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlBinaryExpression_GetRightOperation));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_Value_));

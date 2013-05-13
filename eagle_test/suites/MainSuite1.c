@@ -29,7 +29,7 @@ void _instanceTest(int cores, int recordsPerPage, int totalRecords)
     EaglePlan *plan = EaglePlan_New(recordsPerPage, cores);
     
     // input data
-    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_NewInt(data, totalRecords, recordsPerPage, NULL);
+    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_New(EagleDataTypeInteger, data, totalRecords, recordsPerPage, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_pagesRemaining(provider), EaglePageProvider_TotalPages(totalRecords, recordsPerPage));
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(1, provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
@@ -133,7 +133,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderArray_NewInt)
     testData[1] = 456;
     testData[2] = 789;
     
-    EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(testData, testDataSize, recordsPerPage, NULL);
+    EaglePageProviderArray *provider = EaglePageProviderArray_New(EagleDataTypeInteger, testData, testDataSize, recordsPerPage, NULL);
     CUNIT_VERIFY_EQUAL_INT(provider->totalRecords, testDataSize);
     CUNIT_VERIFY_EQUAL_INT(provider->recordsPerPage, recordsPerPage);
     
@@ -197,7 +197,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
     EagleMemory_Free(msg);
     
     // add some buffer providers
-    EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 10, NULL);
+    EaglePageProviderArray *provider = EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 10, NULL);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(123, (EaglePageProvider*) provider, EagleTrue);
     EaglePlan_addBufferProvider(plan, bp, EagleTrue);
     EaglePlan_prepareBuffers(plan, 1);
@@ -226,7 +226,7 @@ CUNIT_TEST(MainSuite, EaglePlan_toString)
 
 CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString1)
 {
-    EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 10, "something");
+    EaglePageProviderArray *provider = EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 10, "something");
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithProvider(123, (EaglePageProvider*) provider, EagleTrue);
     char *description = EaglePlanBufferProvider_toString(bp);
     CUNIT_ASSERT_EQUAL_STRING(description, "destination = 123, name = something, type = INTEGER");
@@ -246,7 +246,7 @@ CUNIT_TEST(MainSuite, EaglePageProvider_Delete)
 
 CUNIT_TEST(MainSuite, EaglePageProvider_add)
 {
-    EaglePageProviderArray *provider = EaglePageProviderArray_NewInt(NULL, 0, 1, NULL);
+    EaglePageProviderArray *provider = EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 1, NULL);
     CUNIT_ASSERT_EQUAL_INT(EaglePageProvider_add((EaglePageProvider*) provider, NULL), EagleFalse);
     EaglePageProvider_Delete((EaglePageProvider*) provider);
 }
@@ -518,7 +518,7 @@ CUNIT_TEST(MainSuite, EaglePlan_getExecutionSeconds)
     EaglePlan_Delete(p);
 }
 
-CUNIT_TEST(MainSuite, EagleInstance_nextJob)
+CUNIT_TEST(MainSuite, EagleInstance_nextJob, 1)
 {
     int cores = 1;
     EaglePageProviderStream *provider = EaglePageProviderStream_New(EagleDataTypeInteger, 1, "dummy");
@@ -921,7 +921,7 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LastEvent));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_lastEvent));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobPage));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob, 1));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getExecutionSeconds));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_prepareBuffers));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleDataType_nameToType));

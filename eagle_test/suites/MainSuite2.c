@@ -61,14 +61,14 @@ CUNIT_TEST(MainSuite, EaglePageProviderVirtual_Delete)
     EaglePageProviderVirtual_Delete(NULL);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage)
+CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage, Int)
 {
-    EaglePageProviderArray *epp = EaglePageProviderArray_NewInt(NULL, 0, 1, "name");
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 1, "name");
     CUNIT_VERIFY_NULL(EaglePageProviderArray_nextPage(epp));
     EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_1)
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage, 1)
 {
     EaglePageProviderSingle *epp = EaglePageProviderSingle_NewInt(123, 1, "name");
     epp->type = EagleDataTypeUnknown;
@@ -76,7 +76,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_1)
     EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_2)
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage, 2)
 {
     int recordsPerPage = 5;
     EaglePageProviderSingle *epp = EaglePageProviderSingle_NewVarchar("some value", recordsPerPage, "name");
@@ -89,7 +89,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_2)
     EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
-CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject1)
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject, 1)
 {
     int *obj1 = EagleData_Int(123);
     int *obj2 = EagleData_Int(456);
@@ -122,7 +122,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject1)
     EagleMemory_Free(obj2);
 }
 
-CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject2)
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject, 2)
 {
     int *obj1 = EagleData_Int(123);
     int *obj2 = EagleData_Int(456);
@@ -156,7 +156,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject2)
     EagleMemory_Free(obj4);
 }
 
-CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject3)
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject, 3)
 {
     int *obj1 = EagleData_Int(123);
     int *obj2 = EagleData_Int(456);
@@ -182,7 +182,7 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject3)
     EagleLinkedList_DeleteWithItems(list);
 }
 
-CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject4)
+CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject, 4)
 {
     int *obj1 = EagleData_Int(123);
     int *obj2 = EagleData_Int(456);
@@ -208,12 +208,12 @@ CUNIT_TEST(MainSuite, EagleLinkedList_deleteObject4)
     EagleLinkedList_DeleteWithItems(list);
 }
 
-CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage)
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage, 4)
 {
     CUNIT_ASSERT_NULL(EaglePageProviderSingle_nextPage(NULL));
 }
 
-CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_3)
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage, 3)
 {
     int recordsPerPage = 5;
     EaglePageProviderSingle *epp = EaglePageProviderSingle_NewFloat(123.0, recordsPerPage, "name");
@@ -226,7 +226,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderSingle_nextPage_3)
     EaglePageProvider_Delete((EaglePageProvider*) epp);
 }
 
-CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral1)
+CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral, 1)
 {
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
@@ -253,7 +253,7 @@ CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral1)
     EaglePlan_Delete(plan);
 }
 
-CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral2)
+CUNIT_TEST(MainSuite, EagleWorker_runJobLiteral, 2)
 {
     // redirect the errors to nowhere
     EagleLogger_Get()->out = NULL;
@@ -333,7 +333,7 @@ CUNIT_TEST(MainSuite, EaglePlanBufferProvider_NewWithValue)
     EaglePlanBufferProvider_Delete(provider);
 }
 
-CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString2)
+CUNIT_TEST(MainSuite, EaglePlanBufferProvider_toString, 2)
 {
     EagleDbSqlValue *value = EagleDbSqlValue_NewWithFloat(123.456);
     EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithValue(789, value);
@@ -413,7 +413,7 @@ CUNIT_TEST(MainSuite, EaglePageProviderVirtual_getPage)
 CUNIT_TEST(MainSuite, EaglePageProvider_getPage)
 {
     {
-        EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_NewInt(NULL, 0, 1, "name");
+        EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 1, "name");
         EaglePage *page = EaglePageProvider_getPage(provider, 0);
         CUNIT_VERIFY_NULL(page);
         EaglePageProvider_Delete(provider);
@@ -435,33 +435,149 @@ CUNIT_TEST(MainSuite, EaglePageProvider_getPage)
     }
 }
 
+CUNIT_TEST(MainSuite, EagleInstance_nextJob, 2)
+{
+    int cores = 1;
+    EagleDbSqlValue *value = EagleDbSqlValue_NewWithInteger(123);
+    EaglePlan *p = EaglePlan_New(1, cores);
+    EaglePlanBufferProvider *bp = EaglePlanBufferProvider_NewWithValue(0, value);
+    EaglePlan_addBufferProvider(p, bp, EagleFalse);
+    
+    EagleInstance *instance = EagleInstance_New(cores);
+    EagleInstance_addPlan(instance, p);
+    EaglePlanJob *job = EagleInstance_nextJob(instance, 0);
+    CUNIT_VERIFY_NULL(job);
+    
+    EagleInstance_Delete(instance);
+    EaglePlan_Delete(p);
+    EaglePlanBufferProvider_Delete(bp);
+    EaglePlanJob_Delete(job);
+    EagleDbSqlValue_Delete(value);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage, Float)
+{
+    EagleDataTypeFloatType *data = EagleData_Float(123.456);
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeFloat, data, 1, 1, "name");
+    EaglePage *page = EaglePageProviderArray_nextPage(epp);
+    CUNIT_VERIFY_NOT_NULL(page);
+    EaglePage_Delete(page);
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+    EagleMemory_Free(data);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage, Varchar)
+{
+    EagleDataTypeVarcharType *data = (EagleDataTypeVarcharType*) malloc(sizeof(EagleDataTypeVarcharType));
+    data[0] = "whatever";
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeVarchar, (void*) data, 1, 1, "name");
+    EaglePage *page = EaglePageProviderArray_nextPage(epp);
+    CUNIT_VERIFY_NOT_NULL(page);
+    EaglePage_Delete(page);
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+    EagleMemory_Free(data);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_nextPage, Unknown)
+{
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeUnknown, NULL, 1, 1, "name");
+    CUNIT_VERIFY_NULL(EaglePageProviderArray_nextPage(epp));
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_getPage, Integer)
+{
+    EagleDataTypeIntegerType *data = EagleData_Int(123);
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeInteger, data, 1, 1, "name");
+    EaglePage *page = EaglePageProviderArray_getPage(epp, 0);
+    CUNIT_VERIFY_NOT_NULL(page);
+    EaglePage_Delete(page);
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+    EagleMemory_Free(data);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_getPage, Float)
+{
+    EagleDataTypeFloatType *data = EagleData_Float(123.456);
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeFloat, data, 1, 1, "name");
+    EaglePage *page = EaglePageProviderArray_getPage(epp, 0);
+    CUNIT_VERIFY_NOT_NULL(page);
+    EaglePage_Delete(page);
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+    EagleMemory_Free(data);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_getPage, Varchar)
+{
+    EagleDataTypeVarcharType *data = (EagleDataTypeVarcharType*) malloc(sizeof(EagleDataTypeVarcharType));
+    data[0] = "whatever";
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeVarchar, data, 1, 1, "name");
+    EaglePage *page = EaglePageProviderArray_getPage(epp, 0);
+    CUNIT_VERIFY_NOT_NULL(page);
+    EaglePage_Delete(page);
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+    EagleMemory_Free(data);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_getPage, Unknown)
+{
+    EaglePageProviderArray *epp = EaglePageProviderArray_New(EagleDataTypeUnknown, NULL, 1, 1, "name");
+    CUNIT_VERIFY_NULL(EaglePageProviderArray_getPage(epp, 0));
+    EaglePageProvider_Delete((EaglePageProvider*) epp);
+}
+
+CUNIT_TEST(MainSuite, EaglePlan_getRealExecutionSeconds)
+{
+    int cores = 1;
+    EaglePlan *p = EaglePlan_New(1, cores);
+    
+    double time = EaglePlan_getRealExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.0, time);
+    
+    p->startTime = 1000000;
+    EagleUtils_MockAbsoluteTime = 2000000;
+    time = EaglePlan_getRealExecutionSeconds(p);
+    CUNIT_VERIFY_EQUAL_DOUBLE(0.001, time);
+    
+    EaglePlan_Delete(p);
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getRealExecutionSeconds));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Unknown));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Varchar));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Float));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Integer));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage, Unknown));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage, Varchar));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage, Float));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_getPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_getPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_isRandomAccess));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_getPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderStream_getPage));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProviderFloat_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_toString, 2));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlanBufferProvider_NewWithValue));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_3));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleWorker_runJobLiteral, 1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage, 3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage, 4));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_nextPage, 1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_nextPage, Int));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderVirtual_New));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProvider_reset));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject4));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject3));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject2));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject, 4));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject, 3));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_deleteObject, 1));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleInstance_nextJob, 2));
     
     return tests;
 }

@@ -6,7 +6,7 @@
 #include "Eagle.h"
 #include "EagleLinkedList.h"
 
-struct EagleDbInstance_;
+struct EagleDbInstance;
 
 /**
  SQL SELECT expression.
@@ -66,7 +66,7 @@ void EagleDbSqlSelect_DeleteRecursive(EagleDbSqlSelect *select);
  @param [in] db Database instance.
  @return A new plan.
  */
-EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance_ *db);
+EaglePlan* EagleDbSqlSelect_parse(EagleDbSqlSelect *select, struct EagleDbInstance *db);
 
 /**
  * Return the number of expressions after the SELECT clause.

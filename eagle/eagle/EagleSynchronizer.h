@@ -30,10 +30,10 @@ EagleLock* EagleSynchronizer_CreateLock(void);
  */
 #define EagleSynchronizer_Lock(lock) { \
     EagleWorker *currentWorker = EagleWorker_GetForCurrentThread(); \
-    uint64_t start = mach_absolute_time();\
+    uint64_t start = EagleUtils_GetAbsoluteTime();\
     pthread_mutex_lock(&(lock)->mutex); \
     if(NULL != currentWorker) { \
-        currentWorker->lockTime += mach_absolute_time() - start;\
+        currentWorker->lockTime += EagleUtils_GetAbsoluteTime() - start;\
     } \
 }
 

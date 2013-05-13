@@ -9,10 +9,12 @@
 #include "EagleDbSqlInsert.h"
 #include "EagleLoggerEvent.h"
 
+struct EagleDbParser;
+
 /**
  The database instance is a wrapper for a EagleInstance.
  */
-typedef struct EagleDbInstance_ {
+typedef struct EagleDbInstance {
     
     /**
      Contains the pointers to the individual schemas. The schema objects themselves are managed externally (i.e.
@@ -25,6 +27,9 @@ typedef struct EagleDbInstance_ {
      */
     EAGLE_ATTR_NA int pageSize;
     
+    /**
+     The number of CPU cores.
+     */
     EAGLE_ATTR_NA int cores;
     
 } EagleDbInstance;
@@ -55,6 +60,15 @@ void EagleDbInstance_DeleteAll(EagleDbInstance *db);
  @param [out] error If an error occurs it will be sent back through this parameter.
  */
 EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error);
+
+/**
+ Mostly for internal use. See EagleDbInstance_execute().
+ @param [in] db The database instance.
+ @param [in] p Parser instance.
+ @param [out] error If an error occurs it will be sent back through this parameter.
+ @return Success status.
+ */
+EagleBoolean EagleDbInstance_executeParser(EagleDbInstance *db, struct EagleDbParser *p, EagleLoggerEvent **error);
 
 /**
  Execute a SELECT statement.

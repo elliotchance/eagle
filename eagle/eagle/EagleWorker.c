@@ -139,7 +139,7 @@ void* EagleWorker_begin(void *obj)
         uint64_t start;
         
         /* start the timers at zero */
-        start = mach_absolute_time();
+        start = EagleUtils_GetAbsoluteTime();
         worker->lockTime = 0;
         
         /* ask the instance for the next job */
@@ -156,7 +156,7 @@ void* EagleWorker_begin(void *obj)
             EagleWorker_runJob(job);
             
             /* add time */
-            job->plan->executionTime[worker->workerId] += mach_absolute_time() - start;
+            job->plan->executionTime[worker->workerId] += EagleUtils_GetAbsoluteTime() - start;
             job->plan->lockTime[worker->workerId] += worker->lockTime;
             
             /* free */

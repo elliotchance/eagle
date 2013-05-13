@@ -202,7 +202,7 @@ EagleBoolean EaglePlan_isError(EaglePlan *plan)
 
 double EaglePlan_getRealExecutionSeconds(EaglePlan *plan)
 {
-    uint64_t elapsed = mach_absolute_time() - plan->startTime;
+    uint64_t elapsed = EagleUtils_GetAbsoluteTime() - plan->startTime;
     
     /* the timer was not started - bad */
     if(0 == plan->startTime) {

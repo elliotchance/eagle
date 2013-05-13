@@ -3,6 +3,7 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 #include "EagleWorker.h"
+#include "EagleUtils.h"
 
 EaglePageProviderStream* EaglePageProviderStream_New(EagleDataType type, int recordsPerPage, char *name)
 {

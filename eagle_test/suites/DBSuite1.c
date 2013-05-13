@@ -105,7 +105,7 @@ void _testExpression(EagleDbSqlExpression *where, int usedProviders, int usedOpe
     for(int i = 0; i < pageSize; ++i) {
         col1Data[i] = i;
     }
-    EaglePageProvider *col1 = (EaglePageProvider*) EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
+    EaglePageProvider *col1 = (EaglePageProvider*) EaglePageProviderArray_New(EagleDataTypeInteger, col1Data, pageSize, pageSize, "col1");
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, col1, EagleTrue), EagleTrue);
     CUNIT_ASSERT_EQUAL_INT(EagleLinkedList_length(plan->providers), 1);
     
@@ -260,8 +260,8 @@ CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlan)
         col1Data[i] = i;
         col2Data[i] = i * 2;
     }
-    EaglePageProviderArray *col1 = EaglePageProviderArray_NewInt(col1Data, pageSize, pageSize, "col1");
-    EaglePageProviderArray *col2 = EaglePageProviderArray_NewInt(col2Data, pageSize, pageSize, "col2");
+    EaglePageProviderArray *col1 = EaglePageProviderArray_New(EagleDataTypeInteger, col1Data, pageSize, pageSize, "col1");
+    EaglePageProviderArray *col2 = EaglePageProviderArray_New(EagleDataTypeInteger, col2Data, pageSize, pageSize, "col2");
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(1, (EaglePageProvider*) col1, EagleTrue), EagleTrue);
     EaglePlan_addBufferProvider(plan, EaglePlanBufferProvider_NewWithProvider(2, (EaglePageProvider*) col2, EagleTrue), EagleTrue);
     
@@ -341,7 +341,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_New)
     EagleDbInstance_Delete(instance);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_1)
+CUNIT_TEST(DBSuite, EagleDbSqlValue_toString, 1)
 {
     EagleDbSqlValue *v = EagleDbSqlValue_NewWithAsterisk();
     char *desc = EagleDbSqlValue_toString(v);
@@ -350,7 +350,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlValue_toString_1)
     EagleDbSqlValue_Delete(v);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1)
+CUNIT_TEST(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer, 1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     EaglePlan *plan = EaglePlan_New(1, 1);
@@ -457,7 +457,7 @@ CUNIT_TEST(DBSuite, EagleDbTableData_insert)
     EagleDbTable_DeleteWithColumns(table);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse1)
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse, 1)
 {
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
     CUNIT_VERIFY_NULL(EagleDbSqlSelect_parse(NULL, NULL));
@@ -465,7 +465,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse1)
     EagleDbSqlSelect_DeleteRecursive(select);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse, 2)
 {
     int pageSize = 1;
     char *tableName = "mytable";
@@ -497,7 +497,7 @@ CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse2)
     EaglePlan_Delete(plan);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse3)
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_parse, 3)
 {
     int pageSize = 1;
     char *tableName = "mytable";
@@ -544,7 +544,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_PrintResults)
     EaglePlan_Delete(plan);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
+CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect, 1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1, 1);
     EagleDbSqlSelect *select = EagleDbSqlSelect_New();
@@ -556,7 +556,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect1)
     EagleDbSqlSelect_DeleteRecursive(select);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect2)
+CUNIT_TEST(DBSuite, EagleDbInstance_executeSelect, 2)
 {
     const char *tableName = "mytable";
     int pageSize = 1;
@@ -627,7 +627,7 @@ CUNIT_TEST(DBSuite, _DuplicateSchema)
     EagleDbInstance_DeleteAll(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
+CUNIT_TEST(DBSuite, EagleDbInstance_execute, 1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
@@ -638,7 +638,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute1)
     EagleDbInstance_DeleteAll(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
+CUNIT_TEST(DBSuite, EagleDbInstance_execute, 2)
 {
     EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
@@ -649,7 +649,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute2)
     EagleDbInstance_Delete(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
+CUNIT_TEST(DBSuite, EagleDbInstance_execute, 3)
 {
     EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
@@ -660,7 +660,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_execute3)
     EagleDbInstance_Delete(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
+CUNIT_TEST(DBSuite, EagleDbInstance_getTable, 1)
 {
     EagleDbInstance *db = EagleDbInstance_New(1, 1);
     
@@ -670,7 +670,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_getTable1)
     EagleDbInstance_Delete(db);
 }
 
-CUNIT_TEST(DBSuite, EagleDbInstance_getTable2)
+CUNIT_TEST(DBSuite, EagleDbInstance_getTable, 2)
 {
     int pageSize = 1;
     EagleDbInstance *db = EagleDbInstance_New(pageSize, 1);
@@ -732,7 +732,7 @@ CUNIT_TEST(DBSuite, EagleDbConsole_run)
     EagleDbConsole_run(NULL);
 }
 
-CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete2)
+CUNIT_TEST(DBSuite, EagleDbSqlSelect_Delete, 2)
 {
     EagleDbSqlSelect_Delete(NULL);
 }
@@ -943,22 +943,22 @@ CUnitTests* DBSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_DeleteAll));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_Delete));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_Delete, 2));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_run));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_GetLine));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getSchema));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable2));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable1));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute3));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute2));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_getTable, 1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute, 3));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_execute, 1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeCreateTable));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect2));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_executeSelect, 1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_PrintResults));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse3));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse2));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse, 3));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse, 2));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlSelect_parse, 1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_insert));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_Delete));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTableData_New));
@@ -966,8 +966,8 @@ CUnitTests* DBSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setVarchar));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbTuple_setInt));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_toString));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer_1));
-    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString_1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlExpression_CompilePlanIntoBuffer, 1));
+    CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbSqlValue_toString, 1));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbColumn_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbConsole_New));
     CUnitTests_addTest(tests, CUNIT_NEW(DBSuite, EagleDbInstance_New));

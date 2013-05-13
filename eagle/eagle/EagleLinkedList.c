@@ -3,6 +3,7 @@
 #include "EagleLinkedList.h"
 #include "EagleMemory.h"
 #include "EagleWorker.h"
+#include "EagleUtils.h"
 
 EagleLinkedList* EagleLinkedList_New(void)
 {

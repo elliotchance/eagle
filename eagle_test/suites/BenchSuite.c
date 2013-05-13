@@ -7,6 +7,7 @@
 #include "EagleDbSchema.h"
 #include "EagleDbColumn.h"
 #include "EagleDbParser.h"
+#include "EagleUtils.h"
 
 static uint64_t BenchSuite_CalibrateAddition = 0;
 int BenchSuite_TotalPages = 1000, BenchSuite_RecordsPerPage = 10000;
@@ -30,13 +31,13 @@ void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan, int cores)
 CUNIT_TEST(BenchSuite, calibrate)
 {
     // calculate how long it takes to do a bunch of calculations
-    uint64_t start = mach_absolute_time();
+    uint64_t start = EagleUtils_GetAbsoluteTime();
     int a;
     for(int i = 0; i < BenchSuite_TotalPages * BenchSuite_RecordsPerPage; ++i) {
         a = i;
     }
     CUNIT_ASSERT_NOT_NULL(&a);
-    uint64_t end = mach_absolute_time();
+    uint64_t end = EagleUtils_GetAbsoluteTime();
     BenchSuite_CalibrateAddition = end - start;
     
     printf(" %lld nano seconds; ", BenchSuite_CalibrateAddition);
