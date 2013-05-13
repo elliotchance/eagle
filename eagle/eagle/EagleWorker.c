@@ -7,9 +7,12 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 
+/**
+ Used by EagleWorker_GetForCurrentThread() and EagleWorker_SetForCurrentThread()
+ */
 __thread EagleWorker *EagleWorker_ThisWorker = NULL;
 
-EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
+EagleWorker* EagleWorker_New(int workerId, struct EagleInstance *instance)
 {
     EagleWorker *worker = (EagleWorker*) EagleMemory_Allocate("EagleWorker_New.1", sizeof(EagleWorker));
     if(NULL == worker) {

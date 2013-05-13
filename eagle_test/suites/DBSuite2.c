@@ -583,6 +583,7 @@ CUNIT_TEST(DBSuite, EagleDbInstance_executeParser)
 {
     EagleDbParser *p = EagleDbParser_New();
     CUNIT_VERIFY_TRUE(EagleDbInstance_executeParser(NULL, p, NULL));
+    EagleDbParser_Delete(p);
 }
 
 CUnitTests* DBSuite2_tests()

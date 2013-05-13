@@ -40,6 +40,7 @@ typedef struct {
 
 /**
  * Create a new read only page provider from a fixed size array.
+ * @param [in] type The data type.
  * @param [in] records The data records.
  * @param [in] totalRecords The total records.
  * @param [in] recordsPerPage The amount of records to serve out per page.

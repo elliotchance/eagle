@@ -37,6 +37,7 @@ typedef struct EagleDbInstance {
 /**
  Create a new database instance.
  @param [in] pageSize The default page size to use for EaglePlan.
+ @param [in] cores The number of CPU cores.
  @return A new instance.
  */
 EagleDbInstance* EagleDbInstance_New(int pageSize, int cores);

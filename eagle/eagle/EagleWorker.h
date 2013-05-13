@@ -5,7 +5,7 @@
 #include "Eagle.h"
 #include "EaglePlanJob.h"
 
-struct EagleInstance_;
+struct EagleInstance;
 
 /**
  A worker is a thread.
@@ -25,7 +25,7 @@ typedef struct {
     /**
      The instance this worker belongs to.
      */
-    EAGLE_ATTR_PROVIDED struct EagleInstance_ *instance;
+    EAGLE_ATTR_PROVIDED struct EagleInstance *instance;
     
     /**
      Total lock time.
@@ -40,7 +40,7 @@ typedef struct {
  * @param [in] instance The instance the workers belong to.
  * @return A new worker.
  */
-EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance);
+EagleWorker* EagleWorker_New(int workerId, struct EagleInstance *instance);
 
 /**
  * Delete a worker.
@@ -87,8 +87,16 @@ void EagleWorker_runJobLiteral_(EaglePlanJob *job, EaglePlanOperation *epo);
  */
 void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo);
 
+/**
+ * Get the worker instance for this thread.
+ * @return NULL on threads that are not workers.
+ */
 EagleWorker* EagleWorker_GetForCurrentThread(void);
 
+/**
+ * Set the worker instance for this thread.
+ * @param [in] worker The worker instance.
+ */
 void EagleWorker_SetForCurrentThread(EagleWorker *worker);
 
 #endif

@@ -2,7 +2,7 @@
 #include "EagleWorkers.h"
 #include "EagleMemory.h"
 
-EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance)
+EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance *instance)
 {
     EagleWorkers *workers = (EagleWorkers*) EagleMemory_Allocate("EagleWorkers_New.1", sizeof(EagleWorkers));
     int i;

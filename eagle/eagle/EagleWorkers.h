@@ -3,7 +3,7 @@
 
 #include "EagleWorker.h"
 
-struct EagleInstance_;
+struct EagleInstance;
 
 /**
  A pool of workers.
@@ -29,7 +29,7 @@ typedef struct {
  @param [in] instance The eagle instance.
  @return New pool of workers.
  */
-EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance_ *instance);
+EagleWorkers* EagleWorkers_New(int totalWorkers, struct EagleInstance *instance);
 
 /**
  * Delete a pool of workers.

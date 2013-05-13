@@ -11,12 +11,11 @@
 /**
  An eagle instance (a database).
  */
-struct EagleInstance_ {
+typedef struct EagleInstance {
     EAGLE_ATTR_MANAGED  EagleWorkers *workers;  /**< The workers. */
     EAGLE_ATTR_PROVIDED EaglePlan *plan;        /**< The plan that needs to be executed. */
     EAGLE_ATTR_MANAGED  EagleLock *nextJobLock; /**< To syncronise the EagleInstance_nextJob() method. */
-};
-typedef struct EagleInstance_ EagleInstance;
+} EagleInstance;
 
 /**
  Create a new eagle instance. The instance is effectivly a database, with a certain amount of workers (threads) that
@@ -56,6 +55,7 @@ void EagleInstance_run(EagleInstance *eagle);
  will check periodically after that.
  
  @param [in] eagle Instance.
+ @param [in] coreId CPU core ID.
  @return Initialised EaglePlanJob, or NULL if there are no available jobs.
  */
 EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId);
@@ -65,6 +65,7 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId);
  function is mainly to help with profiling code.
  @param [in] plan The plan.
  @param [in] job A reference to the job.
+ @param [in] coreId CPU core ID.
  */
 void EagleInstance_nextJob_(EaglePlan *plan, EaglePlanJob **job, int coreId);
 

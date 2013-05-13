@@ -39,12 +39,14 @@ char* EagleUtils_ToLowerCaseCopy(const char *str);
 
 /**
  * Get the absolute time. One second is 1 billion clock ticks.
- * @param [in] mock If this is not zero then this value will be returned. You must set this to 0 to return the true
- * absolute time.
  * @return The absolute time of the mocked time.
  */
 uint64_t EagleUtils_GetAbsoluteTime(void);
 
+/**
+ * If this is not zero then EagleUtils_GetAbsoluteTime() will return this. You must set this to 0 to return the true
+ * absolute time.
+ */
 extern uint64_t EagleUtils_MockAbsoluteTime;
 
 #endif

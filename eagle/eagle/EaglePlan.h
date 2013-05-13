@@ -81,6 +81,9 @@ typedef struct {
      */
     EAGLE_ATTR_MANAGED EagleLinkedList *freeObjects;
     
+    /**
+     The number of CPU cores.
+     */
     EAGLE_ATTR_NA int cores;
     
 } EaglePlan;
@@ -88,6 +91,7 @@ typedef struct {
 /**
  * Create a new plan.
  * @param [in] pageSize The default page size for the providers.
+ * @param [in] cores The number of CPU cores.
  * @return A new plan instance.
  */
 EaglePlan* EaglePlan_New(int pageSize, int cores);
@@ -187,6 +191,11 @@ int EaglePlan_getRealResultFields(EaglePlan *plan);
  */
 void EaglePlan_addFreeObject(EaglePlan *plan, void *obj, void (*free)(void*));
 
+/**
+ * Get the real execution seconds. This is the absolute time difference from when the plan begins executing until now.
+ * @param [in] plan The plan.
+ * @return The number of absolute execution seconds.
+ */
 double EaglePlan_getRealExecutionSeconds(EaglePlan *plan);
 
 #endif
