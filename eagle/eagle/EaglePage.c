@@ -19,6 +19,8 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
     page->count = count;
     page->recordOffset = recordOffset;
     page->freeData = freeData;
+    page->realPage = NULL;
+    page->duplicationCount = 0;
     
     return page;
 }
@@ -59,53 +61,76 @@ void EaglePage_Delete(EaglePage *page)
         return;
     }
     
-    if(EagleTrue == page->freeData) {
-        switch(page->type) {
-                
-            case EagleDataTypeInteger:
-            case EagleDataTypeUnknown:
-            case EagleDataTypeFloat:
-                break;
-                
-            case EagleDataTypeVarchar:
-            {
-                /* free all strings first */
-                int i;
-                
-                for(i = 0; i < page->count; ++i) {
-                    EagleMemory_Free(((EagleDataTypeVarcharType*) page->data)[i]);
-                }
-                break;
-            }
-
+    /* is this is a real page? */
+    if(NULL == page->realPage) {
+        /* if there are still copies using this then we cant free it */
+        if(page->duplicationCount > 0) {
+            return;
         }
         
-        EagleMemory_Free((void*) page->data);
+        /* this is a real page and there are no copies, free it normally */
+        if(EagleTrue == page->freeData) {
+            switch(page->type) {
+                    
+                case EagleDataTypeInteger:
+                case EagleDataTypeUnknown:
+                case EagleDataTypeFloat:
+                    break;
+                    
+                case EagleDataTypeVarchar:
+                {
+                    /* free all strings first */
+                    int i;
+                    
+                    for(i = 0; i < page->count; ++i) {
+                        EagleMemory_Free(((EagleDataTypeVarcharType*) page->data)[i]);
+                    }
+                    break;
+                }
+                    
+            }
+            
+            EagleMemory_Free((void*) page->data);
+        }
     }
+    else {
+        --page->realPage->duplicationCount;
+    }
+    
     EagleMemory_Free((void*) page);
 }
 
 EaglePage* EaglePage_Copy(EaglePage *page)
+{
+    EaglePage *copiedPage = EaglePage_New(page->type, page->data, page->totalSize, page->count, page->recordOffset, page->freeData);
+    
+    copiedPage->realPage = page;
+    ++page->duplicationCount;
+    
+    return copiedPage;
+}
+
+EaglePage* EaglePage_RealCopy(EaglePage *page)
 {
     switch(page->type) {
             
         case EagleDataTypeUnknown:
             EagleLogger_Log(EagleLoggerSeverityError, "Cannot page of Unknown type.");
             return NULL;
-        
+            
         case EagleDataTypeInteger:
-            return EaglePage_CopyInt_(page);
+            return EaglePage_RealCopyInt_(page);
             
         case EagleDataTypeVarchar:
-            return EaglePage_CopyVarchar_(page);
+            return EaglePage_RealCopyVarchar_(page);
             
         case EagleDataTypeFloat:
-            return EaglePage_CopyFloat_(page);
+            return EaglePage_RealCopyFloat_(page);
             
     }
 }
 
-EaglePage* EaglePage_CopyInt_(EaglePage *page)
+EaglePage* EaglePage_RealCopyInt_(EaglePage *page)
 {
     size_t memorySize;
     EagleDataTypeIntegerType *newData;
@@ -124,7 +149,7 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page)
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
 }
 
-EaglePage* EaglePage_CopyFloat_(EaglePage *page)
+EaglePage* EaglePage_RealCopyFloat_(EaglePage *page)
 {
     size_t memorySize;
     EagleDataTypeFloatType *newData;
@@ -143,7 +168,7 @@ EaglePage* EaglePage_CopyFloat_(EaglePage *page)
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
 }
 
-EaglePage* EaglePage_CopyVarchar_(EaglePage *page)
+EaglePage* EaglePage_RealCopyVarchar_(EaglePage *page)
 {
     EagleDataTypeVarcharType *newData;
     int i;

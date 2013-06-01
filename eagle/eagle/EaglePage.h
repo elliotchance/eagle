@@ -42,6 +42,17 @@ typedef struct EaglePage {
      */
     EAGLE_ATTR_NA EagleBoolean freeData;
     
+    /**
+     If this is a duplicated page this points to the real page.
+     */
+    EAGLE_ATTR_NA struct EaglePage *realPage;
+    
+    /**
+     If \c realPage is not NULL then this will have a value that is greater than or equal to 1. The memory for the page
+     can only be freed when all the duplicate pages have been freed as well.
+     */
+    EAGLE_ATTR_NA int duplicationCount;
+    
 } EaglePage;
 
 /**
@@ -110,7 +121,7 @@ EaglePage* EaglePage_Copy(EaglePage *page);
  * @return A duplicate page.
  * @see EaglePage_Copy()
  */
-EaglePage* EaglePage_CopyInt_(EaglePage *page);
+EaglePage* EaglePage_RealCopyInt_(EaglePage *page);
 
 /**
  * Private function. Copy an FLOAT page.
@@ -118,7 +129,7 @@ EaglePage* EaglePage_CopyInt_(EaglePage *page);
  * @return A duplicate page.
  * @see EaglePage_Copy()
  */
-EaglePage* EaglePage_CopyFloat_(EaglePage *page);
+EaglePage* EaglePage_RealCopyFloat_(EaglePage *page);
 
 /**
  * Private function. Copy a VARCHAR page.
@@ -126,7 +137,7 @@ EaglePage* EaglePage_CopyFloat_(EaglePage *page);
  * @return A duplicate page.
  * @see EaglePage_Copy()
  */
-EaglePage* EaglePage_CopyVarchar_(EaglePage *page);
+EaglePage* EaglePage_RealCopyVarchar_(EaglePage *page);
 
 /**
  * Free a page.
@@ -140,5 +151,7 @@ void EaglePage_Delete(EaglePage *page);
  * @return A new string (you must free this yourself)
  */
 char* EaglePage_toString(EaglePage *page);
+
+EaglePage* EaglePage_RealCopy(EaglePage *page);
 
 #endif

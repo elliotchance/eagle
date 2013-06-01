@@ -92,7 +92,7 @@ CUNIT_TEST(MemorySuite, EaglePage_CopyFloat_)
     EagleMemory_Mock("EaglePage_CopyFloat_.1");
     
     EaglePage *page = EaglePage_AllocFloat(1);
-    CUNIT_VERIFY_NULL(EaglePage_CopyFloat_(page));
+    CUNIT_VERIFY_NULL(EaglePage_RealCopyFloat_(page));
     EaglePage_Delete(page);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);

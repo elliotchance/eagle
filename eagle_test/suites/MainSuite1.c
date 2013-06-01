@@ -425,21 +425,21 @@ CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
     EagleLogger_LogEvent(event);
 }
 
-CUNIT_TEST(MainSuite, EaglePage_CopyInt_)
+CUNIT_TEST(MainSuite, EaglePage_RealCopyInt_)
 {
-    EaglePage *page = EaglePage_CopyInt_(NULL);
+    EaglePage *page = EaglePage_RealCopyInt_(NULL);
     CUNIT_ASSERT_NULL(page);
 }
 
-CUNIT_TEST(MainSuite, EaglePage_CopyFloat_)
+CUNIT_TEST(MainSuite, EaglePage_RealCopyFloat_)
 {
-    EaglePage *page = EaglePage_CopyFloat_(NULL);
+    EaglePage *page = EaglePage_RealCopyFloat_(NULL);
     CUNIT_ASSERT_NULL(page);
 }
 
-CUNIT_TEST(MainSuite, EaglePage_CopyVarchar_)
+CUNIT_TEST(MainSuite, EaglePage_RealCopyVarchar_)
 {
-    EaglePage *page = EaglePage_CopyVarchar_(NULL);
+    EaglePage *page = EaglePage_RealCopyVarchar_(NULL);
     CUNIT_ASSERT_NULL(page);
 }
 
@@ -459,8 +459,9 @@ CUNIT_TEST(MainSuite, EaglePage_Copy)
     CUNIT_ASSERT_NOT_NULL(page);
     
     EaglePage *page2 = EaglePage_Copy(page);
-    CUNIT_ASSERT_NULL(page2);
+    CUNIT_ASSERT_NOT_NULL(page2);
     
+    EaglePage_Delete(page2);
     EaglePage_Delete(page);
 }
 
@@ -942,9 +943,9 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Get));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyInt_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyVarchar_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_CopyFloat_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyInt_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyVarchar_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyFloat_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));
