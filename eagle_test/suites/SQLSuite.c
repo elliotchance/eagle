@@ -92,6 +92,7 @@ void SQLSuiteTest()
     int pageSize = 5;
     int i;
     int whereClauseId = -1;
+    int cores = 1;
     
     SQLTest test = sqlTests[currentTest++];
     
@@ -113,7 +114,7 @@ void SQLSuiteTest()
     }
     
     // create the plan skeleton
-    EaglePlan *plan = EaglePlan_New(pageSize);
+    EaglePlan *plan = EaglePlan_New(pageSize, cores);
     
     EagleDbSqlSelect *select = (EagleDbSqlSelect*) p->yyparse_ast;
     exprs = EagleDbSqlSelect_getExpressionsCount(select);
@@ -150,7 +151,7 @@ void SQLSuiteTest()
     }
     else {
         // execute
-        EagleInstance *eagle = EagleInstance_New(1);
+        EagleInstance *eagle = EagleInstance_New(cores);
         EagleInstance_addPlan(eagle, plan);
         //printf("%s\n", EaglePlan_toString(plan)); exit(0);
         

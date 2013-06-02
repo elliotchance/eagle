@@ -8,13 +8,9 @@ EagleLock* EagleSynchronizer_CreateLock(void)
     if(NULL == lock) {
         return NULL;
     }
+    
     pthread_mutex_init(&lock->mutex, NULL);
     return lock;
-}
-
-void EagleSynchronizer_Lock(EagleLock *lock)
-{
-    pthread_mutex_lock(&lock->mutex);
 }
 
 void EagleSynchronizer_Unlock(EagleLock *lock)

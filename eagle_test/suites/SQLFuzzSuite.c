@@ -298,7 +298,7 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
 {
     // setup
     int pageSize = 10;
-    EagleDbInstance *db = EagleDbInstance_New(pageSize);
+    EagleDbInstance *db = EagleDbInstance_New(pageSize, 1);
     
     EagleDbSchema *schema = EagleDbInstance_getSchema(db, EagleDbSchema_DefaultSchemaName);
     
@@ -335,7 +335,7 @@ void runFuzzTests(const char *pre, int totalFuzzTests, int length)
 
 CUNIT_TEST(SQLFuzzSuite, FirstToken)
 {
-    EagleDbInstance *db = EagleDbInstance_New(10);
+    EagleDbInstance *db = EagleDbInstance_New(10, 1);
     
     for(int i = 0; i < totalTokens; ++i) {
         if(!strcmp(tokens[i], ";")) {

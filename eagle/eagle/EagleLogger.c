@@ -4,6 +4,8 @@
 #include "EagleLogger.h"
 #include "EagleSynchronizer.h"
 #include "EagleMemory.h"
+#include "EagleWorker.h"
+#include "EagleUtils.h"
 
 const char *EagleLogger_DefaultLogLocation = "/tmp/eagledb.log";
 

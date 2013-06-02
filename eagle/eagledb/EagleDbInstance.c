@@ -16,7 +16,7 @@
 #include "EagleDbInformationSchema.h"
 #include "EagleDataType.h"
 
-EagleDbInstance* EagleDbInstance_New(int pageSize)
+EagleDbInstance* EagleDbInstance_New(int pageSize, int cores)
 {
     EagleDbInstance *db = (EagleDbInstance*) EagleMemory_Allocate("EagleDbInstance_New.1", sizeof(EagleDbInstance));
     EagleDbSchema *defaultSchema, *infoSchema;
@@ -26,6 +26,7 @@ EagleDbInstance* EagleDbInstance_New(int pageSize)
     }
     
     db->pageSize = pageSize;
+    db->cores = cores;
     
     /* schemas */
     db->schemas = EagleLinkedList_New();
@@ -393,6 +394,35 @@ EagleBoolean EagleDbInstance_executeCreateTable(EagleDbInstance *db, EagleDbTabl
     return success;
 }
 
+EagleBoolean EagleDbInstance_executeParser(EagleDbInstance *db, struct EagleDbParser *p, EagleLoggerEvent **error)
+{
+    EagleBoolean success = EagleTrue;
+    
+    switch(p->yystatementtype) {
+            
+        case EagleDbSqlStatementTypeNone:
+            /* lets not consider this an error and ignore it */
+            break;
+            
+        case EagleDbSqlStatementTypeSelect:
+            success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast, error);
+            EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
+            break;
+            
+        case EagleDbSqlStatementTypeCreateTable:
+            success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast, error);
+            break;
+            
+        case EagleDbSqlStatementTypeInsert:
+            success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p->yyparse_ast, error);
+            EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
+            break;
+            
+    }
+    
+    return success;
+}
+
 EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, EagleLoggerEvent **error)
 {
     EagleDbParser *p;
@@ -409,27 +439,7 @@ EagleBoolean EagleDbInstance_execute(EagleDbInstance *db, const char *sql, Eagle
         success = EagleFalse;
     }
     else {
-        switch(p->yystatementtype) {
-                
-            case EagleDbSqlStatementTypeNone:
-                /* lets not consider this an error and ignore it */
-                break;
-                
-            case EagleDbSqlStatementTypeSelect:
-                success = EagleDbInstance_executeSelect(db, (EagleDbSqlSelect*) p->yyparse_ast, error);
-                EagleDbSqlSelect_DeleteRecursive((EagleDbSqlSelect*) p->yyparse_ast);
-                break;
-                
-            case EagleDbSqlStatementTypeCreateTable:
-                success = EagleDbInstance_executeCreateTable(db, (EagleDbTable*) p->yyparse_ast, error);
-                break;
-                
-            case EagleDbSqlStatementTypeInsert:
-                success = EagleDbInstance_executeInsert(db, (EagleDbSqlInsert*) p->yyparse_ast, error);
-                EagleDbSqlInsert_Delete((EagleDbSqlInsert*) p->yyparse_ast);
-                break;
-                
-        }
+        success = EagleDbInstance_executeParser(db, p, error);
     }
     
     /* clean up */

@@ -7,7 +7,12 @@
 #include "EagleMemory.h"
 #include "EagleLogger.h"
 
-EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
+/**
+ Used by EagleWorker_GetForCurrentThread() and EagleWorker_SetForCurrentThread()
+ */
+__thread EagleWorker *EagleWorker_ThisWorker = NULL;
+
+EagleWorker* EagleWorker_New(int workerId, struct EagleInstance *instance)
 {
     EagleWorker *worker = (EagleWorker*) EagleMemory_Allocate("EagleWorker_New.1", sizeof(EagleWorker));
     if(NULL == worker) {
@@ -16,6 +21,7 @@ EagleWorker* EagleWorker_New(int workerId, struct EagleInstance_ *instance)
     
     worker->workerId = workerId;
     worker->instance = instance;
+    worker->lockTime = 0;
     
     return worker;
 }
@@ -108,8 +114,6 @@ void EagleWorker_runJobPage_(EaglePlanJob *job, EaglePlanOperation *epo)
 
 void EagleWorker_runJob(EaglePlanJob *job)
 {
-    EaglePlan_resumeTimer(job->plan);
-    
     EagleLinkedList_Foreach(job->plan->operations, EaglePlanOperation*, epo)
     {
         switch(epo->type) {
@@ -131,20 +135,34 @@ void EagleWorker_runJob(EaglePlanJob *job)
 void* EagleWorker_begin(void *obj)
 {
     EagleWorker *worker = (EagleWorker*) obj;
+    EagleWorker_SetForCurrentThread(worker);
     
     while(1) {
         EaglePlanJob *job = NULL;
+        uint64_t start;
+        
+        /* start the timers at zero */
+        start = EagleUtils_GetAbsoluteTime();
+        worker->lockTime = 0;
         
         /* ask the instance for the next job */
-        job = EagleInstance_nextJob(worker->instance);
+        job = EagleInstance_nextJob(worker->instance, worker->workerId);
         
         /* run the job is one is returned */
         if(NULL != job) {
+            /* is this the start of the plan itself? */
+            if(0 == job->plan->startTime) {
+                job->plan->startTime = start;
+            }
+                
             /* run operations */
             EagleWorker_runJob(job);
             
+            /* add time */
+            job->plan->executionTime[worker->workerId] += EagleUtils_GetAbsoluteTime() - start;
+            job->plan->lockTime[worker->workerId] += worker->lockTime;
+            
             /* free */
-            EaglePlan_stopTimer(job->plan);
             EaglePlanJob_Delete(job);
         }
         else {
@@ -172,4 +190,14 @@ void EagleWorker_Delete(EagleWorker *worker)
     }
     
     EagleMemory_Free(worker);
+}
+
+EagleWorker* EagleWorker_GetForCurrentThread(void)
+{
+    return EagleWorker_ThisWorker;
+}
+
+void EagleWorker_SetForCurrentThread(EagleWorker *worker)
+{
+    EagleWorker_ThisWorker = worker;
 }

@@ -2,8 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <mach/mach_time.h>
 #include "EagleUtils.h"
 #include "EagleMemory.h"
+
+uint64_t EagleUtils_MockAbsoluteTime = 0;
+
+uint64_t EagleUtils_GetAbsoluteTime(void)
+{
+    /* return the mocked time */
+    if(0 != EagleUtils_MockAbsoluteTime) {
+        return EagleUtils_MockAbsoluteTime;
+    }
+    
+    /* return the true absolute time */
+    return mach_absolute_time();
+}
 
 char* EagleUtils_ToLowerCaseCopy(const char *str)
 {

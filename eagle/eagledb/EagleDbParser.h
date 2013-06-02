@@ -8,7 +8,7 @@
 /**
  A instance to handle the parser.
  */
-typedef struct {
+typedef struct EagleDbParser {
     
     /**
      Pointer to allow the reentrant parser to work.
