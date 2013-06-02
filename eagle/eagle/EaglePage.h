@@ -147,6 +147,20 @@ void EaglePage_Delete(EaglePage *page);
  */
 char* EaglePage_toString(EaglePage *page);
 
+/**
+ Copy a page. This will do a true deep copy which is different from EaglePage_Copy() which simply registered a new
+ reference to a real only page.
+ @param [in] page The page to copy.
+ @return A new copy of the page, or NULL on error.
+ */
 EaglePage* EaglePage_RealCopy(EaglePage *page);
+
+/**
+ Compare the content two pages.
+ @param [in] page1 First page.
+ @param [in] page2 Second page.
+ @return EagleTrue if the contents of the pages are equal.
+ */
+EagleBoolean EaglePage_equals(EaglePage *page1, EaglePage *page2);
 
 #endif

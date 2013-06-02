@@ -12,6 +12,7 @@
 #include "EaglePageProviderArray.h"
 #include "EaglePageProviderSingle.h"
 #include "EaglePageProviderVirtual.h"
+#include "EagleObject.h"
 
 void _instanceTest(int cores, int recordsPerPage, int totalRecords)
 {
@@ -421,24 +422,6 @@ CUNIT_TEST(MainSuite, EagleLogger_LogEvent)
     EagleLogger_LogEvent(NULL);
     EagleLoggerEvent *event = EagleLoggerEvent_New(EagleLoggerSeverityDebug, "bla bla");
     EagleLogger_LogEvent(event);
-}
-
-CUNIT_TEST(MainSuite, EaglePage_RealCopyInt_)
-{
-    EaglePage *page = EaglePage_RealCopyInt_(NULL);
-    CUNIT_ASSERT_NULL(page);
-}
-
-CUNIT_TEST(MainSuite, EaglePage_RealCopyFloat_)
-{
-    EaglePage *page = EaglePage_RealCopyFloat_(NULL);
-    CUNIT_ASSERT_NULL(page);
-}
-
-CUNIT_TEST(MainSuite, EaglePage_RealCopyVarchar_)
-{
-    EaglePage *page = EaglePage_RealCopyVarchar_(NULL);
-    CUNIT_ASSERT_NULL(page);
 }
 
 CUNIT_TEST(MainSuite, EaglePage_toString)
@@ -890,11 +873,20 @@ CUNIT_TEST(MainSuite, EagleLogger_GetLogFile)
     CUNIT_ASSERT_EQUAL_PTR(EagleLogger_GetLogFile(NULL), stderr);
 }
 
+CUNIT_TEST(MainSuite, EagleObject_equals)
+{
+    int a = 5;
+    CUNIT_VERIFY_FALSE(EagleObject_equals(NULL, NULL));
+    CUNIT_VERIFY_FALSE(EagleObject_equals(NULL, &a));
+    CUNIT_VERIFY_FALSE(EagleObject_equals(&a, NULL));
+}
+
 CUnitTests* MainSuite1_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleObject_equals));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_GetLogFile));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleUtils_CompareWithoutCase));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLinkedList_isEmpty));
@@ -943,9 +935,6 @@ CUnitTests* MainSuite1_tests()
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Get));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_Log));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EagleLogger_LogEvent));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyInt_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyVarchar_));
-    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyFloat_));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_toString));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_Copy));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageOperations_SendPageToProvider));

@@ -542,11 +542,86 @@ CUNIT_TEST(MainSuite, EaglePlan_getRealExecutionSeconds)
     EaglePlan_Delete(p);
 }
 
+CUNIT_TEST(MainSuite, EaglePageProviderSingle_isRandomAccess)
+{
+    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderSingle_NewInt(123, 1, "dummy");
+    CUNIT_VERIFY_TRUE(EaglePageProvider_isRandomAccess(provider));
+    EaglePageProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderStream_isRandomAccess)
+{
+    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderStream_New(EagleDataTypeInteger, 1, "dummy");
+    CUNIT_VERIFY_FALSE(EaglePageProvider_isRandomAccess(provider));
+    EaglePageProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePageProviderArray_isRandomAccess)
+{
+    EaglePageProvider *provider = (EaglePageProvider*) EaglePageProviderArray_New(EagleDataTypeInteger, NULL, 0, 1, "dummy");
+    CUNIT_VERIFY_TRUE(EaglePageProvider_isRandomAccess(provider));
+    EaglePageProvider_Delete(provider);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_RealCopyInt_)
+{
+    EagleDataTypeIntegerType *data = (EagleDataTypeIntegerType*) calloc(sizeof(EagleDataTypeIntegerType), 3);
+    data[0] = 123;
+    data[1] = 456;
+    data[2] = 789;
+    
+    EaglePage *page = EaglePage_New(EagleDataTypeInteger, data, 3, 3, 0, EagleTrue);
+    
+    EaglePage *page2 = EaglePage_RealCopy(page);
+    CUNIT_ASSERT_TRUE(EaglePage_equals(page, page2));
+    EaglePage_Delete(page2);
+    
+    EaglePage_Delete(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_RealCopyFloat_)
+{
+    EagleDataTypeFloatType *data = (EagleDataTypeFloatType*) calloc(sizeof(EagleDataTypeFloatType), 3);
+    data[0] = 123.0;
+    data[1] = 456.0;
+    data[2] = 789.0;
+    
+    EaglePage *page = EaglePage_New(EagleDataTypeFloat, data, 3, 3, 0, EagleTrue);
+    
+    EaglePage *page2 = EaglePage_RealCopy(page);
+    CUNIT_ASSERT_TRUE(EaglePage_equals(page, page2));
+    EaglePage_Delete(page2);
+    
+    EaglePage_Delete(page);
+}
+
+CUNIT_TEST(MainSuite, EaglePage_RealCopyVarchar_)
+{
+    EagleDataTypeVarcharType *data = (EagleDataTypeVarcharType*) calloc(sizeof(EagleDataTypeVarcharType), 3);
+    data[0] = strdup("123");
+    data[1] = strdup("456");
+    data[2] = strdup("789");
+    
+    EaglePage *page = EaglePage_New(EagleDataTypeVarchar, data, 3, 3, 0, EagleTrue);
+    
+    EaglePage *page2 = EaglePage_RealCopy(page);
+    CUNIT_ASSERT_TRUE(EaglePage_equals(page, page2));
+    EaglePage_Delete(page2);
+    
+    EaglePage_Delete(page);
+}
+
 CUnitTests* MainSuite2_tests()
 {
     CUnitTests *tests = CUnitTests_New(100);
     
     // method tests
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyVarchar_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyFloat_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePage_RealCopyInt_));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_isRandomAccess));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderStream_isRandomAccess));
+    CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderSingle_isRandomAccess));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePlan_getRealExecutionSeconds));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Unknown));
     CUnitTests_addTest(tests, CUNIT_NEW(MainSuite, EaglePageProviderArray_getPage, Varchar));

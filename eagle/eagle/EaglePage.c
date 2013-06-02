@@ -5,6 +5,7 @@
 #include "EagleUtils.h"
 #include "EagleMemory.h"
 #include "EagleLogger.h"
+#include "EagleObject.h"
 
 EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int count, int recordOffset, EagleBoolean freeData)
 {
@@ -22,6 +23,63 @@ EaglePage* EaglePage_New(EagleDataType type, void *data, int totalSize, int coun
     page->usageCount = 1;
     
     return page;
+}
+
+EagleBoolean EaglePage_equals(EaglePage *page1, EaglePage *page2)
+{
+    if(EagleTrue == EagleObject_equals(page1, page2)) {
+        return EagleTrue;
+    }
+    
+    /* check the individual properties */
+    if(page1->count != page2->count) {
+        return EagleFalse;
+    }
+    if(page1->totalSize != page2->totalSize) {
+        return EagleFalse;
+    }
+    if(page1->type != page2->type) {
+        return EagleFalse;
+    }
+    
+    /* and finally, deep check data */
+    if(page1->data != page2->data) {
+        switch(page1->type) {
+                
+            case EagleDataTypeUnknown:
+                return EagleFalse;
+                
+            case EagleDataTypeInteger:
+                if(0 != memcmp(page1->data, page2->data, sizeof(EagleDataTypeIntegerType) * (size_t) page1->count)) {
+                    return EagleFalse;
+                }
+                break;
+                
+            case EagleDataTypeFloat:
+                if(0 != memcmp(page1->data, page2->data, sizeof(EagleDataTypeFloatType) * (size_t) page1->count)) {
+                    return EagleFalse;
+                }
+                break;
+                
+            case EagleDataTypeVarchar:
+            {
+                int i;
+                EagleDataTypeVarcharType *p1data = (EagleDataTypeVarcharType*) page1->data;
+                EagleDataTypeVarcharType *p2data = (EagleDataTypeVarcharType*) page2->data;
+                
+                for(i = 0; i < page1->count; ++i) {
+                    if(0 != strcmp(p1data[i], p2data[i])) {
+                        return EagleFalse;
+                    }
+                }
+                break;
+            }
+                
+        }
+    }
+    
+    /* page contents are equal */
+    return EagleTrue;
 }
 
 EaglePage* EaglePage_AllocInt(int count)
@@ -80,9 +138,10 @@ void EaglePage_Delete(EaglePage *page)
             {
                 /* free all strings first */
                 int i;
+                EagleDataTypeVarcharType *d = ((EagleDataTypeVarcharType*) page->data);
                 
                 for(i = 0; i < page->count; ++i) {
-                    EagleMemory_Free(((EagleDataTypeVarcharType*) page->data)[i]);
+                    EagleMemory_Free(d[i]);
                 }
                 break;
             }
@@ -163,6 +222,7 @@ EaglePage* EaglePage_RealCopyFloat_(EaglePage *page)
 EaglePage* EaglePage_RealCopyVarchar_(EaglePage *page)
 {
     EagleDataTypeVarcharType *newData;
+    EagleDataTypeVarcharType *d;
     int i;
     
     if(NULL == page) {
@@ -174,8 +234,9 @@ EaglePage* EaglePage_RealCopyVarchar_(EaglePage *page)
         return NULL;
     }
     
+    d = (EagleDataTypeVarcharType*) page->data;
     for(i = 0; i < page->count; ++i) {
-        newData[i] = strdup(((EagleDataTypeVarcharType*) page->data)[i]);
+        newData[i] = strdup(d[i]);
     }
     
     return EaglePage_New(page->type, newData, page->totalSize, page->count, page->recordOffset, page->freeData);
