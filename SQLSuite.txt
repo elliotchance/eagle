@@ -270,3 +270,12 @@ sqrt(col4 * col4):float
 123.456
 10000
 456.789
+
+% test
+SELECT sqrt(-1.0) FROM mytable
+sqrt(-1):float
+0
+0
+0
+0
+0
