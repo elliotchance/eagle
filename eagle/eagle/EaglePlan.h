@@ -13,7 +13,7 @@
 /**
  An execution plan.
  */
-typedef struct {
+typedef struct EaglePlan {
     
     /**
      The operations. An operation is a task done on a page. This is semi managed because the actual array that contains

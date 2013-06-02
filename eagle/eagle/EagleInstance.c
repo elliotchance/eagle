@@ -63,19 +63,19 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId)
 {
     EaglePlan *plan = NULL;
     EaglePlanJob *job = NULL;
-    EagleBoolean sync = EagleTrue;
+    /*EagleBoolean sync = EagleTrue;*/
     
     plan = eagle->plan;
     job = EaglePlanJob_New(plan);
     
     /* if all the providers can be accessed randomly we do not need to syncronise this function */
-    EagleLinkedList_Foreach(eagle->plan->providers, EaglePlanBufferProvider*, provider)
+    /*EagleLinkedList_Foreach(eagle->plan->providers, EaglePlanBufferProvider*, provider)
     {
         switch(provider->type) {
                 
             case EaglePlanBufferProviderTypeValue:
-                /* this case in find, we do not need sychronisation for this */
-                break;
+                * this case in find, we do not need sychronisation for this */
+                /*break;
                 
             case EaglePlanBufferProviderTypeProvider:
                 if(EagleFalse == EaglePageProvider_isRandomAccess(provider->value.provider.provider)) {
@@ -85,18 +85,17 @@ EaglePlanJob* EagleInstance_nextJob(EagleInstance *eagle, int coreId)
                 
         }
     }
-    EagleLinkedList_ForeachEnd
+    EagleLinkedList_ForeachEnd*/
     
-    if(EagleTrue == sync) {
+    /*if(EagleTrue == sync) {*/
         /* synchronize this function */
         EagleSynchronizer_Lock(eagle->nextJobLock);
-    }
+    /*}*/
     
     EagleInstance_nextJob_(eagle->plan, &job, coreId);
     
-    if(EagleTrue == sync) {
+    /*if(EagleTrue == sync) {*/
         EagleSynchronizer_Unlock(eagle->nextJobLock);
-    }
     
     return job;
 }

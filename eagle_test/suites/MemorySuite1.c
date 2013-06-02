@@ -287,7 +287,7 @@ CUNIT_TEST(MemorySuite, EaglePage_CopyInt_)
     EagleMemory_Mock("EaglePage_CopyInt_.1");
     
     EaglePage *page = EaglePage_AllocInt(1);
-    CUNIT_ASSERT_NULL(EaglePage_CopyInt_(page));
+    CUNIT_ASSERT_NULL(EaglePage_RealCopyInt_(page));
     EaglePage_Delete(page);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
@@ -598,7 +598,7 @@ CUNIT_TEST(MemorySuite, EaglePage_CopyVarchar_)
     EagleMemory_Mock("EaglePage_CopyVarchar_.1");
     
     EaglePage *page = EaglePage_AllocVarchar(1);
-    CUNIT_ASSERT_NULL(EaglePage_CopyVarchar_(page));
+    CUNIT_ASSERT_NULL(EaglePage_RealCopyVarchar_(page));
     EaglePage_Delete(page);
     
     CUNIT_ASSERT_EQUAL_INT(EagleMemory_GetMockInvocations(), 1);
