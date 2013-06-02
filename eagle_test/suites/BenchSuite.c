@@ -16,7 +16,7 @@ void CUNIT_ASSERT_BENCH_RESULT(EaglePlan *plan)
     double execMultiplier = plan->executionTime / (double) BenchSuite_TotalPages / (double) BenchSuite_RecordsPerPage;
     double executionTime = plan->executionTime / 1.0e9;
     double waitTime = plan->lockWaitTime / 1.0e9;
-    printf(" exec time: %f; wait time: %f; exec multiplier: %f; ", executionTime, waitTime, execMultiplier);
+    printf(" exec time: %f; wait time: %f; exec multiplier: %f; \n", executionTime, waitTime, execMultiplier);
     //printf(" exec multiplier: %f; ", execMultiplier);
     
     // make sure the wait time is very small in preportion to the execution time

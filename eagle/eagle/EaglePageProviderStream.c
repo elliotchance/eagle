@@ -131,7 +131,8 @@ EaglePage* EaglePageProviderStream_nextPage(EaglePageProviderStream *epp)
     
     /* always give a duplicate page, so that the original page is not modified or freed */
     page = EaglePage_Copy((EaglePage*) epp->cursor->obj);
-    page->recordOffset = epp->offsetRecords;
+    /*page->recordOffset = epp->offsetRecords;
+    page = (EaglePage*) epp->cursor->obj;*/
     epp->offsetRecords += page->count;
     epp->cursor = epp->cursor->next;
     

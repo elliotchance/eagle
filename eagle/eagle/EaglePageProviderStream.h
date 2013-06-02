@@ -6,7 +6,7 @@
 #include "EaglePage.h"
 #include "EaglePageProvider.h"
 
-typedef struct {
+typedef struct EaglePageProviderStream {
     
     /**
      All "subtypes" of EaglePageProvider will have this header.

@@ -43,15 +43,10 @@ typedef struct EaglePage {
     EAGLE_ATTR_NA EagleBoolean freeData;
     
     /**
-     If this is a duplicated page this points to the real page.
+     This value starts at 1 and is incremented with EaglePage_Copy() and decremented with EaglePage_Delete(). The page
+     is only really freed when this counter hits zero.
      */
-    EAGLE_ATTR_NA struct EaglePage *realPage;
-    
-    /**
-     If \c realPage is not NULL then this will have a value that is greater than or equal to 1. The memory for the page
-     can only be freed when all the duplicate pages have been freed as well.
-     */
-    EAGLE_ATTR_NA int duplicationCount;
+    EAGLE_ATTR_NA int usageCount;
     
 } EaglePage;
 

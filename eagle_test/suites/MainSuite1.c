@@ -332,7 +332,6 @@ CUNIT_TEST(MainSuite, EaglePageProviderStream_New)
     CUNIT_VERIFY_EQUAL_INT(page2->count, recordsPerPage);
     CUNIT_VERIFY_EQUAL_INT(((int*) page2->data)[0], testData[2]);
     CUNIT_VERIFY_EQUAL_INT(((int*) page2->data)[1], testData[3]);
-    CUNIT_VERIFY_EQUAL_INT(page2->recordOffset, 2);
     EaglePage_Delete(page2);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining((EaglePageProvider*) provider), 1);
@@ -340,7 +339,6 @@ CUNIT_TEST(MainSuite, EaglePageProviderStream_New)
     CUNIT_ASSERT_NOT_NULL(page3);
     CUNIT_VERIFY_EQUAL_INT(page3->count, 1);
     CUNIT_VERIFY_EQUAL_INT(((int*) page3->data)[0], testData[4]);
-    CUNIT_VERIFY_EQUAL_INT(page3->recordOffset, 4);
     EaglePage_Delete(page3);
     
     CUNIT_VERIFY_EQUAL_INT(EaglePageProvider_pagesRemaining((EaglePageProvider*) provider), 0);
